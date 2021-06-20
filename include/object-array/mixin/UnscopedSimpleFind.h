@@ -7,18 +7,13 @@
 
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/Pred.h>
+#include <optional>
+#include <object-array/detail/MixinDef.h>
 
 namespace mixin {
     template<_concept::RangedArrayLike T>
-    struct UnscopedSimpleFind {
-    private:
-        auto Self() const -> T const* {
-            return reinterpret_cast<T const*>(this);
-        }
-
-        auto Self() -> T* {
-            return reinterpret_cast<T*>(this);
-        }
+    __DEF_Array_MIXIN(UnscopedSimpleFind) {
+        using Mixin<T>::Self;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

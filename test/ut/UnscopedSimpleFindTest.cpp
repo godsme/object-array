@@ -21,6 +21,7 @@ namespace {
 
     struct FooArray : Foo, mixin::UnscopedSimpleFind<Foo> {
         using mixin::UnscopedSimpleFind<Foo>::FindIndex;
+        static_assert(std::is_empty_v<mixin::UnscopedSimpleFind<Foo>>);
     };
 }
 
@@ -39,9 +40,24 @@ SCENARIO("UnscopedSimpleFind") {
         REQUIRE(*found == 1);
     }
 
+    WHEN("find an existing elem with index") {
+        auto found = foo.FindIndex([](auto&& elem, auto n) {
+            return elem == 6 && n == 1;
+        });
+        REQUIRE(found.has_value());
+        REQUIRE(*found == 1);
+    }
+
     WHEN("find a non-existing elem") {
         auto found = foo.FindIndex([](auto&& elem) {
             return elem == 7;
+        });
+        REQUIRE_FALSE(found.has_value());
+    }
+
+    WHEN("find a non-existing elem with index") {
+        auto found = foo.FindIndex([](auto&& elem, auto index) {
+            return elem == 6 && index != 1;
         });
         REQUIRE_FALSE(found.has_value());
     }
