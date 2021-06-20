@@ -1,6 +1,16 @@
 # Prerequisites
 *.d
 
+cmake-build-debug/*
+cmake-build-debug-coverage/*
+cmake-build-release/*
+.idea/*
+doc/build/*
+doc/source/_ext/__pycache__/*
+.DS_Store
+doc/.DS_Store
+venv/*
+
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +40,4 @@
 *.exe
 *.out
 *.app
+/build/
