@@ -4,6 +4,7 @@
 
 #include <object-array/mixin/UnscopedSimpleFind.h>
 #include <catch.hpp>
+#include <object-array/mixin/RangedArrayLike.h>
 
 namespace {
     struct Foo {
@@ -16,16 +17,14 @@ namespace {
 
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> SizeType { return num; }
-        auto ObjectBegin() const -> int const* { return elems; }
-        auto ObjectEnd() const -> int const* { return elems + num; }
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
-        auto Elems() const -> ElemType const* { return elems; }
     };
 
-    struct FooArray : Foo, mixin::UnscopedSimpleFind<Foo> {
-        using mixin::UnscopedSimpleFind<Foo>::FindIndex;
-        using mixin::UnscopedSimpleFind<Foo>::Find;
-        static_assert(std::is_empty_v<mixin::UnscopedSimpleFind<Foo>>);
+    struct FooArray : Foo, mixin::RangedArrayLike<Foo>, mixin::UnscopedSimpleFind<mixin::RangedArrayLike<Foo>> {
+        using MixinUnderTest = mixin::UnscopedSimpleFind<mixin::RangedArrayLike<Foo>>;
+        using MixinUnderTest::Find;
+        using MixinUnderTest::FindIndex;
+        static_assert(std::is_empty_v<MixinUnderTest>);
     };
 }
 
