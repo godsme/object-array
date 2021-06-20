@@ -10,11 +10,21 @@
 #include <concepts>
 
 namespace _concept {
+    namespace detail {
+        template<typename T>
+        struct PredTypeTrait {
+            using ObjectType = typename T::ObjectType;
+            constexpr static auto pred = [](ObjectType const&) -> bool { return true; };
+            using Type = decltype(pred);
+        };
+
+    }
+
     template<typename T>
     concept SimpleFind = requires(T const& o) {
         typename T::SizeType;
         typename T::ObjectType;
-        { o.FindIndex([](typename T::ObjectType const&) { return true; }) } -> std::same_as<std::optional<typename T::SizeType>>;
+        { o.FindIndex(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<std::optional<typename T::SizeType>>;
     };
 }
 

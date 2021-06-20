@@ -12,9 +12,8 @@ namespace {
 
         using SizeType = std::size_t;
         using ObjectType = int;
-        using ElemType = int;
 
-        auto IndexBegin() const -> SizeType { return 0; }
+        auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> SizeType { return num; }
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
     };

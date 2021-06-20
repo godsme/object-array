@@ -7,8 +7,9 @@
 
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/Pred.h>
-#include <optional>
 #include <object-array/detail/MixinDef.h>
+#include <optional>
+
 
 namespace mixin {
     template<_concept::RangedArrayLike T>
