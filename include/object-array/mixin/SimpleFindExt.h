@@ -7,6 +7,7 @@
 
 #include <object-array/detail/MixinDef.h>
 #include <object-array/concept/SimpleFind.h>
+#include <object-array/concept/Pred.h>
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
@@ -16,6 +17,16 @@ namespace mixin {
 
     public:
         using ObjectType = typename T::ObjectType;
+        using SizeType = typename T::SizeType;
+
+        template<_concept::Pred<ObjectType, SizeType> PRED>
+        auto Find(PRED &&pred) const -> auto* {
+            return Self()->Find(std::forward<PRED>(pred));
+        }
+
+        auto Find(ObjectType const& obj) -> auto* {
+            return __INVOKE_CONST_METHOD(Find(obj));
+        }
 
         auto FindIndex(ObjectType const& obj) const -> auto {
             return Self()->FindIndex([&](auto&& elem) { return elem == obj;});

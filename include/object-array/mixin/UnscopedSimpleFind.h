@@ -9,7 +9,7 @@
 #include <object-array/concept/Pred.h>
 #include <object-array/detail/MixinDef.h>
 #include <optional>
-
+#include <algorithm>
 
 namespace mixin {
     template<_concept::RangedArrayLike T>
@@ -30,6 +30,18 @@ namespace mixin {
                 }
             }
             return std::nullopt;
+        }
+
+        template<_concept::Pred<ObjectType, SizeType> PRED>
+        auto Find(PRED&& pred) const -> ObjectType const* {
+            if constexpr(_concept::WithIndexPred<PRED, ObjectType, SizeType>) {
+                auto index = FindIndex(std::forward<PRED>(pred));
+                return index ? &Self()->GetObj(*index) : nullptr;
+            } else {
+                if (Self()->IndexBegin() >= Self()->IndexEnd()) return nullptr;
+                auto* found = std::find_if(Self()->ObjectBegin(), Self()->ObjectEnd(), std::forward<PRED>(pred));
+                return found == Self()->ObjectEnd() ? nullptr : found;
+            }
         }
     };
 }

@@ -12,14 +12,19 @@ namespace {
 
         using SizeType = std::size_t;
         using ObjectType = int;
+        using ElemType = int;
 
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> SizeType { return num; }
+        auto ObjectBegin() const -> int const* { return elems; }
+        auto ObjectEnd() const -> int const* { return elems + num; }
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
+        auto Elems() const -> ElemType const* { return elems; }
     };
 
     struct FooArray : Foo, mixin::UnscopedSimpleFind<Foo> {
         using mixin::UnscopedSimpleFind<Foo>::FindIndex;
+        using mixin::UnscopedSimpleFind<Foo>::Find;
         static_assert(std::is_empty_v<mixin::UnscopedSimpleFind<Foo>>);
     };
 }
@@ -31,12 +36,20 @@ SCENARIO("UnscopedSimpleFind") {
     foo.elems[2] = 3;
     foo.num = 3;
 
-    WHEN("find an existing elem") {
+    WHEN("find index of an existing elem") {
         auto found = foo.FindIndex([](auto&& elem) {
             return elem == 6;
         });
         REQUIRE(found.has_value());
         REQUIRE(*found == 1);
+    }
+
+    WHEN("find an existing elem") {
+        auto* found = foo.Find([](auto&& elem) {
+            return elem == 6;
+        });
+        REQUIRE(found != nullptr);
+        REQUIRE(*found == 6);
     }
 
     WHEN("find an existing elem with index") {

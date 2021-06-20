@@ -25,6 +25,7 @@ namespace _concept {
         typename T::SizeType;
         typename T::ObjectType;
         { o.FindIndex(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<std::optional<typename T::SizeType>>;
+        { o.Find(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<typename T::ObjectType const*>;
     };
 }
 

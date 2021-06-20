@@ -12,15 +12,20 @@ namespace {
 
         using SizeType = std::size_t;
         using ObjectType = int;
+        using ElemType = int;
 
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> SizeType { return num; }
+        auto ObjectBegin() const -> int const* { return elems; }
+        auto ObjectEnd() const -> int const* { return elems + num; }
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
+        auto Elems() const -> ElemType const* { return elems; }
     };
 
     struct FooArray : Foo, mixin::UnscopedSimpleFind<Foo>, mixin::SimpleFindExt<mixin::UnscopedSimpleFind<Foo>> {
         using MixinUnderTest = mixin::SimpleFindExt<mixin::UnscopedSimpleFind<Foo>>;
         using MixinUnderTest::FindIndex;
+        using MixinUnderTest::Find;
         static_assert(std::is_empty_v<MixinUnderTest>);
     };
 }

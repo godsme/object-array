@@ -12,9 +12,13 @@ namespace _concept {
     concept RangedArrayLike = requires(T const& o) {
         typename T::SizeType;
         typename T::ObjectType;
+        typename T::ElemType;
         { o.IndexBegin() } -> std::same_as<typename T::SizeType>;
         { o.IndexEnd() } -> std::same_as<typename T::SizeType>;
-        { o.GetObj(std::declval<typename T::SizeType>()) } -> std::same_as<typename T::ObjectType const&>;
+        { o.GetObj(typename T::SizeType{}) } -> std::same_as<typename T::ObjectType const&>;
+        { o.ObjectBegin() } -> std::same_as<typename T::ObjectType const*>;
+        { o.ObjectEnd() } -> std::same_as<typename T::ObjectType const*>;
+        { o.Elems() } -> std::same_as<typename T::ElemType const*>;
     };
 }
 
