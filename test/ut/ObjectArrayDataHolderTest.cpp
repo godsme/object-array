@@ -16,8 +16,12 @@ SCENARIO("ObjectArrayDataHolder") {
 
     IntArray array;
     REQUIRE(array.num == 0);
+    REQUIRE(array.GetRange() == 0);
 
     array.elems[0] = 1;
+    array.num = 1;
+
+    REQUIRE(array.GetRange() == 1);
 
     REQUIRE(IntArray::ElemToObject(array.elems[0]) == 1);
 }

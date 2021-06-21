@@ -11,6 +11,10 @@
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
     struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM> {
+        using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
+        using SizeType = typename Parent::SizeType;
+        using BitMap = typename Parent::BitMap;
+
         auto GetScope() const -> decltype(auto) {
             return (occupied);
         }
@@ -20,7 +24,7 @@ namespace holder {
         }
 
         auto GetRange() const -> SizeType {
-            return MAX_NUM;
+            return Parent::MAX_SIZE;
         }
 
         BitMap occupied;
