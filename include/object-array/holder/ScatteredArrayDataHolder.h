@@ -14,6 +14,7 @@ namespace holder {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
         using BitMap = typename Parent::BitMap;
+        using ElemType = typename Parent::ElemType;
 
         auto GetScope() const -> decltype(auto) {
             return (occupied);
@@ -25,6 +26,10 @@ namespace holder {
 
         auto GetRange() const -> SizeType {
             return Parent::MAX_SIZE;
+        }
+
+        auto Elems() const -> ElemType const* {
+            return Parent::elems;
         }
 
         BitMap occupied;

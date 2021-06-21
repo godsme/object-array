@@ -5,7 +5,7 @@
 #include <object-array/holder/ScatteredArrayDataHolder.h>
 #include <catch.hpp>
 
-SCENARIO("ScatteredArrayDataHolder") {
+SCENARIO("Int ScatteredArrayDataHolder") {
     using IntArray = holder::ScatteredArrayDataHolder<int, 5>;
     static_assert(std::is_same_v<int, IntArray::ObjectType>);
     static_assert(std::is_same_v<int, IntArray::ElemType>);
@@ -29,4 +29,38 @@ SCENARIO("ScatteredArrayDataHolder") {
     REQUIRE(array.GetScope() == IntArray::BitMap{3});
 
     REQUIRE(IntArray::ElemToObject(array.elems[0]) == 1);
+}
+
+namespace {
+    struct Foo {
+        explicit Foo(int a) : a{a} {}
+
+        int a;
+    };
+}
+
+SCENARIO("Object ScatteredArrayDataHolder") {
+    using FooArray = holder::ScatteredArrayDataHolder<Foo, 5>;
+    static_assert(std::is_same_v<Foo, FooArray::ObjectType>);
+    static_assert(std::is_same_v<Placement<Foo>, FooArray::ElemType>);
+    static_assert(5 == FooArray::MAX_SIZE);
+
+    static_assert(!std::is_trivially_default_constructible_v<FooArray>);
+    static_assert(std::is_trivially_destructible_v<FooArray>);
+
+    FooArray array;
+    REQUIRE(array.occupied == 0);
+    REQUIRE(array.GetRange() == 5);
+    REQUIRE(array.GetScope() == FooArray::BitMap{0});
+
+    array.elems[0].Emplace(Foo{10});
+    array.occupied.set(0);
+
+    REQUIRE(array.GetRange() == 5);
+    REQUIRE(array.GetScope() == FooArray::BitMap{1});
+
+    array.GetScope().set(1);
+    REQUIRE(array.GetScope() == FooArray::BitMap{3});
+
+    REQUIRE(FooArray::ElemToObject(array.elems[0]).a == Foo{10}.a);
 }
