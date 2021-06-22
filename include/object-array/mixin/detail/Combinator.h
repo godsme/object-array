@@ -41,7 +41,6 @@ namespace mixin {
 
         using SizeType = typename Holder::SizeType;
         using ObjectType = typename Holder::ObjectType;
-        constexpr static auto MAX_SIZE = Holder::MAX_SIZE;
 
         static_assert(std::is_empty_v<Mixins>);
     };

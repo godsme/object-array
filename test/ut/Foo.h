@@ -40,6 +40,7 @@ namespace ut {
     struct Foo {
         int elems[10];
         std::size_t num{};
+        using BitMap = BitSet<10>;
 
         using ElemType = int;
         using SizeType = std::size_t;
