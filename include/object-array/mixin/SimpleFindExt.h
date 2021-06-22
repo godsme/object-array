@@ -34,6 +34,15 @@ namespace mixin {
         auto FindIndex(ObjectType const& obj) -> auto {
             return __INVOKE_CONST_METHOD(FindIndex(obj));
         }
+
+        template<_concept::Pred<ObjectType, SizeType> PRED>
+        auto Exists(PRED &&pred) const -> bool {
+            return Find(std::forward<PRED>(pred)) != nullptr;
+        }
+
+        auto Exists(ObjectType const &obj) const -> bool {
+            return Exists([&](auto&& elem) { return obj == elem; });
+        }
     };
 }
 
