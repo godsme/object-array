@@ -13,7 +13,7 @@ namespace {
 }
 
 SCENARIO("ArrayView Test") {
-    Foo foo{{1,2,3,4}, 4};
+    Foo foo{{1,2,3,4,5,6,7,8}, 8};
 
     WHEN("r-value find an existing elem") {
         auto found = ArrayView{foo.array, foo.num}.Slice(1,2).FindIndex(2);
@@ -22,9 +22,31 @@ SCENARIO("ArrayView Test") {
     }
 
     WHEN("r-value find an existing elem with Scope") {
-        auto found = ArrayView{foo.array, foo.num}.Slice(1,2).Scope(0xFF).FindIndex(2);
+        auto found = ArrayView{foo.array, foo.num}.Slice(1,6).Scope(0xF0).FindIndex(5);
         REQUIRE(found.has_value());
-        REQUIRE(*found == 1);
+        REQUIRE(*found == 4);
+    }
+
+    WHEN("r-value find a non-existing elem with Scope") {
+        auto found = ArrayView{foo.array, foo.num}.Slice(1,6).Scope(0xF0).FindIndex(1);
+        REQUIRE_FALSE(found.has_value());
+    }
+
+    WHEN("r-value find another non-existing elem with Scope") {
+        auto found = ArrayView{foo.array, foo.num}.Slice(1,6).Scope(0xF0).FindIndex(8);
+        REQUIRE_FALSE(found.has_value());
+    }
+
+    WHEN("l-value find a non-existing elem with Scope") {
+        ArrayView view{foo.array, foo.num};
+        auto found = view.Slice(1,6).Scope(0xF0).FindIndex(1);
+        REQUIRE_FALSE(found.has_value());
+    }
+
+    WHEN("l-value find another non-existing elem with Scope") {
+        ArrayView view{foo.array, foo.num};
+        auto found = view.Slice(1,6).Scope(0xF0).FindIndex(8);
+        REQUIRE_FALSE(found.has_value());
     }
 
     WHEN("r-value find a non-existing elem") {
