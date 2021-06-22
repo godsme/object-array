@@ -3,13 +3,14 @@
 //
 
 #include <object-array/mixin/ScopedSimpleFind.h>
-#include <object-array/mixin/RangedArrayLike.h>
+#include <object-array/mixin/ScopedRangedArrayLike.h>
 #include <object-array/mixin/detail/Combinator.h>
 #include "Foo.h"
 #include <catch.hpp>
 
+
 namespace {
-    using FooArray = mixin::Combinator<true, ut::ScopedFoo, mixin::RangedArrayLike, mixin::ScopedSimpleFind>;
+    using FooArray = mixin::Combinator<true, ut::ScopedFoo, mixin::ScopedRangedArrayLike, mixin::ScopedSimpleFind>;
 }
 
 SCENARIO("ScopedSimpleFind") {

@@ -13,7 +13,7 @@
 #include <algorithm>
 
 namespace mixin {
-    __Def_Mixin_Composite(ScopedSimpleFind, _concept::RangedArrayLike, ScopedFind) {
+    __Def_Mixin_Composite(ScopedSimpleFind, _concept::ScopedRangedArrayLike, ScopedFind) {
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
