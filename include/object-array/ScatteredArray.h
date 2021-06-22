@@ -22,9 +22,8 @@ namespace detail {
             mixin::SimpleFindExt>;
 }
 
-template<typename T, std::size_t MAX_NUM>
-struct ScatteredArray : detail::ScatteredArray<T, MAX_NUM> {
-    using Parent = detail::ScatteredArray<T, MAX_NUM>;
+template<typename T, std::size_t MAX_NUM, typename Parent = detail::ScatteredArray<T, MAX_NUM>>
+class ScatteredArray : Parent {
     using Holder = typename Parent::Holder;
     using Mixins = typename Parent::Mixins;
 

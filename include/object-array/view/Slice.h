@@ -24,10 +24,8 @@ namespace view {
         using Slice = SliceMixin<holder::RangedViewDataHolder<ARRAY>>;
     }
 
-    template<typename ARRAY>
-    struct Slice : detail::Slice<ARRAY> {
-    private:
-        using Parent = detail::Slice<ARRAY>;
+    template<typename ARRAY, typename Parent = detail::Slice<ARRAY>>
+    class Slice : Parent {
         using Holder = typename Parent::Holder;
         using Mixins = typename Parent::Mixins;
 

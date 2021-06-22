@@ -14,13 +14,14 @@ namespace detail {
             holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, ELEM>>;
 }
 
-template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T>
-struct ArrayView : detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM> {
-    using Parent = detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>;
+template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T, typename Parent = detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>>
+class ArrayView : Parent {
+    using Holder = typename Parent::Holder;
+public:
     using Parent::Parent;
 
-private:
-    using Holder = typename Parent::Holder;
+    using Parent::Find;
+    using Parent::FindIndex;
 };
 
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>
