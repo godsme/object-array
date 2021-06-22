@@ -10,16 +10,11 @@
 #include <object-array/mixin/SimpleFindExt.h>
 
 namespace {
-    using FooArray = mixin::Combinator<true, ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
+    using FooArray = mixin::Combinator<ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
 }
 
 SCENARIO("NonScopedSimpleFind") {
-    FooArray foo;
-    foo.elems[0] = 2;
-    foo.elems[1] = 6;
-    foo.elems[2] = 3;
-    foo.num = 3;
-
+    FooArray foo = {2,6,3};
     WHEN("find index of an existing elem") {
         auto found = foo.FindIndex([](auto&& elem) {
             return elem == 6;

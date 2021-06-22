@@ -14,7 +14,7 @@
 
 namespace detail {
     template<typename HOLDER>
-    using ContinuousArrayMixin = mixin::Combinator<false,
+    using ContinuousArrayMixin = mixin::Combinator<
             HOLDER,
             mixin::ContinuousArrayLike,
             mixin::RangedArray,

@@ -50,6 +50,14 @@ namespace ut {
 
         using Concept = FooConcept<Foo>;
 
+        Foo(std::initializer_list<int> list) {
+            auto n = std::min(list.size(), MAX_SIZE);
+            num = 0;
+            for(auto&& elem : list) {
+                elems[num++] = elem;
+            }
+        }
+
     public:
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> std::size_t { return num; }
@@ -68,6 +76,16 @@ namespace ut {
         constexpr static SizeType MAX_SIZE = 10;
 
         using Concept = ScopedFooConcept<ScopedFoo>;
+
+    public:
+        ScopedFoo(std::initializer_list<int> list) {
+            auto n = std::min(list.size(), MAX_SIZE);
+            auto i = 0;
+            for(auto&& elem : list) {
+                scope.set(i);
+                elems[i++] = elem;
+            }
+        }
 
     public:
         auto IndexBegin() const -> std::size_t { return 0; }

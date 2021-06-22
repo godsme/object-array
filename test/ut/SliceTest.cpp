@@ -7,16 +7,7 @@
 #include <catch.hpp>
 
 SCENARIO("SliceTest") {
-    ut::Foo foo;
-    foo.elems[0] = 1;
-    foo.elems[1] = 2;
-    foo.elems[2] = 3;
-    foo.elems[3] = 4;
-    foo.elems[4] = 5;
-    foo.elems[5] = 6;
-    foo.elems[6] = 7;
-    foo.num = 7;
-
+    ut::Foo foo = {1,2,3,4,5,6,7};
     view::Slice<ut::Foo> slice{foo, 2, 5};
 
     WHEN("find an existing elem") {
@@ -29,6 +20,5 @@ SCENARIO("SliceTest") {
         auto found = slice.FindIndex(7);
         REQUIRE_FALSE(found);
     }
-
 }
 

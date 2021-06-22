@@ -10,7 +10,7 @@
 #include <catch.hpp>
 
 namespace {
-    using FooArray = mixin::Combinator<true,
+    using FooArray = mixin::Combinator<
             ut::ScopedFoo,
             mixin::ScopedRangedArrayLike,
             mixin::ScopedSimpleFind,
@@ -18,14 +18,7 @@ namespace {
 }
 
 SCENARIO("ScopedSimpleFind") {
-    FooArray foo;
-    foo.elems[0] = 2;
-    foo.elems[1] = 6;
-    foo.elems[2] = 3;
-    foo.scope.set(0);
-    foo.scope.set(1);
-    foo.scope.set(2);
-
+    FooArray foo {2, 6, 3};
     WHEN("find index of an existing elem") {
         auto found = foo.FindIndex([](auto&& elem) {
             return elem == 6;

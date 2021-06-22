@@ -14,7 +14,7 @@
 
 namespace detail {
     template<typename T, std::size_t MAX_NUM>
-    using ScatteredArray = mixin::Combinator<true,
+    using ScatteredArray = mixin::Combinator<
             holder::ScatteredArrayDataHolder<T, MAX_NUM>,
             mixin::ScopedRangedArray,
             mixin::ScopedRangedArrayLike,

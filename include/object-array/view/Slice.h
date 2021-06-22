@@ -14,7 +14,7 @@
 namespace view {
     namespace detail {
         template<typename HOLDER>
-        using SliceMixin = mixin::Combinator<false,
+        using SliceMixin = mixin::Combinator<
                 HOLDER,
                 mixin::RangedArrayLike,
                 mixin::NonScopedSimpleFind,
