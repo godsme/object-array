@@ -15,12 +15,12 @@ namespace mixin {
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
 
-        using T::Find;
-        using T::FindIndex;
+        using Self::Find;
+        using Self::FindIndex;
 
         template<_concept::Pred<ObjectType, SizeType> PRED>
         auto Find(PRED &&pred) const -> auto* {
-            return Find(std::forward<PRED>(pred));
+            return Self::template Find(std::forward<PRED>(pred));
         }
 
         auto Find(ObjectType const& obj) -> auto* {
@@ -28,7 +28,7 @@ namespace mixin {
         }
 
         auto FindIndex(ObjectType const& obj) const -> auto {
-            return FindIndex([&](auto&& elem) { return elem == obj;});
+            return Self::template FindIndex([&](auto&& elem) { return elem == obj;});
         }
 
         auto FindIndex(ObjectType const& obj) -> auto {
