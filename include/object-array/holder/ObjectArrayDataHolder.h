@@ -16,6 +16,15 @@ namespace holder {
         using SizeType = typename Parent::SizeType;
         using Concept = detail::ArrayDataHolderConcept<ObjectArrayDataHolder>;
 
+        ObjectArrayDataHolder() {}
+        ObjectArrayDataHolder(std::initializer_list<OBJ> list) {
+            auto n = std::min(list.size(), MAX_NUM);
+            num = 0;
+            for(auto&& elem : list) {
+                Parent::elems[num++] = elem;
+            }
+        }
+
         auto Num() const -> decltype(auto) { return (num); }
         auto Num() -> decltype(auto) { return (num); }
 

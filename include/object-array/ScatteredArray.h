@@ -27,9 +27,6 @@ struct ScatteredArray : detail::ScatteredArray<T, MAX_NUM> {
     using Parent = detail::ScatteredArray<T, MAX_NUM>;
     using Parent::Parent;
     using Holder = typename Parent::Holder;
-
-    using Holder::Elems;
-    using Holder::GetScope;
 };
 
 #endif //OBJECT_ARRAY_SCATTEREDARRAY_H

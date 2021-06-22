@@ -6,13 +6,7 @@
 #include <catch.hpp>
 
 SCENARIO("ScatteredArray Test") {
-    ScatteredArray<int, 10> foo;
-    foo.Elems()[0] = 2;
-    foo.Elems()[1] = 6;
-    foo.Elems()[2] = 3;
-    foo.GetScope().set(0);
-    foo.GetScope().set(1);
-    foo.GetScope().set(2);
+    ScatteredArray<int, 10> foo {2, 6, 3};
 
     WHEN("find index of an existing elem") {
         auto found = foo.FindIndex([](auto&& elem) {

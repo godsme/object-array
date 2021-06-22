@@ -38,6 +38,17 @@ namespace holder {
         using ElemType = typename Parent::ElemType;
         using Concept = detail::ScatteredArrayDataHolderConcept<ScatteredArrayDataHolder>;
 
+    public:
+        ScatteredArrayDataHolder() {}
+        ScatteredArrayDataHolder(std::initializer_list<OBJ> list) {
+            auto n = std::min(list.size(), MAX_NUM);
+            auto i = 0;
+            for(auto&& elem : list) {
+                occupied.set(i);
+                Parent::elems[i++] = elem;
+            }
+        }
+
         auto GetScope() const -> BitMap {
             return occupied;
         }

@@ -18,9 +18,6 @@ struct ObjectArray : detail::ObjectArray<T, MAX_NUM> {
     using Parent = detail::ObjectArray<T, MAX_NUM>;
     using Parent::Parent;
     using Holder = typename Parent::Holder;
-
-    using Holder::Elems;
-    using Holder::Num;
 };
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H
