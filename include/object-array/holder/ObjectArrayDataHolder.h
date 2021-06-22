@@ -25,7 +25,7 @@ namespace holder {
             }
         }
 
-        auto Num() const -> decltype(auto) { return (num); }
+        auto Num() const -> SizeType { return num; }
         auto Num() -> decltype(auto) { return (num); }
 
     private:

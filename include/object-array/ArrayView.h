@@ -22,6 +22,7 @@ public:
 
     using Parent::Find;
     using Parent::FindIndex;
+    using Parent::Slice;
 };
 
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>

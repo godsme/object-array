@@ -10,7 +10,9 @@
 namespace mixin {
     namespace detail {
         template<typename T, bool = std::is_empty_v<T>>
-        struct Extends : T::Concept {};
+        struct Extends : T::Concept {
+            using DataHolder = T;
+        };
 
         template<typename T>
         struct Extends<T, true> : T {};

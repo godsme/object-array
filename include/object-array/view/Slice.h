@@ -21,20 +21,31 @@ namespace view {
                 mixin::SimpleFindExt>;
 
         template<typename ARRAY>
-        using Slice = SliceMixin<holder::RangedViewDataHolder<ARRAY>>;
+        using ValueSlice = SliceMixin<holder::ValueRangedViewDataHolder<ARRAY>>;
+
+        template<typename ARRAY>
+        using RefSlice = SliceMixin<holder::RefRangedViewDataHolder<ARRAY>>;
+
+        template<typename HOLDER, typename Parent = SliceMixin<HOLDER>>
+        class Slice : Parent {
+            using Holder = typename Parent::Holder;
+            using Mixins = typename Parent::Mixins;
+
+        public:
+            using Parent::Parent;
+
+            using Mixins::Find;
+            using Mixins::FindIndex;
+        };
     }
+}
 
-    template<typename ARRAY, typename Parent = detail::Slice<ARRAY>>
-    class Slice : Parent {
-        using Holder = typename Parent::Holder;
-        using Mixins = typename Parent::Mixins;
+namespace view {
+    template<typename ARRAY>
+    using Slice = detail::Slice<holder::RefRangedViewDataHolder<ARRAY>>;
 
-    public:
-        using Parent::Parent;
-
-        using Mixins::Find;
-        using Mixins::FindIndex;
-    };
+    template<typename ARRAY>
+    using ValueSlice = detail::Slice<holder::ValueRangedViewDataHolder<ARRAY>>;
 }
 
 #endif //OBJECT_ARRAY_SLICE_H

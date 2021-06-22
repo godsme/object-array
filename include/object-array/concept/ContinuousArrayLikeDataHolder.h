@@ -13,7 +13,7 @@ namespace _concept {
     concept ContinuousArrayLikeDataHolder =
             SimpleConstArrayLike<T> &&
             requires(T const& o) {
-                { o.Num() } -> std::same_as<typename T::SizeType const&>;
+                { o.Num() } -> std::same_as<typename T::SizeType>;
             };
 }
 

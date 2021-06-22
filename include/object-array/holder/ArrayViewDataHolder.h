@@ -9,6 +9,7 @@
 #include <object-array/holder/detail/ArrayDataHolderConcept.h>
 #include <type_traits>
 #include <cstring>
+#include <algorithm>
 
 namespace holder {
     template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = OBJ>
@@ -18,7 +19,7 @@ namespace holder {
         using ObjectType = ELEM;
         using SizeType = SIZE_TYPE;
         constexpr static auto MAX_SIZE = MAX_NUM;
-        using ViewTrait = ::detail::ViewElemTrait_T<OBJ, ELEM>;
+        using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
 
     public:
         using Concept = detail::ArrayDataHolderConcept<ArrayViewDataHolder>;
@@ -51,8 +52,8 @@ namespace holder {
         auto Elems() const -> ElemType const* { return elems; }
         auto Elems() -> ElemType* { return elems; }
 
-        auto Num() const -> decltype(auto) { return (num); }
-        auto Num() -> decltype(auto) { return (num); }
+        auto Num() const -> SizeType { return num; }
+        auto Num() -> SizeType& { return (num); }
 
         static auto ElemToObject(ElemType const& elem) -> ObjectType const& { return elem; }
         static auto ElemToObject(ElemType& elem) -> ObjectType& { return elem; }
