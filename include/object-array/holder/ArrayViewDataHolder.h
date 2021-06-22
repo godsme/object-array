@@ -31,6 +31,9 @@ namespace holder {
             if(num > MAX_NUM) num = MAX_NUM;
         }
 
+        ArrayViewDataHolder(ArrayViewDataHolder const& rhs)
+            : elems{rhs.elems}, num(rhs.num) {}
+
         auto CopyFrom(OBJ const* array, std::size_t n) -> void {
             num = std::min(n, MAX_SIZE);
             ::memcpy(elems, array, sizeof(ELEM) * num);
