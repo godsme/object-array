@@ -16,13 +16,16 @@ namespace holder::detail {
         }
         using ElemType = typename DATA_HOLDER::ElemType;
         using ObjectType = typename DATA_HOLDER::ObjectType;
+        using SizeType = typename DATA_HOLDER::SizeType;
 
     public:
-        auto GetRange() const -> auto { return This()->GetRange(); }
+        using BitMap = typename DATA_HOLDER::BitMap;
+        auto GetRange() const -> SizeType { return This()->GetRange(); }
         auto Elems() const -> ElemType const* { return This()->Elems(); }
         static auto ElemToObject(ElemType const& elem) -> ObjectType const& {
             return DATA_HOLDER::ElemToObject(elem);
         }
+        auto GetScope() const -> BitMap { return This()->GetScope(); }
     };
 }
 
@@ -35,8 +38,8 @@ namespace holder {
         using ElemType = typename Parent::ElemType;
         using Concept = detail::ScatteredArrayDataHolderConcept<ScatteredArrayDataHolder>;
 
-        auto GetScope() const -> decltype(auto) {
-            return (occupied);
+        auto GetScope() const -> BitMap {
+            return occupied;
         }
 
         auto GetScope() -> decltype(auto) {
