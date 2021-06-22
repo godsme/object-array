@@ -9,19 +9,20 @@
 
 namespace mixin {
     namespace detail {
-        template<typename T, bool IS_PRIVATE, bool = std::is_empty_v<T>>
-        struct Extends : protected T::Concept {};
+        template<typename T, bool = std::is_empty_v<T>>
+        struct Extends : T::Concept {};
 
         template<typename T>
-        struct Extends<T, true, true> : protected T {};
-
-        template<typename T>
-        struct Extends<T, false, true> : T {};
+        struct Extends<T, true> : T {};
     }
 }
 
 #define __Def_Mixin(Mixin, Concept) \
-    template<Concept T, bool IS_PRIVATE = true, typename Self = detail::Extends<T, IS_PRIVATE>> \
+    template<Concept T, typename Self = detail::Extends<T>> \
+    struct Mixin : Self
+
+#define __Def_Mixin_Composite(Mixin, Concept, Composite) \
+    template<Concept T, typename Self = detail::Extends<Composite<T>>> \
     struct Mixin : Self
 
 #endif //OBJECT_ARRAY_DEFMIXIN_H

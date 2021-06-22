@@ -1,0 +1,62 @@
+//
+// Created by Darwin Yuan on 2021/6/22.
+//
+
+#include <object-array/mixin/ScopedSimpleFind.h>
+#include <object-array/mixin/RangedArrayLike.h>
+#include <object-array/mixin/detail/Combinator.h>
+#include "Foo.h"
+#include <catch.hpp>
+
+namespace {
+    using FooArray = mixin::Combinator<true, ut::ScopedFoo, mixin::RangedArrayLike, mixin::ScopedSimpleFind>;
+}
+
+SCENARIO("ScopedSimpleFind") {
+    FooArray foo;
+    foo.elems[0] = 2;
+    foo.elems[1] = 6;
+    foo.elems[2] = 3;
+    foo.scope.set(0);
+    foo.scope.set(1);
+    foo.scope.set(2);
+
+    WHEN("find index of an existing elem") {
+        auto found = foo.FindIndex([](auto&& elem) {
+            return elem == 6;
+        });
+        REQUIRE(found.has_value());
+        REQUIRE(*found == 1);
+    }
+
+    WHEN("find an existing elem") {
+        auto* found = foo.Find([](auto&& elem) {
+            return elem == 6;
+        });
+        REQUIRE(found != nullptr);
+        REQUIRE(*found == 6);
+    }
+
+    WHEN("find an existing elem with index") {
+        auto found = foo.FindIndex([](auto&& elem, auto n) {
+            return elem == 6 && n == 1;
+        });
+        REQUIRE(found.has_value());
+        REQUIRE(*found == 1);
+    }
+
+    WHEN("find a non-existing elem") {
+        auto found = foo.FindIndex([](auto&& elem) {
+            return elem == 7;
+        });
+        REQUIRE_FALSE(found.has_value());
+    }
+
+    WHEN("find a non-existing elem with index") {
+        auto found = foo.FindIndex([](auto&& elem, auto index) {
+            return elem == 6 && index != 1;
+        });
+        REQUIRE_FALSE(found.has_value());
+    }
+
+}
