@@ -12,16 +12,16 @@
 
 namespace mixin {
     template<_concept::SimpleFind T>
-    __DEF_Array_MIXIN(SimpleFindExt) {
-        using Mixin<T>::Self;
-
-    public:
+    struct SimpleFindExt : private T {
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
 
+        using T::Find;
+        using T::FindIndex;
+
         template<_concept::Pred<ObjectType, SizeType> PRED>
         auto Find(PRED &&pred) const -> auto* {
-            return Self()->Find(std::forward<PRED>(pred));
+            return Find(std::forward<PRED>(pred));
         }
 
         auto Find(ObjectType const& obj) -> auto* {
@@ -29,7 +29,7 @@ namespace mixin {
         }
 
         auto FindIndex(ObjectType const& obj) const -> auto {
-            return Self()->FindIndex([&](auto&& elem) { return elem == obj;});
+            return FindIndex([&](auto&& elem) { return elem == obj;});
         }
 
         auto FindIndex(ObjectType const& obj) -> auto {

@@ -28,10 +28,7 @@ namespace holder {
             return Parent::MAX_SIZE;
         }
 
-        auto Elems() const -> ElemType const* {
-            return Parent::elems;
-        }
-
+    private:
         BitMap occupied;
     };
 }

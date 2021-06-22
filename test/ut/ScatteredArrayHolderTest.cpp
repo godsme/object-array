@@ -12,6 +12,6 @@ SCENARIO("Int ScatteredArrayHolder") {
     REQUIRE(array.IndexBegin() == 0);
     REQUIRE(array.IndexEnd() == 5);
 
-    array.elems[0] = 1;
+    array.Elems()[0] = 1;
     REQUIRE(array.GetObj(0) == 1);
 }

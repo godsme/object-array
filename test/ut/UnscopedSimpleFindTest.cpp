@@ -2,9 +2,9 @@
 // Created by Darwin Yuan on 2021/6/20.
 //
 
-#include <object-array/mixin/UnscopedSimpleFind.h>
-#include <catch.hpp>
+#include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
+#include <catch.hpp>
 
 namespace {
     struct Foo {
@@ -20,15 +20,15 @@ namespace {
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
     };
 
-    struct FooArray : Foo, mixin::RangedArrayLike<Foo>, mixin::UnscopedSimpleFind<mixin::RangedArrayLike<Foo>> {
-        using MixinUnderTest = mixin::UnscopedSimpleFind<mixin::RangedArrayLike<Foo>>;
+    struct FooArray : Foo, mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>> {
+        using MixinUnderTest = mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>>;
         using MixinUnderTest::Find;
         using MixinUnderTest::FindIndex;
         static_assert(std::is_empty_v<MixinUnderTest>);
     };
 }
 
-SCENARIO("UnscopedSimpleFind") {
+SCENARIO("NonScopedSimpleFind") {
     FooArray foo;
     foo.elems[0] = 2;
     foo.elems[1] = 6;

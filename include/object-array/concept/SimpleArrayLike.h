@@ -13,7 +13,7 @@ namespace _concept {
         typename T::SizeType;
         typename T::ObjectType;
         typename T::ElemType;
-        { static_cast<typename T::ElemType const*>(o.elems) } -> std::same_as<typename T::ElemType const*>;
+        { o.Elems() } -> std::same_as<typename T::ElemType const*>;
         { T::ElemToObject(std::declval<typename T::ElemType const&>()) } -> std::same_as<typename T::ObjectType const&>;
     };
 }

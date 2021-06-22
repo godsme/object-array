@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/20.
 //
 #include <object-array/mixin/SimpleFindExt.h>
-#include <object-array/mixin/UnscopedSimpleFind.h>
+#include <object-array/mixin/NonScopedSimpleFind.h>
 #include <catch.hpp>
 #include <object-array/mixin/RangedArrayLike.h>
 
@@ -20,8 +20,8 @@ namespace {
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
     };
 
-    struct FooArray : Foo, mixin::RangedArrayLike<Foo>, mixin::UnscopedSimpleFind<mixin::RangedArrayLike<Foo>>, mixin::SimpleFindExt<mixin::UnscopedSimpleFind<mixin::RangedArrayLike<Foo>>> {
-        using MixinUnderTest = mixin::SimpleFindExt<mixin::UnscopedSimpleFind<mixin::RangedArrayLike<Foo>>>;
+    struct FooArray : Foo, mixin::SimpleFindExt<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>>> {
+        using MixinUnderTest = mixin::SimpleFindExt<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>>>;
         using MixinUnderTest::FindIndex;
         using MixinUnderTest::Find;
         static_assert(std::is_empty_v<MixinUnderTest>);
@@ -34,7 +34,6 @@ SCENARIO("SimpleFindExt") {
     foo.elems[1] = 6;
     foo.elems[2] = 3;
     foo.num = 3;
-
     WHEN("find an existing elem") {
         auto found = foo.FindIndex(6);
         REQUIRE(found.has_value());

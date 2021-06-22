@@ -16,9 +16,9 @@ namespace mixin {
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
 
-        auto IndexBegin() const -> auto { return 0; }
-        auto IndexEnd() const -> auto { return Self()->GetRange(); }
-        auto GetObj(SizeType n) const -> decltype(auto) { return T::ElemToObject(Self()->Elems()[n]); }
+        auto IndexBegin() const -> SizeType { return 0; }
+        auto IndexEnd() const -> SizeType { return Self()->GetRange(); }
+        auto GetObj(SizeType n) const -> ObjectType const& { return T::ElemToObject(Self()->Elems()[n]); }
     };
 }
 

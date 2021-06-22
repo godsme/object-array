@@ -14,6 +14,9 @@ namespace holder {
     struct ObjectArrayHolder
             : ObjectArrayDataHolder<OBJ, MAX_NUM>
             , mixin::RangedArray<mixin::ContinuousArrayLike<ObjectArrayDataHolder<OBJ, MAX_NUM>>> {
+        using Parent = ObjectArrayDataHolder<OBJ, MAX_NUM>;
+        using SizeType = typename Parent::SizeType;
+        using ObjectType = typename Parent::ObjectType;
     };
 }
 
