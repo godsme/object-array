@@ -79,6 +79,8 @@ namespace holder {
         using SizeType = typename Parent::SizeType;
 
         static_assert(std::is_move_constructible_v<ARRAY>);
+        static_assert(sizeof(ARRAY) <= sizeof(std::size_t) * 2,
+                "To avoid unnecessary copy overhead, use l-value slice instead of r-value one!!");
 
     public:
         ValueRangedViewDataHolder(ARRAY&& array, SizeType from, SizeType to)

@@ -15,14 +15,33 @@ namespace {
 SCENARIO("ArrayView Test") {
     Foo foo{{1,2,3,4}, 4};
 
-    WHEN("find an existing elem") {
+    WHEN("r-value find an existing elem") {
         auto found = ArrayView{foo.array, foo.num}.Slice(1,2).FindIndex(2);
         REQUIRE(found.has_value());
         REQUIRE(*found == 1);
     }
 
-    WHEN("find a non-existing elem") {
+    WHEN("r-value find an existing elem with Scope") {
+        auto found = ArrayView{foo.array, foo.num}.Slice(1,2).Scope(0xFF).FindIndex(2);
+        REQUIRE(found.has_value());
+        REQUIRE(*found == 1);
+    }
+
+    WHEN("r-value find a non-existing elem") {
         auto found = ArrayView{foo.array, foo.num}.Slice(1,2).FindIndex(4);
+        REQUIRE_FALSE(found.has_value());
+    }
+
+    WHEN("l-value find an existing elem") {
+        ArrayView view{foo.array, foo.num};
+        auto found = view.Slice(1,2).FindIndex(2);
+        REQUIRE(found.has_value());
+        REQUIRE(*found == 1);
+    }
+
+    WHEN("l-value find a non-existing elem") {
+        ArrayView view{foo.array, foo.num};
+        auto found = view.Slice(1,2).FindIndex(4);
         REQUIRE_FALSE(found.has_value());
     }
 }

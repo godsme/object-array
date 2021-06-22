@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_DEFMIXIN_H
 
 #include <cub/base/DeduceOffsetType.h>
+#include <cub/base/BitSet.h>
 #include <object-array/ArrayOffset.h>
 #include <type_traits>
 
@@ -17,6 +18,7 @@ namespace mixin {
             using DataHolder = T;
             using SizeType = typename T::SizeType;
             constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
+            using BitMap = BitSet<MAX_SIZE>;
             using OffsetType = ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
             using EndOffsetType = ArrayEndOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
         };

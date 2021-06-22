@@ -14,6 +14,7 @@ namespace mixin {
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
+        using RangedArrayLike = RangedArray;
 
         auto IndexBegin() const -> SizeType { return 0; }
         auto IndexEnd() const -> SizeType { return Self::GetRange(); }

@@ -10,34 +10,36 @@
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/detail/Combinator.h>
+#include <object-array/mixin/ScopedViewFactory.h>
 
-namespace view {
-    namespace detail {
-        template<typename HOLDER>
-        using SliceMixin = mixin::Combinator<
-                HOLDER,
-                mixin::RangedArrayLike,
-                mixin::NonScopedSimpleFind,
-                mixin::SimpleFindExt>;
+namespace view::detail {
+    template<typename HOLDER>
+    using SliceMixin = mixin::Combinator<
+            HOLDER,
+            mixin::RangedArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::ScopedViewFactory>;
 
-        template<typename ARRAY>
-        using ValueSlice = SliceMixin<holder::ValueRangedViewDataHolder<ARRAY>>;
+    template<typename ARRAY>
+    using ValueSlice = SliceMixin<holder::ValueRangedViewDataHolder<ARRAY>>;
 
-        template<typename ARRAY>
-        using RefSlice = SliceMixin<holder::RefRangedViewDataHolder<ARRAY>>;
+    template<typename ARRAY>
+    using RefSlice = SliceMixin<holder::RefRangedViewDataHolder<ARRAY>>;
 
-        template<typename HOLDER, typename Parent = SliceMixin<HOLDER>>
-        class Slice : Parent {
-            using Holder = typename Parent::Holder;
-            using Mixins = typename Parent::Mixins;
+    template<typename HOLDER, typename Parent = SliceMixin<HOLDER>>
+    class Slice : Parent {
+        using Holder = typename Parent::Holder;
+        using Mixins = typename Parent::Mixins;
 
-        public:
-            using Parent::Parent;
+    public:
+        using Parent::Parent;
 
-            using Mixins::Find;
-            using Mixins::FindIndex;
-        };
-    }
+        using Mixins::Find;
+        using Mixins::FindIndex;
+        using Mixins::Scope;
+        using Mixins::Exclude;
+    };
 }
 
 namespace view {
