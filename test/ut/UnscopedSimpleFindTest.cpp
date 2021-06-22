@@ -9,23 +9,10 @@
 #include <catch.hpp>
 
 namespace {
-
-    struct FooArray : ut::Foo, mixin::Combinator<ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind> {
-        using MixinUnderTest = mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>;
-        using MixinUnderTest::Find;
-        using MixinUnderTest::FindIndex;
-        static_assert(std::is_empty_v<MixinUnderTest>);
-
-    private:
-        static auto __CheckSelf__() {
-            static_assert(sizeof(FooArray) == sizeof(ut::Foo));
-        }
-    };
-
+    using FooArray = mixin::Combinator<true, ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind>;
 }
 
 SCENARIO("NonScopedSimpleFind") {
-    static_assert(sizeof(std::is_empty_v<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>>) == 1);
     FooArray foo;
     foo.elems[0] = 2;
     foo.elems[1] = 6;

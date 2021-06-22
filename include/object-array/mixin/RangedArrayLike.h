@@ -7,6 +7,7 @@
 
 #include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
+#include <object-array/mixin/detail/Combinator.h>
 
 namespace mixin {
     __Def_Mixin(RangedArrayLike, _concept::SimpleRangedArrayLike) {

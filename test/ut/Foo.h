@@ -33,6 +33,8 @@ namespace ut {
         using SizeType = std::size_t;
         using ObjectType = int;
 
+        constexpr static SizeType MAX_SIZE = 10;
+
         using Concept = FooConcept<Foo>;
 
     public:
