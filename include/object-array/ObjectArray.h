@@ -6,22 +6,11 @@
 #define OBJECT_ARRAY_OBJECTARRAY_H
 
 #include <object-array/holder/ObjectArrayDataHolder.h>
-#include <object-array/mixin/NonScopedSimpleFind.h>
-#include <object-array/mixin/RangedArrayLike.h>
-#include <object-array/mixin/RangedArray.h>
-#include <object-array/mixin/ContinuousArrayLike.h>
-#include <object-array/mixin/SimpleFindExt.h>
-#include <object-array/mixin/detail/Combinator.h>
+#include <object-array/detail/ContinuousArrayMixin.h>
 
 namespace detail {
     template<typename T, std::size_t MAX_NUM>
-    using ObjectArray = mixin::Combinator<true,
-            holder::ObjectArrayDataHolder<T, MAX_NUM>,
-            mixin::ContinuousArrayLike,
-            mixin::RangedArray,
-            mixin::RangedArrayLike,
-            mixin::NonScopedSimpleFind,
-            mixin::SimpleFindExt>;
+    using ObjectArray = ContinuousArrayMixin<holder::ObjectArrayDataHolder<T, MAX_NUM>>;
 }
 
 template<typename T, std::size_t MAX_NUM>

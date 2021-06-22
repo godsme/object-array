@@ -27,8 +27,8 @@ namespace holder {
             return Trait::ToObject(elem);
         }
 
-        auto Elems() const -> ElemType const* { return (elems); }
-        auto Elems() -> ElemType* { return (elems); }
+        auto Elems() const -> ElemType const* { return elems; }
+        auto Elems() -> ElemType* { return elems; }
 
     protected:
         ElemType elems[MAX_SIZE];

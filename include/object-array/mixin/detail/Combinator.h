@@ -24,7 +24,7 @@ namespace mixin::detail {
     };
 
     template<typename BASE>
-    struct Holder<BASE, false> : private BASE {
+    struct Holder<BASE, false> : protected BASE {
         using BASE::BASE;
     };
 }
