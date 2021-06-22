@@ -74,6 +74,9 @@ namespace holder {
 
         static_assert(std::is_move_constructible_v<ARRAY>);
 
+        static_assert(sizeof(ARRAY) <= sizeof(std::size_t) * 4,
+                      "To avoid unnecessary copy overhead, use l-value slice instead of r-value one!!");
+
     public:
         ValueScopedViewDataHolder(ARRAY&& array, BitMap scope)
             : array{std::move(array)}, Parent{scope} {}

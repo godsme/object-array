@@ -23,6 +23,9 @@ public:
 
     using Mixins::Find;
     using Mixins::FindIndex;
+    using Parent::Slice;
+    using Parent::Scope;
+    using Parent::Exclude;
 };
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H
