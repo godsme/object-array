@@ -5,7 +5,7 @@
 #include <object-array/ObjectArray.h>
 #include <catch.hpp>
 
-SCENARIO("Int ObjectArrayHolder") {
+SCENARIO("Int ObjectArray") {
     using IntArray = ObjectArray<int, 5>;
     IntArray foo;
 
