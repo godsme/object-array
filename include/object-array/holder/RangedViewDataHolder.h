@@ -31,6 +31,7 @@ namespace holder {
         using ElemType = typename ARRAY::ElemType;
         //using BitMap = typename ARRAY::BitMap;
         using SizeType = typename ARRAY::SizeType;
+        constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
 
         using Concept = detail::SliceDataHolderConcept<RangedViewDataHolder>;
 
