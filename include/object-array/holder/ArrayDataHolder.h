@@ -13,7 +13,7 @@ namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
     struct ArrayDataHolder {
         using ObjectType = OBJ;
-        using ElemType = ElemType<OBJ>;
+        using ElemType = holder::ElemType<OBJ>;
         using BitMap = BitSet<MAX_NUM>;
         using SizeType = DeduceSizeType_t<MAX_NUM>;
         using Trait = detail::ObjectTrait<ElemType>;

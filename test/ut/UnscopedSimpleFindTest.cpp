@@ -4,11 +4,13 @@
 
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
+#include <object-array/mixin/detail/Combinator.h>
 #include "Foo.h"
 #include <catch.hpp>
 
 namespace {
-    struct FooArray : mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>, ut::Foo {
+
+    struct FooArray : ut::Foo, mixin::Combinator<ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind> {
         using MixinUnderTest = mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>;
         using MixinUnderTest::Find;
         using MixinUnderTest::FindIndex;
