@@ -5,35 +5,24 @@
 #ifndef OBJECT_ARRAY_MIXIN_RANGEDARRAYLIKE_H
 #define OBJECT_ARRAY_MIXIN_RANGEDARRAYLIKE_H
 
-#include <object-array/detail/MixinDef.h>
+#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
-    __DEF_Array_MIXIN(RangedArrayLike) {
-        using Mixin<T>::Self;
-    public:
+    __Def_Mixin(RangedArrayLike, _concept::SimpleRangedArrayLike) {
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
 
-        auto IndexBegin() const -> auto {
-            return Self()->IndexBegin();
-        }
-
-        auto IndexEnd() const -> auto {
-            return Self()->IndexEnd();
-        }
-
-        auto GetObj(SizeType n) const -> decltype(auto) {
-            return Self()->GetObj(n);
-        }
+        using Self::IndexBegin;
+        using Self::IndexEnd;
+        using Self::GetObj;
 
         auto ObjectBegin() const -> ObjectType const* {
-            return &Self()->GetObj(Self()->IndexBegin());
+            return &GetObj(IndexBegin());
         }
 
         auto ObjectEnd() const -> ObjectType const* {
-            return &Self()->GetObj(Self()->IndexEnd());
+            return &GetObj(IndexEnd());
         }
     };
 }

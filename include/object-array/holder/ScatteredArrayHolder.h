@@ -11,8 +11,9 @@
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
     struct ScatteredArrayHolder
-            : ScatteredArrayDataHolder<OBJ, MAX_NUM>
-            , mixin::RangedArray<ScatteredArrayDataHolder<OBJ, MAX_NUM>> {
+            : ScatteredArrayDataHolder<OBJ, MAX_NUM>, mixin::RangedArray<ScatteredArrayDataHolder<OBJ, MAX_NUM>, false> {
+        using DataHolder = ScatteredArrayDataHolder<OBJ, MAX_NUM>;
+        using DataHolder::Elems;
     };
 }
 

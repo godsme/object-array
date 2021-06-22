@@ -5,23 +5,11 @@
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <catch.hpp>
 #include <object-array/mixin/RangedArrayLike.h>
+#include "Foo.h"
 
 namespace {
-    struct Foo {
-        int elems[10];
-        std::size_t num{};
-
-        using SizeType = std::size_t;
-        using ObjectType = int;
-        using ElemType = int;
-
-        auto IndexBegin() const -> std::size_t { return 0; }
-        auto IndexEnd() const -> SizeType { return num; }
-        auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
-    };
-
-    struct FooArray : Foo, mixin::SimpleFindExt<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>>> {
-        using MixinUnderTest = mixin::SimpleFindExt<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>>>;
+    struct FooArray : ut::Foo, mixin::SimpleFindExt<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>> {
+        using MixinUnderTest = mixin::SimpleFindExt<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>>;
         using MixinUnderTest::FindIndex;
         using MixinUnderTest::Find;
         static_assert(std::is_empty_v<MixinUnderTest>);

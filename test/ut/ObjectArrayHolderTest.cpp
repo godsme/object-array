@@ -3,9 +3,9 @@
 //
 
 #include <object-array/holder/ObjectArrayHolder.h>
+#include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <catch.hpp>
-#include <object-array/mixin/RangedArrayLike.h>
 
 SCENARIO("Int ObjectArrayHolder") {
     using IntArray = holder::ObjectArrayHolder<int, 5>;
@@ -21,8 +21,8 @@ SCENARIO("Int ObjectArrayHolder") {
 
 namespace {
 
-    struct Array : holder::ObjectArrayHolder<int, 5>
-            , mixin::NonScopedSimpleFind<mixin::RangedArrayLike<holder::ObjectArrayHolder<int, 5>>> {
-
-    };
+//    struct Array : holder::ObjectArrayHolder<int, 5>
+//            , mixin::NonScopedSimpleFind<mixin::RangedArrayLike<holder::ObjectArrayHolder<int, 5>>> {
+//
+//    };
 }

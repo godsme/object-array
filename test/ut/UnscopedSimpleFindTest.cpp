@@ -4,31 +4,26 @@
 
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
+#include "Foo.h"
 #include <catch.hpp>
 
 namespace {
-    struct Foo {
-        int elems[10];
-        std::size_t num{};
-
-        using SizeType = std::size_t;
-        using ObjectType = int;
-        using ElemType = int;
-
-        auto IndexBegin() const -> std::size_t { return 0; }
-        auto IndexEnd() const -> SizeType { return num; }
-        auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
-    };
-
-    struct FooArray : Foo, mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>> {
-        using MixinUnderTest = mixin::NonScopedSimpleFind<mixin::RangedArrayLike<Foo>>;
+    struct FooArray : mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>, ut::Foo {
+        using MixinUnderTest = mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>;
         using MixinUnderTest::Find;
         using MixinUnderTest::FindIndex;
         static_assert(std::is_empty_v<MixinUnderTest>);
+
+    private:
+        static auto __CheckSelf__() {
+            static_assert(sizeof(FooArray) == sizeof(ut::Foo));
+        }
     };
+
 }
 
 SCENARIO("NonScopedSimpleFind") {
+    static_assert(sizeof(std::is_empty_v<mixin::NonScopedSimpleFind<mixin::RangedArrayLike<ut::Foo>>>) == 1);
     FooArray foo;
     foo.elems[0] = 2;
     foo.elems[1] = 6;

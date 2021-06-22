@@ -5,14 +5,13 @@
 #ifndef OBJECT_ARRAY_SIMPLEFINDEXT_H
 #define OBJECT_ARRAY_SIMPLEFINDEXT_H
 
-#include <object-array/detail/MixinDef.h>
 #include <object-array/concept/SimpleFind.h>
 #include <object-array/concept/Pred.h>
+#include <object-array/mixin/detail/DefMixin.h>
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::SimpleFind T>
-    struct SimpleFindExt : private T {
+    __Def_Mixin(SimpleFindExt, _concept::SimpleFind) {
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
 

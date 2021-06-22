@@ -17,6 +17,8 @@ namespace holder {
         using Parent = ObjectArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
         using ObjectType = typename Parent::ObjectType;
+        using Parent::Elems;
+        using Parent::Num;
     };
 }
 
