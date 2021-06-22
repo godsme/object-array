@@ -25,8 +25,14 @@ namespace detail {
 template<typename T, std::size_t MAX_NUM>
 struct ScatteredArray : detail::ScatteredArray<T, MAX_NUM> {
     using Parent = detail::ScatteredArray<T, MAX_NUM>;
-    using Parent::Parent;
     using Holder = typename Parent::Holder;
+    using Mixins = typename Parent::Mixins;
+
+public:
+    using Parent::Parent;
+
+    using Mixins::Find;
+    using Mixins::FindIndex;
 };
 
 #endif //OBJECT_ARRAY_SCATTEREDARRAY_H

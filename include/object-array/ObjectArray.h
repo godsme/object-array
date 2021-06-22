@@ -13,11 +13,16 @@ namespace detail {
     using ObjectArray = ContinuousArrayMixin<holder::ObjectArrayDataHolder<T, MAX_NUM>>;
 }
 
-template<typename T, std::size_t MAX_NUM>
-struct ObjectArray : detail::ObjectArray<T, MAX_NUM> {
-    using Parent = detail::ObjectArray<T, MAX_NUM>;
-    using Parent::Parent;
+template<typename T, std::size_t MAX_NUM, typename Parent = detail::ObjectArray<T, MAX_NUM>>
+class ObjectArray : Parent {
     using Holder = typename Parent::Holder;
+    using Mixins = typename Parent::Mixins;
+
+public:
+    using Parent::Parent;
+
+    using Mixins::Find;
+    using Mixins::FindIndex;
 };
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H

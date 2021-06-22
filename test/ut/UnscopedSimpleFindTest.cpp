@@ -10,7 +10,12 @@
 #include <object-array/mixin/SimpleFindExt.h>
 
 namespace {
-    using FooArray = mixin::Combinator<ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
+    using Parent = mixin::Combinator<ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
+    struct FooArray : Parent {
+        using Parent::Parent;
+        using Parent::Find;
+        using Parent::FindIndex;
+    };
 }
 
 SCENARIO("NonScopedSimpleFind") {

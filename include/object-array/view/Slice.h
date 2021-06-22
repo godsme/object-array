@@ -26,9 +26,16 @@ namespace view {
 
     template<typename ARRAY>
     struct Slice : detail::Slice<ARRAY> {
+    private:
         using Parent = detail::Slice<ARRAY>;
-        using Parent::Parent;
         using Holder = typename Parent::Holder;
+        using Mixins = typename Parent::Mixins;
+
+    public:
+        using Parent::Parent;
+
+        using Mixins::Find;
+        using Mixins::FindIndex;
     };
 }
 

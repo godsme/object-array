@@ -10,11 +10,17 @@
 #include <catch.hpp>
 
 namespace {
-    using FooArray = mixin::Combinator<
+    using Parent = mixin::Combinator<
             ut::ScopedFoo,
             mixin::ScopedRangedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
+
+    struct FooArray : Parent {
+        using Parent::Parent;
+        using Parent::Find;
+        using Parent::FindIndex;
+    };
 }
 
 SCENARIO("ScopedSimpleFind") {
