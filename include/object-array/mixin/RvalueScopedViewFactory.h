@@ -25,7 +25,7 @@ namespace mixin {
             using RangedArrayLike::IndexBegin;
             using RangedArrayLike::IndexEnd;
 
-            using BitMap = typename DataHolder::BitMap;
+            using BitMap = BitMap;
             using SizeType = typename DataHolder::SizeType;
             using ObjectType = typename DataHolder::ObjectType;
             using ElemType = typename DataHolder::ElemType;

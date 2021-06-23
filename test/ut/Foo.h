@@ -13,8 +13,11 @@ namespace ut {
     struct FooConcept {
     protected:
         auto This() const -> T const* {
-            auto* p = reinterpret_cast<T const*>(this);
-            return p;
+            return reinterpret_cast<T const*>(this);
+        }
+
+        auto This() -> T* {
+            return reinterpret_cast<T*>(this);
         }
 
     public:
@@ -25,6 +28,7 @@ namespace ut {
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> std::size_t { return This()->IndexEnd(); }
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
+        auto GetObj(SizeType n) -> ObjectType& { return This()->GetObj(n); }
     };
 
     template<typename T>
@@ -62,6 +66,7 @@ namespace ut {
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> std::size_t { return num; }
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
+        auto GetObj(SizeType n) -> ObjectType& { return elems[n]; }
     };
 
     struct ScopedFoo {
@@ -91,6 +96,7 @@ namespace ut {
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> std::size_t { return MAX_SIZE; }
         auto GetObj(SizeType n) const -> ObjectType const& { return elems[n]; }
+        auto GetObj(SizeType n) -> ObjectType& { return elems[n]; }
         auto GetScope() const -> BitMap { return scope; }
     };
 }

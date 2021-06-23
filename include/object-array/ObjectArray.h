@@ -10,8 +10,14 @@
 #include <object-array/detail/ArrayComposer.h>
 
 namespace detail {
+    using ObjectArrayMixins =  mixin::ExtendMixins<
+            detail::ContinuousArrayMixin,
+            mixin::RangedViewFactory,
+            mixin::ScopedViewFactory,
+            mixin::IndexedViewFactory>;
+
     template<typename T, std::size_t MAX_NUM>
-    using ObjectArray = detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, detail::ContinuousArrayMixin>;
+    using ObjectArray = detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, ObjectArrayMixins>;
 }
 
 template<typename T, std::size_t MAX_NUM>

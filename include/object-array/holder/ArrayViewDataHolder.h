@@ -7,6 +7,7 @@
 
 #include <object-array/holder/detail/ViewElemTrait.h>
 #include <object-array/holder/detail/ArrayDataHolderConcept.h>
+#include <cub/base/BitSet.h>
 #include <type_traits>
 #include <cstring>
 #include <algorithm>
@@ -18,6 +19,7 @@ namespace holder {
         using ElemType = ELEM;
         using ObjectType = ELEM;
         using SizeType = SIZE_TYPE;
+        using BitMap = BitSet<MAX_NUM>;
         constexpr static auto MAX_SIZE = MAX_NUM;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
 

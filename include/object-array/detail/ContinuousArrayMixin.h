@@ -24,10 +24,7 @@ namespace detail {
             mixin::RangedArrayLike,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
-            mixin::SimpleFindExt,
-            mixin::RangedViewFactory,
-            mixin::ScopedViewFactory,
-            mixin::IndexedViewFactory>;
+            mixin::SimpleFindExt>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

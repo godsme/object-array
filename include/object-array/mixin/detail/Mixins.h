@@ -25,6 +25,12 @@ namespace mixin {
         template<typename HOLDER>
         using Type = typename detail::CombineMixin<MIXINS...>::template Type<HOLDER>;
     };
+
+    template<typename MIXIN, template<typename> typename ... MIXINS>
+    struct ExtendMixins {
+        template<typename HOLDER>
+        using Type = typename detail::CombineMixin<MIXIN::template Type, MIXINS...>::template Type<HOLDER>;
+    };
 }
 
 #endif //OBJECT_ARRAY_MIXINS_H

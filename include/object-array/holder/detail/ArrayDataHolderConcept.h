@@ -15,6 +15,7 @@ namespace holder::detail {
         using SizeType = typename DATA_HOLDER::SizeType;
         using ElemType = typename DATA_HOLDER::ElemType;
         using ObjectType = typename DATA_HOLDER::ObjectType;
+        using BitMap = typename DATA_HOLDER::BitMap;
 
         auto Elems() const -> ElemType const* { return This()->Elems(); }
         auto Elems() -> ElemType* { return This()->Elems(); }
