@@ -5,28 +5,18 @@
 #ifndef OBJECT_ARRAY_ITERATOR_H
 #define OBJECT_ARRAY_ITERATOR_H
 
-namespace iterator {
-    template<typename, typename, typename>
-    class IndexedIterator;
+#include <object-array/iterator/detail/SimpleIterator.h>
 
+namespace iterator {
     template<typename T>
-    struct Iterator {
-        Iterator(T* p) : p{p} {}
+    struct Iterator : detail::SimpleIterator<T> {
+        using Parent = detail::SimpleIterator<T>;
+        using Parent::Parent;
 
         auto operator++() -> Iterator& {
-            ++p;
+            Parent::Forward();
             return *this;
         }
-
-        auto operator!=(Iterator const& rhs) const -> bool { return p != rhs.p; }
-        auto operator*() -> T& { return *p; }
-
-    private:
-        template<typename, typename, typename>
-        friend class IndexedIterator;
-
-    private:
-        T* p;
     };
 }
 

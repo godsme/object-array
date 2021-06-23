@@ -11,12 +11,14 @@
 #include <object-array/mixin/ScopedRangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/IndexedScopedViewFactory.h>
+#include <object-array/mixin/IterableScopedArrayLike.h>
 
 namespace view::detail {
     template<typename HOLDER>
     using ScopedMixin = mixin::Combinator<
             HOLDER,
             mixin::RangedArrayLike,
+            mixin::IterableScopedArrayLike,
             mixin::IndexedScopedViewFactory,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
@@ -29,6 +31,9 @@ namespace view::detail {
 
     public:
         using Parent::Parent;
+
+        using Mixins::begin;
+        using Mixins::end;
 
         using Mixins::Find;
         using Mixins::FindIndex;

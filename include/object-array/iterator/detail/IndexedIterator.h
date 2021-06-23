@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_DETAIL_INDEXEDITERATOR_H
 #define OBJECT_ARRAY_DETAIL_INDEXEDITERATOR_H
 
-#include <object-array/iterator/Iterator.h>
+#include <object-array/iterator/detail/SimpleIterator.h>
 
 namespace iterator::detail {
     template<typename T, typename SIZE_TYPE>
@@ -19,7 +19,7 @@ namespace iterator::detail {
         IndexedIterator(T* p, SIZE_TYPE from) : p{p}, i{from} {}
 
         auto operator!=(IndexedIterator const& rhs) const -> bool { return p != rhs.p; }
-        auto operator!=(Iterator<T> const& rhs) const -> bool { return p != rhs.p; }
+        auto operator!=(SimpleIterator<T> const& rhs) const -> bool { return p != rhs.p; }
         auto operator*() const -> Result { return {*p, i}; }
 
     protected:

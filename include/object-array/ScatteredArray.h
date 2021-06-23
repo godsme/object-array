@@ -12,6 +12,7 @@
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/detail/Combinator.h>
 #include <object-array/mixin/ScopedRangedArray.h>
+#include <object-array/mixin/IterableScopedArrayLike.h>
 
 namespace detail {
     template<typename T>
@@ -19,6 +20,7 @@ namespace detail {
             T,
             mixin::ScopedRangedArray,
             mixin::ScopedRangedArrayLike,
+            mixin::IterableScopedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 }
@@ -31,6 +33,9 @@ class ScatteredArray : detail::ArrayComposer<holder::ScatteredArrayDataHolder<T,
 
 public:
     using Parent::Parent;
+
+    using Mixins::begin;
+    using Mixins::end;
 
     using Mixins::Find;
     using Mixins::FindIndex;
