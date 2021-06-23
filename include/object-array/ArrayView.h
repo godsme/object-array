@@ -25,6 +25,7 @@ public:
     using Parent::Slice;
     using Parent::Scope;
     using Parent::Exclude;
+    using Parent::WithIndex;
 };
 
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>

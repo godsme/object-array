@@ -13,6 +13,8 @@
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/RangedViewFactory.h>
 #include <object-array/mixin/ScopedViewFactory.h>
+#include <object-array/mixin/ScopedViewFactory.h>
+#include <object-array/mixin/IndexedViewFactory.h>
 
 namespace detail {
     template<typename HOLDER>
@@ -24,7 +26,8 @@ namespace detail {
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::RangedViewFactory,
-            mixin::ScopedViewFactory>;
+            mixin::ScopedViewFactory,
+            mixin::IndexedViewFactory>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

@@ -11,7 +11,9 @@
 
 namespace holder {
     template<_concept::SimpleRangedArrayLike ARRAY, typename SUB_TYPE>
-    struct IndexedViewDataHolder {
+    class IndexedViewDataHolder {
+        dEcL_tHiS(SUB_TYPE);
+    public:
         using ObjectType = typename ARRAY::ObjectType;
         using SizeType = typename ARRAY::SizeType;
         using BitMap = typename ARRAY::BitMap;
@@ -27,7 +29,7 @@ namespace holder {
     using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, IndexedViewDataHolder>;
 
     template<_concept::SimpleRangedArrayLike ARRAY>
-    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder>;
+    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H

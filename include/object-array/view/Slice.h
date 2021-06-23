@@ -11,6 +11,7 @@
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/detail/Combinator.h>
 #include <object-array/mixin/ScopedViewFactory.h>
+#include <object-array/mixin/IndexedViewFactory.h>
 
 namespace view::detail {
     template<typename HOLDER>
@@ -19,7 +20,8 @@ namespace view::detail {
             mixin::RangedArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
-            mixin::ScopedViewFactory>;
+            mixin::ScopedViewFactory,
+            mixin::IndexedViewFactory>;
 
     template<typename HOLDER, typename Parent = SliceMixin<HOLDER>>
     class Slice : Parent {
@@ -33,6 +35,7 @@ namespace view::detail {
         using Mixins::FindIndex;
         using Mixins::Scope;
         using Mixins::Exclude;
+        using Mixins::WithIndex;
     };
 }
 

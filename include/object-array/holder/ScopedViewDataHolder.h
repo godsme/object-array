@@ -51,7 +51,7 @@ namespace holder {
 
         auto GetScope() const -> BitMap { return scope; }
 
-    protected:
+    private:
         BitMap scope;
     };
 
