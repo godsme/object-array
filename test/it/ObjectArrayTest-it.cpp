@@ -204,6 +204,48 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
         expect(n == 5);
         expect(sum == (1 + 2 + 3 + 4 + 5));
     };
+
+    "range for index should not be able to modify"_test = [&] {
+        for(auto&& [item, i] : array.Slice(1, 2).WithIndex()) {
+            static_assert(std::is_const_v<decltype(i)>);
+        }
+    };
+
+    "range for index should not be able to modify if array is const"_test = [&] {
+        if constexpr(std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            for(auto&& item : array.Slice(1, -2)) {
+                static_assert(std::is_reference_v<decltype(item)>);
+                static_assert(std::is_const_v<std::remove_reference_t<decltype(item)>>);
+            }
+        }
+    };
+
+    "range for index should be able to modify if array is not const"_test = [&] {
+        if constexpr(!std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            for(auto&& item : array.Slice(1, -2)) {
+                static_assert(std::is_reference_v<decltype(item)>);
+                expect(!std::is_const_v<std::remove_reference_t<decltype(item)>>);
+            }
+        }
+    };
+
+    "range for index should not be able to modify if array is const"_test = [&] {
+        if constexpr(std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            for(auto&& [item, i] : array.Slice(1, -2).WithIndex()) {
+                static_assert(std::is_reference_v<decltype(item)>);
+                static_assert(std::is_const_v<std::remove_reference_t<decltype(item)>>);
+            }
+        }
+    };
+
+    "range for index should be able to modify if array is not const"_test = [&] {
+        if constexpr(!std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            for(auto&& [item, i] : array.Slice(1, -2).WithIndex()) {
+                static_assert(std::is_reference_v<decltype(item)>);
+                expect(!std::is_const_v<std::remove_reference_t<decltype(item)>>);
+            }
+        }
+    };
 }
 
 suite ObjectArraySlice_Suite = [] {
