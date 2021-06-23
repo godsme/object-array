@@ -2,11 +2,11 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#include <cub/base/IntOptional.h>
+#include <cub/base/IntOpt.h>
 #include <catch.hpp>
 
-SCENARIO("IntOptional") {
-    IntOptional<_7bits> a;
+SCENARIO("IntOpt") {
+    IntOpt<uint8_t> a;
 
     REQUIRE(!a.has_value());
     REQUIRE(a == std::nullopt);
@@ -23,7 +23,7 @@ SCENARIO("IntOptional") {
     REQUIRE(std::nullopt == a);
     REQUIRE(!(bool)a);
 
-    IntOptional<_15bits> b{12};
+    IntOpt<uint16_t> b{12};
     REQUIRE(b.has_value());
     REQUIRE(*b == 12);
 

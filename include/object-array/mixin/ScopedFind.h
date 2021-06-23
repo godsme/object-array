@@ -8,7 +8,7 @@
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/Pred.h>
 #include <object-array/mixin/detail/DefMixin.h>
-#include <cub/base/IntOptional.h>
+#include <cub/base/IntOpt.h>
 #include <optional>
 #include <algorithm>
 

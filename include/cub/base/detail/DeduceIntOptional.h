@@ -5,25 +5,25 @@
 #ifndef OBJECT_ARRAY_DEDUCEINTOPTIONAL_H
 #define OBJECT_ARRAY_DEDUCEINTOPTIONAL_H
 
-#include <cub/base/IntOptional.h>
+#include <cub/base/IntOpt.h>
 
 namespace detail {
     template<std::size_t MAX_SIZE>
     auto DeduceBitsType() -> auto {
-        static_assert(MAX_SIZE <= (std::numeric_limits<std::size_t>::max() >> 1));
-        if constexpr(MAX_SIZE <= (std::numeric_limits<uint8_t>::max() >> 1)) {
-            return _7bits{};
-        } else if constexpr(MAX_SIZE <= (std::numeric_limits<uint16_t>::max() >> 1)) {
-            return _15bits{};
-        } else if constexpr(MAX_SIZE <= (std::numeric_limits<uint32_t>::max() >> 1)) {
-            return _31bits{};
+        static_assert(MAX_SIZE < (std::numeric_limits<std::size_t>::max()));
+        if constexpr(MAX_SIZE < (std::numeric_limits<uint8_t>::max())) {
+            return uint8_t{};
+        } else if constexpr(MAX_SIZE < std::numeric_limits<uint16_t>::max()) {
+            return uint16_t{};
+        } else if constexpr(MAX_SIZE < std::numeric_limits<uint32_t>::max()) {
+            return uint32_t{};
         } else {
-            return _63bits{};
+            return uint64_t{};
         }
     }
 
     template<std::size_t MAX_SIZE>
-    using DeduceIntOptional_t = IntOptional<decltype(DeduceBitsType<MAX_SIZE>())>;
+    using DeduceIntOptional_t = IntOpt<decltype(DeduceBitsType<MAX_SIZE>())>;
 }
 
 #endif //OBJECT_ARRAY_DEDUCEINTOPTIONAL_H

@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_FOO_H
 
 #include <cub/base/BitSet.h>
-#include <cub/base/IntOptional.h>
+#include <cub/base/IntOpt.h>
 #include <cstddef>
 
 namespace ut {
@@ -52,7 +52,7 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-        //using Maybe = IntOptional<MAX_SIZE>;
+        //using Maybe = IntOpt<MAX_SIZE>;
 
         using Concept = FooConcept<Foo>;
 
@@ -81,7 +81,7 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-        //using Maybe = IntOptional<MAX_SIZE>;
+        //using Maybe = IntOpt<MAX_SIZE>;
         using Concept = ScopedFooConcept<ScopedFoo>;
 
     public:
