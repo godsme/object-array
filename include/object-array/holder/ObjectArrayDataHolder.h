@@ -14,6 +14,7 @@ namespace holder {
     struct ObjectArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
+        using Trait = typename Parent::Trait;
         using Concept = detail::ArrayDataHolderConcept<ObjectArrayDataHolder>;
 
         ObjectArrayDataHolder() {}
@@ -21,7 +22,7 @@ namespace holder {
             auto n = std::min(list.size(), MAX_NUM);
             num = 0;
             for(auto&& elem : list) {
-                Parent::elems[num++] = elem;
+                Trait::Emplace(Parent::elems[num++], elem);
             }
         }
 

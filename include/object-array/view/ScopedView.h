@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_SCOPEDVIEW_H
 
 #include <object-array/holder/ScopedViewDataHolder.h>
-#include <object-array/mixin/detail/Combine.h>
+#include <object-array/mixin/detail/Mixins.h>
 #include <object-array/mixin/ScopedSimpleFind.h>
 #include <object-array/mixin/ScopedRangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
@@ -14,7 +14,7 @@
 #include <object-array/mixin/IterableScopedArrayLike.h>
 
 namespace view::detail {
-    using ScopedMixin = mixin::Combine<
+    using ScopedMixin = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IterableScopedArrayLike,
             mixin::IndexedScopedViewFactory,

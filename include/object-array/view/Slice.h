@@ -10,13 +10,13 @@
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
-#include <object-array/mixin/detail/Combine.h>
+#include <object-array/mixin/detail/Mixins.h>
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/IndexedViewFactory.h>
 #include <object-array/mixin/IterableArrayLike.h>
 
 namespace view::detail {
-    using SliceMixin = mixin::Combine<
+    using SliceMixin = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,

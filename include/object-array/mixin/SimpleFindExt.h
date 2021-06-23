@@ -22,8 +22,12 @@ namespace mixin {
         using Self::FindIndex;
 
         template<_concept::Pred<ObjectType, SizeType> PRED>
-        auto Find(PRED &&pred) const -> auto* {
+        auto Find(PRED &&pred) const -> ObjectType const* {
             return Self::template Find(std::forward<PRED>(pred));
+        }
+
+        auto Find(ObjectType const& obj) const -> auto* {
+            return Self::template Find([&](auto&& elem) { return elem == obj;});
         }
 
         auto Find(ObjectType const& obj) -> auto* {

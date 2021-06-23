@@ -7,7 +7,7 @@
 
 #include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
-#include <object-array/mixin/detail/Combine.h>
+#include <object-array/mixin/detail/Mixins.h>
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>

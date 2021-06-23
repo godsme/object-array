@@ -19,14 +19,17 @@ class ObjectArray : detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_N
 public:
     using Parent::Parent;
 
+    using Parent::begin;
+    using Parent::end;
+
     using Mixins::Find;
     using Mixins::FindIndex;
+    using Mixins::Exists;
+
     using Parent::Slice;
     using Parent::Scope;
     using Parent::Exclude;
     using Parent::WithIndex;
-    using Parent::begin;
-    using Parent::end;
 };
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H

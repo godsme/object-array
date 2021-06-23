@@ -10,12 +10,12 @@
 #include <object-array/mixin/ScopedSimpleFind.h>
 #include <object-array/mixin/ScopedRangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
-#include <object-array/mixin/detail/Combine.h>
+#include <object-array/mixin/detail/Mixins.h>
 #include <object-array/mixin/ScopedRangedArray.h>
 #include <object-array/mixin/IterableScopedArrayLike.h>
 
 namespace detail {
-    using ScatteredArrayMixins = mixin::Combine<
+    using ScatteredArrayMixins = mixin::Mixins<
             mixin::ScopedRangedArray,
             mixin::ScopedRangedArrayLike,
             mixin::IterableScopedArrayLike,

@@ -4,14 +4,14 @@
 
 #include <object-array/mixin/ScopedSimpleFind.h>
 #include <object-array/mixin/ScopedRangedArrayLike.h>
-#include <object-array/mixin/detail/Combine.h>
+#include <object-array/mixin/detail/Mixins.h>
 #include <object-array/mixin/SimpleFindExt.h>
+#include <object-array/detail/ArrayComposer.h>
 #include "Foo.h"
 #include <catch.hpp>
-#include <object-array/detail/ArrayComposer.h>
 
 namespace {
-    using Mixins = mixin::Combine<
+    using Mixins = mixin::Mixins<
             mixin::ScopedRangedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;

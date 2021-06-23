@@ -15,6 +15,19 @@ namespace holder::detail {
 
         static auto ToObject(ElemType const& elem) -> ObjectType const& { return elem; }
         static auto ToObject(ElemType& elem) -> ObjectType& { return elem; }
+
+        template<typename ... ARGS>
+        static auto Emplace(ElemType& elem, ARGS&& ... args) -> ObjectType* {
+            if constexpr(!(sizeof...(args) == 0 && std::is_trivially_constructible_v<ObjectType>)) {
+                if constexpr(std::is_aggregate_v<ElemType>) {
+                    elem = ObjectType{std::forward<ARGS>(args)...};
+                } else {
+                    elem = ObjectType(std::forward<ARGS>(args)...);
+                }
+            }
+
+            return &elem;
+        }
     };
 
     template<typename OBJ>
@@ -24,6 +37,11 @@ namespace holder::detail {
 
         static auto ToObject(ElemType const& elem) -> ObjectType const& { return elem.GetRef(); }
         static auto ToObject(ElemType& elem) -> ObjectType& { return elem.GetRef(); }
+
+        template<typename ... ARGS>
+        static auto Emplace(ElemType& elem, ARGS&& ... args) -> ObjectType* {
+            return elem.template Emplace(std::forward<ARGS>(args)...);
+        }
     };
 }
 

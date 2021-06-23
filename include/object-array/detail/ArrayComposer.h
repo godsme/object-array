@@ -7,12 +7,12 @@
 
 namespace detail {
     template<typename HOLDER, typename MIXINS>
-    class ArrayComposer : protected HOLDER, protected MIXINS::template Mixins<HOLDER> {
+    class ArrayComposer : protected HOLDER, protected MIXINS::template Type<HOLDER> {
         static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(ArrayComposer)); }
-        static_assert(std::is_empty_v<typename MIXINS::template Mixins<HOLDER>>);
+        static_assert(std::is_empty_v<typename MIXINS::template Type<HOLDER>>);
     public:
         using Holder = HOLDER;
-        using Mixins = typename MIXINS::template Mixins<HOLDER>;
+        using Mixins = typename MIXINS::template Type<HOLDER>;
         using Holder::Holder;
 
         using SizeType = typename Holder::SizeType;
