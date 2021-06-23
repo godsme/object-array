@@ -8,6 +8,7 @@
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/Pred.h>
 #include <object-array/mixin/detail/DefMixin.h>
+#include <cub/base/IntOptional.h>
 #include <optional>
 #include <algorithm>
 
@@ -19,6 +20,7 @@ namespace mixin {
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
         using BitMap = typename T::BitMap;
+        using Maybe = typename T::Maybe;
 
     private:
         using Self::IndexBegin;
@@ -29,7 +31,7 @@ namespace mixin {
 
     public:
         template<_concept::Pred<ObjectType, SizeType> PRED>
-        auto FindIndex(BitMap scope, PRED&& pred) const -> std::optional<SizeType> {
+        auto FindIndex(BitMap scope, PRED&& pred) const -> Maybe {
             if (IndexBegin() >= IndexEnd()) return std::nullopt;
             for (auto i = IndexBegin(); i < IndexEnd(); i++) {
                 if(!scope[i]) continue;

@@ -8,6 +8,7 @@
 #include <object-array/holder/detail/DeduceElemType.h>
 #include <object-array/holder/detail/ObjectTrait.h>
 #include <cub/base/BitSet.h>
+#include <cub/base/IntOptional.h>
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
@@ -17,6 +18,7 @@ namespace holder {
         using BitMap = BitSet<MAX_NUM>;
         using SizeType = DeduceSizeType_t<MAX_NUM>;
         using Trait = detail::ObjectTrait<ElemType>;
+        using Maybe = IntOptional<MAX_NUM>;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
 
         static auto ElemToObject(ElemType const& elem) -> ObjectType const& {

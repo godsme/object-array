@@ -18,6 +18,7 @@ namespace mixin {
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
+        using Maybe = typename T::Maybe;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
@@ -27,7 +28,7 @@ namespace mixin {
 
     public:
         template<_concept::Pred<ObjectType, SizeType> PRED>
-        auto FindIndex(PRED&& pred) const -> std::optional<SizeType> {
+        auto FindIndex(PRED&& pred) const -> Maybe {
             if (IndexBegin() >= IndexEnd()) return std::nullopt;
             for (auto i = IndexBegin(); i < IndexEnd(); i++) {
                 if constexpr(_concept::WithIndexPred<PRED, ObjectType, SizeType>) {

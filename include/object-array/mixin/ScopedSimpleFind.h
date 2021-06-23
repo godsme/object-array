@@ -19,13 +19,14 @@ namespace mixin {
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
+        using Maybe = typename T::Maybe;
 
     private:
         using Self::GetScope;
 
     public:
         template<_concept::Pred<ObjectType, SizeType> PRED>
-        auto FindIndex(PRED&& pred) const -> std::optional<SizeType> {
+        auto FindIndex(PRED&& pred) const -> Maybe {
             return Self::template FindIndex(GetScope(), std::forward<PRED>(pred));
         }
 

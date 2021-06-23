@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_FOO_H
 
 #include <cub/base/BitSet.h>
+#include <cub/base/IntOptional.h>
 #include <cstddef>
 
 namespace ut {
@@ -22,7 +23,8 @@ namespace ut {
 
     public:
         using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;;
+        using ObjectType = typename T::ObjectType;
+        using Maybe = typename T::Maybe;
 
     public:
         auto IndexBegin() const -> std::size_t { return 0; }
@@ -51,6 +53,7 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
+        using Maybe = IntOptional<MAX_SIZE>;
 
         using Concept = FooConcept<Foo>;
 
@@ -79,7 +82,7 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-
+        using Maybe = IntOptional<MAX_SIZE>;
         using Concept = ScopedFooConcept<ScopedFoo>;
 
     public:

@@ -26,6 +26,7 @@ namespace mixin {
             using RangedArrayLike::IndexEnd;
 
             using BitMap = BitMap;
+            using Maybe = typename DataHolder::Maybe;
             using SizeType = typename DataHolder::SizeType;
             using ObjectType = typename DataHolder::ObjectType;
             using ElemType = typename DataHolder::ElemType;

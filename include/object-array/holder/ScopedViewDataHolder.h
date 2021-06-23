@@ -17,6 +17,7 @@ namespace holder::detail {
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
         using BitMap = typename T::BitMap;
+        using Maybe = typename T::Maybe;
 
         using ScopedRangedArrayLike = ScopedViewDataHolderConcept;
 
@@ -40,6 +41,7 @@ namespace holder {
         using BitMap = typename ArrayType::BitMap;
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
+        using Maybe = typename ArrayType::Maybe;
 
         using Concept = detail::ScopedViewDataHolderConcept<ScopedViewDataHolder>;
 

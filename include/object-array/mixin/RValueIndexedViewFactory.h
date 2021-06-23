@@ -30,6 +30,7 @@ namespace mixin {
             using ObjectType = typename DataHolder::ObjectType;
             using ElemType = typename DataHolder::ElemType;
             using BitMap = typename RangedArrayLike::BitMap;
+            using Maybe = typename DataHolder::Maybe;
 
             constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
             Array(Array&&) = default;

@@ -17,6 +17,7 @@ namespace detail {
 
         using SizeType = typename Holder::SizeType;
         using ObjectType = typename Holder::ObjectType;
+        using Maybe = typename Holder::Maybe;
     };
 }
 
