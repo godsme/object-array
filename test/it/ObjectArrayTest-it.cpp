@@ -20,10 +20,9 @@ namespace {
     using FooArray = ObjectArray<Foo, 10>;
 }
 
-suite ObjectArraySimpleFind_Suite = [] {
-    FooArray array{{1},{2},{3},{4},{5},{6}};
-
-    "should be able to find the index of an existent elem"_test = [&] {
+template<typename ARRAY>
+auto FindTest(ARRAY&& array) {
+    test("should be able to find the index of an existent elem") = [&] {
         auto found = array.FindIndex(Foo{3});
         expect(found.has_value());
         expect(*found == 2);
@@ -73,4 +72,11 @@ suite ObjectArraySimpleFind_Suite = [] {
         expect(array.Exists(5));
         expect(!array.Exists(10));
     };
+}
+
+suite ObjectArraySimpleFind_Suite = [] {
+    FooArray const array{{1},{2},{3},{4},{5},{6}};
+    FindTest(array);
+
+    FindTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };

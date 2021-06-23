@@ -38,6 +38,7 @@ namespace detail {
         union Type {
             Type() {}
             ~Type() {}
+            Type(Type const&) = delete;
             T object;
         };
     };
