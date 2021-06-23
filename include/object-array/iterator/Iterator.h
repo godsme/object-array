@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_ITERATOR_H
 
 namespace iterator {
-    template<typename, typename>
+    template<typename, typename, typename>
     class IndexedIterator;
 
     template<typename T>
@@ -22,7 +22,7 @@ namespace iterator {
         auto operator*() -> T& { return *p; }
 
     private:
-        template<typename, typename>
+        template<typename, typename, typename>
         friend class IndexedIterator;
 
     private:

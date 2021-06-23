@@ -10,7 +10,10 @@
 #include <object-array/mixin/detail/Combinator.h>
 
 namespace mixin {
-    __Def_Mixin(RangedArrayLike, _concept::SimpleRangedArrayLike) {
+    template<_concept::SimpleRangedArrayLike T>
+    struct RangedArrayLike : detail::Extends<T> {
+        using Self = detail::Extends<T>;
+
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
 

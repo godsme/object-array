@@ -10,7 +10,9 @@
 #include <object-array/mixin/IndexedContainer.h>
 
 namespace mixin {
-    __Def_Mixin_Composite(RangedArray, _concept::ConstArrayLike, IndexedContainer) {
+    template<_concept::ConstArrayLike T>
+    class RangedArray : public detail::Extends<IndexedContainer<T>> {
+        using Self = detail::Extends<IndexedContainer<T>>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

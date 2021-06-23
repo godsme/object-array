@@ -15,7 +15,7 @@
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/IndexedViewFactory.h>
-#include <object-array/mixin/IteratableArrayLike.h>
+#include <object-array/mixin/IterableArrayLike.h>
 
 namespace detail {
     template<typename HOLDER>
@@ -24,7 +24,7 @@ namespace detail {
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
             mixin::RangedArrayLike,
-            mixin::IteratableArrayLike,
+            mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::RangedViewFactory,

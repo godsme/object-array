@@ -9,7 +9,9 @@
 #include <object-array/concept/ContinuousArrayLikeDataHolder.h>
 
 namespace mixin {
-    __Def_Mixin(ContinuousArrayLike, _concept::ContinuousArrayLikeDataHolder) {
+    template<_concept::ContinuousArrayLikeDataHolder T>
+    struct ContinuousArrayLike : detail::Extends<T> {
+        using Self = detail::Extends<T>;
     public:
         using SizeType = typename T::SizeType;
         using ElemType = typename T::ElemType;

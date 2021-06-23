@@ -9,7 +9,9 @@
 #include <object-array/concept/ArrayLike.h>
 
 namespace mixin {
-    __Def_Mixin(IndexedContainer, _concept::ConstArrayLike) {
+    template<_concept::ConstArrayLike T>
+    struct IndexedContainer : detail::Extends<T> {
+        using Self = detail::Extends<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

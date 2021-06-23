@@ -6,27 +6,29 @@
 #define OBJECT_ARRAY_SLICE_H
 
 #include <object-array/holder/RangedViewDataHolder.h>
+#include <object-array/detail/ArrayComposer.h>
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/detail/Combinator.h>
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/IndexedViewFactory.h>
-#include <object-array/mixin/IteratableArrayLike.h>
+#include <object-array/mixin/IterableArrayLike.h>
 
 namespace view::detail {
     template<typename HOLDER>
     using SliceMixin = mixin::Combinator<
             HOLDER,
             mixin::RangedArrayLike,
-            mixin::IteratableArrayLike,
+            mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory>;
 
-    template<typename HOLDER, typename Parent = SliceMixin<HOLDER>>
-    class Slice : Parent {
+    template<typename HOLDER>
+    class Slice : ::detail::ArrayComposer<HOLDER, SliceMixin> {
+        using Parent = ::detail::ArrayComposer<HOLDER, SliceMixin>;
         using Holder = typename Parent::Holder;
         using Mixins = typename Parent::Mixins;
 

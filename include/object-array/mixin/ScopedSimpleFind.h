@@ -13,7 +13,9 @@
 #include <algorithm>
 
 namespace mixin {
-    __Def_Mixin_Composite(ScopedSimpleFind, _concept::ScopedRangedArrayLike, ScopedFind) {
+    template<_concept::ScopedRangedArrayLike T>
+    struct ScopedSimpleFind : detail::Extends<ScopedFind<T>> {
+        using Self = detail::Extends<ScopedFind<T>>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

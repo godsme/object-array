@@ -7,14 +7,12 @@
 
 #include <object-array/holder/ObjectArrayDataHolder.h>
 #include <object-array/detail/ContinuousArrayMixin.h>
+#include <object-array/detail/ArrayComposer.h>
 
-namespace detail {
-    template<typename T, std::size_t MAX_NUM>
-    using ObjectArray = ContinuousArrayMixin<holder::ObjectArrayDataHolder<T, MAX_NUM>>;
-}
+template<typename T, std::size_t MAX_NUM>
+class ObjectArray : detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, detail::ContinuousArrayMixin> {
+    using Parent = detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, detail::ContinuousArrayMixin>;
 
-template<typename T, std::size_t MAX_NUM, typename Parent = detail::ObjectArray<T, MAX_NUM>>
-class ObjectArray : Parent {
     using Holder = typename Parent::Holder;
     using Mixins = typename Parent::Mixins;
 

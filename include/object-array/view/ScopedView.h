@@ -15,12 +15,13 @@ namespace view::detail {
     template<typename HOLDER>
     using ScopeMixin = mixin::Combinator<
             HOLDER,
-            mixin::ScopedRangedArrayLike,
+            mixin::RangedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 
-    template<typename HOLDER, typename Parent = ScopeMixin<HOLDER>>
-    class ScopedView : Parent {
+    template<typename HOLDER>
+    class ScopedView : ::detail::ArrayComposer<HOLDER, ScopeMixin> {
+        using Parent = ::detail::ArrayComposer<HOLDER, ScopeMixin>;
         using Holder = typename Parent::Holder;
         using Mixins = typename Parent::Mixins;
 

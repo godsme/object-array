@@ -11,7 +11,10 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    __Def_Mixin(SimpleFindExt, _concept::SimpleFind) {
+    template<_concept::SimpleFind T>
+    class SimpleFindExt : public detail::Extends<T> {
+        using Self = detail::Extends<T>;
+    public:
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
 

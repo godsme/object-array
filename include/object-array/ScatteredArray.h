@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_SCATTEREDARRAY_H
 
 #include <object-array/holder/ScatteredArrayDataHolder.h>
+#include <object-array/detail/ArrayComposer.h>
 #include <object-array/mixin/ScopedSimpleFind.h>
 #include <object-array/mixin/ScopedRangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
@@ -13,17 +14,18 @@
 #include <object-array/mixin/ScopedRangedArray.h>
 
 namespace detail {
-    template<typename T, std::size_t MAX_NUM>
-    using ScatteredArray = mixin::Combinator<
-            holder::ScatteredArrayDataHolder<T, MAX_NUM>,
+    template<typename T>
+    using ScatteredArrayMixins = mixin::Combinator<
+            T,
             mixin::ScopedRangedArray,
             mixin::ScopedRangedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 }
 
-template<typename T, std::size_t MAX_NUM, typename Parent = detail::ScatteredArray<T, MAX_NUM>>
-class ScatteredArray : Parent {
+template<typename T, std::size_t MAX_NUM>
+class ScatteredArray : detail::ArrayComposer<holder::ScatteredArrayDataHolder<T, MAX_NUM>, detail::ScatteredArrayMixins> {
+    using Parent = detail::ArrayComposer<holder::ScatteredArrayDataHolder<T, MAX_NUM>, detail::ScatteredArrayMixins>;
     using Holder = typename Parent::Holder;
     using Mixins = typename Parent::Mixins;
 

@@ -7,32 +7,11 @@
 
 #include <object-array/holder/IndexedViewDataHolder.h>
 #include <object-array/mixin/RangedArrayLike.h>
-#include <object-array/mixin/IteratableIndexedArrayLike.h>
-
-namespace view::detail {
-    template<typename HOLDER>
-    using WithIndexMixin = mixin::Combinator<
-            HOLDER,
-            mixin::RangedArrayLike,
-            mixin::IteratableIndexedArrayLike>;
-
-    template<typename HOLDER, typename Parent = WithIndexMixin<HOLDER>>
-    class WithIndex : Parent {
-        using Mixins = typename Parent::Mixins;
-    public:
-        using Parent::Parent;
-
-        using Mixins::begin;
-        using Mixins::end;
-    };
-}
+#include <object-array/view/detail/IndexedArrayView.h>
+#include <object-array/mixin/IterableIndexedArrayLike.h>
 
 namespace view {
-    template<typename ARRAY>
-    using IndexedView = detail::WithIndex<holder::RefIndexedViewDataHolder<ARRAY>>;
-
-    template<typename ARRAY>
-    using ValueIndexedView = detail::WithIndex<holder::ValueIndexedViewDataHolder<ARRAY>>;
+    using IndexedView = typename detail::IndexedArrayView<mixin::IterableIndexedArrayLike, holder::RefIndexedViewDataHolder, holder::ValueIndexedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDVIEW_H

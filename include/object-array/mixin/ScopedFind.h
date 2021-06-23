@@ -12,7 +12,9 @@
 #include <algorithm>
 
 namespace mixin {
-    __Def_Mixin(ScopedFind, _concept::RangedArrayLike) {
+    template<_concept::RangedArrayLike T>
+    struct ScopedFind : detail::Extends<T> {
+        using Self = detail::Extends<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

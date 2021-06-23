@@ -10,7 +10,9 @@
 #include <object-array/view/IndexedView.h>
 
 namespace mixin {
-    __Def_Mixin(IndexedViewFactory, _concept::SimpleRangedArrayLike) {
+    template<_concept::SimpleRangedArrayLike T>
+    class IndexedViewFactory : public detail::Extends<T> {
+        using Self = detail::Extends<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
@@ -37,11 +39,11 @@ namespace mixin {
 
     public:
         auto WithIndex() && -> auto {
-            return view::ValueIndexedView<Array>{reinterpret_cast<Array&&>(*this)};
+            return view::IndexedView::ValueView<Array>{reinterpret_cast<Array&&>(*this)};
         }
 
         auto WithIndex() & -> auto {
-            return view::IndexedView<RangedArrayLike>{static_cast<RangedArrayLike&>(*this)};
+            return view::IndexedView::RefView<RangedArrayLike>{reinterpret_cast<RangedArrayLike&&>(*this)};
         }
     };
 }

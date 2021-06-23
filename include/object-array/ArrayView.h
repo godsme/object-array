@@ -7,15 +7,11 @@
 
 #include <object-array/holder/ArrayViewDataHolder.h>
 #include <object-array/detail/ContinuousArrayMixin.h>
+#include <object-array/detail/ArrayComposer.h>
 
-namespace detail {
-    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM>
-    using ArrayView = ContinuousArrayMixin<
-            holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, ELEM>>;
-}
-
-template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T, typename Parent = detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>>
-class ArrayView : Parent {
+template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T>
+class ArrayView : detail::ArrayComposer<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, ELEM>, detail::ContinuousArrayMixin> {
+    using Parent = detail::ArrayComposer<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, ELEM>, detail::ContinuousArrayMixin>;
     using Holder = typename Parent::Holder;
 public:
     using Parent::Parent;

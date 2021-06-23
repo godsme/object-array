@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_ITERATABLEINDEXEDARRAYLIKE_H
-#define OBJECT_ARRAY_ITERATABLEINDEXEDARRAYLIKE_H
+#ifndef OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
+#define OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
 
 #include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
@@ -11,7 +11,9 @@
 #include <object-array/iterator/Iterator.h>
 
 namespace mixin {
-    __Def_Mixin(IteratableIndexedArrayLike, _concept::RangedArrayLike) {
+    template<_concept::RangedArrayLike T>
+    struct IterableIndexedArrayLike : detail::Extends<T> {
+        using Self = detail::Extends<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
@@ -45,4 +47,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_ITERATABLEINDEXEDARRAYLIKE_H
+#endif //OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H

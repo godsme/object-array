@@ -10,7 +10,9 @@
 #include <object-array/view/Slice.h>
 
 namespace mixin {
-    __Def_Mixin(RangedViewFactory, _concept::SimpleRangedArrayLike) {
+    template<_concept::SimpleRangedArrayLike T>
+    struct RangedViewFactory : detail::Extends<T> {
+        using Self = detail::Extends<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

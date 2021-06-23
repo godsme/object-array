@@ -10,7 +10,9 @@
 #include <object-array/view/ScopedView.h>
 
 namespace mixin {
-    __Def_Mixin(ScopedViewFactory, _concept::SimpleRangedArrayLike) {
+    template<_concept::SimpleRangedArrayLike T>
+    struct ScopedViewFactory : detail::Extends<T> {
+        using Self = detail::Extends<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

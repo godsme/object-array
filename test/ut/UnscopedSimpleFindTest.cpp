@@ -8,9 +8,12 @@
 #include "Foo.h"
 #include <catch.hpp>
 #include <object-array/mixin/SimpleFindExt.h>
+#include <object-array/detail/ArrayComposer.h>
 
 namespace {
-    using Parent = mixin::Combinator<ut::Foo, mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
+    template<typename BASE>
+    using Mixins = mixin::Combinator<BASE, mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
+    using Parent = ::detail::ArrayComposer<ut::Foo, Mixins>;
     struct FooArray : Parent {
         using Parent::Parent;
         using Parent::Find;

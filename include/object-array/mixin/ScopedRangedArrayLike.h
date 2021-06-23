@@ -10,7 +10,10 @@
 #include <object-array/mixin/detail/DefMixin.h>
 
 namespace mixin {
-    __Def_Mixin_Composite(ScopedRangedArrayLike, _concept::SimpleScopedRangedArrayLike, RangedArrayLike) {
+    template<_concept::SimpleScopedRangedArrayLike T>
+    class ScopedRangedArrayLike : public detail::Extends<RangedArrayLike<T>> {
+        using Self = detail::Extends<RangedArrayLike<T>>;
+    public:
         using Self::GetScope;
     };
 }

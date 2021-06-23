@@ -21,19 +21,7 @@ namespace mixin::detail {
 
 namespace mixin {
     template<typename HOLDER, template<typename> typename ... MIXINS>
-    struct Combinator : protected HOLDER, protected detail::CombineMixin<MIXINS...>::template Type<HOLDER> {
-    private:
-        static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(Combinator)); }
-    public:
-        using Holder = HOLDER;
-        using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<HOLDER>;
-        using Holder::Holder;
-
-        using SizeType = typename Holder::SizeType;
-        using ObjectType = typename Holder::ObjectType;
-
-        static_assert(std::is_empty_v<Mixins>);
-    };
+    using Combinator = typename detail::CombineMixin<MIXINS...>::template Type<HOLDER>;
 }
 
 #endif //OBJECT_ARRAY_COMBINATOR_H
