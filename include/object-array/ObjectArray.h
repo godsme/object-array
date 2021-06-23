@@ -27,6 +27,8 @@ public:
     using Parent::Scope;
     using Parent::Exclude;
     using Parent::WithIndex;
+    using Parent::begin;
+    using Parent::end;
 };
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H

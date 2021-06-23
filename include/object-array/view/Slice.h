@@ -12,12 +12,14 @@
 #include <object-array/mixin/detail/Combinator.h>
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/IndexedViewFactory.h>
+#include <object-array/mixin/IteratableArrayLike.h>
 
 namespace view::detail {
     template<typename HOLDER>
     using SliceMixin = mixin::Combinator<
             HOLDER,
             mixin::RangedArrayLike,
+            mixin::IteratableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::ScopedViewFactory,
@@ -30,6 +32,9 @@ namespace view::detail {
 
     public:
         using Parent::Parent;
+
+        using Parent::begin;
+        using Parent::end;
 
         using Mixins::Find;
         using Mixins::FindIndex;
