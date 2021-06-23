@@ -11,8 +11,7 @@
 #include <object-array/mixin/RValueRangedViewFactory.h>
 
 namespace detail {
-    using ArrayViewMixins =  mixin::ExtendMixins<
-            detail::ContinuousArrayMixin,
+    using ArrayViewMixins = detail::ContinuousArrayMixin::Extends<
             mixin::RValueRangedViewFactory,
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory>;
@@ -21,7 +20,8 @@ namespace detail {
     using ArrayView = detail::ArrayComposer<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, ELEM>, ArrayViewMixins>;
 }
 
-template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T, typename Parent = detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>>
+template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T,
+        typename Parent = detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>>
 class ArrayView : Parent {
     using Holder = typename Parent::Holder;
 public:
