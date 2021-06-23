@@ -11,7 +11,6 @@
 namespace _concept {
     template<typename T>
     concept Scoped = requires(T const& o) {
-        typename T::BitMap;
         { o.GetScope() } -> std::same_as<typename T::BitMap>;
     };
 

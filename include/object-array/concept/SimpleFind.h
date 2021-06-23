@@ -22,8 +22,6 @@ namespace _concept {
 
     template<typename T>
     concept SimpleFind = requires(T const& o) {
-        typename T::SizeType;
-        typename T::ObjectType;
         { o.FindIndex(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<std::optional<typename T::SizeType>>;
         { o.Find(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<typename T::ObjectType const*>;
     };

@@ -10,10 +10,8 @@
 
 namespace _concept {
     template<typename T>
-    concept ConstArrayLike = SimpleConstArrayLike<T> && requires(T const& o) {
-        typename T::SizeType;
-        typename T::ObjectType;
-        typename T::ElemType;
+    concept ConstArrayLike = SimpleConstArrayLike<T> &&
+    requires(T const& o) {
         { o.GetRange() } -> std::same_as<typename T::SizeType>;
     };
 }

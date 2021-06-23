@@ -12,8 +12,6 @@ namespace _concept {
     template<typename T>
     concept SimpleRangedArrayLike = IndexedContainer<T> &&
     requires(T const& o) {
-        typename T::SizeType;
-        typename T::ObjectType;
         { o.IndexBegin() } -> std::same_as<typename T::SizeType>;
         { o.IndexEnd() } -> std::same_as<typename T::SizeType>;
     };
