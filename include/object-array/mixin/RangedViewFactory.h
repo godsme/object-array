@@ -44,12 +44,20 @@ namespace mixin {
             return view::Slice<IndexedContainer>{static_cast<IndexedContainer&>(*this), from, until};
         }
 
+        auto MakeSlice(SizeType from, SizeType until) const & -> auto {
+            return view::Slice<IndexedContainer const>{static_cast<IndexedContainer const&>(*this), from, until};
+        }
+
     public:
         auto Slice(OffsetType from, EndOffsetType until) && -> auto {
             return std::move(*this).MakeSlice(from.ToIndex(IndexEnd()), until.ToIndex(IndexEnd()));
         }
 
         auto Slice(OffsetType from, EndOffsetType until) & -> auto {
+            return MakeSlice(from.ToIndex(IndexEnd()), until.ToIndex(IndexEnd()));
+        }
+
+        auto Slice(OffsetType from, EndOffsetType until) const & -> auto {
             return MakeSlice(from.ToIndex(IndexEnd()), until.ToIndex(IndexEnd()));
         }
 

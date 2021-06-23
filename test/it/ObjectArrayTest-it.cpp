@@ -21,7 +21,7 @@ namespace {
 }
 
 template<typename ARRAY>
-auto SimpleFindTest(ARRAY&& array) {
+auto ObjectArray_SimpleFindTest(ARRAY&& array) {
     test("should be able to find the index of an existent elem") = [&] {
         auto found = array.FindIndex(Foo{3});
         expect(found.has_value());
@@ -76,13 +76,12 @@ auto SimpleFindTest(ARRAY&& array) {
 
 suite ObjectArraySimpleFind_Suite = [] {
     FooArray const array{{1},{2},{3},{4},{5},{6}};
-    SimpleFindTest(array);
-
-    SimpleFindTest(FooArray{{1},{2},{3},{4},{5},{6}});
+    ObjectArray_SimpleFindTest(array);
+    ObjectArray_SimpleFindTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };
 
 template<typename ARRAY>
-auto RangeForTest(ARRAY&& array) {
+auto ObjectArray_RangeForTest(ARRAY&& array) {
     "should be able to iterator all items"_test = [&] {
         auto n=0;
         auto sum = 0;
@@ -135,7 +134,21 @@ auto RangeForTest(ARRAY&& array) {
 
 suite ObjectArrayRangeFor_Suite = [] {
     FooArray const array{{1},{2},{3},{4},{5},{6}};
-    RangeForTest(array);
+    ObjectArray_RangeForTest(array);
+    ObjectArray_RangeForTest(FooArray{{1},{2},{3},{4},{5},{6}});
+};
 
-    RangeForTest(FooArray{{1},{2},{3},{4},{5},{6}});
+template<typename ARRAY>
+auto ObjectArray_SliceTest(ARRAY&& array) {
+    "should be able to find the index of an existent elem"_test = [&] {
+        auto found = array.Slice(1, -2).FindIndex(Foo{3});
+        expect(found.has_value());
+        expect(*found == 2);
+    };
+}
+
+suite ObjectArraySlice_Suite = [] {
+    FooArray const array{{1},{2},{3},{4},{5},{6}};
+    ObjectArray_SliceTest(array);
+    ObjectArray_SliceTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };

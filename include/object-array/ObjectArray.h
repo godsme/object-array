@@ -9,9 +9,14 @@
 #include <object-array/detail/ContinuousArrayMixin.h>
 #include <object-array/detail/ArrayComposer.h>
 
+namespace detail {
+    template<typename T, std::size_t MAX_NUM>
+    using ObjectArray = detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, detail::ContinuousArrayMixin>;
+}
+
 template<typename T, std::size_t MAX_NUM>
-class ObjectArray : detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, detail::ContinuousArrayMixin> {
-    using Parent = detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, detail::ContinuousArrayMixin>;
+class ObjectArray : detail::ObjectArray<T, MAX_NUM> {
+    using Parent = detail::ObjectArray<T, MAX_NUM>;
 
     using Holder = typename Parent::Holder;
     using Mixins = typename Parent::Mixins;

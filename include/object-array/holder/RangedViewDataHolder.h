@@ -15,8 +15,11 @@
 namespace holder {
     template<_concept::IndexedContainer ARRAY, typename SUB_TYPE>
     struct RangedViewDataHolder {
-        using ObjectType = typename ARRAY::ObjectType;
-        using ElemType = typename ARRAY::ElemType;
+        constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
+        using ArrayType = std::decay_t<ARRAY>;
+
+        using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
+        using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
         //using BitMap = typename ARRAY::BitMap;
         using SizeType = typename ARRAY::SizeType;
         constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
@@ -24,9 +27,7 @@ namespace holder {
         using Concept = detail::RangedViewDataHolderConcept<RangedViewDataHolder>;
 
     private:
-        constexpr static auto IsNonConstArray = !std::is_const_v<ARRAY>;
-        auto This() const -> SUB_TYPE const* { return reinterpret_cast<SUB_TYPE const*>(this); }
-
+        dEcL_tHiS(SUB_TYPE);
     public:
         RangedViewDataHolder(SizeType begin, SizeType end)
             : begin_{begin}, end_{end} {}
@@ -38,7 +39,7 @@ namespace holder {
             return This()->GetArray().GetObj(n);
         }
 
-        auto GetObj(SizeType n) -> ObjectType& requires IsNonConstArray {
+        auto GetObj(SizeType n) -> ObjectType& {
             return This()->GetArray().GetObj(n);
         }
 
