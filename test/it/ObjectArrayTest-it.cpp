@@ -229,7 +229,7 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
         }
     };
 
-    "range for index should not be able to modify if array is const"_test = [&] {
+    "range for item should not be able to modify if array is const"_test = [&] {
         if constexpr(std::is_const_v<std::remove_reference_t<decltype(array)>>) {
             for(auto&& [item, i] : array.Slice(1, -2).WithIndex()) {
                 static_assert(std::is_reference_v<decltype(item)>);
@@ -238,7 +238,7 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
         }
     };
 
-    "range for index should be able to modify if array is not const"_test = [&] {
+    "range for item should be able to modify if array is not const"_test = [&] {
         if constexpr(!std::is_const_v<std::remove_reference_t<decltype(array)>>) {
             for(auto&& [item, i] : array.Slice(1, -2).WithIndex()) {
                 static_assert(std::is_reference_v<decltype(item)>);
@@ -253,3 +253,12 @@ suite ObjectArraySlice_Suite = [] {
     ObjectArray_SliceTest(array);
     ObjectArray_SliceTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };
+
+suite RValue_ObjectArraySlice_Suite = [] {
+    "r-value object array should not be able to range for with index"_test = [] {
+//        for(auto&& item : FooArray{{1},{2},{3}}.WithIndex()) {
+//        }
+    };
+};
+
+

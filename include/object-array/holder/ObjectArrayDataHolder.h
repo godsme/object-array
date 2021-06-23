@@ -26,6 +26,12 @@ namespace holder {
             }
         }
 
+        ObjectArrayDataHolder(ObjectArrayDataHolder&& rhs) : num{rhs.num} {
+            for(auto i=0; i<num; i++) {
+                Trait::Emplace(Parent::elems[i], std::move(Parent::ElemToObject(rhs.elems[i])));
+            }
+        }
+
         auto Num() const -> SizeType { return num; }
         auto Num() -> decltype(auto) { return (num); }
 

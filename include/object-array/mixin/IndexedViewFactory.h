@@ -12,40 +12,18 @@
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
     class IndexedViewFactory : public detail::Extends<T> {
-        using Self = detail::Extends<T>;
-    public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
         using RangedArrayLike = typename T::RangedArrayLike;
-        using DataHolder = typename T::DataHolder;
-
-    private:
-        struct Array : private DataHolder, RangedArrayLike {
-            using DataHolder::DataHolder;
-            using RangedArrayLike::GetObj;
-            using RangedArrayLike::IndexBegin;
-            using RangedArrayLike::IndexEnd;
-
-            using SizeType = typename DataHolder::SizeType;
-            using ObjectType = typename DataHolder::ObjectType;
-            using ElemType = typename DataHolder::ElemType;
-
-            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
-            Array(Array&&) = default;
-        };
-
     public:
-        auto WithIndex() && -> auto {
-            return view::IndexedView::ValueView<Array>{reinterpret_cast<Array&&>(*this)};
-        }
-
         auto WithIndex() & -> auto {
             return view::IndexedView::RefView<RangedArrayLike>{reinterpret_cast<RangedArrayLike&>(*this)};
         }
-
         auto WithIndex() const & -> auto {
             return view::IndexedView::RefView<RangedArrayLike const>{reinterpret_cast<RangedArrayLike const&>(*this)};
         }
+
+        // R-Value WithIndex is not allowed.
+        auto WithIndex() && -> void {}
+        auto WithIndex() const && -> void {}
     };
 }
 
