@@ -19,9 +19,6 @@ namespace mixin {
         using RangedArrayLike = typename T::RangedArrayLike;
         using DataHolder = typename T::DataHolder;
 
-        using Self::IndexBegin;
-        using Self::IndexEnd;
-
     private:
         struct Array : private DataHolder, RangedArrayLike {
             using DataHolder::DataHolder;

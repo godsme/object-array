@@ -28,12 +28,4 @@ namespace mixin {
     }
 }
 
-#define __Def_Mixin(Mixin, Concept) \
-    template<Concept T, typename Self = detail::Extends<T>> \
-    struct Mixin : Self
-
-#define __Def_Mixin_Composite(Mixin, Concept, Composite) \
-    template<Concept T, typename Self = detail::Extends<Composite<T>>> \
-    struct Mixin : Self
-
 #endif //OBJECT_ARRAY_DEFMIXIN_H

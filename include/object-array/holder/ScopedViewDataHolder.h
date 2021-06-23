@@ -18,6 +18,8 @@ namespace holder::detail {
         using SizeType = typename T::SizeType;
         using BitMap = typename T::BitMap;
 
+        using ScopedRangedArrayLike = ScopedViewDataHolderConcept;
+
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
         auto IndexBegin() const -> SizeType { return This()->IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->IndexEnd(); }
