@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/21.
 //
 
-#ifndef OBJECT_ARRAY_COMBINATOR_H
-#define OBJECT_ARRAY_COMBINATOR_H
+#ifndef OBJECT_ARRAY_COMBINE_H
+#define OBJECT_ARRAY_COMBINE_H
 
 namespace mixin::detail {
     template<template<typename> typename ... MIXINS>
@@ -20,8 +20,11 @@ namespace mixin::detail {
 }
 
 namespace mixin {
-    template<typename HOLDER, template<typename> typename ... MIXINS>
-    using Combinator = typename detail::CombineMixin<MIXINS...>::template Type<HOLDER>;
+    template<template<typename> typename ... MIXINS>
+    struct Combine {
+        template<typename HOLDER>
+        using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<HOLDER>;
+    };
 }
 
-#endif //OBJECT_ARRAY_COMBINATOR_H
+#endif //OBJECT_ARRAY_COMBINE_H

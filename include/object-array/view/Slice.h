@@ -10,15 +10,13 @@
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
-#include <object-array/mixin/detail/Combinator.h>
+#include <object-array/mixin/detail/Combine.h>
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/IndexedViewFactory.h>
 #include <object-array/mixin/IterableArrayLike.h>
 
 namespace view::detail {
-    template<typename HOLDER>
-    using SliceMixin = mixin::Combinator<
-            HOLDER,
+    using SliceMixin = mixin::Combine<
             mixin::RangedArrayLike,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,

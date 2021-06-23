@@ -12,9 +12,7 @@
 namespace view::detail {
     template<template<typename> typename ITERATOR, template<typename> typename REF_HOLDER, template<typename> typename VALUE_HOLDER>
     struct IndexedArrayView {
-        template<typename HOLDER>
-        using Mixins = mixin::Combinator<
-                HOLDER,
+        using Mixins = mixin::Combine<
                 mixin::RangedArrayLike,
                 ITERATOR>;
 

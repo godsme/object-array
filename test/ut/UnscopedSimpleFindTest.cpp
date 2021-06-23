@@ -4,15 +4,14 @@
 
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
-#include <object-array/mixin/detail/Combinator.h>
+#include <object-array/mixin/detail/Combine.h>
 #include "Foo.h"
 #include <catch.hpp>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/detail/ArrayComposer.h>
 
 namespace {
-    template<typename BASE>
-    using Mixins = mixin::Combinator<BASE, mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
+    using Mixins = mixin::Combine<mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
     using Parent = ::detail::ArrayComposer<ut::Foo, Mixins>;
     struct FooArray : Parent {
         using Parent::Parent;

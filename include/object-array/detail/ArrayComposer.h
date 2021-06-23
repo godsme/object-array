@@ -6,13 +6,13 @@
 #define OBJECT_ARRAY_ARRAYCOMPOSER_H
 
 namespace detail {
-    template<typename HOLDER, template <typename> typename MIXINS>
-    class ArrayComposer : protected HOLDER, protected MIXINS<HOLDER> {
+    template<typename HOLDER, typename MIXINS>
+    class ArrayComposer : protected HOLDER, protected MIXINS::template Mixins<HOLDER> {
         static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(ArrayComposer)); }
-        static_assert(std::is_empty_v<MIXINS<HOLDER>>);
+        static_assert(std::is_empty_v<typename MIXINS::template Mixins<HOLDER>>);
     public:
         using Holder = HOLDER;
-        using Mixins = MIXINS<HOLDER>;
+        using Mixins = typename MIXINS::template Mixins<HOLDER>;
         using Holder::Holder;
 
         using SizeType = typename Holder::SizeType;

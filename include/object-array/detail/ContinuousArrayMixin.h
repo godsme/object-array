@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H
 #define OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H
 
-#include <object-array/mixin/detail/Combinator.h>
+#include <object-array/mixin/detail/Combine.h>
 #include <object-array/mixin/NonScopedSimpleFind.h>
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/RangedArray.h>
@@ -18,9 +18,7 @@
 #include <object-array/mixin/IterableArrayLike.h>
 
 namespace detail {
-    template<typename HOLDER>
-    using ContinuousArrayMixin = mixin::Combinator<
-            HOLDER,
+    using ContinuousArrayMixin = mixin::Combine<
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
             mixin::RangedArrayLike,
