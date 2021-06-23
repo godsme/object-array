@@ -9,11 +9,12 @@
 #include <object-array/iterator/detail/IndexedIterator.h>
 
 namespace iterator {
-    template<typename T, typename SIZE_TYPE, typename Parent = detail::IndexedIterator<T, SIZE_TYPE>>
-    struct IndexedIterator : Parent {
+    template<typename T, typename SIZE_TYPE>
+    struct IndexedIterator : detail::IndexedIterator<T, SIZE_TYPE> {
+        using Parent = detail::IndexedIterator<T, SIZE_TYPE>;
         using Parent::Parent;
         auto operator++() -> IndexedIterator& {
-            Parent::FORWARD();
+            Parent::Forward();
             return *this;
         }
     };

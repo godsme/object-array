@@ -12,7 +12,7 @@ namespace iterator::detail {
     class IndexedIterator {
         struct Result {
             T& value;
-            SIZE_TYPE index;
+            SIZE_TYPE const index;
         };
 
     public:

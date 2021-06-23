@@ -21,7 +21,7 @@ namespace {
 }
 
 template<typename ARRAY>
-auto FindTest(ARRAY&& array) {
+auto SimpleFindTest(ARRAY&& array) {
     test("should be able to find the index of an existent elem") = [&] {
         auto found = array.FindIndex(Foo{3});
         expect(found.has_value());
@@ -76,7 +76,66 @@ auto FindTest(ARRAY&& array) {
 
 suite ObjectArraySimpleFind_Suite = [] {
     FooArray const array{{1},{2},{3},{4},{5},{6}};
-    FindTest(array);
+    SimpleFindTest(array);
 
-    FindTest(FooArray{{1},{2},{3},{4},{5},{6}});
+    SimpleFindTest(FooArray{{1},{2},{3},{4},{5},{6}});
+};
+
+template<typename ARRAY>
+auto RangeForTest(ARRAY&& array) {
+    "should be able to iterator all items"_test = [&] {
+        auto n=0;
+        auto sum = 0;
+        for(auto&& item : array) {
+            ++n;
+            sum += item.a;
+        }
+
+        expect(n == 6);
+        expect(sum == (1 + 2 + 3 + 4 + 5 + 6));
+    };
+
+    "should be able to iterator all items with index"_test = [&] {
+        auto n=0;
+        auto sum = 0;
+        for(auto&& [item, i] : array.WithIndex()) {
+            expect(n == i);
+            ++n;
+            sum += item.a;
+        }
+
+        expect(n == 6);
+        expect(sum == (1 + 2 + 3 + 4 + 5 + 6));
+    };
+
+    "range for index should not be able to modify"_test = [&] {
+        for(auto&& [item, i] : array.WithIndex()) {
+            static_assert(std::is_const_v<decltype(i)>);
+        }
+    };
+
+    "range for index should not be able to modify if array is const"_test = [&] {
+        if constexpr(std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            for(auto&& [item, i] : array.WithIndex()) {
+                static_assert(std::is_reference_v<decltype(item)>);
+                static_assert(std::is_const_v<std::remove_reference_t<decltype(item)>>);
+            }
+        }
+    };
+
+    "range for index should be able to modify if array is not const"_test = [&] {
+        if constexpr(!std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            for(auto&& [item, i] : array.WithIndex()) {
+                static_assert(std::is_reference_v<decltype(item)>);
+                expect(!std::is_const_v<std::remove_reference_t<decltype(item)>>);
+            }
+        }
+    };
+}
+
+suite ObjectArrayRangeFor_Suite = [] {
+    FooArray const array{{1},{2},{3},{4},{5},{6}};
+    RangeForTest(array);
+
+    RangeForTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };

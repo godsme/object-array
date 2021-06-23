@@ -40,7 +40,11 @@ namespace mixin {
         }
 
         auto WithIndex() & -> auto {
-            return view::IndexedView::RefView<RangedArrayLike>{reinterpret_cast<RangedArrayLike&&>(*this)};
+            return view::IndexedView::RefView<RangedArrayLike>{reinterpret_cast<RangedArrayLike&>(*this)};
+        }
+
+        auto WithIndex() const & -> auto {
+            return view::IndexedView::RefView<RangedArrayLike const>{reinterpret_cast<RangedArrayLike const&>(*this)};
         }
     };
 }

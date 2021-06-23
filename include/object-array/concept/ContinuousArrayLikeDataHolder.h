@@ -11,7 +11,7 @@
 namespace _concept {
     template<typename T>
     concept ContinuousArrayLikeDataHolder =
-            SimpleConstArrayLike<T> &&
+            SimpleArrayLike<T> &&
             requires(T const& o) {
                 { o.Num() } -> std::same_as<typename T::SizeType>;
             };

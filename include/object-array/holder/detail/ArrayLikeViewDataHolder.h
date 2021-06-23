@@ -18,6 +18,7 @@ namespace holder::detail {
             : Parent(std::forward<ARGS>(args)...), array{array} {}
 
         auto GetArray() const -> ARRAY& { return array; }
+        auto GetArray() -> ARRAY& { return array; }
 
     protected:
         ARRAY& array;

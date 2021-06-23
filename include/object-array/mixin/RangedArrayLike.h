@@ -25,7 +25,15 @@ namespace mixin {
             return &GetObj(IndexBegin());
         }
 
+        auto ObjectBegin() -> ObjectType* {
+            return &GetObj(IndexBegin());
+        }
+
         auto ObjectEnd() const -> ObjectType const* {
+            return &GetObj(IndexEnd());
+        }
+
+        auto ObjectEnd() -> ObjectType* {
             return &GetObj(IndexEnd());
         }
     };

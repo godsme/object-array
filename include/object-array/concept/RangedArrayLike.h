@@ -19,12 +19,17 @@ namespace _concept {
     };
 
     template<typename T>
-    concept RangedArrayLike = SimpleRangedArrayLike<T> &&
+    concept ConstRangedArrayLike = SimpleRangedArrayLike<T> &&
     requires(T const& o) {
-        typename T::SizeType;
-        typename T::ObjectType;
         { o.ObjectBegin() } -> std::same_as<typename T::ObjectType const*>;
         { o.ObjectEnd() } -> std::same_as<typename T::ObjectType const*>;
+    };
+
+    template<typename T>
+    concept RangedArrayLike = ConstRangedArrayLike<T> &&
+    requires(T& o) {
+       { o.ObjectBegin() } -> std::same_as<typename T::ObjectType*>;
+       { o.ObjectEnd() } -> std::same_as<typename T::ObjectType*>;
     };
 }
 

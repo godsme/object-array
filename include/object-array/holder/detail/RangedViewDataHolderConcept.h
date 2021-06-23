@@ -16,6 +16,7 @@ namespace holder::detail {
         using SizeType = typename T::SizeType;
 
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
+        auto GetObj(SizeType n) -> ObjectType& { return This()->GetObj(n); }
         auto IndexBegin() const -> SizeType { return This()->IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->IndexEnd(); }
     };

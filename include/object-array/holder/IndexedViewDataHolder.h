@@ -13,16 +13,19 @@ namespace holder {
     template<_concept::SimpleRangedArrayLike ARRAY, typename SUB_TYPE>
     class IndexedViewDataHolder {
         dEcL_tHiS(SUB_TYPE);
+        constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
+        using ArrayType = std::decay_t<ARRAY>;
     public:
-        using ObjectType = typename ARRAY::ObjectType;
-        using SizeType = typename ARRAY::SizeType;
-        using BitMap = typename ARRAY::BitMap;
-        constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
+        using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
+        using SizeType = typename ArrayType::SizeType;
+        using BitMap = typename ArrayType::BitMap;
+        constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
         using Concept = detail::RangedViewDataHolderConcept<IndexedViewDataHolder>;
 
         auto IndexBegin() const -> SizeType { return This()->GetArray().IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->GetArray().IndexEnd(); }
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetArray().GetObj(n);}
+        auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n);}
     };
 
     template<_concept::SimpleRangedArrayLike ARRAY>
