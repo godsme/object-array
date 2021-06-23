@@ -8,21 +8,9 @@
 #include <object-array/concept/IndexedContainer.h>
 #include <object-array/holder/detail/DeduceElemType.h>
 #include <object-array/holder/detail/ObjectTrait.h>
+#include <object-array/holder/detail/RangedViewDataHolderConcept.h>
+#include <object-array/holder/detail/ArrayLikeViewDataHolder.h>
 #include <cub/base/BitSet.h>
-
-namespace holder::detail {
-    template<typename T>
-    class SliceDataHolderConcept {
-        auto This() const -> T const* { return reinterpret_cast<T const*>(this); }
-    public:
-        using ObjectType = typename T::ObjectType;
-        using SizeType = typename T::SizeType;
-
-        auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
-        auto IndexBegin() const -> SizeType { return This()->IndexBegin(); }
-        auto IndexEnd() const -> SizeType { return This()->IndexEnd(); }
-    };
-}
 
 namespace holder {
     template<_concept::IndexedContainer ARRAY, typename SUB_TYPE>
@@ -33,7 +21,7 @@ namespace holder {
         using SizeType = typename ARRAY::SizeType;
         constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
 
-        using Concept = detail::SliceDataHolderConcept<RangedViewDataHolder>;
+        using Concept = detail::RangedViewDataHolderConcept<RangedViewDataHolder>;
 
     private:
         constexpr static auto IsNonConstArray = !std::is_const_v<ARRAY>;
@@ -60,38 +48,10 @@ namespace holder {
     };
 
     template<_concept::IndexedContainer ARRAY>
-    struct RefRangedViewDataHolder : RangedViewDataHolder<ARRAY, RefRangedViewDataHolder<ARRAY>> {
-        using Parent = RangedViewDataHolder<ARRAY, RefRangedViewDataHolder<ARRAY>>;
-        using SizeType = typename Parent::SizeType;
-
-        RefRangedViewDataHolder(ARRAY& array, SizeType from, SizeType to)
-            : array{array}, Parent{from, to} {}
-
-        auto GetArray() const -> ARRAY& { return array; }
-
-    protected:
-        ARRAY& array;
-    };
+    using RefRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, RangedViewDataHolder>;
 
     template<_concept::IndexedContainer ARRAY>
-    struct ValueRangedViewDataHolder : RangedViewDataHolder<ARRAY, ValueRangedViewDataHolder<ARRAY>> {
-        using Parent = RangedViewDataHolder<ARRAY, ValueRangedViewDataHolder<ARRAY>>;
-        using SizeType = typename Parent::SizeType;
-
-        static_assert(std::is_move_constructible_v<ARRAY>);
-        static_assert(sizeof(ARRAY) <= sizeof(std::size_t) * 2,
-                "To avoid unnecessary copy overhead, use l-value slice instead of r-value one!!");
-
-    public:
-        ValueRangedViewDataHolder(ARRAY&& array, SizeType from, SizeType to)
-                : array{std::move(array)}, Parent{from, to} {}
-
-        auto GetArray() const -> ARRAY const& { return array; }
-        auto GetArray() -> ARRAY& { return array; }
-
-    protected:
-        ARRAY array;
-    };
+    using ValueRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, RangedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H

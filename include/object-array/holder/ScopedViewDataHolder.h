@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_SCOPEDVIEWDATAHOLDER_H
 
 #include <object-array/concept/RangedArrayLike.h>
+#include <object-array/holder/detail/ArrayLikeViewDataHolder.h>
 #include <cub/base/BitSet.h>
 
 namespace holder::detail {
@@ -49,44 +50,16 @@ namespace holder {
         auto GetObj(SizeType n) -> ObjectType& requires IsNonConstArray { return This()->GetArray().GetObj(n); }
 
         auto GetScope() const -> BitMap { return scope; }
+
     protected:
         BitMap scope;
     };
 
-    template<_concept::IndexedContainer ARRAY>
-    struct RefScopedViewDataHolder : ScopedViewDataHolder<ARRAY, RefScopedViewDataHolder<ARRAY>> {
-        using Parent = ScopedViewDataHolder<ARRAY, RefScopedViewDataHolder<ARRAY>>;
-        using BitMap = typename ARRAY::BitMap;
+    template<_concept::SimpleRangedArrayLike ARRAY>
+    using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedViewDataHolder>;
 
-        RefScopedViewDataHolder(ARRAY& array, BitMap scope)
-                : array{array}, Parent{scope} {}
-
-        auto GetArray() const -> ARRAY& { return array; }
-
-    protected:
-        ARRAY& array;
-    };
-
-    template<_concept::IndexedContainer ARRAY>
-    struct ValueScopedViewDataHolder : ScopedViewDataHolder<ARRAY, ValueScopedViewDataHolder<ARRAY>> {
-        using Parent = ScopedViewDataHolder<ARRAY, ValueScopedViewDataHolder<ARRAY>>;
-        using BitMap = typename ARRAY::BitMap;
-
-        static_assert(std::is_move_constructible_v<ARRAY>);
-
-        static_assert(sizeof(ARRAY) <= sizeof(std::size_t) * 4,
-                      "To avoid unnecessary copy overhead, use l-value slice instead of r-value one!!");
-
-    public:
-        ValueScopedViewDataHolder(ARRAY&& array, BitMap scope)
-            : array{std::move(array)}, Parent{scope} {}
-
-        auto GetArray() const -> ARRAY const& { return array; }
-        auto GetArray() -> ARRAY& { return array; }
-
-    protected:
-        ARRAY array;
-    };
+    template<_concept::SimpleRangedArrayLike ARRAY>
+    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDVIEWDATAHOLDER_H

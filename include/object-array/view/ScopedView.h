@@ -19,12 +19,6 @@ namespace view::detail {
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 
-    template<typename ARRAY>
-    using ValueScope = ScopeMixin<holder::ValueScopedViewDataHolder<ARRAY>>;
-
-    template<typename ARRAY>
-    using RefScope = ScopeMixin<holder::RefRangedViewDataHolder<ARRAY>>;
-
     template<typename HOLDER, typename Parent = ScopeMixin<HOLDER>>
     class ScopedView : Parent {
         using Holder = typename Parent::Holder;

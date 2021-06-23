@@ -21,12 +21,6 @@ namespace view::detail {
             mixin::SimpleFindExt,
             mixin::ScopedViewFactory>;
 
-    template<typename ARRAY>
-    using ValueSlice = SliceMixin<holder::ValueRangedViewDataHolder<ARRAY>>;
-
-    template<typename ARRAY>
-    using RefSlice = SliceMixin<holder::RefRangedViewDataHolder<ARRAY>>;
-
     template<typename HOLDER, typename Parent = SliceMixin<HOLDER>>
     class Slice : Parent {
         using Holder = typename Parent::Holder;
