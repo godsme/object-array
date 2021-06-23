@@ -6,7 +6,7 @@
 #include <catch.hpp>
 
 SCENARIO("IntOptional") {
-    IntOptional<10> a;
+    IntOptional<_7bits> a;
 
     REQUIRE(!a.has_value());
     REQUIRE(a == std::nullopt);
@@ -23,7 +23,7 @@ SCENARIO("IntOptional") {
     REQUIRE(std::nullopt == a);
     REQUIRE(!(bool)a);
 
-    IntOptional<1000> b{12};
+    IntOptional<_15bits> b{12};
     REQUIRE(b.has_value());
     REQUIRE(*b == 12);
 

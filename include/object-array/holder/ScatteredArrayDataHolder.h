@@ -19,7 +19,6 @@ namespace holder::detail {
         using SizeType = typename DATA_HOLDER::SizeType;
 
     public:
-        using Maybe = typename DATA_HOLDER::Maybe;
         using BitMap = typename DATA_HOLDER::BitMap;
         auto GetRange() const -> SizeType { return This()->GetRange(); }
         auto Elems() const -> ElemType const* { return This()->Elems(); }
@@ -36,7 +35,7 @@ namespace holder {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
         using BitMap = typename Parent::BitMap;
-        using Maybe = typename Parent::Maybe;
+        //using Maybe = typename Parent::Maybe;
         using ElemType = typename Parent::ElemType;
         using Concept = detail::ScatteredArrayDataHolderConcept<ScatteredArrayDataHolder>;
 

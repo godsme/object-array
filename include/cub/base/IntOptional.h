@@ -7,25 +7,15 @@
 
 #include <optional>
 
-namespace detail {
-    template<std::size_t MAX_SIZE>
-    auto DeduceUintType() -> auto {
-        static_assert(MAX_SIZE <= (std::numeric_limits<std::size_t>::max() >> 1));
-        if constexpr(MAX_SIZE <= (std::numeric_limits<uint8_t>::max() >> 1)) {
-            return uint8_t{};
-        } else if constexpr(MAX_SIZE <= (std::numeric_limits<uint16_t>::max() >> 1)) {
-            return uint16_t{};
-        } else if constexpr(MAX_SIZE <= (std::numeric_limits<uint32_t>::max() >> 1)) {
-            return uint32_t{};
-        } else {
-            return std::size_t{};
-        }
-    }
-}
+enum class _7bits  : uint8_t {};
+enum class _15bits : uint16_t {};
+enum class _31bits : uint32_t {};
+enum class _63bits : uint64_t {};
 
-template<std::size_t MAX_SIZE>
+template<typename T>
 class IntOptional {
-    using IntType = decltype(detail::DeduceUintType<MAX_SIZE>());
+    static_assert(std::is_same_v<T, _7bits> || std::is_same_v<T, _15bits> || std::is_same_v<T, _31bits> || std::is_same_v<T, _63bits>);
+    using IntType = std::underlying_type_t<T>;
     constexpr static auto MAX_BITS = (sizeof(IntType) << 3) - 1;
     constexpr static IntType EMPTY = 1 << MAX_BITS;
     constexpr static IntType VALUE_MASK = ~EMPTY;
