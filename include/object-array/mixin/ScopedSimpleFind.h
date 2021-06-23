@@ -13,7 +13,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<_concept::ScopedRangedArrayLike T>
+    template<_concept::ConstScopedRangedArrayLike T>
     struct ScopedSimpleFind : detail::Extends<ScopedFind<T>> {
         using Self = detail::Extends<ScopedFind<T>>;
     public:

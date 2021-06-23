@@ -12,7 +12,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<_concept::RangedArrayLike T>
+    template<_concept::ConstRangedArrayLike T>
     struct NonScopedSimpleFind : detail::Extends<T> {
         using Self = detail::Extends<T>;
     public:

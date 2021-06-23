@@ -27,7 +27,7 @@ namespace _concept {
 
     template<typename T>
     concept RangedArrayLike = ConstRangedArrayLike<T> &&
-    requires(T& o) {
+    requires(std::decay_t<T>& o) {
        { o.ObjectBegin() } -> std::same_as<typename T::ObjectType*>;
        { o.ObjectEnd() } -> std::same_as<typename T::ObjectType*>;
     };

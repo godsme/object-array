@@ -19,6 +19,9 @@ namespace _concept {
     concept ConstScopedArrayLike = Scoped<T> && ConstArrayLike<T>;
 
     template<typename T>
+    concept ConstScopedRangedArrayLike = Scoped<T> && ConstRangedArrayLike<T>;
+
+    template<typename T>
     concept ScopedRangedArrayLike = Scoped<T> && RangedArrayLike<T>;
 
     template<typename T>
