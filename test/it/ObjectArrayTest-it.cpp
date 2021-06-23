@@ -264,6 +264,16 @@ suite RValue_ObjectArraySlice_Suite = [] {
         static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().WithIndex())>);
     };
 
+    "l-value object array should be able to range for with indexed slice"_test = [] {
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().Slice(1,2).WithIndex())>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().Slice(1,2).WithIndex())>);
+    };
+
+    "l-value object array should be able to range for with indexed scope"_test = [] {
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().Slice(1,2).Scope(1).WithIndex())>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().Slice(1,2).Scope(1).WithIndex())>);
+    };
+
     "r-value object array should not be able to create slice"_test = [] {
         static_assert(std::is_void_v<decltype(std::declval<FooArray&&>().Slice(1, -2))>);
         static_assert(std::is_void_v<decltype(std::declval<FooArray const&&>().Slice(1, -2))>);

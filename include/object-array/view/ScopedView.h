@@ -17,7 +17,7 @@ namespace view::detail {
     using ScopedMixin = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IterableScopedArrayLike,
-            mixin::IndexedScopedViewFactory,
+            mixin::RValueIndexedViewFactory,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 
@@ -35,6 +35,8 @@ namespace view::detail {
 
         using Mixins::Find;
         using Mixins::FindIndex;
+
+        using Mixins::WithIndex;
     };
 }
 

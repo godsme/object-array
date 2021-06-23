@@ -11,9 +11,9 @@
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/detail/Mixins.h>
-#include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/IterableArrayLike.h>
 #include <object-array/mixin/RValueIndexedViewFactory.h>
+#include <object-array/mixin/RvalueScopedViewFactory.h>
 
 namespace view::detail {
     using SliceMixin = mixin::Mixins<
@@ -21,7 +21,7 @@ namespace view::detail {
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
-            mixin::ScopedViewFactory,
+            mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory>;
 
     template<typename HOLDER>
