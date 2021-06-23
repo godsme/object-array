@@ -69,11 +69,19 @@ namespace mixin {
             return MakeSlice(from.ToIndex(IndexEnd()), IndexEnd());
         }
 
+        auto From(OffsetType from) const& -> auto {
+            return MakeSlice(from.ToIndex(IndexEnd()), IndexEnd());
+        }
+
         auto Until(EndOffsetType until) && -> auto {
             return std::move(*this).MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
         }
 
         auto Until(EndOffsetType until) & -> auto {
+            return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
+        }
+
+        auto Until(EndOffsetType until) const& -> auto {
             return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
         }
     };

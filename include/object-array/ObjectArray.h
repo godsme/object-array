@@ -32,6 +32,9 @@ public:
     using Mixins::Exists;
 
     using Parent::Slice;
+    using Parent::From;
+    using Parent::Until;
+
     using Parent::Scope;
     using Parent::Exclude;
     using Parent::WithIndex;

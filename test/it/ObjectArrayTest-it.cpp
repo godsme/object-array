@@ -145,6 +145,65 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
         expect(found.has_value());
         expect(*found == 2);
     };
+
+    "should return nullopt if trying to find the index of a existent but not-in-range elem"_test = [&] {
+        expect(!array.Slice(1, -2).FindIndex(Foo{6}));
+    };
+
+    "should be able to find the index of an existent elem in From slice"_test = [&] {
+        auto found = array.From(1).FindIndex(Foo{3});
+        expect(found.has_value());
+        expect(*found == 2);
+    };
+
+    "should return nullopt if trying to find the index of a existent but not-in-range elem in From Slice"_test = [&] {
+        expect(!array.From(1).FindIndex(Foo{1}));
+    };
+
+    "should be able to find the index of an existent elem in Until slice"_test = [&] {
+        auto found = array.Until(-2).FindIndex(Foo{3});
+        expect(found.has_value());
+        expect(*found == 2);
+    };
+
+    "should return nullopt if trying to find the index of a existent but not-in-range elem in Until slice"_test = [&] {
+        expect(!array.Until(-2).FindIndex(Foo{6}));
+    };
+
+    "should be able to rang-for"_test = [&] {
+        auto n=0;
+        auto sum = 0;
+        for(auto&& item : array.Slice(1, -2)) {
+            ++n;
+            sum += item.a;
+        }
+
+        expect(n == 4);
+        expect(sum == (2 + 3 + 4 + 5));
+    };
+
+    "should be able to rang-for (From)"_test = [&] {
+        auto n=0;
+        auto sum = 0;
+        for(auto&& item : array.From(1)) {
+            ++n;
+            sum += item.a;
+        }
+
+        expect(n == 5);
+        expect(sum == (2 + 3 + 4 + 5 + 6));
+    };
+
+    "should be able to rang-for (Until)"_test = [&] {
+        auto n=0;
+        auto sum = 0;
+        for(auto&& item : array.Until(-2)) {
+            ++n;
+            sum += item.a;
+        }
+        expect(n == 5);
+        expect(sum == (1 + 2 + 3 + 4 + 5));
+    };
 }
 
 suite ObjectArraySlice_Suite = [] {
