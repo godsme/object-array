@@ -2,6 +2,7 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 #include <object-array/ObjectArray.h>
+#include <experimental/type_traits>
 #include <boost/ut.hpp>
 
 using namespace boost::ut;
@@ -254,10 +255,27 @@ suite ObjectArraySlice_Suite = [] {
     ObjectArray_SliceTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };
 
+
 suite RValue_ObjectArraySlice_Suite = [] {
     "r-value object array should not be able to range for with index"_test = [] {
-//        for(auto&& item : FooArray{{1},{2},{3}}.WithIndex()) {
-//        }
+        static_assert(std::is_void_v<decltype(std::declval<FooArray&&>().WithIndex())>);
+        static_assert(std::is_void_v<decltype(std::declval<FooArray const&&>().WithIndex())>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().WithIndex())>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().WithIndex())>);
+    };
+
+    "r-value object array should not be able to create slice"_test = [] {
+        static_assert(std::is_void_v<decltype(std::declval<FooArray&&>().Slice(1, -2))>);
+        static_assert(std::is_void_v<decltype(std::declval<FooArray const&&>().Slice(1, -2))>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().Slice(1, -2))>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().Slice(1, -2))>);
+    };
+
+    "r-value object array should not be able to create Scope"_test = [] {
+        static_assert(std::is_void_v<decltype(std::declval<FooArray&&>().Scope(1))>);
+        static_assert(std::is_void_v<decltype(std::declval<FooArray const&&>().Scope(1))>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().Scope(1))>);
+        static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().Scope(1))>);
     };
 };
 

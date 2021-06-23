@@ -18,37 +18,27 @@ namespace mixin {
         using ObjectType = typename T::ObjectType;
         using BitMap = typename T::BitMap;
         using RangedArrayLike = typename T::RangedArrayLike;
-        using DataHolder = typename T::DataHolder;
-
-    private:
-        struct Array : private DataHolder, RangedArrayLike {
-            using DataHolder::DataHolder;
-            using RangedArrayLike::GetObj;
-            using RangedArrayLike::IndexBegin;
-            using RangedArrayLike::IndexEnd;
-
-            using SizeType = typename DataHolder::SizeType;
-            using ObjectType = typename DataHolder::ObjectType;
-            using ElemType = typename DataHolder::ElemType;
-
-            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
-            Array(Array&&) = default;
-        };
 
     public:
-        auto Scope(BitMap scope) && -> auto {
-            return view::ValueScopedView<Array>{reinterpret_cast<Array&&>(*this), scope};
+        auto Scope(BitMap scope) && -> void {}
+        auto Scope(BitMap scope) const && -> void {}
+
+        auto Scope(BitMap scope) & -> view::ScopedView<RangedArrayLike> {
+            return {static_cast<RangedArrayLike&>(*this), scope};
         }
 
-        auto Scope(BitMap scope) & -> auto {
-            return view::ScopedView<RangedArrayLike>{static_cast<RangedArrayLike&>(*this), scope};
+        auto Scope(BitMap scope) const & -> view::ScopedView<RangedArrayLike const> {
+            return {static_cast<RangedArrayLike const&>(*this), scope};
         }
 
-        auto Exclude(BitMap excluded) && -> auto {
-            return std::move(*this).Scope(~excluded);
-        }
+        auto Exclude(BitMap excluded) && -> void {}
+        auto Exclude(BitMap excluded) const && -> void {}
 
         auto Exclude(BitMap excluded) & -> auto {
+            return Scope(~excluded);
+        }
+
+        auto Exclude(BitMap excluded) const & -> auto {
             return Scope(~excluded);
         }
     };

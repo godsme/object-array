@@ -14,13 +14,12 @@ namespace mixin {
     class IndexedViewFactory : public detail::Extends<T> {
         using RangedArrayLike = typename T::RangedArrayLike;
     public:
-        auto WithIndex() & -> auto {
-            return view::IndexedView::RefView<RangedArrayLike>{reinterpret_cast<RangedArrayLike&>(*this)};
+        auto WithIndex() & -> view::IndexedView::RefView<RangedArrayLike> {
+            return {reinterpret_cast<RangedArrayLike&>(*this)};
         }
-        auto WithIndex() const & -> auto {
-            return view::IndexedView::RefView<RangedArrayLike const>{reinterpret_cast<RangedArrayLike const&>(*this)};
+        auto WithIndex() const & -> view::IndexedView::RefView<RangedArrayLike const> {
+            return {reinterpret_cast<RangedArrayLike const&>(*this)};
         }
-
         // R-Value WithIndex is not allowed.
         auto WithIndex() && -> void {}
         auto WithIndex() const && -> void {}

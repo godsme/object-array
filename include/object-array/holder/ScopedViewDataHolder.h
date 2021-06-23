@@ -12,7 +12,7 @@
 namespace holder::detail {
     template<typename T>
     class ScopedViewDataHolderConcept {
-        auto This() const -> T const* { return reinterpret_cast<T const*>(this); }
+        dEcL_tHiS(T);
     public:
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
@@ -20,6 +20,7 @@ namespace holder::detail {
 
         using ScopedRangedArrayLike = ScopedViewDataHolderConcept;
 
+        auto GetObj(SizeType n) -> ObjectType& { return This()->GetObj(n); }
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
         auto IndexBegin() const -> SizeType { return This()->IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->IndexEnd(); }
@@ -30,18 +31,20 @@ namespace holder::detail {
 namespace holder {
     template<_concept::SimpleRangedArrayLike ARRAY, typename SUB_TYPE>
     struct ScopedViewDataHolder {
-        using ObjectType = typename ARRAY::ObjectType;
-        using ElemType = typename ARRAY::ElemType;
-        using BitMap = typename ARRAY::BitMap;
-        using SizeType = typename ARRAY::SizeType;
-        constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
+        constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
+        using ArrayType = std::decay_t<ARRAY>;
+
+        using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
+        using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
+
+        using BitMap = typename ArrayType::BitMap;
+        using SizeType = typename ArrayType::SizeType;
+        constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
 
         using Concept = detail::ScopedViewDataHolderConcept<ScopedViewDataHolder>;
 
     private:
-        constexpr static auto IsNonConstArray = !std::is_const_v<ARRAY>;
-        auto This() const -> SUB_TYPE const* { return reinterpret_cast<SUB_TYPE const*>(this); }
-
+        dEcL_tHiS(SUB_TYPE);
     public:
         ScopedViewDataHolder(BitMap scope) : scope{scope} {}
 
@@ -49,7 +52,7 @@ namespace holder {
         auto IndexEnd() const -> SizeType { return This()->GetArray().IndexEnd(); }
 
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetArray().GetObj(n); }
-        auto GetObj(SizeType n) -> ObjectType& requires IsNonConstArray { return This()->GetArray().GetObj(n); }
+        auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n); }
 
         auto GetScope() const -> BitMap { return scope; }
 

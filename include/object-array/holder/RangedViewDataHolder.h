@@ -20,9 +20,9 @@ namespace holder {
 
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
         using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
-        //using BitMap = typename ARRAY::BitMap;
-        using SizeType = typename ARRAY::SizeType;
-        constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
+        using BitMap = typename ArrayType::BitMap;
+        using SizeType = typename ArrayType::SizeType;
+        constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
 
         using Concept = detail::RangedViewDataHolderConcept<RangedViewDataHolder>;
 

@@ -5,14 +5,14 @@
 #ifndef OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
 #define OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
 
-#include <object-array/mixin/detail/DefMixin.h>
+#include <object-array/mixin/IndexedViewFactory.h>
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/view/IndexedView.h>
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    class RValueIndexedViewFactory : public detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    class RValueIndexedViewFactory : public detail::Extends<IndexedViewFactory<T>> {
+        using Self = detail::Extends<IndexedViewFactory<T>>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
@@ -36,12 +36,14 @@ namespace mixin {
         };
 
     public:
-        auto WithIndex() && -> auto {
-            return view::IndexedView::ValueView<Array>{reinterpret_cast<Array&&>(*this)};
+        using Self::WithIndex;
+
+        auto WithIndex() && -> view::IndexedView::ValueView<Array> {
+            return {reinterpret_cast<Array&&>(*this)};
         }
 
-        auto WithIndex() const && -> auto {
-            return view::IndexedView::ValueView<Array const>{reinterpret_cast<Array const&&>(*this)};
+        auto WithIndex() const && -> view::IndexedView::ValueView<Array const> {
+            return {reinterpret_cast<Array const&&>(*this)};
         }
     };
 }
