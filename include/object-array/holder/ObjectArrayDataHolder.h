@@ -5,9 +5,9 @@
 #ifndef OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H
 #define OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H
 
-#include <cub/base/DeduceSizeType.h>
-#include <object-array/holder/ArrayDataHolder.h>
 #include <object-array/holder/detail/ContinuousArrayDataHolderInterface.h>
+#include <object-array/holder/ArrayDataHolder.h>
+#include <cub/base/DeduceSizeType.h>
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
