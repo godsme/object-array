@@ -74,11 +74,11 @@ namespace mixin {
         auto MakeSlice(OffsetType from, EndOffsetType until) const -> auto {
             auto from_  = from.ToIndex(IndexEnd());
             if(from_ == IndexEnd()) {
-                return DoMakeSlice<CONST, R_VALUE>(IndexEnd(), IndexEnd());
+                return DoMakeSlice<CONST, R_VALUE>(from_, from_);
             }else {
                 auto until_ = until.ToIndex(IndexEnd());
                 if(until_ <= from_) {
-                    return DoMakeSlice<CONST, R_VALUE>(IndexEnd(), IndexEnd());
+                    return DoMakeSlice<CONST, R_VALUE>(from_, from_);
                 } else {
                     return DoMakeSlice<CONST, R_VALUE>(from_, until_);
                 }

@@ -711,11 +711,16 @@ suite ObjectArrayUntilSliceView_Suite = [] {
     "should be able to know the num"_test = [&] {
         expect(slice.GetNum() == 5);
         expect(array.Slice(10, -2).GetNum() == 0);
+        expect(array.From(10).GetNum() == 0);
+        expect(array.Until(-10).GetNum() == 0);
     };
 
     "should be able to know if there is any elems"_test = [&] {
         expect(slice.Any());
         expect(!slice.None());
+        expect(array.Slice(10, -2).None());
+        expect(!array.Slice(10, -2).Any());
+        expect(array.From(10).None());
     };
 };
 
