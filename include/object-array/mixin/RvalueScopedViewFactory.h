@@ -39,11 +39,11 @@ namespace mixin {
         using Self::Exclude;
 
         auto Scope(BitMap scope) && -> view::ValueScopedView<Array> {
-            return {reinterpret_cast<Array&&>(*this), scope};
+            return {reinterpret_cast<Array&&>(*this), Self::AlignScope(scope)};
         }
 
         auto Scope(BitMap scope) const && -> view::ValueScopedView<Array const> {
-            return {reinterpret_cast<Array const&&>(*this), scope};
+            return {reinterpret_cast<Array const&&>(*this), Self::AlignScope(scope)};
         }
 
         auto Exclude(BitMap excluded) && -> auto {

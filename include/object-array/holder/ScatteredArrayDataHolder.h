@@ -128,22 +128,6 @@ namespace holder {
             return Parent::MAX_SIZE;
         }
 
-        auto GetNum() const -> SizeType {
-            return occupied.count();
-        }
-
-        auto All() const -> bool {
-            return occupied.all();
-        }
-
-        auto None() const -> bool {
-            return occupied.none();
-        }
-
-        auto Any() const -> bool {
-            return occupied.any();
-        }
-
         auto GetOccupied() const -> BitMap {
             return occupied;
         }

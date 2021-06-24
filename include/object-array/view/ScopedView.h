@@ -13,12 +13,14 @@
 #include <object-array/mixin/IterableScopedArrayLike.h>
 #include <object-array/mixin/IndexedRefAccessor.h>
 #include <object-array/mixin/ScopedByIndexAccessor.h>
+#include <object-array/mixin/ScopedElemCount.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IndexedRefAccessor,
             mixin::ScopedByIndexAccessor,
+            mixin::ScopedElemCount,
             mixin::IterableScopedArrayLike,
             mixin::IndexedScopedViewFactory,
             mixin::ScopedSimpleFind,
@@ -36,6 +38,11 @@ namespace view::detail {
 
         using Mixins::begin;
         using Mixins::end;
+
+        using Parent::GetNum;
+        using Parent::Any;
+        using Parent::None;
+        using Parent::All;
 
         using Mixins::Find;
         using Mixins::FindIndex;

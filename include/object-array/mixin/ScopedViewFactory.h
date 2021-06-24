@@ -18,16 +18,25 @@ namespace mixin {
         using BitMap = typename T::BitMap;
         using RangedArrayLike = typename T::RangedArrayLike;
 
+        using Self::IndexBegin;
+        using Self::IndexEnd;
+
+    protected:
+        auto AlignScope(BitMap scope) const -> BitMap {
+            auto n = Self::MAX_SIZE - IndexEnd();
+            return ((scope << n) >> ( n + IndexBegin())) << IndexBegin();
+        }
+
     public:
         auto Scope(BitMap scope) && -> void {}
         auto Scope(BitMap scope) const && -> void {}
 
         auto Scope(BitMap scope) & -> view::ScopedView<RangedArrayLike> {
-            return {static_cast<RangedArrayLike&>(*this), scope};
+            return {static_cast<RangedArrayLike&>(*this), AlignScope(scope)};
         }
 
         auto Scope(BitMap scope) const & -> view::ScopedView<RangedArrayLike const> {
-            return {static_cast<RangedArrayLike const&>(*this), scope};
+            return {static_cast<RangedArrayLike const&>(*this), AlignScope(scope)};
         }
 
         auto Exclude(BitMap excluded) && -> void {}

@@ -16,6 +16,7 @@
 #include <object-array/mixin/IndexedRefAccessor.h>
 #include <object-array/mixin/ByIndexAccessor.h>
 #include <object-array/mixin/ScopedByIndexAccessor.h>
+#include <object-array/mixin/ScopedElemCount.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
@@ -24,6 +25,7 @@ namespace detail {
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::ScopedByIndexAccessor,
+            mixin::ScopedElemCount,
             mixin::IterableScopedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
@@ -43,6 +45,11 @@ public:
 
     using Mixins::begin;
     using Mixins::end;
+
+    using Parent::GetNum;
+    using Parent::Any;
+    using Parent::None;
+    using Parent::All;
 
     using Mixins::Find;
     using Mixins::FindIndex;

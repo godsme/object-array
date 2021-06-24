@@ -50,7 +50,7 @@ namespace view::detail {
         using Parent::GetNum;
         using Parent::Any;
         using Parent::None;
-        using Parent::Full;
+        using Parent::All;
 
         using Mixins::Find;
         using Mixins::FindIndex;

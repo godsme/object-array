@@ -792,7 +792,7 @@ auto ObjectArray_ScopeTest(SCOPE&& scope) {
     };
 }
 
-suite ObjectArraySliceScopedView_Suite = [] {
+suite ObjectArrayScopedView_Suite = [] {
     FooArray const array{{1},{2},{3},{4},{5},{6}};
     ObjectArray_ScopeTest(array.Scope(0x13));
     ObjectArray_ScopeTest(array.Slice(0, -1).Scope(0x13));
@@ -800,6 +800,15 @@ suite ObjectArraySliceScopedView_Suite = [] {
     FooArray array1{{1},{2},{3},{4},{5},{6}};
     ObjectArray_ScopeTest(array1.Scope(0x13));
     ObjectArray_ScopeTest(array1.Slice(0, -1).Scope(0x13));
+};
+
+suite ObjectArraySliceScopedView_Suite= [] {
+    FooArray const array{{1},{2},{3},{4},{5},{6}};
+    auto&& scope = array.Slice(2,-2).Scope(0xFF);
+
+    "should be able to get num of elems in scope"_test = [&] {
+        expect(3 == scope.GetNum());
+    };
 };
 
 
