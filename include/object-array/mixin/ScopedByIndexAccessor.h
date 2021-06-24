@@ -2,16 +2,16 @@
 // Created by Darwin Yuan on 2021/6/24.
 //
 
-#ifndef OBJECT_ARRAY_RANGEDBYINDEXACCESSOR_H
-#define OBJECT_ARRAY_RANGEDBYINDEXACCESSOR_H
+#ifndef OBJECT_ARRAY_SCOPEDBYINDEXACCESSOR_H
+#define OBJECT_ARRAY_SCOPEDBYINDEXACCESSOR_H
 
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/mixin/detail/Mixins.h>
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
-    class RangedByIndexAccessor : public T {
+    template<_concept::SimpleScopedRangedArrayLike T>
+    class ScopedByIndexAccessor : public T {
         using Self = T;
 
     public:
@@ -21,9 +21,10 @@ namespace mixin {
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
+        using Self::GetScope;
 
         auto At(SizeType n) const -> ObjectType const* {
-            return n >= IndexEnd() ? nullptr : &GetObj(n + IndexBegin());
+            return !(GetScope().test(n) && n < IndexEnd()) ? nullptr : &GetObj(n + IndexBegin());
         }
 
         auto At(SizeType n) -> ObjectType * {
@@ -32,4 +33,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_RANGEDBYINDEXACCESSOR_H
+#endif //OBJECT_ARRAY_SCOPEDBYINDEXACCESSOR_H

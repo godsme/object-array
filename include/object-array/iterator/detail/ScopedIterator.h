@@ -18,7 +18,7 @@ namespace iterator::detail {
     public:
         template<typename ... ARGS>
         ScopedIterator(BIT_MAP const& bitmap, ARGS&& ... args)
-                : bitmap{bitmap}, BASE{std::forward(args)...} {}
+                : bitmap{bitmap}, BASE{std::forward<ARGS>(args)...} {}
 
         auto operator++() -> ScopedIterator& {
             do { bitmap >>= 1; BASE::Forward(); } while(!bitmap[0] && bitmap.any());

@@ -17,6 +17,7 @@ namespace holder::detail {
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
         using BitMap = typename T::BitMap;
+        constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
 
         using ScopedRangedArrayLike = ScopedViewDataHolderInterface;
 
@@ -35,7 +36,7 @@ namespace holder {
         using ArrayType = std::decay_t<ARRAY>;
 
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
-        using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
+        //using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
 
         using BitMap = typename ArrayType::BitMap;
         using SizeType = typename ArrayType::SizeType;

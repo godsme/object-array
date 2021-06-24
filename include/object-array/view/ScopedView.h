@@ -12,13 +12,15 @@
 #include <object-array/mixin/IndexedScopedViewFactory.h>
 #include <object-array/mixin/IterableScopedArrayLike.h>
 #include <object-array/mixin/IndexedRefAccessor.h>
+#include <object-array/mixin/ScopedByIndexAccessor.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IndexedRefAccessor,
+            mixin::ScopedByIndexAccessor,
             mixin::IterableScopedArrayLike,
-            mixin::RValueIndexedViewFactory,
+            mixin::IndexedScopedViewFactory,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 
@@ -28,6 +30,9 @@ namespace view::detail {
         using Mixins = typename Parent::Mixins;
     public:
         using Parent::Parent;
+
+        using Mixins::operator[];
+        using Mixins::At;
 
         using Mixins::begin;
         using Mixins::end;

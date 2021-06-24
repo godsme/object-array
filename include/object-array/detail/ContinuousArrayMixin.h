@@ -19,7 +19,7 @@
 #include <object-array/mixin/IndexedViewFactory.h>
 #include <object-array/mixin/IterableArrayLike.h>
 #include <object-array/mixin/IndexedRefAccessor.h>
-#include <object-array/mixin/RangedByIndexAccessor.h>
+#include <object-array/mixin/ByIndexAccessor.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
@@ -27,7 +27,7 @@ namespace detail {
             mixin::RangedArray,
             mixin::RangedArrayLike,
             mixin::IndexedRefAccessor,
-            mixin::RangedByIndexAccessor,
+            mixin::ByIndexAccessor,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,

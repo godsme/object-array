@@ -23,7 +23,7 @@ namespace iterator::detail {
         template<typename, typename>
         friend class IndexedIterator;
 
-    private:
+    protected:
         T* p;
     };
 }

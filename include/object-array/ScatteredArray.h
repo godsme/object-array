@@ -14,14 +14,16 @@
 #include <object-array/mixin/RangedArray.h>
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/IndexedRefAccessor.h>
-#include <object-array/mixin/RangedByIndexAccessor.h>
+#include <object-array/mixin/ByIndexAccessor.h>
+#include <object-array/mixin/ScopedByIndexAccessor.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
             mixin::RangedArray,
             mixin::RangedArrayLike,
             mixin::IndexedRefAccessor,
-            mixin::RangedByIndexAccessor,
+            mixin::ByIndexAccessor,
+            mixin::ScopedByIndexAccessor,
             mixin::IterableScopedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;

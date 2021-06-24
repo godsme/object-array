@@ -30,7 +30,7 @@ namespace mixin {
 
     public:
         auto begin() const -> ConstIterator {
-            return {ObjectBegin(), GetScope(), IndexBegin()};
+            return {GetScope(), ObjectBegin(), IndexBegin()};
         }
 
         auto end() const -> EndIterator {
@@ -38,7 +38,7 @@ namespace mixin {
         }
 
         auto begin() -> Iterator {
-            return {ObjectBegin(), GetScope(), IndexBegin()};
+            return {GetScope(), ObjectBegin(), IndexBegin()};
         }
 
         auto end() -> EndIterator {
