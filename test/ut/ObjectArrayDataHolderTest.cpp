@@ -13,12 +13,6 @@ SCENARIO("Int ObjectArrayDataHolder") {
 
     static_assert(!std::is_trivially_default_constructible_v<IntArray>);
     static_assert(std::is_trivially_destructible_v<IntArray>);
-
-    IntArray array;
-
-    array.elems[0] = 1;
-
-    REQUIRE(IntArray::ElemToObject(array.elems[0]) == 1);
 }
 
 namespace {
@@ -37,10 +31,4 @@ SCENARIO("Object ObjectArrayDataHolder") {
 
     static_assert(!std::is_trivially_default_constructible_v<FooArray>);
     static_assert(std::is_trivially_destructible_v<FooArray>);
-
-    FooArray array;
-
-    array.elems[0].Emplace(Foo{10});
-
-    REQUIRE(FooArray::ElemToObject(array.elems[0]).a == Foo{10}.a);
 }
