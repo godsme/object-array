@@ -14,10 +14,12 @@
 #include <object-array/mixin/IterableArrayLike.h>
 #include <object-array/mixin/RValueIndexedViewFactory.h>
 #include <object-array/mixin/RvalueScopedViewFactory.h>
+#include <object-array/mixin/IndexedRefAccessor.h>
 
 namespace view::detail {
     using SliceMixins = mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::IndexedRefAccessor,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,

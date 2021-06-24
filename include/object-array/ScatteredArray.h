@@ -13,11 +13,13 @@
 #include <object-array/mixin/IterableScopedArrayLike.h>
 #include <object-array/mixin/RangedArray.h>
 #include <object-array/mixin/RangedArrayLike.h>
+#include <object-array/mixin/IndexedRefAccessor.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
             mixin::RangedArray,
             mixin::RangedArrayLike,
+            mixin::IndexedRefAccessor,
             mixin::IterableScopedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;

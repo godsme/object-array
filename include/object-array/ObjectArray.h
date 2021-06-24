@@ -27,6 +27,8 @@ class ObjectArray : detail::ObjectArray<T, MAX_NUM> {
 public:
     using Parent::Parent;
 
+    using Parent::operator[];
+
     using Parent::begin;
     using Parent::end;
 

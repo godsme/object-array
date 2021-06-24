@@ -8,12 +8,14 @@
 #include <object-array/holder/IndexedViewDataHolder.h>
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/IterableIndexedScopedArrayLike.h>
+#include <object-array/mixin/IndexedRefAccessor.h>
 
 namespace view::detail {
     template<template<typename> typename ITERATOR, template<typename> typename REF_HOLDER, template<typename> typename VALUE_HOLDER>
     struct IndexedArrayView {
         using Mixins = mixin::Mixins<
                 mixin::RangedArrayLike,
+                mixin::IndexedRefAccessor,
                 ITERATOR>;
 
         template<typename HOLDER>

@@ -15,18 +15,10 @@ SCENARIO("Int ScatteredArrayDataHolder") {
     static_assert(std::is_trivially_destructible_v<IntArray>);
 
     IntArray array;
-    REQUIRE(array.GetScope() == 0);
-    REQUIRE(array.GetScope() == IntArray::BitMap{0});
-
-    array.elems[0] = 1;
-    array.GetScope().set(0);
-
-    REQUIRE(array.GetScope() == IntArray::BitMap{1});
-
-    array.GetScope().set(1);
-    REQUIRE(array.GetScope() == IntArray::BitMap{3});
-
-    REQUIRE(IntArray::ElemToObject(array.elems[0]) == 1);
+    REQUIRE(array.GetOccupied() == 0);
+    REQUIRE(array.GetOccupied() == IntArray::BitMap{0});
+    array.Append(1);
+    REQUIRE(array.GetOccupied() == IntArray::BitMap{1});
 }
 
 namespace {
@@ -47,16 +39,9 @@ SCENARIO("Object ScatteredArrayDataHolder") {
     static_assert(std::is_trivially_destructible_v<FooArray>);
 
     FooArray array;
-    REQUIRE(array.GetScope() == 0);
-    REQUIRE(array.GetScope() == FooArray::BitMap{0});
+    REQUIRE(array.GetOccupied() == FooArray::BitMap{0});
 
-    array.elems[0].Emplace(Foo{10});
-    array.GetScope().set(0);
+    array.Append(Foo{10});
 
-    REQUIRE(array.GetScope() == FooArray::BitMap{1});
-
-    array.GetScope().set(1);
-    REQUIRE(array.GetScope() == FooArray::BitMap{3});
-
-    REQUIRE(FooArray::ElemToObject(array.elems[0]).a == Foo{10}.a);
+    REQUIRE(array.GetOccupied() == FooArray::BitMap{1});
 }

@@ -11,10 +11,12 @@
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/IndexedScopedViewFactory.h>
 #include <object-array/mixin/IterableScopedArrayLike.h>
+#include <object-array/mixin/IndexedRefAccessor.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::IndexedRefAccessor,
             mixin::IterableScopedArrayLike,
             mixin::RValueIndexedViewFactory,
             mixin::ScopedSimpleFind,

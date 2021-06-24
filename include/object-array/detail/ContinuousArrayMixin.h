@@ -16,12 +16,14 @@
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/IndexedViewFactory.h>
 #include <object-array/mixin/IterableArrayLike.h>
+#include <object-array/mixin/IndexedRefAccessor.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
             mixin::RangedArrayLike,
+            mixin::IndexedRefAccessor,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt>;

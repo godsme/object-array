@@ -247,6 +247,29 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
             }
         }
     };
+
+    "should be able to access by index"_test = [&] {
+        expect(array[0] == 1);
+        expect(array[1] == 2);
+        expect(array[2] == 3);
+        expect(array[3] == 4);
+        expect(array[4] == 5);
+        expect(array[5] == 6);
+    };
+
+    "non-const access should be able to modify"_test = [&] {
+        if constexpr(!std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            static_assert(std::is_reference_v<decltype(array[0])>);
+            expect(!std::is_const_v<std::remove_reference_t<decltype(array[0])>>);
+        }
+    };
+
+    "const access should not be able to modify"_test = [&] {
+        if constexpr(std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            static_assert(std::is_reference_v<decltype(array[0])>);
+            expect(std::is_const_v<std::remove_reference_t<decltype(array[0])>>);
+        }
+    };
 }
 
 suite ObjectArraySlice_Suite = [] {
@@ -254,7 +277,6 @@ suite ObjectArraySlice_Suite = [] {
     ObjectArray_SliceTest(array);
     ObjectArray_SliceTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };
-
 
 suite RValue_ObjectArraySlice_Suite = [] {
     "r-value object array should not be able to range for with index"_test = [] {
