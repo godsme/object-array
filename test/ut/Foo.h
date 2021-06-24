@@ -52,7 +52,6 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-        //using Maybe = IntOpt<MAX_SIZE>;
 
         using Concept = FooConcept<Foo>;
 
@@ -81,7 +80,6 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-        //using Maybe = IntOpt<MAX_SIZE>;
         using Concept = ScopedFooConcept<ScopedFoo>;
 
     public:
@@ -91,6 +89,7 @@ namespace ut {
             for(auto&& elem : list) {
                 scope.set(i);
                 elems[i++] = elem;
+                if(i >= n) break;
             }
         }
 

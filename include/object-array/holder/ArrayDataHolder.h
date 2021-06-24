@@ -18,7 +18,6 @@ namespace holder {
         using BitMap = BitSet<MAX_NUM>;
         using SizeType = DeduceSizeType_t<MAX_NUM>;
         using Trait = detail::ObjectTrait<ElemType>;
-        //using Maybe = IntOpt<MAX_NUM>;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
 
         static auto ElemToObject(ElemType const& elem) -> ObjectType const& {
