@@ -86,6 +86,14 @@ auto ObjectArray_SimpleFindTest(ARRAY&& array) {
         expect(*found == 4);
     };
 
+    "should return true if trying to get the existent of an existent elem in scope"_test = [&] {
+        expect(array.Exists(0x30, 5));
+    };
+
+    "should return false if trying to get the existent of a non-existent elem in scope"_test = [&] {
+        expect(!array.Exists(0x30, 2));
+    };
+
     "should return nullptr if out of scope"_test = [&] {
         expect(nullptr == array.Find(0x30, 2));
     };
