@@ -257,6 +257,22 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
         expect(array[5] == 6);
     };
 
+    "should be able to access by At"_test = [&] {
+        auto* p = array.At(2);
+        expect(p != nullptr);
+        expect(*p == 3);
+
+        if constexpr(std::is_const_v<std::remove_reference_t<decltype(array)>>) {
+            expect(std::is_const_v<std::remove_pointer_t<decltype(p)>>);
+        } else {
+            expect(!std::is_const_v<std::remove_pointer_t<decltype(p)>>);
+        }
+    };
+
+    "should return nullptr if index is out of range"_test = [&] {
+        expect(array.At(6) == nullptr);
+    };
+
     "non-const access should be able to modify"_test = [&] {
         if constexpr(!std::is_const_v<std::remove_reference_t<decltype(array)>>) {
             static_assert(std::is_reference_v<decltype(array[0])>);

@@ -28,6 +28,7 @@ public:
     using Parent::Parent;
 
     using Parent::operator[];
+    using Parent::At;
 
     using Parent::begin;
     using Parent::end;

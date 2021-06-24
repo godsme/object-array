@@ -15,11 +15,13 @@
 #include <object-array/mixin/RValueIndexedViewFactory.h>
 #include <object-array/mixin/RvalueScopedViewFactory.h>
 #include <object-array/mixin/IndexedRefAccessor.h>
+#include <object-array/mixin/RangedByIndexAccessor.h>
 
 namespace view::detail {
     using SliceMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IndexedRefAccessor,
+            mixin::RangedByIndexAccessor,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
