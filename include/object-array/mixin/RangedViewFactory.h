@@ -71,17 +71,22 @@ namespace mixin {
 
     protected:
         template<bool CONST, bool R_VALUE>
+        auto MakeSliceByFrom(SizeType from, EndOffsetType until) const -> auto {
+            auto until_ = until.ToIndex(IndexEnd());
+            if(until_ <= from) {
+                return DoMakeSlice<CONST, R_VALUE>(from, from);
+            } else {
+                return DoMakeSlice<CONST, R_VALUE>(from, until_);
+            }
+        }
+
+        template<bool CONST, bool R_VALUE>
         auto MakeSlice(OffsetType from, EndOffsetType until) const -> auto {
             auto from_  = from.ToIndex(IndexEnd());
             if(from_ == IndexEnd()) {
                 return DoMakeSlice<CONST, R_VALUE>(from_, from_);
-            }else {
-                auto until_ = until.ToIndex(IndexEnd());
-                if(until_ <= from_) {
-                    return DoMakeSlice<CONST, R_VALUE>(from_, from_);
-                } else {
-                    return DoMakeSlice<CONST, R_VALUE>(from_, until_);
-                }
+            } else {
+                return MakeSliceByFrom<CONST, R_VALUE>(from_, until);
             }
         }
 
@@ -112,11 +117,11 @@ namespace mixin {
         auto Until(EndOffsetType) const && -> void {}
 
         auto Until(EndOffsetType until) & -> auto {
-            return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
+            return MakeSliceByFrom<false, false>(IndexBegin(), until);
         }
 
         auto Until(EndOffsetType until) const& -> auto {
-            return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
+            return MakeSliceByFrom<true, false>(IndexBegin(), until);
         }
     };
 }
