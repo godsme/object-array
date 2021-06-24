@@ -13,7 +13,7 @@
 #include <object-array/mixin/IterableScopedArrayLike.h>
 
 namespace view::detail {
-    using ScopedMixin = mixin::Mixins<
+    using ScopedMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IterableScopedArrayLike,
             mixin::RValueIndexedViewFactory,
@@ -21,11 +21,9 @@ namespace view::detail {
             mixin::SimpleFindExt>;
 
     template<typename HOLDER>
-    class ScopedView : ::detail::ArrayComposer<HOLDER, ScopedMixin> {
-        using Parent = ::detail::ArrayComposer<HOLDER, ScopedMixin>;
-        using Holder = typename Parent::Holder;
+    class ScopedView : ::detail::ArrayComposer<HOLDER, ScopedMixins> {
+        using Parent = ::detail::ArrayComposer<HOLDER, ScopedMixins>;
         using Mixins = typename Parent::Mixins;
-
     public:
         using Parent::Parent;
 

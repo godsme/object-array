@@ -23,10 +23,7 @@ namespace detail {
 template<typename T, std::size_t MAX_NUM>
 class ObjectArray : detail::ObjectArray<T, MAX_NUM> {
     using Parent = detail::ObjectArray<T, MAX_NUM>;
-
-    using Holder = typename Parent::Holder;
     using Mixins = typename Parent::Mixins;
-
 public:
     using Parent::Parent;
 

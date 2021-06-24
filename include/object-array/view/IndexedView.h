@@ -11,7 +11,10 @@
 #include <object-array/mixin/IterableIndexedArrayLike.h>
 
 namespace view {
-    using IndexedView = typename detail::IndexedArrayView<mixin::IterableIndexedArrayLike, holder::RefIndexedViewDataHolder, holder::ValueIndexedViewDataHolder>;
+    using IndexedView = typename detail::IndexedArrayView<
+            mixin::IterableIndexedArrayLike,
+            holder::RefIndexedViewDataHolder,
+            holder::ValueIndexedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDVIEW_H

@@ -10,7 +10,10 @@
 #include <object-array/mixin/IterableIndexedArrayLike.h>
 
 namespace view {
-    using IndexedScopedView = typename detail::IndexedArrayView<mixin::IterableIndexedScopedArrayLike, holder::RefScopedViewDataHolder, holder::ValueScopedViewDataHolder>;
+    using IndexedScopedView = typename detail::IndexedArrayView<
+            mixin::IterableIndexedScopedArrayLike,
+            holder::RefScopedViewDataHolder,
+            holder::ValueScopedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDSCOPEDVIEW_H

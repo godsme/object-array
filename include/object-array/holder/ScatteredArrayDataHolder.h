@@ -11,7 +11,7 @@
 
 namespace holder::detail {
     template<typename DATA_HOLDER>
-    class ScatteredArrayDataHolderConcept {
+    class ScatteredArrayDataHolderInterface {
         dEcL_tHiS(DATA_HOLDER);
     public:
         using ElemType = typename DATA_HOLDER::ElemType;
@@ -19,9 +19,9 @@ namespace holder::detail {
         using SizeType = typename DATA_HOLDER::SizeType;
         using BitMap = typename DATA_HOLDER::BitMap;
 
-        auto GetRange() const -> SizeType { return This()->GetRange(); }
-        auto Elems() const -> ElemType const* { return This()->Elems(); }
-        auto Elems() -> ElemType* { return This()->Elems(); }
+        auto GetRange() const -> SizeType { return DATA_HOLDER::MAX_SIZE; }
+        auto Elems() const -> ElemType const* { return This()->elems; }
+        auto Elems() -> ElemType* { return This()->elems; }
         static auto ElemToObject(ElemType const& elem) -> ObjectType const& {
             return DATA_HOLDER::ElemToObject(elem);
         }
@@ -39,7 +39,7 @@ namespace holder {
         using SizeType = typename Parent::SizeType;
         using BitMap = typename Parent::BitMap;
         using ElemType = typename Parent::ElemType;
-        using Interface = detail::ScatteredArrayDataHolderConcept<ScatteredArrayDataHolder>;
+        using Interface = detail::ScatteredArrayDataHolderInterface<ScatteredArrayDataHolder>;
 
     public:
         ScatteredArrayDataHolder() {}
@@ -58,10 +58,6 @@ namespace holder {
 
         auto GetScope() -> decltype(auto) {
             return (occupied);
-        }
-
-        auto GetRange() const -> SizeType {
-            return Parent::MAX_SIZE;
         }
 
     private:

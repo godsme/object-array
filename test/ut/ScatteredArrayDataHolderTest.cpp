@@ -16,19 +16,17 @@ SCENARIO("Int ScatteredArrayDataHolder") {
 
     IntArray array;
     REQUIRE(array.GetScope() == 0);
-    REQUIRE(array.GetRange() == 5);
     REQUIRE(array.GetScope() == IntArray::BitMap{0});
 
-    array.Elems()[0] = 1;
+    array.elems[0] = 1;
     array.GetScope().set(0);
 
-    REQUIRE(array.GetRange() == 5);
     REQUIRE(array.GetScope() == IntArray::BitMap{1});
 
     array.GetScope().set(1);
     REQUIRE(array.GetScope() == IntArray::BitMap{3});
 
-    REQUIRE(IntArray::ElemToObject(array.Elems()[0]) == 1);
+    REQUIRE(IntArray::ElemToObject(array.elems[0]) == 1);
 }
 
 namespace {
@@ -50,17 +48,15 @@ SCENARIO("Object ScatteredArrayDataHolder") {
 
     FooArray array;
     REQUIRE(array.GetScope() == 0);
-    REQUIRE(array.GetRange() == 5);
     REQUIRE(array.GetScope() == FooArray::BitMap{0});
 
-    array.Elems()[0].Emplace(Foo{10});
+    array.elems[0].Emplace(Foo{10});
     array.GetScope().set(0);
 
-    REQUIRE(array.GetRange() == 5);
     REQUIRE(array.GetScope() == FooArray::BitMap{1});
 
     array.GetScope().set(1);
     REQUIRE(array.GetScope() == FooArray::BitMap{3});
 
-    REQUIRE(FooArray::ElemToObject(array.Elems()[0]).a == Foo{10}.a);
+    REQUIRE(FooArray::ElemToObject(array.elems[0]).a == Foo{10}.a);
 }

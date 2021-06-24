@@ -32,10 +32,6 @@ namespace holder {
             }
         }
 
-        auto Num() const -> SizeType { return num; }
-        auto Num() -> decltype(auto) { return (num); }
-
-    private:
         SizeType num{};
     };
 }

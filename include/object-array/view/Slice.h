@@ -16,7 +16,7 @@
 #include <object-array/mixin/RvalueScopedViewFactory.h>
 
 namespace view::detail {
-    using SliceMixin = mixin::Mixins<
+    using SliceMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
@@ -25,8 +25,8 @@ namespace view::detail {
             mixin::RValueIndexedViewFactory>;
 
     template<typename HOLDER>
-    class Slice : ::detail::ArrayComposer<HOLDER, SliceMixin> {
-        using Parent = ::detail::ArrayComposer<HOLDER, SliceMixin>;
+    class Slice : ::detail::ArrayComposer<HOLDER, SliceMixins> {
+        using Parent = ::detail::ArrayComposer<HOLDER, SliceMixins>;
         using Holder = typename Parent::Holder;
         using Mixins = typename Parent::Mixins;
 

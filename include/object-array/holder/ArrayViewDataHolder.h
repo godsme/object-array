@@ -55,16 +55,9 @@ namespace holder {
             num = std::min(num, n);
         }
 
-        auto Elems() const -> ElemType const* { return elems; }
-        auto Elems() -> ElemType* { return elems; }
-
-        auto Num() const -> SizeType { return num; }
-        auto Num() -> SizeType& { return (num); }
-
         static auto ElemToObject(ElemType const& elem) -> ObjectType const& { return elem; }
         static auto ElemToObject(ElemType& elem) -> ObjectType& { return elem; }
 
-    private:
         ElemType* elems;
         SIZE_TYPE& num;
     };
