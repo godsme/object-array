@@ -57,14 +57,6 @@ namespace mixin {
                 if(pred(GetObj(i))) DoErase(i);
             }
         }
-
-//        auto Clear(OffsetType from, EndOffsetType until) {
-//            Self::template ClearRange<false>(from.ToIndex(), until.ToIndex());
-//        }
-//
-//        auto ClearUntil(EndOffsetType until) {
-//            Self::template ClearRange<false>(0, until.ToIndex());
-//        }
     };
 }
 

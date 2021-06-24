@@ -574,21 +574,21 @@ SCENARIO("init with init list") {
             REQUIRE(array[1].a == 2);
         }
 
-//        WHEN("ClearUntil") {
-//            REQUIRE(array.GetNum() == 5);
-//            array.ClearUntil(2);
-//            REQUIRE(array.GetNum() == 2);
-//            REQUIRE(array[0].a == 4);
-//            REQUIRE(array[1].a == 5);
-//        }
-//
-//        WHEN("ClearRange") {
-//            REQUIRE(array.GetNum() == 5);
-//            array.Clear(1, -2);
-//            REQUIRE(array.GetNum() == 2);
-//            REQUIRE(array[0].a == 1);
-//            REQUIRE(array[1].a == 5);
-//        }
+        WHEN("ClearUntil") {
+            REQUIRE(array.GetNum() == 5);
+            array.ClearUntil(2);
+            REQUIRE(array.GetNum() == 2);
+            REQUIRE(array[0].a == 4);
+            REQUIRE(array[1].a == 5);
+        }
+
+        WHEN("ClearRange") {
+            REQUIRE(array.GetNum() == 5);
+            array.Clear(1, -2);
+            REQUIRE(array.GetNum() == 2);
+            REQUIRE(array[0].a == 1);
+            REQUIRE(array[1].a == 5);
+        }
 
         WHEN("CleanUp") {
             array.CleanUp(0x0a); // 01010

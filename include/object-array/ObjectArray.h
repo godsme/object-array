@@ -16,17 +16,20 @@ namespace detail {
                 mixin::ScopedViewFactory,
                 mixin::IndexedViewFactory>;
 
-    template<typename T, std::size_t MAX_NUM>
-    using ObjectArray = detail::ContinuousReadOnlyArray<holder::ObjectArrayDataHolder<T, MAX_NUM>, ObjectArrayMixins>;
+    template<typename T, std::size_t MAX_NUM, bool ORDERED>
+    using ObjectArray = detail::ContinuousReadOnlyArray<holder::ObjectArrayDataHolder<T, MAX_NUM>, ObjectArrayMixins, ORDERED>;
 }
 
-template<typename T, std::size_t MAX_NUM>
-class ObjectArray : public detail::ObjectArray<T, MAX_NUM> {
-    using Parent = detail::ObjectArray<T, MAX_NUM>;
+template<typename T, std::size_t MAX_NUM, bool ORDERED = false>
+class ObjectArray : public detail::ObjectArray<T, MAX_NUM, ORDERED> {
+    using Parent = detail::ObjectArray<T, MAX_NUM, ORDERED>;
     using Mixins = typename Parent::Mixins;
     using DataHolder = typename Parent::DataHolder;
+
 public:
     using BitMap = typename Mixins::BitMap;
+    using OffsetType = typename Mixins::OffsetType;
+    using EndOffsetType = typename Mixins::EndOffsetType;
 
 public:
     using Parent::Parent;
@@ -34,10 +37,7 @@ public:
     using Mixins::Append;
     using Mixins::Replace;
     using Mixins::Erase;
-    //using Mixins::Clear;
     using DataHolder::Clear;
-    using DataHolder::ClearFrom;
-    //using Mixins::ClearUntil;
     using Mixins::CleanUpBy;
     using Mixins::ReplaceObj;
     using Mixins::Remove;
@@ -45,6 +45,18 @@ public:
     using Mixins::CleanUp;
     using Mixins::CleanUpEx;
     using Mixins::FindOrAppend;
+
+    auto ClearFrom(OffsetType from) {
+        DataHolder::ClearFrom(from.ToIndex(Parent::GetNum()));
+    }
+
+    auto Clear(OffsetType from, EndOffsetType until) {
+        DataHolder::template ClearRange<ORDERED>(from.ToIndex(Parent::GetNum()), until.ToIndex(Parent::GetNum()));
+    }
+
+    auto ClearUntil(EndOffsetType until) {
+        DataHolder::template ClearRange<ORDERED>(0, until.ToIndex(Parent::GetNum()));
+    }
 };
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H
