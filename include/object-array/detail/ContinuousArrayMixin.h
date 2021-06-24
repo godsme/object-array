@@ -23,6 +23,7 @@
 #include <object-array/mixin/RangedElemsCount.h>
 #include <object-array/mixin/ArrayElemVisit.h>
 #include <object-array/mixin/SimpleForEachExt.h>
+#include <object-array/mixin/ScopedForEachExt.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
@@ -37,7 +38,8 @@ namespace detail {
             mixin::SimpleFindExt,
             mixin::ScopedFindExt,
             mixin::ArrayElemVisit,
-            mixin::SimpleForEachExt>;
+            mixin::SimpleForEachExt,
+            mixin::ScopedForEachExt>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

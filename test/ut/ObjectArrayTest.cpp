@@ -330,18 +330,18 @@ SCENARIO("ObjectArray Foreach") {
         REQUIRE(times == 1);
     }
 
-//    {
-//        auto times = 0;
-//        ObjectArray<int, 10>::BitMap scope{0x01};
-//        auto result = array1.ForEach(scope, [&times](auto &&r) {
-//            r = 10;
-//            times++;
-//            return 1;
-//        });
-//        REQUIRE(result == 1);
-//        REQUIRE(times == 1);
-//        REQUIRE(array1[0] == 10);
-//    }
+    {
+        auto times = 0;
+        ObjectArray<int, 10>::BitMap scope{0x01};
+        auto result = array1.ForEach(scope, [&times](auto &&r) {
+            r = 10;
+            times++;
+            return 1;
+        });
+        REQUIRE(result == 1);
+        REQUIRE(times == 1);
+        REQUIRE(array1[0] == 10);
+    }
 
     {
         auto times = 0;
@@ -404,7 +404,7 @@ SCENARIO("ObjectArray Foreach") {
 
         int n = 0;
         auto sum = 0;
-        for(auto&& [elem, i] : a.Slice(1, -1).Scope(0x02).WithIndex()) {
+        for(auto&& [elem, i] : a.Slice(1, -1).Scope(scope).WithIndex()) {
             ++n;
             REQUIRE(i == 1);
             sum += elem;
@@ -446,43 +446,43 @@ SCENARIO("ObjectArray Foreach") {
     }
 }
 
-//namespace {
-//    struct Thing {
-//        Thing() : a{0} {}
-//        Thing(int a) : a{a} {}
-//        Thing(Thing&& rhs) : a{rhs.a} {
-//            rhs.a = 10;
-//        }
-//        ~Thing() { a = 15; }
-//
-//        auto operator==(Thing const& rhs) const -> bool {
-//            return a == rhs.a;
-//        }
-//        int a;
-//    };
-//
-//    using ThingArray = ObjectArray<Thing, 5>;
-//
-//    static_assert(!std::is_trivially_constructible_v<Thing>);
-//    static_assert(!std::is_trivially_constructible_v<ThingArray>);
-//
-//    static_assert(!std::is_trivially_destructible_v<Thing>);
-//    static_assert(!std::is_trivially_destructible_v<ThingArray>);
-//
-//    static_assert(!std::is_copy_constructible_v<Thing>);
-//    static_assert(!std::is_copy_constructible_v<ThingArray>);
-//
-//    static_assert(std::is_move_constructible_v<Thing>);
-//    static_assert(std::is_move_constructible_v<ThingArray>);
-//
-//    static_assert(!std::is_copy_assignable_v<Thing>);
-//    static_assert(!std::is_copy_assignable_v<ThingArray>);
-//
-//    // this is fine for array.
-//    static_assert(!std::is_move_assignable_v<Thing>);
-//    static_assert(std::is_move_assignable_v<ThingArray>);
-//}
-//
+namespace {
+    struct Thing {
+        Thing() : a{0} {}
+        Thing(int a) : a{a} {}
+        Thing(Thing&& rhs) : a{rhs.a} {
+            rhs.a = 10;
+        }
+        ~Thing() { a = 15; }
+
+        auto operator==(Thing const& rhs) const -> bool {
+            return a == rhs.a;
+        }
+        int a;
+    };
+
+    using ThingArray = ObjectArray<Thing, 5>;
+
+    static_assert(!std::is_trivially_constructible_v<Thing>);
+    static_assert(!std::is_trivially_constructible_v<ThingArray>);
+
+    static_assert(!std::is_trivially_destructible_v<Thing>);
+    static_assert(!std::is_trivially_destructible_v<ThingArray>);
+
+    static_assert(!std::is_copy_constructible_v<Thing>);
+    static_assert(!std::is_copy_constructible_v<ThingArray>);
+
+    static_assert(std::is_move_constructible_v<Thing>);
+    static_assert(std::is_move_constructible_v<ThingArray>);
+
+    static_assert(!std::is_copy_assignable_v<Thing>);
+    static_assert(!std::is_copy_assignable_v<ThingArray>);
+
+    // this is fine for array.
+    static_assert(!std::is_move_assignable_v<Thing>);
+    static_assert(std::is_move_assignable_v<ThingArray>);
+}
+
 //SCENARIO("init with init list") {
 //    ThingArray array;
 //    array.Append(1);

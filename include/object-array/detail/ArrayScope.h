@@ -22,14 +22,42 @@ namespace detail {
         }
 
         ArrayScope(Parent const& rhs) : Parent{rhs} {}
+        auto operator=(ArrayScope const& rhs) -> ArrayScope& = default;
+        auto operator=(Parent const& rhs) -> ArrayScope& {
+            Parent::operator=(rhs);
+            return *this;
+        }
 
-        auto Align(SizeType begin, SizeType end) const -> ArrayScope {
-            auto n = MAX_SIZE - end;
-            return (((*this) << n) >> ( n + begin)) << begin;
+        auto operator<<=(SizeType n) -> ArrayScope& {
+            Parent::operator<<=(n);
+            return *this;
+        }
+
+        auto operator>>=(SizeType n) -> ArrayScope& {
+            Parent::operator>>=(n);
+            return *this;
         }
 
         constexpr auto operator~() const -> ArrayScope {
             return Parent::operator~();
+        }
+
+        auto AlignWithBegin(SizeType begin, SizeType end) -> ArrayScope& {
+            auto n = MAX_SIZE - end;
+            return (((*this) <<= n) >>= ( n + begin));
+        }
+
+        auto Mask(SizeType begin, SizeType end) -> ArrayScope& {
+            return AlignWithBegin(begin, end) <<= begin;
+        }
+
+        template<bool MASK>
+        auto Align(SizeType begin, SizeType end) -> ArrayScope& {
+            if constexpr(MASK) {
+                return AlignWithBegin(begin, end);
+            } else {
+                return (*this) >>= begin;
+            }
         }
     };
 

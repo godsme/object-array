@@ -22,8 +22,8 @@ namespace mixin {
         using Self::IndexEnd;
 
     protected:
-        auto AlignScope(BitMap scope) const -> BitMap {
-            return scope.Align(IndexBegin(), IndexEnd());
+        auto MaskScope(BitMap scope) const -> BitMap {
+            return scope.Mask(IndexBegin(), IndexEnd());
         }
 
     public:
@@ -31,11 +31,11 @@ namespace mixin {
         auto Scope(BitMap scope) const && -> void {}
 
         auto Scope(BitMap scope) & -> view::ScopedView<RangedArrayLike> {
-            return {static_cast<RangedArrayLike&>(*this), AlignScope(scope)};
+            return {static_cast<RangedArrayLike&>(*this), MaskScope(scope)};
         }
 
         auto Scope(BitMap scope) const & -> view::ScopedView<RangedArrayLike const> {
-            return {static_cast<RangedArrayLike const&>(*this), AlignScope(scope)};
+            return {static_cast<RangedArrayLike const&>(*this), MaskScope(scope)};
         }
 
         auto Exclude(BitMap excluded) && -> void {}
