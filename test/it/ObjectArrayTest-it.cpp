@@ -357,12 +357,6 @@ suite RValue_ObjectArraySlice_Suite = [] {
 
 template<typename SLICE>
 auto ObjectArray_SliceOpTest(SLICE&& slice) {
-}
-
-suite ObjectArraySliceView_Suite = [] {
-    FooArray const array{{1}, {2}, {3}, {4}, {5}, {6}};
-    auto&& slice = array.Slice(1, -2);
-
     "should be able to access by operator[]"_test = [&] {
         expect(slice[0] ==  2);
         expect(slice[1] ==  3);
@@ -470,6 +464,246 @@ suite ObjectArraySliceView_Suite = [] {
     };
 
     "should be able to know the existent of an elem with exluded scope"_test = [&] {
+        expect(!slice.ExistsEx(0x31, 5));
+        expect(slice.ExistsEx(0x31, 3));
+    };
+}
+
+suite ObjectArraySliceView_Suite = [] {
+    FooArray const array{{1}, {2}, {3}, {4}, {5}, {6}};
+    ObjectArray_SliceOpTest(array.Slice(1, -2));
+
+    FooArray array2{{1}, {2}, {3}, {4}, {5}, {6}};
+    ObjectArray_SliceOpTest(array2.Slice(1, -2));
+};
+
+suite ObjectArrayFromSliceView_Suite = [] {
+    FooArray const array{{1}, {2}, {3}, {4}, {5}, {6}};
+    auto&& slice = array.From(1);
+
+    "should be able to access by operator[]"_test = [&] {
+        expect(slice[0] ==  2);
+        expect(slice[1] ==  3);
+    };
+
+    "should be able to access by At"_test = [&] {
+        auto* p = slice.At(3);
+        expect(p != nullptr);
+        expect(*p == 5);
+    };
+
+    "should return nullptr if index out of range"_test = [&] {
+        expect(nullptr == slice.At(5));
+    };
+
+    "should be able to range for"_test = [&] {
+        auto sum = 0;
+        auto n = 0;
+        for(auto&& elem : slice) {
+            ++n;
+            sum += elem.a;
+        }
+        expect(n == 5);
+        expect(sum == 2 + 3 + 4 + 5 + 6);
+    };
+
+    "should be able to range for with index"_test = [&] {
+        auto sum = 0;
+        auto n = 0;
+        auto index_sum = 0;
+        for(auto&& [elem, i] : slice.WithIndex()) {
+            ++n;
+            sum += elem.a;
+            index_sum += i;
+        }
+        expect(n == 5);
+        expect(index_sum == 1 + 2 + 3 + 4 + 5);
+        expect(sum == 2 + 3 + 4 + 5 + 6);
+    };
+
+    "should be find the index of an elem in range, but the index should be an array index"_test = [&] {
+        auto index = slice.FindIndex(5);
+        expect(index.has_value());
+        expect(*index == 4);
+    };
+
+    "should be find the index of an elem in range with scope, but the index should be an array index"_test = [&] {
+        auto index = slice.FindIndex(0x31, 5);
+        expect(index.has_value());
+        expect(*index == 4);
+    };
+
+    "should return nullopt if trying to find an out-of-range elem"_test = [&] {
+        expect(!slice.FindIndex(0).has_value());
+    };
+
+    "should return nullopt if trying to find an out-of-range elem with scope"_test = [&] {
+        expect(!slice.FindIndex(0x31, 3).has_value());
+    };
+
+    "should return nullopt if trying to find an out-of-range elem with scope"_test = [&] {
+        auto index = slice.FindIndexEx(0x31, 3);
+        expect(index.has_value());
+        expect(*index == 2);
+    };
+
+    "should be able to find an elem in range"_test = [&] {
+        auto* found = slice.Find(5);
+        expect(found != nullptr);
+        expect(*found == 5);
+    };
+
+    "should be able to find an elem in range with scope"_test = [&] {
+        auto* found = slice.Find(0x31, 5);
+        expect(found != nullptr);
+        expect(*found == 5);
+    };
+
+    "should return nullptr if trying to find an out-of-range elem with excluded scope"_test = [&] {
+        expect(nullptr == slice.FindEx(0x31, 5));
+    };
+
+    "should return nullptr if trying to find an out-of-range elem"_test = [&] {
+        expect(nullptr == slice.Find(0));
+    };
+
+    "should return nullptr if trying to find an out-of-range elem with scope"_test = [&] {
+        expect(nullptr == slice.Find(0x31, 4));
+    };
+
+    "should return nullptr if trying to find an out-of-range elem with scope"_test = [&] {
+        auto* found = slice.FindEx(0x31, 4);
+        expect(found != nullptr);
+        expect(*found == 4);
+    };
+
+    "should be able to know the existent of an elem"_test = [&] {
+        expect(slice.Exists(5));
+        expect(!slice.Exists(1));
+    };
+
+    "should be able to know the existent of an elem with scope"_test = [&] {
+        expect(slice.Exists(0x31, 5));
+        expect(!slice.Exists(0x31, 3));
+    };
+
+    "should be able to know the existent of an elem with excluded scope"_test = [&] {
+        expect(!slice.ExistsEx(0x31, 5));
+        expect(slice.ExistsEx(0x31, 3));
+    };
+};
+
+suite ObjectArrayUntilSliceView_Suite = [] {
+    FooArray const array{{1}, {2}, {3}, {4}, {5}, {6}};
+    auto&& slice = array.Until(-2);
+
+    "should be able to access by operator[]"_test = [&] {
+        expect(slice[0] ==  1);
+        expect(slice[1] ==  2);
+    };
+
+    "should be able to access by At"_test = [&] {
+        auto* p = slice.At(3);
+        expect(p != nullptr);
+        expect(*p == 4);
+    };
+
+    "should return nullptr if index out of range"_test = [&] {
+        expect(nullptr == slice.At(5));
+    };
+
+    "should be able to range for"_test = [&] {
+        auto sum = 0;
+        auto n = 0;
+        for(auto&& elem : slice) {
+            ++n;
+            sum += elem.a;
+        }
+        expect(n == 5);
+        expect(sum == 1 + 2 + 3 + 4 + 5);
+    };
+
+    "should be able to range for with index"_test = [&] {
+        auto sum = 0;
+        auto n = 0;
+        auto index_sum = 0;
+        for(auto&& [elem, i] : slice.WithIndex()) {
+            ++n;
+            sum += elem.a;
+            index_sum += i;
+        }
+        expect(n == 5);
+        expect(index_sum == 0 + 1 + 2 + 3 + 4);
+        expect(sum == 1 + 2 + 3 + 4 + 5);
+    };
+
+    "should be find the index of an elem in range, but the index should be an array index"_test = [&] {
+        auto index = slice.FindIndex(5);
+        expect(index.has_value());
+        expect(*index == 4);
+    };
+
+    "should be find the index of an elem in range with scope, but the index should be an array index"_test = [&] {
+        auto index = slice.FindIndex(0x31, 5);
+        expect(index.has_value());
+        expect(*index == 4);
+    };
+
+    "should return nullopt if trying to find an out-of-range elem"_test = [&] {
+        expect(!slice.FindIndex(6).has_value());
+    };
+
+    "should return nullopt if trying to find an out-of-range elem with scope"_test = [&] {
+        expect(!slice.FindIndex(0x31, 3).has_value());
+    };
+
+    "should return nullopt if trying to find an out-of-range elem with scope"_test = [&] {
+        auto index = slice.FindIndexEx(0x31, 3);
+        expect(index.has_value());
+        expect(*index == 2);
+    };
+
+    "should be able to find an elem in range"_test = [&] {
+        auto* found = slice.Find(5);
+        expect(found != nullptr);
+        expect(*found == 5);
+    };
+
+    "should be able to find an elem in range with scope"_test = [&] {
+        auto* found = slice.Find(0x31, 5);
+        expect(found != nullptr);
+        expect(*found == 5);
+    };
+
+    "should return nullptr if trying to find an out-of-range elem with excluded scope"_test = [&] {
+        expect(nullptr == slice.FindEx(0x31, 6));
+    };
+
+    "should return nullptr if trying to find an out-of-range elem"_test = [&] {
+        expect(nullptr == slice.Find(6));
+    };
+
+    "should return nullptr if trying to find an out-of-range elem with scope"_test = [&] {
+        expect(nullptr == slice.Find(0x31, 4));
+    };
+
+    "should return nullptr if trying to find an out-of-range elem with scope"_test = [&] {
+        auto* found = slice.FindEx(0x31, 4);
+        expect(found != nullptr);
+        expect(*found == 4);
+    };
+
+    "should be able to know the existent of an elem"_test = [&] {
+        expect(slice.Exists(5));
+        expect(!slice.Exists(6));
+    };
+
+    "should be able to know the existent of an elem with scope"_test = [&] {
+        expect(slice.Exists(0x31, 5));
+        expect(!slice.Exists(0x31, 3));
+    };
+
+    "should be able to know the existent of an elem with excluded scope"_test = [&] {
         expect(!slice.ExistsEx(0x31, 5));
         expect(slice.ExistsEx(0x31, 3));
     };
