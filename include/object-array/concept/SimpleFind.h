@@ -5,18 +5,10 @@
 #ifndef OBJECT_ARRAY_SIMPLEFIND_H
 #define OBJECT_ARRAY_SIMPLEFIND_H
 
+#include <object-array/concept/detail/PredTypeTrait.h>
 #include <type_traits>
 #include <optional>
 #include <concepts>
-
-namespace _concept::detail {
-    template<typename T>
-    struct PredTypeTrait {
-        using ObjectType = typename T::ObjectType;
-        constexpr static auto pred = [](ObjectType const&) -> bool { return true; };
-        using Type = decltype(pred);
-    };
-}
 
 namespace _concept {
     template<typename T>

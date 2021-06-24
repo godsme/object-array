@@ -73,6 +73,26 @@ auto ObjectArray_SimpleFindTest(ARRAY&& array) {
         expect(array.Exists(5));
         expect(!array.Exists(10));
     };
+
+    "should be able to find in scope"_test = [&] {
+        auto* found = array.Find(0x30, 5);
+        expect(found != nullptr);
+        expect(found->a == 5);
+    };
+
+    "should be able to find the index of existent elem in scope"_test = [&] {
+        auto found = array.FindIndex(0x30, 5);
+        expect(found.has_value());
+        expect(*found == 4);
+    };
+
+    "should return nullptr if out of scope"_test = [&] {
+        expect(nullptr == array.Find(0x30, 2));
+    };
+
+    "should return nullopt if trying to find the index of elem out of scope"_test = [&] {
+        expect(std::nullopt == array.FindIndex(0x30, 2));
+    };
 }
 
 suite ObjectArraySimpleFind_Suite = [] {

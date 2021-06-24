@@ -21,7 +21,7 @@ namespace mixin {
         using BitMap = typename T::BitMap;
         using Maybe = typename T::Maybe;
 
-    private:
+    public:
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
@@ -30,7 +30,7 @@ namespace mixin {
 
     public:
         template<_concept::Pred<ObjectType, SizeType> PRED>
-        auto FindIndex(BitMap scope, PRED&& pred) const -> Maybe {
+        auto DoFindIndex(BitMap scope, PRED&& pred) const -> Maybe {
             if (IndexBegin() >= IndexEnd()) return std::nullopt;
             for (auto i = IndexBegin(); i < IndexEnd(); i++) {
                 if(!scope[i]) continue;
@@ -44,8 +44,8 @@ namespace mixin {
         }
 
         template<_concept::Pred<ObjectType, SizeType> PRED>
-        auto Find(BitMap scope, PRED&& pred) const -> ObjectType const* {
-            auto index = FindIndex(scope, std::forward<PRED>(pred));
+        auto DoFind(BitMap scope, PRED&& pred) const -> ObjectType const* {
+            auto index = DoFindIndex(scope, std::forward<PRED>(pred));
             return index ? &GetObj(*index) : nullptr;
         }
     };

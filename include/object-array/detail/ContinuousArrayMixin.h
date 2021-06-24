@@ -11,6 +11,8 @@
 #include <object-array/mixin/RangedArray.h>
 #include <object-array/mixin/ContinuousArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
+#include <object-array/mixin/ScopedFind.h>
+#include <object-array/mixin/ScopedFindExt.h>
 #include <object-array/mixin/RangedViewFactory.h>
 #include <object-array/mixin/ScopedViewFactory.h>
 #include <object-array/mixin/ScopedViewFactory.h>
@@ -28,7 +30,8 @@ namespace detail {
             mixin::RangedByIndexAccessor,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
-            mixin::SimpleFindExt>;
+            mixin::SimpleFindExt,
+            mixin::ScopedFindExt>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

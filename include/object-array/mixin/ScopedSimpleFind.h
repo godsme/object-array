@@ -26,12 +26,12 @@ namespace mixin {
     public:
         template<_concept::Pred<ObjectType, SizeType> PRED>
         auto FindIndex(PRED&& pred) const -> Maybe {
-            return Self::template FindIndex(GetScope(), std::forward<PRED>(pred));
+            return Self::template DoFindIndex(GetScope(), std::forward<PRED>(pred));
         }
 
         template<_concept::Pred<ObjectType, SizeType> PRED>
         auto Find(PRED&& pred) const -> ObjectType const* {
-            return Self::template Find(GetScope(), std::forward<PRED>(pred));
+            return Self::template DoFind(GetScope(), std::forward<PRED>(pred));
         }
     };
 }
