@@ -5,10 +5,9 @@
 #ifndef OBJECT_ARRAY_SCATTEREDARRAYDATAHOLDER_H
 #define OBJECT_ARRAY_SCATTEREDARRAYDATAHOLDER_H
 
-#include <cub/base/DeduceSizeType.h>
 #include <object-array/holder/ArrayDataHolder.h>
 #include <object-array/holder/detail/ArrayDataHolderInterface.h>
-#include <object-array/detail/CrtpHelper.h>
+
 
 namespace holder::detail {
     template<typename DATA_HOLDER>

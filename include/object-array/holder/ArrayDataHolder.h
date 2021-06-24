@@ -7,6 +7,7 @@
 
 #include <object-array/holder/detail/DeduceElemType.h>
 #include <object-array/holder/detail/ObjectTrait.h>
+#include <cub/base/DeduceSizeType.h>
 #include <cub/base/BitSet.h>
 #include <cub/base/IntOpt.h>
 
