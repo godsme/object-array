@@ -5,15 +5,14 @@
 #ifndef OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
 #define OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/iterator/IndexedIterator.h>
 #include <object-array/iterator/Iterator.h>
 
 namespace mixin {
     template<_concept::RangedArrayLike T>
-    struct IterableIndexedArrayLike : detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    struct IterableIndexedArrayLike : T {
+        using Self = T;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

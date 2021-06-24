@@ -9,8 +9,8 @@
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    struct RValueScopedViewFactory : detail::Extends<ScopedViewFactory<T>> {
-        using Self = detail::Extends<ScopedViewFactory<T>>;
+    struct RValueScopedViewFactory : ScopedViewFactory<T> {
+        using Self = ScopedViewFactory<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

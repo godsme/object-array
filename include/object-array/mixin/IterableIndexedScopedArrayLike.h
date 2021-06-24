@@ -5,15 +5,14 @@
 #ifndef OBJECT_ARRAY_ITERABLEINDEXEDSCOPEDARRAYLIKE_H
 #define OBJECT_ARRAY_ITERABLEINDEXEDSCOPEDARRAYLIKE_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/ScopedArrayLike.h>
 #include <object-array/iterator/IndexedIterator.h>
 #include <object-array/iterator/IndexedScopedIterator.h>
 
 namespace mixin {
     template<_concept::ScopedRangedArrayLike T>
-    struct IterableIndexedScopedArrayLike : detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    struct IterableIndexedScopedArrayLike : T {
+        using Self = T;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

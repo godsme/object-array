@@ -5,13 +5,12 @@
 #ifndef OBJECT_ARRAY_INDEXEDVIEWFACTORY_H
 #define OBJECT_ARRAY_INDEXEDVIEWFACTORY_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/view/IndexedView.h>
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    class IndexedViewFactory : public detail::Extends<T> {
+    class IndexedViewFactory : public T {
         using RangedArrayLike = typename T::RangedArrayLike;
     public:
         auto WithIndex() & -> view::IndexedView::RefView<RangedArrayLike> {

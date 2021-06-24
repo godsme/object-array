@@ -8,16 +8,16 @@
 #include <object-array/holder/ScatteredArrayDataHolder.h>
 #include <object-array/detail/ArrayComposer.h>
 #include <object-array/mixin/ScopedSimpleFind.h>
-#include <object-array/mixin/ScopedRangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/detail/Mixins.h>
-#include <object-array/mixin/ScopedRangedArray.h>
 #include <object-array/mixin/IterableScopedArrayLike.h>
+#include <object-array/mixin/RangedArray.h>
+#include <object-array/mixin/RangedArrayLike.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
-            mixin::ScopedRangedArray,
-            mixin::ScopedRangedArrayLike,
+            mixin::RangedArray,
+            mixin::RangedArrayLike,
             mixin::IterableScopedArrayLike,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;

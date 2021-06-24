@@ -11,8 +11,8 @@
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    class RValueIndexedViewFactory : public detail::Extends<IndexedViewFactory<T>> {
-        using Self = detail::Extends<IndexedViewFactory<T>>;
+    class RValueIndexedViewFactory : public IndexedViewFactory<T> {
+        using Self = IndexedViewFactory<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

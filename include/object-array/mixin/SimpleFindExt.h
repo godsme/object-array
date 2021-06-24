@@ -7,13 +7,12 @@
 
 #include <object-array/concept/SimpleFind.h>
 #include <object-array/concept/Pred.h>
-#include <object-array/mixin/detail/DefMixin.h>
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
     template<_concept::SimpleFind T>
-    class SimpleFindExt : public detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    class SimpleFindExt : public T {
+        using Self = T;
     public:
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;

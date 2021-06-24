@@ -10,8 +10,8 @@
 
 namespace mixin {
     template<_concept::ScopedRangedArrayLike T>
-    class IterableScopedArrayLike : public detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    class IterableScopedArrayLike : public T {
+        using Self = T;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

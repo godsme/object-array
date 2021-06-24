@@ -8,7 +8,6 @@
 #include <object-array/holder/ScopedViewDataHolder.h>
 #include <object-array/mixin/detail/Mixins.h>
 #include <object-array/mixin/ScopedSimpleFind.h>
-#include <object-array/mixin/ScopedRangedArrayLike.h>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/mixin/IndexedScopedViewFactory.h>
 #include <object-array/mixin/IterableScopedArrayLike.h>

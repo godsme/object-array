@@ -9,8 +9,8 @@
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    struct RValueRangedViewFactory : detail::Extends<RangedViewFactory<T>> {
-        using Self = detail::Extends<RangedViewFactory<T>>;
+    struct RValueRangedViewFactory : RangedViewFactory<T> {
+        using Self = RangedViewFactory<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

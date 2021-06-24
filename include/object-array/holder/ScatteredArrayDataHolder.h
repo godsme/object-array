@@ -7,22 +7,25 @@
 
 #include <cub/base/DeduceSizeType.h>
 #include <object-array/holder/ArrayDataHolder.h>
+#include <object-array/detail/CrtpHelper.h>
 
 namespace holder::detail {
     template<typename DATA_HOLDER>
     class ScatteredArrayDataHolderConcept {
-        auto This() const -> DATA_HOLDER const * {
-            return reinterpret_cast<DATA_HOLDER const*>(this);
-        }
+        dEcL_tHiS(DATA_HOLDER);
+    public:
         using ElemType = typename DATA_HOLDER::ElemType;
         using ObjectType = typename DATA_HOLDER::ObjectType;
         using SizeType = typename DATA_HOLDER::SizeType;
-
-    public:
         using BitMap = typename DATA_HOLDER::BitMap;
+
         auto GetRange() const -> SizeType { return This()->GetRange(); }
         auto Elems() const -> ElemType const* { return This()->Elems(); }
+        auto Elems() -> ElemType* { return This()->Elems(); }
         static auto ElemToObject(ElemType const& elem) -> ObjectType const& {
+            return DATA_HOLDER::ElemToObject(elem);
+        }
+        static auto ElemToObject(ElemType& elem) -> ObjectType& {
             return DATA_HOLDER::ElemToObject(elem);
         }
         auto GetScope() const -> BitMap { return This()->GetScope(); }

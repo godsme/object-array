@@ -5,14 +5,13 @@
 #ifndef OBJECT_ARRAY_MIXIN_RANGEDARRAYLIKE_H
 #define OBJECT_ARRAY_MIXIN_RANGEDARRAYLIKE_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/mixin/detail/Mixins.h>
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    struct RangedArrayLike : detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    struct RangedArrayLike : T {
+        using Self = T;
 
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

@@ -5,14 +5,13 @@
 #ifndef OBJECT_ARRAY_RANGEDARRAY_H
 #define OBJECT_ARRAY_RANGEDARRAY_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/ArrayLike.h>
 #include <object-array/mixin/IndexedContainer.h>
 
 namespace mixin {
     template<_concept::ConstArrayLike T>
-    class RangedArray : public detail::Extends<IndexedContainer<T>> {
-        using Self = detail::Extends<IndexedContainer<T>>;
+    class RangedArray : public IndexedContainer<T> {
+        using Self = IndexedContainer<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

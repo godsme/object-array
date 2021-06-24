@@ -5,13 +5,12 @@
 #ifndef OBJECT_ARRAY_CONTINUOUSARRAYLIKE_H
 #define OBJECT_ARRAY_CONTINUOUSARRAYLIKE_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/ContinuousArrayLikeDataHolder.h>
 
 namespace mixin {
     template<_concept::ContinuousArrayLikeDataHolder T>
-    struct ContinuousArrayLike : detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    struct ContinuousArrayLike : T {
+        using Self = T;
     public:
         using SizeType = typename T::SizeType;
         using ElemType = typename T::ElemType;

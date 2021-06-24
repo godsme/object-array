@@ -5,14 +5,13 @@
 #ifndef OBJECT_ARRAY_SCOPEDVIEWFACTORY_H
 #define OBJECT_ARRAY_SCOPEDVIEWFACTORY_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/ScopedArrayLike.h>
 #include <object-array/view/ScopedView.h>
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    struct ScopedViewFactory : detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    struct ScopedViewFactory : T {
+        using Self = T;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

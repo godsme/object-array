@@ -5,14 +5,13 @@
 #ifndef OBJECT_ARRAY_RANGEDVIEWFACTORY_H
 #define OBJECT_ARRAY_RANGEDVIEWFACTORY_H
 
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/view/Slice.h>
 
 namespace mixin {
     template<_concept::SimpleRangedArrayLike T>
-    struct RangedViewFactory : detail::Extends<T> {
-        using Self = detail::Extends<T>;
+    struct RangedViewFactory : T {
+        using Self = T;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;

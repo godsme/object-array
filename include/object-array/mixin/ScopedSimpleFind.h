@@ -7,15 +7,14 @@
 
 #include <object-array/concept/ScopedArrayLike.h>
 #include <object-array/concept/Pred.h>
-#include <object-array/mixin/detail/DefMixin.h>
 #include <object-array/mixin/ScopedFind.h>
 #include <optional>
 #include <algorithm>
 
 namespace mixin {
     template<_concept::ConstScopedRangedArrayLike T>
-    struct ScopedSimpleFind : detail::Extends<ScopedFind<T>> {
-        using Self = detail::Extends<ScopedFind<T>>;
+    struct ScopedSimpleFind : ScopedFind<T> {
+        using Self = ScopedFind<T>;
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
