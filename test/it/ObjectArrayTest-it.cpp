@@ -373,6 +373,31 @@ suite ObjectArraySliceView_Suite = [] {
     "should return nullptr if index out of range"_test = [&] {
         expect(nullptr == slice.At(4));
     };
+
+    "should be able to range for"_test = [&] {
+        auto sum = 0;
+        auto n = 0;
+        for(auto&& elem : slice) {
+            ++n;
+            sum += elem.a;
+        }
+        expect(n == 4);
+        expect(sum == 2 + 3 + 4 + 5);
+    };
+
+    "should be able to range for with index"_test = [&] {
+        auto sum = 0;
+        auto n = 0;
+        auto index_sum = 0;
+        for(auto&& [elem, i] : slice.WithIndex()) {
+            ++n;
+            sum += elem.a;
+            index_sum += i;
+        }
+        expect(n == 4);
+        expect(index_sum == 1 + 2 + 3 + 4);
+        expect(sum == 2 + 3 + 4 + 5);
+    };
 };
 
 template<typename SCOPE>
