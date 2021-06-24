@@ -6,24 +6,25 @@
 #define OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H
 
 #include <object-array/holder/detail/ContinuousArrayDataHolderInterface.h>
+#include <object-array/holder/detail/ArrayHolderTrait.h>
 #include <object-array/holder/ArrayDataHolder.h>
 #include <cub/base/DeduceSizeType.h>
 
-namespace holder {
+namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM>
-    struct ObjectArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM> {
+    struct ObjectArrayHolder : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
         using ElemType = typename Parent::ElemType;
         using Trait = typename Parent::Trait;
-        using Interface = detail::ContinuousArrayDataHolderInterface<ObjectArrayDataHolder>;
+        using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
 
     private:
         template<typename>
-        friend class detail::ContinuousArrayDataHolderInterface;
+        friend class ContinuousArrayDataHolderInterface;
 
         template<typename>
-        friend class detail::ArrayDataHolderInterface;
+        friend class ArrayDataHolderInterface;
 
         using Parent::elems;
 
@@ -93,7 +94,7 @@ namespace holder {
             num -= (until - from);
         }
 
-        auto MoveFrom(ObjectArrayDataHolder&& rhs) {
+        auto MoveFrom(ObjectArrayHolder&& rhs) {
             ConstructFrom(rhs.elems);
             rhs.Clear();
         }
@@ -107,8 +108,8 @@ namespace holder {
         }
 
     public:
-        ObjectArrayDataHolder() = default;
-        ObjectArrayDataHolder(std::initializer_list<OBJ> l) : num(std::min(l.size(), MAX_NUM)) {
+        ObjectArrayHolder() = default;
+        ObjectArrayHolder(std::initializer_list<OBJ> l) : num(std::min(l.size(), MAX_NUM)) {
             SizeType i = 0;
             for(auto&& elem : l) {
                 if(i == num) break;
@@ -116,22 +117,22 @@ namespace holder {
             }
         }
 
-        ObjectArrayDataHolder(ObjectArrayDataHolder const& rhs) : num{rhs.num} {
+        ObjectArrayHolder(ObjectArrayHolder const& rhs) : num{rhs.num} {
             ConstructFrom(rhs.elems);
         }
 
-        ObjectArrayDataHolder(ObjectArrayDataHolder&& rhs) : num{rhs.num} {
+        ObjectArrayHolder(ObjectArrayHolder&& rhs) : num{rhs.num} {
             MoveFrom(std::move(rhs));
         }
 
-        auto operator=(ObjectArrayDataHolder const& rhs) -> ObjectArrayDataHolder& {
+        auto operator=(ObjectArrayHolder const& rhs) -> ObjectArrayHolder& {
             Clear();
             num = rhs.num;
             ConstructFrom(rhs.elems);
             return *this;
         }
 
-        auto operator=(ObjectArrayDataHolder&& rhs) -> ObjectArrayDataHolder& {
+        auto operator=(ObjectArrayHolder&& rhs) -> ObjectArrayHolder& {
             Clear();
             num = rhs.num;
             MoveFrom(std::move(rhs));
@@ -141,6 +142,11 @@ namespace holder {
     private:
         SizeType num{};
     };
+}
+
+namespace holder {
+    template<typename OBJ, std::size_t MAX_NUM>
+    using ObjectArrayDataHolder = typename detail::Holder<OBJ, MAX_NUM, detail::ObjectArrayHolder>;
 }
 
 #endif //OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H
