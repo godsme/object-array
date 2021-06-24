@@ -23,7 +23,8 @@ namespace mixin {
         using Self::GetObj;
 
         auto At(SizeType n) const -> ObjectType const* {
-            return n >= IndexEnd() ? nullptr : &GetObj(n + IndexBegin());
+            auto index = n + IndexBegin();
+            return index >= IndexEnd() ? nullptr : &GetObj(index);
         }
 
         auto At(SizeType n) -> ObjectType * {

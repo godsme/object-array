@@ -355,6 +355,26 @@ suite RValue_ObjectArraySlice_Suite = [] {
     };
 };
 
+suite ObjectArraySliceView_Suite = [] {
+    FooArray const array{{1}, {2}, {3}, {4}, {5}, {6}};
+    auto&& slice = array.Slice(1, -2);
+
+    "should be able to access by operator[]"_test = [&] {
+        expect(slice[0] ==  2);
+        expect(slice[1] ==  3);
+    };
+
+    "should be able to access by At"_test = [&] {
+        auto* p = slice.At(3);
+        expect(p != nullptr);
+        expect(*p == 5);
+    };
+
+    "should return nullptr if index out of range"_test = [&] {
+        expect(nullptr == slice.At(4));
+    };
+};
+
 template<typename SCOPE>
 auto ObjectArray_ScopeTest(SCOPE&& scope) {
     "should be able to access by operator[]"_test = [&] {
@@ -382,16 +402,6 @@ auto ObjectArray_ScopeTest(SCOPE&& scope) {
         expect(n == 3);
         expect(sum == 1 + 2 + 5);
     };
-}
-
-suite ObjectArraySliceScopedView_Suite = [] {
-    FooArray const array{{1},{2},{3},{4},{5},{6}};
-    ObjectArray_ScopeTest(array.Scope(0x13));
-
-    FooArray array1{{1},{2},{3},{4},{5},{6}};
-    ObjectArray_ScopeTest(array1.Scope(0x13));
-
-    auto&& scope = array.Scope(0x13);
 
     "should be able to range for with index"_test = [&] {
         auto sum = 0;
@@ -406,6 +416,16 @@ suite ObjectArraySliceScopedView_Suite = [] {
         expect(sum == 1 + 2 + 5);
         expect(index_sum == 0 + 1 + 4);
     };
+}
+
+suite ObjectArraySliceScopedView_Suite = [] {
+    FooArray const array{{1},{2},{3},{4},{5},{6}};
+    ObjectArray_ScopeTest(array.Scope(0x13));
+    ObjectArray_ScopeTest(array.Slice(0, -1).Scope(0x13));
+
+    FooArray array1{{1},{2},{3},{4},{5},{6}};
+    ObjectArray_ScopeTest(array1.Scope(0x13));
+    ObjectArray_ScopeTest(array1.Slice(0, -1).Scope(0x13));
 };
 
 
