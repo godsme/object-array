@@ -21,6 +21,8 @@
 #include <object-array/mixin/IndexedRefAccessor.h>
 #include <object-array/mixin/ByIndexAccessor.h>
 #include <object-array/mixin/RangedElemsCount.h>
+#include <object-array/mixin/ArrayElemVisit.h>
+#include <object-array/mixin/SimpleForEachExt.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
@@ -33,7 +35,9 @@ namespace detail {
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
-            mixin::ScopedFindExt>;
+            mixin::ScopedFindExt,
+            mixin::ArrayElemVisit,
+            mixin::SimpleForEachExt>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

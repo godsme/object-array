@@ -23,5 +23,4 @@ namespace _concept {
     concept Pred = WithIndexPred<PRED, ELEM, SizeType> || SimplePred<PRED, ELEM>;
 }
 
-
 #endif //OBJECT_ARRAY_PRED_H

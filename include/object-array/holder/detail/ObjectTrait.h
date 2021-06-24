@@ -18,15 +18,21 @@ namespace holder::detail {
 
         template<typename ... ARGS>
         static auto Emplace(ElemType& elem, ARGS&& ... args) -> ObjectType* {
-            if constexpr(!(sizeof...(args) == 0 && std::is_trivially_constructible_v<ObjectType>)) {
+            if constexpr(sizeof...(args) != 0) {
                 if constexpr(std::is_aggregate_v<ElemType>) {
                     elem = ObjectType{std::forward<ARGS>(args)...};
                 } else {
                     elem = ObjectType(std::forward<ARGS>(args)...);
                 }
             }
-
             return &elem;
+        }
+
+        static auto Destroy(ElemType & elem) -> void {}
+
+        template<typename ... ARGS>
+        static auto Replace(ElemType & elem, ARGS&& ... args) -> auto* {
+            return Emplace(elem, std::forward<ARGS>(args) ...);
         }
     };
 
@@ -41,6 +47,15 @@ namespace holder::detail {
         template<typename ... ARGS>
         static auto Emplace(ElemType& elem, ARGS&& ... args) -> ObjectType* {
             return elem.template Emplace(std::forward<ARGS>(args)...);
+        }
+
+        static auto Destroy(ElemType & elem) -> void {
+            elem.Destroy();
+        }
+
+        template<typename ... ARGS>
+        static auto Replace(ElemType & elem, ARGS&& ... args) -> auto* {
+            return elem.template Replace(std::forward<ARGS>(args)...);
         }
     };
 }

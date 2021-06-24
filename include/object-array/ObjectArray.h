@@ -25,6 +25,9 @@ class ObjectArray : detail::ObjectArray<T, MAX_NUM> {
     using Parent = detail::ObjectArray<T, MAX_NUM>;
     using Mixins = typename Parent::Mixins;
 public:
+    using BitMap = typename Mixins::BitMap;
+
+public:
     using Parent::Parent;
 
     using Parent::operator[];
@@ -37,6 +40,8 @@ public:
     using Parent::Any;
     using Parent::None;
     using Parent::All;
+
+    using Mixins::ForEach;
 
     using Mixins::Find;
     using Mixins::FindIndex;

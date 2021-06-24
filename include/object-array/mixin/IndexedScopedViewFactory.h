@@ -29,7 +29,7 @@ namespace mixin {
 
             using SizeType = typename DataHolder::SizeType;
             using ObjectType = typename DataHolder::ObjectType;
-            //using ElemType = typename DataHolder::ElemType;
+            using BitMap = typename ScopedRangedArrayLike::BitMap;
 
             constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
             Array(Array&&) = default;
