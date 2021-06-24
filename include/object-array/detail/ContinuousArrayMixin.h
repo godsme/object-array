@@ -24,6 +24,8 @@
 #include <object-array/mixin/ArrayElemVisit.h>
 #include <object-array/mixin/SimpleForEachExt.h>
 #include <object-array/mixin/ScopedForEachExt.h>
+#include <object-array/mixin/SimpleMutate.h>
+#include <object-array/mixin/SimpleMutateExt.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
@@ -39,7 +41,9 @@ namespace detail {
             mixin::ScopedFindExt,
             mixin::ArrayElemVisit,
             mixin::SimpleForEachExt,
-            mixin::ScopedForEachExt>;
+            mixin::ScopedForEachExt,
+            mixin::SimpleMutate,
+            mixin::SimpleMutateExt>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

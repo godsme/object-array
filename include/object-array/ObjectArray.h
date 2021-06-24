@@ -7,7 +7,7 @@
 
 #include <object-array/holder/ObjectArrayDataHolder.h>
 #include <object-array/detail/ContinuousArrayMixin.h>
-#include <object-array/detail/ArrayComposer.h>
+#include <object-array/detail/ContinousReadOnlyArray.h>
 
 namespace detail {
     using ObjectArrayMixins =
@@ -17,43 +17,34 @@ namespace detail {
                 mixin::IndexedViewFactory>;
 
     template<typename T, std::size_t MAX_NUM>
-    using ObjectArray = detail::ArrayComposer<holder::ObjectArrayDataHolder<T, MAX_NUM>, ObjectArrayMixins>;
+    using ObjectArray = detail::ContinuousReadOnlyArray<holder::ObjectArrayDataHolder<T, MAX_NUM>, ObjectArrayMixins>;
 }
 
 template<typename T, std::size_t MAX_NUM>
-class ObjectArray : detail::ObjectArray<T, MAX_NUM> {
+class ObjectArray : public detail::ObjectArray<T, MAX_NUM> {
     using Parent = detail::ObjectArray<T, MAX_NUM>;
     using Mixins = typename Parent::Mixins;
+    using DataHolder = typename Parent::DataHolder;
 public:
     using BitMap = typename Mixins::BitMap;
 
 public:
     using Parent::Parent;
 
-    using Parent::operator[];
-    using Parent::At;
-
-    using Parent::begin;
-    using Parent::end;
-
-    using Parent::GetNum;
-    using Parent::Any;
-    using Parent::None;
-    using Parent::All;
-
-    using Mixins::ForEach;
-
-    using Mixins::Find;
-    using Mixins::FindIndex;
-    using Mixins::Exists;
-
-    using Parent::Slice;
-    using Parent::From;
-    using Parent::Until;
-
-    using Parent::Scope;
-    using Parent::Exclude;
-    using Parent::WithIndex;
+    using Mixins::Append;
+    using Mixins::Replace;
+    using Mixins::Erase;
+    //using Mixins::Clear;
+    using DataHolder::Clear;
+    using DataHolder::ClearFrom;
+    //using Mixins::ClearUntil;
+    using Mixins::CleanUpBy;
+    using Mixins::ReplaceObj;
+    using Mixins::Remove;
+    using Mixins::RemoveBy;
+    using Mixins::CleanUp;
+    using Mixins::CleanUpEx;
+    using Mixins::FindOrAppend;
 };
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H

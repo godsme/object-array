@@ -12,6 +12,7 @@
 #include <type_traits>
 #include <cstring>
 #include <algorithm>
+#include <object-array/holder/detail/ObjectTrait.h>
 
 namespace holder {
     template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = OBJ>
@@ -22,6 +23,7 @@ namespace holder {
         using SizeType = SIZE_TYPE;
         constexpr static auto MAX_SIZE = MAX_NUM;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
+        using Trait = detail::ObjectTrait<ElemType>;
 
     public:
         using Interface = detail::ContinuousArrayDataHolderInterface<ArrayViewDataHolder>;

@@ -35,6 +35,8 @@ namespace view::detail {
 
         using Mixins::operator[];
         using Mixins::At;
+        using Mixins::First;
+        using Mixins::Last;
 
         using Mixins::begin;
         using Mixins::end;

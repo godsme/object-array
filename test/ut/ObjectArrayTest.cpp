@@ -483,97 +483,97 @@ namespace {
     static_assert(std::is_move_assignable_v<ThingArray>);
 }
 
-//SCENARIO("init with init list") {
-//    ThingArray array;
-//    array.Append(1);
-//
-//    Thing thing{2};
-//
-//    // copy cons is not allowed
-//    // array.Append(thing);
-//    array.Append(std::move(thing));
-//    REQUIRE(array.GetNum() == 2);
-//    REQUIRE(thing.a == 10);
-//    REQUIRE(array[1].a == 2);
-//
-//    WHEN("Access By At") {
-//        REQUIRE(array.At(0)->a == 1);
-//        REQUIRE(array.At(1)->a == 2);
-//        REQUIRE(array.At(2) == nullptr);
-//    }
-//
-//    WHEN("Erase 1st one") {
-//        array.Erase(0);
-//        REQUIRE(array.GetNum() == 1);
-//        REQUIRE(array[1].a == 15);
-//        REQUIRE(array[0].a == 2);
-//    }
-//
-//    WHEN("Erase 2nd one") {
-//        array.Erase(1);
-//        REQUIRE(array.GetNum() == 1);
-//        REQUIRE(array[1].a == 15);
-//        REQUIRE(array[0].a == 1);
-//    }
-//
-//    WHEN("Replace") {
-//        array.Replace(0, Thing{3});
-//        REQUIRE(array.GetNum() == 2);
-//        REQUIRE(array[0].a == 3);
-//    }
-//
-//    WHEN("Remove") {
-//        array.Remove(&array[0]);
-//        REQUIRE(array.GetNum() == 1);
-//        REQUIRE(array[0].a == 2);
-//    }
-//
-//    WHEN("ReplaceObj") {
-//        array.ReplaceObj(array[0], 7);
-//        REQUIRE(array.GetNum() == 2);
-//        REQUIRE(array[0].a == 7);
-//    }
-//
-//    WHEN("RemoveBy") {
-//        array.RemoveBy([](auto&& elem) {
-//            return elem.a == 1;
-//        });
-//
-//        REQUIRE(array.GetNum() == 1);
-//        REQUIRE(array[0].a == 2);
-//    }
-//
-//    WHEN("Added moe elems") {
-//        array.Append(3);
-//        array.Append(4);
-//        array.Append(5);
-//        REQUIRE(array.GetNum() == 5);
-//        REQUIRE(array.All());
-//
-//        WHEN("CleanUpBy") {
-//            array.CleanUpBy([](auto&& elem) {
-//                return elem.a <= 3;
-//            });
-//
-//            REQUIRE(array.GetNum() == 2);
-//            REQUIRE(array.Exists(Thing{4}));
-//            REQUIRE(array.Exists(Thing{5}));
-//        }
-//
-//        WHEN("Clear") {
-//            array.Clear();
-//            REQUIRE(array.GetNum() == 0);
-//            REQUIRE(array.None());
-//            REQUIRE_FALSE(array.Any());
-//        }
-//
-//        WHEN("ClearFrom") {
-//            array.ClearFrom(2);
-//            REQUIRE(array.GetNum() == 2);
-//            REQUIRE(array[0].a == 1);
-//            REQUIRE(array[1].a == 2);
-//        }
-//
+SCENARIO("init with init list") {
+    ThingArray array;
+    array.Append(1);
+
+    Thing thing{2};
+
+    // copy cons is not allowed
+    // array.Append(thing);
+    array.Append(std::move(thing));
+    REQUIRE(array.GetNum() == 2);
+    REQUIRE(thing.a == 10);
+    REQUIRE(array[1].a == 2);
+
+    WHEN("Access By At") {
+        REQUIRE(array.At(0)->a == 1);
+        REQUIRE(array.At(1)->a == 2);
+        REQUIRE(array.At(2) == nullptr);
+    }
+
+    WHEN("Erase 1st one") {
+        array.Erase(0);
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(array[1].a == 15);
+        REQUIRE(array[0].a == 2);
+    }
+
+    WHEN("Erase 2nd one") {
+        array.Erase(1);
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(array[1].a == 15);
+        REQUIRE(array[0].a == 1);
+    }
+
+    WHEN("Replace") {
+        array.Replace(0, Thing{3});
+        REQUIRE(array.GetNum() == 2);
+        REQUIRE(array[0].a == 3);
+    }
+
+    WHEN("Remove") {
+        array.Remove(&array[0]);
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(array[0].a == 2);
+    }
+
+    WHEN("ReplaceObj") {
+        array.ReplaceObj(array[0], 7);
+        REQUIRE(array.GetNum() == 2);
+        REQUIRE(array[0].a == 7);
+    }
+
+    WHEN("RemoveBy") {
+        array.RemoveBy([](auto&& elem) {
+            return elem.a == 1;
+        });
+
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(array[0].a == 2);
+    }
+
+    WHEN("Added moe elems") {
+        array.Append(3);
+        array.Append(4);
+        array.Append(5);
+        REQUIRE(array.GetNum() == 5);
+        REQUIRE(array.All());
+
+        WHEN("CleanUpBy") {
+            array.CleanUpBy([](auto&& elem) {
+                return elem.a <= 3;
+            });
+
+            REQUIRE(array.GetNum() == 2);
+            REQUIRE(array.Exists(Thing{4}));
+            REQUIRE(array.Exists(Thing{5}));
+        }
+
+        WHEN("Clear") {
+            array.Clear();
+            REQUIRE(array.GetNum() == 0);
+            REQUIRE(array.None());
+            REQUIRE_FALSE(array.Any());
+        }
+
+        WHEN("ClearFrom") {
+            array.ClearFrom(2);
+            REQUIRE(array.GetNum() == 2);
+            REQUIRE(array[0].a == 1);
+            REQUIRE(array[1].a == 2);
+        }
+
 //        WHEN("ClearUntil") {
 //            REQUIRE(array.GetNum() == 5);
 //            array.ClearUntil(2);
@@ -589,47 +589,36 @@ namespace {
 //            REQUIRE(array[0].a == 1);
 //            REQUIRE(array[1].a == 5);
 //        }
-//
-//        WHEN("CleanUp") {
-//            array.CleanUp(0x0a); // 01010
-//            REQUIRE(array.GetNum() == 3);
-//            REQUIRE(array[0].a == 1);
-//            REQUIRE(array[1].a == 5);
-//            REQUIRE(array[2].a == 3);
-//        }
-//
-//        WHEN("CleanUpEx") {
-//            array.CleanUpEx(0x0a); // 00101
-//            REQUIRE(array.GetNum() == 2);
-//            REQUIRE(array[0].a == 4);
-//            REQUIRE(array[1].a == 2);
-//        }
-//    }
-//
-//    WHEN("Compare Equality") {
-//        ThingArray array2;
-//        array2.Append(2);
-//        array2.Append(1);
-//        REQUIRE(array == array2);
-//        array2.Append(2);
-//        REQUIRE(array != array2);
-//    }
-//
-//    WHEN("Compare Equality with same num") {
-//        ThingArray array2;
-//        array2.Append(3);
-//        array2.Append(1);
-//        REQUIRE(array != array2);
-//    }
 
-//    WHEN("move an array") {
-//        std::optional<ThingArray> array2;
-//        array2.emplace();
-//        array2->Append(3);
-//        array2->Append(1);
-//
-//        auto&& ref = array2 ? std::move(*array2) : std::move(ThingArray{});
-//
-//        REQUIRE(array2->GetNum() == 0);
-//    }
-//}
+        WHEN("CleanUp") {
+            array.CleanUp(0x0a); // 01010
+            REQUIRE(array.GetNum() == 3);
+            REQUIRE(array[0].a == 1);
+            REQUIRE(array[1].a == 5);
+            REQUIRE(array[2].a == 3);
+        }
+
+        WHEN("CleanUpEx") {
+            array.CleanUpEx(0x0a); // 00101
+            REQUIRE(array.GetNum() == 2);
+            REQUIRE(array[0].a == 4);
+            REQUIRE(array[1].a == 2);
+        }
+    }
+
+    WHEN("Compare Equality") {
+        ThingArray array2;
+        array2.Append(2);
+        array2.Append(1);
+        REQUIRE(array == array2);
+        array2.Append(2);
+        REQUIRE(array != array2);
+    }
+
+    WHEN("Compare Equality with same num") {
+        ThingArray array2;
+        array2.Append(3);
+        array2.Append(1);
+        REQUIRE(array != array2);
+    }
+}

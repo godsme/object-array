@@ -24,11 +24,37 @@ namespace mixin {
         using Self::GetScope;
 
         auto At(SizeType n) const -> ObjectType const* {
-            return !(GetScope().test(n) && n < IndexEnd()) ? nullptr : &GetObj(n + IndexBegin());
+            auto index = n + IndexBegin();
+            return !(GetScope().test(index) && index < IndexEnd()) ? nullptr : &GetObj(index);
         }
 
         auto At(SizeType n) -> ObjectType * {
             return __INVOKE_CONST_METHOD(At(n));
+        }
+
+        auto First() const -> auto* {
+            auto&& scope = GetScope();
+            for(auto i = IndexBegin(); i < IndexEnd(); ++i) {
+                if(scope[i]) return &GetObj(i);
+            }
+            return nullptr;
+        }
+
+        auto First() -> auto* {
+            return __INVOKE_CONST_METHOD(Last());
+        }
+
+        auto Last() const -> ObjectType const* {
+            if(IndexEnd() == IndexBegin()) return nullptr;
+            auto&& scope = GetScope();
+            for(int i = IndexEnd()-1; i >= IndexBegin(); --i) {
+                if(scope[i]) return &GetObj(i);
+            }
+            return nullptr;
+        }
+
+        auto Last() -> auto* {
+            return __INVOKE_CONST_METHOD(Last());
         }
     };
 }

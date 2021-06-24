@@ -30,6 +30,22 @@ namespace mixin {
         auto At(SizeType n) -> ObjectType * {
             return __INVOKE_CONST_METHOD(At(n));
         }
+
+        auto First() const -> auto* {
+            return IndexBegin() == IndexEnd() ? nullptr : &GetObj(IndexBegin());
+        }
+
+        auto First() -> auto* {
+            return __INVOKE_CONST_METHOD(Last());
+        }
+
+        auto Last() const -> auto* {
+            return IndexBegin() == IndexEnd() ? nullptr : &GetObj(IndexEnd() - 1);
+        }
+
+        auto Last() -> auto* {
+            return __INVOKE_CONST_METHOD(Last());
+        }
     };
 }
 
