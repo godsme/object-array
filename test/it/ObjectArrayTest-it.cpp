@@ -809,6 +809,12 @@ suite ObjectArraySliceScopedView_Suite= [] {
     "should be able to get num of elems in scope"_test = [&] {
         expect(3 == scope.GetNum());
     };
+
+    "should be able to know if there is any elems"_test = [&] {
+        expect(scope.Any());
+        expect(!scope.None());
+        expect(scope.All());
+    };
 };
 
 

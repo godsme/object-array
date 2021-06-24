@@ -6,14 +6,11 @@
 #define OBJECT_ARRAY_SCOPEDELEMCOUNT_H
 
 #include <object-array/concept/ScopedArrayLike.h>
-#include <object-array/mixin/detail/Mixins.h>
-#include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
     template<_concept::Scoped T>
     class ScopedElemCount : public T {
         using Self = T;
-
     public:
         using SizeType = typename T::SizeType;
         using ObjectType = typename T::ObjectType;
@@ -30,10 +27,6 @@ namespace mixin {
 
         auto None() const -> bool {
             return GetScope().none();
-        }
-
-        auto All() const -> bool {
-            return GetScope().all();
         }
     };
 }
