@@ -23,8 +23,7 @@ namespace mixin {
 
     protected:
         auto AlignScope(BitMap scope) const -> BitMap {
-            auto n = Self::MAX_SIZE - IndexEnd();
-            return ((scope << n) >> ( n + IndexBegin())) << IndexBegin();
+            return scope.Align(IndexBegin(), IndexEnd());
         }
 
     public:

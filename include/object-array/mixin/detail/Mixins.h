@@ -9,6 +9,7 @@
 #include <cub/base/BitSet.h>
 #include <cub/base/detail/DeduceIntOptional.h>
 #include <object-array/ArrayOffset.h>
+#include <object-array/detail/ArrayScope.h>
 #include <type_traits>
 
 namespace mixin::detail {
@@ -29,7 +30,7 @@ namespace mixin::detail {
         using DataHolder = T;
         using SizeType = typename T::SizeType;
         constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
-        using BitMap = BitSet<MAX_SIZE>;
+        using BitMap = ::detail::ArrayScope<MAX_SIZE>;
         using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
         using OffsetType = ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
         using EndOffsetType = ArrayEndOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;

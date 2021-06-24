@@ -17,16 +17,9 @@ namespace mixin {
         using Self::IndexBegin;
         using Self::IndexEnd;
 
-    private:
-        auto GetMask() const -> BitMap {
-            BitMap scope;
-            scope.set();
-            auto n = Self::MAX_SIZE - IndexEnd();
-            return (scope << (n + IndexBegin())) >> n;
-        }
     public:
         auto All() const -> bool {
-            return GetMask() == GetScope();
+            return BitMap(IndexBegin(), IndexEnd()) == GetScope();
         }
     };
 }

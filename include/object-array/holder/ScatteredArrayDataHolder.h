@@ -28,7 +28,7 @@ namespace holder {
         using ObjectType = typename Parent::ObjectType;
         using ElemType = typename Parent::ElemType;
         using SizeType = typename Parent::SizeType;
-        using BitMap = typename Parent::BitMap;
+        using BitMap = ::detail::ArrayScope<MAX_NUM>;
         using Trait = typename Parent::Trait;
 
         using Interface = detail::ScatteredArrayDataHolderInterface<ScatteredArrayDataHolder>;

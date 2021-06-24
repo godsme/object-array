@@ -7,6 +7,7 @@
 
 #include <object-array/holder/detail/DeduceElemType.h>
 #include <object-array/holder/detail/ObjectTrait.h>
+#include <object-array/detail/ArrayScope.h>
 #include <cub/base/DeduceSizeType.h>
 #include <cub/base/BitSet.h>
 #include <cub/base/IntOpt.h>
@@ -16,7 +17,6 @@ namespace holder {
     struct ArrayDataHolder {
         using ObjectType = OBJ;
         using ElemType = holder::ElemType<OBJ>;
-        using BitMap = BitSet<MAX_NUM>;
         using SizeType = DeduceSizeType_t<MAX_NUM>;
         using Trait = detail::ObjectTrait<ElemType>;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
