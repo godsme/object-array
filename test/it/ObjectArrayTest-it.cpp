@@ -707,6 +707,16 @@ suite ObjectArrayUntilSliceView_Suite = [] {
         expect(!slice.ExistsEx(0x31, 5));
         expect(slice.ExistsEx(0x31, 3));
     };
+
+    "should be able to know the num"_test = [&] {
+        expect(slice.GetNum() == 5);
+        expect(array.Slice(10, -2).GetNum() == 0);
+    };
+
+    "should be able to know if there is any elems"_test = [&] {
+        expect(slice.Any());
+        expect(!slice.None());
+    };
 };
 
 template<typename SCOPE>

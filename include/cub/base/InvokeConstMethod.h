@@ -28,6 +28,11 @@ namespace detail {
     constexpr auto ToConstThis(T* p) -> auto {
         return std::add_pointer_t<std::add_const_t<T>>(p);
     }
+
+    template<typename T> requires (std::is_const_v<T>)
+    constexpr auto RemoveConstThis(T* p) -> auto {
+        return std::add_pointer_t<std::remove_const_t<T>>(p);
+    }
 }
 
 #define __INVOKE_CONST_METHOD(method) \

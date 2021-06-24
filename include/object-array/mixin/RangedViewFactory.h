@@ -18,9 +18,29 @@ namespace mixin {
         using OffsetType = typename T::OffsetType;
         using EndOffsetType = typename T::EndOffsetType;
         using IndexedContainer = typename T::IndexedContainer;
-
+        using DataHolder = typename T::DataHolder;
         using Self::IndexBegin;
         using Self::IndexEnd;
+
+    private:
+        struct Array : private DataHolder, IndexedContainer {
+            using DataHolder::DataHolder;
+            using IndexedContainer::GetObj;
+            using SizeType = typename DataHolder::SizeType;
+            using ObjectType = typename DataHolder::ObjectType;
+            using ElemType = typename DataHolder::ElemType;
+            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
+            Array(Array&&) = default;
+        };
+
+    protected:
+        auto MakeSlice(SizeType from, SizeType until) && -> auto {
+            return view::ValueSlice<Array>{reinterpret_cast<Array&&>(*this), from, until};
+        }
+
+        auto MakeSlice(SizeType from, SizeType until) const && -> auto {
+            return view::ValueSlice<Array const>{reinterpret_cast<Array const &&>(*this), from, until};
+        }
 
     private:
         auto MakeSlice(SizeType from, SizeType until) & -> view::Slice<IndexedContainer> {
@@ -31,16 +51,50 @@ namespace mixin {
             return {static_cast<IndexedContainer const&>(*this), from, until};
         }
 
+        template<bool CONST>
+        auto GetThis() const -> auto* {
+            if constexpr(CONST) {
+                return this;
+            } else {
+                return ::detail::RemoveConstThis(this);
+            }
+        }
+
+        template<bool CONST, bool R_VALUE>
+        auto DoMakeSlice(SizeType from, SizeType until) const -> auto {
+            if constexpr(R_VALUE) {
+                return std::move(*GetThis<CONST>()).MakeSlice(from, until);
+            } else {
+                return GetThis<CONST>()->MakeSlice(from, until);
+            }
+        }
+
+    protected:
+        template<bool CONST, bool R_VALUE>
+        auto MakeSlice(OffsetType from, EndOffsetType until) const -> auto {
+            auto from_  = from.ToIndex(IndexEnd());
+            if(from_ == IndexEnd()) {
+                return DoMakeSlice<CONST, R_VALUE>(IndexEnd(), IndexEnd());
+            }else {
+                auto until_ = until.ToIndex(IndexEnd());
+                if(until_ <= from_) {
+                    return DoMakeSlice<CONST, R_VALUE>(IndexEnd(), IndexEnd());
+                } else {
+                    return DoMakeSlice<CONST, R_VALUE>(from_, until_);
+                }
+            }
+        }
+
     public:
         auto Slice(OffsetType, EndOffsetType) && -> void {}
         auto Slice(OffsetType, EndOffsetType) const && -> void {}
 
         auto Slice(OffsetType from, EndOffsetType until) & -> auto {
-            return MakeSlice(from.ToIndex(IndexEnd()), until.ToIndex(IndexEnd()));
+            return MakeSlice<false, false>(from, until);
         }
 
         auto Slice(OffsetType from, EndOffsetType until) const & -> auto {
-            return MakeSlice(from.ToIndex(IndexEnd()), until.ToIndex(IndexEnd()));
+            return MakeSlice<true, false>(from, until);
         }
 
         auto From(OffsetType) && -> void {}

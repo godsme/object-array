@@ -33,6 +33,11 @@ public:
     using Parent::begin;
     using Parent::end;
 
+    using Parent::GetNum;
+    using Parent::Any;
+    using Parent::None;
+    using Parent::Full;
+
     using Mixins::Find;
     using Mixins::FindIndex;
     using Mixins::Exists;

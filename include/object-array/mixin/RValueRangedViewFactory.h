@@ -16,31 +16,9 @@ namespace mixin {
         using ObjectType = typename T::ObjectType;
         using OffsetType = typename T::OffsetType;
         using EndOffsetType = typename T::EndOffsetType;
-        using IndexedContainer = typename T::IndexedContainer;
-        using DataHolder = typename T::DataHolder;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
-
-    private:
-        struct Array : private DataHolder, IndexedContainer {
-            using DataHolder::DataHolder;
-            using IndexedContainer::GetObj;
-            using SizeType = typename DataHolder::SizeType;
-            using ObjectType = typename DataHolder::ObjectType;
-            using ElemType = typename DataHolder::ElemType;
-            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
-            Array(Array&&) = default;
-        };
-
-    private:
-        auto MakeSlice(SizeType from, SizeType until) && -> auto {
-            return view::ValueSlice<Array>{reinterpret_cast<Array&&>(*this), from, until};
-        }
-
-        auto MakeSlice(SizeType from, SizeType until) const && -> auto {
-            return view::ValueSlice<Array const>{reinterpret_cast<Array const &&>(*this), from, until};
-        }
 
     public:
         using Self::Slice;
@@ -48,11 +26,11 @@ namespace mixin {
         using Self::Until;
 
         auto Slice(OffsetType from, EndOffsetType until) && -> auto {
-            return std::move(*this).MakeSlice(from.ToIndex(IndexEnd()), until.ToIndex(IndexEnd()));
+            return Self::template MakeSlice<false, true>(from, until);
         }
 
         auto Slice(OffsetType from, EndOffsetType until) const && -> auto {
-            return std::move(*this).MakeSlice(from.ToIndex(IndexEnd()), until.ToIndex(IndexEnd()));
+            return Self::template MakeSlice<true, true>(from, until);
         }
 
         auto From(OffsetType from) && -> auto {

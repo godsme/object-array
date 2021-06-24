@@ -20,6 +20,7 @@
 #include <object-array/mixin/IterableArrayLike.h>
 #include <object-array/mixin/IndexedRefAccessor.h>
 #include <object-array/mixin/ByIndexAccessor.h>
+#include <object-array/mixin/RangedElemsCount.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
@@ -28,6 +29,7 @@ namespace detail {
             mixin::RangedArrayLike,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
