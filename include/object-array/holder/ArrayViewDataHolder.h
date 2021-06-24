@@ -20,7 +20,6 @@ namespace holder {
         using ElemType = ELEM;
         using ObjectType = ELEM;
         using SizeType = SIZE_TYPE;
-        using BitMap = ::detail::ArrayScope<MAX_NUM>;
         constexpr static auto MAX_SIZE = MAX_NUM;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
 

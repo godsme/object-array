@@ -17,6 +17,11 @@ namespace holder {
         using Trait = typename Parent::Trait;
         using Interface = detail::ContinuousArrayDataHolderInterface<ObjectArrayDataHolder>;
 
+    private:
+        template<typename>
+        friend class detail::ContinuousArrayDataHolderInterface;
+
+    public:
         ObjectArrayDataHolder() {}
         ObjectArrayDataHolder(std::initializer_list<OBJ> list) {
             auto n = std::min(list.size(), MAX_NUM);
@@ -32,6 +37,7 @@ namespace holder {
             }
         }
 
+    private:
         SizeType num{};
     };
 }

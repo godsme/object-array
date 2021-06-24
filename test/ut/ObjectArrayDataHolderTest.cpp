@@ -15,10 +15,8 @@ SCENARIO("Int ObjectArrayDataHolder") {
     static_assert(std::is_trivially_destructible_v<IntArray>);
 
     IntArray array;
-    REQUIRE(array.num == 0);
 
     array.elems[0] = 1;
-    array.num = 1;
 
     REQUIRE(IntArray::ElemToObject(array.elems[0]) == 1);
 }
@@ -41,10 +39,8 @@ SCENARIO("Object ObjectArrayDataHolder") {
     static_assert(std::is_trivially_destructible_v<FooArray>);
 
     FooArray array;
-    REQUIRE(array.num == 0);
 
     array.elems[0].Emplace(Foo{10});
-    array.num = 1;
 
     REQUIRE(FooArray::ElemToObject(array.elems[0]).a == Foo{10}.a);
 }

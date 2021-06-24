@@ -18,7 +18,6 @@ namespace holder {
     public:
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
         using SizeType = typename ArrayType::SizeType;
-        using BitMap = typename ArrayType::BitMap;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
         using Interface = detail::RangedViewDataHolderInterface<IndexedViewDataHolder>;
 

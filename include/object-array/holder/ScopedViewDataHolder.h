@@ -47,7 +47,7 @@ namespace holder {
     private:
         dEcL_tHiS(SUB_TYPE);
     public:
-        ScopedViewDataHolder(BitMap scope) : scope{scope} {}
+        ScopedViewDataHolder(BitMap const& scope) : scope{scope} {}
 
         auto IndexBegin() const -> SizeType { return This()->GetArray().IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->GetArray().IndexEnd(); }
@@ -55,7 +55,7 @@ namespace holder {
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetArray().GetObj(n); }
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n); }
 
-        auto GetScope() const -> BitMap { return scope; }
+        auto GetScope() const -> BitMap const& { return scope; }
 
     private:
         BitMap scope;
