@@ -20,6 +20,7 @@ namespace detail {
     template<typename T>
     struct StorageTrait<T, true, false> {
         union Type {
+            Type(Type const&) = delete;
             ~Type() {}
             T object;
         };
@@ -37,8 +38,8 @@ namespace detail {
     struct StorageTrait<T, false, false> {
         union Type {
             Type() {}
-            ~Type() {}
             Type(Type const&) = delete;
+            ~Type() {}
             T object;
         };
     };

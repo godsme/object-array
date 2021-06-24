@@ -22,7 +22,7 @@ namespace mixin {
             BitMap scope;
             scope.set();
             auto n = Self::MAX_SIZE - IndexEnd();
-            return ((scope << n) >> (n + IndexBegin())) << IndexBegin();
+            return (scope << (n + IndexBegin())) >> n;
         }
     public:
         auto All() const -> bool {
