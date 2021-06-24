@@ -15,6 +15,7 @@ namespace holder::detail {
     public:
         using SizeType = typename DATA_HOLDER::SizeType;
         using BitMap = typename DATA_HOLDER::BitMap;
+        using Trait = typename DATA_HOLDER::Trait;
 
         auto GetRange() const -> SizeType { return DATA_HOLDER::MAX_SIZE; }
         auto GetScope() const -> BitMap { return This()->GetOccupied(); }

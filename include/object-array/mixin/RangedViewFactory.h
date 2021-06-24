@@ -13,12 +13,13 @@ namespace mixin {
     struct RangedViewFactory : T {
         using Self = T;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using OffsetType = typename T::OffsetType;
-        using EndOffsetType = typename T::EndOffsetType;
-        using IndexedContainer = typename T::IndexedContainer;
-        using DataHolder = typename T::DataHolder;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::OffsetType;
+        using typename T::EndOffsetType;
+        using typename T::IndexedContainer;
+        using typename T::DataHolder;
+
         using Self::IndexBegin;
         using Self::IndexEnd;
 
@@ -26,9 +27,11 @@ namespace mixin {
         struct Array : private DataHolder, IndexedContainer {
             using DataHolder::DataHolder;
             using IndexedContainer::GetObj;
-            using SizeType = typename DataHolder::SizeType;
-            using ObjectType = typename DataHolder::ObjectType;
-            using ElemType = typename DataHolder::ElemType;
+
+            using typename DataHolder::SizeType;
+            using typename DataHolder::ObjectType;
+            using typename DataHolder::ElemType;
+
             constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
             Array(Array&&) = default;
         };

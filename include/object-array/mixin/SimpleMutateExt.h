@@ -7,12 +7,12 @@
 
 namespace mixin {
     template<typename T>
-    struct SimpleMutateExt : T {
+    class SimpleMutateExt : public T {
         using Self = T;
-
-        using ObjectType = typename T::ObjectType;
-        using SizeType = typename T::SizeType;
-        using BitMap = typename T::BitMap;
+    public:
+        using typename T::ObjectType;
+        using typename T::SizeType;
+        using typename T::BitMap;
 
     public:
         using Self::GetObj;

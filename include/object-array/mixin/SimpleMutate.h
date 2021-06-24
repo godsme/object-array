@@ -13,11 +13,9 @@ namespace mixin {
         using Self = T;
 
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using OffsetType = typename T::OffsetType;
-        using EndOffsetType = typename T::EndOffsetType;
-        using Trait = typename T::Trait;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::Trait;
 
         static constexpr auto MAX_SIZE = T::MAX_SIZE;
 

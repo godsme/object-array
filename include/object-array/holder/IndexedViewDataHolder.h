@@ -17,8 +17,10 @@ namespace holder {
         using ArrayType = std::decay_t<ARRAY>;
     public:
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
-        using SizeType = typename ArrayType::SizeType;
+        using SizeType   = typename ArrayType::SizeType;
+
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
+
         using Interface = detail::RangedViewDataHolderInterface<IndexedViewDataHolder>;
 
         auto IndexBegin() const -> SizeType { return This()->GetArray().IndexBegin(); }

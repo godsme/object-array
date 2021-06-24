@@ -13,8 +13,8 @@ namespace mixin {
         using Self = SimpleForEach<T>;
 
     public:
-        using SizeType = typename Self::SizeType;
-        using ObjectType = typename Self::ObjectType;
+        using typename Self::SizeType;
+        using typename Self::ObjectType;
 
     public:
         template<_concept::Op<ObjectType, SizeType> OP>

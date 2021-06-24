@@ -35,8 +35,8 @@ namespace view::detail {
     template<typename HOLDER>
     class Slice : ::detail::ArrayComposer<HOLDER, SliceMixins> {
         using Parent = ::detail::ArrayComposer<HOLDER, SliceMixins>;
-        using Holder = typename Parent::Holder;
-        using Mixins = typename Parent::Mixins;
+        using typename Parent::Holder;
+        using typename Parent::Mixins;
 
     public:
         using Parent::Parent;

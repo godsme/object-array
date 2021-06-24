@@ -19,7 +19,7 @@ namespace view::detail {
         template<typename HOLDER>
         class View : ::detail::ArrayComposer<HOLDER, Mixins> {
             using Parent = ::detail::ArrayComposer<HOLDER, Mixins>;
-            using Mixins = typename Parent::Mixins;
+            using typename Parent::Mixins;
         public:
             using Parent::Parent;
 

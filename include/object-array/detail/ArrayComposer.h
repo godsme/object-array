@@ -15,8 +15,8 @@ namespace detail {
         using Mixins = typename MIXINS::template Type<HOLDER>;
         using Holder::Holder;
 
-        using SizeType = typename Holder::SizeType;
-        using ObjectType = typename Holder::ObjectType;
+        using typename Holder::SizeType;
+        using typename Holder::ObjectType;
     };
 }
 

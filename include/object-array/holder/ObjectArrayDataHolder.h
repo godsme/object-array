@@ -39,59 +39,16 @@ namespace holder::detail {
             }
         }
 
-        auto ClearContent(SizeType from, SizeType until) -> void {
-            if constexpr (!std::is_trivially_destructible_v<ElemType>) {
-                for(int i=from; i<until; i++) Trait::Destroy(elems[i]);
-            }
-        }
-
-        auto CleanOrdered(SizeType from, SizeType until) {
-            auto total = num - until;
-            if constexpr (std::is_trivially_copyable_v<ElemType>) {
-                ::memmove(elems + from, elems + until, sizeof(ElemType) * total);
-            } else {
-                for(auto i=0; i<total; i++) {
-                    Trait::Emplace(elems[from+i], std::move(Trait::ToObject(elems[until + i])));
-                }
-            }
-        }
-
-        auto Clean(SizeType from, SizeType until) {
-            auto total = std::min(until - from, num - until);
-            if constexpr (std::is_trivially_copyable_v<ElemType>) {
-                ::memmove(elems + from, elems + num - total, sizeof(ElemType) * total);
-            } else {
-                auto moveFrom = num - total;
-                for(auto i=0; i<total; i++) {
-                    Trait::Emplace(elems[from+i], std::move(Trait::ToObject(elems[moveFrom + i])));
-                }
-            }
-        }
-
     public:
         auto ClearContent() -> void {
-            ClearContent(0, num);
-        }
-
-        auto ClearFrom(SizeType from = 0) -> void {
-            ClearContent(from, num);
-            num = std::min(from, num);
+            if constexpr (!std::is_trivially_destructible_v<ElemType>) {
+                for(int i=0; i<num; i++) Trait::Destroy(elems[i]);
+            }
         }
 
         auto Clear() -> void {
-            ClearFrom(0);
-        }
-
-        template<bool ORDERED>
-        auto ClearRange(SizeType from, SizeType until) -> void {
-            if(from >= until || until >= num) return;
-            ClearContent(from, until);
-            if constexpr(ORDERED) {
-                CleanOrdered(from, until);
-            } else {
-                Clean(from, until);
-            }
-            num -= (until - from);
+            ClearContent();
+            num = 0;
         }
 
         auto MoveFrom(ObjectArrayHolder&& rhs) {

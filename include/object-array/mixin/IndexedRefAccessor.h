@@ -12,8 +12,8 @@ namespace mixin {
     struct IndexedRefAccessor : T {
         using Self = T;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
+        using typename T::SizeType;
+        using typename T::ObjectType;
 
         auto operator[](SizeType n) const -> ObjectType const& {
             return Self::GetObj(n + Self::IndexBegin());

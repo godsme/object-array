@@ -13,8 +13,8 @@ namespace mixin {
     class RangedArray : public IndexedContainer<T> {
         using Self = IndexedContainer<T>;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
+        using typename T::SizeType;
+        using typename T::ObjectType;
         using RangedArrayLike = RangedArray;
 
         auto IndexBegin() const -> SizeType { return 0; }

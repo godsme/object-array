@@ -13,10 +13,10 @@ namespace mixin {
     struct ScopedViewFactory : T {
         using Self = T;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using BitMap = typename T::BitMap;
-        using RangedArrayLike = typename T::RangedArrayLike;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::BitMap;
+        using typename T::RangedArrayLike;
 
         using Self::IndexBegin;
         using Self::IndexEnd;

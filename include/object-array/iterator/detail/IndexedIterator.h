@@ -23,9 +23,7 @@ namespace iterator::detail {
         auto operator*() const -> Result { return {*p, i}; }
 
     protected:
-        auto Forward() -> void {
-            ++p, ++i;
-        }
+        auto StepForward() -> void { ++p, ++i; }
 
     protected:
         T* p;

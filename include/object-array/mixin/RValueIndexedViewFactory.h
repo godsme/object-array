@@ -14,10 +14,10 @@ namespace mixin {
     class RValueIndexedViewFactory : public IndexedViewFactory<T> {
         using Self = IndexedViewFactory<T>;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using RangedArrayLike = typename T::RangedArrayLike;
-        using DataHolder = typename T::DataHolder;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::RangedArrayLike;
+        using typename T::DataHolder;
 
     private:
         struct Array : private DataHolder, RangedArrayLike {
@@ -26,13 +26,13 @@ namespace mixin {
             using RangedArrayLike::IndexBegin;
             using RangedArrayLike::IndexEnd;
 
-            using SizeType = typename DataHolder::SizeType;
-            using ObjectType = typename DataHolder::ObjectType;
-            using ElemType = typename DataHolder::ElemType;
-            using BitMap = typename RangedArrayLike::BitMap;
-            //using Maybe = typename DataHolder::Maybe;
+            using typename DataHolder::SizeType;
+            using typename DataHolder::ObjectType;
+            using typename DataHolder::ElemType;
+            using typename RangedArrayLike::BitMap;
 
             constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
+
             Array(Array&&) = default;
         };
 

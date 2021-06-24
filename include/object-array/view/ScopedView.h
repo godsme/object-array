@@ -29,7 +29,7 @@ namespace view::detail {
     template<typename HOLDER>
     class ScopedView : ::detail::ArrayComposer<HOLDER, ScopedMixins> {
         using Parent = ::detail::ArrayComposer<HOLDER, ScopedMixins>;
-        using Mixins = typename Parent::Mixins;
+        using typename Parent::Mixins;
     public:
         using Parent::Parent;
 

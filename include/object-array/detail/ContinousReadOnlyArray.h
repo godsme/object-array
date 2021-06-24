@@ -11,7 +11,7 @@ namespace detail {
         using Parent = detail::ArrayComposer<DATA_HOLDER, MIXINS>;
 
     protected:
-        using Mixins = typename Parent::Mixins;
+        using typename Parent::Mixins;
 
     public:
         using Parent::Parent;

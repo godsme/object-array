@@ -12,9 +12,9 @@ namespace mixin {
     struct ContinuousArrayLike : T {
         using Self = T;
     public:
-        using SizeType = typename T::SizeType;
-        using ElemType = typename T::ElemType;
-        using ObjectType = typename T::ObjectType;
+        using typename T::SizeType;
+        using typename T::ElemType;
+        using typename T::ObjectType;
 
         using Self::Elems;
         using Self::ElemToObject;

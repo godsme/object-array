@@ -14,8 +14,8 @@ namespace mixin {
     class SimpleFindExt : public T {
         using Self = T;
     public:
-        using ObjectType = typename T::ObjectType;
-        using SizeType = typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::SizeType;
 
         using Self::Find;
         using Self::FindIndex;

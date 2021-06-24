@@ -14,7 +14,7 @@ namespace iterator {
         using Parent = detail::IndexedIterator<T, SIZE_TYPE>;
         using Parent::Parent;
         auto operator++() -> IndexedIterator& {
-            Parent::Forward();
+            Parent::StepForward();
             return *this;
         }
     };

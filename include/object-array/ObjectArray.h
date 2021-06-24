@@ -37,7 +37,6 @@ public:
     using Mixins::Append;
     using Mixins::Replace;
     using Mixins::Erase;
-    using DataHolder::Clear;
     using Mixins::CleanUpBy;
     using Mixins::ReplaceObj;
     using Mixins::Remove;
@@ -45,17 +44,15 @@ public:
     using Mixins::CleanUp;
     using Mixins::CleanUpEx;
     using Mixins::FindOrAppend;
+    using Mixins::ClearFrom;
+    using DataHolder::Clear;
 
-    auto ClearFrom(OffsetType from) {
-        DataHolder::ClearFrom(from.ToIndex(Parent::GetNum()));
+    auto Clear(OffsetType from, EndOffsetType until) -> void {
+        Mixins::template Clear<ORDERED>(from, until);
     }
 
-    auto Clear(OffsetType from, EndOffsetType until) {
-        DataHolder::template ClearRange<ORDERED>(from.ToIndex(Parent::GetNum()), until.ToIndex(Parent::GetNum()));
-    }
-
-    auto ClearUntil(EndOffsetType until) {
-        DataHolder::template ClearRange<ORDERED>(0, until.ToIndex(Parent::GetNum()));
+    auto ClearUntil(EndOffsetType until) -> void {
+        Mixins::template ClearUntil<ORDERED>(until);
     }
 };
 

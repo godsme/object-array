@@ -37,8 +37,8 @@ namespace detail {
 template<typename T, std::size_t MAX_NUM>
 class ScatteredArray : detail::ScatteredArrayBase<T, MAX_NUM> {
     using Parent = detail::ScatteredArrayBase<T, MAX_NUM>;
-    using Holder = typename Parent::Holder;
-    using Mixins = typename Parent::Mixins;
+    using typename Parent::Holder;
+    using typename Parent::Mixins;
 
 public:
     using Parent::Parent;

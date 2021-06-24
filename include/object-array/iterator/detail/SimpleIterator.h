@@ -17,7 +17,7 @@ namespace iterator::detail {
         auto operator*() -> T& { return *p; }
 
     protected:
-        auto Forward() -> void { ++p; }
+        auto StepForward() -> void { ++p; }
 
     private:
         template<typename, typename>

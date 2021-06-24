@@ -23,7 +23,7 @@ namespace detail {
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T,
         typename Parent = detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>>
 class ArrayView : Parent {
-    using Holder = typename Parent::Holder;
+    using typename Parent::Holder;
 public:
     using Parent::Parent;
 

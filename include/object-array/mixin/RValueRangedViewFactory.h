@@ -12,10 +12,10 @@ namespace mixin {
     struct RValueRangedViewFactory : RangedViewFactory<T> {
         using Self = RangedViewFactory<T>;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using OffsetType = typename T::OffsetType;
-        using EndOffsetType = typename T::EndOffsetType;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::OffsetType;
+        using typename T::EndOffsetType;
 
         using Self::IndexBegin;
         using Self::IndexEnd;

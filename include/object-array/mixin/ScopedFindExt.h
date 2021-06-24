@@ -15,10 +15,10 @@ namespace mixin {
     class ScopedFindExt : public ScopedFind<T> {
         using Self = ScopedFind<T>;
     public:
-        using ObjectType = typename T::ObjectType;
-        using SizeType = typename T::SizeType;
-        using BitMap = typename T::BitMap;
-        using Maybe = typename T::Maybe;
+        using typename T::ObjectType;
+        using typename T::SizeType;
+        using typename T::BitMap;
+        using typename T::Maybe;
 
         using Self::Find;
         using Self::FindIndex;

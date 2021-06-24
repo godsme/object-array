@@ -12,7 +12,8 @@ namespace mixin {
     class RangedScopedElemCount : public ScopedElemCount<T> {
         using Self = T;
     public:
-        using BitMap = typename T::BitMap;
+        using typename T::BitMap;
+
         using Self::GetScope;
         using Self::IndexBegin;
         using Self::IndexEnd;

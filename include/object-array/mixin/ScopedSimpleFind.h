@@ -16,9 +16,9 @@ namespace mixin {
     struct ScopedSimpleFind : ScopedFind<T> {
         using Self = ScopedFind<T>;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using Maybe = typename T::Maybe;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::Maybe;
 
     private:
         using Self::GetScope;

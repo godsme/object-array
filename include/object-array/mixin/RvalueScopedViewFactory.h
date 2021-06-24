@@ -12,11 +12,11 @@ namespace mixin {
     struct RValueScopedViewFactory : ScopedViewFactory<T> {
         using Self = ScopedViewFactory<T>;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using BitMap = typename T::BitMap;
-        using RangedArrayLike = typename T::RangedArrayLike;
-        using DataHolder = typename T::DataHolder;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::BitMap;
+        using typename T::RangedArrayLike;
+        using typename T::DataHolder;
 
     private:
         struct Array : private DataHolder, RangedArrayLike {
@@ -25,10 +25,10 @@ namespace mixin {
             using RangedArrayLike::IndexBegin;
             using RangedArrayLike::IndexEnd;
 
-            using BitMap = BitMap;
-            using SizeType = typename DataHolder::SizeType;
-            using ObjectType = typename DataHolder::ObjectType;
-            using ElemType = typename DataHolder::ElemType;
+            using typename RangedArrayLike::BitMap;
+            using typename DataHolder::SizeType;
+            using typename DataHolder::ObjectType;
+            using typename DataHolder::ElemType;
 
             constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
             Array(Array&&) = default;

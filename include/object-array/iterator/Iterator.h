@@ -14,7 +14,7 @@ namespace iterator {
         using Parent::Parent;
 
         auto operator++() -> Iterator& {
-            Parent::Forward();
+            Parent::StepForward();
             return *this;
         }
     };

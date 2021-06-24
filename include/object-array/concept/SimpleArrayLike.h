@@ -10,6 +10,7 @@
 namespace _concept {
     template<typename T>
     concept SimpleConstArrayLike = requires(T const& o) {
+        typename T::Trait;
         { o.Elems() } -> std::same_as<typename T::ElemType const*>;
         { T::ElemToObject(std::declval<typename T::ElemType const&>()) } -> std::same_as<typename T::ObjectType const&>;
     };

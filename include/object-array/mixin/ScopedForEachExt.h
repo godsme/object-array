@@ -14,9 +14,9 @@ namespace mixin {
         using Self = ScopedForEach<T>;
 
     public:
-        using BitMap = typename Self::BitMap;
-        using ObjectType = typename Self::ObjectType;
-        using SizeType = typename Self::SizeType;
+        using typename Self::BitMap;
+        using typename Self::ObjectType;
+        using typename Self::SizeType;
 
     public:
         using Self::ForEach;

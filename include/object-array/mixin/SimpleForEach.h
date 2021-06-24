@@ -16,8 +16,8 @@ namespace mixin {
         using Self = T;
 
     public:
-        using SizeType = typename Self::SizeType;
-        using ObjectType = typename Self::ObjectType;
+        using typename Self::SizeType;
+        using typename Self::ObjectType;
 
     public:
         using Self::Visit;

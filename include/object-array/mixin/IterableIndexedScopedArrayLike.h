@@ -14,9 +14,9 @@ namespace mixin {
     struct IterableIndexedScopedArrayLike : T {
         using Self = T;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using BitMap = typename T::BitMap;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::BitMap;
 
         using Self::GetScope;
         using Self::IndexBegin;

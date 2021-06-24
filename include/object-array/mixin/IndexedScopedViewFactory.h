@@ -13,10 +13,11 @@ namespace mixin {
     class IndexedScopedViewFactory : public T {
         using Self = T;
     public:
-        using SizeType = typename T::SizeType;
-        using ObjectType = typename T::ObjectType;
-        using ScopedRangedArrayLike = typename T::ScopedRangedArrayLike;
-        using DataHolder = typename T::DataHolder;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::ScopedRangedArrayLike;
+        using typename T::DataHolder;
+
         using Self::GetScope;
 
     private:
@@ -27,11 +28,12 @@ namespace mixin {
             using ScopedRangedArrayLike::GetScope;
             using ScopedRangedArrayLike::GetObj;
 
-            using SizeType = typename DataHolder::SizeType;
-            using ObjectType = typename DataHolder::ObjectType;
-            using BitMap = typename ScopedRangedArrayLike::BitMap;
+            using typename DataHolder::SizeType;
+            using typename DataHolder::ObjectType;
+            using typename ScopedRangedArrayLike::BitMap;
 
             constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
+
             Array(Array&&) = default;
         };
 
