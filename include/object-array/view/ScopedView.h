@@ -39,6 +39,7 @@ namespace view::detail {
 
         using Mixins::Find;
         using Mixins::FindIndex;
+        using Mixins::Exists;
 
         using Mixins::WithIndex;
     };

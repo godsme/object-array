@@ -25,6 +25,7 @@ namespace view::detail {
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
+            mixin::ScopedFindExt,
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory>;
 
@@ -45,6 +46,12 @@ namespace view::detail {
 
         using Mixins::Find;
         using Mixins::FindIndex;
+        using Mixins::Exists;
+
+        using Mixins::FindEx;
+        using Mixins::FindIndexEx;
+        using Mixins::ExistsEx;
+
         using Mixins::Scope;
         using Mixins::Exclude;
         using Mixins::WithIndex;

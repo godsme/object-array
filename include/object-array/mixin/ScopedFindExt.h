@@ -66,7 +66,7 @@ namespace mixin {
 
         template<_concept::Pred<ObjectType, SizeType> PRED>
         auto FindIndexEx(BitMap excluded, PRED &&pred) const -> Maybe {
-            return Find(~excluded, std::forward<PRED>(pred));
+            return FindIndex(~excluded, std::forward<PRED>(pred));
         }
 
         auto FindIndex(BitMap scope, ObjectType const& obj) const -> Maybe {
