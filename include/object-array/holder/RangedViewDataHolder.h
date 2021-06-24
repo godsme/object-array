@@ -8,7 +8,7 @@
 #include <object-array/concept/IndexedContainer.h>
 #include <object-array/holder/detail/DeduceElemType.h>
 #include <object-array/holder/detail/ObjectTrait.h>
-#include <object-array/holder/detail/RangedViewDataHolderConcept.h>
+#include <object-array/holder/detail/RangedViewDataHolderInterface.h>
 #include <object-array/holder/detail/ArrayLikeViewDataHolder.h>
 #include <cub/base/BitSet.h>
 
@@ -23,7 +23,7 @@ namespace holder {
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
 
-        using Concept = detail::RangedViewDataHolderConcept<RangedViewDataHolder>;
+        using Interface = detail::RangedViewDataHolderInterface<RangedViewDataHolder>;
 
     private:
         dEcL_tHiS(SUB_TYPE);

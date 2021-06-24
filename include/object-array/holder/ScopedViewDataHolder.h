@@ -11,15 +11,14 @@
 
 namespace holder::detail {
     template<typename T>
-    class ScopedViewDataHolderConcept {
+    class ScopedViewDataHolderInterface {
         dEcL_tHiS(T);
     public:
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
         using BitMap = typename T::BitMap;
-        using Maybe = typename T::Maybe;
 
-        using ScopedRangedArrayLike = ScopedViewDataHolderConcept;
+        using ScopedRangedArrayLike = ScopedViewDataHolderInterface;
 
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetObj(n); }
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
@@ -41,9 +40,8 @@ namespace holder {
         using BitMap = typename ArrayType::BitMap;
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
-        using Maybe = typename ArrayType::Maybe;
 
-        using Concept = detail::ScopedViewDataHolderConcept<ScopedViewDataHolder>;
+        using Interface = detail::ScopedViewDataHolderInterface<ScopedViewDataHolder>;
 
     private:
         dEcL_tHiS(SUB_TYPE);

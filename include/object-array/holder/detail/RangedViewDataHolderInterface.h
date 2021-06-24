@@ -2,14 +2,14 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_RANGEDVIEWDATAHOLDERCONCEPT_H
-#define OBJECT_ARRAY_RANGEDVIEWDATAHOLDERCONCEPT_H
+#ifndef OBJECT_ARRAY_RANGEDVIEWDATAHOLDERINTERFACE_H
+#define OBJECT_ARRAY_RANGEDVIEWDATAHOLDERINTERFACE_H
 
 #include <object-array/detail/CrtpHelper.h>
 
 namespace holder::detail {
     template<typename T>
-    class RangedViewDataHolderConcept {
+    class RangedViewDataHolderInterface {
         dEcL_tHiS(T);
     public:
         using ObjectType = typename T::ObjectType;
@@ -22,4 +22,4 @@ namespace holder::detail {
     };
 }
 
-#endif //OBJECT_ARRAY_RANGEDVIEWDATAHOLDERCONCEPT_H
+#endif //OBJECT_ARRAY_RANGEDVIEWDATAHOLDERINTERFACE_H

@@ -8,7 +8,6 @@
 #include <cub/base/Placement.h>
 #include <type_traits>
 
-
 namespace holder::detail {
     template<typename OBJ>
     auto DeduceElemType() -> auto {

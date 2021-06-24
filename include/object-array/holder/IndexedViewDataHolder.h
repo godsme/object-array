@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H
 
 #include <object-array/concept/RangedArrayLike.h>
-#include <object-array/holder/detail/RangedViewDataHolderConcept.h>
+#include <object-array/holder/detail/RangedViewDataHolderInterface.h>
 #include <object-array/holder/detail/ArrayLikeViewDataHolder.h>
 
 namespace holder {
@@ -21,7 +21,7 @@ namespace holder {
         using BitMap = typename ArrayType::BitMap;
         using Maybe = typename ArrayType::Maybe;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
-        using Concept = detail::RangedViewDataHolderConcept<IndexedViewDataHolder>;
+        using Interface = detail::RangedViewDataHolderInterface<IndexedViewDataHolder>;
 
         auto IndexBegin() const -> SizeType { return This()->GetArray().IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->GetArray().IndexEnd(); }

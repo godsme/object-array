@@ -14,8 +14,8 @@
 namespace mixin {
     namespace detail {
         template<typename T, bool = std::is_empty_v<T>>
-        struct Extends : T::Concept {
-            // T must be data holder
+        struct Extends : T::Interface {
+            // T must be the data holder
             using DataHolder = T;
             using SizeType = typename T::SizeType;
             constexpr static SizeType MAX_SIZE = T::MAX_SIZE;

@@ -35,9 +35,8 @@ namespace holder {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
         using BitMap = typename Parent::BitMap;
-        //using Maybe = typename Parent::Maybe;
         using ElemType = typename Parent::ElemType;
-        using Concept = detail::ScatteredArrayDataHolderConcept<ScatteredArrayDataHolder>;
+        using Interface = detail::ScatteredArrayDataHolderConcept<ScatteredArrayDataHolder>;
 
     public:
         ScatteredArrayDataHolder() {}

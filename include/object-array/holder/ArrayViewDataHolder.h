@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_ARRAYVIEWDATAHOLDER_H
 
 #include <object-array/holder/detail/ViewElemTrait.h>
-#include <object-array/holder/detail/ArrayDataHolderConcept.h>
+#include <object-array/holder/detail/ArrayDataHolderInterface.h>
 #include <cub/base/BitSet.h>
 #include <cub/base/IntOpt.h>
 #include <type_traits>
@@ -25,7 +25,7 @@ namespace holder {
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
 
     public:
-        using Concept = detail::ArrayDataHolderConcept<ArrayViewDataHolder>;
+        using Interface = detail::ArrayDataHolderInterface<ArrayViewDataHolder>;
 
         ArrayViewDataHolder(OBJ* array, SIZE_TYPE& n)
                 : elems(&ViewTrait::ObjToElem(*array))

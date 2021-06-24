@@ -11,7 +11,7 @@
 
 namespace ut {
     template<typename T>
-    struct FooConcept {
+    struct FooInterface {
     protected:
         auto This() const -> T const* {
             return reinterpret_cast<T const*>(this);
@@ -33,8 +33,8 @@ namespace ut {
     };
 
     template<typename T>
-    struct ScopedFooConcept : FooConcept<T> {
-        using FooConcept<T>::This;
+    struct ScopedFooInterface : FooInterface<T> {
+        using FooInterface<T>::This;
         using BitMap = typename T::BitMap;
 
         auto GetScope() const -> BitMap {
@@ -53,7 +53,7 @@ namespace ut {
 
         constexpr static SizeType MAX_SIZE = 10;
 
-        using Concept = FooConcept<Foo>;
+        using Interface = FooInterface<Foo>;
 
         Foo(std::initializer_list<int> list) {
             auto n = std::min(list.size(), MAX_SIZE);
@@ -80,7 +80,7 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-        using Concept = ScopedFooConcept<ScopedFoo>;
+        using Interface = ScopedFooInterface<ScopedFoo>;
 
     public:
         ScopedFoo(std::initializer_list<int> list) {

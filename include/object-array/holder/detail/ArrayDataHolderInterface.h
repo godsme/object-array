@@ -2,14 +2,14 @@
 // Created by Darwin Yuan on 2021/6/22.
 //
 
-#ifndef OBJECT_ARRAY_ARRAYDATAHOLDERCONCEPT_H
-#define OBJECT_ARRAY_ARRAYDATAHOLDERCONCEPT_H
+#ifndef OBJECT_ARRAY_ARRAYDATAHOLDERINTERFACE_H
+#define OBJECT_ARRAY_ARRAYDATAHOLDERINTERFACE_H
 
 #include <object-array/detail/CrtpHelper.h>
 
 namespace holder::detail {
     template<typename DATA_HOLDER>
-    class ArrayDataHolderConcept {
+    class ArrayDataHolderInterface {
         dEcL_tHiS(DATA_HOLDER);
     public:
         using SizeType = typename DATA_HOLDER::SizeType;
@@ -32,4 +32,4 @@ namespace holder::detail {
     };
 }
 
-#endif //OBJECT_ARRAY_ARRAYDATAHOLDERCONCEPT_H
+#endif //OBJECT_ARRAY_ARRAYDATAHOLDERINTERFACE_H

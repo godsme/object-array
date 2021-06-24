@@ -7,7 +7,7 @@
 
 #include <cub/base/DeduceSizeType.h>
 #include <object-array/holder/ArrayDataHolder.h>
-#include <object-array/holder/detail/ArrayDataHolderConcept.h>
+#include <object-array/holder/detail/ArrayDataHolderInterface.h>
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
@@ -15,7 +15,7 @@ namespace holder {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
         using Trait = typename Parent::Trait;
-        using Concept = detail::ArrayDataHolderConcept<ObjectArrayDataHolder>;
+        using Interface = detail::ArrayDataHolderInterface<ObjectArrayDataHolder>;
 
         ObjectArrayDataHolder() {}
         ObjectArrayDataHolder(std::initializer_list<OBJ> list) {
