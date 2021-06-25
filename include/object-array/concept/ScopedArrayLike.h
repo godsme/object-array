@@ -7,6 +7,7 @@
 
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/ArrayLike.h>
+#include <object-array/concept/ElemVisitor.h>
 
 namespace _concept {
     template<typename T>
@@ -25,6 +26,9 @@ namespace _concept {
 
     template<typename T>
     concept SimpleScopedRangedArrayLike = Scoped<T> && SimpleRangedArrayLike<T>;
+
+    template<typename T>
+    concept ScopedOpVisitable = Scoped<T> && OpVisitable<T>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDARRAYLIKE_H

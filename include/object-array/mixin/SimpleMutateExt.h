@@ -5,10 +5,12 @@
 #ifndef OBJECT_ARRAY_SIMPLEMUTATEEXT_H
 #define OBJECT_ARRAY_SIMPLEMUTATEEXT_H
 
+#include <object-array/concept/SimpleMutable.h>
+
 namespace mixin {
-    template<_concept::ContinuousArrayLikeDataHolder T>
-    class SimpleMutateExt : public SimpleMutate<T> {
-        using Self = SimpleMutate<T>;
+    template<_concept::SimpleMutable T>
+    class SimpleMutateExt : public T {
+        using Self = T;
     public:
         using typename Self::ObjectType;
         using typename Self::SizeType;

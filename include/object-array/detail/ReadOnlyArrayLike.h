@@ -8,12 +8,16 @@
 #include <object-array/detail/ArrayComposer.h>
 
 namespace detail {
-    template<typename DATA_HOLDER, typename MIXINS>
+    template<typename DATA_HOLDER, typename MIXINS, bool ORDERED=false>
     class ReadOnlyArrayLike : public detail::ArrayComposer<DATA_HOLDER, MIXINS> {
         using Parent = detail::ArrayComposer<DATA_HOLDER, MIXINS>;
 
     protected:
         using typename Parent::Mixins;
+        using typename Parent::Holder;
+
+    public:
+        using typename Mixins::BitMap;
 
     public:
         using Parent::Parent;
@@ -32,6 +36,7 @@ namespace detail {
         using Mixins::All;
         using Mixins::GetOccupied;
         using Mixins::GetAvailable;
+        using Mixins::IsPresent;
 
         using Mixins::ForEach;
 
@@ -45,6 +50,24 @@ namespace detail {
         using Mixins::MaxElemIndex;
 
         using Mixins::WithIndex;
+
+    public:
+        auto operator==(ReadOnlyArrayLike const &rhs) const -> bool {
+            if (GetNum() != rhs.GetNum()) return false;
+
+            for (auto i = 0; i < GetNum(); i++) {
+                if constexpr(ORDERED) {
+                    if ((*this)[i] != rhs[i]) return false;
+                } else {
+                    if (!rhs.Exists((*this)[i])) return false;
+                }
+            }
+            return true;
+        }
+
+        auto operator!=(ReadOnlyArrayLike const &rhs) const -> bool {
+            return !operator==(rhs);
+        }
     };
 }
 

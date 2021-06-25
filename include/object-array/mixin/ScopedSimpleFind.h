@@ -20,7 +20,7 @@ namespace mixin {
         using typename T::ObjectType;
         using typename T::Maybe;
 
-    private:
+    public:
         using Self::GetScope;
 
     public:

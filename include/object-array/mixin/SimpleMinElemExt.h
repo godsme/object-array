@@ -11,9 +11,10 @@
 
 namespace mixin {
     template<typename T>
-    struct SimpleMinElemExt : SimpleMinElem<T> {
-        using Self = SimpleMinElem<T>;
+    class SimpleMinElemExt : public T {
+        using Self = T;
 
+    public:
         using typename Self::ObjectType;
 
     public:

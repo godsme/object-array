@@ -13,7 +13,7 @@
 
 namespace mixin {
     template<_concept::ConstRangedArrayLike T>
-    struct ScopedFind : T {
+    class ScopedFind : public T {
         using Self = T;
     public:
         using typename T::SizeType;

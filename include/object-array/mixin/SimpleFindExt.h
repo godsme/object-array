@@ -16,28 +16,34 @@ namespace mixin {
     public:
         using typename T::ObjectType;
         using typename T::SizeType;
+        using typename T::Maybe;
 
         using Self::Find;
         using Self::FindIndex;
 
         template<_concept::Pred<ObjectType, SizeType> PRED>
-        auto Find(PRED &&pred) const -> ObjectType const* {
-            return Self::template Find(std::forward<PRED>(pred));
+        auto Find(PRED &&pred) -> ObjectType* {
+            return __INVOKE_CONST_METHOD(Find(std::forward<PRED>(pred)));
         }
 
-        auto Find(ObjectType const& obj) const -> auto* {
+        template<_concept::Pred<ObjectType, SizeType> PRED>
+        auto FindIndex(PRED &&pred) -> Maybe {
+            return __INVOKE_CONST_METHOD(FindIndex(std::forward<PRED>(pred)));
+        }
+
+        auto Find(ObjectType const& obj) const -> ObjectType const* {
             return Self::template Find([&](auto&& elem) { return elem == obj;});
         }
 
-        auto Find(ObjectType const& obj) -> auto* {
+        auto Find(ObjectType const& obj) -> ObjectType* {
             return __INVOKE_CONST_METHOD(Find(obj));
         }
 
-        auto FindIndex(ObjectType const& obj) const -> auto {
+        auto FindIndex(ObjectType const& obj) const -> Maybe {
             return Self::template FindIndex([&](auto&& elem) { return elem == obj;});
         }
 
-        auto FindIndex(ObjectType const& obj) -> auto {
+        auto FindIndex(ObjectType const& obj) -> Maybe {
             return __INVOKE_CONST_METHOD(FindIndex(obj));
         }
 

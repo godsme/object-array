@@ -9,7 +9,7 @@
 
 namespace detail {
     template<typename DATA_HOLDER, typename MIXINS, bool ORDERED=false>
-    class ContinuousReadOnlyArray : public detail::ReadOnlyArrayLike<DATA_HOLDER, MIXINS> {
+    class ContinuousReadOnlyArray : public detail::ReadOnlyArrayLike<DATA_HOLDER, MIXINS, ORDERED> {
         using Parent = detail::ReadOnlyArrayLike<DATA_HOLDER, MIXINS>;
 
     protected:
@@ -25,24 +25,6 @@ namespace detail {
 
         using Mixins::Scope;
         using Mixins::Exclude;
-
-    public:
-        auto operator==(ContinuousReadOnlyArray const &rhs) const -> bool {
-            if (GetNum() != rhs.GetNum()) return false;
-
-            for (auto i = 0; i < GetNum(); i++) {
-                if constexpr(ORDERED) {
-                    if ((*this)[i] != rhs[i]) return false;
-                } else {
-                    if (!rhs.Exists((*this)[i])) return false;
-                }
-            }
-            return true;
-        }
-
-        auto operator!=(ContinuousReadOnlyArray const &rhs) const -> bool {
-            return !operator==(rhs);
-        }
     };
 }
 

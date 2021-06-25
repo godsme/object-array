@@ -17,9 +17,24 @@ namespace holder::detail {
         using SizeType = typename DATA_HOLDER::SizeType;
         using BitMap = typename DATA_HOLDER::BitMap;
         using Trait = typename DATA_HOLDER::Trait;
+        using ObjectType = typename DATA_HOLDER::ObjectType;
 
         auto GetRange() const -> SizeType { return DATA_HOLDER::MAX_SIZE; }
         auto GetScope() const -> BitMap { return This()->GetOccupied(); }
+
+        template<typename ... ARGS>
+        auto Append(ARGS &&... args) -> ObjectType * {
+            return This()->Append(std::forward<ARGS>(args)...);
+        }
+
+        template<typename ... ARGS>
+        auto Replace(SizeType n, ARGS &&... args) -> ObjectType * {
+            return This()->Replace(n, std::forward<ARGS>(args)...);
+        }
+
+        auto Erase(SizeType n) -> void {
+            This()->Erase(n);
+        }
     };
 }
 
@@ -143,6 +158,23 @@ namespace holder::detail {
                 }
             }
             return nullptr;
+        }
+
+        template<typename ... ARGS>
+        auto Replace(SizeType i, ARGS &&... args) -> ObjectType * {
+            if (i >= MAX_NUM) return nullptr;
+            if(occupied[i]) {
+                return Trait::Replace(elems[i], std::forward<ARGS>(args)...);
+            } else {
+                return DoEmplace(i, std::forward<ARGS>(args)...);
+            }
+        }
+
+        auto Erase(SizeType i) -> void {
+            if(occupied[i]) {
+                Trait::Destroy(elems[i]);
+                occupied.reset(i);
+            }
         }
 
     private:

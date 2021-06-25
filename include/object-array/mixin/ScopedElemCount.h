@@ -33,6 +33,10 @@ namespace mixin {
         auto GetOccupied() const -> BitMap {
             return GetScope();
         }
+
+        auto IsPresent(SizeType n) const -> bool {
+            return GetScope().test(n);
+        }
     };
 }
 

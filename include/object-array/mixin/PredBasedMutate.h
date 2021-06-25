@@ -38,7 +38,7 @@ namespace mixin {
         template<_concept::SimplePred<ObjectType> PRED>
         auto FindOrAppend(PRED&& pred) -> ObjectType * {
             auto* found = Find(std::forward<PRED>(pred));
-            return found ? found : Append();
+            return found != nullptr ? found : Append();
         }
 
         template<_concept::SimplePred<ObjectType> PRED>

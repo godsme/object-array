@@ -28,10 +28,11 @@ namespace detail {
             mixin::RangedArray>::Concat<RangedReadOnlyMixins>;
 
     using ContinuousArrayMixin = ContinousReadOnlyMixins::Extends<
+            mixin::SimpleMutate,
             mixin::SimpleMutateExt,
-            mixin::RangedClear,
             mixin::PredBasedMutate,
-            mixin::ScopedCleanUp>;
+            mixin::ScopedCleanUp,
+            mixin::RangedClear>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

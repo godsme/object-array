@@ -21,10 +21,10 @@ namespace _concept::detail {
         constexpr static auto BOOL_PRED = [](ObjectType&) { return true; };
         constexpr static auto BOOL_INDEX_PRED = [](ObjectType&, SizeType) { return true; };
 
-        constexpr static auto STATUS_CONST_PRED = [](ObjectType const&) -> uint32_t { return 0; };
-        constexpr static auto STATUS_CONST_INDEX_PRED = [](ObjectType const&, SizeType) -> uint32_t { return 7; };
-        constexpr static auto STATUS_PRED = [](ObjectType&) -> uint32_t { return 10; };
-        constexpr static auto STATUS_INDEX_PRED = [](ObjectType&, SizeType) -> uint32_t { return 20; };
+        constexpr static auto STATUS_CONST_PRED = [](ObjectType const&) -> unsigned int { return 0; };
+        constexpr static auto STATUS_CONST_INDEX_PRED = [](ObjectType const&, SizeType) -> unsigned int { return 7; };
+        constexpr static auto STATUS_PRED = [](ObjectType&) -> unsigned int { return 10; };
+        constexpr static auto STATUS_INDEX_PRED = [](ObjectType&, SizeType) -> unsigned int { return 20; };
 
         using ConstPredType = decltype(CONST_PRED);
         using ConstIndexPredType = decltype(CONST_INDEX_PRED);

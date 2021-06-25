@@ -46,6 +46,10 @@ namespace mixin {
         auto GetAvailable() const -> BitMap {
             return ~BitMap(IndexBegin(), IndexEnd());
         }
+
+        auto IsPresent(SizeType n) const -> bool {
+            return n >= IndexBegin() && n < IndexEnd();
+        }
     };
 }
 

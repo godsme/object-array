@@ -27,7 +27,7 @@ namespace mixin {
     public:
         template<bool SCOPE_CHECK, _concept::Less<ObjectType> LESS>
         auto DoMinElemIndex(BitMap scope, LESS &&less) const -> Maybe {
-            scope.Align<SCOPE_CHECK>(IndexBegin(), IndexEnd());
+            scope.template Align<SCOPE_CHECK>(IndexBegin(), IndexEnd());
             if(scope.none()) return std::nullopt;
 
             auto minElem = IndexBegin();
@@ -41,8 +41,8 @@ namespace mixin {
 
         template<bool SCOPE_CHECK, _concept::Less<ObjectType> LESS>
         auto DoMinElem(BitMap scope, LESS &&less) const -> ObjectType const* {
-            auto minElem = DoMinElemIndex(scope, std::forward<LESS>(less));
-            return minElem ? GetObj(*minElem) : nullptr;
+            auto minElem = DoMinElemIndex<SCOPE_CHECK>(scope, std::forward<LESS>(less));
+            return minElem ? &GetObj(*minElem) : nullptr;
         }
     };
 }

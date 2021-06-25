@@ -36,6 +36,7 @@ namespace detail {
             mixin::SimpleForEach,
             mixin::SimpleForEachExt,
             mixin::ScopedForEachExt,
+            mixin::SimpleMinElem,
             mixin::SimpleMinElemExt,
             mixin::ScopedMinElemExt>;
 }
