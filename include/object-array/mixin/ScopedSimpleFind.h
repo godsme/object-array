@@ -12,7 +12,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<_concept::ConstScopedRangedArrayLike T>
+    template<__cOnCePt(ConstScopedRangedArrayLike) T>
     struct ScopedSimpleFind : ScopedFind<T> {
         using Self = ScopedFind<T>;
     public:
@@ -24,12 +24,12 @@ namespace mixin {
         using Self::GetScope;
 
     public:
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto FindIndex(PRED&& pred) const -> Maybe {
             return Self::template DoFindIndex(GetScope(), std::forward<PRED>(pred));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto Find(PRED&& pred) const -> ObjectType const* {
             return Self::template DoFind(GetScope(), std::forward<PRED>(pred));
         }

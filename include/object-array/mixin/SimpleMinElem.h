@@ -10,7 +10,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<_concept::ConstRangedArrayLike T>
+    template<__cOnCePt(ConstRangedArrayLike) T>
     class SimpleMinElem : public T {
         using Self = T;
 
@@ -28,7 +28,7 @@ namespace mixin {
         using Self::ObjectEnd;
 
     public:
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElemIndex(LESS &&less) const -> Maybe {
             if(IndexBegin() == IndexEnd()) return std::nullopt;
             auto min = IndexBegin();
@@ -38,7 +38,7 @@ namespace mixin {
             return min;
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElem(LESS &&less) const -> ObjectType const* {
             auto* found = std::min_element(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));
             return found == ObjectEnd() ? nullptr : found;

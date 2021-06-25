@@ -5,6 +5,9 @@
 #ifndef OBJECT_ARRAY_RANGEDARRAYLIKE_H
 #define OBJECT_ARRAY_RANGEDARRAYLIKE_H
 
+#include <object-array/config.h>
+#include <object-array/concept/detail/ConceptDef.h>
+#if HAS_CONCEPT
 #include <object-array/concept/IndexedContainer.h>
 #include <concepts>
 
@@ -30,5 +33,6 @@ namespace _concept {
        { o.ObjectEnd() } -> std::same_as<typename T::ObjectType*>;
     };
 }
+#endif
 
 #endif //OBJECT_ARRAY_RANGEDARRAYLIKE_H

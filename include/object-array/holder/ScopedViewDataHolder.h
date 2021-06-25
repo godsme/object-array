@@ -32,7 +32,7 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<_concept::SimpleRangedArrayLike ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     struct ScopedViewDataHolder {
         constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
         using ArrayType = std::decay_t<ARRAY>;
@@ -63,10 +63,10 @@ namespace holder {
         BitMap scope;
     };
 
-    template<_concept::SimpleRangedArrayLike ARRAY>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
     using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedViewDataHolder>;
 
-    template<_concept::SimpleRangedArrayLike ARRAY>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
     using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedViewDataHolder>;
 }
 

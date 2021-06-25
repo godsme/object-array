@@ -10,13 +10,16 @@
 #include <object-array/concept/Pred.h>
 
 namespace mixin {
+#if HAS_CONCEPT
     template<typename T>
     concept SimpleFind_Mutable =
             _concept::SimpleRangedArrayLike<T> &&
             _concept::SimpleMutable<T> &&
             _concept::SimpleFind<T>;
-
     template<SimpleFind_Mutable T>
+#else
+    template<typename T>
+#endif
     class PredBasedMutate : public T {
         using Self = T;
 
@@ -35,19 +38,19 @@ namespace mixin {
         using Self::GetObj;
 
     public:
-        template<_concept::SimplePred<ObjectType> PRED>
+        template<__sImPlE_pReD_cOnCePt(PRED)>
         auto FindOrAppend(PRED&& pred) -> ObjectType * {
             auto* found = Find(std::forward<PRED>(pred));
             return found != nullptr ? found : Append();
         }
 
-        template<_concept::SimplePred<ObjectType> PRED>
+        template<__sImPlE_pReD_cOnCePt(PRED)>
         auto RemoveBy(PRED&& pred) -> void {
             auto found = FindIndex(std::forward<PRED>(pred));
             if(found) Erase(*found);
         }
 
-        template<_concept::SimplePred<ObjectType> PRED>
+        template<__sImPlE_pReD_cOnCePt(PRED)>
         auto CleanUpBy(PRED&& pred) -> void {
             if(IndexBegin() == IndexEnd()) return;
             for(int i = IndexEnd() - 1; i >=IndexBegin(); --i) {

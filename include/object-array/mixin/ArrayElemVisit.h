@@ -10,7 +10,7 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::IndexedContainer T>
+    template<__cOnCePt(IndexedContainer) T>
     class ArrayElemVisit : public T {
         using Self = T;
 
@@ -29,9 +29,9 @@ namespace mixin {
             }
         }
     public:
-        template<bool TO_NON_CONST, _concept::Op<ObjectType, SizeType> OP>
+        template<bool TO_NON_CONST, __oP_cOnCePt(OP)>
         auto Visit(OP &&op, SizeType i) const -> auto {
-            if constexpr(_concept::WithIndexOp<OP, ObjectType, SizeType>) {
+            if constexpr(__wItH_iNdEx_Op(OP)) {
                 return op(GetObject<TO_NON_CONST>(i), i);
             } else {
                 return op(GetObject<TO_NON_CONST>(i));

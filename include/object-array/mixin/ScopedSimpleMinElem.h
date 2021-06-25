@@ -8,7 +8,7 @@
 #include <object-array/mixin/ScopedMinElem.h>
 
 namespace mixin {
-    template<_concept::ConstScopedRangedArrayLike T>
+    template<__cOnCePt(ConstScopedRangedArrayLike) T>
     struct ScopedSimpleMinElem : ScopedMinElem<T> {
         using Self = ScopedMinElem<T>;
     public:
@@ -19,12 +19,12 @@ namespace mixin {
         using Self::GetScope;
 
     public:
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElemIndex(LESS &&less) const -> auto {
             return Self::template DoMinElemIndex<false>(GetScope(), std::forward<LESS>(less));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElem(LESS &&less) const -> auto* {
             return Self::template DoMinElem<false>(GetScope(), std::forward<LESS>(less));
         }

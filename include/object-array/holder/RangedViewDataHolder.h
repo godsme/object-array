@@ -13,7 +13,7 @@
 #include <cub/base/BitSet.h>
 
 namespace holder {
-    template<_concept::IndexedContainer ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(IndexedContainer) ARRAY, typename SUB_TYPE>
     struct RangedViewDataHolder {
         constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
         using ArrayType = std::decay_t<ARRAY>;
@@ -48,10 +48,10 @@ namespace holder {
         SizeType end_;
     };
 
-    template<_concept::IndexedContainer ARRAY>
+    template<__cOnCePt(IndexedContainer) ARRAY>
     using RefRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, RangedViewDataHolder>;
 
-    template<_concept::IndexedContainer ARRAY>
+    template<__cOnCePt(IndexedContainer) ARRAY>
     using ValueRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, RangedViewDataHolder>;
 }
 

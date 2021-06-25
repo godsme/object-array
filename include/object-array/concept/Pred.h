@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_PRED_H
 #define OBJECT_ARRAY_PRED_H
 
+#include <object-array/config.h>
+#if HAS_CONCEPT
 #include <concepts>
 #include <type_traits>
 
@@ -22,5 +24,6 @@ namespace _concept {
     template<typename PRED, typename ELEM, typename SizeType>
     concept Pred = WithIndexPred<PRED, ELEM, SizeType> || SimplePred<PRED, ELEM>;
 }
+#endif
 
 #endif //OBJECT_ARRAY_PRED_H

@@ -8,7 +8,7 @@
 #include <object-array/concept/ArrayLike.h>
 
 namespace mixin {
-    template<_concept::ConstArrayLike T>
+    template<__cOnCePt(ConstArrayLike) T>
     struct IndexedContainer : T {
         using Self = T;
     public:

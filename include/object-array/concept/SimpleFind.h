@@ -5,6 +5,9 @@
 #ifndef OBJECT_ARRAY_SIMPLEFIND_H
 #define OBJECT_ARRAY_SIMPLEFIND_H
 
+#include <object-array/config.h>
+#include <object-array/concept/detail/ConceptDef.h>
+#if HAS_CONCEPT
 #include <object-array/concept/detail/PredTypeTrait.h>
 #include <type_traits>
 #include <optional>
@@ -17,5 +20,6 @@ namespace _concept {
         { o.Find(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<typename T::ObjectType const*>;
     };
 }
+#endif
 
 #endif //OBJECT_ARRAY_SIMPLEFIND_H

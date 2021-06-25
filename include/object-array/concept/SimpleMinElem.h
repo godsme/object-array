@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_CONCEPT_SIMPLEMINELEM_H
 #define OBJECT_ARRAY_CONCEPT_SIMPLEMINELEM_H
 
+#include <object-array/config.h>
+#if HAS_CONCEPT
 #include <object-array/concept/detail/LessTypeTrait.h>
 #include <type_traits>
 #include <optional>
@@ -17,5 +19,6 @@ namespace _concept {
         { o.MinElem(std::declval<typename detail::LessTypeTrait<T>::Type&&>()) } -> std::same_as<typename T::ObjectType const*>;
     };
 }
+#endif
 
 #endif //OBJECT_ARRAY_CONCEPT_SIMPLEMINELEM_H

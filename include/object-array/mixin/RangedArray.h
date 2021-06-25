@@ -9,7 +9,7 @@
 #include <object-array/mixin/IndexedContainer.h>
 
 namespace mixin {
-    template<_concept::ConstArrayLike T>
+    template<__cOnCePt(ConstArrayLike) T>
     class RangedArray : public IndexedContainer<T> {
         using Self = IndexedContainer<T>;
     public:

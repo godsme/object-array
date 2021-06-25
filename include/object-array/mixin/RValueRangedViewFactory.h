@@ -8,7 +8,7 @@
 #include <object-array/mixin/RangedViewFactory.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     struct RValueRangedViewFactory : RangedViewFactory<T> {
         using Self = RangedViewFactory<T>;
     public:

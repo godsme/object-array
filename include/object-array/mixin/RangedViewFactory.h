@@ -9,7 +9,7 @@
 #include <object-array/view/Slice.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     struct RangedViewFactory : T {
         using Self = T;
     public:

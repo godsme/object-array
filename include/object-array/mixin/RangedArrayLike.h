@@ -9,7 +9,7 @@
 #include <object-array/mixin/detail/Mixins.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     struct RangedArrayLike : T {
         using Self = T;
 

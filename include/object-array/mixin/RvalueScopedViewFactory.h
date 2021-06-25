@@ -8,7 +8,7 @@
 #include <object-array/mixin/ScopedViewFactory.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     struct RValueScopedViewFactory : ScopedViewFactory<T> {
         using Self = ScopedViewFactory<T>;
     public:

@@ -11,7 +11,7 @@
 #include <object-array/concept/ElemVisitor.h>
 
 namespace mixin {
-    template<_concept::OpVisitable T>
+    template<__cOnCePt(OpVisitable) T>
     class SimpleForEach : public T {
         using Self = T;
 
@@ -25,7 +25,7 @@ namespace mixin {
         using Self::IndexEnd;
 
     public:
-        template<bool TO_NON_CONST, _concept::Op<ObjectType, SizeType> OP>
+        template<bool TO_NON_CONST, __oP_cOnCePt(OP)>
         auto DoForEach(OP &&op) const -> auto {
             for (auto i = IndexBegin(); i < IndexEnd(); i++) {
                 __vIsIt_CoDe_BlOcK__

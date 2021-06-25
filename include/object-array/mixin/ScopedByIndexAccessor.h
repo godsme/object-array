@@ -10,7 +10,7 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::SimpleScopedRangedArrayLike T>
+    template<__cOnCePt(SimpleScopedRangedArrayLike) T>
     class ScopedByIndexAccessor : public T {
         using Self = T;
 

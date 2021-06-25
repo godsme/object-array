@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_LESS_H
 #define OBJECT_ARRAY_LESS_H
 
+#include <object-array/config.h>
+#if HAS_CONCEPT
 #include <concepts>
 #include <type_traits>
 
@@ -14,5 +16,6 @@ namespace _concept {
         { less(lhs, rhs) } -> std::same_as<bool>;
     };
 }
+#endif
 
 #endif //OBJECT_ARRAY_LESS_H

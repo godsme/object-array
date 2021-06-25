@@ -10,7 +10,7 @@
 #include <object-array/iterator/Iterator.h>
 
 namespace mixin {
-    template<_concept::RangedArrayLike T>
+    template<__cOnCePt(RangedArrayLike) T>
     struct IterableIndexedArrayLike : T {
         using Self = T;
     public:

@@ -11,7 +11,7 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::SimpleMinElem T>
+    template<__cOnCePt(SimpleMinElem) T>
     class SimpleMinElemExt : public T {
         using Self = T;
 
@@ -26,7 +26,7 @@ namespace mixin {
             return MinElemIndex(detail::DEFAULT_LESS_THAN);
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElemIndex(LESS &&less) const -> auto {
             return MinElemIndex([&](auto&& l, auto&& r) { return less(r, l); });
         }
@@ -35,7 +35,7 @@ namespace mixin {
             return MaxElemIndex(detail::DEFAULT_LESS_THAN);
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElem(LESS &&less) -> auto* {
             return __INVOKE_CONST_METHOD(MinElem(std::forward<LESS>(less)));
         }
@@ -48,12 +48,12 @@ namespace mixin {
             return __INVOKE_CONST_METHOD(MinElem());
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElem(LESS &&less) const -> auto* {
             return MinElem([&](auto&& l, auto&& r) { return less(r, l); });
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElem(LESS &&less) -> auto* {
             return __INVOKE_CONST_METHOD(MaxElem(std::forward<LESS>(less)));
         }

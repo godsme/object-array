@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_SCOPEDARRAYLIKE_H
 #define OBJECT_ARRAY_SCOPEDARRAYLIKE_H
 
+#include <object-array/config.h>
+#if HAS_CONCEPT
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/ArrayLike.h>
 #include <object-array/concept/ElemVisitor.h>
@@ -30,5 +32,6 @@ namespace _concept {
     template<typename T>
     concept ScopedOpVisitable = Scoped<T> && OpVisitable<T>;
 }
+#endif
 
 #endif //OBJECT_ARRAY_SCOPEDARRAYLIKE_H

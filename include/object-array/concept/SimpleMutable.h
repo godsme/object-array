@@ -5,6 +5,9 @@
 #ifndef OBJECT_ARRAY_SIMPLEMUTABLE_H
 #define OBJECT_ARRAY_SIMPLEMUTABLE_H
 
+#include <object-array/config.h>
+#include <object-array/concept/detail/ConceptDef.h>
+#if HAS_CONCEPT
 #include <object-array/concept/detail/PredTypeTrait.h>
 #include <type_traits>
 #include <optional>
@@ -19,5 +22,6 @@ namespace _concept {
         { o.Append(std::declval<typename T::ObjectType&&>()) } -> std::same_as<typename T::ObjectType*>;
     };
 }
+#endif
 
 #endif //OBJECT_ARRAY_SIMPLEMUTABLE_H

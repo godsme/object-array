@@ -9,7 +9,7 @@
 #include <object-array/view/IndexedView.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     class IndexedViewFactory : public T {
         using typename T::RangedArrayLike;
     public:

@@ -10,7 +10,7 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     class ByIndexAccessor : public T {
         using Self = T;
 

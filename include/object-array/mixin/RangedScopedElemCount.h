@@ -8,7 +8,7 @@
 #include <object-array/mixin/ScopedElemCount.h>
 
 namespace mixin {
-    template<_concept::Scoped T>
+    template<__cOnCePt(Scoped) T>
     class RangedScopedElemCount : public ScopedElemCount<T> {
         using Self = T;
     public:

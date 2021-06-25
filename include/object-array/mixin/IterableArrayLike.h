@@ -9,7 +9,7 @@
 #include <object-array/iterator/Iterator.h>
 
 namespace mixin {
-    template<_concept::RangedArrayLike T>
+    template<__cOnCePt(RangedArrayLike) T>
     class IterableArrayLike : public T {
         using Self = T;
     public:

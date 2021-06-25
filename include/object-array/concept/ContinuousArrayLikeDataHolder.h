@@ -5,6 +5,9 @@
 #ifndef OBJECT_ARRAY_CONTINUOUSARRAYLIKEDATAHOLDER_H
 #define OBJECT_ARRAY_CONTINUOUSARRAYLIKEDATAHOLDER_H
 
+#include <object-array/config.h>
+
+#if HAS_CONCEPT
 #include <object-array/concept/SimpleArrayLike.h>
 #include <concepts>
 
@@ -21,5 +24,6 @@ namespace _concept {
         { o.Num() } -> std::same_as<typename T::SizeType&>;
     };
 }
+#endif
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYLIKEDATAHOLDER_H

@@ -12,7 +12,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<_concept::ConstRangedArrayLike T>
+    template<__cOnCePt(ConstRangedArrayLike) T>
     class ScopedFind : public T {
         using Self = T;
     public:
@@ -29,12 +29,12 @@ namespace mixin {
         using Self::ObjectEnd;
 
     public:
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto DoFindIndex(BitMap scope, PRED&& pred) const -> Maybe {
             if (IndexBegin() >= IndexEnd()) return std::nullopt;
             for (auto i = IndexBegin(); i < IndexEnd(); i++) {
                 if(!scope[i]) continue;
-                if constexpr(_concept::WithIndexPred<PRED, ObjectType, SizeType>) {
+                if constexpr(__wItH_iNdEx_pReD(PRED)) {
                     if (pred(GetObj(i), i)) return i;
                 } else {
                     if (pred(GetObj(i))) return i;
@@ -43,7 +43,7 @@ namespace mixin {
             return std::nullopt;
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto DoFind(BitMap scope, PRED&& pred) const -> ObjectType const* {
             auto index = DoFindIndex(scope, std::forward<PRED>(pred));
             return index ? &GetObj(*index) : nullptr;

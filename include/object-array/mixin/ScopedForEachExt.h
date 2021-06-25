@@ -9,7 +9,7 @@
 #include <utility>
 
 namespace mixin {
-    template<_concept::OpVisitable T>
+    template<__cOnCePt(OpVisitable) T>
     class ScopedForEachExt : public ScopedForEach<T> {
         using Self = ScopedForEach<T>;
 
@@ -21,22 +21,22 @@ namespace mixin {
     public:
         using Self::ForEach;
 
-        template<_concept::Op<ObjectType, SizeType> OP>
+        template<__oP_cOnCePt(OP)>
         auto ForEach(BitMap scope, OP &&op) const -> auto {
             return Self::template DoForEach<false, true>(scope, std::forward<OP>(op));
         }
 
-        template<_concept::Op<ObjectType, SizeType> OP>
+        template<__oP_cOnCePt(OP)>
         auto ForEach(BitMap scope, OP &&op) -> auto {
             return Self::template DoForEach<true, true>(scope, std::forward<OP>(op));
         }
 
-        template<_concept::Op<ObjectType, SizeType> OP>
+        template<__oP_cOnCePt(OP)>
         auto ForEachEx(BitMap excluded, OP &&op) const -> auto {
             return ForEach(~excluded, std::forward<OP>(op));
         }
 
-        template<_concept::Op<ObjectType, SizeType> OP>
+        template<__oP_cOnCePt(OP)>
         auto ForEachEx(BitMap excluded, OP &&op) -> auto {
             return ForEach(~excluded, std::forward<OP>(op));
         }

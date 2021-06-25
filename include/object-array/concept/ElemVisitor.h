@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_ELEMVISITOR_H
 #define OBJECT_ARRAY_ELEMVISITOR_H
 
+#include <object-array/config.h>
+#if HAS_CONCEPT
 #include <object-array/concept/detail/OpTypeTrait.h>
 #include <object-array/concept/RangedArrayLike.h>
 #include <concepts>
@@ -32,5 +34,6 @@ namespace _concept {
     template<typename T>
     concept OpVisitable = SimpleRangedArrayLike<T> && ElemVisitor<T>;
 }
+#endif
 
 #endif //OBJECT_ARRAY_ELEMVISITOR_H

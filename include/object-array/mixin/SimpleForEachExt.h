@@ -14,12 +14,12 @@ namespace mixin {
         using typename Self::ObjectType;
 
     public:
-        template<_concept::Op<ObjectType, SizeType> OP>
+        template<__oP_cOnCePt(OP)>
         auto ForEach(OP &&op) const -> auto {
             return Self::template DoForEach<false>(std::forward<OP>(op));
         }
 
-        template<_concept::Op<ObjectType, SizeType> OP>
+        template<__oP_cOnCePt(OP)>
         auto ForEach(OP &&op) -> auto {
             return Self::template DoForEach<true>(std::forward<OP>(op));
         }

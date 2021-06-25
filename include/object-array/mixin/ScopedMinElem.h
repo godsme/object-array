@@ -9,7 +9,7 @@
 #include <object-array/concept/Less.h>
 
 namespace mixin {
-    template<_concept::ConstRangedArrayLike T>
+    template<__cOnCePt(ConstRangedArrayLike) T>
     class ScopedMinElem : public T {
         using Self = T;
     public:
@@ -25,7 +25,7 @@ namespace mixin {
         using Self::IndexEnd;
 
     public:
-        template<bool SCOPE_CHECK, _concept::Less<ObjectType> LESS>
+        template<bool SCOPE_CHECK, __lEsS_cOnCePt(LESS)>
         auto DoMinElemIndex(BitMap scope, LESS &&less) const -> Maybe {
             scope.template Align<SCOPE_CHECK>(IndexBegin(), IndexEnd());
             if(scope.none()) return std::nullopt;
@@ -39,7 +39,7 @@ namespace mixin {
             return minElem;
         }
 
-        template<bool SCOPE_CHECK, _concept::Less<ObjectType> LESS>
+        template<bool SCOPE_CHECK, __lEsS_cOnCePt(LESS)>
         auto DoMinElem(BitMap scope, LESS &&less) const -> ObjectType const* {
             auto minElem = DoMinElemIndex<SCOPE_CHECK>(scope, std::forward<LESS>(less));
             return minElem ? &GetObj(*minElem) : nullptr;

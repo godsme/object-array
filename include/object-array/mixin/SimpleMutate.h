@@ -8,7 +8,7 @@
 #include <object-array/concept/ContinuousArrayLikeDataHolder.h>
 
 namespace mixin {
-    template<_concept::ContinuousArrayLikeDataHolder T>
+    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
     class SimpleMutate : public T {
         using Self = T;
 

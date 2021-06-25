@@ -10,7 +10,7 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::SimpleFind T>
+    template<__cOnCePt(SimpleFind) T>
     class SimpleFindExt : public T {
         using Self = T;
     public:
@@ -21,12 +21,12 @@ namespace mixin {
         using Self::Find;
         using Self::FindIndex;
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto Find(PRED &&pred) -> ObjectType* {
             return __INVOKE_CONST_METHOD(Find(std::forward<PRED>(pred)));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto FindIndex(PRED &&pred) -> Maybe {
             return __INVOKE_CONST_METHOD(FindIndex(std::forward<PRED>(pred)));
         }
@@ -47,7 +47,7 @@ namespace mixin {
             return __INVOKE_CONST_METHOD(FindIndex(obj));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto Exists(PRED &&pred) const -> bool {
             return Find(std::forward<PRED>(pred)) != nullptr;
         }

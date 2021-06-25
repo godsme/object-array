@@ -9,7 +9,7 @@
 #include <object-array/iterator/ScopedIterator.h>
 
 namespace mixin {
-    template<_concept::ScopedRangedArrayLike T>
+    template<__cOnCePt(ScopedRangedArrayLike) T>
     class IterableScopedArrayLike : public T {
         using Self = T;
     public:

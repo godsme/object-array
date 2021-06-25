@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_SIMPLEARRAYLIKE_H
 #define OBJECT_ARRAY_SIMPLEARRAYLIKE_H
 
+#include <object-array/config.h>
+#if HAS_CONCEPT
 #include <concepts>
 
 namespace _concept {
@@ -21,5 +23,6 @@ namespace _concept {
         { std::decay_t<T>::ElemToObject(std::declval<typename std::decay_t<T>::ElemType&>()) } -> std::same_as<typename std::decay_t<T>::ObjectType&>;
     };
 }
+#endif
 
 #endif //OBJECT_ARRAY_SIMPLEARRAYLIKE_H

@@ -10,7 +10,7 @@
 #include <object-array/holder/detail/ArrayLikeViewDataHolder.h>
 
 namespace holder {
-    template<_concept::SimpleRangedArrayLike ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     class IndexedViewDataHolder {
         dEcL_tHiS(SUB_TYPE);
         constexpr static auto IsConstArray = std::is_const_v<std::remove_reference_t<ARRAY>>;
@@ -29,10 +29,10 @@ namespace holder {
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n);}
     };
 
-    template<_concept::SimpleRangedArrayLike ARRAY>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
     using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, IndexedViewDataHolder>;
 
-    template<_concept::SimpleRangedArrayLike ARRAY>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
     using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder>;
 }
 

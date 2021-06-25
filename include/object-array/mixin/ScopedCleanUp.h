@@ -9,10 +9,14 @@
 #include <object-array/concept/SimpleMutable.h>
 
 namespace mixin {
+#if HAS_CONCEPT
     template<typename T>
     concept SimpleRangedMutable = _concept::SimpleMutable<T> && _concept::SimpleRangedArrayLike<T>;
 
     template<SimpleRangedMutable T>
+#else
+    template<typename T>
+#endif
     class ScopedCleanUp : public T {
         using Self = T;
     public:

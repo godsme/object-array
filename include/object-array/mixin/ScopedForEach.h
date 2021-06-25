@@ -11,7 +11,7 @@
 #include <object-array/concept/ElemVisitor.h>
 
 namespace mixin {
-    template<_concept::OpVisitable T>
+    template<__cOnCePt(OpVisitable) T>
     class ScopedForEach : public T {
         using Self = T;
     public:
@@ -24,7 +24,7 @@ namespace mixin {
         using Self::IndexEnd;
 
     public:
-        template<bool TO_NON_CONST, bool SCOPE_CHECK, _concept::Op<ObjectType, SizeType> OP>
+        template<bool TO_NON_CONST, bool SCOPE_CHECK, __oP_cOnCePt(OP)>
         auto DoForEach(BitMap scope, OP &&op) const -> auto {
             scope.template Align<SCOPE_CHECK>(IndexBegin(), IndexEnd());
             for (auto i = IndexBegin(); scope.any(); scope >>= 1, ++i) {

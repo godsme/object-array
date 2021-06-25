@@ -11,7 +11,7 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::ConstRangedArrayLike T>
+    template<__cOnCePt(ConstRangedArrayLike) T>
     class ScopedFindExt : public ScopedFind<T> {
         using Self = ScopedFind<T>;
     public:
@@ -24,22 +24,22 @@ namespace mixin {
         using Self::FindIndex;
         using Self::Exists;
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto Find(BitMap scope, PRED &&pred) const -> ObjectType const* {
             return Self::template DoFind(scope, std::forward<PRED>(pred));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto FindEx(BitMap excluded, PRED &&pred) const -> ObjectType const* {
             return Find(~excluded, std::forward<PRED>(pred));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto Find(BitMap scope, PRED &&pred) -> ObjectType* {
             return __INVOKE_CONST_METHOD(Find(scope, std::forward<PRED>(pred)));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto FindEx(BitMap excluded, PRED &&pred) -> ObjectType* {
             return __INVOKE_CONST_METHOD(FindEx(excluded, std::forward<PRED>(pred)));
         }
@@ -60,12 +60,12 @@ namespace mixin {
             return __INVOKE_CONST_METHOD(FindEx(excluded, obj));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto FindIndex(BitMap scope, PRED &&pred) const -> Maybe {
             return Self::template DoFindIndex(scope, std::forward<PRED>(pred));
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto FindIndexEx(BitMap excluded, PRED &&pred) const -> Maybe {
             return FindIndex(~excluded, std::forward<PRED>(pred));
         }
@@ -78,12 +78,12 @@ namespace mixin {
             return FindIndexEx(excluded, [&](auto&& elem) { return elem == obj;});
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto Exists(BitMap scope, PRED &&pred) const -> bool {
             return Find(scope, std::forward<PRED>(pred)) != nullptr;
         }
 
-        template<_concept::Pred<ObjectType, SizeType> PRED>
+        template<__pRed_CoNcEpT(PRED)>
         auto ExistsEx(BitMap excluded, PRED &&pred) const -> bool {
             return FindEx(excluded, std::forward<PRED>(pred)) != nullptr;
         }

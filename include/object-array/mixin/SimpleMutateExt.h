@@ -8,7 +8,7 @@
 #include <object-array/concept/SimpleMutable.h>
 
 namespace mixin {
-    template<_concept::SimpleMutable T>
+    template<__cOnCePt(SimpleMutable) T>
     class SimpleMutateExt : public T {
         using Self = T;
     public:

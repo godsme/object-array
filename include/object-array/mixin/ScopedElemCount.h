@@ -8,7 +8,7 @@
 #include <object-array/concept/ScopedArrayLike.h>
 
 namespace mixin {
-    template<_concept::Scoped T>
+    template<__cOnCePt(Scoped) T>
     class ScopedElemCount : public T {
         using Self = T;
     public:

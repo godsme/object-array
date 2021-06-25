@@ -8,7 +8,7 @@
 #include <object-array/concept/ContinuousArrayLikeDataHolder.h>
 
 namespace mixin {
-    template<_concept::ContinuousArrayLikeDataHolder T>
+    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
     struct RangedClear : T {
         using typename T::Trait;
         using typename T::ElemType;

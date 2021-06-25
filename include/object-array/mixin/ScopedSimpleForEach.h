@@ -8,7 +8,7 @@
 #include <object-array/mixin/ScopedForEach.h>
 
 namespace mixin {
-    template<_concept::ScopedOpVisitable T>
+    template<__cOnCePt(ScopedOpVisitable) T>
     struct ScopedSimpleForEach : ScopedForEach<T> {
         using Self = ScopedForEach<T>;
     public:
@@ -19,7 +19,7 @@ namespace mixin {
         using Self::GetScope;
 
     public:
-        template<bool TO_NON_CONST, _concept::Op<ObjectType, SizeType> OP>
+        template<bool TO_NON_CONST, __oP_cOnCePt(OP)>
         auto DoForEach(OP &&op) const -> auto {
             return Self::template DoForEach<TO_NON_CONST, false>(GetScope(), std::forward<OP>(op));
         }

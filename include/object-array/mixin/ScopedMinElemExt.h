@@ -10,7 +10,7 @@
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<_concept::ConstRangedArrayLike T>
+    template<__cOnCePt(ConstRangedArrayLike) T>
     class ScopedMinElemExt : public ScopedMinElem<T> {
         using Self = T;
     public:
@@ -25,12 +25,12 @@ namespace mixin {
         using Self::MinElemIndex;
         using Self::MaxElemIndex;
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElemIndex(BitMap scope, LESS &&less) const -> Maybe {
             return Self::template DoMinElemIndex<true>(scope, std::forward<LESS>(less));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElemIndexEx(BitMap excluded, LESS &&less) const -> Maybe {
             return MinElemIndex(~excluded, std::forward<LESS>(less));
         }
@@ -43,22 +43,22 @@ namespace mixin {
             return MinElemIndexEx(excluded, detail::DEFAULT_LESS_THAN);
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElem(BitMap scope, LESS &&less) const -> ObjectType const * {
             return Self::template MinElem(scope, std::forward<LESS>(less));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElem(BitMap scope, LESS &&less) -> auto* {
             return __INVOKE_CONST_METHOD(MinElem(scope, std::forward<LESS>(less)));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElemEx(BitMap excluded, LESS &&less) const -> ObjectType const * {
             return MinElem(~excluded, std::forward<LESS>(less));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MinElemEx(BitMap excluded, LESS &&less) -> ObjectType * {
             return __INVOKE_CONST_METHOD(MinElemEx(excluded, std::forward<LESS>(less)));
         }
@@ -79,12 +79,12 @@ namespace mixin {
             return __INVOKE_CONST_METHOD(MinElemEx(excluded));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElemIndex(BitMap excluded, LESS &&less) const -> Maybe {
             return MinElemIndex(excluded, [&](auto &&l, auto r) { return less(r, l); });
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElemIndexEx(BitMap excluded, LESS &&less) const -> Maybe {
             return MinElemIndexEx(excluded, [&](auto &&l, auto r) { return less(r, l); });
         }
@@ -97,12 +97,12 @@ namespace mixin {
             return MinElemIndexEx(excluded, detail::DEFAULT_GREATER_THAN);
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElem(BitMap scope, LESS &&less) const -> auto {
             return MinElem(scope, [&](auto &&l, auto r) { return less(r, l); });
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElem(BitMap scope, LESS &&less) -> auto* {
             return __INVOKE_CONST_METHOD(MaxElem(scope, std::forward<LESS>(less)));
         }
@@ -115,12 +115,12 @@ namespace mixin {
             return __INVOKE_CONST_METHOD(MaxElem(scope));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElemEx(BitMap excluded, LESS &&less) const -> auto {
             return MaxElem(~excluded, std::forward<LESS>(less));
         }
 
-        template<_concept::Less<ObjectType> LESS>
+        template<__lEsS_cOnCePt(LESS)>
         auto MaxElemEx(BitMap excluded, LESS &&less) -> auto* {
             return __INVOKE_CONST_METHOD(MaxElemEx(excluded, std::forward<LESS>(less)));
         }

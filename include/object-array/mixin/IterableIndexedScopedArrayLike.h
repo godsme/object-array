@@ -10,7 +10,7 @@
 #include <object-array/iterator/IndexedScopedIterator.h>
 
 namespace mixin {
-    template<_concept::ScopedRangedArrayLike T>
+    template<__cOnCePt(ScopedRangedArrayLike) T>
     struct IterableIndexedScopedArrayLike : T {
         using Self = T;
     public:

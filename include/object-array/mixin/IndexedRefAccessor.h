@@ -8,7 +8,7 @@
 #include <object-array/concept/ArrayLike.h>
 
 namespace mixin {
-    template<_concept::SimpleRangedArrayLike T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     struct IndexedRefAccessor : T {
         using Self = T;
     public:
