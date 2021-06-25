@@ -12,7 +12,6 @@ namespace mixin {
     template<_concept::ConstRangedArrayLike T>
     class ScopedMinElem : public T {
         using Self = T;
-
     public:
         using typename Self::Maybe;
         using typename Self::BitMap;

@@ -6,7 +6,7 @@
 #include <object-array/mixin/detail/Mixins.h>
 #include <object-array/mixin/SimpleFindExt.h>
 #include <object-array/detail/ArrayComposer.h>
-#include "Foo.h"
+#include "../../Foo.h"
 #include <catch.hpp>
 #include <object-array/mixin/RangedArrayLike.h>
 
