@@ -5,39 +5,53 @@
 #ifndef OBJECT_ARRAY_ARRAYVIEW_H
 #define OBJECT_ARRAY_ARRAYVIEW_H
 
+#include <object-array/holder/ConstArrayViewDataHolder.h>
 #include <object-array/holder/ArrayViewDataHolder.h>
 #include <object-array/detail/ContinuousArrayMixin.h>
 #include <object-array/detail/ArrayComposer.h>
 #include <object-array/mixin/RValueRangedViewFactory.h>
+#include <object-array/detail/ContinousReadOnlyArray.h>
 
 namespace detail {
-    using ArrayViewMixins = detail::ContinuousArrayMixin::Extends<
+    using ArrayViewSpecifiedMixins = ::mixin::Mixins<
             mixin::RValueRangedViewFactory,
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory>;
 
-    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM>
-    using ArrayView = detail::ArrayComposer<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, ELEM>, ArrayViewMixins>;
+    using ConstArrayViewMixins = detail::ContinousReadOnlyMixins::Concat<ArrayViewSpecifiedMixins>;
+    using ArrayViewMixins = detail::ContinuousArrayMixin::Concat<ArrayViewSpecifiedMixins>;
+
+    template<typename T, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
+    using ConstArrayView = detail::ContinuousReadOnlyArray<holder::ConstArrayViewDataHolder<T, MAX_NUM, ELEM>, ConstArrayViewMixins, ORDERED>;
+
+    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER = T, bool = std::is_const_v<T>>
+    struct ArrayViewTrait {
+        using Type = ConstArrayView<T, MAX_NUM, WRAPPER, false>;
+    };
+
+    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER>
+    struct ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, WRAPPER, false> {
+        using Type = detail::ContinuousReadOnlyArray<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, WRAPPER>, ArrayViewMixins, false>;
+    };
 }
 
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T,
-        typename Parent = detail::ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>>
-class ArrayView : Parent {
+        typename Parent = typename detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ELEM>::Type>
+class ArrayView : public Parent {
     using typename Parent::Holder;
 public:
     using Parent::Parent;
-
-    using Parent::Find;
-    using Parent::FindIndex;
-    using Parent::Slice;
-    using Parent::Scope;
-    using Parent::Exclude;
-    using Parent::WithIndex;
-    using Parent::begin;
-    using Parent::end;
 };
 
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>
 ArrayView(T (&)[MAX_NUM], SIZE_TYPE& size) -> ArrayView<T, SIZE_TYPE, MAX_NUM>;
+
+template<typename T, std::size_t MAX_NUM, typename WRAPPER = T, typename Parent = detail::ConstArrayView<T, MAX_NUM, WRAPPER, false>>
+struct ConstArrayView : Parent {
+    using Parent::Parent;
+};
+
+template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>
+ConstArrayView(T const (&)[MAX_NUM], SIZE_TYPE) -> ConstArrayView<T, MAX_NUM, T>;
 
 #endif //OBJECT_ARRAY_ARRAYVIEW_H

@@ -20,7 +20,7 @@ namespace holder {
         static_assert(std::is_trivial_v<OBJ>);
         using ElemType = ELEM;
         using ObjectType = ELEM;
-        using SizeType = SIZE_TYPE;
+        using SizeType = std::remove_const_t<SIZE_TYPE>;
         constexpr static auto MAX_SIZE = MAX_NUM;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
         using Trait = detail::ObjectTrait<ElemType>;
@@ -56,7 +56,7 @@ namespace holder {
             num = std::min(num, n);
         }
 
-        static auto ElemToObject(ElemType const& elem) -> ObjectType const& { return elem; }
+        static auto ConstElemToObject(ElemType const& elem) -> ObjectType const& { return elem; }
         static auto ElemToObject(ElemType& elem) -> ObjectType& { return elem; }
 
         ElemType* elems;

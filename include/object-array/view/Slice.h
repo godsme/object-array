@@ -2,67 +2,31 @@
 // Created by Darwin Yuan on 2021/6/22.
 //
 
-#ifndef OBJECT_ARRAY_SLICE_H
-#define OBJECT_ARRAY_SLICE_H
+#ifndef OBJECT_ARRAY_VIEW_SLICE_H
+#define OBJECT_ARRAY_VIEW_SLICE_H
 
-#include <object-array/holder/RangedViewDataHolder.h>
-#include <object-array/detail/ArrayComposer.h>
-#include <object-array/mixin/NonScopedSimpleFind.h>
-#include <object-array/mixin/ScopedFindExt.h>
-#include <object-array/mixin/RangedArrayLike.h>
-#include <object-array/mixin/SimpleFindExt.h>
-#include <object-array/mixin/detail/Mixins.h>
-#include <object-array/mixin/IterableArrayLike.h>
-#include <object-array/mixin/RValueIndexedViewFactory.h>
+#include <object-array/detail/RangedReadOnlyMixins.h>
 #include <object-array/mixin/RvalueScopedViewFactory.h>
-#include <object-array/mixin/IndexedRefAccessor.h>
-#include <object-array/mixin/ByIndexAccessor.h>
-#include <object-array/mixin/RangedElemsCount.h>
+#include <object-array/mixin/RValueIndexedViewFactory.h>
+#include <object-array/holder/RangedViewDataHolder.h>
+#include <object-array/detail/ReadOnlyArrayLike.h>
 
 namespace view::detail {
-    using SliceMixins = mixin::Mixins<
-            mixin::RangedArrayLike,
-            mixin::IndexedRefAccessor,
-            mixin::ByIndexAccessor,
-            mixin::IterableArrayLike,
-            mixin::RangedElemCount,
-            mixin::NonScopedSimpleFind,
-            mixin::SimpleFindExt,
-            mixin::ScopedFindExt,
+    using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory>;
 
     template<typename HOLDER>
-    class Slice : ::detail::ArrayComposer<HOLDER, SliceMixins> {
-        using Parent = ::detail::ArrayComposer<HOLDER, SliceMixins>;
+    class Slice : public ::detail::ReadOnlyArrayLike<HOLDER, SliceMixins> {
+        using Parent = ::detail::ReadOnlyArrayLike<HOLDER, SliceMixins>;
         using typename Parent::Holder;
         using typename Parent::Mixins;
 
     public:
         using Parent::Parent;
 
-        using Parent::operator[];
-        using Parent::At;
-
-        using Parent::begin;
-        using Parent::end;
-
-        using Parent::GetNum;
-        using Parent::Any;
-        using Parent::None;
-        using Parent::All;
-
-        using Mixins::Find;
-        using Mixins::FindIndex;
-        using Mixins::Exists;
-
-        using Mixins::FindEx;
-        using Mixins::FindIndexEx;
-        using Mixins::ExistsEx;
-
         using Mixins::Scope;
         using Mixins::Exclude;
-        using Mixins::WithIndex;
     };
 }
 
@@ -74,4 +38,4 @@ namespace view {
     using ValueSlice = detail::Slice<holder::ValueRangedViewDataHolder<ARRAY>>;
 }
 
-#endif //OBJECT_ARRAY_SLICE_H
+#endif //OBJECT_ARRAY_VIEW_SLICE_H

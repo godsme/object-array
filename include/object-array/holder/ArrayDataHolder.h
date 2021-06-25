@@ -21,7 +21,7 @@ namespace holder {
         using Trait = detail::ObjectTrait<ElemType>;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
 
-        static auto ElemToObject(ElemType const& elem) -> ObjectType const& {
+        static auto ConstElemToObject(ElemType const& elem) -> ObjectType const& {
             return Trait::ToObject(elem);
         }
 

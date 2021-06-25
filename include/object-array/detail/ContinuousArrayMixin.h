@@ -6,24 +6,9 @@
 #define OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H
 
 #include <object-array/mixin/detail/Mixins.h>
-#include <object-array/mixin/NonScopedSimpleFind.h>
-#include <object-array/mixin/RangedArrayLike.h>
+#include <object-array/detail/RangedReadOnlyMixins.h>
 #include <object-array/mixin/RangedArray.h>
 #include <object-array/mixin/ContinuousArrayLike.h>
-#include <object-array/mixin/SimpleFindExt.h>
-#include <object-array/mixin/ScopedFind.h>
-#include <object-array/mixin/ScopedFindExt.h>
-#include <object-array/mixin/RangedViewFactory.h>
-#include <object-array/mixin/ScopedViewFactory.h>
-#include <object-array/mixin/ScopedViewFactory.h>
-#include <object-array/mixin/IndexedViewFactory.h>
-#include <object-array/mixin/IterableArrayLike.h>
-#include <object-array/mixin/IndexedRefAccessor.h>
-#include <object-array/mixin/ByIndexAccessor.h>
-#include <object-array/mixin/RangedElemsCount.h>
-#include <object-array/mixin/ArrayElemVisit.h>
-#include <object-array/mixin/SimpleForEachExt.h>
-#include <object-array/mixin/ScopedForEachExt.h>
 #include <object-array/mixin/SimpleMutate.h>
 #include <object-array/mixin/SimpleMutateExt.h>
 #include <object-array/mixin/RangedClear.h>
@@ -31,24 +16,18 @@
 #include <object-array/mixin/ScopedCleanUp.h>
 #include <object-array/mixin/SimpleMinElemExt.h>
 #include <object-array/mixin/ScopedMinElemExt.h>
+#include <object-array/mixin/RangedViewFactory.h>
+#include <object-array/mixin/ScopedViewFactory.h>
+#include <object-array/mixin/ScopedViewFactory.h>
+#include <object-array/mixin/IndexedViewFactory.h>
 
 namespace detail {
-    using ContinuousArrayMixin = mixin::Mixins<
+
+    using ContinousReadOnlyMixins = mixin::Mixins <
             mixin::ContinuousArrayLike,
-            mixin::RangedArray,
-            mixin::RangedArrayLike,
-            mixin::IndexedRefAccessor,
-            mixin::ByIndexAccessor,
-            mixin::RangedElemCount,
-            mixin::IterableArrayLike,
-            mixin::NonScopedSimpleFind,
-            mixin::SimpleFindExt,
-            mixin::ScopedFindExt,
-            mixin::ArrayElemVisit,
-            mixin::SimpleForEachExt,
-            mixin::ScopedForEachExt,
-            mixin::SimpleMinElemExt,
-            mixin::ScopedMinElemExt,
+            mixin::RangedArray>::Concat<RangedReadOnlyMixins>;
+
+    using ContinuousArrayMixin = ContinousReadOnlyMixins::Extends<
             mixin::SimpleMutateExt,
             mixin::RangedClear,
             mixin::PredBasedMutate,

@@ -18,8 +18,8 @@ namespace holder::detail {
         auto Elems() const -> ElemType const* { return This()->elems; }
         auto Elems() -> ElemType* { return This()->elems; }
 
-        static auto ElemToObject(ElemType const& elem) -> ObjectType const& {
-            return DATA_HOLDER::ElemToObject(elem);
+        static auto ConstElemToObject(ElemType const& elem) -> ObjectType const& {
+            return DATA_HOLDER::ConstElemToObject(elem);
         }
 
         static auto ElemToObject(ElemType& elem) -> ObjectType& {

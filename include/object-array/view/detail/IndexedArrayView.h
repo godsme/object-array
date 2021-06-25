@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_INDEXEDARRAYVIEW_H
 
 #include <object-array/holder/IndexedViewDataHolder.h>
+#include <object-array/detail/ArrayComposer.h>
 #include <object-array/mixin/RangedArrayLike.h>
 #include <object-array/mixin/IterableIndexedScopedArrayLike.h>
 

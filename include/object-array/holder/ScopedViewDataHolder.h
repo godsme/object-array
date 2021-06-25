@@ -7,6 +7,7 @@
 
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/holder/detail/ArrayLikeViewDataHolder.h>
+#include <object-array/detail/CrtpHelper.h>
 #include <cub/base/BitSet.h>
 
 namespace holder::detail {

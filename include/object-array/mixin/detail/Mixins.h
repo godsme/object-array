@@ -45,6 +45,12 @@ namespace mixin {
 
         template<template<typename> typename ... MORE_MIXINS>
         using Extends = Mixins<MIXINS..., MORE_MIXINS...>;
+
+        template<typename LHS>
+        using Prepend = typename LHS::template Extends<MIXINS...>;
+
+        template<typename RHS>
+        using Concat = typename RHS::template Prepend<Mixins<MIXINS...>>;
     };
 }
 

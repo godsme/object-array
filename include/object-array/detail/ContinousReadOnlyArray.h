@@ -5,10 +5,12 @@
 #ifndef OBJECT_ARRAY_CONTINOUSREADONLYARRAY_H
 #define OBJECT_ARRAY_CONTINOUSREADONLYARRAY_H
 
+#include <object-array/detail/ReadOnlyArrayLike.h>
+
 namespace detail {
     template<typename DATA_HOLDER, typename MIXINS, bool ORDERED=false>
-    class ContinuousReadOnlyArray : public detail::ArrayComposer<DATA_HOLDER, MIXINS> {
-        using Parent = detail::ArrayComposer<DATA_HOLDER, MIXINS>;
+    class ContinuousReadOnlyArray : public detail::ReadOnlyArrayLike<DATA_HOLDER, MIXINS> {
+        using Parent = detail::ReadOnlyArrayLike<DATA_HOLDER, MIXINS>;
 
     protected:
         using typename Parent::Mixins;
@@ -16,39 +18,13 @@ namespace detail {
     public:
         using Parent::Parent;
 
-        using Mixins::operator[];
-        using Mixins::At;
-        using Mixins::First;
-        using Mixins::Last;
-
-        using Mixins::begin;
-        using Mixins::end;
-
         using Mixins::GetNum;
-        using Mixins::Any;
-        using Mixins::None;
-        using Mixins::All;
-        using Mixins::GetOccupied;
-        using Mixins::GetAvailable;
-
-        using Mixins::ForEach;
-
-        using Mixins::Find;
-        using Mixins::FindIndex;
-        using Mixins::Exists;
-
-        using Mixins::MinElem;
-        using Mixins::MinElemIndex;
-        using Mixins::MaxElem;
-        using Mixins::MaxElemIndex;
-
         using Mixins::Slice;
         using Mixins::From;
         using Mixins::Until;
 
         using Mixins::Scope;
         using Mixins::Exclude;
-        using Mixins::WithIndex;
 
     public:
         auto operator==(ContinuousReadOnlyArray const &rhs) const -> bool {
