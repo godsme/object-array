@@ -10,6 +10,7 @@
 #include <object-array/detail/ContinuousArrayMixin.h>
 #include <object-array/detail/ArrayComposer.h>
 #include <object-array/mixin/RValueRangedViewFactory.h>
+#include <object-array/detail/ContinuousArrayLike.h>
 #include <object-array/detail/ContinousReadOnlyArray.h>
 
 namespace detail {
@@ -31,7 +32,7 @@ namespace detail {
 
     template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER>
     struct ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, WRAPPER, false> {
-        using Type = detail::ContinuousReadOnlyArray<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, WRAPPER>, ArrayViewMixins, false>;
+        using Type = detail::ContinuousArrayLike<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, WRAPPER>, ArrayViewMixins, false>;
     };
 }
 

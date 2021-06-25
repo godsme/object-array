@@ -305,12 +305,12 @@ SCENARIO("ArrayView iterator with excluded scope") {
 }
 
 namespace {
-    struct UU_Foo {
+    struct UU_Thing {
         int a;
         int b;
     };
 
-    DEF_STRUCT_WRAPPER(Thing, UU_Foo) {
+    DEF_STRUCT_WRAPPER(Thing, UU_Thing) {
         Thing() {
             a = 10;
             b = 20;
@@ -335,38 +335,38 @@ namespace {
     };
 
     struct Bar {
-        UU_Foo foo[10];
+        UU_Thing things[10];
         std::size_t num;
     };
 
-    using FooView = ArrayView<UU_Foo, std::size_t, 20, Thing>;
+    using ThingView = ArrayView<UU_Thing, std::size_t, 20, Thing>;
 
-    auto foo(UU_Foo const &foo) -> void {
+    auto foo(UU_Thing const &) -> void {
 
     }
 
 }
-//
-//
-//SCENARIO("ArrayView with wrapper") {
-//    Bar bar{.foo = {{1, 2},
-//                    {3, 4},
-//                    {4, 5}}, .num = 3};
-//
-//    FooView view{bar.foo, bar.num};
-//
-//    foo(*view[0]);
-//    UU_Foo const &uu = view[0].to_struct();
-//
-//    REQUIRE(view[0].GetSize() == sizeof(Foo));
-//    REQUIRE(view[0].GetA() == 1);
-//    REQUIRE(view[1].GetA() == 3);
-//    REQUIRE(view[2].GetA() == 4);
-//
-//    auto *p = view.Append(5, 6);
-//    REQUIRE(p != nullptr);
-//
-//    REQUIRE(view.GetNum() == 4);
-//    REQUIRE(view[3].GetA() == 5);
-//    REQUIRE(view[3].GetB() == 6);
-//}
+
+
+SCENARIO("ArrayView with wrapper") {
+    Bar bar{.things = {{1, 2},
+                    {3, 4},
+                    {4, 5}}, .num = 3};
+
+    ThingView view{bar.things, bar.num};
+
+    foo(*view[0]);
+    UU_Thing const &uu = view[0].to_struct();
+
+    REQUIRE(view[0].GetSize() == sizeof(Thing));
+    REQUIRE(view[0].GetA() == 1);
+    REQUIRE(view[1].GetA() == 3);
+    REQUIRE(view[2].GetA() == 4);
+
+    auto *p = view.Append(5, 6);
+    REQUIRE(p != nullptr);
+
+    REQUIRE(view.GetNum() == 4);
+    REQUIRE(view[3].GetA() == 5);
+    REQUIRE(view[3].GetB() == 6);
+}
