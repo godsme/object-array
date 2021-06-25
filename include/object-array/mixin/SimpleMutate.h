@@ -34,26 +34,16 @@ namespace mixin {
     public:
         template<typename ... ARGS>
         auto Append(ARGS &&... args) -> ObjectType * {
-            if (Num() >= MAX_SIZE) return nullptr;
-            return Trait::Emplace(Elems()[Num()++], std::forward<ARGS>(args)...);
+            return Num() < MAX_SIZE ? Trait::Emplace(Elems()[Num()++], std::forward<ARGS>(args)...) : nullptr;
         }
 
         template<typename ... ARGS>
         auto Replace(SizeType i, ARGS &&... args) -> ObjectType * {
-            if (i >= Num()) return nullptr;
-            return Trait::Replace(Elems()[i], std::forward<ARGS>(args)...);
+            return i < Num() ? Trait::Replace(Elems()[i], std::forward<ARGS>(args)...) : nullptr;
         }
 
         auto Erase(SizeType i) -> void {
             if (i < Num()) DoErase(i);
-        }
-
-        template<typename PRED>
-        auto CleanUpBy(PRED&& pred) -> void {
-            if(Num() == 0) return;
-            for(int i = Num() - 1; i >=0; --i) {
-                if(pred(GetObj(i))) DoErase(i);
-            }
         }
     };
 }

@@ -29,6 +29,8 @@
 #include <object-array/mixin/RangedClear.h>
 #include <object-array/mixin/PredBasedMutate.h>
 #include <object-array/mixin/ScopedCleanUp.h>
+#include <object-array/mixin/SimpleMinElemExt.h>
+#include <object-array/mixin/ScopedMinElemExt.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
@@ -45,6 +47,8 @@ namespace detail {
             mixin::ArrayElemVisit,
             mixin::SimpleForEachExt,
             mixin::ScopedForEachExt,
+            mixin::SimpleMinElemExt,
+            mixin::ScopedMinElemExt,
             mixin::SimpleMutateExt,
             mixin::RangedClear,
             mixin::PredBasedMutate,

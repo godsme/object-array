@@ -37,6 +37,11 @@ namespace detail {
         using Mixins::FindIndex;
         using Mixins::Exists;
 
+        using Mixins::MinElem;
+        using Mixins::MinElemIndex;
+        using Mixins::MaxElem;
+        using Mixins::MaxElemIndex;
+
         using Mixins::Slice;
         using Mixins::From;
         using Mixins::Until;

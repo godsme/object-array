@@ -5,42 +5,42 @@
 #include <object-array/ObjectArray.h>
 #include <catch.hpp>
 
-//SCENARIO("ObjectArray") {
-//    ObjectArray<int, 10> array;
-//
-//    static_assert(std::is_trivially_destructible_v<ObjectArray<int, 10>>);
-//
-//    REQUIRE(array.GetNum() == 0);
-//    REQUIRE(array.None());
-//    array.Append(1);
-//
-//    WHEN("Erase")
-//    {
-//        REQUIRE(array.GetNum() == 1);
-//        REQUIRE(!array.None());
-//        array.Erase(0);
-//        REQUIRE(array.GetNum() == 0);
-//        REQUIRE(array.None());
-//    }
-//
-//    WHEN("Remove")
-//    {
-//        REQUIRE(array.GetNum() == 1);
-//        REQUIRE(!array.None());
-//
-//        array.Remove(&array[0]);
-//
-//        REQUIRE(array.GetNum() == 0);
-//        REQUIRE(array.None());
-//    }
-//
-//    WHEN("copy") {
-//        auto array2 = std::move(array);
-//        REQUIRE(array2.GetNum() == 1);
-//        REQUIRE(array.GetNum() == 0);
-//    }
-//
-//}
+SCENARIO("ObjectArray") {
+    ObjectArray<int, 10> array;
+
+    static_assert(std::is_trivially_destructible_v<ObjectArray<int, 10>>);
+
+    REQUIRE(array.GetNum() == 0);
+    REQUIRE(array.None());
+    array.Append(1);
+
+    WHEN("Erase")
+    {
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(!array.None());
+        array.Erase(0);
+        REQUIRE(array.GetNum() == 0);
+        REQUIRE(array.None());
+    }
+
+    WHEN("Remove")
+    {
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(!array.None());
+
+        array.Remove(&array[0]);
+
+        REQUIRE(array.GetNum() == 0);
+        REQUIRE(array.None());
+    }
+
+    WHEN("copy") {
+        auto array2 = std::move(array);
+        REQUIRE(array2.GetNum() == 1);
+        REQUIRE(array.GetNum() == 0);
+    }
+
+}
 
 namespace {
     int object_count = 0;
@@ -54,60 +54,60 @@ namespace {
     static_assert(!std::is_trivially_destructible_v<ObjectArray<Foo, 10>>);
 }
 
-//SCENARIO("ObjectArray Cleanup") {
-//    {
-//        ObjectArray<Foo, 10> array;
-//        REQUIRE(object_count == 0);
-//        array.Append(1);
-//        REQUIRE(object_count == 1);
-//        array.Append(2);
-//        REQUIRE(object_count == 2);
-//    }
-//    REQUIRE(object_count == 0);
-//}
-//
-//SCENARIO("ObjectArray equality") {
-//    ObjectArray<int, 10> array1;
-//    array1.Append(0);
-//    array1.Append(1);
-//
-//    {
-//        ObjectArray<int, 10> array2;
-//        array2.Append(1);
-//        array2.Append(0);
-//        REQUIRE(array1 == array2);
-//        array2.Append(0);
-//        REQUIRE(array1 != array2);
-//    }
-//
-//    {
-//        ObjectArray<int, 10> array2;
-//        array2.Append(1);
-//        array2.Append(2);
-//        REQUIRE(array1 != array2);
-//    }
-//}
-//
-//SCENARIO("ObjectArray iterator") {
-//    ObjectArray<int, 10> array;
-//    array.Append(2);
-//    array.Append(3);
-//    array.Append(4);
-//    array.Append(1);
-//    array.Append(8);
-//    array.Append(7);
-//
-//    auto n = 0;
-//    auto sum = 0;
-//    for(auto&& i : array) {
-//        i += 1;
-//        n++;
-//        sum += i;
-//    }
-//
-//    REQUIRE(n == 6);
-//    REQUIRE(sum == 2 + 4 + 3 + 1 + 8 + 7 + 6);
-//}
+SCENARIO("ObjectArray Cleanup") {
+    {
+        ObjectArray<Foo, 10> array;
+        REQUIRE(object_count == 0);
+        array.Append(1);
+        REQUIRE(object_count == 1);
+        array.Append(2);
+        REQUIRE(object_count == 2);
+    }
+    REQUIRE(object_count == 0);
+}
+
+SCENARIO("ObjectArray equality") {
+    ObjectArray<int, 10> array1;
+    array1.Append(0);
+    array1.Append(1);
+
+    {
+        ObjectArray<int, 10> array2;
+        array2.Append(1);
+        array2.Append(0);
+        REQUIRE(array1 == array2);
+        array2.Append(0);
+        REQUIRE(array1 != array2);
+    }
+
+    {
+        ObjectArray<int, 10> array2;
+        array2.Append(1);
+        array2.Append(2);
+        REQUIRE(array1 != array2);
+    }
+}
+
+SCENARIO("ObjectArray iterator") {
+    ObjectArray<int, 10> array;
+    array.Append(2);
+    array.Append(3);
+    array.Append(4);
+    array.Append(1);
+    array.Append(8);
+    array.Append(7);
+
+    auto n = 0;
+    auto sum = 0;
+    for(auto&& i : array) {
+        i += 1;
+        n++;
+        sum += i;
+    }
+
+    REQUIRE(n == 6);
+    REQUIRE(sum == 2 + 4 + 3 + 1 + 8 + 7 + 6);
+}
 
 SCENARIO("ObjectArray const iterator") {
     ObjectArray<int, 10> array{2,3,4,1,8,7};
