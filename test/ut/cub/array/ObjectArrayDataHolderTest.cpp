@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/21.
 //
 
-#include <object-array/holder/ObjectArrayDataHolder.h>
+#include <l0-infra/object-array/holder/ObjectArrayDataHolder.h>
 #include <catch.hpp>
 
 SCENARIO("Int ObjectArrayDataHolder") {

@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/25.
 //
 
-#include <object-array/holder/detail/ViewElemTrait.h>
+#include <l0-infra/object-array/holder/detail/ViewElemTrait.h>
 #include <l0-infra/base/StructWrapper.h>
 #include <catch.hpp>
 
