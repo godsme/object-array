@@ -10,14 +10,26 @@
 #include <l0-infra/array/mixin/RValueIndexedViewFactory.h>
 #include <l0-infra/array/holder/RangedViewDataHolder.h>
 #include <l0-infra/array/detail/ContinuousReadOnlyArray.h>
+#include <l0-infra/array/mixin/ArraySort.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
             mixin::RValueScopedViewFactory,
-            mixin::RValueIndexedViewFactory>;
+            mixin::RValueIndexedViewFactory,
+            mixin::ArraySort>;
 
-    template<typename HOLDER>
-    using Slice = ::detail::ContinuousReadOnlyArrayLike<HOLDER, SliceMixins>;
+    template<typename HOLDER, typename Parent = ::detail::ContinuousReadOnlyArrayLike<HOLDER, SliceMixins>>
+    class Slice : public Parent {
+        using Parent::Parent;
+        using typename Parent::Mixins;
+
+        using Mixins::Sort;
+        using Mixins::DescSort;
+        using Mixins::PartialSort;
+        using Mixins::PartialDescSort;
+        using Mixins::StableSort;
+        using Mixins::StableDescSort;
+    };
 }
 
 namespace view {

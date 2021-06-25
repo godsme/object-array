@@ -15,7 +15,6 @@ namespace mixin {
         using Self = T;
 
     public:
-        using typename Self::Trait;
         using typename Self::ObjectType;
         using typename Self::SizeType;
 
