@@ -54,9 +54,8 @@ namespace detail {
             detail::ScatteredArrayMixins>;
 }
 
-template<typename T, std::size_t MAX_NUM>
-class ScatteredArray : public detail::ScatteredArrayBase<T, MAX_NUM> {
-    using Parent = detail::ScatteredArrayBase<T, MAX_NUM>;
+template<typename T, std::size_t MAX_NUM, typename Parent = detail::ScatteredArrayBase<T, MAX_NUM>>
+class ScatteredArray : public Parent {
     using typename Parent::Holder;
     using typename Parent::Mixins;
 

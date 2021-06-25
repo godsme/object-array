@@ -5,12 +5,13 @@
 #ifndef OBJECT_ARRAY_SIMPLEMINELEMEXT_H
 #define OBJECT_ARRAY_SIMPLEMINELEMEXT_H
 
+#include <object-array/concept/SimpleMinElem.h>
 #include <object-array/mixin/SimpleMinElem.h>
 #include <object-array/mixin/detail/DefaultLessThan.h>
 #include <cub/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<typename T>
+    template<_concept::SimpleMinElem T>
     class SimpleMinElemExt : public T {
         using Self = T;
 

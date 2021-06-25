@@ -452,63 +452,73 @@ namespace {
     static_assert(!std::is_trivially_constructible_v<ThingArray>);
 
 }
-//
-//SCENARIO("move cons Thing") {
-//    Thing a;
-//    Thing b{std::move(a)};
-//}
-//
-//SCENARIO("A copy cons deleted ScopeArray should not be able to copy") {
-//    ThingArray array{};
-//
-//    //ThingArray array1{array};
-//}
-//
-//namespace {
-//    struct Thing2 {
-//        Thing2(Thing2 const&) {}
-//    };
-//
-//    using Thing2Array = ScatteredArray<Thing2, 10>;
-//    static_assert(std::is_copy_constructible_v<Thing2>);
-//    static_assert(std::is_copy_constructible_v<Thing2Array>);
-//
-//    static_assert(std::is_copy_assignable_v<Thing2>);
-//    static_assert(std::is_copy_assignable_v<Thing2Array>);
-//
-//    static_assert(std::is_move_constructible_v<Thing2>);
-//    static_assert(std::is_move_constructible_v<Thing2Array>);
-//
-//    static_assert(std::is_move_assignable_v<Thing2>);
-//    static_assert(std::is_move_assignable_v<Thing2Array>);
-//
-//}
-//
-//namespace {
-//    struct Thing3 {
-//        Thing3() = default;
-//        Thing3(Thing2 const&) {}
-//        Thing3(Thing2&&) = delete;
-//    };
-//
-//    using Thing3Array = ScatteredArray<Thing3, 10>;
-//    static_assert(std::is_copy_constructible_v<Thing3>);
-//    static_assert(std::is_copy_constructible_v<Thing3Array>);
-//
-//    static_assert(std::is_copy_assignable_v<Thing3>);
-//    static_assert(std::is_copy_assignable_v<Thing3Array>);
-//
-//    static_assert(std::is_move_constructible_v<Thing3>);
-//    static_assert(std::is_move_constructible_v<Thing3Array>);
-//
-//    static_assert(std::is_move_assignable_v<Thing3>);
-//    static_assert(std::is_move_assignable_v<Thing3Array>);
-//}
-//
-//SCENARIO("move cons Thing3Array") {
-//    Thing3 a;
-//    Thing3 b{std::move(a)};
-//
-//    Thing3Array aa;
-//    Thing3Array ba{std::move(aa)};
-//}
+
+SCENARIO("move cons Thing") {
+    Thing a;
+    Thing b{std::move(a)};
+}
+
+SCENARIO("A copy cons deleted ScopeArray should not be able to copy") {
+    ThingArray array{};
+
+    //ThingArray array1{array};
+}
+
+namespace {
+    struct Thing2 {
+        Thing2(Thing2 const&) {}
+    };
+
+    using Thing2Array = ScatteredArray<Thing2, 10>;
+    static_assert(std::is_copy_constructible_v<Thing2>);
+    static_assert(std::is_copy_constructible_v<Thing2Array>);
+
+    static_assert(std::is_copy_assignable_v<Thing2>);
+    static_assert(std::is_copy_assignable_v<Thing2Array>);
+
+    static_assert(std::is_move_constructible_v<Thing2>);
+    static_assert(std::is_move_constructible_v<Thing2Array>);
+
+    static_assert(std::is_move_assignable_v<Thing2>);
+    static_assert(std::is_move_assignable_v<Thing2Array>);
+
+}
+
+namespace {
+    struct Thing3 {
+        Thing3() = default;
+        Thing3(Thing2 const&) {}
+        Thing3(Thing2&&) = delete;
+    };
+
+    using Thing3Array = ScatteredArray<Thing3, 10>;
+    static_assert(std::is_copy_constructible_v<Thing3>);
+    static_assert(std::is_copy_constructible_v<Thing3Array>);
+
+    static_assert(std::is_copy_assignable_v<Thing3>);
+    static_assert(std::is_copy_assignable_v<Thing3Array>);
+
+    static_assert(std::is_move_constructible_v<Thing3>);
+    static_assert(std::is_move_constructible_v<Thing3Array>);
+
+    static_assert(std::is_move_assignable_v<Thing3>);
+    static_assert(std::is_move_assignable_v<Thing3Array>);
+}
+
+SCENARIO("move cons Thing3Array") {
+    Thing3 a;
+    Thing3 b{std::move(a)};
+
+    Thing3Array aa;
+    Thing3Array ba{std::move(aa)};
+
+    aa.Append();
+    aa.Append();
+
+    REQUIRE(aa.GetNum() == 2);
+
+    Thing3Array ca{std::move(aa)};
+
+    REQUIRE(ca.GetNum() == 2);
+    REQUIRE(aa.GetNum() == 0);
+}
