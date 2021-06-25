@@ -10,19 +10,9 @@
 #include <l0-infra/array/concept/Pred.h>
 
 namespace mixin {
-#if HAS_CONCEPT
-    template<typename T>
-    concept SimpleFind_Mutable =
-            _concept::SimpleRangedArrayLike<T> &&
-            _concept::SimpleMutable<T> &&
-            _concept::SimpleFind<T>;
-    template<SimpleFind_Mutable T>
-#else
-    template<typename T>
-#endif
+    template<__cOnCePt(SimpleFindMutable) T>
     class PredBasedMutate : public T {
         using Self = T;
-
     public:
         using typename Self::ObjectType;
 

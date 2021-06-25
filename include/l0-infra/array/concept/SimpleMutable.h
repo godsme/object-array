@@ -21,6 +21,14 @@ namespace _concept {
         { o.Append(std::declval<typename T::ObjectType const&>()) } -> std::same_as<typename T::ObjectType*>;
         { o.Append(std::declval<typename T::ObjectType&&>()) } -> std::same_as<typename T::ObjectType*>;
     };
+
+    template<typename T>
+    concept SimpleRangedMutable = _concept::SimpleMutable<T> && _concept::SimpleRangedArrayLike<T>;
+
+    concept SimpleFindMutable =
+            _concept::SimpleRangedArrayLike<T> &&
+            _concept::SimpleMutable<T> &&
+            _concept::SimpleFind<T>;
 }
 #endif
 
