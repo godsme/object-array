@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/22.
 //
 
-#include <l0-infra/object-array/ScatteredArray.h>
+#include <l0-infra/array/ScatteredArray.h>
 #include <catch.hpp>
 
 SCENARIO("ScatteredArray Test") {

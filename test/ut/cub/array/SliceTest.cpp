@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/22.
 //
 
-#include <l0-infra/object-array/view/Slice.h>
+#include <l0-infra/array/view/Slice.h>
 #include "../../Foo.h"
 #include <catch.hpp>
 

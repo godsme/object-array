@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/21.
 //
 
-#include <l0-infra/object-array/ObjectArray.h>
+#include <l0-infra/array/ObjectArray.h>
 #include <catch.hpp>
 
 SCENARIO("ObjectArray") {

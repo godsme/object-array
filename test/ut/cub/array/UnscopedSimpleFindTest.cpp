@@ -2,13 +2,13 @@
 // Created by Darwin Yuan on 2021/6/20.
 //
 
-#include <l0-infra/object-array/mixin/NonScopedSimpleFind.h>
-#include <l0-infra/object-array/mixin/RangedArrayLike.h>
-#include <l0-infra/object-array/mixin/detail/Mixins.h>
+#include <l0-infra/array/mixin/NonScopedSimpleFind.h>
+#include <l0-infra/array/mixin/RangedArrayLike.h>
+#include <l0-infra/array/mixin/detail/Mixins.h>
 #include "../../Foo.h"
 #include <catch.hpp>
-#include <l0-infra/object-array/mixin/SimpleFindExt.h>
-#include <l0-infra/object-array/detail/ArrayComposer.h>
+#include <l0-infra/array/mixin/SimpleFindExt.h>
+#include <l0-infra/array/detail/ArrayComposer.h>
 
 namespace {
     using Mixins = mixin::Mixins<mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;

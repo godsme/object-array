@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/21.
 //
 
-#include <l0-infra/object-array/holder/ScatteredArrayDataHolder.h>
+#include <l0-infra/array/holder/ScatteredArrayDataHolder.h>
 #include <catch.hpp>
 
 SCENARIO("Int ScatteredArrayDataHolder") {
