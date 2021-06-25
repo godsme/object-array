@@ -6,10 +6,11 @@
 #define OBJECT_ARRAY_SCOPEDARRAYLIKE_H
 
 #include <l0-infra/array/config.h>
+
 #if HAS_CONCEPT
-#include <object-array/concept/RangedArrayLike.h>
-#include <object-array/concept/ArrayLike.h>
-#include <object-array/concept/ElemVisitor.h>
+#include <l0-infra/array/concept/RangedArrayLike.h>
+#include <l0-infra/array/concept/ArrayLike.h>
+#include <l0-infra/array/concept/ElemVisitor.h>
 
 namespace _concept {
     template<typename T>

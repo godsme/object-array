@@ -8,7 +8,7 @@
 #include <l0-infra/array/config.h>
 #include <l0-infra/array/concept/detail/ConceptDef.h>
 #if HAS_CONCEPT
-#include <object-array/concept/detail/PredTypeTrait.h>
+#include <l0-infra/array/concept/detail/PredTypeTrait.h>
 #include <type_traits>
 #include <optional>
 #include <concepts>

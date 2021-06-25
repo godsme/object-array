@@ -8,7 +8,7 @@
 #include <l0-infra/array/config.h>
 
 #if HAS_CONCEPT
-#include <object-array/concept/SimpleArrayLike.h>
+#include <l0-infra/array/concept/SimpleArrayLike.h>
 #include <concepts>
 
 namespace _concept {

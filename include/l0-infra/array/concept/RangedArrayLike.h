@@ -8,7 +8,7 @@
 #include <l0-infra/array/config.h>
 #include <l0-infra/array/concept/detail/ConceptDef.h>
 #if HAS_CONCEPT
-#include <object-array/concept/IndexedContainer.h>
+#include <l0-infra/array/concept/IndexedContainer.h>
 #include <concepts>
 
 namespace _concept {

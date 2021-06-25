@@ -8,7 +8,7 @@
 #include <l0-infra/array/config.h>
 #include <l0-infra/array/concept/detail/ConceptDef.h>
 #if HAS_CONCEPT
-#include <object-array/concept/detail/PredTypeTrait.h>
+#include <l0-infra/array/concept/detail/PredTypeTrait.h>
 #include <type_traits>
 #include <optional>
 #include <concepts>
@@ -25,6 +25,7 @@ namespace _concept {
     template<typename T>
     concept SimpleRangedMutable = _concept::SimpleMutable<T> && _concept::SimpleRangedArrayLike<T>;
 
+    template<typename T>
     concept SimpleFindMutable =
             _concept::SimpleRangedArrayLike<T> &&
             _concept::SimpleMutable<T> &&

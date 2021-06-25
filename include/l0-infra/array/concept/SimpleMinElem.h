@@ -7,7 +7,7 @@
 
 #include <l0-infra/array/config.h>
 #if HAS_CONCEPT
-#include <object-array/concept/detail/LessTypeTrait.h>
+#include <l0-infra/array/concept/detail/LessTypeTrait.h>
 #include <type_traits>
 #include <optional>
 #include <concepts>

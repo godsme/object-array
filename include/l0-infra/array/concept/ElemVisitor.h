@@ -7,8 +7,8 @@
 
 #include <l0-infra/array/config.h>
 #if HAS_CONCEPT
-#include <object-array/concept/detail/OpTypeTrait.h>
-#include <object-array/concept/RangedArrayLike.h>
+#include <l0-infra/array/concept/detail/OpTypeTrait.h>
+#include <l0-infra/array/concept/RangedArrayLike.h>
 #include <concepts>
 #include <type_traits>
 
