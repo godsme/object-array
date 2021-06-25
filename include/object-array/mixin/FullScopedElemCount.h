@@ -12,10 +12,17 @@ namespace mixin {
     class FullScopedElemCount : public ScopedElemCount<T> {
         using Self = T;
     public:
+        using typename Self::BitMap;
+
+    public:
         using Self::GetScope;
 
         auto All() const -> bool {
             return GetScope().all();
+        }
+
+        auto GetAvailable() const -> BitMap {
+            return ~GetScope();
         }
     };
 }

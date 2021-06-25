@@ -28,6 +28,8 @@ namespace detail {
         using Mixins::Any;
         using Mixins::None;
         using Mixins::All;
+        using Mixins::GetOccupied;
+        using Mixins::GetAvailable;
 
         using Mixins::ForEach;
 

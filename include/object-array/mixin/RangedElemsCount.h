@@ -18,6 +18,7 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
+        using typename T::BitMap;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
@@ -36,6 +37,14 @@ namespace mixin {
 
         auto All() const -> bool {
             return IndexEnd() == Self::MAX_SIZE;
+        }
+
+        auto GetOccupied() const -> BitMap {
+            return BitMap(IndexBegin(), IndexEnd());
+        }
+
+        auto GetAvailable() const -> BitMap {
+            return ~BitMap(IndexBegin(), IndexEnd());
         }
     };
 }

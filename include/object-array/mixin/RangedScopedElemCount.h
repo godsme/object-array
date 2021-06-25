@@ -22,6 +22,10 @@ namespace mixin {
         auto All() const -> bool {
             return BitMap(IndexBegin(), IndexEnd()) == GetScope();
         }
+
+        auto GetAvailable() const -> BitMap {
+            return (~GetScope()).Mask(IndexBegin(), IndexEnd());
+        }
     };
 }
 

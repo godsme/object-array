@@ -14,6 +14,7 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
+        using typename T::BitMap;
 
         using Self::GetScope;
 
@@ -27,6 +28,10 @@ namespace mixin {
 
         auto None() const -> bool {
             return GetScope().none();
+        }
+
+        auto GetOccupied() const -> BitMap {
+            return GetScope();
         }
     };
 }
