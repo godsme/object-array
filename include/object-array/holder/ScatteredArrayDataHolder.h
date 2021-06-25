@@ -7,6 +7,7 @@
 
 #include <object-array/holder/ArrayDataHolder.h>
 #include <object-array/holder/detail/ArrayDataHolderInterface.h>
+#include <object-array/holder/detail/ArrayHolderTrait.h>
 
 namespace holder::detail {
     template<typename DATA_HOLDER>
@@ -22,7 +23,7 @@ namespace holder::detail {
     };
 }
 
-namespace holder {
+namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM>
     struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
@@ -148,5 +149,11 @@ namespace holder {
         BitMap occupied;
     };
 }
+
+namespace holder {
+    template<typename OBJ, std::size_t MAX_NUM>
+    using ScatteredArrayHolder = typename detail::Holder<OBJ, MAX_NUM, detail::ScatteredArrayDataHolder>;
+}
+
 
 #endif //OBJECT_ARRAY_SCATTEREDARRAYDATAHOLDER_H

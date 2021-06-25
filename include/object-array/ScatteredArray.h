@@ -31,7 +31,9 @@ namespace detail {
             mixin::SimpleFindExt>;
 
     template<typename T, std::size_t MAX_NUM>
-    using ScatteredArrayBase = detail::ArrayComposer<holder::ScatteredArrayDataHolder<T, MAX_NUM>, detail::ScatteredArrayMixins>;
+    using ScatteredArrayBase = detail::ReadOnlyArrayLike<
+            holder::ScatteredArrayHolder<T, MAX_NUM>,
+            detail::ScatteredArrayMixins>;
 }
 
 template<typename T, std::size_t MAX_NUM>
@@ -42,17 +44,6 @@ class ScatteredArray : detail::ScatteredArrayBase<T, MAX_NUM> {
 
 public:
     using Parent::Parent;
-
-    using Mixins::begin;
-    using Mixins::end;
-
-    using Parent::GetNum;
-    using Parent::Any;
-    using Parent::None;
-    using Parent::All;
-
-    using Mixins::Find;
-    using Mixins::FindIndex;
 };
 
 #endif //OBJECT_ARRAY_SCATTEREDARRAY_H
