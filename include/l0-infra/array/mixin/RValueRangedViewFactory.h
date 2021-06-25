@@ -42,11 +42,11 @@ namespace mixin {
         }
 
         auto Until(EndOffsetType until) && -> auto {
-            return Self::template MakeSliceByFrom<false, true>(IndexBegin(), until);
+            return std::move(*this).MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
         }
 
         auto Until(EndOffsetType until) const && -> auto {
-            return Self::template MakeSliceByFrom<true, true>(IndexBegin(), until);
+            return std::move(*this).MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
         }
     };
 }

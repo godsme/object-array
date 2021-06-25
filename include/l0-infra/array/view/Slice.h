@@ -19,10 +19,9 @@ namespace view::detail {
             mixin::ArraySort>;
 
     template<typename HOLDER, typename Parent = ::detail::ContinuousReadOnlyArrayLike<HOLDER, SliceMixins>>
-    class Slice : public Parent {
+    struct Slice : Parent {
         using Parent::Parent;
         using typename Parent::Mixins;
-
         using Mixins::Sort;
         using Mixins::DescSort;
         using Mixins::PartialSort;

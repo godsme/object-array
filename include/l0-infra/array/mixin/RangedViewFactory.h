@@ -120,11 +120,11 @@ namespace mixin {
         auto Until(EndOffsetType) const && -> void {}
 
         auto Until(EndOffsetType until) & -> auto {
-            return MakeSliceByFrom<false, false>(IndexBegin(), until);
+            return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
         }
 
         auto Until(EndOffsetType until) const& -> auto {
-            return MakeSliceByFrom<true, false>(IndexBegin(), until);
+            return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
         }
     };
 }

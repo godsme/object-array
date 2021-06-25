@@ -14,6 +14,9 @@
 #include <l0-infra/array/mixin/IndexedRefAccessor.h>
 #include <l0-infra/array/mixin/ScopedByIndexAccessor.h>
 #include <l0-infra/array/mixin/RangedScopedElemCount.h>
+#include <l0-infra/array/mixin/ScopedSimpleForEach.h>
+#include <l0-infra/array/mixin/ScopedSimpleMinElem.h>
+#include <l0-infra/array/detail/ReadOnlyArrayLike.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
@@ -24,33 +27,20 @@ namespace view::detail {
             mixin::IterableScopedArrayLike,
             mixin::IndexedScopedViewFactory,
             mixin::ScopedSimpleFind,
-            mixin::SimpleFindExt>;
+            mixin::SimpleFindExt,
+            mixin::ArrayElemVisit,
+            mixin::ScopedSimpleForEach,
+            mixin::SimpleForEachExt,
+            mixin::ScopedSimpleMinElem,
+            mixin::SimpleMinElemExt,
+            mixin::IndexedScopedViewFactory>;
 
     template<typename HOLDER>
-    class ScopedView : ::detail::ArrayComposer<HOLDER, ScopedMixins> {
-        using Parent = ::detail::ArrayComposer<HOLDER, ScopedMixins>;
+    class ScopedView : public ::detail::ReadOnlyArrayLike<HOLDER, ScopedMixins> {
+        using Parent = ::detail::ReadOnlyArrayLike<HOLDER, ScopedMixins>;
         using typename Parent::Mixins;
     public:
         using Parent::Parent;
-
-        using Mixins::operator[];
-        using Mixins::At;
-        using Mixins::First;
-        using Mixins::Last;
-
-        using Mixins::begin;
-        using Mixins::end;
-
-        using Parent::GetNum;
-        using Parent::Any;
-        using Parent::None;
-        using Parent::All;
-
-        using Mixins::Find;
-        using Mixins::FindIndex;
-        using Mixins::Exists;
-
-        using Mixins::WithIndex;
     };
 }
 
