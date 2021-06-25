@@ -27,6 +27,8 @@
 #include <object-array/mixin/SimpleMutate.h>
 #include <object-array/mixin/SimpleMutateExt.h>
 #include <object-array/mixin/RangedClear.h>
+#include <object-array/mixin/PredBasedMutate.h>
+#include <object-array/mixin/ScopedCleanUp.h>
 
 namespace detail {
     using ContinuousArrayMixin = mixin::Mixins<
@@ -43,9 +45,10 @@ namespace detail {
             mixin::ArrayElemVisit,
             mixin::SimpleForEachExt,
             mixin::ScopedForEachExt,
-            mixin::SimpleMutate,
             mixin::SimpleMutateExt,
-            mixin::RangedClear>;
+            mixin::RangedClear,
+            mixin::PredBasedMutate,
+            mixin::ScopedCleanUp>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H

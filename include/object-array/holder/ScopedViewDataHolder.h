@@ -17,7 +17,7 @@ namespace holder::detail {
         using ObjectType = typename T::ObjectType;
         using SizeType   = typename T::SizeType;
         using BitMap     = typename T::BitMap;
-        
+
         constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
 
         using ScopedRangedArrayLike = ScopedViewDataHolderInterface;

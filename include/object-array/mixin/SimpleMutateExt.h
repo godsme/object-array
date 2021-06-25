@@ -6,60 +6,37 @@
 #define OBJECT_ARRAY_SIMPLEMUTATEEXT_H
 
 namespace mixin {
-    template<typename T>
-    class SimpleMutateExt : public T {
-        using Self = T;
+    template<_concept::ContinuousArrayLikeDataHolder T>
+    class SimpleMutateExt : public SimpleMutate<T> {
+        using Self = SimpleMutate<T>;
     public:
-        using typename T::ObjectType;
-        using typename T::SizeType;
-        using typename T::BitMap;
+        using typename Self::ObjectType;
+        using typename Self::SizeType;
+        using typename Self::BitMap;
+        using typename Self::Maybe;
 
     public:
         using Self::GetObj;
 
-        using Self::IndexBegin;
-        using Self::IndexEnd;
-
-        using Self::Append;
         using Self::Replace;
         using Self::Erase;
-        using Self::Find;
-        using Self::FindIndex;
 
+    private:
+        auto GetObjIndex(ObjectType const* obj) -> Maybe {
+            auto* base = &GetObj(0);
+            return obj < base ? std::nullopt : Maybe(obj - base);
+        }
+
+    public:
         template<typename ... ARGS>
         auto ReplaceObj(ObjectType const& obj, ARGS &&... args) -> ObjectType * {
-            auto* base = &GetObj(0);
-            if(&obj < base) return nullptr;
-            return Replace(&obj - base, std::forward<ARGS>(args)...);
+            auto index = GetObjIndex(&obj);
+            return index ? Replace(*index, std::forward<ARGS>(args)...) : nullptr;
         }
 
         auto Remove(ObjectType *p) -> void {
-            auto* base = &GetObj(0);
-            if (p < base) return;
-            Erase(p - base);
-        }
-
-        auto CleanUp(BitMap scope) -> void {
-            if(IndexEnd() == 0) return;
-            for(auto i=IndexEnd()-1; i>=IndexBegin(); --i) {
-                if(scope[i]) Erase(i);
-            }
-        }
-
-        auto CleanUpEx(BitMap excluded) -> void {
-            CleanUp(~excluded);
-        }
-
-        template<typename PRED>
-        auto FindOrAppend(PRED&& pred) -> ObjectType * {
-            auto* found = Find(std::forward<PRED>(pred));
-            return found ? found : Append();
-        }
-
-        template<typename PRED>
-        auto RemoveBy(PRED&& pred) -> void {
-            auto found = FindIndex(std::forward<PRED>(pred));
-            if(found) Erase(*found);
+            auto index = GetObjIndex(p);
+            if (index) Erase(*index);
         }
     };
 }
