@@ -14,6 +14,7 @@
 #define __wItH_iNdEx_Op(OP) _concept::WithIndexOp<OP, ObjectType, SizeType>
 #define __oP_cOnCePt(OP) _concept::Op<ObjectType, SizeType> OP
 #define __lEsS_cOnCePt(LESS) _concept::Less<ObjectType> LESS
+#define __sImPlE_pReD_cOnCePt(PRED) _concept::SimplePred<ObjectType> PRED
 #else
 #define __cOnCePt(c) typename
 

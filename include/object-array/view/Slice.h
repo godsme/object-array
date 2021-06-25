@@ -9,7 +9,7 @@
 #include <object-array/mixin/RvalueScopedViewFactory.h>
 #include <object-array/mixin/RValueIndexedViewFactory.h>
 #include <object-array/holder/RangedViewDataHolder.h>
-#include <object-array/detail/ReadOnlyArrayLike.h>
+#include <object-array/detail/ContinuousReadOnlyArray.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
@@ -17,17 +17,7 @@ namespace view::detail {
             mixin::RValueIndexedViewFactory>;
 
     template<typename HOLDER>
-    class Slice : public ::detail::ReadOnlyArrayLike<HOLDER, SliceMixins> {
-        using Parent = ::detail::ReadOnlyArrayLike<HOLDER, SliceMixins>;
-        using typename Parent::Holder;
-        using typename Parent::Mixins;
-
-    public:
-        using Parent::Parent;
-
-        using Mixins::Scope;
-        using Mixins::Exclude;
-    };
+    using Slice = ::detail::ContinuousReadOnlyArrayLike<HOLDER, SliceMixins>;
 }
 
 namespace view {

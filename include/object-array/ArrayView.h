@@ -11,7 +11,7 @@
 #include <object-array/detail/ArrayComposer.h>
 #include <object-array/mixin/RValueRangedViewFactory.h>
 #include <object-array/detail/ContinuousArrayLike.h>
-#include <object-array/detail/ContinousReadOnlyArray.h>
+#include <object-array/detail/ContinuousReadOnlyArray.h>
 
 namespace detail {
     using ArrayViewSpecifiedMixins = ::mixin::Mixins<

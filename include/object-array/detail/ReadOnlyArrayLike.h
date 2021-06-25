@@ -69,6 +69,8 @@ namespace detail {
             return !operator==(rhs);
         }
     };
+
+
 }
 
 #endif //OBJECT_ARRAY_READONLYARRAYLIKE_H

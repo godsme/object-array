@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_DETAIL_CONTINUOUSARRAYLIKE_H
 #define OBJECT_ARRAY_DETAIL_CONTINUOUSARRAYLIKE_H
 
-#include <object-array/detail/ContinousReadOnlyArray.h>
+#include <object-array/detail/ContinuousReadOnlyArray.h>
 
 namespace detail {
     template<typename DATA_HOLDER, typename MIXINS, bool ORDERED=false>
