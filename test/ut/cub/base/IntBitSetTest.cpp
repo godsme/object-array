@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/25.
 //
 
-#include <cub/base/IntBitSet.h>
-#include <cub/base/BitSet.h>
+#include <l0-infra/base/IntBitSet.h>
+#include <l0-infra/base/BitSet.h>
 #include <catch.hpp>
 
 SCENARIO("IntBitSet Size") {

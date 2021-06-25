@@ -7,7 +7,7 @@
 
 #include <object-array/concept/SimpleFind.h>
 #include <object-array/concept/Pred.h>
-#include <cub/base/InvokeConstMethod.h>
+#include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleFind) T>

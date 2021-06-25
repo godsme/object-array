@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_DEDUCEINTOPTIONAL_H
 #define OBJECT_ARRAY_DEDUCEINTOPTIONAL_H
 
-#include <cub/base/IntOpt.h>
+#include <l0-infra/base/IntOpt.h>
 
 namespace detail {
     template<std::size_t MAX_SIZE>

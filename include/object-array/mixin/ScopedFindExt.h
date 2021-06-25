@@ -8,7 +8,7 @@
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/Pred.h>
 #include <object-array/mixin/ScopedFind.h>
-#include <cub/base/InvokeConstMethod.h>
+#include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {
     template<__cOnCePt(ConstRangedArrayLike) T>

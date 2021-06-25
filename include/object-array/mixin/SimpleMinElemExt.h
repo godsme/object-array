@@ -8,7 +8,7 @@
 #include <object-array/concept/SimpleMinElem.h>
 #include <object-array/mixin/SimpleMinElem.h>
 #include <object-array/mixin/detail/DefaultLessThan.h>
-#include <cub/base/InvokeConstMethod.h>
+#include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleMinElem) T>

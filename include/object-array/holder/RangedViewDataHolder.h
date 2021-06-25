@@ -10,7 +10,7 @@
 #include <object-array/holder/detail/ObjectTrait.h>
 #include <object-array/holder/detail/RangedViewDataHolderInterface.h>
 #include <object-array/holder/detail/ArrayLikeViewDataHolder.h>
-#include <cub/base/BitSet.h>
+#include <l0-infra/base/BitSet.h>
 
 namespace holder {
     template<__cOnCePt(IndexedContainer) ARRAY, typename SUB_TYPE>

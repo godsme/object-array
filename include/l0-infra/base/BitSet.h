@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_BITSET_H
 #define OBJECT_ARRAY_BITSET_H
 
-#include <cub/base/IntBitSet.h>
+#include <l0-infra/base/IntBitSet.h>
 #include <bitset>
 
 namespace detail {

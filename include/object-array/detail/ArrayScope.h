@@ -5,8 +5,8 @@
 #ifndef OBJECT_ARRAY_ARRAYSCOPE_H
 #define OBJECT_ARRAY_ARRAYSCOPE_H
 
-#include <cub/base/DeduceSizeType.h>
-#include <cub/base/BitSet.h>
+#include <l0-infra/base/DeduceSizeType.h>
+#include <l0-infra/base/BitSet.h>
 
 namespace detail {
     template<std::size_t MAX_SIZE>

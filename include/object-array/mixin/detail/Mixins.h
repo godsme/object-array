@@ -5,9 +5,9 @@
 #ifndef OBJECT_ARRAY_MIXINS_H
 #define OBJECT_ARRAY_MIXINS_H
 
-#include <cub/base/DeduceOffsetType.h>
-#include <cub/base/BitSet.h>
-#include <cub/base/detail/DeduceIntOptional.h>
+#include <l0-infra/base/DeduceOffsetType.h>
+#include <l0-infra/base/BitSet.h>
+#include <l0-infra/base/detail/DeduceIntOptional.h>
 #include <object-array/ArrayOffset.h>
 #include <object-array/detail/ArrayScope.h>
 #include <type_traits>

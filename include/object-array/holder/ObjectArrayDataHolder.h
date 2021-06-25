@@ -8,7 +8,7 @@
 #include <object-array/holder/detail/ContinuousArrayDataHolderInterface.h>
 #include <object-array/holder/detail/ArrayHolderTrait.h>
 #include <object-array/holder/ArrayDataHolder.h>
-#include <cub/base/DeduceSizeType.h>
+#include <l0-infra/base/DeduceSizeType.h>
 
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM>

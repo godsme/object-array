@@ -8,7 +8,7 @@
 
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/mixin/detail/Mixins.h>
-#include <cub/base/InvokeConstMethod.h>
+#include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>

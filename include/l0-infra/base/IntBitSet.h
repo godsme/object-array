@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_INTBITSET_H
 #define OBJECT_ARRAY_INTBITSET_H
 
-#include <cub/base/detail/DeduceBitSetIntType.h>
+#include <l0-infra/base/detail/DeduceBitSetIntType.h>
 #include <limits>
 
 template<std::size_t N>

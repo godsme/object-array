@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/25.
 //
 
-#include <cub/base/DeduceSizeType.h>
+#include <l0-infra/base/DeduceSizeType.h>
 #include <catch.hpp>
 
 SCENARIO("DeduceSizeType") {

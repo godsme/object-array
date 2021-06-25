@@ -7,7 +7,7 @@
 
 #include <object-array/concept/RangedArrayLike.h>
 #include <object-array/concept/Pred.h>
-#include <cub/base/IntOpt.h>
+#include <l0-infra/base/IntOpt.h>
 #include <optional>
 #include <algorithm>
 

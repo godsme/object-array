@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/25.
 //
 
-#include <cub/base/BitSet.h>
+#include <l0-infra/base/BitSet.h>
 #include <catch.hpp>
 
 static_assert(std::is_trivially_copyable_v<IntBitSet<10>>);

@@ -7,7 +7,7 @@
 
 #include <object-array/concept/IndexedContainer.h>
 #include <object-array/concept/Op.h>
-#include <cub/base/InvokeConstMethod.h>
+#include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {
     template<__cOnCePt(IndexedContainer) T>

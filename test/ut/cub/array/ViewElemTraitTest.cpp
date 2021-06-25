@@ -3,7 +3,7 @@
 //
 
 #include <object-array/holder/detail/ViewElemTrait.h>
-#include <cub/base/StructWrapper.h>
+#include <l0-infra/base/StructWrapper.h>
 #include <catch.hpp>
 
 namespace {

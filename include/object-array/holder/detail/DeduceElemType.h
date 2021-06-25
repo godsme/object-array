@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_DEDUCEELEMTYPE_H
 #define OBJECT_ARRAY_DEDUCEELEMTYPE_H
 
-#include <cub/base/Placement.h>
+#include <l0-infra/base/Placement.h>
 #include <type_traits>
 
 namespace holder::detail {

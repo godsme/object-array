@@ -5,8 +5,8 @@
 #ifndef OBJECT_ARRAY_FOO_H
 #define OBJECT_ARRAY_FOO_H
 
-#include <cub/base/BitSet.h>
-#include <cub/base/IntOpt.h>
+#include <l0-infra/base/BitSet.h>
+#include <l0-infra/base/IntOpt.h>
 #include <cstddef>
 
 namespace ut {

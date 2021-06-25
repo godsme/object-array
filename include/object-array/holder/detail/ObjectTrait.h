@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_OBJECTTRAIT_H
 #define OBJECT_ARRAY_OBJECTTRAIT_H
 
-#include <cub/base/Placement.h>
+#include <l0-infra/base/Placement.h>
 
 namespace holder::detail {
     template<typename ELEM>

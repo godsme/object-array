@@ -8,7 +8,7 @@
 #include <object-array/holder/detail/ViewElemTrait.h>
 #include <object-array/holder/detail/ContinuousArrayDataHolderInterface.h>
 #include <object-array/detail/ArrayScope.h>
-#include <cub/base/IntOpt.h>
+#include <l0-infra/base/IntOpt.h>
 #include <type_traits>
 #include <cstring>
 #include <algorithm>

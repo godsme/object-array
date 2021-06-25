@@ -4,7 +4,7 @@
 
 #include <object-array/ArrayView.h>
 #include <catch.hpp>
-#include <cub/base/StructWrapper.h>
+#include <l0-infra/base/StructWrapper.h>
 
 namespace {
     struct Foo {

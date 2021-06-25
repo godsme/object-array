@@ -8,9 +8,9 @@
 #include <object-array/holder/detail/DeduceElemType.h>
 #include <object-array/holder/detail/ObjectTrait.h>
 #include <object-array/detail/ArrayScope.h>
-#include <cub/base/DeduceSizeType.h>
-#include <cub/base/BitSet.h>
-#include <cub/base/IntOpt.h>
+#include <l0-infra/base/DeduceSizeType.h>
+#include <l0-infra/base/BitSet.h>
+#include <l0-infra/base/IntOpt.h>
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>

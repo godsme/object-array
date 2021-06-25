@@ -2,7 +2,7 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#include <cub/base/IntOpt.h>
+#include <l0-infra/base/IntOpt.h>
 #include <catch.hpp>
 
 SCENARIO("IntOpt") {

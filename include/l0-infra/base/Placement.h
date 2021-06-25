@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_PLACEMENT_H
 #define OBJECT_ARRAY_PLACEMENT_H
 
-#include <cub/base/detail/StorageTrait.h>
+#include <l0-infra/base/detail/StorageTrait.h>
 #include <utility>
 #include <new>
 
