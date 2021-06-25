@@ -31,12 +31,18 @@ suite SliceFind_Suite = [] {
         auto&& slice = array.Slice(0, 0);
         expect(slice.GetNum() == 1);
         expect(*slice.At(0) == 0);
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "the size of double end slice should be 1"_test = [&] {
         auto&& slice = array.Slice(8, 8);
         expect(slice.GetNum() == 1);
         expect(*slice.At(0) == 8);
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "should be able to specify wrong boundary"_test = [&] {
@@ -48,6 +54,9 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 0);
         expect(slice.At(0) == nullptr);
+        expect(!slice.Any());
+        expect(slice.None());
+        expect(!slice.All());
     };
 
     "should be able to specify wrong boundary to create an empty slice"_test = [&] {
@@ -59,6 +68,9 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 0);
         expect(slice.At(0) == nullptr);
+        expect(!slice.Any());
+        expect(slice.None());
+        expect(!slice.All());
     };
 
     "left boundary should be able to adjust to 0"_test = [&] {
@@ -70,6 +82,9 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 1);
         expect(*slice.At(0) == 0);
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "left boundary should be able to adjust to 0"_test = [&] {
@@ -81,6 +96,9 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 0);
         expect(slice.At(0) == nullptr);
+        expect(!slice.Any());
+        expect(slice.None());
+        expect(!slice.All());
     };
 
     "right boundary could be 0"_test = [&] {
@@ -92,6 +110,9 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 1);
         expect(*slice.At(0) == 0);
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "right boundary could be limited to right boundary"_test = [&] {
@@ -105,6 +126,10 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 9);
         expect(sum == 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8);
+
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "right boundary could be limited to right boundary"_test = [&] {
@@ -118,6 +143,10 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 9);
         expect(sum == 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8);
+
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "right boundary could be limited to right boundary"_test = [&] {
@@ -131,6 +160,10 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 1);
         expect(*slice.At(0) == 0);
+
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "left boundary should be able to adjust to 0"_test = [&] {
@@ -142,6 +175,10 @@ suite SliceFind_Suite = [] {
         }
         expect(n == 1);
         expect(*slice.At(0) == 8);
+
+        expect(slice.Any());
+        expect(!slice.None());
+        expect(!slice.All());
     };
 
     "should be able to sort"_test = [&] {
