@@ -16,6 +16,7 @@
 #include <object-array/mixin/ByIndexAccessor.h>
 #include <object-array/mixin/RangedElemsCount.h>
 #include <object-array/mixin/ArrayElemVisit.h>
+#include <object-array/mixin/SimpleForEach.h>
 #include <object-array/mixin/SimpleForEachExt.h>
 #include <object-array/mixin/ScopedForEachExt.h>
 #include <object-array/mixin/SimpleMinElemExt.h>
@@ -32,6 +33,7 @@ namespace detail {
             mixin::SimpleFindExt,
             mixin::ScopedFindExt,
             mixin::ArrayElemVisit,
+            mixin::SimpleForEach,
             mixin::SimpleForEachExt,
             mixin::ScopedForEachExt,
             mixin::SimpleMinElemExt,

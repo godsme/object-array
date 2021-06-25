@@ -5,13 +5,10 @@
 #ifndef OBJECT_ARRAY_SIMPLEFOREACHEXT_H
 #define OBJECT_ARRAY_SIMPLEFOREACHEXT_H
 
-#include <object-array/mixin/SimpleForEach.h>
-
 namespace mixin {
-    template<_concept::OpVisitable T>
-    class SimpleForEachExt : public SimpleForEach<T> {
-        using Self = SimpleForEach<T>;
-
+    template<typename T>
+    class SimpleForEachExt : public T {
+        using Self = T;
     public:
         using typename Self::SizeType;
         using typename Self::ObjectType;
@@ -19,12 +16,12 @@ namespace mixin {
     public:
         template<_concept::Op<ObjectType, SizeType> OP>
         auto ForEach(OP &&op) const -> auto {
-            return Self::template ForEach<false>(std::forward<OP>(op));
+            return Self::template DoForEach<false>(std::forward<OP>(op));
         }
 
         template<_concept::Op<ObjectType, SizeType> OP>
         auto ForEach(OP &&op) -> auto {
-            return Self::template ForEach<true>(std::forward<OP>(op));
+            return Self::template DoForEach<true>(std::forward<OP>(op));
         }
     };
 }

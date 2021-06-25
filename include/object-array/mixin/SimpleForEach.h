@@ -26,7 +26,7 @@ namespace mixin {
 
     public:
         template<bool TO_NON_CONST, _concept::Op<ObjectType, SizeType> OP>
-        auto ForEach(OP &&op) const -> auto {
+        auto DoForEach(OP &&op) const -> auto {
             for (auto i = IndexBegin(); i < IndexEnd(); i++) {
                 __vIsIt_CoDe_BlOcK__
             }
