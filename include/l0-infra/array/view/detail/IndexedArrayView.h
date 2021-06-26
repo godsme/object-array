@@ -11,7 +11,7 @@
 #include <l0-infra/array/mixin/IterableIndexedScopedArrayLike.h>
 
 namespace view::detail {
-    template<template<typename> typename ITERATOR, template<typename> typename REF_HOLDER, template<typename> typename VALUE_HOLDER>
+    template<template<typename> typename ITERATOR, template<typename, typename> typename REF_HOLDER, template<typename, typename> typename VALUE_HOLDER>
     struct IndexedArrayView {
         using Mixins = mixin::Mixins<
                 mixin::RangedArrayLike,
@@ -29,10 +29,16 @@ namespace view::detail {
         };
 
         template<typename ARRAY>
-        using RefView = View<REF_HOLDER<ARRAY>>;
+        struct RefView : View<REF_HOLDER<ARRAY, RefView<ARRAY>>> {
+            using Parent = View<REF_HOLDER<ARRAY, RefView<ARRAY>>>;
+            using Parent::Parent;
+        };
 
         template<typename ARRAY>
-        using ValueView = View<VALUE_HOLDER<ARRAY>>;
+        struct ValueView : View<VALUE_HOLDER<ARRAY, ValueView<ARRAY>>> {
+            using Parent = View<VALUE_HOLDER<ARRAY, ValueView<ARRAY>>>;
+            using Parent::Parent;
+        };
     };
 }
 

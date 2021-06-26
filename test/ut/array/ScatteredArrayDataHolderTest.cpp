@@ -6,7 +6,11 @@
 #include <catch.hpp>
 
 SCENARIO("Int ScatteredArrayDataHolder") {
-    using IntArray = holder::ScatteredArrayHolder<int, 5>;
+    struct IntArray : holder::ScatteredArrayHolder<int, 5, IntArray> {
+        using Parent = holder::ScatteredArrayHolder<int, 5, IntArray>;
+        using Parent::Parent;
+    };
+
     static_assert(std::is_same_v<int, IntArray::ObjectType>);
     static_assert(std::is_same_v<int, IntArray::ElemType>);
     static_assert(5 == IntArray::MAX_SIZE);
@@ -30,7 +34,11 @@ namespace {
 }
 
 SCENARIO("Object ScatteredArrayDataHolder") {
-    using FooArray = holder::ScatteredArrayHolder<Foo, 5>;
+    struct FooArray : holder::ScatteredArrayHolder<Foo, 5, FooArray> {
+        using Parent = holder::ScatteredArrayHolder<Foo, 5, FooArray>;
+        using Parent::Parent;
+    };
+
     static_assert(std::is_same_v<Foo, FooArray::ObjectType>);
     static_assert(std::is_same_v<Placement<Foo>, FooArray::ElemType>);
     static_assert(5 == FooArray::MAX_SIZE);

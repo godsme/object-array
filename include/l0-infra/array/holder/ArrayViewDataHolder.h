@@ -15,7 +15,7 @@
 #include <l0-infra/array/holder/detail/ObjectTrait.h>
 
 namespace holder {
-    template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = OBJ>
+    template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename OWNER, typename ELEM>
     struct ArrayViewDataHolder {
         static_assert(std::is_trivial_v<OBJ>);
         using ElemType = ELEM;
@@ -24,6 +24,7 @@ namespace holder {
         constexpr static auto MAX_SIZE = MAX_NUM;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
         using Trait = detail::ObjectTrait<ElemType>;
+        using Owner = OWNER;
 
     public:
         using Interface = detail::ContinuousArrayDataHolderInterface<ArrayViewDataHolder>;

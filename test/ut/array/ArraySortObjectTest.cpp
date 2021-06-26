@@ -35,9 +35,7 @@ SCENARIO("SortView Test") {
     }
 
     WHEN("Create a sort view on Slice") {
-        auto&& view = array.Slice(1, -1).SortObject();
-
-        view.Sort();
+        auto&& view = array.Slice(1, -1).SortObject().Sort();
 
         REQUIRE(view[0] == 1);
         REQUIRE(view[1] == 2);

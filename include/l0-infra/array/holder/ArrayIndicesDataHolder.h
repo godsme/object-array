@@ -9,8 +9,9 @@
 #include <type_traits>
 
 namespace holder {
-    template<std::size_t MAX_SIZE, typename Parent = ObjectArrayDataHolder<DeduceSizeType_t<MAX_SIZE>, MAX_SIZE>>
-    struct ArrayIndicesDataHolder : Parent {
+    template<std::size_t MAX_SIZE>
+    struct ArrayIndicesDataHolder : ObjectArrayDataHolder<DeduceSizeType_t<MAX_SIZE>, MAX_SIZE, ArrayIndicesDataHolder<MAX_SIZE>> {
+        using Parent = ObjectArrayDataHolder<DeduceSizeType_t<MAX_SIZE>, MAX_SIZE, ArrayIndicesDataHolder<MAX_SIZE>>;
         using Parent::Parent;
 
     private:

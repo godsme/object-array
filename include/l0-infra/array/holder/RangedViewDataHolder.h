@@ -13,7 +13,7 @@
 #include <l0-infra/base/BitSet.h>
 
 namespace holder {
-    template<__cOnCePt(IndexedContainer) ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(IndexedContainer) ARRAY, typename OWNER, typename SUB_TYPE>
     struct RangedViewDataHolder {
         constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
         using ArrayType = std::decay_t<ARRAY>;
@@ -21,6 +21,7 @@ namespace holder {
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
         using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
         using SizeType   = typename ArrayType::SizeType;
+        using Owner = OWNER;
 
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
 
@@ -48,11 +49,11 @@ namespace holder {
         SizeType end_;
     };
 
-    template<__cOnCePt(IndexedContainer) ARRAY>
-    using RefRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, RangedViewDataHolder>;
+    template<__cOnCePt(IndexedContainer) ARRAY, typename OWNER>
+    using RefRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, OWNER, RangedViewDataHolder>;
 
-    template<__cOnCePt(IndexedContainer) ARRAY>
-    using ValueRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, RangedViewDataHolder>;
+    template<__cOnCePt(IndexedContainer) ARRAY, typename OWNER>
+    using ValueRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, OWNER, RangedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H

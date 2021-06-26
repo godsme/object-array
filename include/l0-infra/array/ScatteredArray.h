@@ -48,14 +48,15 @@ namespace detail {
             mixin::PredBasedMutate,
             mixin::ScopedCleanUp>;
 
-    template<typename T, std::size_t MAX_NUM>
+    template<typename T, std::size_t MAX_NUM, typename OWNER>
     using ScatteredArrayBase = detail::ReadOnlyArrayLike<
-            holder::ScatteredArrayHolder<T, MAX_NUM>,
+            holder::ScatteredArrayHolder<T, MAX_NUM, OWNER>,
             detail::ScatteredArrayMixins>;
 }
 
-template<typename T, std::size_t MAX_NUM, typename Parent = detail::ScatteredArrayBase<T, MAX_NUM>>
-class ScatteredArray : public Parent {
+template<typename T, std::size_t MAX_NUM>
+class ScatteredArray : public detail::ScatteredArrayBase<T, MAX_NUM, ScatteredArray<T, MAX_NUM>> {
+    using Parent = detail::ScatteredArrayBase<T, MAX_NUM, ScatteredArray<T, MAX_NUM>>;
     using typename Parent::Holder;
     using typename Parent::Mixins;
 

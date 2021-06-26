@@ -11,12 +11,13 @@
 #include <l0-infra/base/DeduceSizeType.h>
 
 namespace holder::detail {
-    template<typename OBJ, std::size_t MAX_NUM>
+    template<typename OBJ, std::size_t MAX_NUM, typename OWNER>
     struct ObjectArrayHolder : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using SizeType = typename Parent::SizeType;
         using ElemType = typename Parent::ElemType;
         using Trait = typename Parent::Trait;
+        using Owner = OWNER;
         using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
 
     protected:
@@ -103,8 +104,8 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<typename OBJ, std::size_t MAX_NUM>
-    using ObjectArrayDataHolder = typename detail::Holder<OBJ, MAX_NUM, detail::ObjectArrayHolder>;
+    template<typename OBJ, std::size_t MAX_NUM, typename OWNER>
+    using ObjectArrayDataHolder = typename detail::Holder<OBJ, MAX_NUM, OWNER, detail::ObjectArrayHolder>;
 }
 
 #endif //OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H

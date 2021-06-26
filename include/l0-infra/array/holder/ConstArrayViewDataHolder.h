@@ -15,7 +15,7 @@
 #include <l0-infra/array/holder/detail/ObjectTrait.h>
 
 namespace holder {
-    template <typename OBJ, std::size_t MAX_NUM, typename ELEM = OBJ>
+    template <typename OBJ, std::size_t MAX_NUM, typename OWNER, typename ELEM = OBJ>
     struct ConstArrayViewDataHolder {
         using SizeType = DeduceSizeType_t<MAX_NUM>;
         using ElemType   = std::add_const_t<ELEM>;
@@ -24,6 +24,7 @@ namespace holder {
         using ViewTrait = detail::ViewElemTrait_T<std::decay_t<OBJ>, std::decay_t<ElemType>>;
         using Interface = detail::ContinuousArrayDataHolderInterface<ConstArrayViewDataHolder>;
         using Trait = detail::ObjectTrait<ElemType>;
+        using Owner = OWNER;
 
         ConstArrayViewDataHolder(OBJ const* array, std::size_t n)
                 : elems(&ViewTrait::ConstObjToElem(*array))

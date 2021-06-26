@@ -18,6 +18,7 @@ namespace holder::detail {
         using BitMap = typename DATA_HOLDER::BitMap;
         using Trait = typename DATA_HOLDER::Trait;
         using ObjectType = typename DATA_HOLDER::ObjectType;
+        using Owner = typename DATA_HOLDER::Owner;
 
         auto GetRange() const -> SizeType { return DATA_HOLDER::MAX_SIZE; }
         auto GetScope() const -> BitMap { return This()->GetOccupied(); }
@@ -39,7 +40,7 @@ namespace holder::detail {
 }
 
 namespace holder::detail {
-    template<typename OBJ, std::size_t MAX_NUM>
+    template<typename OBJ, std::size_t MAX_NUM, typename OWNER>
     struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using ObjectType = typename Parent::ObjectType;
@@ -47,6 +48,7 @@ namespace holder::detail {
         using SizeType = typename Parent::SizeType;
         using BitMap = ::detail::ArrayScope<MAX_NUM>;
         using Trait = typename Parent::Trait;
+        using Owner = OWNER;
 
         using Interface = detail::ScatteredArrayDataHolderInterface<ScatteredArrayDataHolder>;
 
@@ -183,8 +185,8 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<typename OBJ, std::size_t MAX_NUM>
-    using ScatteredArrayHolder = typename detail::Holder<OBJ, MAX_NUM, detail::ScatteredArrayDataHolder>;
+    template<typename OBJ, std::size_t MAX_NUM, typename OWNER>
+    using ScatteredArrayHolder = typename detail::Holder<OBJ, MAX_NUM, OWNER, detail::ScatteredArrayDataHolder>;
 }
 
 

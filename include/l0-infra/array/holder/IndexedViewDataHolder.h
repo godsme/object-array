@@ -10,7 +10,7 @@
 #include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
     class IndexedViewDataHolder {
         dEcL_tHiS(SUB_TYPE);
         constexpr static auto IsConstArray = std::is_const_v<std::remove_reference_t<ARRAY>>;
@@ -18,6 +18,7 @@ namespace holder {
     public:
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
         using SizeType   = typename ArrayType::SizeType;
+        using Owner = OWNER;
 
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
 
@@ -29,11 +30,11 @@ namespace holder {
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n);}
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, IndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
+    using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, OWNER, IndexedViewDataHolder>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
+    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, OWNER, IndexedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H

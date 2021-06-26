@@ -8,9 +8,9 @@
 #include <utility>
 
 namespace holder::detail {
-    template<typename ARRAY, template <typename, typename> typename SUPER>
-    struct RefViewDataHolder : SUPER<ARRAY, RefViewDataHolder<ARRAY, SUPER>> {
-        using Parent = SUPER<ARRAY, RefViewDataHolder<ARRAY, SUPER>>;
+    template<typename ARRAY, typename OWNER, template <typename, typename, typename> typename SUPER>
+    struct RefViewDataHolder : SUPER<ARRAY, OWNER, RefViewDataHolder<ARRAY, OWNER, SUPER>> {
+        using Parent = SUPER<ARRAY,OWNER,  RefViewDataHolder<ARRAY, OWNER, SUPER>>;
 
     public:
         template<typename ... ARGS>
@@ -24,9 +24,9 @@ namespace holder::detail {
         ARRAY& array;
     };
 
-    template<typename ARRAY, template <typename, typename> typename SUPER>
-    struct ValueViewDataHolder : SUPER<ARRAY, ValueViewDataHolder<ARRAY, SUPER>> {
-        using Parent = SUPER<ARRAY, ValueViewDataHolder<ARRAY, SUPER>>;
+    template<typename ARRAY, typename OWNER, template <typename, typename, typename> typename SUPER>
+    struct ValueViewDataHolder : SUPER<ARRAY, OWNER, ValueViewDataHolder<ARRAY, OWNER, SUPER>> {
+        using Parent = SUPER<ARRAY, OWNER, ValueViewDataHolder<ARRAY, OWNER, SUPER>>;
 
         static_assert(std::is_move_constructible_v<ARRAY>);
 

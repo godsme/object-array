@@ -12,7 +12,7 @@ namespace holder::detail {
 
 #define __sLiCe_SoRt_LaMbDa [&, &array = This()->GetArray()](auto l, auto r) { return less(array.GetObj(l), array.GetObj(r)); }
 
-    template<typename HOLDER>
+    template<typename HOLDER, typename OWNER>
     class SortObjectDataHolderInterface {
         dEcL_tHiS(HOLDER);
     public:
@@ -21,13 +21,15 @@ namespace holder::detail {
         using ObjectType = typename HOLDER::ObjectType;
 
         template<__lEsS_cOnCePt(LESS)>
-        auto Sort(LESS&& less) -> void {
+        auto Sort(LESS&& less) -> OWNER& {
             This()->indices.template Sort(__sLiCe_SoRt_LaMbDa);
+            return reinterpret_cast<OWNER&>(*this);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto StableSort(LESS&& less) -> void {
+        auto StableSort(LESS&& less) -> OWNER& {
             This()->indices.template StableSort(__sLiCe_SoRt_LaMbDa);
+            return reinterpret_cast<OWNER&>(*this);
         }
 
         template<__lEsS_cOnCePt(LESS)>
@@ -43,24 +45,20 @@ namespace holder::detail {
             return This()->GetArray().GetObj(This()->indices[n]);
         }
 
-        auto IndexBegin() const -> SizeType {
-            return 0;
-        }
-
-        auto IndexEnd() const -> SizeType {
-            return This()->indices.GetNum();
-        }
+        auto IndexBegin() const -> SizeType { return 0; }
+        auto IndexEnd() const -> SizeType { return This()->indices.GetNum(); }
     };
 }
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
-    struct SortObjectDataHolder {
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
+    struct SortViewDataHolder {
         constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
         using SizeType = typename ARRAY::SizeType;
         using ObjectType = typename ARRAY::ObjectType;
+        using Owner = OWNER;
 
-        using Interface = detail::SortObjectDataHolderInterface<SortObjectDataHolder>;
+        using Interface = detail::SortObjectDataHolderInterface<SortViewDataHolder, OWNER>;
 
     private:
         dEcL_tHiS(SUB_TYPE);
@@ -75,18 +73,18 @@ namespace holder {
 
     private:
 
-        template<typename>
+        template<typename, typename>
         friend class detail::SortObjectDataHolderInterface;
 
     public:
         ::detail::ArrayIndices<MAX_SIZE> indices;
     };
 
-    template<typename ARRAY>
-    using RefSortObjectHolder = detail::RefViewDataHolder<ARRAY, SortObjectDataHolder>;
+    template<typename ARRAY, typename OWNER>
+    using RefSortViewHolder = detail::RefViewDataHolder<ARRAY, OWNER, SortViewDataHolder>;
 
-    template<typename ARRAY>
-    using ValueSortObjectHolder = detail::ValueViewDataHolder<ARRAY, SortObjectDataHolder>;
+    template<typename ARRAY, typename OWNER>
+    using ValueSortViewHolder = detail::ValueViewDataHolder<ARRAY, OWNER, SortViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_SORTOBJECTDATAHOLDER_H

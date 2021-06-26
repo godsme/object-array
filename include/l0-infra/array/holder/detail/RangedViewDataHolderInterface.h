@@ -14,6 +14,7 @@ namespace holder::detail {
     public:
         using ObjectType = typename T::ObjectType;
         using SizeType   = typename T::SizeType;
+        using Owner = typename T::Owner;
 
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetObj(n); }

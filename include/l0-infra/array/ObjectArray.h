@@ -17,14 +17,17 @@ namespace detail {
                 mixin::IndexedViewFactory,
                 mixin::SortViewFactory>;
 
-    template<typename T, std::size_t MAX_NUM, bool ORDERED>
+    template<typename T, std::size_t MAX_NUM, typename OWNER, bool ORDERED>
     using ObjectArray = detail::ContinuousArrayLike<
-            holder::ObjectArrayDataHolder<T, MAX_NUM>,
+            holder::ObjectArrayDataHolder<T, MAX_NUM, OWNER>,
             ObjectArrayMixins,
             ORDERED>;
 }
 
 template<typename T, std::size_t MAX_NUM, bool ORDERED = false>
-using ObjectArray = detail::ObjectArray<T, MAX_NUM, ORDERED>;
+struct ObjectArray : detail::ObjectArray<T, MAX_NUM, ObjectArray<T, MAX_NUM>, ORDERED> {
+    using Parent = detail::ObjectArray<T, MAX_NUM, ObjectArray<T, MAX_NUM>, ORDERED>;
+    using Parent::Parent;
+};
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H

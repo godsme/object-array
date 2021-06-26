@@ -17,6 +17,7 @@ namespace mixin {
     public:
         using typename Self::ObjectType;
         using typename Self::SizeType;
+        using typename Self::Owner;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
@@ -32,13 +33,15 @@ namespace mixin {
 
     public:
         template<__lEsS_cOnCePt(LESS)>
-        auto Sort(LESS&& less) -> void {
+        auto Sort(LESS&& less) -> decltype(auto) {
             std::sort(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));
+            return reinterpret_cast<Owner&>(*this);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto StableSort(LESS&& less) -> void {
+        auto StableSort(LESS&& less) -> decltype(auto) {
             std::stable_sort(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));
+            return reinterpret_cast<Owner&>(*this);
         }
 
         auto Sort() -> void {

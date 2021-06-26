@@ -35,9 +35,9 @@ namespace view::detail {
             mixin::SimpleMinElemExt,
             mixin::IndexedScopedViewFactory>;
 
-    template<typename HOLDER>
-    class ScopedView : public ::detail::ReadOnlyArrayLike<HOLDER, ScopedMixins> {
-        using Parent = ::detail::ReadOnlyArrayLike<HOLDER, ScopedMixins>;
+    template<typename ARRAY, template <typename, typename> typename HOLDER>
+    class ScopedView : public ::detail::ReadOnlyArrayLike<HOLDER<ARRAY, ScopedView<ARRAY, HOLDER>>, ScopedMixins> {
+        using Parent = ::detail::ReadOnlyArrayLike<HOLDER<ARRAY, ScopedView<ARRAY, HOLDER>>, ScopedMixins>;
         using typename Parent::Mixins;
     public:
         using Parent::Parent;
@@ -46,10 +46,10 @@ namespace view::detail {
 
 namespace view {
     template<typename ARRAY>
-    using ScopedView = detail::ScopedView<holder::RefScopedViewDataHolder<ARRAY>>;
+    using ScopedView = detail::ScopedView<ARRAY, holder::RefScopedViewDataHolder>;
 
     template<typename ARRAY>
-    using ValueScopedView = detail::ScopedView<holder::ValueScopedViewDataHolder<ARRAY>>;
+    using ValueScopedView = detail::ScopedView<ARRAY, holder::ValueScopedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDVIEW_H

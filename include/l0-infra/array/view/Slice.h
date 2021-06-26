@@ -22,8 +22,9 @@ namespace view::detail {
             mixin::ArraySortExt,
             mixin::RValueSortViewFactory>;
 
-    template<typename HOLDER, typename Parent = ::detail::ContinuousReadOnlyArrayLike<HOLDER, SliceMixins>>
-    struct Slice : Parent {
+    template<typename ARRAY, template<typename, typename> typename HOLDER>
+    struct Slice : ::detail::ContinuousReadOnlyArrayLike<HOLDER<ARRAY, Slice<ARRAY, HOLDER>>, SliceMixins> {
+        using Parent = ::detail::ContinuousReadOnlyArrayLike<HOLDER<ARRAY, Slice<ARRAY, HOLDER>>, SliceMixins>;
         using Parent::Parent;
         using typename Parent::Mixins;
 
@@ -40,10 +41,10 @@ namespace view::detail {
 
 namespace view {
     template<typename ARRAY>
-    using Slice = detail::Slice<holder::RefRangedViewDataHolder<ARRAY>>;
+    using Slice = detail::Slice<ARRAY, holder::RefRangedViewDataHolder>;
 
     template<typename ARRAY>
-    using ValueSlice = detail::Slice<holder::ValueRangedViewDataHolder<ARRAY>>;
+    using ValueSlice = detail::Slice<ARRAY, holder::ValueRangedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_VIEW_SLICE_H

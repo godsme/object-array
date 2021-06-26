@@ -16,12 +16,12 @@ namespace view::detail {
             mixin::IndexedViewFactory,
             mixin::ArraySortExt>;
 
-    template<typename ARRAY, template<typename > typename HOLDER>
-    using SortViewBased = ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY>, ArraySortObjectMixins, true>;
+    template<typename ARRAY, typename OWNER, template<typename, typename> typename HOLDER>
+    using SortViewBased = ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OWNER>, ArraySortObjectMixins, true>;
 
-    template<typename ARRAY, template<typename > typename HOLDER>
-    class SortView : public SortViewBased<ARRAY, HOLDER> {
-        using Parent = SortViewBased<ARRAY, HOLDER>;
+    template<typename ARRAY, template<typename, typename> typename HOLDER>
+    class SortView : public SortViewBased<ARRAY, SortView<ARRAY, HOLDER>, HOLDER> {
+        using Parent = SortViewBased<ARRAY, SortView<ARRAY, HOLDER>, HOLDER> ;
         using typename Parent::Mixins;
         using typename Parent::Holder;
 
@@ -53,10 +53,10 @@ namespace view::detail {
 
 namespace view {
     template<typename ARRAY>
-    using SortView = detail::SortView<ARRAY, holder::RefSortObjectHolder>;
+    using SortView = detail::SortView<ARRAY, holder::RefSortViewHolder>;
 
     template<typename ARRAY>
-    using ValueSortView = detail::SortView<ARRAY, holder::ValueSortObjectHolder>;
+    using ValueSortView = detail::SortView<ARRAY, holder::ValueSortViewHolder>;
 }
 
 #endif //OBJECT_ARRAY_SORTVIEW_H
