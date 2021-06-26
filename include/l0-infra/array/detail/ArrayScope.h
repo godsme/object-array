@@ -61,7 +61,9 @@ namespace detail {
         }
 
         auto TestAndClear(SizeType n) -> bool {
-            return *this != Parent::reset(n);
+            bool result = Parent::test(n);
+            Parent::reset(n);
+            return result;
         }
     };
 

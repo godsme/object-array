@@ -75,24 +75,29 @@ public:
         return N;
     }
 
-    auto set(std::size_t pos) -> void {
+    auto set(std::size_t pos) -> IntBitSet& {
         integral |= (((IntType)1 << pos) & MASK);
+        return *this;
     }
 
-    auto set() -> void {
+    auto set() -> IntBitSet& {
         integral = MASK;
+        return *this;
     }
 
-    auto set(std::size_t pos, bool value) -> void {
+    auto set(std::size_t pos, bool value) -> IntBitSet& {
         value ? set(pos) : reset(pos);
+        return *this;
     }
 
-    auto reset(std::size_t pos) -> void {
+    auto reset(std::size_t pos) noexcept -> IntBitSet& {
         integral &= (~((IntType)1 << pos) & MASK);
+        return *this;
     }
 
-    auto reset() -> void {
+    auto reset() -> IntBitSet& {
         integral = 0;
+        return *this;
     }
 
     auto flip() -> IntBitSet& {

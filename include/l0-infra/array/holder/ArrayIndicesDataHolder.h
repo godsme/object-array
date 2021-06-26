@@ -28,7 +28,8 @@ namespace holder {
         template<typename ARRAY, std::enable_if_t<(MAX_SIZE >= ARRAY::MAX_SIZE), bool> = true>
         auto InitWith(ARRAY const& array, typename ARRAY::BitMap scope) -> void {
             num = 0;
-            for(auto i=0; i<array.GetNum() && scope.any(); i++) {
+            auto total = array.GetNum();
+            for(auto i=0; i<total && scope.any(); i++) {
                 if(scope.TestAndClear(i)) {
                     elems[num++] = i;
                 }
