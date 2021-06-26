@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
 
 #include <l0-infra/array/mixin/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/view/IndexedView.h>
 
@@ -20,21 +21,7 @@ namespace mixin {
         using typename T::DataHolder;
 
     private:
-        struct Array : private DataHolder, RangedArrayLike {
-            using DataHolder::DataHolder;
-            using RangedArrayLike::GetObj;
-            using RangedArrayLike::IndexBegin;
-            using RangedArrayLike::IndexEnd;
-
-            using typename DataHolder::SizeType;
-            using typename DataHolder::ObjectType;
-            using typename DataHolder::ElemType;
-            using typename RangedArrayLike::BitMap;
-
-            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
-
-            Array(Array&&) = default;
-        };
+        using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
 
     public:
         using Self::WithIndex;

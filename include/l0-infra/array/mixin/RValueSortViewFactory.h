@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_RVALUESORTVIEWFACTORY_H
 
 #include <l0-infra/array/mixin/SortViewFactory.h>
+#include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
@@ -18,19 +19,7 @@ namespace mixin {
         using typename T::DataHolder;
 
     private:
-        struct Array : private DataHolder, RangedArrayLike {
-            using DataHolder::DataHolder;
-            using RangedArrayLike::GetObj;
-            using RangedArrayLike::IndexBegin;
-            using RangedArrayLike::IndexEnd;
-
-            using typename DataHolder::SizeType;
-            using typename DataHolder::ObjectType;
-            using typename DataHolder::ElemType;
-
-            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
-            Array(Array&&) = default;
-        };
+        using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
 
     public:
         using Self::SortObject;
