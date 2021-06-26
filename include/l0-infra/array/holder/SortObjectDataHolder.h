@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SORTOBJECTDATAHOLDER_H
 #define OBJECT_ARRAY_SORTOBJECTDATAHOLDER_H
 
-#include <l0-infra/array/ArrayIndices.h>
+#include <l0-infra/array/detail/ArrayIndices.h>
 #include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
 
 namespace holder::detail {
@@ -79,7 +79,7 @@ namespace holder {
         friend class detail::SortObjectDataHolderInterface;
 
     public:
-        ArrayIndices<MAX_SIZE> indices;
+        ::detail::ArrayIndices<MAX_SIZE> indices;
     };
 
     template<typename ARRAY>

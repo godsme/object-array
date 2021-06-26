@@ -20,6 +20,7 @@ SCENARIO("SortView Test") {
 
     WHEN("should be able to sort by sort object") {
         auto&& sorted = array.SortObject();
+
         sorted.Sort();
 
         REQUIRE(sorted[0] == 1);
