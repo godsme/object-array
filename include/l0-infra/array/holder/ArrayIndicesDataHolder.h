@@ -26,6 +26,24 @@ namespace holder {
         }
 
         template<typename ARRAY, std::enable_if_t<(MAX_SIZE >= ARRAY::MAX_SIZE), bool> = true>
+        auto InitWithRange(ARRAY const& array) -> void {
+            num = 0;
+            for(auto i=array.IndexBegin(); i<array.IndexEnd(); i++) {
+                elems[num++] = i;
+            }
+        }
+
+        template<typename ARRAY, std::enable_if_t<(MAX_SIZE >= ARRAY::MAX_SIZE), bool> = true>
+        auto InitWithRange(ARRAY const& array, typename ARRAY::BitMap scope) -> void {
+            num = 0;
+            for(auto i=array.IndexBegin(); i<array.IndexEnd() && scope.any(); i++) {
+                if(scope.TestAndClear(i)) {
+                    elems[num++] = i;
+                }
+            }
+        }
+
+        template<typename ARRAY, std::enable_if_t<(MAX_SIZE >= ARRAY::MAX_SIZE), bool> = true>
         auto InitWith(ARRAY const& array, typename ARRAY::BitMap scope) -> void {
             num = 0;
             auto total = array.GetNum();

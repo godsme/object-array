@@ -43,6 +43,8 @@ namespace detail {
         using Mixins::StableSort;
         using Mixins::StableDescSort;
 
+        using Mixins::SortObject;
+
     public:
         auto Clear(OffsetType from, EndOffsetType until) -> void {
             Mixins::template Clear<ORDERED>(from, until);

@@ -6,9 +6,8 @@
 #define OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H
 
 #include <l0-infra/array/mixin/detail/Mixins.h>
+#include <l0-infra/array/detail/ContinuousRangedArray.h>
 #include <l0-infra/array/detail/RangedReadOnlyMixins.h>
-#include <l0-infra/array/mixin/RangedArray.h>
-#include <l0-infra/array/mixin/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/SimpleMutate.h>
 #include <l0-infra/array/mixin/SimpleMutateExt.h>
 #include <l0-infra/array/mixin/RangedClear.h>
@@ -24,10 +23,7 @@
 #include <l0-infra/array/mixin/ArraySortExt.h>
 
 namespace detail {
-
-    using ContinousReadOnlyMixins = mixin::Mixins <
-            mixin::ContinuousArrayLike,
-            mixin::RangedArray>::Concat<RangedReadOnlyMixins>;
+    using ContinousReadOnlyMixins = ContinuousRangedArray::Concat<RangedReadOnlyMixins>;
 
     using ContinuousArrayMixin = ContinousReadOnlyMixins::Extends<
             mixin::SimpleMutate,

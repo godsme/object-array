@@ -10,7 +10,7 @@
 
 namespace holder::detail {
 
-#define __sLiCe_SoRt_LaMbDa [&, &array = This()->GetArray()](auto l, auto r) { return less(array[l], array[r]); }
+#define __sLiCe_SoRt_LaMbDa [&, &array = This()->GetArray()](auto l, auto r) { return less(array.GetObj(l), array.GetObj(r)); }
 
     template<typename HOLDER>
     class SortObjectDataHolderInterface {
@@ -36,11 +36,11 @@ namespace holder::detail {
         }
 
         auto GetObj(SizeType n) -> ObjectType & {
-            return This()->GetArray()[This()->indices[n]];
+            return This()->GetArray().GetObj(This()->indices[n]);
         }
 
         auto GetObj(SizeType n) const -> ObjectType const& {
-            return This()->GetArray()[This()->indices[n]];
+            return This()->GetArray().GetObj(This()->indices[n]);
         }
 
         auto IndexBegin() const -> SizeType {
@@ -54,7 +54,7 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<typename ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     struct SortObjectDataHolder {
         constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
         using SizeType = typename ARRAY::SizeType;

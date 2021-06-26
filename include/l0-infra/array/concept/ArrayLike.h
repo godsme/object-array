@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_ARRAYLIKE_H
 
 #include <l0-infra/array/config.h>
+#include <l0-infra/array/concept/detail/ConceptDef.h>
 
 #if HAS_CONCEPT
 #include <l0-infra/array/concept/SimpleArrayLike.h>

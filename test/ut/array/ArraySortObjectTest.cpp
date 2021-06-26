@@ -2,15 +2,14 @@
 // Created by Darwin Yuan on 2021/6/26.
 //
 
-#include <l0-infra/array/ArraySortObject.h>
+#include <l0-infra/array/view/SortView.h>
 #include <l0-infra/array/ObjectArray.h>
 #include <catch.hpp>
 
-SCENARIO("ArraySortObject Test") {
+SCENARIO("SortView Test") {
     using Array = ObjectArray<int, 90>;
-    using ArraySortObject = ArraySortObject<Array>;
+    using SortView = view::SortView<Array>;
     Array array{3,2,4,1};
-
 
     WHEN("array itself should be able to sort") {
         array.Sort();
@@ -21,7 +20,7 @@ SCENARIO("ArraySortObject Test") {
     }
 
     WHEN("should be able to sort by sort object") {
-        ArraySortObject sorted{array};
+        auto&& sorted = array.SortObject();
         sorted.Sort();
         REQUIRE(sorted[0] == 1);
         REQUIRE(sorted[1] == 2);

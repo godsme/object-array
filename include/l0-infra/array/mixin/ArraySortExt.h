@@ -5,8 +5,8 @@
 #ifndef OBJECT_ARRAY_ARRAYSORTEXT_H
 #define OBJECT_ARRAY_ARRAYSORTEXT_H
 
-
 #include <l0-infra/array/concept/Less.h>
+#include <l0-infra/array/mixin/detail/DefaultLessThan.h>
 #include <type_traits>
 #include <algorithm>
 

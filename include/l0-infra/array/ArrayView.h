@@ -12,12 +12,14 @@
 #include <l0-infra/array/mixin/RValueRangedViewFactory.h>
 #include <l0-infra/array/detail/ContinuousArrayLike.h>
 #include <l0-infra/array/detail/ContinuousReadOnlyArray.h>
+#include <l0-infra/array/mixin/SortViewFactory.h>
 
 namespace detail {
     using ArrayViewSpecifiedMixins = ::mixin::Mixins<
             mixin::RValueRangedViewFactory,
             mixin::RValueScopedViewFactory,
-            mixin::RValueIndexedViewFactory>;
+            mixin::RValueIndexedViewFactory,
+            mixin::SortViewFactory>;
 
     using ConstArrayViewMixins = detail::ContinousReadOnlyMixins::Concat<ArrayViewSpecifiedMixins>;
     using ArrayViewMixins = detail::ContinuousArrayMixin::Concat<ArrayViewSpecifiedMixins>;

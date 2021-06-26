@@ -8,12 +8,14 @@
 #include <l0-infra/array/holder/ObjectArrayDataHolder.h>
 #include <l0-infra/array/detail/ContinuousArrayMixin.h>
 #include <l0-infra/array/detail/ContinuousArrayLike.h>
+#include <l0-infra/array/mixin/SortViewFactory.h>
 
 namespace detail {
     using ObjectArrayMixins = detail::ContinuousArrayMixin::Extends<
                 mixin::RangedViewFactory,
                 mixin::ScopedViewFactory,
-                mixin::IndexedViewFactory>;
+                mixin::IndexedViewFactory,
+                mixin::SortViewFactory>;
 
     template<typename T, std::size_t MAX_NUM, bool ORDERED>
     using ObjectArray = detail::ContinuousArrayLike<
