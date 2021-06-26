@@ -44,22 +44,6 @@ namespace mixin {
             return reinterpret_cast<Owner&>(*this);
         }
 
-        auto Sort() -> void {
-            Sort(detail::DEFAULT_LESS_THAN);
-        }
-
-        auto DescSort() -> void {
-            Sort(detail::DEFAULT_GREATER_THAN);
-        }
-
-        auto StableSort() -> void {
-            StableSort(detail::DEFAULT_LESS_THAN);
-        }
-
-        auto StableDescSort() -> void {
-            StableSort(detail::DEFAULT_GREATER_THAN);
-        }
-
         template<__lEsS_cOnCePt(LESS)>
         auto PartialSort(LESS&& less, SizeType n) -> SizeType {
             if(n == 0) return 0;
@@ -69,14 +53,6 @@ namespace mixin {
                 Sort(std::forward<LESS>(less));
                 return IndexEnd() - IndexBegin();
             }
-        }
-
-        auto PartialSort(SizeType n) -> SizeType {
-            return PartialSort(detail::DEFAULT_LESS_THAN, n);
-        }
-
-        auto PartialDescSort(SizeType n) -> SizeType {
-            return PartialSort(detail::DEFAULT_GREATER_THAN, n);
         }
     };
 }

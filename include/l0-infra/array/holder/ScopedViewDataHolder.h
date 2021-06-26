@@ -18,6 +18,7 @@ namespace holder::detail {
         using ObjectType = typename T::ObjectType;
         using SizeType   = typename T::SizeType;
         using BitMap     = typename T::BitMap;
+        using Owner      = typename T::Owner;
 
         constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
 
@@ -43,6 +44,7 @@ namespace holder {
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
         using BitMap = typename ARRAY::BitMap;
+        using Owner = OWNER;
 
         using Interface = detail::ScopedViewDataHolderInterface<ScopedViewDataHolder>;
 

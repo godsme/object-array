@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SORTVIEW_H
 #define OBJECT_ARRAY_SORTVIEW_H
 
-#include <l0-infra/array/holder/SortObjectDataHolder.h>
+#include <l0-infra/array/holder/SortViewDataHolder.h>
 #include <l0-infra/array/detail/SimpleReadOnlyArrayLike.h>
 #include <l0-infra/array/detail/SimpleReadOnlyArrayLikeMixins.h>
 #include <l0-infra/array/mixin/IndexedViewFactory.h>

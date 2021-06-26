@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/26.
 //
 
-#ifndef OBJECT_ARRAY_SORTOBJECTDATAHOLDER_H
-#define OBJECT_ARRAY_SORTOBJECTDATAHOLDER_H
+#ifndef OBJECT_ARRAY_SORTVIEWDATAHOLDER_H
+#define OBJECT_ARRAY_SORTVIEWDATAHOLDER_H
 
 #include <l0-infra/array/detail/ArrayIndices.h>
 #include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
@@ -87,4 +87,4 @@ namespace holder {
     using ValueSortViewHolder = detail::ValueViewDataHolder<ARRAY, OWNER, SortViewDataHolder>;
 }
 
-#endif //OBJECT_ARRAY_SORTOBJECTDATAHOLDER_H
+#endif //OBJECT_ARRAY_SORTVIEWDATAHOLDER_H
