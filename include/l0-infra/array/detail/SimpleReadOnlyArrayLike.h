@@ -46,6 +46,8 @@ namespace detail {
         using Mixins::FindIndex;
         using Mixins::Exists;
 
+        using Mixins::WithIndex;
+
     public:
         auto operator==(SimpleReadOnlyArrayLike const &rhs) const -> bool {
             if (GetNum() != rhs.GetNum()) return false;

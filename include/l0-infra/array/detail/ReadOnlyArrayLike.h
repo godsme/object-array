@@ -23,8 +23,6 @@ namespace detail {
         using Mixins::MinElemIndex;
         using Mixins::MaxElem;
         using Mixins::MaxElemIndex;
-
-        using Mixins::WithIndex;
     };
 }
 

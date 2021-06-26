@@ -36,6 +36,14 @@ namespace detail {
         using Mixins::ClearFrom;
         using DataHolder::Clear;
 
+        using Mixins::Sort;
+        using Mixins::DescSort;
+        using Mixins::PartialSort;
+        using Mixins::PartialDescSort;
+        using Mixins::StableSort;
+        using Mixins::StableDescSort;
+
+    public:
         auto Clear(OffsetType from, EndOffsetType until) -> void {
             Mixins::template Clear<ORDERED>(from, until);
         }

@@ -10,8 +10,7 @@
 #include <l0-infra/array/detail/ContinuousArrayLike.h>
 
 namespace detail {
-    using ObjectArrayMixins =
-            detail::ContinuousArrayMixin::Extends<
+    using ObjectArrayMixins = detail::ContinuousArrayMixin::Extends<
                 mixin::RangedViewFactory,
                 mixin::ScopedViewFactory,
                 mixin::IndexedViewFactory>;

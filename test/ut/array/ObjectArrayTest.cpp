@@ -444,6 +444,12 @@ SCENARIO("ObjectArray Foreach") {
         REQUIRE(n == 2);
         REQUIRE(sum == 1 + 2);
     }
+
+    {
+        ObjectArray<int, 10> a = {3,2,1};
+
+        a.Sort();
+    }
 }
 
 namespace {

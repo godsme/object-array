@@ -9,7 +9,9 @@
 #include <l0-infra/array/detail/ContinuousArrayMixin.h>
 
 namespace detail {
-    using ArrayIndicesMixins = ContinousReadOnlyMixins;
+    using ArrayIndicesMixins = ContinousReadOnlyMixins::Extends
+            <mixin::IndexedViewFactory,
+                    mixin::ArraySort>;
 
     template<std::size_t MAX_NUM>
     using ArrayIndices = SimpleReadOnlyArrayLike<holder::ArrayIndicesDataHolder<MAX_NUM>, ArrayIndicesMixins, true>;
@@ -24,6 +26,13 @@ class ArrayIndices : public detail::ArrayIndices<MAX_NUM> {
 public:
     using Parent::Parent;
     using Holder::InitWith;
+
+    using Mixins::Sort;
+    using Mixins::DescSort;
+    using Mixins::PartialSort;
+    using Mixins::PartialDescSort;
+    using Mixins::StableSort;
+    using Mixins::StableDescSort;
 };
 
 #endif //OBJECT_ARRAY_ARRAYINDICES_H
