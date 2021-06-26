@@ -56,6 +56,11 @@ SCENARIO("SortView Test") {
         REQUIRE(view[2] == 4);
         REQUIRE(view[3] == 2);
 
+        REQUIRE(!view.IsPresent(0));
+        REQUIRE(view.IsPresent(1));
+        REQUIRE(!view.IsPresent(2));
+        REQUIRE(view.IsPresent(3));
+
         REQUIRE(array[0] == 3);
         REQUIRE(array[1] == 1);
         REQUIRE(array[2] == 4);
