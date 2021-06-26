@@ -3,7 +3,7 @@
 //
 
 #include <l0-infra/array/view/Slice.h>
-#include "../../Foo.h"
+#include "../Foo.h"
 #include <catch.hpp>
 
 SCENARIO("SliceTest") {

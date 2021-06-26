@@ -59,6 +59,10 @@ namespace detail {
                 return (*this) >>= begin;
             }
         }
+
+        auto TestAndClear(SizeType n) -> bool {
+            return *this != Parent::reset(n);
+        }
     };
 
 }

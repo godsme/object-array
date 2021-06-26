@@ -19,14 +19,15 @@ namespace holder::detail {
         using Trait = typename Parent::Trait;
         using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
 
+    protected:
+        using Parent::elems;
+
     private:
         template<typename>
         friend class ContinuousArrayDataHolderInterface;
 
         template<typename>
         friend class ArrayDataHolderInterface;
-
-        using Parent::elems;
 
         template<typename U, std::enable_if_t<std::is_same_v<std::remove_const_t<U>, OBJ> || std::is_same_v<std::remove_const_t<U>, ElemType>, int> = 0>
         auto ConstructFrom(U* array) -> void {
@@ -96,7 +97,7 @@ namespace holder::detail {
             return *this;
         }
 
-    private:
+    protected:
         SizeType num{};
     };
 }

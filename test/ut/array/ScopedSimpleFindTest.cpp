@@ -1,18 +1,22 @@
 //
-// Created by Darwin Yuan on 2021/6/20.
+// Created by Darwin Yuan on 2021/6/22.
 //
 
-#include <l0-infra/array/mixin/NonScopedSimpleFind.h>
-#include <l0-infra/array/mixin/RangedArrayLike.h>
+#include <l0-infra/array/mixin/ScopedSimpleFind.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include "../../Foo.h"
-#include <catch.hpp>
 #include <l0-infra/array/mixin/SimpleFindExt.h>
 #include <l0-infra/array/detail/ArrayComposer.h>
+#include "../Foo.h"
+#include <catch.hpp>
+#include <l0-infra/array/mixin/RangedArrayLike.h>
 
 namespace {
-    using Mixins = mixin::Mixins<mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
-    using Parent = ::detail::ArrayComposer<ut::Foo, Mixins>;
+    using Mixins = mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ScopedSimpleFind,
+            mixin::SimpleFindExt>;
+
+    using Parent = ::detail::ArrayComposer<ut::ScopedFoo, Mixins>;
     struct FooArray : Parent {
         using Parent::Parent;
         using Parent::Find;
@@ -20,8 +24,8 @@ namespace {
     };
 }
 
-SCENARIO("NonScopedSimpleFind") {
-    FooArray foo = {2,6,3};
+SCENARIO("ScopedSimpleFind") {
+    FooArray foo {2, 6, 3};
     WHEN("find index of an existing elem") {
         auto found = foo.FindIndex([](auto&& elem) {
             return elem == 6;

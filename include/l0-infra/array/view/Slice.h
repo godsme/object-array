@@ -22,6 +22,7 @@ namespace view::detail {
     struct Slice : Parent {
         using Parent::Parent;
         using typename Parent::Mixins;
+
         using Mixins::Sort;
         using Mixins::DescSort;
         using Mixins::PartialSort;
