@@ -8,7 +8,6 @@
 
 SCENARIO("SortView Test") {
     using Array = ObjectArray<int, 90>;
-    using SortView = view::SortView<Array>;
     Array array{3,2,4,1};
 
     WHEN("array itself should be able to sort") {
@@ -22,9 +21,25 @@ SCENARIO("SortView Test") {
     WHEN("should be able to sort by sort object") {
         auto&& sorted = array.SortObject();
         sorted.Sort();
+
         REQUIRE(sorted[0] == 1);
         REQUIRE(sorted[1] == 2);
         REQUIRE(sorted[2] == 3);
         REQUIRE(sorted[3] == 4);
+
+        REQUIRE(array[0] == 3);
+        REQUIRE(array[1] == 2);
+        REQUIRE(array[2] == 4);
+        REQUIRE(array[3] == 1);
+    }
+
+    WHEN("Create a sort view on Slice") {
+        auto&& view = array.Slice(1, -1).SortObject();
+
+        view.Sort();
+
+        REQUIRE(view[0] == 1);
+        REQUIRE(view[1] == 2);
+        REQUIRE(view[2] == 4);
     }
 }

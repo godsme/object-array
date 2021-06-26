@@ -34,6 +34,14 @@ namespace view::detail {
             Holder::indices.InitWithRange(array, scope);
         }
 
+        SortView(ARRAY&& array) : Parent{std::move(array)} {
+            Holder::indices.InitWithRange(array);
+        }
+
+        SortView(ARRAY&& array, typename ARRAY::BitMap scope) : Parent{std::move(array)} {
+            Holder::indices.InitWithRange(array, scope);
+        }
+
         using Mixins::Sort;
         using Mixins::DescSort;
         using Mixins::PartialSort;

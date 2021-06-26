@@ -12,13 +12,15 @@
 #include <l0-infra/array/detail/ContinuousReadOnlyArray.h>
 #include <l0-infra/array/mixin/ArraySort.h>
 #include <l0-infra/array/mixin/ArraySortExt.h>
+#include <l0-infra/array/mixin/RValueSortViewFactory.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory,
             mixin::ArraySort,
-            mixin::ArraySortExt>;
+            mixin::ArraySortExt,
+            mixin::RValueSortViewFactory>;
 
     template<typename HOLDER, typename Parent = ::detail::ContinuousReadOnlyArrayLike<HOLDER, SliceMixins>>
     struct Slice : Parent {
@@ -31,6 +33,8 @@ namespace view::detail {
         using Mixins::PartialDescSort;
         using Mixins::StableSort;
         using Mixins::StableDescSort;
+
+        using Mixins::SortObject;
     };
 }
 
