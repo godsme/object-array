@@ -66,7 +66,7 @@ namespace holder::detail {
         }
 
     public:
-        ObjectArrayHolder() = default;
+        ObjectArrayHolder() {}
         ObjectArrayHolder(std::initializer_list<OBJ> l) : num(std::min(l.size(), MAX_NUM)) {
             SizeType i = 0;
             for(auto&& elem : l) {

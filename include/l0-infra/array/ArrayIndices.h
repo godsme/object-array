@@ -7,11 +7,13 @@
 
 #include <l0-infra/array/holder/ArrayIndicesDataHolder.h>
 #include <l0-infra/array/detail/ContinuousArrayMixin.h>
+#include <l0-infra/array/mixin/ArraySortExt.h>
 
 namespace detail {
-    using ArrayIndicesMixins = ContinousReadOnlyMixins::Extends
-            <mixin::IndexedViewFactory,
-                    mixin::ArraySort>;
+    using ArrayIndicesMixins = ContinousReadOnlyMixins::Extends<
+            mixin::IndexedViewFactory,
+            mixin::ArraySort,
+            mixin::ArraySortExt>;
 
     template<std::size_t MAX_NUM>
     using ArrayIndices = SimpleReadOnlyArrayLike<holder::ArrayIndicesDataHolder<MAX_NUM>, ArrayIndicesMixins, true>;

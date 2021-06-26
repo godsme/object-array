@@ -9,6 +9,9 @@
 #include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
 
 namespace holder::detail {
+
+#define __sLiCe_SoRt_LaMbDa [&, &array = This()->GetArray()](auto l, auto r) { return less(array[l], array[r]); }
+
     template<typename HOLDER>
     class SortObjectDataHolderInterface {
         dEcL_tHiS(HOLDER);
@@ -17,12 +20,27 @@ namespace holder::detail {
         using SizeType = typename HOLDER::SizeType;
         using ObjectType = typename HOLDER::ObjectType;
 
+        template<__lEsS_cOnCePt(LESS)>
+        auto Sort(LESS&& less) -> void {
+            This()->indices.template Sort(__sLiCe_SoRt_LaMbDa);
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto StableSort(LESS&& less) -> void {
+            This()->indices.template StableSort(__sLiCe_SoRt_LaMbDa);
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto PartialSort(LESS&& less, SizeType n) -> SizeType {
+            return This()->indices.template PartialSort(__sLiCe_SoRt_LaMbDa, n);
+        }
+
         auto GetObj(SizeType n) -> ObjectType & {
-            return This()->GetObj(n);
+            return This()->GetArray()[This()->indices[n]];
         }
 
         auto GetObj(SizeType n) const -> ObjectType const& {
-            return This()->GetObj(n);
+            return This()->GetArray()[This()->indices[n]];
         }
 
         auto IndexBegin() const -> SizeType {
@@ -47,12 +65,12 @@ namespace holder {
     private:
         dEcL_tHiS(SUB_TYPE);
 
-        auto GetObj(SizeType n) -> ObjectType & {
-            return This()->GetArray()[indices[n]];
+        auto GetArray() const -> ARRAY const& {
+            return This()->GetArray();
         }
 
-        auto GetObj(SizeType n) const -> ObjectType const& {
-            return This()->GetArray()[indices[n]];
+        auto GetArray() -> ARRAY& {
+            return This()->GetArray();
         }
 
     private:
@@ -60,7 +78,7 @@ namespace holder {
         template<typename>
         friend class detail::SortObjectDataHolderInterface;
 
-    private:
+    public:
         ArrayIndices<MAX_SIZE> indices;
     };
 

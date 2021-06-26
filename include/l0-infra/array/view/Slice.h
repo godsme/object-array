@@ -11,12 +11,14 @@
 #include <l0-infra/array/holder/RangedViewDataHolder.h>
 #include <l0-infra/array/detail/ContinuousReadOnlyArray.h>
 #include <l0-infra/array/mixin/ArraySort.h>
+#include <l0-infra/array/mixin/ArraySortExt.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory,
-            mixin::ArraySort>;
+            mixin::ArraySort,
+            mixin::ArraySortExt>;
 
     template<typename HOLDER, typename Parent = ::detail::ContinuousReadOnlyArrayLike<HOLDER, SliceMixins>>
     struct Slice : Parent {

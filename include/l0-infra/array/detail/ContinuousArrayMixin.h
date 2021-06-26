@@ -21,6 +21,7 @@
 #include <l0-infra/array/mixin/ScopedViewFactory.h>
 #include <l0-infra/array/mixin/IndexedViewFactory.h>
 #include <l0-infra/array/mixin/ArraySort.h>
+#include <l0-infra/array/mixin/ArraySortExt.h>
 
 namespace detail {
 
@@ -34,7 +35,8 @@ namespace detail {
             mixin::PredBasedMutate,
             mixin::ScopedCleanUp,
             mixin::RangedClear,
-            mixin::ArraySort>;
+            mixin::ArraySort,
+            mixin::ArraySortExt>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H
