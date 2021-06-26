@@ -50,7 +50,12 @@ SCENARIO("SortView Test") {
     }
 
     WHEN("Scope view should be able to sort directly") {
-        array.Scope(0x0a).Sort();
+        auto&& view = array.Scope(0x0a).Sort();
+        REQUIRE(view[0] == 3);
+        REQUIRE(view[1] == 1);
+        REQUIRE(view[2] == 4);
+        REQUIRE(view[3] == 2);
+
         REQUIRE(array[0] == 3);
         REQUIRE(array[1] == 1);
         REQUIRE(array[2] == 4);
