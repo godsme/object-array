@@ -15,7 +15,7 @@ namespace mixin::detail {
 
         using typename HOLDER::SizeType;
         using typename HOLDER::ObjectType;
-        using typename HOLDER::ElemType;
+        using typename RANGED_ARRAY_LIKE::BitMap;
 
         constexpr static auto MAX_SIZE = HOLDER::MAX_SIZE;
         ValueRangedArray(ValueRangedArray&&) = default;

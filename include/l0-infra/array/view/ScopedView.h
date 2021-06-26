@@ -17,6 +17,7 @@
 #include <l0-infra/array/mixin/ScopedSimpleForEach.h>
 #include <l0-infra/array/mixin/ScopedSimpleMinElem.h>
 #include <l0-infra/array/detail/ReadOnlyArrayLike.h>
+#include <l0-infra/array/mixin/ScopedSortViewFactory.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
@@ -33,7 +34,8 @@ namespace view::detail {
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleMinElem,
             mixin::SimpleMinElemExt,
-            mixin::IndexedScopedViewFactory>;
+            mixin::IndexedScopedViewFactory,
+            mixin::ScopedSortViewFactory>;
 
     template<typename ARRAY, template <typename, typename> typename HOLDER>
     class ScopedView : public ::detail::ReadOnlyArrayLike<HOLDER<ARRAY, ScopedView<ARRAY, HOLDER>>, ScopedMixins> {
@@ -41,6 +43,7 @@ namespace view::detail {
         using typename Parent::Mixins;
     public:
         using Parent::Parent;
+        using Mixins::SortObject;
     };
 }
 

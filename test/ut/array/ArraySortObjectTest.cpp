@@ -41,4 +41,11 @@ SCENARIO("SortView Test") {
         REQUIRE(view[1] == 2);
         REQUIRE(view[2] == 4);
     }
+
+    WHEN("Create a sort view on scoped view") {
+        auto&& view = array.Scope(0x0a).SortObject().Sort();
+
+        REQUIRE(view[0] == 1);
+        REQUIRE(view[1] == 2);
+    }
 }
