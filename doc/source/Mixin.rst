@@ -166,17 +166,20 @@ NonScopedSimpleFind
 
 .. code-block:: c++
 
-   auto IndexBegin() const -> SizeType {
-       return 0;
-   }
+   template <_concept::ArrayLike T>
+   struct RangedArray {
+      auto IndexBegin() const -> SizeType {
+         return 0;
+      }
 
-   auto IndexEnd() const -> SizeType {
-       return (ArrayLike const*)(this)->GetRange();
-   }
+      auto IndexEnd() const -> SizeType {
+         return (ArrayLike const*)(this)->GetRange();
+      }
 
-   auto GetObj(SizeType n) const -> ObjectType const& {
-       return ArrayLike::ElemToObject((ArrayLike const*)(this)->Elems()[n]);
-   }
+      auto GetObj(SizeType n) const -> ObjectType const& {
+         return ArrayLike::ElemToObject((ArrayLike const*)(this)->Elems()[n]);
+      }
+   };
 
 为何 ``IndexEnd()`` 调用的是 ``GetRange`` ，而不是直接返回数组元素的个数： ``num`` ？
 
@@ -237,4 +240,42 @@ mixin
 现在到了我们进行组合的时候了。我们先来看看 ``ObjectArray`` :
 
 .. image:: images/object-array-simple-find.png
+
+从图中优美的线条我们看出，这是一个层层依赖的结构。
+
+因而，对于 `mixin` 我们可以使用单线继承的方式来进行组合：
+
+.. image:: images/obj-array-compose.png
+
+而其中每个 `mixin` 都是类似于下面的定义：
+
+.. code-block:: c++
+
+   template <Concept T>
+   struct Mixin : T  {
+      using Self = T;
+      using Self::method; // import T::method
+      using typename Self::Type // import T::Type
+      // more imports
+
+      // its own algorithm.
+      auto DoSth() -> Bar {
+         // ...
+      }
+
+      // more algorithms.
+      // ...
+   };
+
+我们总是将被依赖的 `mixin` 放在父类的位置；如果相互双方没有任何依赖关系
+（比如 ``SimpleFindExt`` 与 ``ScopedFindExt`` )，那么它们在继承线上先后顺序也无所谓。
+
+这样的组合方式，有一个明显的问题：子类对于父类同名函数的遮掩问题（比如 `SimpleFindExt`` 与 ``ScopedFindExt`` 里都有 ``Find`` ，
+虽然它们的参数列表并不相同）。
+
+对于这样的问题，没有自动解决的办法，只能要么避免各个 `mixin` 间出现同名函数（需要全局知识）；要么放在下面的 `mixin` 如果知道放在上面
+的某个 `mixin` 存在与自己同名的函数，就负责明确地通过 ``using`` 来 `import` （这也需要全局知识）。
+
+这当然是一个令人讨厌的地方，但对于所有 `mixin` 都在我们的控制之中（我们只是想通过分解为 `mixin` 达到复用目的），
+这一点并不会带来明显的设计和维护负担。
 
