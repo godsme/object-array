@@ -577,7 +577,7 @@ CleanUp
 
    ObjectArray<int, 10> array{3,2,4,1};
 
-   auto&& view = array.From(1).Scope(0x0b).SortObject().Sort();
+   auto&& view = array.From(1).Scope(0x0c).SortObject().Sort();
 
    // indices are slice ones.
    ASSERT(view[0] == 2);

@@ -39,7 +39,6 @@ SCENARIO("ObjectArray") {
         REQUIRE(array2.GetNum() == 1);
         REQUIRE(array.GetNum() == 0);
     }
-
 }
 
 namespace {
@@ -194,47 +193,6 @@ SCENARIO("ObjectArray const iterator") {
         REQUIRE(sum == 4 + 3 + 1 + 8 + 7);
     }
 
-//    WHEN("r-value iterate with const view Begin without Index")
-//    {
-//        ObjectArray<int, 10> const& constArray = array;
-//        auto n = 0;
-//        auto sum = 0;
-//        for(auto&& elem : ObjectArray<int, 10>{1,2,3}.From(1)) {
-//            n++;
-//            sum += elem;
-//        }
-//        REQUIRE(n == 2);
-//        REQUIRE(sum == 2 + 3);
-//    }
-
-//    WHEN("r-value iterate with const view Begin with Index")
-//    {
-//        ObjectArray<int, 10> const& constArray = array;
-//        auto n = 0;
-//        auto sum = 0;
-//        for(auto&& [elem, i] : ObjectArray<int, 10>{1,2,3}.From(1).WithIndex()) {
-//            n++;
-//            sum += elem;
-//            REQUIRE(i == n);
-//        }
-//        REQUIRE(n == 2);
-//        REQUIRE(sum == 2 + 3);
-//    }
-
-//    WHEN("r-value iterate with const view Begin with Index r")
-//    {
-//        ObjectArray<int, 10> const& constArray = array;
-//        auto n = 0;
-//        auto sum = 0;
-//        for(auto&& [elem, i] : ObjectArray<int, 10>{1,2,3}.From(1).WithIndex()) {
-//            n++;
-//            sum += elem;
-//            REQUIRE(i == n);
-//        }
-//        REQUIRE(n == 2);
-//        REQUIRE(sum == 2 + 3);
-//    }
-
     WHEN("iterate with non-const view from")
     {
         auto n = 0;
@@ -248,6 +206,45 @@ SCENARIO("ObjectArray const iterator") {
         REQUIRE(n == 5);
         REQUIRE(sum == 4 + 3 + 1 + 8 + 7 + 5);
     }
+}
+
+SCENARIO("ObjectArray Slice Sort") {
+    ObjectArray<int, 10> array{2,3,4,1,8,7};
+
+    array.Slice(1, -2).Sort();
+
+    REQUIRE(array[0] == 2);
+    REQUIRE(array[1] == 1);
+    REQUIRE(array[2] == 3);
+    REQUIRE(array[3] == 4);
+    REQUIRE(array[4] == 8);
+    REQUIRE(array[5] == 7);
+}
+
+SCENARIO("ObjectArray Scope Sort") {
+    ObjectArray<int, 10> array{2,3,4,1,8,7};
+
+    array.Scope(0x0c).Sort();
+
+    REQUIRE(array[0] == 2);
+    REQUIRE(array[1] == 3);
+    REQUIRE(array[2] == 1);
+    REQUIRE(array[3] == 4);
+    REQUIRE(array[4] == 8);
+    REQUIRE(array[5] == 7);
+}
+
+SCENARIO("ObjectArray Slice/Scope Sort") {
+    ObjectArray<int, 10> array{2,3,4,1,8,7};
+
+    array.Slice(1, -2).Scope(0x2d).Sort();
+
+    REQUIRE(array[0] == 2);
+    REQUIRE(array[1] == 3);
+    REQUIRE(array[2] == 1);
+    REQUIRE(array[3] == 4);
+    REQUIRE(array[4] == 8);
+    REQUIRE(array[5] == 7);
 }
 
 namespace {
