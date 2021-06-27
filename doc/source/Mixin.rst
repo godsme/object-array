@@ -196,3 +196,20 @@ ScopedSimpleFind
 
 .. image:: images/scoped-find.png
 
+其中 `ScopedView` 聚合了一个提供了 `RangedArrayLike` 概念的对象，无论那个对象是
+一个 `ObjectArray` , `ArrayView` 还是一个 `Slice` ，`ScopedView` 都并不关心，
+只要它们都提供了 `RangeArrayLike` 概念所要求的接口。
+
+而 `ScopeView` 只是通过转调它们的 `RangedArrayLike` 接口来让自己也成为一个
+满足 `RangedArrayLike` 概念的对象。
+
+而 `ScatteredView` 则通过 `RangedArray mixin` 来让自己满足 `RangedArrayLike` 概念。
+
+而两者都通过自己所持有的 ``BitMap`` 类型的数据来满足 `ScopedArrayAlike` 概念。
+
+如果一个对象既满足 `RangedArrayLike` 概念， 又满足 `ScopedArrayAlike` 概念，从语义上就满足
+了 `RangedArrayLike + ScopedArrayAlike` 概念。而 `C++ 20` 则通过 ``RangedArrayLike && ScopedArrayAlike`` 来
+表达这种概念上的组合关系。我们将这个组合后的概念，定义为一个新概念：
+
+.. image:: images/scoped-ranged-concept.png
+
