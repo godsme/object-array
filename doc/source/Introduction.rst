@@ -571,6 +571,19 @@ CleanUp
    `SortObject` 本身是对数组的索引进行排序，而不是对对象直接排序，以降低数组元素移动所带来的成本。
 
 
+而 `SortObject` 也可以在 `Slice` (或/和） `Scope` 范围内创建：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,2,4,1};
+
+   auto&& view = array.From(1).Scope(0x0b).SortObject().Sort();
+
+   // indices are slice ones.
+   ASSERT(view[0] == 2);
+   ASSERT(view[1] == 1);
+   ASSERT(view[2] == 4);
+
 对象数组
 ------------------------
 
