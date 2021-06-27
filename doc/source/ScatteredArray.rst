@@ -25,3 +25,12 @@ ScatteredArray
 
 ``ScatteredArray`` 和 ``ObjectArray`` 一样，都要考虑 copy/move 构造/赋值，
 是否需要提供非平凡析构函数的问题等等，其解决思路与 ``ObjectArray`` 一致，这里就不再赘述。
+
+.. attention::
+
+   对于 `ScatteredArray` ，你不能创建 `Slice` ，跟不能创建 `ScopedView` ，也无法进行任何
+   排序操作。因为基于 `ScatteredArray` 的性质，这些操作本身没有意义。
+
+   但是，其它的算法，比如 `Find`, `MinElem` , `ForEach`, `range-for` 都是支持的。
+
+`ScatteredArray` 的 `range-for` 以及 `ForEach` ，只会遍历所有有效的元素。

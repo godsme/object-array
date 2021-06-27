@@ -57,6 +57,10 @@ SCENARIO("ScatteredArray Test") {
     }
 }
 
+SCENARIO("ScatteredArray Slice Test") {
+    ScatteredArray<int, 10> foo {2, 6, 3};
+}
+
 namespace {
     using IntArray = ScatteredArray<int, 10>;
     static_assert(std::is_move_constructible_v<IntArray>);
