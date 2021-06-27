@@ -283,6 +283,34 @@ Replace
    未来如果有现实需求，可以增加接口。现阶段，为了避免误用，暂不提供额外接口。
 
 
+另外，你不能在一个 **右值** 数组上创建一个 `slice` 。也就是说下面的代码是不被允许的：
+
+.. code-block:: c++
+
+   auto&& slice = Array<int, 10>{1,2,3).Slice(2,-3); // not allowed
+
+因而，你也不能在 `range-for` 表达式里写如下代码：
+
+.. code-block:: c++
+
+   for(auto&& item : Array<int, 10>{1,2,3).Slice(2,-3)) { // not allowed
+      // do sth.
+   }
+
+这是因为，一个 `slice` 必然会引用一个数组。如果数组本身是一个右值，那么其生命周期在那一行代码维持。
+在那一行代码执行结束后，右值数组就被销毁了，导致 `slice` 变成了 `dangling slice` 。因而这样的
+代码会导致编译错误。
+
+但是，如果你使用的是一个 `ArrayView` (我们会在后面章节介绍到），则可以在右值对象上创建 `slice` :
+
+.. code-block:: c++
+
+   int a[3] = {1,2,3};
+   uint8_t num = 3;
+
+   auto&& slice = ArrayView{a, num}.Slice(1, -2); // OK
+
+
 Clear
 ---------------------
 
@@ -398,6 +426,23 @@ ScopeView
 
    - `ScopedView` 可以通过算法参数来替代，但 `Slice` 不能；
    - 当使用 `range-for` 时，`ScopedView` 不可能通过算法参数来替代。
+
+
+另外，基于与 `slice` 同样的原因，你不能在一个右值数组对象上创建一个 `scope view` ：
+
+.. code-block:: c++
+
+   auto&& view = ObjectArray<int, 10>{1,2,3}.Scope(0x0a}; // not allowed.
+
+但你却可以在一个右值 `ArrayView` 上创建一个 `scope view` :
+
+.. code-block:: c++
+
+   int a[3] = {1,2,3};
+   uint8_t num = 3;
+
+   auto&& view = ArrayView{a, num}.Scope(0x0a}; // OK.
+
 
 CleanUp
 ---------------------
