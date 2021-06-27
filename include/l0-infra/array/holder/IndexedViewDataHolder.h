@@ -12,6 +12,7 @@
 namespace holder {
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
     class IndexedViewDataHolder {
+    protected:
         dEcL_tHiS(SUB_TYPE);
         constexpr static auto IsConstArray = std::is_const_v<std::remove_reference_t<ARRAY>>;
         using ArrayType = std::decay_t<ARRAY>;

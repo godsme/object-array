@@ -15,22 +15,22 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
-        using typename T::RangedArrayLike;
+        using typename T::ScopedRangedArrayLike;
         using typename T::DataHolder;
 
         using Self::GetScope;
 
     private:
-        struct Array : private DataHolder, RangedArrayLike {
+        struct Array : private DataHolder, ScopedRangedArrayLike {
             using DataHolder::DataHolder;
-            using RangedArrayLike::IndexBegin;
-            using RangedArrayLike::IndexEnd;
-            //using RangedArrayLike::GetScope;
-            using RangedArrayLike::GetObj;
+            using ScopedRangedArrayLike::IndexBegin;
+            using ScopedRangedArrayLike::IndexEnd;
+            using ScopedRangedArrayLike::GetScope;
+            using ScopedRangedArrayLike::GetObj;
 
             using typename DataHolder::SizeType;
             using typename DataHolder::ObjectType;
-            using typename RangedArrayLike::BitMap;
+            using typename ScopedRangedArrayLike::BitMap;
 
             constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
 
@@ -39,16 +39,16 @@ namespace mixin {
 
     public:
         auto WithIndex() && -> view::IndexedScopedView::ValueView<Array> {
-            return {reinterpret_cast<Array&&>(*this), GetScope()};
+            return {reinterpret_cast<Array&&>(*this)};
         }
         auto WithIndex() const&& -> view::IndexedScopedView::ValueView<Array const> {
-            return {reinterpret_cast<Array const&&>(*this), GetScope()};
+            return {reinterpret_cast<Array const&&>(*this)};
         }
-        auto WithIndex() & -> view::IndexedScopedView::RefView<RangedArrayLike> {
-            return {reinterpret_cast<RangedArrayLike&>(*this), GetScope()};
+        auto WithIndex() & -> view::IndexedScopedView::RefView<ScopedRangedArrayLike> {
+            return {reinterpret_cast<ScopedRangedArrayLike&>(*this)};
         }
-        auto WithIndex() const& -> view::IndexedScopedView::RefView<RangedArrayLike const> {
-            return {reinterpret_cast<RangedArrayLike const&>(*this), GetScope()};
+        auto WithIndex() const& -> view::IndexedScopedView::RefView<ScopedRangedArrayLike const> {
+            return {reinterpret_cast<ScopedRangedArrayLike const&>(*this)};
         }
     };
 }

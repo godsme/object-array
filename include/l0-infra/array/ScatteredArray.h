@@ -28,11 +28,13 @@
 #include <l0-infra/array/mixin/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/ScopedSortViewFactory.h>
 #include <l0-infra/array/mixin/ScopedSort.h>
+#include <l0-infra/array/mixin/ScopedRangedArray.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
             mixin::RangedArray,
             mixin::RangedArrayLike,
+            mixin::ScopedRangedArray,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::ScopedByIndexAccessor,
