@@ -189,5 +189,10 @@ NonScopedSimpleFind
 ScopedSimpleFind
 -------------------------------
 
+`ScopedSimpleFind` 相对于 `NonScopedSimpleFind` ，复杂度稍微上升了一点，因为它需要一个额外的
+接口: ``GetScope`` 。而 ``Find`` 操作，只能在 `scope` 指定的范围内进行。
+
+而 `ScopedView` 与 `ScatteredArray` 都属于此类。它们的关系如下：
+
 .. image:: images/scoped-find.png
 
