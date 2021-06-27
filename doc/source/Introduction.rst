@@ -480,6 +480,45 @@ CleanUp
    ASSERT(array[2].a == 4);
    ASSERT(array[3].a == 2);
 
+而排序不仅仅可以在整个数组范围内进行，还可以只在一个 `slice` 范围，或者（和） `scope` 范围内进行排序：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,1,4,2};
+
+   array.Slice(1, -2).DescSort();
+
+   ASSERT(array[0] == 3);
+   ASSERT(array[1] == 4);
+   ASSERT(array[2] == 1);
+   ASSERT(array[3] == 2);
+
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,1,4,2};
+
+   array.Scope(0x06).DescSort();
+
+   ASSERT(array[0] == 3);
+   ASSERT(array[1] == 4);
+   ASSERT(array[2] == 1);
+   ASSERT(array[3] == 2);
+
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,1,4,2};
+
+   array.Slice(0, -2).Scope(0x06).DescSort();
+
+   ASSERT(array[0] == 3);
+   ASSERT(array[1] == 4);
+   ASSERT(array[2] == 1);
+   ASSERT(array[3] == 2);
+
+
+
 排序对象
 -------------------
 
