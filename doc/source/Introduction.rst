@@ -282,18 +282,46 @@ Replace
 
    未来如果有现实需求，可以增加接口。现阶段，为了避免误用，暂不提供额外接口。
 
+在指定切片边界时，用户有可能给出超出数组事实边界的索引，比如：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{1,2,3};
+
+   array.Slice(-4, -5); // both are beyond left boundary.
+
+`Object Array` 会自动对超越边界的索引进行调整：
+
+   1. 如果超越左边界，会调整为左边界
+   2. 如果超越右边界，会调整为右边界
+   3. 如果用户给定的 `Slice` 范围不能构成有效范围，则整个 `Slice` 的范围为空。
+
+比如：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{1,2,3};
+
+   array.Until(10);    // [0, 2]
+   array.From(-10);    // [0, 2]
+   array.Slice(1, 10); // [1,2]
+
+   array.Slice(-10, -20); // empty
+   array.Slice(-10, 0); // [0, 0]
+   array.Slice(10, 20); // empty
+
 
 另外，你不能在一个 **右值** 数组上创建一个 `slice` 。也就是说下面的代码是不被允许的：
 
 .. code-block:: c++
 
-   auto&& slice = Array<int, 10>{1,2,3).Slice(2,-3); // not allowed
+   auto&& slice = ObjectArray<int, 10>{1,2,3).Slice(2,-3); // not allowed
 
 因而，你也不能在 `range-for` 表达式里写如下代码：
 
 .. code-block:: c++
 
-   for(auto&& item : Array<int, 10>{1,2,3).Slice(2,-3)) { // not allowed
+   for(auto&& item : ObjectArray<int, 10>{1,2,3).Slice(2,-3)) { // not allowed
       // do sth.
    }
 
