@@ -8,6 +8,7 @@
 #include <l0-infra/array/concept/Less.h>
 #include <l0-infra/array/concept/ScopedArrayLike.h>
 #include <l0-infra/array/detail/ScopedArrayIndices.h>
+#include <l0-infra/array/view/OrderedScopedView.h>
 #include <type_traits>
 #include <algorithm>
 
@@ -20,10 +21,24 @@ namespace mixin {
         using typename Self::ObjectType;
         using typename Self::SizeType;
         using typename Self::Owner;
+        using typename T::RangedArrayLike;;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetScope;
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto DoPartialSort(LESS&& less, SizeType n) -> SizeType {
+            if(n == 0) return 0;
+            ::detail::ScopedArrayIndices indices{*this};
+            if(n < indices.GetNum()) {
+                std::partial_sort(indices.begin(), indices.begin() + n, indices.end(), std::forward<LESS>(less));
+                return n;
+            } else {
+                std::sort(indices.begin(), indices.end(), std::forward<LESS>(less));
+                return indices.GetNum();
+            }
+        }
 
     public:
         template<__lEsS_cOnCePt(LESS)>
@@ -41,16 +56,8 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) -> SizeType {
-            if(n == 0) return 0;
-            ::detail::ScopedArrayIndices indices{*this};
-            if(n < indices.GetNum()) {
-                std::partial_sort(indices.begin(), indices.begin() + n, indices.end(), std::forward<LESS>(less));
-                return n;
-            } else {
-                std::sort(indices.begin(), indices.end(), std::forward<LESS>(less));
-                return indices.GetNum();
-            }
+        auto PartialSort(LESS&& less, SizeType n) -> view::OrderedScopedView<RangedArrayLike> {
+            return {reinterpret_cast<RangedArrayLike&>(*this), GetScope(), DoPartialSort(std::forward<LESS>(less), n)};
         }
     };
 }

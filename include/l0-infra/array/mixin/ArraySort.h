@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_ARRAYSORT_H
 
 #include <l0-infra/array/concept/Less.h>
+#include <l0-infra/array/view/OrderedView.h>
 #include <type_traits>
 #include <algorithm>
 
@@ -18,6 +19,7 @@ namespace mixin {
         using typename Self::ObjectType;
         using typename Self::SizeType;
         using typename Self::Owner;
+        using typename T::RangedArrayLike;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
@@ -26,9 +28,15 @@ namespace mixin {
 
     private:
         template<__lEsS_cOnCePt(LESS)>
-        auto DoPartialSort(LESS&& less, SizeType n) -> SizeType {
-            std::partial_sort(ObjectBegin(), ObjectBegin() + n, ObjectEnd(), std::forward<LESS>(less));
-            return n;
+        auto DoPartialSort(LESS&& less, SizeType n) & -> SizeType {
+            if(n == 0) return 0;
+            if(n < (IndexEnd() - IndexBegin())) {
+                std::partial_sort(ObjectBegin(), ObjectBegin() + n, ObjectEnd(), std::forward<LESS>(less));
+                return n;
+            } else {
+                Sort(std::forward<LESS>(less));
+                return IndexEnd() - IndexBegin();
+            }
         }
 
     public:
@@ -45,15 +53,12 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) -> SizeType {
-            if(n == 0) return 0;
-            if(n < (IndexEnd() - IndexBegin())) {
-                return DoPartialSort(std::forward<LESS>(less), n);
-            } else {
-                Sort(std::forward<LESS>(less));
-                return IndexEnd() - IndexBegin();
-            }
+        auto PartialSort(LESS&& less, SizeType n) & -> view::OrderedView<RangedArrayLike> {
+            return {reinterpret_cast<RangedArrayLike&>(*this), DoPartialSort(std::forward<LESS>(less), n)};
         }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto PartialSort(LESS&& less, SizeType n) && -> void {}
     };
 }
 

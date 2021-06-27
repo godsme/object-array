@@ -1,9 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/6/22.
+// Created by Darwin Yuan on 2021/6/28.
 //
 
-#ifndef OBJECT_ARRAY_SCOPEDVIEW_H
-#define OBJECT_ARRAY_SCOPEDVIEW_H
+#ifndef OBJECT_ARRAY_ORDEREDSCOPEDVIEW_H
+#define OBJECT_ARRAY_ORDEREDSCOPEDVIEW_H
 
 #include <l0-infra/array/holder/ScopedViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
@@ -15,13 +15,10 @@
 #include <l0-infra/array/mixin/ScopedByIndexAccessor.h>
 #include <l0-infra/array/mixin/RangedScopedElemCount.h>
 #include <l0-infra/array/mixin/ScopedSimpleForEach.h>
-#include <l0-infra/array/mixin/ScopedSimpleMinElem.h>
 #include <l0-infra/array/detail/ReadOnlyArrayLike.h>
-#include <l0-infra/array/mixin/ScopedSortViewFactory.h>
-#include <l0-infra/array/mixin/ScopedSort.h>
 
 namespace view::detail {
-    using ScopedMixins = mixin::Mixins<
+    using SimpleScopedViewMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::IndexedRefAccessor,
             mixin::ScopedByIndexAccessor,
@@ -33,38 +30,25 @@ namespace view::detail {
             mixin::ArrayElemVisit,
             mixin::ScopedSimpleForEach,
             mixin::SimpleForEachExt,
-            mixin::ScopedSimpleMinElem,
-            mixin::SimpleMinElemExt,
-            mixin::IndexedScopedViewFactory,
-            mixin::ScopedSortViewFactory,
-            mixin::ScopedSort,
-            mixin::ArraySortExt>;
+            mixin::IndexedScopedViewFactory>;
 
     template<typename ARRAY, template <typename, typename> typename HOLDER>
-    class ScopedView : public ::detail::ReadOnlyArrayLike<HOLDER<ARRAY, ScopedView<ARRAY, HOLDER>>, ScopedMixins> {
-        using Parent = ::detail::ReadOnlyArrayLike<HOLDER<ARRAY, ScopedView<ARRAY, HOLDER>>, ScopedMixins>;
+    class OrderedScopedView : public ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OrderedScopedView<ARRAY, HOLDER>>, SimpleScopedViewMixins, true> {
+        using Parent = ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OrderedScopedView<ARRAY, HOLDER>>, SimpleScopedViewMixins, true>;
         using typename Parent::Mixins;
     public:
         using Parent::Parent;
-        using Mixins::SortObject;
-
-        using Mixins::Sort;
-        using Mixins::DescSort;
-        using Mixins::PartialSort;
-        using Mixins::PartialDescSort;
-        using Mixins::StableSort;
-        using Mixins::StableDescSort;
     };
-
-
 }
 
 namespace view {
     template<typename ARRAY>
-    using ScopedView = detail::ScopedView<ARRAY, holder::RefScopedViewDataHolder>;
-
-    template<typename ARRAY>
-    using ValueScopedView = detail::ScopedView<ARRAY, holder::ValueScopedViewDataHolder>;
+    struct OrderedScopedView : detail::OrderedScopedView<ARRAY, holder::RefScopedViewDataHolder> {
+        using Parent = detail::OrderedScopedView<ARRAY, holder::RefScopedViewDataHolder>;
+        OrderedScopedView(ARRAY& array, typename ARRAY::BitMap scope, typename ARRAY::SizeType n)
+                : Parent(array, scope.GetLowestBits(n))
+        {}
+    };
 }
 
-#endif //OBJECT_ARRAY_SCOPEDVIEW_H
+#endif //OBJECT_ARRAY_ORDEREDSCOPEDVIEW_H

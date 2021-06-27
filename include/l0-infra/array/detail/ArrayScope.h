@@ -65,6 +65,19 @@ namespace detail {
             Parent::reset(n);
             return result;
         }
+
+        auto GetLowestBits(SizeType n) -> ArrayScope {
+            ArrayScope result{};
+            if(n == 0) return result;
+            auto num = 0;
+            for(auto i=0; i<MAX_SIZE; i++) {
+                if(Parent::test(i)) {
+                    result.set(i);
+                    if(++num == n) break;
+                }
+            }
+            return result;
+        }
     };
 
 }

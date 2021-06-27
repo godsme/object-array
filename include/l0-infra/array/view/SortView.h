@@ -12,12 +12,12 @@
 #include <l0-infra/array/mixin/ArraySortExt.h>
 
 namespace view::detail {
-    using ArraySortObjectMixins = ::detail::SimpleReadOnlyArrayLikeMixins::Extends<
+    using SortViewMixins = ::detail::SimpleReadOnlyArrayLikeMixins::Extends<
             mixin::IndexedViewFactory,
             mixin::ArraySortExt>;
 
     template<typename ARRAY, typename OWNER, template<typename, typename> typename HOLDER>
-    using SortViewBased = ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OWNER>, ArraySortObjectMixins, true>;
+    using SortViewBased = ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OWNER>, SortViewMixins, true>;
 
     template<typename ARRAY, template<typename, typename> typename HOLDER>
     class SortView : public SortViewBased<ARRAY, SortView<ARRAY, HOLDER>, HOLDER> {

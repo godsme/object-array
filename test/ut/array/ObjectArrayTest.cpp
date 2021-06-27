@@ -625,3 +625,53 @@ SCENARIO("init with init list") {
         REQUIRE(array != array2);
     }
 }
+
+SCENARIO("ObjectArray PartialSort") {
+    ObjectArray<int, 10> a = {4,3,1,2};
+
+    auto n = 0;
+    auto sum = 0;
+    for(auto&& elem : a.PartialSort(2)) {
+        n++;
+        sum += elem;
+    }
+
+    REQUIRE(n == 2);
+    REQUIRE(sum == 3);
+}
+
+SCENARIO("ObjectArray Slice PartialSort") {
+    ObjectArray<int, 10> a = {4,3,1,2};
+
+    auto n = 0;
+    auto sum = 0;
+    for(auto&& elem : a.Slice(1, -2).PartialSort(2)) {
+        n++;
+        sum += elem;
+    }
+
+    REQUIRE(n == 2);
+    REQUIRE(sum == 4);
+
+    REQUIRE(a[0] == 4);
+    REQUIRE(a[1] == 1);
+    REQUIRE(a[2] == 3);
+}
+
+SCENARIO("ObjectArray Slice Scope PartialSort") {
+    ObjectArray<int, 10> a = {4,3,1,2};
+
+    auto n = 0;
+    auto sum = 0;
+    for(auto&& elem : a.Slice(1, -2).Scope(0xFF).PartialSort(2)) {
+        n++;
+        sum += elem;
+    }
+
+    REQUIRE(n == 2);
+    REQUIRE(sum == 4);
+
+    REQUIRE(a[0] == 4);
+    REQUIRE(a[1] == 1);
+    REQUIRE(a[2] == 3);
+}

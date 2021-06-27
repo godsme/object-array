@@ -39,11 +39,11 @@ namespace mixin {
             return StableSort(detail::DEFAULT_GREATER_THAN);
         }
 
-        auto PartialSort(SizeType n) -> SizeType {
+        auto PartialSort(SizeType n) -> auto {
             return PartialSort(detail::DEFAULT_LESS_THAN, n);
         }
 
-        auto PartialDescSort(SizeType n) -> SizeType {
+        auto PartialDescSort(SizeType n) -> auto {
             return PartialSort(detail::DEFAULT_GREATER_THAN, n);
         }
     };

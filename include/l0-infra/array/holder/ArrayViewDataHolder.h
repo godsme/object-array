@@ -7,12 +7,12 @@
 
 #include <l0-infra/array/holder/detail/ViewElemTrait.h>
 #include <l0-infra/array/holder/detail/ContinuousArrayDataHolderInterface.h>
+#include <l0-infra/array/holder/detail/ObjectTrait.h>
 #include <l0-infra/array/detail/ArrayScope.h>
 #include <l0-infra/base/IntOpt.h>
 #include <type_traits>
 #include <cstring>
 #include <algorithm>
-#include <l0-infra/array/holder/detail/ObjectTrait.h>
 
 namespace holder {
     template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename OWNER, typename ELEM>
