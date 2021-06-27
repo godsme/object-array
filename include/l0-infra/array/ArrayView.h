@@ -19,7 +19,7 @@ namespace detail {
             mixin::RValueRangedViewFactory,
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory,
-            mixin::SortViewFactory>;
+            mixin::RValueSortViewFactory>;
 
     using ConstArrayViewMixins = detail::ContinousReadOnlyMixins::Concat<ArrayViewSpecifiedMixins>;
     using ArrayViewMixins = detail::ContinuousArrayMixin::Concat<ArrayViewSpecifiedMixins>;

@@ -179,6 +179,60 @@ SCENARIO("ArrayView full Slice index iterator") {
     REQUIRE(sum == 4 + 3 + 1 + 8);
 }
 
+SCENARIO("ArrayView Sort") {
+    Dummy dummy{.a = {2, 4, 3, 1, 8, 7}, .num = 6};
+
+    auto&& view = ArrayView{dummy.a, dummy.num}.Sort();
+
+    REQUIRE(view[0] == 1);
+    REQUIRE(view[1] == 2);
+    REQUIRE(view[2] == 3);
+    REQUIRE(view[3] == 4);
+    REQUIRE(view[4] == 7);
+    REQUIRE(view[5] == 8);
+
+    REQUIRE(dummy.a[0] == 1);
+    REQUIRE(dummy.a[1] == 2);
+    REQUIRE(dummy.a[2] == 3);
+    REQUIRE(dummy.a[3] == 4);
+    REQUIRE(dummy.a[4] == 7);
+    REQUIRE(dummy.a[5] == 8);
+}
+
+SCENARIO("ArrayView Sort Object") {
+    Dummy dummy{.a = {2, 4, 3, 1, 8, 7}, .num = 6};
+
+    auto&& view = ArrayView{dummy.a, dummy.num}.SortObject().Sort();
+
+    REQUIRE(view[0] == 1);
+    REQUIRE(view[1] == 2);
+    REQUIRE(view[2] == 3);
+    REQUIRE(view[3] == 4);
+    REQUIRE(view[4] == 7);
+    REQUIRE(view[5] == 8);
+
+    REQUIRE(dummy.a[0] == 2);
+    REQUIRE(dummy.a[1] == 4);
+    REQUIRE(dummy.a[2] == 3);
+    REQUIRE(dummy.a[3] == 1);
+    REQUIRE(dummy.a[4] == 8);
+    REQUIRE(dummy.a[5] == 7);
+}
+
+SCENARIO("ArrayView Sort ForEach") {
+    Dummy dummy{.a = {2, 4, 3, 1, 8, 7}, .num = 6};
+
+    auto n = 0;
+    auto sum = 0;
+    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Sort().WithIndex()) {
+        n++;
+        sum += elem;
+    }
+
+    REQUIRE(n == 6);
+    REQUIRE(sum == 2 + 4 + 3 + 1 + 8 + 7);
+}
+
 SCENARIO("ArrayView Slice [2, -2] index iterator") {
     Dummy dummy{.a = {2, 4, 3, 1, 8, 7}, .num = 6};
 

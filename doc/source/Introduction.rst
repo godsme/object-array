@@ -409,6 +409,10 @@ CleanUp
    array.CleanUp(0x0a);   // 1, 3 is cleared.
    array.CleanUpEx(0x0a); // `Ex` Means `Exclude`, so 0, 2, 4 is cleared.
 
+排序
+-------------
+
+对于一个 ``ObjectArray``
 
 对象数组
 ------------------------
