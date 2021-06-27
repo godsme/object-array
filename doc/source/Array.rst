@@ -110,9 +110,9 @@ copy/move 构造与赋值
             }
         }
 
-        auto ClearContent() -> void {
+        auto ClearContent(SizeType from) -> void {
             if constexpr (!std::is_trivially_destructible_v<ELEM>) {
-                for(int i=0; i<num; i++) Trait::Destroy(elems[i]);
+                for(int i=from; i<num; i++) Trait::Destroy(elems[i]);
             }
         }
 
@@ -199,7 +199,7 @@ copy/move 构造与赋值
         using Parent = Array<OBJ, MAX_NUM>;
         using Parent::Parent;
 
-        ~ArrayExt() { Parent::ClearContent(); }
+        ~ArrayExt() { Parent::ClearContent(0); }
     };
 
     template<typename OBJ, std::size_t MAX_NUM>
@@ -243,7 +243,7 @@ Rule Of Five
         ArrayExt(ArrayExt&& rhs) = default;
         auto operator=(ArrayExt&& rhs) -> ArrayExt& = default;
 
-        ~ArrayExt() { Parent::ClearContent(); }
+        ~ArrayExt() { Parent::ClearContent(0); }
     };
 
     template<typename OBJ, std::size_t MAX_NUM>
