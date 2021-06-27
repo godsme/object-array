@@ -216,7 +216,7 @@ ScopedSimpleFind
 
 .. image:: images/scoped-ranged-concept.png
    :align: center
-   :scale: 30 %
+   :scale: 40 %
 
 mixin
 --------------
@@ -246,6 +246,8 @@ mixin
 因而，对于 `mixin` 我们可以使用单线继承的方式来进行组合：
 
 .. image:: images/obj-array-compose.png
+   :align: center
+   :scale: 50 %
 
 而其中每个 `mixin` 都是类似于下面的定义：
 
@@ -289,6 +291,8 @@ CRTP
 解决这种问题的办法是，我们将 `DataHolder` 从继承线的顶部移动到底部，变为下面的结构：
 
 .. image:: images/obj-array-crtp.png
+   :align: center
+   :scale: 50 %
 
 而这样的结构变化，让那些 `mixin` 如何访问 `DataHolder` 上的数据和方法编程了一个问题。
 
@@ -325,6 +329,8 @@ CRTP
 本身又是一个类似于 `mixin` 的空类。我们将其成为 `DataHolder interface` 。如下图所示：
 
 .. image:: images/object-array-composer.png
+   :align: center
+   :scale: 50 %
 
 而 `DataHolder interface` 对 `DataHolder` 的访问，则是通过 `CRTP` 来完成：
 
@@ -356,14 +362,20 @@ CRTP
 在组合了 `ObjectArray` 之后，我们发现 `ArrayView` 的组合方式与 `ObjectArray` 是一致的，除了 `DataHolder` 不同之外：
 
 .. image:: images/array-view-composer.png
+   :align: center
+   :scale: 50 %
 
 而 `Slice` 需要的 `mixin` 要比 `ObjectArray` 少一些，因而它比较简单：
 
 .. image:: images/slice-composer.png
+   :align: center
+   :scale: 50 %
 
 `ScopedView` 是一个不同的物种，如下图：
 
 .. image:: images/scoped-view-composer.png
+   :align: center
+   :scale: 50 %
 
 正如我们之前所讨论的，它本身不再提供 `ScopedFind` 接口，但却会利用 `ScopedFind` 来
 实现 `SimpleFind` ，因而即便从具体实现上这依然是通过继承来实现，但在图中我们用组合关系来表达。
@@ -371,5 +383,7 @@ CRTP
 而 `ScatteredArray` 则与 `ScopedView` 属于同一类：
 
 .. image:: images/scattered-array-composer.png
+   :align: center
+   :scale: 50 %
 
 实际上，每一种对象最终拼合的 `mixin` 要比这里举例的要多得多。但它们依据的方法是一致的。这里就不再赘述。
