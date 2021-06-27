@@ -13,9 +13,9 @@ class CppTransDslLexer(CppLexer):
     TYPE_KEYWORDS  = set(('ForEach',  'MinElem',  'Slice', 'MinElemIndex', 'MinElemEx', 'Find',
                           'FindIndex', 'MaxElem', 'MaxElemIndex', 'MaxElemEx', 'MinElemIndexEx', 'MaxElemIndexEx',
                           'From', 'Until', 'Scope', 'Exclude', 'WithIndex',
-                          'Sort', 'DescSort', 'SortEx', 'DescSortEx',
-                          'PartialSort', 'StableSort', 'Exists', 'Append', 'At',
-                          'Erase', 'GetNum', 'Any', 'All', 'None', 'Replace',
+                          'Sort', 'DescSort', 'SortEx', 'DescSortEx', 'SortObject', 'PartialDescSort', 'StableDescSort',
+                          'PartialSort', 'StableSort', 'Exists', 'Append', 'At', 'First', 'Last',
+                          'Erase', 'GetNum', 'Any', 'All', 'None', 'Replace', 'GetOccupied', 'IsPresent',
                           'Remove', 'Clear', 'ClearFrom', 'ClearUntil', 'RemoveBy', 'CleanUp', 'CleanUpEx', 'CleanUpBy'))
     CONST_KEYWORDS = set(('ASSERT', 'UNKNOWN_EVENT', 'FAILED',
                           'DEF_SIMPLE_ASYNC_ACTION'))
