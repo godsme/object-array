@@ -26,6 +26,8 @@
 #include <l0-infra/array/mixin/SimpleMutateExt.h>
 #include <l0-infra/array/mixin/PredBasedMutate.h>
 #include <l0-infra/array/mixin/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/ScopedSortViewFactory.h>
+#include <l0-infra/array/mixin/ScopedSort.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
@@ -46,7 +48,10 @@ namespace detail {
             mixin::IndexedScopedViewFactory,
             mixin::SimpleMutateExt,
             mixin::PredBasedMutate,
-            mixin::ScopedCleanUp>;
+            mixin::ScopedCleanUp,
+            mixin::ScopedSortViewFactory,
+            mixin::ScopedSort,
+            mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM, typename OWNER>
     using ScatteredArrayBase = detail::ReadOnlyArrayLike<
@@ -74,6 +79,15 @@ public:
     using Mixins::CleanUpEx;
     using Mixins::FindOrAppend;
     using Holder::Clear;
+
+    using Mixins::SortObject;
+
+    using Mixins::Sort;
+    using Mixins::DescSort;
+    using Mixins::PartialSort;
+    using Mixins::PartialDescSort;
+    using Mixins::StableSort;
+    using Mixins::StableDescSort;
 };
 
 #endif //OBJECT_ARRAY_SCATTEREDARRAY_H

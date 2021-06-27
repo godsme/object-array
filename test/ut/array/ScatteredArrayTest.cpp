@@ -57,8 +57,34 @@ SCENARIO("ScatteredArray Test") {
     }
 }
 
-SCENARIO("ScatteredArray Slice Test") {
+SCENARIO("ScatteredArray Sort Test") {
     ScatteredArray<int, 10> foo {2, 6, 3};
+
+    foo.Sort();
+
+    REQUIRE(foo[0] == 2);
+    REQUIRE(foo[1] == 3);
+    REQUIRE(foo[2] == 6);
+
+    foo.DescSort();
+
+    REQUIRE(foo[0] == 6);
+    REQUIRE(foo[1] == 3);
+    REQUIRE(foo[2] == 2);
+}
+
+SCENARIO("ScatteredArray SortObject Test") {
+    ScatteredArray<int, 10> foo {2, 6, 3};
+
+    auto&& view = foo.SortObject().Sort();
+
+    REQUIRE(view[0] == 2);
+    REQUIRE(view[1] == 3);
+    REQUIRE(view[2] == 6);
+
+    REQUIRE(foo[0] == 2);
+    REQUIRE(foo[1] == 6);
+    REQUIRE(foo[2] == 3);
 }
 
 namespace {
