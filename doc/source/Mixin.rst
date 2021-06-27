@@ -78,8 +78,29 @@ concept
 
 .. image:: images/multi-simple-find.png
 
-之所以会有这两种不同的 ``SimpleFind`` ，是因为对于 ``ScatteredArray`` 和 ``ScopedArrayView`` （我们它们归为 `ScopedArrayLike` 一族）而言，
-它们自身都有一个 ``Scope`` ，而对于其它的，我们将其称之为 `NonScopedArrayLike` ： 包括 ``ObjectArray`` , ``Slice`` ，``ArrayView`` ，
+
+分类
+-------------
+
+在进一步讨论之前，我们先将我们的 `Array` 和 `View` 进行一下分类：
+
+  1. `NonScopedArrayLike`
+
+     - `ScatteredArray`
+     - `ScopedArrayView`
+
+  2. `ScopedArrayLike`
+
+     - `ObjectArray`
+     - `ArrayView` / `ConstArrayView`
+     - `Slice`
+
+
+NonScopedSimpleFind
+--------------------------
+
+之所以会有这两种不同的 ``SimpleFind`` ，是因为 `ScopedArrayLike` 而言，
+它们自身都有一个 ``Scope`` ，而对于 `NonScopedArrayLike` ，
 则没有 ``Scope`` ，而这两种的 ``Find`` 实现是不一样的。
 
 但是一旦各自给出了最核心的 ``Find`` ，那么所有基于它们的扩展算法 （ ``SimpleFindExt`` ）则是完全一样的。
@@ -95,7 +116,7 @@ concept
 
    array.Scope(0xa5).Find([](auto&& item) { return item == 5 });
 
-但是却不允许对 `ScopedArrayLike` 一族提供上述的接口（因为它们已经属于 `Scoped` )。
+但是却不允许对 `ScopedArrayLike` 一族提供上述的接口（ 因为它们已经属于 `Scoped` )。
 
 因而，对于 `NonScopedArrayLike` 一族，存在 ``ScopedFind`` 以及它的扩展 ``ScopedFindExt`` 等一族接口。
 但 `ScopedArrayLike` 却没有这样的接口。
@@ -106,6 +127,7 @@ concept
 
 .. image:: images/simple-scoped-find.png
 
+
 NonScopedSimpleFind
 -------------------------------
 
@@ -113,10 +135,14 @@ NonScopedSimpleFind
 因为 ``Find`` 与 ``FindIndex`` 的算法实现，仅仅需要依赖两类元素：
 
    1. 搜索的 `Range` : `[begin, end)` ，对应如下两个方法：
+
       - ``IndexBegin() -> SizeType``
       - ``IndexEnd() -> SizeType``
+
    2. 每个索引位置的对象：
+
       - ``GetObj(i) -> ObjectType const&``
+
 
 而拥有这三个接口的概念为 ``RangedArrayLike`` 。而对于此 `concept` 的实现，可以分为两类：
 
