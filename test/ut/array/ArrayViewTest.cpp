@@ -404,8 +404,8 @@ namespace {
 
 SCENARIO("ArrayView with wrapper") {
     Bar bar{.things = {{1, 2},
-                    {3, 4},
-                    {4, 5}}, .num = 3};
+                       {3, 4},
+                       {4, 5}}, .num = 3};
 
     ThingView view{bar.things, bar.num};
 

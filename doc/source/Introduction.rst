@@ -412,7 +412,123 @@ CleanUp
 排序
 -------------
 
-对于一个 ``ObjectArray``
+对于任何一种可修改的 `array` 或者 `view` ，你都可以对其进行直接的排序：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,1,4,2};
+
+   array.Sort();
+
+   ASSERT(array[0] == 1);
+   ASSERT(array[1] == 2);
+   ASSERT(array[2] == 3);
+   ASSERT(array[3] == 4);
+
+或者进行降序排序：
+
+.. code-block:: c++
+
+   array.DescSort();
+
+   ASSERT(array[0] == 4);
+   ASSERT(array[1] == 3);
+   ASSERT(array[2] == 2);
+   ASSERT(array[3] == 1);
+
+你能直接进行排序的原因是：数组中的对象本身可以进行 ``<`` 操作。如果不能，你就需要通过 ``lambda`` 指明
+排序规则：
+
+.. code-block:: c++
+
+   ObjectArray<Foo, 10> array{{3}, {1}, {4}, {2}};
+
+   array.DescSort([](auto&& l, auto&& r) { return l.a < r.a; });
+
+   ASSERT(array[0].a == 4);
+   ASSERT(array[1].a == 3);
+   ASSERT(array[2].a == 2);
+   ASSERT(array[3].a == 1);
+
+如果你希望使用 **稳定排序** 算法，则可以调用 ``StableSort`` :
+
+.. code-block:: c++
+
+   ObjectArray<Foo, 10> array{{3}, {1}, {4}, {2}};
+
+   array.StableSort([](auto&& l, auto&& r) { return l.a < r.a; });
+
+   ASSERT(array[0].a == 1);
+   ASSERT(array[1].a == 2);
+   ASSERT(array[2].a == 3);
+   ASSERT(array[3].a == 4);
+
+当对象本身支持 ``<`` 操作时， ``StableSort`` 也提供了降序排序接口 ``StableDescSort`` 。
+
+注意： ``StableSort`` 比 ``Sort`` 性能要差，但却可以保证两个相等的对象在排序后，与排序前的顺序相同。
+
+如果你只想对部分进行排序，则可以使用 ``PartialSort`` ：
+
+.. code-block:: c++
+
+   ObjectArray<Foo, 10> array{{3}, {1}, {4}, {2}};
+
+   array.PartialSort([](auto&& l, auto&& r) { return l.a < r.a; }, 3);
+
+   ASSERT(array[0].a == 1);
+   ASSERT(array[1].a == 3);
+   ASSERT(array[2].a == 4);
+   ASSERT(array[3].a == 2);
+
+排序对象
+-------------------
+
+对于数组而言，排序操作会导致对象在数组中的位置进行移动，如果对象比较大，这是一个昂贵的操作。
+
+如果我们只是在某次需要时，对数组进行排序，但并不想改变数组本身的元素顺序，则可以通过排序对象进行排序。
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3, 1, 4, 2};
+
+   auto&& view = array.SortObject().Sort();
+
+   ASSERT(view[0] == 1);
+   ASSERT(view[1] == 2);
+   ASSERT(view[2] == 3);
+   ASSERT(view[3] == 4);
+
+   // array itself still keeps its order.
+   ASSERT(array[0] == 3);
+   ASSERT(array[1] == 1);
+   ASSERT(array[2] == 4);
+   ASSERT(array[3] == 2);
+
+当然， 通过 `SortObject` 也可以进行 ``StableSort`` 和 ``PartialSort`` ：
+
+.. code-block:: c++
+
+   auto&& view = array.SortObject();
+
+   view.PartialSort(3);
+
+   ASSERT(view[0] == 1);
+   ASSERT(view[1] == 3);
+   ASSERT(view[2] == 4);
+   ASSERT(view[3] == 2);
+
+
+当然，你也可以连写：
+
+.. code-block:: c++
+
+   auto&& view = array.SortObject().PartialSort(3);
+
+
+.. note::
+
+   `SortObject` 本身是对数组的索引进行排序，而不是对对象直接排序，以降低数组元素移动所带来的成本。
+
 
 对象数组
 ------------------------
