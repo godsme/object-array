@@ -324,14 +324,14 @@ CRTP
 让 `DataHolder` 提供一个的替身 ：它提供了 `DataHolder` 希望对外暴露的接口，但
 本身又是一个类似于 `mixin` 的空类。我们将其成为 `DataHolder interface` 。如下图所示：
 
-.. image:: images/object-array-interface.png
+.. image:: images/object-array-composer.png
 
 而 `DataHolder interface` 对 `DataHolder` 的访问，则是通过 `CRTP` 来完成：
 
 .. code-block:: c++
 
    template <typename DATA_HOLDER>
-   class ObjectArrayDataHolderInterface {
+   class ContinuousArrayDataHolderInterface {
        auto This() const -> DATA_HOLDER const* {
            return reinterpret_cast<DATA_HOLDER const*>(this);
        }
@@ -352,4 +352,8 @@ CRTP
           return DATA_HOLDER::ElemToObject(elem);
        }
    };
+
+在组合了 ``ObjectArray`` 之后，我们发现 ``ArrayView`` 的组合方式与 ``ObjectArray`` 是一致的，除了 `DataHolder` 不同之外：
+
+.. image:: images/array-view-composer.png
 
