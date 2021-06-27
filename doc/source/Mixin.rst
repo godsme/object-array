@@ -369,13 +369,13 @@ CRTP
 
 .. image:: images/slice-composer.png
    :align: center
-   :scale: 50 %
+   :scale: 40 %
 
 `ScopedView` 是一个不同的物种，如下图：
 
 .. image:: images/scoped-view-composer.png
    :align: center
-   :scale: 50 %
+   :scale: 40 %
 
 正如我们之前所讨论的，它本身不再提供 `ScopedFind` 接口，但却会利用 `ScopedFind` 来
 实现 `SimpleFind` ，因而即便从具体实现上这依然是通过继承来实现，但在图中我们用组合关系来表达。
@@ -384,6 +384,6 @@ CRTP
 
 .. image:: images/scattered-array-composer.png
    :align: center
-   :scale: 50 %
+   :scale: 40 %
 
 实际上，每一种对象最终拼合的 `mixin` 要比这里举例的要多得多。但它们依据的方法是一致的。这里就不再赘述。
