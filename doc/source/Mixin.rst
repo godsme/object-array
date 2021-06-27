@@ -95,10 +95,6 @@ concept
      - `ArrayView` / `ConstArrayView`
      - `Slice`
 
-
-NonScopedSimpleFind
---------------------------
-
 之所以会有这两种不同的 ``SimpleFind`` ，是因为 `ScopedArrayLike` 而言，
 它们自身都有一个 ``Scope`` ，而对于 `NonScopedArrayLike` ，
 则没有 ``Scope`` ，而这两种的 ``Find`` 实现是不一样的。
@@ -129,7 +125,7 @@ NonScopedSimpleFind
 
 
 NonScopedSimpleFind
--------------------------------
++++++++++++++++++++++++++++++
 
 而具体到 ``NonScopedSimpleFind`` 的实现，它也需要依赖一个 `concept` :  ``RangedArrayLike`` 。
 因为 ``Find`` 与 ``FindIndex`` 的算法实现，仅仅需要依赖两类元素：
@@ -190,7 +186,7 @@ NonScopedSimpleFind
 
 
 ScopedSimpleFind
--------------------------------
++++++++++++++++++++++++++++++
 
 `ScopedSimpleFind` 相对于 `NonScopedSimpleFind` ，复杂度稍微上升了一点，因为它需要一个额外的
 接口: ``GetScope`` 。而 ``Find`` 操作，只能在 `scope` 指定的范围内进行。
