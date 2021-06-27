@@ -279,3 +279,77 @@ mixin
 这当然是一个令人讨厌的地方，但对于所有 `mixin` 都在我们的控制之中（我们只是想通过分解为 `mixin` 达到复用目的），
 这一点并不会带来明显的设计和维护负担。
 
+CRTP
+---------------
+
+使用这种方式进行组合的另外一个缺点是，这几乎总是导致数据类 ( `DataHolder` ) 被放在最顶层。
+
+这本身没有任何问题，但却会导致 `debug` 时，如果需要查看数据，需要点开太多的层次（由于类层次很深）。每次层层点击打开的过程都让人精疲力尽，不厌其烦。
+
+解决这种问题的办法是，我们将 `DataHolder` 从继承线的顶部移动到底部，变为下面的结构：
+
+.. image:: images/obj-array-crtp.png
+
+而这样的结构变化，让那些 `mixin` 如何访问 `DataHolder` 上的数据和方法编程了一个问题。
+
+但 `C++` 范型有一个非常有趣的模式，叫做 `CRTP` （ `Curiously Recurring Template Pattern` ）。
+即，一个作为父类，或者兄弟类的模版类，可以访问其子类的成员。
+
+.. code-block:: c++
+
+   template <typename T>
+   struct Base {
+      auto interface() -> void {
+         // ...
+         static_cast<T*>(this)->implementation();
+         // ...
+      }
+
+      static auto static_func() -> void {
+         // ...
+         T::static_sub_func();
+         // ...
+      }
+   };
+
+   struct Derived : Base<Derived> {
+      void implementation();
+      static void static_sub_func();
+   };
+
+我们之前已经讲过，由于我们的 `mixin` 都是没有任何数据的模版类，它们的存在与否并不会影响整个对象的
+内存布局。因而我们安全的将某个 `mixin` 的 ``this`` 指针强行转化为 `DataHolder` 的指针。
+
+另外，由于我们只是把 `DataHolder` 从继承线上移出，`mixin` 们仍然保持了继承结构。我们我们只需要
+让 `DataHolder` 提供一个的替身 ：它提供了 `DataHolder` 希望对外暴露的接口，但
+本身又是一个类似于 `mixin` 的空类。我们将其成为 `DataHolder interface` 。如下图所示：
+
+.. image:: images/object-array-interface.png
+
+而 `DataHolder interface` 对 `DataHolder` 的访问，则是通过 `CRTP` 来完成：
+
+.. code-block:: c++
+
+   template <typename DATA_HOLDER>
+   class ObjectArrayDataHolderInterface {
+       auto This() const -> DATA_HOLDER const* {
+           return reinterpret_cast<DATA_HOLDER const*>(this);
+       }
+       auto This() -> DATA_HOLDER* {
+           return reinterpret_cast<DATA_HOLDER*>(this);
+       }
+   public:
+       using SizeType = typename DATA_HOLDER::SizeType;
+       using ElemType = typename DATA_HOLDER::ElemType;
+
+       auto Num() -> SizeType& {
+          return This()->num;
+       }
+       auto Elems() -> ElemType* {
+          return This()->elems;
+       }
+       static auto ElemToObject(ElemType& elem) -> ObjectType& {
+          return DATA_HOLDER::ElemToObject(elem);
+       }
+   };
+
