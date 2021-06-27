@@ -5,30 +5,17 @@
 #ifndef OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H
 #define OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H
 
-#include <l0-infra/array/concept/IndexedContainer.h>
-#include <l0-infra/array/holder/detail/DeduceElemType.h>
-#include <l0-infra/array/holder/detail/ObjectTrait.h>
-#include <l0-infra/array/holder/detail/RangedViewDataHolderInterface.h>
-#include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
-#include <l0-infra/base/BitSet.h>
+#include <l0-infra/array/holder/detail/RangedViewDataHolderBase.h>
 
 namespace holder {
-    template<__cOnCePt(IndexedContainer) ARRAY, typename OWNER, typename SUB_TYPE>
-    struct RangedViewDataHolder {
-        constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
-        using ArrayType = std::decay_t<ARRAY>;
-
-        using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
-        using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
-        using SizeType   = typename ArrayType::SizeType;
-        using Owner = OWNER;
-
-        constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
-
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
+    struct RangedViewDataHolder : detail::RangedViewDataHolderBase<ARRAY, OWNER, SUB_TYPE> {
+        using Parent = detail::RangedViewDataHolderBase<ARRAY, OWNER, SUB_TYPE>;
         using Interface = detail::RangedViewDataHolderInterface<RangedViewDataHolder>;
+        using typename Parent::SizeType;
+        using typename Parent::ObjectType;
+        using Parent::This;
 
-    private:
-        dEcL_tHiS(SUB_TYPE);
     public:
         RangedViewDataHolder(SizeType begin, SizeType end)
             : begin_{begin}, end_{end} {}
@@ -36,23 +23,15 @@ namespace holder {
         auto IndexBegin() const -> SizeType { return begin_; }
         auto IndexEnd() const -> SizeType { return end_; }
 
-        auto GetObj(SizeType n) const -> ObjectType const& {
-            return This()->GetArray().GetObj(n);
-        }
-
-        auto GetObj(SizeType n) -> ObjectType& {
-            return This()->GetArray().GetObj(n);
-        }
-
     protected:
         SizeType begin_;
         SizeType end_;
     };
 
-    template<__cOnCePt(IndexedContainer) ARRAY, typename OWNER>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
     using RefRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, OWNER, RangedViewDataHolder>;
 
-    template<__cOnCePt(IndexedContainer) ARRAY, typename OWNER>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
     using ValueRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, OWNER, RangedViewDataHolder>;
 }
 

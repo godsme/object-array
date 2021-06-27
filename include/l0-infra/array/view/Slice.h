@@ -14,6 +14,8 @@
 #include <l0-infra/array/mixin/ArraySortExt.h>
 #include <l0-infra/array/mixin/RValueSortViewFactory.h>
 #include <l0-infra/array/mixin/RValueArraySort.h>
+#include <l0-infra/array/holder/FromViewDataHolder.h>
+#include <l0-infra/array/holder/UntilViewDataHolder.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
@@ -47,6 +49,18 @@ namespace view {
 
     template<typename ARRAY>
     using ValueSlice = detail::Slice<ARRAY, holder::ValueRangedViewDataHolder>;
+
+    template<typename ARRAY>
+    using FromView = detail::Slice<ARRAY, holder::RefFromViewDataHolder>;
+
+    template<typename ARRAY>
+    using ValueFromView = detail::Slice<ARRAY, holder::ValueFromViewDataHolder>;
+
+    template<typename ARRAY>
+    using UntilView = detail::Slice<ARRAY, holder::RefUntilViewDataHolder>;
+
+    template<typename ARRAY>
+    using ValueUntilView = detail::Slice<ARRAY, holder::ValueUntilViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_VIEW_SLICE_H

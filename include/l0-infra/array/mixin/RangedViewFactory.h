@@ -17,41 +17,63 @@ namespace mixin {
         using typename T::ObjectType;
         using typename T::OffsetType;
         using typename T::EndOffsetType;
-        using typename T::IndexedContainer;
+        using typename T::RangedArrayLike;
         using typename T::DataHolder;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
 
-    private:
-        struct Array : private DataHolder, IndexedContainer {
-            using DataHolder::DataHolder;
-            using IndexedContainer::GetObj;
-
-            using typename DataHolder::SizeType;
-            using typename DataHolder::ObjectType;
-            using typename DataHolder::ElemType;
-
-            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
-            Array(Array&&) = default;
-        };
+    protected:
+        using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
 
     protected:
-        auto MakeSlice(SizeType from, SizeType until) && -> auto {
-            return view::ValueSlice<Array>{reinterpret_cast<Array&&>(*this), from, until};
+        auto MakeSlice(SizeType from, SizeType until) && -> view::ValueSlice<Array> {
+            return {reinterpret_cast<Array&&>(*this), from, until};
         }
 
-        auto MakeSlice(SizeType from, SizeType until) const && -> auto {
-            return view::ValueSlice<Array const>{reinterpret_cast<Array const &&>(*this), from, until};
+        auto MakeSlice(SizeType from, SizeType until) const && -> view::ValueSlice<Array const> {
+            return {reinterpret_cast<Array const &&>(*this), from, until};
+        }
+
+        auto MakeFromSlice(SizeType from) && -> view::ValueFromView<Array> {
+            return {reinterpret_cast<Array&&>(*this), from};
+        }
+
+        auto MakeFromSlice(SizeType from) const && -> view::ValueFromView<Array const> {
+            return {reinterpret_cast<Array const &&>(*this), from};
+        }
+
+        auto MakeUntilSlice(SizeType until) && -> view::ValueUntilView<Array> {
+            return {reinterpret_cast<Array&&>(*this), until};
+        }
+
+        auto MakeUntilSlice(SizeType until) const && -> view::ValueUntilView<Array const> {
+            return {reinterpret_cast<Array const &&>(*this), until};
         }
 
     private:
-        auto MakeSlice(SizeType from, SizeType until) & -> view::Slice<IndexedContainer> {
-            return {static_cast<IndexedContainer&>(*this), from, until};
+        auto MakeSlice(SizeType from, SizeType until) & -> view::Slice<RangedArrayLike> {
+            return {static_cast<RangedArrayLike&>(*this), from, until};
         }
 
-        auto MakeSlice(SizeType from, SizeType until) const & -> view::Slice<IndexedContainer const> {
-            return {static_cast<IndexedContainer const&>(*this), from, until};
+        auto MakeSlice(SizeType from, SizeType until) const & -> view::Slice<RangedArrayLike const> {
+            return {static_cast<RangedArrayLike const&>(*this), from, until};
+        }
+
+        auto MakeFromSlice(SizeType from) & -> view::FromView<RangedArrayLike> {
+            return {static_cast<RangedArrayLike&>(*this), from};
+        }
+
+        auto MakeFromSlice(SizeType from) const & -> view::FromView<RangedArrayLike const> {
+            return {static_cast<RangedArrayLike const&>(*this), from};
+        }
+
+        auto MakeUntilSlice(SizeType until) & -> view::UntilView<RangedArrayLike> {
+            return {static_cast<RangedArrayLike&>(*this), until};
+        }
+
+        auto MakeUntilSlice(SizeType until) const & -> view::UntilView<RangedArrayLike const> {
+            return {static_cast<RangedArrayLike const&>(*this), until};
         }
 
         template<bool CONST>
@@ -109,22 +131,22 @@ namespace mixin {
         auto From(OffsetType) const && -> void {}
 
         auto From(OffsetType from) & -> auto {
-            return MakeSlice(from.ToIndex(IndexEnd()), IndexEnd());
+            return MakeFromSlice(from.ToIndex(IndexEnd()));
         }
 
         auto From(OffsetType from) const& -> auto {
-            return MakeSlice(from.ToIndex(IndexEnd()), IndexEnd());
+            return MakeFromSlice(from.ToIndex(IndexEnd()));
         }
 
         auto Until(EndOffsetType) && -> void {}
         auto Until(EndOffsetType) const && -> void {}
 
         auto Until(EndOffsetType until) & -> auto {
-            return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
+            return MakeUntilSlice(until.ToIndex(IndexEnd()));
         }
 
         auto Until(EndOffsetType until) const& -> auto {
-            return MakeSlice(IndexBegin(), until.ToIndex(IndexEnd()));
+            return MakeUntilSlice(until.ToIndex(IndexEnd()));
         }
     };
 }
