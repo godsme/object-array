@@ -353,7 +353,23 @@ CRTP
        }
    };
 
-在组合了 ``ObjectArray`` 之后，我们发现 ``ArrayView`` 的组合方式与 ``ObjectArray`` 是一致的，除了 `DataHolder` 不同之外：
+在组合了 `ObjectArray` 之后，我们发现 `ArrayView` 的组合方式与 `ObjectArray` 是一致的，除了 `DataHolder` 不同之外：
 
 .. image:: images/array-view-composer.png
 
+而 `Slice` 需要的 `mixin` 要比 `ObjectArray` 少一些，因而它比较简单：
+
+.. image:: images/slice-composer.png
+
+`ScopedView` 是一个不同的物种，如下图：
+
+.. image:: images/scoped-view-composer.png
+
+正如我们之前所讨论的，它本身不再提供 `ScopedFind` 接口，但却会利用 `ScopedFind` 来
+实现 `SimpleFind` ，因而即便从具体实现上这依然是通过继承来实现，但在图中我们用组合关系来表达。
+
+而 `ScatteredArray` 则与 `ScopedView` 属于同一类：
+
+.. image:: images/scattered-array-composer.png
+
+实际上，每一种对象最终拼合的 `mixin` 要比这里举例的要多得多。但它们依据的方法是一致的。这里就不再赘述。
