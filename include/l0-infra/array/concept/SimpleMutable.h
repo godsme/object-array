@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SIMPLEMUTABLE_H
 #define OBJECT_ARRAY_SIMPLEMUTABLE_H
 
-#include <l0-infra/array/config.h>
+#include <l0-infra/array/detail/config.h>
 #include <l0-infra/array/concept/detail/ConceptDef.h>
 #if HAS_CONCEPT
 #include <l0-infra/array/concept/detail/PredTypeTrait.h>

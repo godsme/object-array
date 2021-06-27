@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SIMPLEARRAYLIKE_H
 #define OBJECT_ARRAY_SIMPLEARRAYLIKE_H
 
-#include <l0-infra/array/config.h>
+#include <l0-infra/array/detail/config.h>
 #if HAS_CONCEPT
 #include <concepts>
 
