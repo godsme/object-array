@@ -200,7 +200,7 @@ Replace
 
 .. code-block:: c++
 
-   std::optional<uint8_t> index = array.FindIndex([](int item) { /* ... */ });
+   IntOpt<uint8_t> index = array.FindIndex([](int item) { /* ... */ });
    if(!index) {
      // not found
    } else {
