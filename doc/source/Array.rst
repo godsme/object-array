@@ -117,7 +117,7 @@ copy/move 构造与赋值
         }
 
         auto Clear() -> void {
-            ClearContent(from);
+            ClearContent(0);
             num = 0;
         }
 
