@@ -488,11 +488,18 @@ SCENARIO("move cons Thing") {
     Thing b{std::move(a)};
 }
 
-SCENARIO("A copy cons deleted ScopeArray should not be able to copy") {
-    ThingArray array{};
+#if HAS_CONCEPT
 
-    //ThingArray array1{array};
+template<typename T>
+concept CopyAllowed = requires(T const& value) {
+    { T{value} };
+};
+
+SCENARIO("A copy cons deleted ScopeArray should not be able to copy") {
+    static_assert(!CopyAllowed<ThingArray>);
 }
+
+#endif
 
 namespace {
     struct Thing2 {
