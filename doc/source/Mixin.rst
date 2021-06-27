@@ -290,7 +290,7 @@ CRTP
 
 解决这种问题的办法是，我们将 `DataHolder` 从继承线的顶部移动到底部，变为下面的结构：
 
-.. image:: images/obj-array-crtp.png
+.. image:: images/object-array-crtp.png
    :align: center
    :scale: 50 %
 
