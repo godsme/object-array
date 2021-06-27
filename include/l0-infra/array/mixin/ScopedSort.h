@@ -27,6 +27,7 @@ namespace mixin {
         using Self::IndexEnd;
         using Self::GetScope;
 
+    public:
         template<__lEsS_cOnCePt(LESS)>
         auto DoPartialSort(LESS&& less, SizeType n) -> SizeType {
             if(n == 0) return 0;
@@ -40,7 +41,6 @@ namespace mixin {
             }
         }
 
-    public:
         template<__lEsS_cOnCePt(LESS)>
         auto Sort(LESS&& less) && -> void {
             ::detail::ScopedArrayIndices indices{*this};

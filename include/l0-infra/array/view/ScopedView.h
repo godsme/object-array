@@ -49,6 +49,7 @@ namespace view::detail {
         using Parent::Parent;
         using Mixins::SortObject;
 
+        using Mixins::DoPartialSort;
         using Mixins::Sort;
         using Mixins::DescSort;
         using Mixins::PartialSort;

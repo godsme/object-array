@@ -26,7 +26,7 @@ namespace mixin {
         using Self::ObjectBegin;
         using Self::ObjectEnd;
 
-    protected:
+    public:
         template<__lEsS_cOnCePt(LESS)>
         auto DoPartialSort(LESS&& less, SizeType n) & -> SizeType {
             if(n == 0) return 0;
@@ -39,7 +39,6 @@ namespace mixin {
             }
         }
 
-    public:
         template<__lEsS_cOnCePt(LESS)>
         auto Sort(LESS&& less) && -> void {
             std::sort(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));

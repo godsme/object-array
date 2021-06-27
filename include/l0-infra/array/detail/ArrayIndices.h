@@ -12,11 +12,12 @@
 #include <l0-infra/array/mixin/ArraySortExt.h>
 #include <l0-infra/array/mixin/IndexedViewFactory.h>
 #include <l0-infra/array/mixin/ArraySort.h>
+#include <l0-infra/array/mixin/RangedClear.h>
 
 namespace detail {
     using ArrayIndicesMixins = ContinuousRangedArray
     ::Concat<SimpleReadOnlyArrayLikeMixins>
-    ::Extends<
+    ::Extends<mixin::RangedClear,
             mixin::IndexedViewFactory,
             mixin::ArraySort,
             mixin::ArraySortExt>;
@@ -35,8 +36,10 @@ namespace detail {
         using Holder::InitWith;
         using Holder::InitWithRange;
 
+        using Mixins::ClearFrom;
         using Mixins::Sort;
         using Mixins::DescSort;
+        using Mixins::DoPartialSort;
         using Mixins::PartialSort;
         using Mixins::PartialDescSort;
         using Mixins::StableSort;

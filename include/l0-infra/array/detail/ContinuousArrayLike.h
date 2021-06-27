@@ -38,6 +38,7 @@ namespace detail {
 
         using Mixins::Sort;
         using Mixins::DescSort;
+        using Mixins::DoPartialSort;
         using Mixins::PartialSort;
         using Mixins::PartialDescSort;
         using Mixins::StableSort;

@@ -19,6 +19,7 @@ namespace mixin {
         using typename Self::ObjectType;
         using typename Self::SizeType;
 
+        using Self::DoPartialSort;
         using Self::Sort;
         using Self::PartialSort;
         using Self::StableSort;
