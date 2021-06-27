@@ -45,16 +45,16 @@ namespace view {
     template<typename ARRAY>
     struct OrderedScopedView : detail::OrderedScopedView<ARRAY, holder::RefScopedViewDataHolder> {
         using Parent = detail::OrderedScopedView<ARRAY, holder::RefScopedViewDataHolder>;
-        OrderedScopedView(ARRAY& array, typename ARRAY::BitMap scope, typename ARRAY::SizeType n)
-                : Parent(array, scope.GetLowestBits(n))
+        OrderedScopedView(ARRAY& array, typename ARRAY::SizeType n)
+                : Parent(array, array.GetScope().GetLowestBits(n))
         {}
     };
 
     template<typename ARRAY>
     struct OrderedValueScopedView : detail::OrderedScopedView<ARRAY, holder::ValueScopedViewDataHolder> {
         using Parent = detail::OrderedScopedView<ARRAY, holder::ValueScopedViewDataHolder>;
-        OrderedValueScopedView(ARRAY&& array, typename ARRAY::BitMap scope, typename ARRAY::SizeType n)
-                : Parent(std::move(array), scope.GetLowestBits(n))
+        OrderedValueScopedView(ARRAY&& array, typename ARRAY::SizeType n)
+                : Parent(std::move(array), array.GetScope().GetLowestBits(n))
         {}
     };
 }

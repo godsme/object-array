@@ -21,7 +21,7 @@ namespace mixin {
         using typename Self::ObjectType;
         using typename Self::SizeType;
         using typename Self::Owner;
-        using typename T::RangedArrayLike;;
+        using typename T::ScopedRangedArrayLike;;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
@@ -66,8 +66,8 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) & -> view::OrderedScopedView<RangedArrayLike> {
-            return {reinterpret_cast<RangedArrayLike&>(*this), GetScope(), DoPartialSort(std::forward<LESS>(less), n)};
+        auto PartialSort(LESS&& less, SizeType n) & -> view::OrderedScopedView<ScopedRangedArrayLike> {
+            return {reinterpret_cast<ScopedRangedArrayLike&>(*this), DoPartialSort(std::forward<LESS>(less), n)};
         }
 
         template<__lEsS_cOnCePt(LESS)>
