@@ -22,7 +22,8 @@ namespace detail {
             mixin::RValueSortViewFactory>;
 
     using ConstArrayViewMixins = detail::ContinousReadOnlyMixins::Concat<ArrayViewSpecifiedMixins>;
-    using ArrayViewMixins = detail::ContinuousArrayMixin::Concat<ArrayViewSpecifiedMixins>;
+    using ArrayViewMixins = detail::ContinuousArrayMixin::Concat<ArrayViewSpecifiedMixins>
+            ::Extends<mixin::RValueArraySort, mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM, typename OWNER, typename ELEM, bool ORDERED>
     using ConstArrayView = detail::ContinuousReadOnlyArray<holder::ConstArrayViewDataHolder<T, MAX_NUM, OWNER, ELEM>, ConstArrayViewMixins, ORDERED>;

@@ -19,6 +19,7 @@ namespace mixin::detail {
 
         constexpr static auto MAX_SIZE = HOLDER::MAX_SIZE;
         ValueRangedArray(ValueRangedArray&&) = default;
+        ValueRangedArray(ValueRangedArray const&) = default;
     };
 }
 

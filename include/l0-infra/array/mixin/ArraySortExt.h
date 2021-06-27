@@ -23,20 +23,36 @@ namespace mixin {
         using Self::PartialSort;
         using Self::StableSort;
 
-        auto Sort() -> decltype(auto) {
+        auto Sort() & -> decltype(auto) {
             return Sort(detail::DEFAULT_LESS_THAN);
         }
 
-        auto DescSort() -> decltype(auto) {
+        auto Sort() && -> decltype(auto) {
+            return std::move(*this).Sort(detail::DEFAULT_LESS_THAN);
+        }
+
+        auto DescSort() & -> decltype(auto) {
             return Sort(detail::DEFAULT_GREATER_THAN);
         }
 
-        auto StableSort() -> decltype(auto) {
+        auto DescSort() && -> decltype(auto) {
+            return std::move(*this).Sort(detail::DEFAULT_GREATER_THAN);
+        }
+
+        auto StableSort() & -> decltype(auto) {
             return StableSort(detail::DEFAULT_LESS_THAN);
         }
 
-        auto StableDescSort() -> decltype(auto) {
+        auto StableSort() && -> decltype(auto) {
+            return std::move(*this).StableSort(detail::DEFAULT_LESS_THAN);
+        }
+
+        auto StableDescSort() & -> decltype(auto) {
             return StableSort(detail::DEFAULT_GREATER_THAN);
+        }
+
+        auto StableDescSort() && -> decltype(auto) {
+            return std::move(*this).StableSort(detail::DEFAULT_GREATER_THAN);
         }
 
         auto PartialSort(SizeType n) & -> auto {

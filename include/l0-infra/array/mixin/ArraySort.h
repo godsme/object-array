@@ -41,14 +41,24 @@ namespace mixin {
 
     public:
         template<__lEsS_cOnCePt(LESS)>
-        auto Sort(LESS&& less) -> decltype(auto) {
+        auto Sort(LESS&& less) && -> void {
             std::sort(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto Sort(LESS&& less) & -> decltype(auto) {
+            std::move(*this).Sort(std::forward<LESS>(less));
             return reinterpret_cast<Owner&>(*this);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto StableSort(LESS&& less) -> decltype(auto) {
+        auto StableSort(LESS&& less) && -> void {
             std::stable_sort(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto StableSort(LESS&& less) & -> decltype(auto) {
+            std::move(*this).StableSort(std::forward<LESS>(less));
             return reinterpret_cast<Owner&>(*this);
         }
 
@@ -58,7 +68,9 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) && -> void {}
+        auto PartialSort(LESS&& less, SizeType n) && -> void {
+            DoPartialSort(std::forward<LESS>(less), n);
+        }
     };
 }
 

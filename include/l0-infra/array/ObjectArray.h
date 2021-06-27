@@ -15,7 +15,9 @@ namespace detail {
                 mixin::RangedViewFactory,
                 mixin::ScopedViewFactory,
                 mixin::IndexedViewFactory,
-                mixin::SortViewFactory>;
+                mixin::SortViewFactory,
+                mixin::ArraySort,
+                mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM, typename OWNER, bool ORDERED>
     using ObjectArray = detail::ContinuousArrayLike<

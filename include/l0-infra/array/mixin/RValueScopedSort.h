@@ -17,13 +17,28 @@ namespace mixin {
         using typename T::DataHolder;
         using typename T::ObjectType;
         using typename T::SizeType;
+        using typename T::Owner;
 
     private:
         using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
 
     public:
         using Self::PartialSort;
+        using Self::Sort;
+        using Self::StableSort;
         using Self::GetScope;
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto Sort(LESS&& less) && -> Owner {
+            std::move(*this).Self::Sort(std::forward<LESS>(less));
+            return reinterpret_cast<Owner&>(*this);
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto StableSort(LESS&& less) && -> Owner {
+            std::move(*this).Self::StableSort(std::forward<LESS>(less));
+            return reinterpret_cast<Owner&>(*this);
+        }
 
         template<__lEsS_cOnCePt(LESS)>
         auto PartialSort(LESS&& less, SizeType n) && -> view::OrderedValueScopedView<Array> {

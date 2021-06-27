@@ -30,9 +30,7 @@ namespace detail {
             mixin::SimpleMutateExt,
             mixin::PredBasedMutate,
             mixin::ScopedCleanUp,
-            mixin::RangedClear,
-            mixin::ArraySort,
-            mixin::ArraySortExt>;
+            mixin::RangedClear>;
 }
 
 #endif //OBJECT_ARRAY_CONTINUOUSARRAYMIXIN_H
