@@ -19,6 +19,7 @@
 #include <l0-infra/array/detail/ReadOnlyArrayLike.h>
 #include <l0-infra/array/mixin/ScopedSortViewFactory.h>
 #include <l0-infra/array/mixin/ScopedSort.h>
+#include <l0-infra/array/mixin/RValueScopedSort.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
@@ -37,7 +38,7 @@ namespace view::detail {
             mixin::SimpleMinElemExt,
             mixin::IndexedScopedViewFactory,
             mixin::ScopedSortViewFactory,
-            mixin::ScopedSort,
+            mixin::RValueScopedSort,
             mixin::ArraySortExt>;
 
     template<typename ARRAY, template <typename, typename> typename HOLDER>

@@ -23,6 +23,9 @@ namespace view::detail {
     public:
         OrderedView(ARRAY& array, typename ARRAY::SizeType n)
             : Parent{array, array, n} {}
+
+        OrderedView(ARRAY&& array, typename ARRAY::SizeType n)
+                : Parent{std::move(array), array, n} {}
     };
 }
 

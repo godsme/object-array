@@ -5,7 +5,6 @@
 #ifndef OBJECT_ARRAY_RANGEDELEMSCOUNT_H
 #define OBJECT_ARRAY_RANGEDELEMSCOUNT_H
 
-
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/base/InvokeConstMethod.h>

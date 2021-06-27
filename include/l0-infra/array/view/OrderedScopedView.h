@@ -49,6 +49,14 @@ namespace view {
                 : Parent(array, scope.GetLowestBits(n))
         {}
     };
+
+    template<typename ARRAY>
+    struct OrderedValueScopedView : detail::OrderedScopedView<ARRAY, holder::ValueScopedViewDataHolder> {
+        using Parent = detail::OrderedScopedView<ARRAY, holder::ValueScopedViewDataHolder>;
+        OrderedValueScopedView(ARRAY&& array, typename ARRAY::BitMap scope, typename ARRAY::SizeType n)
+                : Parent(std::move(array), scope.GetLowestBits(n))
+        {}
+    };
 }
 
 #endif //OBJECT_ARRAY_ORDEREDSCOPEDVIEW_H

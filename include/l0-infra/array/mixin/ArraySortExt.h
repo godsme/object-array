@@ -39,12 +39,20 @@ namespace mixin {
             return StableSort(detail::DEFAULT_GREATER_THAN);
         }
 
-        auto PartialSort(SizeType n) -> auto {
+        auto PartialSort(SizeType n) & -> auto {
             return PartialSort(detail::DEFAULT_LESS_THAN, n);
         }
 
-        auto PartialDescSort(SizeType n) -> auto {
+        auto PartialSort(SizeType n) && -> auto {
+            return std::move(*this).PartialSort(detail::DEFAULT_LESS_THAN, n);
+        }
+
+        auto PartialDescSort(SizeType n) & -> auto {
             return PartialSort(detail::DEFAULT_GREATER_THAN, n);
+        }
+
+        auto PartialDescSort(SizeType n) && -> auto {
+            return std::move(*this).PartialSort(detail::DEFAULT_GREATER_THAN, n);
         }
     };
 }

@@ -56,9 +56,12 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) -> view::OrderedScopedView<RangedArrayLike> {
+        auto PartialSort(LESS&& less, SizeType n) & -> view::OrderedScopedView<RangedArrayLike> {
             return {reinterpret_cast<RangedArrayLike&>(*this), GetScope(), DoPartialSort(std::forward<LESS>(less), n)};
         }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto PartialSort(LESS&& less, SizeType n) && -> void {}
     };
 }
 

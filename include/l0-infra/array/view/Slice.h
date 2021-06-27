@@ -13,12 +13,13 @@
 #include <l0-infra/array/mixin/ArraySort.h>
 #include <l0-infra/array/mixin/ArraySortExt.h>
 #include <l0-infra/array/mixin/RValueSortViewFactory.h>
+#include <l0-infra/array/mixin/RValueArraySort.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory,
-            mixin::ArraySort,
+            mixin::RValueArraySort,
             mixin::ArraySortExt,
             mixin::RValueSortViewFactory>;
 

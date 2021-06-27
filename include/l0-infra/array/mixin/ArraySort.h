@@ -26,7 +26,7 @@ namespace mixin {
         using Self::ObjectBegin;
         using Self::ObjectEnd;
 
-    private:
+    protected:
         template<__lEsS_cOnCePt(LESS)>
         auto DoPartialSort(LESS&& less, SizeType n) & -> SizeType {
             if(n == 0) return 0;
