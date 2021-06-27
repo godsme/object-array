@@ -209,7 +209,31 @@ ScopedSimpleFind
 
 如果一个对象既满足 `RangedArrayLike` 概念， 又满足 `ScopedArrayAlike` 概念，从语义上就满足
 了 `RangedArrayLike + ScopedArrayAlike` 概念。而 `C++ 20` 则通过 ``RangedArrayLike && ScopedArrayAlike`` 来
-表达这种概念上的组合关系。我们将这个组合后的概念，定义为一个新概念：
+表达这种概念上的组合关系。我们将这个组合后的概念，定义为一个新概念 `ScopedRangedArrayLike` ：
 
 .. image:: images/scoped-ranged-concept.png
+
+
+mixin
+--------------
+
+到了现在，我们需要来谈一下什么叫 `mixin` 了。
+
+简而言之， `mixin` 是个可以与对象进行组合的 `class/template class` 。它本身不应该有任何数据，
+因而可以通过 ``std::is_empty_v<MIXIN>``  谓词断言。
+
+由于它本身没有任何数据，因而拼接在对象身上不会引起对象二进制结构 （内存布局）的任何变化。所以，它们
+的 ``this`` 指针的位置与整个对象的 ``this`` 指针位置一致。
+
+这样的 `mixin` 与其它语言比如 `scala` 所提供的 `trait` 概念上很相似。（ `scala trait` 允许
+提供算法实现，并且其 `trait` 组合顺序与声明顺序一致）。
+
+之所以使用 `mixin` 这样的概念，是为了让一个 `mixin` 所提供的实现，能够在不同的对象间方便的复用。
+
+组合
+---------------
+
+现在到了我们对对象进行组合的时候了。我们先来看看 ``ObjectArray`` :
+
+.. image:: images/object-array-simple-find.png
 
