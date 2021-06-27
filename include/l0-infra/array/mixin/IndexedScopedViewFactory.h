@@ -7,6 +7,7 @@
 
 #include <l0-infra/array/concept/ScopedArrayLike.h>
 #include <l0-infra/array/view/IndexedScopedView.h>
+#include <l0-infra/array/mixin/detail/ValueScopedRangedArray.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleScopedRangedArrayLike) T>
@@ -21,21 +22,7 @@ namespace mixin {
         using Self::GetScope;
 
     private:
-        struct Array : private DataHolder, ScopedRangedArrayLike {
-            using DataHolder::DataHolder;
-            using ScopedRangedArrayLike::IndexBegin;
-            using ScopedRangedArrayLike::IndexEnd;
-            using ScopedRangedArrayLike::GetScope;
-            using ScopedRangedArrayLike::GetObj;
-
-            using typename DataHolder::SizeType;
-            using typename DataHolder::ObjectType;
-            using typename ScopedRangedArrayLike::BitMap;
-
-            constexpr static auto MAX_SIZE = DataHolder::MAX_SIZE;
-
-            Array(Array&&) = default;
-        };
+        using Array = detail::ValueScopedRangedArray<DataHolder, ScopedRangedArrayLike>;
 
     public:
         auto WithIndex() && -> view::IndexedScopedView::ValueView<Array> {
