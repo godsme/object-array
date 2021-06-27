@@ -212,7 +212,8 @@ ScopedSimpleFind
 表达这种概念上的组合关系。我们将这个组合后的概念，定义为一个新概念 `ScopedRangedArrayLike` ：
 
 .. image:: images/scoped-ranged-concept.png
-
+   :align: center
+   :scale: 30 %
 
 mixin
 --------------
@@ -233,7 +234,7 @@ mixin
 组合
 ---------------
 
-现在到了我们对对象进行组合的时候了。我们先来看看 ``ObjectArray`` :
+现在到了我们进行组合的时候了。我们先来看看 ``ObjectArray`` :
 
 .. image:: images/object-array-simple-find.png
 
