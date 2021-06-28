@@ -11,7 +11,7 @@
 
 namespace mixin {
     template<__cOnCePt(ConstRangedArrayLike) T>
-    class ScopedMinElemExt : public ScopedMinElem<T> {
+    class ScopedMinElemExt : public T {
         using Self = T;
     public:
         using typename Self::Maybe;

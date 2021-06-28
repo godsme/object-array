@@ -18,7 +18,7 @@ namespace mixin {
         using typename Self::ObjectType;
         using typename Self::SizeType;
 
-    public:
+    protected:
         using Self::GetObj;
 
         using Self::IndexBegin;

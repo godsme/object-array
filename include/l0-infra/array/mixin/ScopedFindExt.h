@@ -12,8 +12,8 @@
 
 namespace mixin {
     template<__cOnCePt(ConstRangedArrayLike) T>
-    class ScopedFindExt : public ScopedFind<T> {
-        using Self = ScopedFind<T>;
+    class ScopedFindExt : public T {
+        using Self = T;
     public:
         using typename T::ObjectType;
         using typename T::SizeType;
