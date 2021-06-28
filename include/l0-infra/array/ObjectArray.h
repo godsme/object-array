@@ -20,7 +20,7 @@ namespace detail {
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::ScopedMinElem,
-            mixin::detail::PublicMixinSplitter,
+            mixin::detail::__PublicMixinDelimiter__,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
