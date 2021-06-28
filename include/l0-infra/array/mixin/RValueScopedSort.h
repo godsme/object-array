@@ -42,7 +42,9 @@ namespace mixin {
 
         template<__lEsS_cOnCePt(LESS)>
         auto PartialSort(LESS&& less, SizeType n) && -> view::OrderedValueScopedView<Array> {
-            return {reinterpret_cast<Array&&>(*this), Self::DoPartialSort(std::forward<LESS>(less), n)};
+            static_assert(std::is_reference_v<decltype(GetScope())>);
+            GetScope().KeepLowestBits(Self::DoPartialSort(std::forward<LESS>(less), n));
+            return {reinterpret_cast<Array&&>(*this)};
         }
     };
 }

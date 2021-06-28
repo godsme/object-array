@@ -78,6 +78,11 @@ namespace detail {
             }
             return result;
         }
+
+        auto KeepLowestBits(SizeType n) -> ArrayScope& {
+            *this = GetLowestBits(n);
+            return *this;
+        }
     };
 
 }

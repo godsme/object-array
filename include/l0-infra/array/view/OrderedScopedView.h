@@ -47,12 +47,7 @@ namespace view {
     };
 
     template<typename ARRAY>
-    struct OrderedValueScopedView : detail::OrderedScopedView<ARRAY, holder::ValueScopedViewDataHolder> {
-        using Parent = detail::OrderedScopedView<ARRAY, holder::ValueScopedViewDataHolder>;
-        OrderedValueScopedView(ARRAY&& array, typename ARRAY::SizeType n)
-                : Parent(std::move(array), array.GetScope().GetLowestBits(n))
-        {}
-    };
+    using OrderedValueScopedView = detail::OrderedScopedView<ARRAY, holder::ValueScopedIndexedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_ORDEREDSCOPEDVIEW_H

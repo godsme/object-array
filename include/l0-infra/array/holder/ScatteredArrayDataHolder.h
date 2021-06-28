@@ -22,6 +22,7 @@ namespace holder::detail {
 
         auto GetRange() const -> SizeType { return MAX_SIZE; }
         auto GetScope() const -> BitMap { return This()->occupied; }
+        auto GetScope() -> BitMap& { return This()->occupied; }
 
         template<typename ... ARGS>
         auto Append(ARGS &&... args) -> ObjectType * {
@@ -164,10 +165,6 @@ namespace holder::detail {
             ClearContent();
             occupied.reset();
         }
-
-//        auto GetOccupied() const -> BitMap {
-//            return occupied;
-//        }
 
     private:
         BitMap occupied;

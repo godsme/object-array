@@ -24,6 +24,7 @@ namespace holder {
         friend class detail::ScopedViewDataHolderInterface;
 
         auto GetScope() const -> BitMap { return This()->GetArray().GetScope(); }
+        auto GetScope() -> BitMap& { return This()->GetArray().GetScope(); }
     };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>

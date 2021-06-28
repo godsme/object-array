@@ -26,6 +26,7 @@ namespace holder::detail {
         auto IndexBegin() const -> SizeType { return This()->IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->IndexEnd(); }
         auto GetScope() const -> BitMap { return This()->GetScope(); }
+        auto GetScope() -> BitMap& { return This()->GetScope(); }
     };
 }
 

@@ -41,6 +41,7 @@ namespace holder {
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n); }
 
         auto GetScope() const -> BitMap const& { return scope; }
+        auto GetScope() -> BitMap& { return scope; }
 
     private:
         BitMap scope;
