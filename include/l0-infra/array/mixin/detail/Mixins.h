@@ -41,8 +41,10 @@ namespace mixin::detail {
         using Owner = OWNER;
         using SizeType = typename DataHolder::SizeType;
         constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
+        constexpr static bool ORDERED = T::ORDERED;
         using BitMap = ::detail::ArrayScope<MAX_SIZE>;
         using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
+
         using OffsetType = ::detail::ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
     };
 }

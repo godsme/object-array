@@ -7,7 +7,7 @@
 
 namespace mixin {
     template<typename T>
-    struct ArrayEquality : T {
+    class ArrayEquality : public T {
         using Self = T;
 
     public:
@@ -20,11 +20,11 @@ namespace mixin {
             if (GetNum() != rhs.GetNum()) return false;
 
             for (auto i = 0; i < GetNum(); i++) {
-//                if constexpr(ORDERED) {
-//                    if ((*this)[i] != rhs[i]) return false;
-//                } else {
+                if constexpr(T::ORDERED) {
+                    if ((*this)[i] != rhs[i]) return false;
+                } else {
                     if (!rhs.Exists((*this)[i])) return false;
-                //}
+                }
             }
             return true;
         }
