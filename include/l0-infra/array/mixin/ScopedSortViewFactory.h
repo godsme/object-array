@@ -15,29 +15,27 @@ namespace mixin {
         using Self = T;
 
     protected:
-        using typename T::RangedArrayLike;
+        using typename T::ScopedRangedArrayLike;
         using typename T::DataHolder;
 
-        using T::GetScope;
-
     private:
-        using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
+        using Array = detail::ValueScopedRangedArray<DataHolder, ScopedRangedArrayLike>;
 
     public:
         auto SortObject() && -> view::ValueSortView<Array> {
-            return {reinterpret_cast<Array&&>(*this), GetScope()};
+            return {reinterpret_cast<Array&&>(*this)};
         }
 
         auto SortObject() const && -> view::ValueSortView<Array const> {
-            return {reinterpret_cast<Array const&&>(*this), GetScope()};
+            return {reinterpret_cast<Array const&&>(*this)};
         }
 
-        auto SortObject() & -> view::SortView<RangedArrayLike> {
-            return {static_cast<RangedArrayLike&>(*this), GetScope()};
+        auto SortObject() & -> view::SortView<ScopedRangedArrayLike> {
+            return {static_cast<ScopedRangedArrayLike&>(*this)};
         }
 
-        auto SortObject() const & -> view::SortView<RangedArrayLike const> {
-            return {static_cast<RangedArrayLike const&>(*this), GetScope()};
+        auto SortObject() const & -> view::SortView<ScopedRangedArrayLike const> {
+            return {static_cast<ScopedRangedArrayLike const&>(*this)};
         }
     };
 }

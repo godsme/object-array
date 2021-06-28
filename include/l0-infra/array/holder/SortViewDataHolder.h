@@ -15,23 +15,35 @@ namespace holder::detail {
     template<typename HOLDER>
     class SortViewDataHolderInterface {
         dEcL_tHiS(HOLDER);
+        auto InitIndices() {
+            if constexpr(HOLDER::IS_SCOPED) {
+                This()->indices.InitWithRange(This()->GetArray(), This()->GetArray().GetScope());
+            } else {
+                This()->indices.InitWithRange(This()->GetArray());
+            }
+        };
     public:
         constexpr static auto MAX_SIZE = HOLDER::MAX_SIZE;
+
         using SizeType = typename HOLDER::SizeType;
         using ObjectType = typename HOLDER::ObjectType;
 
+
         template<__lEsS_cOnCePt(LESS)>
         auto IndicesSort(LESS&& less) -> void {
+            InitIndices();
             This()->indices.template Sort(__sLiCe_SoRt_LaMbDa);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto IndicesStableSort(LESS&& less) & -> void{
+        auto IndicesStableSort(LESS&& less) & -> void {
+            InitIndices();
             This()->indices.template StableSort(__sLiCe_SoRt_LaMbDa);
         }
 
         template<__lEsS_cOnCePt(LESS)>
         auto IndicesPartialSort(LESS&& less, SizeType n) -> SizeType {
+            InitIndices();
             SizeType num = This()->indices.template DoPartialSort(__sLiCe_SoRt_LaMbDa, n);
             This()->indices.ClearFrom(num);
             return num;
@@ -48,13 +60,20 @@ namespace holder::detail {
         auto IndexBegin() const -> SizeType { return 0; }
         auto IndexEnd() const -> SizeType { return This()->indices.GetNum(); }
     };
+
+    template<typename T, typename = void>
+    struct IsScopedArray : std::false_type{};
+
+    template<typename T>
+    struct IsScopedArray<T, std::enable_if_t<std::is_same_v<typename T::BitMap, decltype(std::declval<T const&>().GetScope())>>> : std::true_type{};
 }
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE, bool ORDERED>
+    template<typename ARRAY, typename SUB_TYPE, bool ORDERED>
     struct SortViewDataHolder {
         constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
         constexpr static bool IS_ORDERED = ORDERED;
+        constexpr static bool IS_SCOPED = detail::IsScopedArray<ARRAY>::value;
         using SizeType = typename ARRAY::SizeType;
         using ObjectType = typename ARRAY::ObjectType;
 

@@ -18,28 +18,7 @@ namespace view::detail {
             mixin::ArraySortExt>;
 
     template<typename ARRAY, template<typename> typename HOLDER>
-    class SortView : public SortViewMixins::Compose<HOLDER<ARRAY>> {
-        using Parent = SortViewMixins::Compose<HOLDER<ARRAY>>;
-        using typename Parent::Mixins;
-        using typename Parent::Holder;
-
-    public:
-        SortView(ARRAY& array) : Parent{array} {
-            Holder::indices.InitWithRange(array);
-        }
-
-        SortView(ARRAY& array, typename ARRAY::BitMap scope) : Parent{array} {
-            Holder::indices.InitWithRange(array, scope);
-        }
-
-        SortView(ARRAY&& array) : Parent{std::move(array)} {
-            Holder::indices.InitWithRange(array);
-        }
-
-        SortView(ARRAY&& array, typename ARRAY::BitMap scope) : Parent{std::move(array)} {
-            Holder::indices.InitWithRange(array, scope);
-        }
-    };
+    using SortView = SortViewMixins::Compose<HOLDER<ARRAY>>;
 }
 
 namespace view {
