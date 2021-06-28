@@ -46,7 +46,7 @@ namespace detail {
             mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM>
-    using ObjectArray = holder::ObjectArrayDataHolder<T, MAX_NUM, detail::ObjectArrayMixins>;
+    using ObjectArray = detail::ObjectArrayMixins::Compose<holder::ObjectArrayDataHolder<T, MAX_NUM>>;
 }
 
 template<typename T, std::size_t MAX_NUM>

@@ -23,6 +23,10 @@ namespace mixin {
         using typename Self::ObjectType;
 
     public:
+        using Self::Erase;
+        using Self::Append;
+        using Self::Replace;
+
         template<__sImPlE_pReD_cOnCePt(PRED)>
         auto FindOrAppend(PRED&& pred) -> ObjectType * {
             auto* found = Self::Find(std::forward<PRED>(pred));

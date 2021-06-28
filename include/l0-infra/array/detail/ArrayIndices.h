@@ -23,7 +23,7 @@ namespace detail {
             mixin::ArraySortExt>;
 
     template<std::size_t MAX_NUM>
-    using ArrayIndices = holder::ArrayIndicesDataHolder<MAX_NUM, ArrayIndicesMixins>;
+    using ArrayIndices = ArrayIndicesMixins::Compose<holder::ArrayIndicesDataHolder<MAX_NUM>>;
 }
 
 #endif //OBJECT_ARRAY_ARRAYINDICES_H

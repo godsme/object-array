@@ -35,9 +35,10 @@ namespace mixin::detail {
         using OffsetType = ::detail::ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
     };
 
-    template<typename T>
-    struct DataHolderInterface1 : T {
-        using DataHolder = typename T::Owner;
+    template<typename OWNER, typename T>
+    struct DataHolderInterface1 : T::Interface {
+        using DataHolder = T;
+        using Owner = OWNER;
         using SizeType = typename DataHolder::SizeType;
         constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
         using BitMap = ::detail::ArrayScope<MAX_SIZE>;
@@ -53,7 +54,22 @@ namespace mixin {
         using Type = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<HOLDER>>;
 
         template<typename HOLDER>
-        using type = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface1<HOLDER>>;
+        struct Compose : HOLDER, detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface1<Compose<HOLDER>, HOLDER>> {
+        public:
+            using Holder = HOLDER;
+            using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface1<Compose<HOLDER>, HOLDER>>;
+
+        private:
+            static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(Compose)); }
+            static_assert(std::is_empty_v<Mixins>);
+
+        public:
+            using HOLDER::HOLDER;
+            using typename Mixins::SizeType;
+            using typename Mixins::ObjectType;
+            using typename Mixins::BitMap;
+            using typename Mixins::Maybe;
+        };
 
         template<template<typename> typename ... MORE_MIXINS>
         using Extends = Mixins<MIXINS..., MORE_MIXINS...>;

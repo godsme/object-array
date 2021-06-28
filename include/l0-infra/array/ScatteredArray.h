@@ -60,7 +60,7 @@ namespace detail {
             mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM>
-    using ScatteredArray = holder::ScatteredArrayHolder<T, MAX_NUM, detail::ScatteredArrayMixins>;
+    using ScatteredArray = detail::ScatteredArrayMixins::Compose<holder::ScatteredArrayHolder<T, MAX_NUM>>;
 }
 
 template<typename T, std::size_t MAX_NUM>
