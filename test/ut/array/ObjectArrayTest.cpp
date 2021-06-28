@@ -432,7 +432,7 @@ SCENARIO("ObjectArray Foreach") {
 
         int n = 0;
         auto sum = 0;
-        for(auto&& [elem, i] : a.Until(-2).WithIndex()) {
+        for(auto&& [elem, i] : a.Until(-1).WithIndex()) {
             REQUIRE(i == n);
             n++;
             sum += elem;
@@ -579,7 +579,7 @@ SCENARIO("init with init list") {
 
         WHEN("ClearUntil") {
             REQUIRE(array.GetNum() == 5);
-            array.ClearUntil(2);
+            array.ClearUntil(3);
             REQUIRE(array.GetNum() == 2);
             REQUIRE(array[0].a == 4);
             REQUIRE(array[1].a == 5);
@@ -587,7 +587,7 @@ SCENARIO("init with init list") {
 
         WHEN("ClearRange") {
             REQUIRE(array.GetNum() == 5);
-            array.Clear(1, -2);
+            array.Clear(1, -1);
             REQUIRE(array.GetNum() == 2);
             REQUIRE(array[0].a == 1);
             REQUIRE(array[1].a == 5);
@@ -645,7 +645,7 @@ SCENARIO("ObjectArray Slice PartialSort") {
 
     auto n = 0;
     auto sum = 0;
-    for(auto&& elem : a.Slice(1, -2).PartialSort(2)) {
+    for(auto&& elem : a.Slice(1, -1).PartialSort(2)) {
         n++;
         sum += elem;
     }
@@ -663,7 +663,7 @@ SCENARIO("ObjectArray Slice Scope PartialSort") {
 
     auto n = 0;
     auto sum = 0;
-    for(auto&& elem : a.Slice(1, -2).Scope(0xFF).PartialSort(2)) {
+    for(auto&& elem : a.Slice(1, -1).Scope(0xFF).PartialSort(2)) {
         n++;
         sum += elem;
     }

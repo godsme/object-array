@@ -16,7 +16,6 @@ namespace mixin {
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::OffsetType;
-        using typename T::EndOffsetType;
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
 
@@ -96,7 +95,7 @@ namespace mixin {
 
     protected:
         template<bool CONST, bool R_VALUE>
-        auto MakeSliceByFrom(SizeType from, EndOffsetType until) const -> auto {
+        auto MakeSliceByFrom(SizeType from, OffsetType until) const -> auto {
             auto until_ = until.ToIndex(IndexEnd());
             if(until_ <= from) {
                 return DoMakeSlice<CONST, R_VALUE>(from, from);
@@ -106,7 +105,7 @@ namespace mixin {
         }
 
         template<bool CONST, bool R_VALUE>
-        auto MakeSlice(OffsetType from, EndOffsetType until) const -> auto {
+        auto MakeSlice(OffsetType from, OffsetType until) const -> auto {
             auto from_  = from.ToIndex(IndexEnd());
             if(from_ == IndexEnd()) {
                 return DoMakeSlice<CONST, R_VALUE>(from_, from_);
@@ -116,14 +115,14 @@ namespace mixin {
         }
 
     public:
-        auto Slice(OffsetType, EndOffsetType) && -> void {}
-        auto Slice(OffsetType, EndOffsetType) const && -> void {}
+        auto Slice(OffsetType, OffsetType) && -> void {}
+        auto Slice(OffsetType, OffsetType) const && -> void {}
 
-        auto Slice(OffsetType from, EndOffsetType until) & -> auto {
+        auto Slice(OffsetType from, OffsetType until) & -> auto {
             return MakeSlice<false, false>(from, until);
         }
 
-        auto Slice(OffsetType from, EndOffsetType until) const & -> auto {
+        auto Slice(OffsetType from, OffsetType until) const & -> auto {
             return MakeSlice<true, false>(from, until);
         }
 
@@ -138,14 +137,14 @@ namespace mixin {
             return MakeFromSlice(from.ToIndex(IndexEnd()));
         }
 
-        auto Until(EndOffsetType) && -> void {}
-        auto Until(EndOffsetType) const && -> void {}
+        auto Until(OffsetType) && -> void {}
+        auto Until(OffsetType) const && -> void {}
 
-        auto Until(EndOffsetType until) & -> auto {
+        auto Until(OffsetType until) & -> auto {
             return MakeUntilSlice(until.ToIndex(IndexEnd()));
         }
 
-        auto Until(EndOffsetType until) const& -> auto {
+        auto Until(OffsetType until) const& -> auto {
             return MakeUntilSlice(until.ToIndex(IndexEnd()));
         }
     };

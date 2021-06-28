@@ -226,7 +226,10 @@ Replace
 
    auto&& slice = array.Slice(3, -2);
 
-这样，你就得到了一个 `slice` ，其表达的范围为: ``[3, n-2]`` 。
+这样，你就得到了一个 `slice` ，其表达的范围为: ``[3, n-2)`` 。
+
+
+
 
 .. note::
 
@@ -247,8 +250,16 @@ Replace
 
 .. code-block:: c++
 
-   array.From(3);  // [3, n-1]
-   array.Until(-2) // [0, n-2]
+   array.From(3);  // [3, n)
+   array.Until(-2) // [0, n-2)
+
+这里的切片索引方案与 `python` 一致。当给出两边的边界，比如 ``Slice(m, n)`` 时，其包含的元素
+索引边界为： ``[m, n-1]`` 或 ``[m, n)`` 。因而：
+
+.. code-block:: c++
+
+   array.From(-2)   # last two items in the array
+   array.Until(-2)   # everything except the last two items
 
 
 而切片也提供了几乎所有 ``ObjectArray<T,N>`` 的算法接口：
@@ -308,8 +319,8 @@ Replace
    array.Slice(1, 10); // [1,2]
 
    array.Slice(-10, -20); // empty
-   array.Slice(-10, 0); // [0, 0]
-   array.Slice(10, 20); // empty
+   array.Slice(-10, 0);   // empty
+   array.Slice(10, 20);   // empty
 
 
 另外，你不能在一个 **右值** 数组上创建一个 `slice` 。也就是说下面的代码是不被允许的：
@@ -339,7 +350,7 @@ Replace
    int a[3] = {1,2,3};
    uint8_t num = 3;
 
-   auto&& slice = ArrayView{a, num}.Slice(1, -2); // OK
+   auto&& slice = ArrayView{a, num}.Slice(1, -1); // OK
 
 
 Clear
@@ -355,7 +366,7 @@ Clear
    array.Clear();
    ASSERT(array.GetNum() == 0);
 
-如果仅仅想清除 `[from, until]` 范围内的元素，则可以通过指定切片范围来调用 ``Clear`` ：
+如果仅仅想清除 `[from, until)` 范围内的元素，则可以通过指定切片范围来调用 ``Clear`` ：
 
 .. code-block:: c++
 
@@ -364,7 +375,7 @@ Clear
    ASSERT(array[1] == 2);
    ASSERT(array[4] == 5);
 
-   array.Clear(1, -2); // [1, 3] is cleared.
+   array.Clear(1, -1); // [1, 3] is cleared.
 
    ASSERT(array.GetNum() == 2);
 
@@ -376,8 +387,8 @@ Clear
 
 .. code-block:: c++
 
-   array.ClearFrom(2); // [2, n-1]
-   array.ClearUntil(-2); // [0, n-2]
+   array.ClearFrom(2); // [2, n)
+   array.ClearUntil(-2); // [0, n-2)
 
 
 ScopeView

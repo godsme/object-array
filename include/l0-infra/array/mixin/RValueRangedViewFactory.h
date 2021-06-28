@@ -15,7 +15,6 @@ namespace mixin {
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::OffsetType;
-        using typename T::EndOffsetType;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
@@ -25,11 +24,11 @@ namespace mixin {
         using Self::From;
         using Self::Until;
 
-        auto Slice(OffsetType from, EndOffsetType until) && -> auto {
+        auto Slice(OffsetType from, OffsetType until) && -> auto {
             return Self::template MakeSlice<false, true>(from, until);
         }
 
-        auto Slice(OffsetType from, EndOffsetType until) const && -> auto {
+        auto Slice(OffsetType from, OffsetType until) const && -> auto {
             return Self::template MakeSlice<true, true>(from, until);
         }
 
@@ -41,11 +40,11 @@ namespace mixin {
             return std::move(*this).MakeFromSlice(from.ToIndex(IndexEnd()));
         }
 
-        auto Until(EndOffsetType until) && -> auto {
+        auto Until(OffsetType until) && -> auto {
             return std::move(*this).MakeUntilSlice(until.ToIndex(IndexEnd()));
         }
 
-        auto Until(EndOffsetType until) const && -> auto {
+        auto Until(OffsetType until) const && -> auto {
             return std::move(*this).MakeUntilSlice(until.ToIndex(IndexEnd()));
         }
     };

@@ -14,7 +14,6 @@ namespace mixin {
         using typename T::ElemType;
         using typename T::SizeType;
         using typename T::OffsetType;
-        using typename T::EndOffsetType;
 
         using T::Elems;
         using T::Num;
@@ -72,12 +71,12 @@ namespace mixin {
         }
 
         template<bool ORDERED>
-        auto Clear(OffsetType from, EndOffsetType until) -> void {
+        auto Clear(OffsetType from, OffsetType until) -> void {
             ClearRange<ORDERED>(from.ToIndex(Num()), until.ToIndex(Num()));
         }
 
         template<bool ORDERED>
-        auto ClearUntil(EndOffsetType until) -> void {
+        auto ClearUntil(OffsetType until) -> void {
             ClearRange<ORDERED>(0, until.ToIndex(Num()));
         }
     };

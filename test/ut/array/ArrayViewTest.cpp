@@ -169,7 +169,7 @@ SCENARIO("ArrayView full Slice index iterator") {
 
     auto n = 0;
     auto sum = 0;
-    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(1, -2).WithIndex()) {
+    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(1, -1).WithIndex()) {
         n++;
         REQUIRE(n == i);
         sum += elem;
@@ -238,7 +238,7 @@ SCENARIO("ArrayView Slice [2, -2] index iterator") {
 
     auto n = 0;
     auto sum = 0;
-    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(2, -2).WithIndex()) {
+    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(2, -1).WithIndex()) {
         n++;
         REQUIRE(n + 1 == i);
         sum += elem;
@@ -253,7 +253,7 @@ SCENARIO("ArrayView Slice [2, -3] index iterator") {
 
     auto n = 0;
     auto sum = 0;
-    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(2, -3).WithIndex()) {
+    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(2, -2).WithIndex()) {
         n++;
         REQUIRE(n + 1 == i);
         sum += elem;
@@ -268,7 +268,7 @@ SCENARIO("ArrayView Slice [3, -3] index iterator") {
 
     auto n = 0;
     auto sum = 0;
-    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(3, -3).WithIndex()) {
+    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Slice(3, -2).WithIndex()) {
         n++;
         REQUIRE(n + 2 == i);
         sum += elem;
@@ -311,7 +311,7 @@ SCENARIO("ArrayView Slice [1,-2] ForEach") {
 
     auto n = 0;
     auto sum = 0;
-    ArrayView{dummy.a, dummy.num}.Slice(1, -2).ForEach([&n, &sum](auto &&elem) {
+    ArrayView{dummy.a, dummy.num}.Slice(1, -1).ForEach([&n, &sum](auto &&elem) {
         n++;
         sum += elem;
     });

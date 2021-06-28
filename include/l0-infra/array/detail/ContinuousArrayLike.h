@@ -20,7 +20,6 @@ namespace detail {
     public:
         using BitMap = typename Mixins::BitMap;
         using OffsetType = typename Mixins::OffsetType;
-        using EndOffsetType = typename Mixins::EndOffsetType;
 
     public:
         using Mixins::Append;
@@ -47,11 +46,11 @@ namespace detail {
         using Mixins::SortObject;
 
     public:
-        auto Clear(OffsetType from, EndOffsetType until) -> void {
+        auto Clear(OffsetType from, OffsetType until) -> void {
             Mixins::template Clear<ORDERED>(from, until);
         }
 
-        auto ClearUntil(EndOffsetType until) -> void {
+        auto ClearUntil(OffsetType until) -> void {
             Mixins::template ClearUntil<ORDERED>(until);
         }
     };

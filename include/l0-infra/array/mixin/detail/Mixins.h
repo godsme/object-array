@@ -33,7 +33,6 @@ namespace mixin::detail {
         using BitMap = ::detail::ArrayScope<MAX_SIZE>;
         using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
         using OffsetType = ::detail::ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
-        using EndOffsetType = ::detail::ArrayEndOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
     };
 }
 
