@@ -258,7 +258,7 @@ Replace
    array.From(-2)   // last two items in the array
    array.Until(-2)  // everything except the last two items
 
-而切片也提供了几乎所有 ``ObjectArray<T,N>`` 的算法接口：
+而切片也提供了几乎所有 `ObjectArray<T,N>` 的算法接口：
 
 .. code-block:: c++
 
@@ -274,7 +274,7 @@ Replace
    }
 
 
-不过需要注意的是：当你进行 ``range-for`` 时，如果需要索引，你得到的是数组的索引，而不是在
+不过需要注意的是：当你进行 `range-for` 时，如果需要索引，你得到的是数组的索引，而不是在
 切片内的索引：
 
 .. code-block:: c++
@@ -361,6 +361,7 @@ Replace
    留给用户。
 
    另，`rust` 则是通过语言的内建约束来保证一个数组被至少一个 `slice` 引用时，数组本身是不允许修改的。
+
 
 Clear
 ---------------------
