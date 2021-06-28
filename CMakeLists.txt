@@ -60,7 +60,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/holder/ScopedViewDataHolder.h
         include/l0-infra/array/mixin/ScopedViewFactory.h
         include/l0-infra/array/view/IndexedView.h
-        include/l0-infra/array/holder/IndexedViewDataHolder.h
+        include/l0-infra/array/holder/ProxyRangedViewDataHolder.h
         include/l0-infra/array/holder/detail/RangedViewDataHolderInterface.h
         include/l0-infra/array/detail/CrtpHelper.h
         include/l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h
@@ -150,7 +150,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/RValueArraySort.h
         include/l0-infra/array/mixin/RValueScopedSort.h
         include/l0-infra/array/mixin/ScopedRangedArray.h
-        include/l0-infra/array/holder/ScopedIndexedViewDataHolder.h
+        include/l0-infra/array/holder/ProxyScopedViewDataHolder.h
         include/l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h
         include/l0-infra/array/mixin/detail/ValueScopedRangedArray.h
         include/l0-infra/array/holder/FromViewDataHolder.h

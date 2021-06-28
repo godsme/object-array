@@ -7,13 +7,13 @@
 
 #include <l0-infra/array/view/detail/IndexedArrayView.h>
 #include <l0-infra/array/mixin/IterableIndexedArrayLike.h>
-#include <l0-infra/array/holder/ScopedIndexedViewDataHolder.h>
+#include <l0-infra/array/holder/ProxyScopedViewDataHolder.h>
 
 namespace view {
     using IndexedScopedView = typename detail::IndexedArrayView<
             mixin::IterableIndexedScopedArrayLike,
-            holder::RefScopedIndexedViewDataHolder,
-            holder::ValueScopedIndexedViewDataHolder>;
+            holder::RefProxyScopedViewDataHolder,
+            holder::ValueProxyScopedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDSCOPEDVIEW_H

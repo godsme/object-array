@@ -47,7 +47,7 @@ namespace view {
     };
 
     template<typename ARRAY>
-    using OrderedValueScopedView = detail::OrderedScopedView<ARRAY, holder::ValueScopedIndexedViewDataHolder>;
+    using OrderedValueScopedView = detail::OrderedScopedView<ARRAY, holder::ValueProxyScopedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_ORDEREDSCOPEDVIEW_H

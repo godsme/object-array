@@ -2,22 +2,22 @@
 // Created by Darwin Yuan on 2021/6/28.
 //
 
-#ifndef OBJECT_ARRAY_SCOPEDINDEXEDVIEWDATAHOLDER_H
-#define OBJECT_ARRAY_SCOPEDINDEXEDVIEWDATAHOLDER_H
+#ifndef OBJECT_ARRAY_PROXYSCOPEDVIEWDATAHOLDER_H
+#define OBJECT_ARRAY_PROXYSCOPEDVIEWDATAHOLDER_H
 
 #include <l0-infra/array/concept/ScopedArrayLike.h>
-#include <l0-infra/array/holder/IndexedViewDataHolder.h>
+#include <l0-infra/array/holder/ProxyRangedViewDataHolder.h>
 #include <l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h>
 
 namespace holder {
     template<__cOnCePt(SimpleScopedRangedArrayLike) ARRAY, typename SUB_TYPE, bool IS_ORDERED>
-    class ScopedIndexedViewDataHolder : public IndexedViewDataHolder<ARRAY, SUB_TYPE, IS_ORDERED> {
-        using Parent = IndexedViewDataHolder<ARRAY, SUB_TYPE, IS_ORDERED>;
+    class ProxyScopedViewDataHolder : public ProxyRangedViewDataHolder<ARRAY, SUB_TYPE, IS_ORDERED> {
+        using Parent = ProxyRangedViewDataHolder<ARRAY, SUB_TYPE, IS_ORDERED>;
         using typename Parent::ArrayType;
         using Parent::This;
     public:
         using BitMap = typename ARRAY::BitMap;
-        using Interface = detail::ScopedViewDataHolderInterface<ScopedIndexedViewDataHolder>;
+        using Interface = detail::ScopedViewDataHolderInterface<ProxyScopedViewDataHolder>;
 
     private:
         template<typename>
@@ -28,10 +28,10 @@ namespace holder {
     };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefScopedIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedIndexedViewDataHolder, ORDERED>;
+    using RefProxyScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyScopedViewDataHolder, ORDERED>;
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueScopedIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedIndexedViewDataHolder, ORDERED>;
+    using ValueProxyScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyScopedViewDataHolder, ORDERED>;
 }
 
-#endif //OBJECT_ARRAY_SCOPEDINDEXEDVIEWDATAHOLDER_H
+#endif //OBJECT_ARRAY_PROXYSCOPEDVIEWDATAHOLDER_H

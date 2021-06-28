@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_INDEXEDARRAYVIEW_H
 #define OBJECT_ARRAY_INDEXEDARRAYVIEW_H
 
-#include <l0-infra/array/holder/IndexedViewDataHolder.h>
+#include <l0-infra/array/holder/ProxyRangedViewDataHolder.h>
 #include <l0-infra/array/mixin/RangedArrayLike.h>
 #include <l0-infra/array/mixin/IterableIndexedScopedArrayLike.h>
 #include <l0-infra/array/mixin/detail/PublicMixinSplitter.h>

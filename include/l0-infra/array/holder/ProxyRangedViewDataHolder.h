@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H
-#define OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H
+#ifndef OBJECT_ARRAY_PROXYRANGEDVIEWDATAHOLDER_H
+#define OBJECT_ARRAY_PROXYRANGEDVIEWDATAHOLDER_H
 
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/holder/detail/RangedViewDataHolderInterface.h>
@@ -12,7 +12,7 @@
 
 namespace holder {
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE, bool ORDERED>
-    class IndexedViewDataHolder {
+    class ProxyRangedViewDataHolder {
     protected:
         dEcL_tHiS(SUB_TYPE);
         constexpr static auto IsConstArray = std::is_const_v<std::remove_reference_t<ARRAY>>;
@@ -24,7 +24,7 @@ namespace holder {
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
         constexpr static bool IS_ORDERED = ORDERED;
 
-        using Interface = detail::RangedViewDataHolderInterface<IndexedViewDataHolder>;
+        using Interface = detail::RangedViewDataHolderInterface<ProxyRangedViewDataHolder>;
 
     private:
         template<typename>
@@ -40,10 +40,10 @@ namespace holder {
     };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, IndexedViewDataHolder, ORDERED>;
+    using RefProxyRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyRangedViewDataHolder, ORDERED>;
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder, ORDERED>;
+    using ValueProxyRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyRangedViewDataHolder, ORDERED>;
 }
 
-#endif //OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H
+#endif //OBJECT_ARRAY_PROXYRANGEDVIEWDATAHOLDER_H
