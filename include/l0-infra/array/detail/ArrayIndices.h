@@ -8,7 +8,6 @@
 #include <l0-infra/array/holder/ArrayIndicesDataHolder.h>
 #include <l0-infra/array/detail/SimpleReadOnlyArrayLikeMixins.h>
 #include <l0-infra/array/detail/ContinuousRangedArray.h>
-#include <l0-infra/array/detail/SimpleReadOnlyArrayLike.h>
 #include <l0-infra/array/mixin/ArraySortExt.h>
 #include <l0-infra/array/mixin/IndexedViewFactory.h>
 #include <l0-infra/array/mixin/ArraySort.h>

@@ -8,10 +8,7 @@
 #include <l0-infra/array/holder/ConstArrayViewDataHolder.h>
 #include <l0-infra/array/holder/ArrayViewDataHolder.h>
 #include <l0-infra/array/detail/ContinuousArrayMixin.h>
-#include <l0-infra/array/detail/ArrayComposer.h>
 #include <l0-infra/array/mixin/RValueRangedViewFactory.h>
-#include <l0-infra/array/detail/ContinuousArrayLike.h>
-#include <l0-infra/array/detail/ContinuousReadOnlyArray.h>
 #include <l0-infra/array/mixin/SortViewFactory.h>
 
 namespace detail {

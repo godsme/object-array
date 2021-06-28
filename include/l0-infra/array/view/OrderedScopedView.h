@@ -15,7 +15,6 @@
 #include <l0-infra/array/mixin/ScopedByIndexAccessor.h>
 #include <l0-infra/array/mixin/RangedScopedElemCount.h>
 #include <l0-infra/array/mixin/ScopedSimpleForEach.h>
-#include <l0-infra/array/detail/ReadOnlyArrayLike.h>
 
 namespace view::detail {
     using SimpleScopedViewMixins = mixin::Mixins<

@@ -76,7 +76,6 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/iterator/detail/ScopedIterator.h
         include/l0-infra/array/iterator/EmptyIterator.h
         include/l0-infra/array/view/detail/IndexedArrayView.h
-        include/l0-infra/array/detail/ArrayComposer.h
         include/l0-infra/array/mixin/IndexedScopedViewFactory.h
         include/l0-infra/array/iterator/detail/SimpleIterator.h
         include/l0-infra/array/iterator/ScopedIterator.h
@@ -109,7 +108,6 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/ScopedForEachExt.h
         include/l0-infra/array/mixin/SimpleMutate.h
         include/l0-infra/array/mixin/RangedClear.h
-        include/l0-infra/array/detail/ContinuousReadOnlyArray.h
         include/l0-infra/array/mixin/SimpleMutateExt.h
         include/l0-infra/array/mixin/ScopedCleanUp.h
         include/l0-infra/array/mixin/PredBasedMutate.h
@@ -122,9 +120,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/ScopedMinElemExt.h
         include/l0-infra/base/StructWrapper.h
         include/l0-infra/array/holder/ConstArrayViewDataHolder.h
-        include/l0-infra/array/detail/ReadOnlyArrayLike.h
         include/l0-infra/array/detail/RangedReadOnlyMixins.h
-        include/l0-infra/array/detail/ContinuousArrayLike.h
         include/l0-infra/array/mixin/ScopedSimpleForEach.h
         include/l0-infra/array/mixin/ScopedSimpleMinElem.h
         include/l0-infra/array/concept/SimpleMinElem.h
@@ -135,7 +131,6 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/base/SizeOfArray.h
         include/l0-infra/array/holder/ArrayIndicesDataHolder.h
         include/l0-infra/array/detail/ArrayIndices.h
-        include/l0-infra/array/detail/SimpleReadOnlyArrayLike.h
         include/l0-infra/array/detail/SimpleReadOnlyArrayLikeMixins.h
         include/l0-infra/array/holder/SortViewDataHolder.h
         include/l0-infra/array/view/SortView.h

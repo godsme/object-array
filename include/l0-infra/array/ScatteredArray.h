@@ -6,7 +6,6 @@
 #define OBJECT_ARRAY_SCATTEREDARRAY_H
 
 #include <l0-infra/array/holder/ScatteredArrayDataHolder.h>
-#include <l0-infra/array/detail/ReadOnlyArrayLike.h>
 #include <l0-infra/array/mixin/ScopedSimpleFind.h>
 #include <l0-infra/array/mixin/SimpleFindExt.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>

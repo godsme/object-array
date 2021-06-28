@@ -7,7 +7,6 @@
 
 #include <l0-infra/array/holder/ObjectArrayDataHolder.h>
 #include <l0-infra/array/detail/ContinuousArrayMixin.h>
-#include <l0-infra/array/detail/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/SortViewFactory.h>
 #include <l0-infra/array/mixin/ArrayEquality.h>
 

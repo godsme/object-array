@@ -5,7 +5,6 @@
 #include <l0-infra/array/mixin/ScopedSimpleFind.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/SimpleFindExt.h>
-#include <l0-infra/array/detail/ArrayComposer.h>
 #include "../Foo.h"
 #include <catch.hpp>
 #include <l0-infra/array/mixin/RangedArrayLike.h>

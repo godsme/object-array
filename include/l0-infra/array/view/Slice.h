@@ -9,7 +9,6 @@
 #include <l0-infra/array/mixin/RvalueScopedViewFactory.h>
 #include <l0-infra/array/mixin/RValueIndexedViewFactory.h>
 #include <l0-infra/array/holder/RangedViewDataHolder.h>
-#include <l0-infra/array/detail/ContinuousReadOnlyArray.h>
 #include <l0-infra/array/mixin/ArraySort.h>
 #include <l0-infra/array/mixin/ArraySortExt.h>
 #include <l0-infra/array/mixin/RValueSortViewFactory.h>

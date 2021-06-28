@@ -8,7 +8,6 @@
 #include "../Foo.h"
 #include <catch.hpp>
 #include <l0-infra/array/mixin/SimpleFindExt.h>
-#include <l0-infra/array/detail/ArrayComposer.h>
 
 namespace {
     using Mixins = mixin::Mixins<mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
