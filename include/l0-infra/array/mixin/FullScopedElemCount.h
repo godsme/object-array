@@ -11,12 +11,14 @@ namespace mixin {
     template<__cOnCePt(Scoped) T>
     class FullScopedElemCount : public ScopedElemCount<T> {
         using Self = T;
+
     public:
         using typename Self::BitMap;
 
-    public:
+    protected:
         using Self::GetScope;
 
+    public:
         auto All() const -> bool {
             return GetScope().all();
         }

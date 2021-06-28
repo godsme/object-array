@@ -13,6 +13,7 @@
 namespace {
     using Mixins = mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::ScopedFind,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 

@@ -14,14 +14,15 @@ namespace mixin {
     class ScopedByIndexAccessor : public T {
         using Self = T;
 
-    public:
-        using typename T::SizeType;
-        using typename T::ObjectType;
-
+    protected:
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
         using Self::GetScope;
+
+    public:
+        using typename T::SizeType;
+        using typename T::ObjectType;
 
         auto At(SizeType n) const -> ObjectType const* {
             auto index = n + IndexBegin();

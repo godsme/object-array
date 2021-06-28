@@ -29,17 +29,6 @@ namespace view::detail {
     struct Slice : ::detail::ContinuousReadOnlyArrayLike<HOLDER<ARRAY, Slice<ARRAY, HOLDER>>, SliceMixins> {
         using Parent = ::detail::ContinuousReadOnlyArrayLike<HOLDER<ARRAY, Slice<ARRAY, HOLDER>>, SliceMixins>;
         using Parent::Parent;
-        using typename Parent::Mixins;
-
-        using Mixins::DoPartialSort;
-        using Mixins::Sort;
-        using Mixins::DescSort;
-        using Mixins::PartialSort;
-        using Mixins::PartialDescSort;
-        using Mixins::StableSort;
-        using Mixins::StableDescSort;
-
-        using Mixins::SortObject;
     };
 }
 

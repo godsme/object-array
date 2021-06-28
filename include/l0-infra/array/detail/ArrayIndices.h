@@ -23,28 +23,7 @@ namespace detail {
             mixin::ArraySortExt>;
 
     template<std::size_t MAX_NUM>
-    using ArrayIndicesBase = SimpleReadOnlyArrayLike<holder::ArrayIndicesDataHolder<MAX_NUM>, ArrayIndicesMixins, true>;
-
-    template<std::size_t MAX_NUM>
-    class ArrayIndices : public detail::ArrayIndicesBase<MAX_NUM> {
-        using Parent = detail::ArrayIndicesBase<MAX_NUM>;
-        using typename Parent::Mixins;
-        using typename Parent::Holder;
-
-    public:
-        using Parent::Parent;
-        using Holder::InitWith;
-        using Holder::InitWithRange;
-
-        using Mixins::ClearFrom;
-        using Mixins::Sort;
-        using Mixins::DescSort;
-        using Mixins::DoPartialSort;
-        using Mixins::PartialSort;
-        using Mixins::PartialDescSort;
-        using Mixins::StableSort;
-        using Mixins::StableDescSort;
-    };
+    using ArrayIndices = holder::ArrayIndicesDataHolder<MAX_NUM, ArrayIndicesMixins>;
 }
 
 #endif //OBJECT_ARRAY_ARRAYINDICES_H

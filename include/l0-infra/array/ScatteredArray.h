@@ -35,15 +35,19 @@ namespace detail {
             mixin::RangedArray,
             mixin::RangedArrayLike,
             mixin::ScopedRangedArray,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedSimpleFind,
+            mixin::ScopedForEach,
+            mixin::ScopedMinElem,
+            mixin::ScopedSimpleForEach,
+            mixin::detail::PublicMixinSplitter,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::ScopedByIndexAccessor,
             mixin::FullScopedElemCount,
             mixin::IterableScopedArrayLike,
-            mixin::ScopedSimpleFind,
             mixin::SimpleFindExt,
-            mixin::ArrayElemVisit,
-            mixin::ScopedSimpleForEach,
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleMinElem,
             mixin::SimpleMinElemExt,
@@ -55,41 +59,11 @@ namespace detail {
             mixin::ScopedSort,
             mixin::ArraySortExt>;
 
-    template<typename T, std::size_t MAX_NUM, typename OWNER>
-    using ScatteredArrayBase = detail::ReadOnlyArrayLike<
-            holder::ScatteredArrayHolder<T, MAX_NUM, OWNER>,
-            detail::ScatteredArrayMixins>;
+    template<typename T, std::size_t MAX_NUM>
+    using ScatteredArray = holder::ScatteredArrayHolder<T, MAX_NUM, detail::ScatteredArrayMixins>;
 }
 
 template<typename T, std::size_t MAX_NUM>
-class ScatteredArray : public detail::ScatteredArrayBase<T, MAX_NUM, ScatteredArray<T, MAX_NUM>> {
-    using Parent = detail::ScatteredArrayBase<T, MAX_NUM, ScatteredArray<T, MAX_NUM>>;
-    using typename Parent::Holder;
-    using typename Parent::Mixins;
-
-public:
-    using Parent::Parent;
-
-    using Mixins::Append;
-    using Mixins::Replace;
-    using Mixins::Erase;
-    using Mixins::CleanUpBy;
-    using Mixins::ReplaceObj;
-    using Mixins::Remove;
-    using Mixins::RemoveBy;
-    using Mixins::CleanUp;
-    using Mixins::CleanUpEx;
-    using Mixins::FindOrAppend;
-    using Holder::Clear;
-
-    using Mixins::SortObject;
-
-    using Mixins::Sort;
-    using Mixins::DescSort;
-    using Mixins::PartialSort;
-    using Mixins::PartialDescSort;
-    using Mixins::StableSort;
-    using Mixins::StableDescSort;
-};
+using ScatteredArray = detail::ScatteredArray<T, MAX_NUM>;
 
 #endif //OBJECT_ARRAY_SCATTEREDARRAY_H

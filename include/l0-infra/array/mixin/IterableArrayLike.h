@@ -12,13 +12,16 @@ namespace mixin {
     template<__cOnCePt(RangedArrayLike) T>
     class IterableArrayLike : public T {
         using Self = T;
+
+    protected:
+        using Self::ObjectBegin;
+        using Self::ObjectEnd;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
 
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
-
+    private:
         using ConstIterator = iterator::Iterator<std::add_const_t<ObjectType>>;
         using Iterator = iterator::Iterator<ObjectType>;
 

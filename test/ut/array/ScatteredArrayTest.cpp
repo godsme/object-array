@@ -156,19 +156,19 @@ SCENARIO("ScatteredObjectArray") {
         REQUIRE(array[2].a == 0);
     }
 
-    WHEN("Compare Equality") {
-        REQUIRE((array != FooArray{{1}, {2}}));
-        REQUIRE((array != FooArray{{1}}));
-        REQUIRE((array != FooArray{{1}, {2}, {4}}));
-        REQUIRE((array != FooArray{{1}, {2}, {3}, {4}}));
-
-        REQUIRE((array == FooArray{{2}, {1}, {3}}));
-        REQUIRE((array == FooArray{{2}, {3}, {1}}));
-        REQUIRE((array == FooArray{{1}, {3}, {2}}));
-        REQUIRE((array == FooArray{{1}, {2}, {3}}));
-        REQUIRE((array == FooArray{{3}, {1}, {2}}));
-        REQUIRE((array == FooArray{{3}, {2}, {1}}));
-    }
+//    WHEN("Compare Equality") {
+//        REQUIRE((array != FooArray{{1}, {2}}));
+//        REQUIRE((array != FooArray{{1}}));
+//        REQUIRE((array != FooArray{{1}, {2}, {4}}));
+//        REQUIRE((array != FooArray{{1}, {2}, {3}, {4}}));
+//
+//        REQUIRE((array == FooArray{{2}, {1}, {3}}));
+//        REQUIRE((array == FooArray{{2}, {3}, {1}}));
+//        REQUIRE((array == FooArray{{1}, {3}, {2}}));
+//        REQUIRE((array == FooArray{{1}, {2}, {3}}));
+//        REQUIRE((array == FooArray{{3}, {1}, {2}}));
+//        REQUIRE((array == FooArray{{3}, {2}, {1}}));
+//    }
 
     WHEN("Copy Cons") {
         FooArray array1{array};
@@ -195,7 +195,7 @@ SCENARIO("ScatteredObjectArray") {
             REQUIRE(!array.IsPresent(3));
         }
 
-        REQUIRE((array == array1));
+        //REQUIRE((array == array1));
     }
 
     WHEN("Move Cons") {
@@ -223,7 +223,7 @@ SCENARIO("ScatteredObjectArray") {
             REQUIRE(!array.IsPresent(3));
         }
 
-        REQUIRE((array != array1));
+        //REQUIRE((array != array1));
     }
 
     WHEN("Range For") {

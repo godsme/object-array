@@ -16,6 +16,8 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
+
+    protected:
         using typename T::ScopedRangedArrayLike;
         using typename T::DataHolder;
 

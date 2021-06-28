@@ -14,6 +14,7 @@ namespace mixin {
     struct ScopedSortViewFactory : T {
         using Self = T;
 
+    protected:
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
 

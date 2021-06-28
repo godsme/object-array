@@ -12,16 +12,19 @@ namespace mixin {
     template<__cOnCePt(ScopedRangedArrayLike) T>
     class IterableScopedArrayLike : public T {
         using Self = T;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::BitMap;
 
+    protected:
         using Self::IndexBegin;
         using Self::ObjectBegin;
         using Self::ObjectEnd;
         using Self::GetScope;
 
+    private:
         using ConstIterator = iterator::ScopedIterator<std::add_const_t<ObjectType>, BitMap>;
         using Iterator = iterator::ScopedIterator<ObjectType, BitMap>;
 

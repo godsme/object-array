@@ -10,11 +10,17 @@
 namespace mixin {
     template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
     struct RangedClear : T {
+        using Self = T;
+    protected:
         using typename T::Trait;
         using typename T::ElemType;
         using typename T::SizeType;
         using typename T::OffsetType;
 
+        using Self::IndexBegin;
+        using Self::IndexEnd;
+
+    private:
         using T::Elems;
         using T::Num;
 
@@ -56,7 +62,7 @@ namespace mixin {
     public:
         template<bool ORDERED>
         auto ClearRange(SizeType from, SizeType until) -> void {
-            if(from >= until || until >= Num()) return;
+            if(from >= until || until > Num()) return;
             ClearContent(from, until);
             if constexpr(ORDERED) {
                 CleanOrdered(from, until);
@@ -66,18 +72,20 @@ namespace mixin {
             Num() -= (until - from);
         }
 
+        auto Clear() -> void {
+            ClearRange<false>(IndexBegin(), IndexEnd());
+        }
+
         auto ClearFrom(OffsetType from) -> void {
             DoClearFrom(from.ToIndex(Num()));
         }
 
-        template<bool ORDERED>
         auto Clear(OffsetType from, OffsetType until) -> void {
-            ClearRange<ORDERED>(from.ToIndex(Num()), until.ToIndex(Num()));
+            ClearRange<false>(from.ToIndex(Num()), until.ToIndex(Num()));
         }
 
-        template<bool ORDERED>
         auto ClearUntil(OffsetType until) -> void {
-            ClearRange<ORDERED>(0, until.ToIndex(Num()));
+            ClearRange<false>(0, until.ToIndex(Num()));
         }
     };
 }

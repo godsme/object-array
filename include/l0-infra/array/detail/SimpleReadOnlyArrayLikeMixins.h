@@ -16,17 +16,21 @@
 #include <l0-infra/array/mixin/ArrayElemVisit.h>
 #include <l0-infra/array/mixin/SimpleForEach.h>
 #include <l0-infra/array/mixin/SimpleForEachExt.h>
+#include <l0-infra/array/mixin/detail/PublicMixinSplitter.h>
+#include <l0-infra/array/mixin/ScopedFind.h>
 
 namespace detail {
     using SimpleReadOnlyArrayLikeMixins = ::mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::detail::PublicMixinSplitter,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
-            mixin::ArrayElemVisit,
             mixin::SimpleForEach,
             mixin::SimpleForEachExt>;
 }

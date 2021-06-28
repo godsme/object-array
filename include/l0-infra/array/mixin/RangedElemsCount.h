@@ -14,14 +14,16 @@ namespace mixin {
     class RangedElemCount : public T {
         using Self = T;
 
+    protected:
+        using Self::IndexBegin;
+        using Self::IndexEnd;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::BitMap;
 
-        using Self::IndexBegin;
-        using Self::IndexEnd;
-
+    public:
         auto GetNum() const -> SizeType {
             return IndexEnd() - IndexBegin();
         }

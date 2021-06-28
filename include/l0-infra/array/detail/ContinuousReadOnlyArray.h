@@ -18,19 +18,19 @@ namespace detail {
     public:
         using Parent::Parent;
 
-        using Mixins::FindIndexEx;
-        using Mixins::FindEx;
-        using Mixins::ExistsEx;
-
-        using Mixins::ForEachEx;
-
-        using Mixins::MinElemEx;
-        using Mixins::MaxElemEx;
-        using Mixins::MinElemIndexEx;
-        using Mixins::MaxElemIndexEx;
-
-        using Mixins::Scope;
-        using Mixins::Exclude;
+//        using Mixins::FindIndexEx;
+//        using Mixins::FindEx;
+//        using Mixins::ExistsEx;
+//
+//        using Mixins::ForEachEx;
+//
+//        using Mixins::MinElemEx;
+//        using Mixins::MaxElemEx;
+//        using Mixins::MinElemIndexEx;
+//        using Mixins::MaxElemIndexEx;
+//
+//        using Mixins::Scope;
+//        using Mixins::Exclude;
     };
 
     template<typename DATA_HOLDER, typename MIXINS, bool ORDERED=false>
@@ -43,10 +43,10 @@ namespace detail {
     public:
         using Parent::Parent;
 
-        using Mixins::GetNum;
-        using Mixins::Slice;
-        using Mixins::From;
-        using Mixins::Until;
+//        using Mixins::GetNum;
+//        using Mixins::Slice;
+//        using Mixins::From;
+//        using Mixins::Until;
     };
 }
 

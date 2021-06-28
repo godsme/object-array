@@ -9,6 +9,7 @@ namespace mixin {
     template<typename T>
     class SimpleForEachExt : public T {
         using Self = T;
+
     public:
         using typename Self::SizeType;
         using typename Self::ObjectType;

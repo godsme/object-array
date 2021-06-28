@@ -9,13 +9,14 @@
 
 namespace mixin {
     template<__cOnCePt(ScopedOpVisitable) T>
-    struct ScopedSimpleForEach : ScopedForEach<T> {
-        using Self = ScopedForEach<T>;
+    struct ScopedSimpleForEach : T {
+        using Self = T;
+
     public:
         using typename Self::SizeType;
         using typename Self::ObjectType;
 
-    public:
+    protected:
         using Self::GetScope;
 
     public:

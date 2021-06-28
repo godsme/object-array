@@ -9,13 +9,14 @@
 
 namespace mixin {
     template<__cOnCePt(ConstScopedRangedArrayLike) T>
-    struct ScopedSimpleMinElem : ScopedMinElem<T> {
-        using Self = ScopedMinElem<T>;
+    class ScopedSimpleMinElem : public T {
+        using Self = T;
+
     public:
         using typename Self::SizeType;
         using typename Self::ObjectType;
 
-    public:
+    protected:
         using Self::GetScope;
 
     public:

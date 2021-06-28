@@ -28,8 +28,18 @@ namespace mixin::detail {
     template<typename T>
     struct DataHolderInterface : T::Interface {
         using DataHolder = T;
-        using SizeType = typename T::SizeType;
-        constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
+        using SizeType = typename DataHolder::SizeType;
+        constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
+        using BitMap = ::detail::ArrayScope<MAX_SIZE>;
+        using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
+        using OffsetType = ::detail::ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
+    };
+
+    template<typename T>
+    struct DataHolderInterface1 : T {
+        using DataHolder = typename T::Owner;
+        using SizeType = typename DataHolder::SizeType;
+        constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
         using BitMap = ::detail::ArrayScope<MAX_SIZE>;
         using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
         using OffsetType = ::detail::ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
@@ -41,6 +51,9 @@ namespace mixin {
     struct Mixins {
         template<typename HOLDER>
         using Type = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<HOLDER>>;
+
+        template<typename HOLDER>
+        using type = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface1<HOLDER>>;
 
         template<template<typename> typename ... MORE_MIXINS>
         using Extends = Mixins<MIXINS..., MORE_MIXINS...>;

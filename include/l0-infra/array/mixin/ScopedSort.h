@@ -14,24 +14,27 @@
 
 namespace mixin {
     template<__cOnCePt(ScopedRangedArrayLike) T>
-    struct ScopedSort : T {
+    class ScopedSort : public T {
         using Self = T;
 
-    public:
-        using typename Self::ObjectType;
-        using typename Self::SizeType;
+    protected:
         using typename Self::Owner;
-        using typename T::ScopedRangedArrayLike;;
+        using typename T::ScopedRangedArrayLike;
 
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetScope;
 
     public:
+        using typename Self::ObjectType;
+        using typename Self::SizeType;
+        constexpr auto static MAX_SIZE = Self::MAX_SIZE;
+
+    public:
         template<__lEsS_cOnCePt(LESS)>
         auto DoPartialSort(LESS&& less, SizeType n) -> SizeType {
             if(n == 0) return 0;
-            ::detail::ScopedArrayIndices indices{*this};
+            ::detail::ScopedArrayIndices indices{reinterpret_cast<ScopedRangedArrayLike&>(*this)};
             if(n < indices.GetNum()) {
                 std::partial_sort(indices.begin(), indices.begin() + n, indices.end(), std::forward<LESS>(less));
                 return n;
@@ -43,7 +46,7 @@ namespace mixin {
 
         template<__lEsS_cOnCePt(LESS)>
         auto Sort(LESS&& less) && -> void {
-            ::detail::ScopedArrayIndices indices{*this};
+            ::detail::ScopedArrayIndices indices{reinterpret_cast<ScopedRangedArrayLike&>(*this)};
             std::sort(indices.begin(), indices.end(), std::forward<LESS>(less));
         }
 
@@ -55,7 +58,7 @@ namespace mixin {
 
         template<__lEsS_cOnCePt(LESS)>
         auto StableSort(LESS&& less) && -> void {
-            ::detail::ScopedArrayIndices indices{*this};
+            ::detail::ScopedArrayIndices indices{reinterpret_cast<ScopedRangedArrayLike&>(*this)};
             std::stable_sort(indices.begin(), indices.end(), std::forward<LESS>(less));
         }
 

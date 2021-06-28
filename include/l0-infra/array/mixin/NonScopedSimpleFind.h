@@ -12,18 +12,20 @@
 
 namespace mixin {
     template<__cOnCePt(ConstRangedArrayLike) T>
-    struct NonScopedSimpleFind : T {
+    class NonScopedSimpleFind : public T {
         using Self = T;
-    public:
-        using typename T::SizeType;
-        using typename T::ObjectType;
-        using typename T::Maybe;
 
+    protected:
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
         using Self::ObjectBegin;
         using Self::ObjectEnd;
+
+    public:
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::Maybe;
 
     public:
         template<__pRed_CoNcEpT(PRED)>

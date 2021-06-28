@@ -17,11 +17,8 @@ namespace mixin {
         using typename Self::BitMap;
         using typename Self::Maybe;
 
-    public:
+    protected:
         using Self::GetObj;
-
-        using Self::Replace;
-        using Self::Erase;
 
     private:
         auto GetObjIndex(ObjectType const* obj) -> Maybe {
@@ -33,12 +30,12 @@ namespace mixin {
         template<typename ... ARGS>
         auto ReplaceObj(ObjectType const& obj, ARGS &&... args) -> ObjectType * {
             auto index = GetObjIndex(&obj);
-            return index ? Replace(*index, std::forward<ARGS>(args)...) : nullptr;
+            return index ? Self::Replace(*index, std::forward<ARGS>(args)...) : nullptr;
         }
 
         auto Remove(ObjectType *p) -> void {
             auto index = GetObjIndex(p);
-            if (index) Erase(*index);
+            if (index) Self::Erase(*index);
         }
     };
 }

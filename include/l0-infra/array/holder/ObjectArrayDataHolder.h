@@ -11,101 +11,112 @@
 #include <l0-infra/base/DeduceSizeType.h>
 
 namespace holder::detail {
-    template<typename OBJ, std::size_t MAX_NUM, typename OWNER>
-    struct ObjectArrayHolder : ArrayDataHolder<OBJ, MAX_NUM> {
+    template<typename OBJ, std::size_t MAX_NUM, typename MIXINS>
+    struct ObjectArrayHolder {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
+        using ObjectType = typename Parent::ObjectType;
         using SizeType = typename Parent::SizeType;
         using ElemType = typename Parent::ElemType;
         using Trait = typename Parent::Trait;
-        using Owner = OWNER;
-        using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
+        using Owner = ObjectArrayHolder;
+        constexpr static SizeType MAX_SIZE = MAX_NUM;
 
-    protected:
-        using Parent::elems;
+        struct Inner : ArrayDataHolder<OBJ, MAX_NUM>
+                , MIXINS::template type<detail::ContinuousArrayDataHolderInterface1<ObjectArrayHolder<OBJ, MAX_NUM, MIXINS>>> {
 
-    private:
-        template<typename>
-        friend class ContinuousArrayDataHolderInterface;
+        protected:
+            using Parent::elems;
 
-        template<typename>
-        friend class ArrayDataHolderInterface;
+        private:
+            template<typename>
+            friend class ContinuousArrayDataHolderInterface1;
 
-        template<typename U, std::enable_if_t<std::is_same_v<std::remove_const_t<U>, OBJ> || std::is_same_v<std::remove_const_t<U>, ElemType>, int> = 0>
-        auto ConstructFrom(U* array) -> void {
-            if constexpr (std::is_trivially_copyable_v<ElemType>) {
-                ::memcpy(elems, array, sizeof(ElemType) * num);
-            } else {
-                for(auto i=0; i<num; i++) {
-                    Trait::Emplace(elems[i], std::move(Trait::ToObject(array[i])));
+            template<typename>
+            friend class ArrayDataHolderInterface1;
+
+        private:
+            using Parent::ElemToObject;
+            using Parent::ConstElemToObject;
+
+            template<typename U, std::enable_if_t<std::is_same_v<std::remove_const_t<U>, OBJ> ||
+                                                  std::is_same_v<std::remove_const_t<U>, ElemType>, int> = 0>
+            auto ConstructFrom(U *array) -> void {
+                if constexpr (std::is_trivially_copyable_v<ElemType>) {
+                    ::memcpy(elems, array, sizeof(ElemType) * num);
+                } else {
+                    for (auto i = 0; i < num; i++) {
+                        Trait::Emplace(elems[i], std::move(Trait::ToObject(array[i])));
+                    }
                 }
             }
-        }
 
-    public:
-        auto ClearContent() -> void {
-            if constexpr (!std::is_trivially_destructible_v<ElemType>) {
-                for(int i=0; i<num; i++) Trait::Destroy(elems[i]);
+        protected:
+            auto ClearContent() -> void {
+                if constexpr (!std::is_trivially_destructible_v<ElemType>) {
+                    for (int i = 0; i < num; i++) Trait::Destroy(elems[i]);
+                }
             }
-        }
 
-        auto Clear() -> void {
-            ClearContent();
-            num = 0;
-        }
-
-        auto MoveFrom(ObjectArrayHolder&& rhs) {
-            ConstructFrom(rhs.elems);
-            rhs.Clear();
-        }
-
-        auto CopyFrom(OBJ const* array, std::size_t n) -> void {
-            if constexpr(!std::is_trivially_destructible_v<ElemType>) {
-                Clear();
+            auto DoClear() -> void {
+                ClearContent();
+                num = 0;
             }
-            num = std::min(n, MAX_NUM);
-            ConstructFrom(array);
-        }
 
-    public:
-        ObjectArrayHolder() {}
-        ObjectArrayHolder(std::initializer_list<OBJ> l) : num(std::min(l.size(), MAX_NUM)) {
-            SizeType i = 0;
-            for(auto&& elem : l) {
-                if(i == num) break;
-                Trait::Emplace(elems[i++], std::move(elem));
+            auto MoveFrom(Inner &&rhs) {
+                ConstructFrom(rhs.elems);
+                rhs.DoClear();
             }
-        }
 
-        ObjectArrayHolder(ObjectArrayHolder const& rhs) : num{rhs.num} {
-            ConstructFrom(rhs.elems);
-        }
+            auto CopyFrom(OBJ const *array, std::size_t n) -> void {
+                if constexpr(!std::is_trivially_destructible_v<ElemType>) {
+                    DoClear();
+                }
+                num = std::min(n, MAX_NUM);
+                ConstructFrom(array);
+            }
 
-        ObjectArrayHolder(ObjectArrayHolder&& rhs) : num{rhs.num} {
-            MoveFrom(std::move(rhs));
-        }
+        public:
+            Inner() {}
 
-        auto operator=(ObjectArrayHolder const& rhs) -> ObjectArrayHolder& {
-            Clear();
-            num = rhs.num;
-            ConstructFrom(rhs.elems);
-            return *this;
-        }
+            Inner(std::initializer_list<OBJ> l) : num (std::min(l.size(), MAX_NUM)) {
+                SizeType i = 0;
+                for (auto &&elem : l) {
+                    if (i == num) break;
+                    Trait::Emplace(elems[i++], std::move(elem));
+                }
+            }
 
-        auto operator=(ObjectArrayHolder&& rhs) -> ObjectArrayHolder& {
-            Clear();
-            num = rhs.num;
-            MoveFrom(std::move(rhs));
-            return *this;
-        }
+            Inner(Inner const& rhs) : num{ rhs.num } {
+                ConstructFrom(rhs.elems);
+            }
 
-    protected:
-        SizeType num{};
+            Inner(Inner&& rhs) : num{ rhs.num } {
+                MoveFrom(std::move(rhs));
+            }
+
+            auto operator=(Inner const &rhs) -> Inner & {
+                DoClear();
+                num = rhs.num;
+                ConstructFrom(rhs.elems);
+                return *this;
+            }
+
+            auto operator=(Inner &&rhs) -> Inner & {
+                DoClear();
+                num = rhs.num;
+                MoveFrom(std::move(rhs));
+                return *this;
+            }
+
+        protected:
+            SizeType num{};
+        };
     };
 }
 
 namespace holder {
-    template<typename OBJ, std::size_t MAX_NUM, typename OWNER>
-    using ObjectArrayDataHolder = typename detail::Holder<OBJ, MAX_NUM, OWNER, detail::ObjectArrayHolder>;
+    template<typename OBJ, std::size_t MAX_NUM, typename MIXINS>
+    using ObjectArrayDataHolder = typename detail::Holder<OBJ, MAX_NUM, MIXINS, detail::ObjectArrayHolder>;
 }
 
 #endif //OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H

@@ -9,12 +9,14 @@
 #include <l0-infra/array/detail/ArrayComposer.h>
 #include <l0-infra/array/mixin/RangedArrayLike.h>
 #include <l0-infra/array/mixin/IterableIndexedScopedArrayLike.h>
+#include <l0-infra/array/mixin/detail/PublicMixinSplitter.h>
 
 namespace view::detail {
     template<template<typename> typename ITERATOR, template<typename, typename> typename REF_HOLDER, template<typename, typename> typename VALUE_HOLDER>
     struct IndexedArrayView {
         using Mixins = mixin::Mixins<
                 mixin::RangedArrayLike,
+                mixin::detail::PublicMixinSplitter,
                 ITERATOR>;
 
         template<typename HOLDER>

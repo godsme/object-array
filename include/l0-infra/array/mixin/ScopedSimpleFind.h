@@ -13,14 +13,14 @@
 
 namespace mixin {
     template<__cOnCePt(ConstScopedRangedArrayLike) T>
-    struct ScopedSimpleFind : ScopedFind<T> {
-        using Self = ScopedFind<T>;
+    class ScopedSimpleFind : public T {
+        using Self = T;
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::Maybe;
 
-    public:
+    protected:
         using Self::GetScope;
 
     public:

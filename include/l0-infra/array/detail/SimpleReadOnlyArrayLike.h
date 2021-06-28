@@ -24,29 +24,9 @@ namespace detail {
     public:
         using Parent::Parent;
 
-        using Mixins::operator[];
-        using Mixins::At;
-        using Mixins::First;
-        using Mixins::Last;
-
-        using Mixins::begin;
-        using Mixins::end;
-
         using Mixins::GetNum;
-        using Mixins::Any;
-        using Mixins::None;
-        using Mixins::All;
         using Mixins::GetOccupied;
-        using Mixins::GetAvailable;
-        using Mixins::IsPresent;
-
-        using Mixins::ForEach;
-
-        using Mixins::Find;
-        using Mixins::FindIndex;
         using Mixins::Exists;
-
-        using Mixins::WithIndex;
 
     public:
         auto operator==(SimpleReadOnlyArrayLike const &rhs) const -> bool {

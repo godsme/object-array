@@ -21,7 +21,7 @@ namespace mixin {
         using typename T::BitMap;
         using typename T::Maybe;
 
-    public:
+    protected:
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;

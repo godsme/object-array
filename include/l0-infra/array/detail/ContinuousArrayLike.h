@@ -13,7 +13,6 @@ namespace detail {
         using Parent = detail::ContinuousReadOnlyArray<DATA_HOLDER, MIXINS, ORDERED>;
 
     public:
-        using Parent::Parent;
         using Mixins = typename Parent::Mixins;
         using DataHolder = typename Parent::DataHolder;
 
@@ -21,29 +20,33 @@ namespace detail {
         using BitMap = typename Mixins::BitMap;
         using OffsetType = typename Mixins::OffsetType;
 
-    public:
-        using Mixins::Append;
-        using Mixins::Replace;
-        using Mixins::Erase;
-        using Mixins::CleanUpBy;
-        using Mixins::ReplaceObj;
-        using Mixins::Remove;
-        using Mixins::RemoveBy;
-        using Mixins::CleanUp;
-        using Mixins::CleanUpEx;
-        using Mixins::FindOrAppend;
-        using Mixins::ClearFrom;
+        using Parent::Parent;
+
         using DataHolder::Clear;
 
-        using Mixins::Sort;
-        using Mixins::DescSort;
-        using Mixins::DoPartialSort;
-        using Mixins::PartialSort;
-        using Mixins::PartialDescSort;
-        using Mixins::StableSort;
-        using Mixins::StableDescSort;
-
-        using Mixins::SortObject;
+//    public:
+//        using Mixins::Append;
+//        using Mixins::Replace;
+//        using Mixins::Erase;
+//        using Mixins::CleanUpBy;
+//        using Mixins::ReplaceObj;
+//        using Mixins::Remove;
+//        using Mixins::RemoveBy;
+//        using Mixins::CleanUp;
+//        using Mixins::CleanUpEx;
+//        using Mixins::FindOrAppend;
+//        using Mixins::ClearFrom;
+//        using DataHolder::Clear;
+//
+//        using Mixins::Sort;
+//        using Mixins::DescSort;
+//        using Mixins::DoPartialSort;
+//        using Mixins::PartialSort;
+//        using Mixins::PartialDescSort;
+//        using Mixins::StableSort;
+//        using Mixins::StableDescSort;
+//
+//        using Mixins::SortObject;
 
     public:
         auto Clear(OffsetType from, OffsetType until) -> void {

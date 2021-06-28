@@ -12,19 +12,19 @@ namespace mixin {
     template<__cOnCePt(SimpleRangedMutable) T>
     class ScopedCleanUp : public T {
         using Self = T;
-    public:
-        using typename Self::BitMap;
 
+    protected:
         using Self::IndexBegin;
         using Self::IndexEnd;
 
-        using Self::Erase;
+    public:
+        using typename Self::BitMap;
 
     public:
         auto CleanUp(BitMap scope) -> void {
             if(IndexEnd() == IndexBegin()) return;
             for(auto i=IndexEnd()-1; i>=IndexBegin(); --i) {
-                if(scope[i]) Erase(i);
+                if(scope[i]) Self::Erase(i);
             }
         }
 

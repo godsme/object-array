@@ -12,13 +12,14 @@
 
 namespace mixin {
     template<typename T>
-    struct ArraySortExt : T {
+    class ArraySortExt : public T {
         using Self = T;
 
     public:
         using typename Self::ObjectType;
         using typename Self::SizeType;
 
+    public:
         using Self::DoPartialSort;
         using Self::Sort;
         using Self::PartialSort;

@@ -24,6 +24,9 @@
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::detail::PublicMixinSplitter,
             mixin::IndexedRefAccessor,
             mixin::ScopedByIndexAccessor,
             mixin::RangedScopedElemCount,
@@ -31,7 +34,6 @@ namespace view::detail {
             mixin::IndexedScopedViewFactory,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt,
-            mixin::ArrayElemVisit,
             mixin::ScopedSimpleForEach,
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleMinElem,

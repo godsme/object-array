@@ -9,8 +9,9 @@
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
-    struct IndexedRefAccessor : T {
+    class IndexedRefAccessor : public T {
         using Self = T;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;

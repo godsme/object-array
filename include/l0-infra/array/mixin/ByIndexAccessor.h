@@ -14,13 +14,14 @@ namespace mixin {
     class ByIndexAccessor : public T {
         using Self = T;
 
-    public:
-        using typename T::SizeType;
-        using typename T::ObjectType;
-
+    protected:
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
+
+    public:
+        using typename T::SizeType;
+        using typename T::ObjectType;
 
         auto At(SizeType n) const -> ObjectType const* {
             auto index = n + IndexBegin();
