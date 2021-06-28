@@ -255,9 +255,8 @@ Replace
 
 .. code-block:: c++
 
-   array.From(-2)   # last two items in the array
-   array.Until(-2)   # everything except the last two items
-
+   array.From(-2)   // last two items in the array
+   array.Until(-2)  // everything except the last two items
 
 而切片也提供了几乎所有 ``ObjectArray<T,N>`` 的算法接口：
 
