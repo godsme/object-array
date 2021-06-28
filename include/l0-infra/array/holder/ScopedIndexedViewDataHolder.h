@@ -10,23 +10,27 @@
 #include <l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleScopedRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
-    class ScopedIndexedViewDataHolder : public IndexedViewDataHolder<ARRAY, OWNER, SUB_TYPE> {
-        using Parent = IndexedViewDataHolder<ARRAY, OWNER, SUB_TYPE>;
+    template<__cOnCePt(SimpleScopedRangedArrayLike) ARRAY, typename SUB_TYPE>
+    class ScopedIndexedViewDataHolder : public IndexedViewDataHolder<ARRAY, SUB_TYPE> {
+        using Parent = IndexedViewDataHolder<ARRAY, SUB_TYPE>;
         using typename Parent::ArrayType;
         using Parent::This;
     public:
         using BitMap = typename ARRAY::BitMap;
         using Interface = detail::ScopedViewDataHolderInterface<ScopedIndexedViewDataHolder>;
 
+    private:
+        template<typename>
+        friend class detail::ScopedViewDataHolderInterface;
+
         auto GetScope() const -> BitMap { return This()->GetArray().GetScope(); }
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using RefScopedIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, OWNER, ScopedIndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using RefScopedIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedIndexedViewDataHolder>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using ValueScopedIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, OWNER, ScopedIndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using ValueScopedIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedIndexedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDINDEXEDVIEWDATAHOLDER_H

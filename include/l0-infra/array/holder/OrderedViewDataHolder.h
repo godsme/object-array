@@ -17,7 +17,6 @@ namespace holder::detail {
     public:
         using SizeType = typename HOLDER::SizeType;
         using ObjectType = typename HOLDER::ObjectType;
-        using Owner = typename HOLDER::Owner;
 
         auto IndexBegin() const -> SizeType {
             return This()->IndexBegin();
@@ -38,7 +37,7 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     class OrderedViewDataHolder {
         dEcL_tHiS(SUB_TYPE);
         auto GetArray() const -> ARRAY const& { return This()->GetArray(); }
@@ -46,13 +45,17 @@ namespace holder {
     public:
         using SizeType = typename ARRAY::SizeType;
         using ObjectType = typename ARRAY::ObjectType;
-        using Owner = OWNER;
-        constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
+        constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
+        constexpr static bool ORDERED = true;
         using Interface = detail::OrderedViewDataHolderInterface<OrderedViewDataHolder>;
 
     public:
         OrderedViewDataHolder(ARRAY& array, SizeType num)
             : indexEnd(array.IndexBegin() + num) {}
+
+    private:
+        template<typename>
+        friend class detail::OrderedViewDataHolderInterface;
 
         auto IndexBegin() const -> SizeType { return GetArray().IndexBegin(); }
         auto IndexEnd() const -> SizeType { return indexEnd; }
@@ -63,11 +66,11 @@ namespace holder {
         SizeType indexEnd;
     };
 
-    template<typename ARRAY, typename OWNER>
-    using RefOrdredViewHolder = detail::RefViewDataHolder<ARRAY, OWNER, OrderedViewDataHolder>;
+    template<typename ARRAY>
+    using RefOrdredViewHolder = detail::RefViewDataHolder<ARRAY, OrderedViewDataHolder>;
 
-    template<typename ARRAY, typename OWNER>
-    using ValueOrderedViewHolder = detail::ValueViewDataHolder<ARRAY, OWNER, OrderedViewDataHolder>;
+    template<typename ARRAY>
+    using ValueOrderedViewHolder = detail::ValueViewDataHolder<ARRAY, OrderedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_ORDEREDVIEWDATAHOLDER_H

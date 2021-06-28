@@ -25,18 +25,8 @@ namespace mixin::detail {
         using Type = typename CombineMixin<MIXINS...>::template Type<H<BASE>>;
     };
 
-    template<typename T>
-    struct DataHolderInterface : T::Interface {
-        using DataHolder = T;
-        using SizeType = typename DataHolder::SizeType;
-        constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
-        using BitMap = ::detail::ArrayScope<MAX_SIZE>;
-        using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
-        using OffsetType = ::detail::ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
-    };
-
     template<typename OWNER, typename T>
-    struct DataHolderInterface1 : T::Interface {
+    struct DataHolderInterface : T::Interface {
         using DataHolder = T;
         using Owner = OWNER;
         using SizeType = typename DataHolder::SizeType;
@@ -53,20 +43,17 @@ namespace mixin {
     template<template<typename> typename ... MIXINS>
     struct Mixins {
         template<typename HOLDER>
-        using Type = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<HOLDER>>;
-
-        template<typename HOLDER>
-        struct Compose : HOLDER, detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface1<Compose<HOLDER>, HOLDER>> {
+        struct Compose : HOLDER, detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<Compose<HOLDER>, HOLDER>> {
         public:
             using Holder = HOLDER;
-            using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface1<Compose<HOLDER>, HOLDER>>;
+            using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<Compose<HOLDER>, HOLDER>>;
 
         private:
             static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(Compose)); }
             static_assert(std::is_empty_v<Mixins>);
 
         public:
-            using HOLDER::HOLDER;
+            using Holder::Holder;
             using typename Mixins::SizeType;
             using typename Mixins::ObjectType;
             using typename Mixins::BitMap;

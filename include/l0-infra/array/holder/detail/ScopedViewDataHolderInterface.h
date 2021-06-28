@@ -15,7 +15,6 @@ namespace holder::detail {
         using ObjectType = typename T::ObjectType;
         using SizeType   = typename T::SizeType;
         using BitMap     = typename T::BitMap;
-        using Owner      = typename T::Owner;
 
         constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
 

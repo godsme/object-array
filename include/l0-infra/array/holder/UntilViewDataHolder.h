@@ -8,9 +8,9 @@
 #include <l0-infra/array/holder/detail/RangedViewDataHolderBase.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
-    struct UntilViewDataHolder : detail::RangedViewDataHolderBase<ARRAY, OWNER, SUB_TYPE> {
-        using Parent = detail::RangedViewDataHolderBase<ARRAY, OWNER, SUB_TYPE>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
+    struct UntilViewDataHolder : detail::RangedViewDataHolderBase<ARRAY, SUB_TYPE> {
+        using Parent = detail::RangedViewDataHolderBase<ARRAY, SUB_TYPE>;
         using Interface = detail::RangedViewDataHolderInterface<UntilViewDataHolder>;
         using typename Parent::SizeType;
         using typename Parent::ObjectType;
@@ -20,6 +20,10 @@ namespace holder {
         UntilViewDataHolder(SizeType end)
                 : end_{end} {}
 
+    private:
+        template<typename>
+        friend class detail::RangedViewDataHolderInterface;
+
         auto IndexBegin() const -> SizeType { return 0; }
         auto IndexEnd() const -> SizeType { return end_; }
 
@@ -27,11 +31,11 @@ namespace holder {
         SizeType end_;
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using RefUntilViewDataHolder = detail::RefViewDataHolder<ARRAY, OWNER, UntilViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using RefUntilViewDataHolder = detail::RefViewDataHolder<ARRAY, UntilViewDataHolder>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using ValueUntilViewDataHolder = detail::ValueViewDataHolder<ARRAY, OWNER, UntilViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using ValueUntilViewDataHolder = detail::ValueViewDataHolder<ARRAY, UntilViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_UNTILVIEWDATAHOLDER_H

@@ -12,7 +12,7 @@
 #include <l0-infra/array/mixin/detail/PublicMixinSplitter.h>
 
 namespace view::detail {
-    template<template<typename> typename ITERATOR, template<typename, typename> typename REF_HOLDER, template<typename, typename> typename VALUE_HOLDER>
+    template<template<typename> typename ITERATOR, template<typename> typename REF_HOLDER, template<typename> typename VALUE_HOLDER>
     struct IndexedArrayView {
         using Mixins = mixin::Mixins<
                 mixin::RangedArrayLike,
@@ -20,27 +20,13 @@ namespace view::detail {
                 ITERATOR>;
 
         template<typename HOLDER>
-        class View : ::detail::ArrayComposer<HOLDER, Mixins> {
-            using Parent = ::detail::ArrayComposer<HOLDER, Mixins>;
-            using typename Parent::Mixins;
-        public:
-            using Parent::Parent;
-
-            using Mixins::begin;
-            using Mixins::end;
-        };
+        using View = typename Mixins::template Compose<HOLDER>;
 
         template<typename ARRAY>
-        struct RefView : View<REF_HOLDER<ARRAY, RefView<ARRAY>>> {
-            using Parent = View<REF_HOLDER<ARRAY, RefView<ARRAY>>>;
-            using Parent::Parent;
-        };
+        using RefView = View<REF_HOLDER<ARRAY>>;
 
         template<typename ARRAY>
-        struct ValueView : View<VALUE_HOLDER<ARRAY, ValueView<ARRAY>>> {
-            using Parent = View<VALUE_HOLDER<ARRAY, ValueView<ARRAY>>>;
-            using Parent::Parent;
-        };
+        using ValueView = View<VALUE_HOLDER<ARRAY>>;
     };
 }
 

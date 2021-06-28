@@ -17,7 +17,7 @@ namespace {
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt>;
 
-    using Parent = ::detail::ArrayComposer<ut::ScopedFoo, Mixins>;
+    using Parent = Mixins::Compose<ut::ScopedFoo>;
     struct FooArray : Parent {
         using Parent::Parent;
         using Parent::Find;

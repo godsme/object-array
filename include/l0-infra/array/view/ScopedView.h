@@ -43,24 +43,8 @@ namespace view::detail {
             mixin::RValueScopedSort,
             mixin::ArraySortExt>;
 
-    template<typename ARRAY, template <typename, typename> typename HOLDER>
-    class ScopedView : public ::detail::ReadOnlyArrayLike<HOLDER<ARRAY, ScopedView<ARRAY, HOLDER>>, ScopedMixins> {
-        using Parent = ::detail::ReadOnlyArrayLike<HOLDER<ARRAY, ScopedView<ARRAY, HOLDER>>, ScopedMixins>;
-        using typename Parent::Mixins;
-    public:
-        using Parent::Parent;
-        using Mixins::SortObject;
-
-        using Mixins::DoPartialSort;
-        using Mixins::Sort;
-        using Mixins::DescSort;
-        using Mixins::PartialSort;
-        using Mixins::PartialDescSort;
-        using Mixins::StableSort;
-        using Mixins::StableDescSort;
-    };
-
-
+    template<typename ARRAY, template <typename> typename HOLDER>
+    using ScopedView = ScopedMixins::Compose<HOLDER<ARRAY>>;
 }
 
 namespace view {

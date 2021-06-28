@@ -8,9 +8,10 @@
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/holder/detail/RangedViewDataHolderInterface.h>
 #include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
+#include <l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     class IndexedViewDataHolder {
     protected:
         dEcL_tHiS(SUB_TYPE);
@@ -19,11 +20,18 @@ namespace holder {
     public:
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
         using SizeType   = typename ArrayType::SizeType;
-        using Owner = OWNER;
 
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
+        constexpr static bool ORDERED = ArrayType::ORDERED;
 
         using Interface = detail::RangedViewDataHolderInterface<IndexedViewDataHolder>;
+
+    private:
+        template<typename>
+        friend class detail::RangedViewDataHolderInterface;
+
+        template<typename>
+        friend class detail::ScopedViewDataHolderInterface;
 
         auto IndexBegin() const -> SizeType { return This()->GetArray().IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->GetArray().IndexEnd(); }
@@ -31,11 +39,11 @@ namespace holder {
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n);}
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, OWNER, IndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, IndexedViewDataHolder>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, OWNER, IndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H

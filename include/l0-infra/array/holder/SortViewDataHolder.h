@@ -13,55 +13,28 @@ namespace holder::detail {
 #define __sLiCe_SoRt_LaMbDa [&, &array = This()->GetArray()](auto l, auto r) { return less(array.GetObj(l), array.GetObj(r)); }
 
     template<typename HOLDER>
-    class SortObjectDataHolderInterface {
+    class SortViewDataHolderInterface {
         dEcL_tHiS(HOLDER);
     public:
         constexpr static auto MAX_SIZE = HOLDER::MAX_SIZE;
         using SizeType = typename HOLDER::SizeType;
         using ObjectType = typename HOLDER::ObjectType;
-        using Owner = typename HOLDER::Owner;
 
         template<__lEsS_cOnCePt(LESS)>
-        auto Sort(LESS&& less) & -> Owner& {
+        auto IndicesSort(LESS&& less) -> void {
             This()->indices.template Sort(__sLiCe_SoRt_LaMbDa);
-            return reinterpret_cast<Owner&>(*this);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto Sort(LESS&& less) && -> Owner {
-            This()->indices.template Sort(__sLiCe_SoRt_LaMbDa);
-            return reinterpret_cast<Owner&>(*this);
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto StableSort(LESS&& less) & -> Owner& {
+        auto IndicesStableSort(LESS&& less) & -> void{
             This()->indices.template StableSort(__sLiCe_SoRt_LaMbDa);
-            return reinterpret_cast<Owner&>(*this);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto StableSort(LESS&& less) && -> Owner {
-            This()->indices.template StableSort(__sLiCe_SoRt_LaMbDa);
-            return reinterpret_cast<Owner&>(*this);
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto DoPartialSort(LESS&& less, SizeType n) & -> SizeType {
+        auto IndicesPartialSort(LESS&& less, SizeType n) -> SizeType {
             SizeType num = This()->indices.template DoPartialSort(__sLiCe_SoRt_LaMbDa, n);
             This()->indices.ClearFrom(num);
             return num;
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) & -> Owner& {
-            DoPartialSort(std::forward<LESS>(less), n);
-            return reinterpret_cast<Owner&>(*this);
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) && -> Owner {
-            DoPartialSort(std::forward<LESS>(less), n);
-            return reinterpret_cast<Owner&>(*this);
         }
 
         auto GetObj(SizeType n) -> ObjectType & {
@@ -78,14 +51,13 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     struct SortViewDataHolder {
         constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
         using SizeType = typename ARRAY::SizeType;
         using ObjectType = typename ARRAY::ObjectType;
-        using Owner = OWNER;
 
-        using Interface = detail::SortObjectDataHolderInterface<SortViewDataHolder>;
+        using Interface = detail::SortViewDataHolderInterface<SortViewDataHolder>;
 
     private:
         dEcL_tHiS(SUB_TYPE);
@@ -99,19 +71,18 @@ namespace holder {
         }
 
     private:
-
         template<typename>
-        friend class detail::SortObjectDataHolderInterface;
+        friend class detail::SortViewDataHolderInterface;
 
     public:
         ::detail::ArrayIndices<MAX_SIZE> indices;
     };
 
-    template<typename ARRAY, typename OWNER>
-    using RefSortViewHolder = detail::RefViewDataHolder<ARRAY, OWNER, SortViewDataHolder>;
+    template<typename ARRAY>
+    using RefSortViewHolder = detail::RefViewDataHolder<ARRAY, SortViewDataHolder>;
 
-    template<typename ARRAY, typename OWNER>
-    using ValueSortViewHolder = detail::ValueViewDataHolder<ARRAY, OWNER, SortViewDataHolder>;
+    template<typename ARRAY>
+    using ValueSortViewHolder = detail::ValueViewDataHolder<ARRAY, SortViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_SORTVIEWDATAHOLDER_H

@@ -11,18 +11,17 @@
 #include <l0-infra/base/BitSet.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     struct ScopedViewDataHolder {
         constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
         using ArrayType = std::decay_t<ARRAY>;
 
         using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
-        //using ElemType   = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ElemType>, typename ArrayType::ElemType>;
 
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
+        constexpr static bool ORDERED = ArrayType::ORDERED;
         using BitMap = typename ARRAY::BitMap;
-        using Owner = OWNER;
 
         using Interface = detail::ScopedViewDataHolderInterface<ScopedViewDataHolder>;
 
@@ -30,6 +29,10 @@ namespace holder {
         dEcL_tHiS(SUB_TYPE);
     public:
         ScopedViewDataHolder(BitMap const& scope) : scope{scope} {}
+
+    private:
+        template<typename>
+        friend class detail::ScopedViewDataHolderInterface;
 
         auto IndexBegin() const -> SizeType { return This()->GetArray().IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->GetArray().IndexEnd(); }
@@ -43,11 +46,11 @@ namespace holder {
         BitMap scope;
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, OWNER, ScopedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedViewDataHolder>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename OWNER>
-    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, OWNER, ScopedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
+    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDVIEWDATAHOLDER_H

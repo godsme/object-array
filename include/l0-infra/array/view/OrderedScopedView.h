@@ -34,13 +34,8 @@ namespace view::detail {
             mixin::SimpleForEachExt,
             mixin::IndexedScopedViewFactory>;
 
-    template<typename ARRAY, template <typename, typename> typename HOLDER>
-    class OrderedScopedView : public ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OrderedScopedView<ARRAY, HOLDER>>, SimpleScopedViewMixins, true> {
-        using Parent = ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OrderedScopedView<ARRAY, HOLDER>>, SimpleScopedViewMixins, true>;
-        using typename Parent::Mixins;
-    public:
-        using Parent::Parent;
-    };
+    template<typename ARRAY, template <typename> typename HOLDER>
+    using OrderedScopedView =  SimpleScopedViewMixins::Compose<HOLDER<ARRAY>>;
 }
 
 namespace view {

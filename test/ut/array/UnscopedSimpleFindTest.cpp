@@ -12,7 +12,7 @@
 
 namespace {
     using Mixins = mixin::Mixins<mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;
-    using Parent = ::detail::ArrayComposer<ut::Foo, Mixins>;
+    using Parent = Mixins::Compose<ut::Foo>;
     struct FooArray : Parent {
         using Parent::Parent;
         using Parent::Find;

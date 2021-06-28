@@ -5,19 +5,19 @@
 #ifndef OBJECT_ARRAY_ARRAYCOMPOSER_H
 #define OBJECT_ARRAY_ARRAYCOMPOSER_H
 
-namespace detail {
-    template<typename HOLDER, typename MIXINS>
-    class ArrayComposer : protected HOLDER, public MIXINS::template Type<HOLDER> {
-        static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(ArrayComposer)); }
-        static_assert(std::is_empty_v<typename MIXINS::template Type<HOLDER>>);
-    public:
-        using Holder = HOLDER;
-        using Mixins = typename MIXINS::template Type<HOLDER>;
-        using Holder::Holder;
-
-        using typename Holder::SizeType;
-        using typename Holder::ObjectType;
-    };
-}
+//namespace detail {
+//    template<typename HOLDER, typename MIXINS>
+//    class ArrayComposer : protected HOLDER, public MIXINS::template Type<HOLDER> {
+//        static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(ArrayComposer)); }
+//        static_assert(std::is_empty_v<typename MIXINS::template Type<HOLDER>>);
+//    public:
+//        using Holder = HOLDER;
+//        using Mixins = typename MIXINS::template Type<HOLDER>;
+//        using Holder::Holder;
+//
+//        using typename Holder::SizeType;
+//        using typename Holder::ObjectType;
+//    };
+//}
 
 #endif //OBJECT_ARRAY_ARRAYCOMPOSER_H

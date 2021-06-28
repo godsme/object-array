@@ -14,12 +14,12 @@ namespace view::detail {
     using OrderedViewMixins = ::detail::SimpleReadOnlyArrayLikeMixins::Extends<
             mixin::IndexedViewFactory>;
 
-    template<typename ARRAY, typename OWNER, template<typename, typename> typename HOLDER>
-    using OrderedViewBased = ::detail::SimpleReadOnlyArrayLike<HOLDER<ARRAY, OWNER>, OrderedViewMixins, true>;
+    template<typename ARRAY, template<typename> typename HOLDER>
+    using OrderedViewBased = OrderedViewMixins::Compose<HOLDER<ARRAY>>;
 
-    template<typename ARRAY, template<typename, typename> typename HOLDER>
-    class OrderedView : public OrderedViewBased<ARRAY, OrderedView<ARRAY, HOLDER>, HOLDER> {
-        using Parent = OrderedViewBased<ARRAY, OrderedView<ARRAY, HOLDER>, HOLDER> ;
+    template<typename ARRAY, template<typename> typename HOLDER>
+    class OrderedView : public OrderedViewBased<ARRAY, HOLDER> {
+        using Parent = OrderedViewBased<ARRAY, HOLDER> ;
     public:
         OrderedView(ARRAY& array, typename ARRAY::SizeType n)
             : Parent{array, array, n} {}
