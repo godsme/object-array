@@ -61,11 +61,10 @@ namespace mixin {
         }
 
     public:
-        template<bool ORDERED>
         auto ClearRange(SizeType from, SizeType until) -> void {
             if(from >= until || until > Num()) return;
             ClearContent(from, until);
-            if constexpr(ORDERED) {
+            if constexpr(Self::ORDERED) {
                 CleanOrdered(from, until);
             } else {
                 Clean(from, until);
@@ -74,7 +73,7 @@ namespace mixin {
         }
 
         auto Clear() -> void {
-            ClearRange<false>(IndexBegin(), IndexEnd());
+            ClearRange(IndexBegin(), IndexEnd());
         }
 
         auto ClearFrom(OffsetType from) -> void {
@@ -82,11 +81,11 @@ namespace mixin {
         }
 
         auto Clear(OffsetType from, OffsetType until) -> void {
-            ClearRange<false>(from.ToIndex(Num()), until.ToIndex(Num()));
+            ClearRange(from.ToIndex(Num()), until.ToIndex(Num()));
         }
 
         auto ClearUntil(OffsetType until) -> void {
-            ClearRange<false>(0, until.ToIndex(Num()));
+            ClearRange(0, until.ToIndex(Num()));
         }
     };
 }
