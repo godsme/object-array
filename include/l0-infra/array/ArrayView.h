@@ -25,34 +25,34 @@ namespace detail {
     using ArrayViewMixins = detail::ContinuousArrayMixin::Concat<ArrayViewSpecifiedMixins>
             ::Extends<mixin::RValueArraySort, mixin::ArraySortExt>;
 
-    template<typename T, std::size_t MAX_NUM, typename OWNER, typename ELEM, bool ORDERED>
-    using ConstArrayView = detail::ContinuousReadOnlyArray<holder::ConstArrayViewDataHolder<T, MAX_NUM, OWNER, ELEM>, ConstArrayViewMixins, ORDERED>;
+    template<typename T, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
+    using ConstArrayView = ConstArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ORDERED, ELEM>>;
 
-    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename OWNER, typename WRAPPER, bool = std::is_const_v<T>>
+    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER, bool ORDERED, bool = std::is_const_v<T>>
     struct ArrayViewTrait {
-        using Type = ConstArrayView<T, MAX_NUM, OWNER, WRAPPER, false>;
+        using Type = ConstArrayView<T, MAX_NUM, WRAPPER, ORDERED>;
     };
 
-    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename OWNER, typename WRAPPER>
-    struct ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, OWNER, WRAPPER, false> {
-        using Type = detail::ContinuousArrayLike<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, OWNER, WRAPPER>, ArrayViewMixins, false>;
+    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER, bool ORDERED>
+    struct ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, WRAPPER, ORDERED, false> {
+        using Type = ArrayViewMixins::Compose<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, WRAPPER, ORDERED>>;
     };
 }
 
-template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T>
-class ArrayView : public detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>, ELEM>::Type {
-    using Parent = typename detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ArrayView<T, SIZE_TYPE, MAX_NUM, ELEM>, ELEM>::Type;
+template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T, bool ORDERED = false>
+class ArrayView : public detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ELEM, ORDERED>::Type {
+    using Parent = typename detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ELEM, ORDERED>::Type;
     using typename Parent::Holder;
 public:
     using Parent::Parent;
 };
 
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>
-ArrayView(T (&)[MAX_NUM], SIZE_TYPE& size) -> ArrayView<T, SIZE_TYPE, MAX_NUM>;
+ArrayView(T (&)[MAX_NUM], SIZE_TYPE& size) -> ArrayView<T, SIZE_TYPE, MAX_NUM, T, false>;
 
-template<typename T, std::size_t MAX_NUM, typename WRAPPER = T>
-struct ConstArrayView : detail::ConstArrayView<T, MAX_NUM, ConstArrayView<T, MAX_NUM, WRAPPER>, WRAPPER, false> {
-    using Parent = detail::ConstArrayView<T, MAX_NUM, ConstArrayView<T, MAX_NUM, WRAPPER>, WRAPPER, false>;
+template<typename T, std::size_t MAX_NUM, typename WRAPPER = T, bool ORDERED = false>
+struct ConstArrayView : detail::ConstArrayView<T, MAX_NUM, WRAPPER, ORDERED> {
+    using Parent = detail::ConstArrayView<T, MAX_NUM, WRAPPER, ORDERED>;
     using Parent::Parent;
 };
 

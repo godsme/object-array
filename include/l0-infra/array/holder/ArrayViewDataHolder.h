@@ -15,20 +15,19 @@
 #include <algorithm>
 
 namespace holder {
-    template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename OWNER, typename ELEM>
+    template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM, bool IS_ORDERED>
     struct ArrayViewDataHolder {
         static_assert(std::is_trivial_v<OBJ>);
         using ElemType = ELEM;
         using ObjectType = ELEM;
         using SizeType = std::remove_const_t<SIZE_TYPE>;
-        constexpr static auto MAX_SIZE = MAX_NUM;
+        constexpr static SizeType MAX_SIZE = MAX_NUM;
+        constexpr static bool ORDERED = IS_ORDERED;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
         using Trait = detail::ObjectTrait<ElemType>;
-        using Owner = OWNER;
-
-    public:
         using Interface = detail::ContinuousArrayDataHolderInterface<ArrayViewDataHolder>;
 
+    public:
         ArrayViewDataHolder(OBJ* array, SIZE_TYPE& n)
                 : elems(&ViewTrait::ObjToElem(*array))
                 , num(n)
@@ -57,6 +56,14 @@ namespace holder {
             num = std::min(num, n);
         }
 
+    private:
+        template<typename>
+        friend class detail::ContinuousArrayDataHolderInterface;
+
+        template<typename>
+        friend class detail::ArrayDataHolderInterface;
+
+    private:
         static auto ConstElemToObject(ElemType const& elem) -> ObjectType const& { return elem; }
         static auto ElemToObject(ElemType& elem) -> ObjectType& { return elem; }
 

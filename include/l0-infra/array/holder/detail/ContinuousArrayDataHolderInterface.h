@@ -14,7 +14,6 @@ namespace holder::detail {
     public:
         using SizeType = typename DATA_HOLDER::SizeType;
         using Trait    = typename DATA_HOLDER::Trait;
-        using Owner    = typename DATA_HOLDER::Owner;
 
         auto Num() const -> SizeType { return This()->num; }
         auto Num() -> decltype(auto) { return (This()->num); }
