@@ -15,13 +15,13 @@
 #include <l0-infra/array/holder/detail/ObjectTrait.h>
 
 namespace holder {
-    template <typename OBJ, std::size_t MAX_NUM, bool IS_ORDERED, typename ELEM = OBJ>
+    template <typename OBJ, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
     struct ConstArrayViewDataHolder {
         using SizeType = DeduceSizeType_t<MAX_NUM>;
         using ElemType   = std::add_const_t<ELEM>;
         using ObjectType = std::add_const_t<ELEM>;
         constexpr static auto MAX_SIZE = MAX_NUM;
-        constexpr static auto ORDERED = IS_ORDERED;
+        constexpr static auto IS_ORDERED = ORDERED;
         using ViewTrait = detail::ViewElemTrait_T<std::decay_t<OBJ>, std::decay_t<ElemType>>;
         using Interface = detail::ContinuousArrayDataHolderInterface<ConstArrayViewDataHolder>;
         using Trait = detail::ObjectTrait<ElemType>;

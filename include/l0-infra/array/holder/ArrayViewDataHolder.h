@@ -15,14 +15,14 @@
 #include <algorithm>
 
 namespace holder {
-    template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM, bool IS_ORDERED>
+    template <typename OBJ, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM, bool ORDERED>
     struct ArrayViewDataHolder {
         static_assert(std::is_trivial_v<OBJ>);
         using ElemType = ELEM;
         using ObjectType = ELEM;
         using SizeType = std::remove_const_t<SIZE_TYPE>;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
-        constexpr static bool ORDERED = IS_ORDERED;
+        constexpr static bool IS_ORDERED = ORDERED;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
         using Trait = detail::ObjectTrait<ElemType>;
         using Interface = detail::ContinuousArrayDataHolderInterface<ArrayViewDataHolder>;

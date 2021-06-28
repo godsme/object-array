@@ -33,8 +33,8 @@ namespace view::detail {
             mixin::SimpleForEachExt,
             mixin::IndexedScopedViewFactory>;
 
-    template<typename ARRAY, template <typename> typename HOLDER>
-    using OrderedScopedView =  SimpleScopedViewMixins::Compose<HOLDER<ARRAY>>;
+    template<typename ARRAY, template <typename, bool> typename HOLDER>
+    using OrderedScopedView =  SimpleScopedViewMixins::Compose<HOLDER<ARRAY, true>>;
 }
 
 namespace view {

@@ -23,7 +23,7 @@ namespace detail {
             ::Extends<mixin::RValueArraySort, mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
-    using ConstArrayView = ConstArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ORDERED, ELEM>>;
+    using ConstArrayView = ConstArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ELEM, ORDERED>>;
 
     template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER, bool ORDERED, bool = std::is_const_v<T>>
     struct ArrayViewTrait {

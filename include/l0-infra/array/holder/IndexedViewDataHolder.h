@@ -11,7 +11,7 @@
 #include <l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE, bool ORDERED>
     class IndexedViewDataHolder {
     protected:
         dEcL_tHiS(SUB_TYPE);
@@ -22,7 +22,7 @@ namespace holder {
         using SizeType   = typename ArrayType::SizeType;
 
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
-        constexpr static bool ORDERED = ArrayType::ORDERED;
+        constexpr static bool IS_ORDERED = ORDERED;
 
         using Interface = detail::RangedViewDataHolderInterface<IndexedViewDataHolder>;
 
@@ -39,11 +39,11 @@ namespace holder {
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n);}
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, IndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using RefIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, IndexedViewDataHolder, ORDERED>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, IndexedViewDataHolder, ORDERED>;
 }
 
 #endif //OBJECT_ARRAY_INDEXEDVIEWDATAHOLDER_H

@@ -10,9 +10,9 @@
 #include <l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleScopedRangedArrayLike) ARRAY, typename SUB_TYPE>
-    class ScopedIndexedViewDataHolder : public IndexedViewDataHolder<ARRAY, SUB_TYPE> {
-        using Parent = IndexedViewDataHolder<ARRAY, SUB_TYPE>;
+    template<__cOnCePt(SimpleScopedRangedArrayLike) ARRAY, typename SUB_TYPE, bool IS_ORDERED>
+    class ScopedIndexedViewDataHolder : public IndexedViewDataHolder<ARRAY, SUB_TYPE, IS_ORDERED> {
+        using Parent = IndexedViewDataHolder<ARRAY, SUB_TYPE, IS_ORDERED>;
         using typename Parent::ArrayType;
         using Parent::This;
     public:
@@ -26,11 +26,11 @@ namespace holder {
         auto GetScope() const -> BitMap { return This()->GetArray().GetScope(); }
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using RefScopedIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedIndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using RefScopedIndexedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedIndexedViewDataHolder, ORDERED>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using ValueScopedIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedIndexedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueScopedIndexedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedIndexedViewDataHolder, ORDERED>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDINDEXEDVIEWDATAHOLDER_H

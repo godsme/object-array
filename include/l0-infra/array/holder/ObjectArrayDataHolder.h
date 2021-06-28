@@ -20,7 +20,7 @@ namespace holder::detail {
         using Trait = typename Parent::Trait;
         using Owner = ObjectArrayHolder;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
-        constexpr static bool ORDERED = false;
+        constexpr static bool IS_ORDERED = false;
         using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
 
         protected:

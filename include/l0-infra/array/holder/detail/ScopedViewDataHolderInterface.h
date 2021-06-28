@@ -17,6 +17,7 @@ namespace holder::detail {
         using BitMap     = typename T::BitMap;
 
         constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
+        constexpr static bool ORDERED = T::IS_ORDERED;
 
         using ScopedRangedArrayLike = ScopedViewDataHolderInterface;
 

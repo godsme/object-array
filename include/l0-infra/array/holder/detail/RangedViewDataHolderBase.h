@@ -13,7 +13,7 @@
 #include <l0-infra/base/BitSet.h>
 
 namespace holder::detail {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE, bool ORDERED>
     struct RangedViewDataHolderBase {
         constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
         using ArrayType = std::decay_t<ARRAY>;
@@ -22,7 +22,7 @@ namespace holder::detail {
         using SizeType   = typename ArrayType::SizeType;
 
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
-        constexpr static bool ORDERED = ArrayType::ORDERED;
+        constexpr static bool IS_ORDERED = ORDERED;
 
     protected:
         dEcL_tHiS(SUB_TYPE);

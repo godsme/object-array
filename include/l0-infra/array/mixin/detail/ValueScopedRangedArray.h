@@ -18,7 +18,8 @@ namespace mixin::detail {
         using typename HOLDER::ObjectType;
         using typename SCOPED_ARRAY_LIKE::BitMap;
 
-        constexpr static auto MAX_SIZE = HOLDER::MAX_SIZE;
+        constexpr static SizeType MAX_SIZE = HOLDER::MAX_SIZE;
+        constexpr static bool ORDERED = HOLDER::IS_ORDERED;
 
         ValueScopedRangedArray(ValueScopedRangedArray&&) = default;
         ValueScopedRangedArray(ValueScopedRangedArray const&) = default;

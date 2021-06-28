@@ -11,7 +11,7 @@
 #include <l0-infra/base/BitSet.h>
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE, bool ORDERED>
     struct ScopedViewDataHolder {
         constexpr static auto IsConstArray = std::is_const_v<ARRAY>;
         using ArrayType = std::decay_t<ARRAY>;
@@ -20,7 +20,7 @@ namespace holder {
 
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
-        constexpr static bool ORDERED = ArrayType::ORDERED;
+        constexpr static bool IS_ORDERED = ORDERED;
         using BitMap = typename ARRAY::BitMap;
 
         using Interface = detail::ScopedViewDataHolderInterface<ScopedViewDataHolder>;
@@ -46,11 +46,11 @@ namespace holder {
         BitMap scope;
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedViewDataHolder, ORDERED>;
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY>
-    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedViewDataHolder>;
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedViewDataHolder, ORDERED>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDVIEWDATAHOLDER_H
