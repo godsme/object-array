@@ -29,6 +29,7 @@
 #include <l0-infra/array/mixin/ScopedSortViewFactory.h>
 #include <l0-infra/array/mixin/ScopedSort.h>
 #include <l0-infra/array/mixin/ScopedRangedArray.h>
+#include <l0-infra/array/mixin/ArrayEquality.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
@@ -48,6 +49,7 @@ namespace detail {
             mixin::FullScopedElemCount,
             mixin::IterableScopedArrayLike,
             mixin::SimpleFindExt,
+            mixin::ArrayEquality,
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleMinElem,
             mixin::SimpleMinElemExt,

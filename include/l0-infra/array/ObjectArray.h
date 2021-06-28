@@ -9,6 +9,7 @@
 #include <l0-infra/array/detail/ContinuousArrayMixin.h>
 #include <l0-infra/array/detail/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/SortViewFactory.h>
+#include <l0-infra/array/mixin/ArrayEquality.h>
 
 namespace detail {
     using ObjectArrayMixins = ::mixin::Mixins<
@@ -28,6 +29,7 @@ namespace detail {
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::SimpleForEachExt,
+            mixin::ArrayEquality,
             mixin::ScopedFindExt,
             mixin::ScopedForEachExt,
             mixin::SimpleMinElem,
@@ -50,9 +52,6 @@ namespace detail {
 }
 
 template<typename T, std::size_t MAX_NUM>
-struct ObjectArray : detail::ObjectArray<T, MAX_NUM> {
-    using Parent = detail::ObjectArray<T, MAX_NUM>;
-    using Parent::Parent;
-};
+using ObjectArray = detail::ObjectArray<T, MAX_NUM>;
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H

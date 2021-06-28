@@ -613,16 +613,16 @@ SCENARIO("init with init list") {
         ThingArray array2;
         array2.Append(2);
         array2.Append(1);
-        //REQUIRE(array == array2);
+        REQUIRE(array == array2);
         array2.Append(2);
-        //REQUIRE(array != array2);
+        REQUIRE(array != array2);
     }
 
     WHEN("Compare Equality with same num") {
         ThingArray array2;
         array2.Append(3);
         array2.Append(1);
-        //REQUIRE(array != array2);
+        REQUIRE(array != array2);
     }
 }
 
