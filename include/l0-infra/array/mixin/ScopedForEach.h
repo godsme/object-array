@@ -25,7 +25,7 @@ namespace mixin {
 
     public:
         template<bool TO_NON_CONST, bool SCOPE_CHECK, __oP_cOnCePt(OP)>
-        auto DoForEach(BitMap scope, OP &&op) const -> auto {
+        auto DoScopeForEach(BitMap scope, OP &&op) const -> auto {
             scope.template Align<SCOPE_CHECK>(IndexBegin(), IndexEnd());
             for (auto i = IndexBegin(); scope.any(); scope >>= 1, ++i) {
                 if (!scope[0]) continue;

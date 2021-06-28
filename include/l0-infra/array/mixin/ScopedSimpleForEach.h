@@ -22,7 +22,7 @@ namespace mixin {
     public:
         template<bool TO_NON_CONST, __oP_cOnCePt(OP)>
         auto DoForEach(OP &&op) const -> auto {
-            return Self::template DoForEach<TO_NON_CONST, false>(GetScope(), std::forward<OP>(op));
+            return Self::template DoScopeForEach<TO_NON_CONST, false>(GetScope(), std::forward<OP>(op));
         }
     };
 }

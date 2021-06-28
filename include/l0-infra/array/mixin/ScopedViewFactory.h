@@ -16,8 +16,9 @@ namespace mixin {
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::BitMap;
-        using typename T::RangedArrayLike;
 
+    protected:
+        using typename T::RangedArrayLike;
         using Self::IndexBegin;
         using Self::IndexEnd;
 

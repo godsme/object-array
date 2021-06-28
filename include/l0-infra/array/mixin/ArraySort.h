@@ -18,6 +18,8 @@ namespace mixin {
     public:
         using typename Self::ObjectType;
         using typename Self::SizeType;
+
+    protected:
         using typename Self::Owner;
         using typename T::RangedArrayLike;
 

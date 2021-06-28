@@ -189,7 +189,7 @@ namespace holder::detail {
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM, typename MIXINS>
-    using ScatteredArrayHolder = typename detail::Holder<OBJ, MAX_NUM, MIXINS, detail::ScatteredArrayDataHolder>;
+    using ScatteredArrayHolder = detail::Holder<OBJ, MAX_NUM, MIXINS, detail::ScatteredArrayDataHolder>;
 }
 
 

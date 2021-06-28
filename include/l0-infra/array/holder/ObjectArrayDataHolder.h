@@ -116,7 +116,7 @@ namespace holder::detail {
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM, typename MIXINS>
-    using ObjectArrayDataHolder = typename detail::Holder<OBJ, MAX_NUM, MIXINS, detail::ObjectArrayHolder>;
+    using ObjectArrayDataHolder = detail::Holder<OBJ, MAX_NUM, MIXINS, detail::ObjectArrayHolder>;
 }
 
 #endif //OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H

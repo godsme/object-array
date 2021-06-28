@@ -19,7 +19,7 @@ namespace mixin {
         using typename Self::ObjectType;
         using typename Self::Maybe;
 
-    public:
+    protected:
         using Self::IndexBegin;
         using Self::IndexEnd;
 

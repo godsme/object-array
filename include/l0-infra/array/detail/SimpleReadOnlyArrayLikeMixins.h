@@ -18,12 +18,14 @@
 #include <l0-infra/array/mixin/SimpleForEachExt.h>
 #include <l0-infra/array/mixin/detail/PublicMixinSplitter.h>
 #include <l0-infra/array/mixin/ScopedFind.h>
+#include <l0-infra/array/mixin/ScopedForEach.h>
 
 namespace detail {
     using SimpleReadOnlyArrayLikeMixins = ::mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
+            mixin::ScopedForEach,
             mixin::detail::PublicMixinSplitter,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,

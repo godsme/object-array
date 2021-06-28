@@ -19,7 +19,7 @@ namespace mixin {
 
         static constexpr auto MAX_SIZE = T::MAX_SIZE;
 
-    public:
+    protected:
         using Self::GetObj;
         using Self::Num;
         using Self::Elems;

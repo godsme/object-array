@@ -11,25 +11,47 @@
 #include <l0-infra/array/mixin/SortViewFactory.h>
 
 namespace detail {
-    using ObjectArrayMixins = detail::ContinuousArrayMixin::Extends<
-                mixin::RangedViewFactory,
-                mixin::ScopedViewFactory,
-                mixin::IndexedViewFactory,
-                mixin::SortViewFactory,
-                mixin::ArraySort,
-                mixin::ArraySortExt>;
-
-//    template<typename T, std::size_t MAX_NUM, typename OWNER, bool ORDERED>
-//    using ObjectArray = detail::ContinuousArrayLike<
-//            holder::ObjectArrayDataHolder<T, MAX_NUM, OWNER>,
-//            ObjectArrayMixins,
-//            ORDERED>;
+    using ObjectArrayMixins = ::mixin::Mixins<
+            mixin::ContinuousArrayLike,
+            mixin::RangedArray,
+            mixin::RangedArrayLike,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::detail::PublicMixinSplitter,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::SimpleForEach,
+            mixin::SimpleForEachExt,
+            mixin::ScopedFindExt,
+            mixin::ScopedForEachExt,
+            mixin::SimpleMinElem,
+            mixin::SimpleMinElemExt,
+            mixin::ScopedMinElemExt,
+            mixin::SimpleMutate,
+            mixin::SimpleMutateExt,
+            mixin::PredBasedMutate,
+            mixin::ScopedCleanUp,
+            mixin::RangedClear,
+            mixin::RangedViewFactory,
+            mixin::ScopedViewFactory,
+            mixin::IndexedViewFactory,
+            mixin::SortViewFactory,
+            mixin::ArraySort,
+            mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM>
-    using ObjectArray = typename holder::ObjectArrayDataHolder<T, MAX_NUM, detail::ObjectArrayMixins>;
+    using ObjectArray = holder::ObjectArrayDataHolder<T, MAX_NUM, detail::ObjectArrayMixins>;
 }
 
 template<typename T, std::size_t MAX_NUM>
-using ObjectArray = detail::ObjectArray<T, MAX_NUM>;
+struct ObjectArray : detail::ObjectArray<T, MAX_NUM> {
+    using Parent = detail::ObjectArray<T, MAX_NUM>;
+    using Parent::Parent;
+};
 
 #endif //OBJECT_ARRAY_OBJECTARRAY_H

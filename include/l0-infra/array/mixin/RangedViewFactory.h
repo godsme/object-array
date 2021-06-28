@@ -16,6 +16,8 @@ namespace mixin {
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::OffsetType;
+
+    protected:
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
 

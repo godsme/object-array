@@ -9,8 +9,9 @@
 
 namespace mixin {
     template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
-    struct RangedClear : T {
+    class RangedClear : public T {
         using Self = T;
+
     protected:
         using typename T::Trait;
         using typename T::ElemType;

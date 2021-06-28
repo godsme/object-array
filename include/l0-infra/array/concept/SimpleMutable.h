@@ -9,6 +9,8 @@
 #include <l0-infra/array/concept/detail/ConceptDef.h>
 #if HAS_CONCEPT
 #include <l0-infra/array/concept/detail/PredTypeTrait.h>
+#include <l0-infra/array/concept/RangedArrayLike.h>
+#include <l0-infra/array/concept/SimpleFind.h>
 #include <type_traits>
 #include <optional>
 #include <concepts>
