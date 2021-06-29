@@ -13,16 +13,22 @@
 #include <l0-infra/array/concept/ElemVisitor.h>
 
 namespace _concept {
-    template<typename T>
-    struct ScopedChecker : T {
-        using T::GetScope;
-        using typename T::BitMap;
-    };
+
+    namespace detail {
+        template<typename T>
+        struct ScopedChecker : T {
+            using T::GetScope;
+            using typename T::BitMap;
+        };
+
+        template<typename T>
+        concept Scoped = requires(T const& o) {
+            { o.GetScope() } -> std::same_as<typename T::BitMap>;
+        };
+    }
 
     template<typename T>
-    concept Scoped = requires(ScopedChecker<T> const& o) {
-        { o.GetScope() } -> std::same_as<typename ScopedChecker<T>::BitMap>;
-    };
+    concept Scoped = detail::Scoped<detail::ScopedChecker<T>>;
 
     template<typename T>
     concept ConstScopedArrayLike = Scoped<T> && ConstArrayLike<T>;
@@ -39,6 +45,7 @@ namespace _concept {
     template<typename T>
     concept ScopedOpVisitable = Scoped<T> && OpVisitable<T>;
 }
+
 #endif
 
 #endif //OBJECT_ARRAY_SCOPEDARRAYLIKE_H

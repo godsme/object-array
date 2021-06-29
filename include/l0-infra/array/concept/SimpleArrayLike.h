@@ -20,7 +20,7 @@ namespace _concept {
             using typename T::Trait;
         };
         template<typename T>
-        concept SimpleConstArrayLike_ = requires(T const& o) {
+        concept SimpleConstArrayLike = requires(T const& o) {
             typename T::Trait;
             { o.Elems() } -> std::same_as<typename T::ElemType const*>;
             { T::ConstElemToObject(std::declval<typename T::ElemType const&>()) } -> std::same_as<typename T::ObjectType const&>;
@@ -28,7 +28,7 @@ namespace _concept {
     }
 
     template<typename T>
-    concept SimpleConstArrayLike = detail::SimpleConstArrayLike_<detail::SimpleConstArrayLikeChecker<T>>;
+    concept SimpleConstArrayLike = detail::SimpleConstArrayLike<detail::SimpleConstArrayLikeChecker<T>>;
 
     namespace detail {
         template<typename T>

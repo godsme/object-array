@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_SIMPLEMUTABLE_H
 
 #include <l0-infra/array/detail/config.h>
-#include <l0-infra/array/concept/detail/ConceptDef.h>
+
 #if HAS_CONCEPT
 #include <l0-infra/array/concept/detail/PredTypeTrait.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
@@ -16,22 +16,27 @@
 #include <concepts>
 
 namespace _concept {
-    template<typename T>
-    struct SimpleMutableChecker : T {
-        using T::Erase;
-        using T::Append;
+    namespace detail {
+        template<typename T>
+        struct SimpleMutableChecker : T {
+            using T::Erase;
+            using T::Append;
 
-        using typename T::SizeType;
-        using typename T::ObjectType;
-    };
+            using typename T::SizeType;
+            using typename T::ObjectType;
+        };
+
+        template<typename T>
+        concept SimpleMutable = requires(T& o) {
+            { o.Erase(typename T::SizeType{}) };
+            { o.Append() } -> std::same_as<typename T::ObjectType*>;
+            { o.Append(std::declval<typename T::ObjectType const&>()) } -> std::same_as<typename T::ObjectType*>;
+            { o.Append(std::declval<typename T::ObjectType&&>()) } -> std::same_as<typename T::ObjectType*>;
+        };
+    }
 
     template<typename T>
-    concept SimpleMutable = requires(SimpleMutableChecker<std::decay_t<T>>& o) {
-        { o.Erase(typename SimpleMutableChecker<std::decay_t<T>>::SizeType{}) };
-        { o.Append() } -> std::same_as<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType*>;
-        { o.Append(std::declval<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType const&>()) } -> std::same_as<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType*>;
-        { o.Append(std::declval<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType&&>()) } -> std::same_as<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType*>;
-    };
+    concept SimpleMutable = detail::SimpleMutable<detail::SimpleMutableChecker<std::decay_t<T>>>;
 
     template<typename T>
     concept SimpleRangedMutable = _concept::SimpleMutable<T> && _concept::SimpleRangedArrayLike<T>;
