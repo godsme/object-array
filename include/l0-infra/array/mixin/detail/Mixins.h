@@ -42,7 +42,7 @@ namespace mixin::detail {
         using SizeType = typename DataHolder::SizeType;
         constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
         constexpr static bool ORDERED = T::IS_ORDERED;
-        constexpr static bool IS_CONST = T::IS_CONST;
+        constexpr static bool CONST = T::IS_CONST;
         using BitMap = ::detail::ArrayScope<MAX_SIZE>;
         using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
 

@@ -8,7 +8,7 @@
 namespace mixin::detail {
     template<typename T>
     struct DummyMixin : T {
-        constexpr static bool IS_CONST = T::IS_CONST;
+        constexpr static bool IS_CONST = T::CONST;
     };
 }
 
