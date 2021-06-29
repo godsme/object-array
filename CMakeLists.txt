@@ -49,7 +49,6 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/holder/detail/ViewElemTrait.h
         include/l0-infra/array/ArrayView.h
         include/l0-infra/array/holder/detail/ArrayDataHolderInterface.h
-        include/l0-infra/array/detail/ContinuousArrayMixin.h
         include/l0-infra/array/holder/RangedViewDataHolder.h
         include/l0-infra/array/view/Slice.h
         include/l0-infra/array/concept/IndexedContainer.h
@@ -119,7 +118,6 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/ScopedMinElemExt.h
         include/l0-infra/base/StructWrapper.h
         include/l0-infra/array/holder/ConstArrayViewDataHolder.h
-        include/l0-infra/array/detail/RangedReadOnlyMixins.h
         include/l0-infra/array/mixin/ScopedSimpleForEach.h
         include/l0-infra/array/mixin/ScopedSimpleMinElem.h
         include/l0-infra/array/concept/SimpleMinElem.h

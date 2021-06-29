@@ -5,7 +5,6 @@
 #ifndef OBJECT_ARRAY_VIEW_SLICE_H
 #define OBJECT_ARRAY_VIEW_SLICE_H
 
-#include <l0-infra/array/detail/RangedReadOnlyMixins.h>
 #include <l0-infra/array/mixin/RvalueScopedViewFactory.h>
 #include <l0-infra/array/mixin/RValueIndexedViewFactory.h>
 #include <l0-infra/array/holder/RangedViewDataHolder.h>
@@ -22,6 +21,9 @@
 #include <l0-infra/array/mixin/ViewAppend.h>
 #include <l0-infra/array/mixin/AppendExt.h>
 #include <l0-infra/array/mixin/ReplaceExt.h>
+#include <l0-infra/array/mixin/ScopedFindExt.h>
+#include <l0-infra/array/mixin/ScopedForEachExt.h>
+#include <l0-infra/array/mixin/ScopedMinElemExt.h>
 
 namespace view::detail {
     using SliceMixins = mixin::Mixins<

@@ -6,13 +6,22 @@
 #define OBJECT_ARRAY_OBJECTARRAY_H
 
 #include <l0-infra/array/holder/ObjectArrayDataHolder.h>
-#include <l0-infra/array/detail/ContinuousArrayMixin.h>
 #include <l0-infra/array/mixin/SortViewFactory.h>
 #include <l0-infra/array/mixin/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/ObjectIndex.h>
 #include <l0-infra/array/mixin/ReplaceExt.h>
 #include <l0-infra/array/mixin/AppendExt.h>
+#include <l0-infra/array/mixin/ScopedMinElem.h>
+#include <l0-infra/array/mixin/SimpleMinElem.h>
+#include <l0-infra/array/mixin/ScopedFindExt.h>
+#include <l0-infra/array/mixin/ScopedForEachExt.h>
+#include <l0-infra/array/mixin/SimpleMinElemExt.h>
+#include <l0-infra/array/mixin/ScopedMinElemExt.h>
+#include <l0-infra/array/mixin/RangedViewFactory.h>
+#include <l0-infra/array/mixin/SimpleMutate.h>
+#include <l0-infra/array/mixin/EraseExt.h>
+#include <l0-infra/array/mixin/ScopedCleanUp.h>
 
 namespace detail {
 
@@ -41,6 +50,7 @@ namespace detail {
             mixin::SimpleMinElemExt,
             mixin::ScopedMinElemExt,
             mixin::RangedViewFactory,
+            mixin::SortViewFactory,
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory,
             mixin::SortViewFactory,

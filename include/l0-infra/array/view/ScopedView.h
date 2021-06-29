@@ -14,6 +14,7 @@
 #include <l0-infra/array/mixin/IndexedRefAccessor.h>
 #include <l0-infra/array/mixin/ScopedByIndexAccessor.h>
 #include <l0-infra/array/mixin/RangedScopedElemCount.h>
+#include <l0-infra/array/mixin/SimpleMinElemExt.h>
 #include <l0-infra/array/mixin/ScopedSimpleForEach.h>
 #include <l0-infra/array/mixin/ScopedSimpleMinElem.h>
 #include <l0-infra/array/mixin/ScopedSortViewFactory.h>
