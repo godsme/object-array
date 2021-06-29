@@ -5,6 +5,7 @@
 #ifndef OBJECT_ARRAY_CONTINUOUSARRAYLIKE_H
 #define OBJECT_ARRAY_CONTINUOUSARRAYLIKE_H
 
+#include <l0-infra/array/concept/detail/ConceptDef.h>
 #include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
 
 namespace mixin {
@@ -16,9 +17,11 @@ namespace mixin {
         using typename T::ElemType;
         using typename T::ObjectType;
 
+    protected:
         using Self::Elems;
         using Self::ElemToObject;
 
+    public:
         auto GetRange() const -> SizeType { return Self::Num(); }
     };
 }

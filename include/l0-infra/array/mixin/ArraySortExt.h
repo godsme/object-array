@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/26.
 //
 
-#ifndef OBJECT_ARRAY_ARRAYSORTEXT_H
-#define OBJECT_ARRAY_ARRAYSORTEXT_H
+#ifndef OBJECT_ARRAY_ALGO_ARRAYSORTEXT_H
+#define OBJECT_ARRAY_ALGO_ARRAYSORTEXT_H
 
 #include <l0-infra/array/concept/Less.h>
 #include <l0-infra/array/mixin/detail/DefaultLessThan.h>
@@ -75,4 +75,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_ARRAYSORTEXT_H
+#endif //OBJECT_ARRAY_ALGO_ARRAYSORTEXT_H

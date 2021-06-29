@@ -22,6 +22,8 @@
 #include <l0-infra/array/mixin/SimpleMutate.h>
 #include <l0-infra/array/mixin/EraseExt.h>
 #include <l0-infra/array/mixin/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/ContinuousArrayLike.h>
+#include <l0-infra/array/mixin/RangedArray.h>
 
 namespace detail {
 

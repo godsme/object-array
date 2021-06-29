@@ -6,20 +6,33 @@
 #define OBJECT_ARRAY_ARRAYINDICES_H
 
 #include <l0-infra/array/holder/ArrayIndicesDataHolder.h>
-#include <l0-infra/array/detail/SimpleReadOnlyArrayLikeMixins.h>
-#include <l0-infra/array/detail/ContinuousRangedArray.h>
-#include <l0-infra/array/mixin/ArraySortExt.h>
-#include <l0-infra/array/mixin/IndexedViewFactory.h>
-#include <l0-infra/array/mixin/ArraySort.h>
+#include <l0-infra/array/mixin/detail/Mixins.h>
+#include <l0-infra/array/mixin/ContinuousArrayLike.h>
+#include <l0-infra/array/mixin/RangedArray.h>
+#include <l0-infra/array/mixin/RangedArrayLike.h>
+#include <l0-infra/array/mixin/ObjectIndex.h>
+#include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
+#include <l0-infra/array/mixin/IndexedRefAccessor.h>
+#include <l0-infra/array/mixin/ByIndexAccessor.h>
+#include <l0-infra/array/mixin/RangedElemsCount.h>
+#include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/RangedClear.h>
+#include <l0-infra/array/mixin/ArraySort.h>
+
 
 namespace detail {
-    using ArrayIndicesMixins = ContinuousRangedArray
-    ::Concat<SimpleReadOnlyArrayLikeMixins>
-    ::Extends<mixin::RangedClear,
-            mixin::IndexedViewFactory,
-            mixin::ArraySort,
-            mixin::ArraySortExt>;
+    using ArrayIndicesMixins = ::mixin::Mixins<
+            mixin::ContinuousArrayLike,
+            mixin::RangedArray,
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::___public_mixin_delimiter___,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::___mutable_mixin_delimiter___,
+            mixin::RangedClear,
+            mixin::ArraySort>;
 
     template<std::size_t MAX_NUM>
     using ArrayIndices = ArrayIndicesMixins::Compose<holder::ArrayIndicesDataHolder<MAX_NUM>>;
