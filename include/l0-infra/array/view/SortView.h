@@ -12,7 +12,21 @@
 #include <l0-infra/array/mixin/IndicesBasedSort.h>
 
 namespace view::detail {
-    using SortViewMixins = ::detail::SimpleReadOnlyArrayLikeMixins::Extends<
+    using SortViewMixins = ::mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::SimpleForEach,
+            mixin::ScopedForEach,
+            mixin::__PublicMixinDelimiter__,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::SimpleForEachExt,
             mixin::IndexedViewFactory,
             mixin::IndicesBasedSort,
             mixin::ArraySortExt>;

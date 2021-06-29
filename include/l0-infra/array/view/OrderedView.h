@@ -10,7 +10,21 @@
 #include <l0-infra/array/mixin/IndexedViewFactory.h>
 
 namespace view::detail {
-    using OrderedViewMixins = ::detail::SimpleReadOnlyArrayLikeMixins::Extends<
+    using OrderedViewMixins = ::mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::__PublicMixinDelimiter__,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::SimpleForEach,
+            mixin::SimpleForEachExt,
             mixin::IndexedViewFactory>;
 
     template<typename ARRAY, template<typename> typename HOLDER>
