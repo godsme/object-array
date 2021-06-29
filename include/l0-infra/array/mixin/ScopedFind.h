@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SCOPEDFIND_H
 #define OBJECT_ARRAY_SCOPEDFIND_H
 
-#include <l0-infra/array/concept/detail/ConceptDef.h>
+#include <l0-infra/array/detail/ConceptDef.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/concept/Pred.h>
 #include <l0-infra/base/IntOpt.h>

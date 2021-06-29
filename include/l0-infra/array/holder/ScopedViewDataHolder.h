@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SCOPEDVIEWDATAHOLDER_H
 #define OBJECT_ARRAY_SCOPEDVIEWDATAHOLDER_H
 
-#include <l0-infra/array/concept/detail/ConceptDef.h>
+#include <l0-infra/array/detail/ConceptDef.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
 #include <l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h>

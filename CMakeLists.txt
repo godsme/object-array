@@ -123,7 +123,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/concept/SimpleMinElem.h
         include/l0-infra/array/concept/detail/LessTypeTrait.h
         include/l0-infra/array/detail/config.h
-        include/l0-infra/array/concept/detail/ConceptDef.h
+        include/l0-infra/array/detail/ConceptDef.h
         include/l0-infra/array/mixin/ArraySort.h
         include/l0-infra/base/SizeOfArray.h
         include/l0-infra/array/holder/ArrayIndicesDataHolder.h
