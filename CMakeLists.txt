@@ -178,7 +178,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/ReplaceExt.h
         include/l0-infra/array/mixin/AppendExt.h
         include/l0-infra/array/mixin/ViewAppend.h
-        include/l0-infra/array/mixin/ScopedReplace.h)
+        include/l0-infra/array/mixin/ScopedReplace.h include/l0-infra/array/holder/detail/ViewDataHolder.h)
 
 add_executable(object_array_test test/ut/catch.cpp ${OBJ_ARRAY_SRC})
 add_executable(object_array_it
