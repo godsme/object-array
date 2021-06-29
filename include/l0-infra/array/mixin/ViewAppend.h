@@ -16,7 +16,7 @@ namespace mixin {
     public:
         template<typename ... ARGS>
         auto Append(ARGS&& ... args) -> ObjectType* {
-            return Self::GetObject().Append(std::forward<ARGS>(args)...);
+            return Self::GetArray().Append(std::forward<ARGS>(args)...);
         }
     };
 }

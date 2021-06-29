@@ -10,6 +10,8 @@ SCENARIO("SliceTest") {
     ut::Foo foo = {1,2,3,4,5,6,7};
     view::Slice<ut::Foo> slice{foo, 2, 5};
 
+    REQUIRE(slice.GetNum() == 3);
+
     WHEN("find an existing elem") {
         auto found = slice.FindIndex(5);
         REQUIRE(found.has_value());
@@ -24,6 +26,34 @@ SCENARIO("SliceTest") {
     WHEN("replace an element") {
         auto* replaced = slice.Replace(0, 10);
         REQUIRE(replaced != nullptr);
+    }
+
+    WHEN("Append") {
+        auto* elem = slice.Append(8);
+        REQUIRE(elem != nullptr);
+        REQUIRE(*elem == 8);
+        REQUIRE(slice.GetNum() == 3);
+
+        REQUIRE(slice.Append(9) != nullptr);
+        REQUIRE(slice.GetNum() == 3);
+        REQUIRE(slice.Append(10) != nullptr);
+        REQUIRE(slice.GetNum() == 3);
+        REQUIRE(slice.Append(11) == nullptr);
+        REQUIRE(slice.GetNum() == 3);
+    }
+}
+
+SCENARIO("FromSlice Test") {
+    ut::Foo foo = {1,2,3,4,5,6,7};
+    view::FromView<ut::Foo> slice{foo, 2};
+
+    REQUIRE(slice.GetNum() == 5);
+
+    WHEN("Append") {
+        auto* elem = slice.Append(8);
+        REQUIRE(elem != nullptr);
+        REQUIRE(*elem == 8);
+        REQUIRE(slice.GetNum() == 6);
     }
 }
 

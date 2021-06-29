@@ -71,6 +71,13 @@ namespace ut {
             return elems + n;
         }
 
+        template<typename ... ARGS>
+        auto Append(ARGS&& ... args) -> ObjectType* {
+            if(num == MAX_SIZE) return nullptr;
+            elems[num++] = int(std::forward<ARGS>(args)...);
+            return elems + num - 1;
+        }
+
     public:
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> std::size_t { return num; }
