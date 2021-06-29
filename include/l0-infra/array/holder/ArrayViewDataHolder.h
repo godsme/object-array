@@ -23,6 +23,7 @@ namespace holder {
         using SizeType = std::remove_const_t<SIZE_TYPE>;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
         constexpr static bool IS_ORDERED = ORDERED;
+        constexpr static auto IS_CONST = false;
         using ViewTrait = detail::ViewElemTrait_T<OBJ, ELEM>;
         using Trait = detail::ObjectTrait<ElemType, ObjectType>;
         using Interface = detail::ContinuousArrayDataHolderInterface<ArrayViewDataHolder>;

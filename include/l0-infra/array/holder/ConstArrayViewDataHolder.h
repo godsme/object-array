@@ -22,6 +22,7 @@ namespace holder {
         using ObjectType = std::add_const_t<ELEM>;
         constexpr static auto MAX_SIZE = MAX_NUM;
         constexpr static auto IS_ORDERED = ORDERED;
+        constexpr static auto IS_CONST = true;
         using ViewTrait = detail::ViewElemTrait_T<std::decay_t<OBJ>, std::decay_t<ElemType>>;
         using Interface = detail::ContinuousArrayDataHolderInterface<ConstArrayViewDataHolder>;
         using Trait = detail::ObjectTrait<ElemType, ObjectType>;
