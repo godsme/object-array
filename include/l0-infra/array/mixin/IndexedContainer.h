@@ -5,6 +5,7 @@
 #ifndef OBJECT_ARRAY_MIXIN_INDEXEDCONTAINER_H
 #define OBJECT_ARRAY_MIXIN_INDEXEDCONTAINER_H
 
+#include <l0-infra/array/concept/detail/ConceptDef.h>
 #include <l0-infra/array/concept/ArrayLike.h>
 
 namespace mixin {
