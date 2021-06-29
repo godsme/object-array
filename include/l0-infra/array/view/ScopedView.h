@@ -19,7 +19,7 @@
 #include <l0-infra/array/mixin/ScopedSortViewFactory.h>
 #include <l0-infra/array/mixin/ScopedSort.h>
 #include <l0-infra/array/mixin/RValueScopedSort.h>
-#include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
+#include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/ViewedArray.h>
 #include <l0-infra/array/mixin/ViewAppend.h>
 #include <l0-infra/array/mixin/AppendExt.h>
@@ -33,7 +33,7 @@ namespace view::detail {
             mixin::ScopedFind,
             mixin::ScopedMinElem,
             mixin::ViewedArray,
-            mixin::__PublicMixinDelimiter__,
+            mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ScopedByIndexAccessor,
             mixin::RangedScopedElemCount,
@@ -47,7 +47,7 @@ namespace view::detail {
             mixin::SimpleMinElemExt,
             mixin::IndexedScopedViewFactory,
             mixin::ScopedSortViewFactory,
-            mixin::__MutableMixinDelimiter__,
+            mixin::___mutable_mixin_delimiter___,
             mixin::ViewAppend,
             mixin::AppendExt,
             mixin::ScopedReplace,

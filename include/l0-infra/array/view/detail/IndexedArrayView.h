@@ -8,14 +8,14 @@
 #include <l0-infra/array/holder/ProxyRangedViewDataHolder.h>
 #include <l0-infra/array/mixin/RangedArrayLike.h>
 #include <l0-infra/array/mixin/IterableIndexedScopedArrayLike.h>
-#include <l0-infra/array/mixin/detail/__PublicMixinDelimiter__.h>
+#include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
 
 namespace view::detail {
     template<template<typename> typename ITERATOR, template<typename> typename REF_HOLDER, template<typename> typename VALUE_HOLDER>
     struct IndexedArrayView {
         using Mixins = mixin::Mixins<
                 mixin::RangedArrayLike,
-                mixin::__PublicMixinDelimiter__,
+                mixin::___public_mixin_delimiter___,
                 ITERATOR>;
 
         template<typename HOLDER>

@@ -171,7 +171,18 @@ set(OBJ_ARRAY_SRC
         test/ut/array/SliceTest.cpp
         test/ut/array/ArrayViewTest.cpp
         test/ut/array/ScatteredArrayTest.cpp
-        test/ut/array/UnscopedSimpleFindTest.cpp include/l0-infra/array/mixin/detail/__PublicMixinDelimiter__.h include/l0-infra/array/mixin/ArrayEquality.h include/l0-infra/array/mixin/IndicesBasedSort.h include/l0-infra/array/mixin/RangedReplace.h include/l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h include/l0-infra/array/mixin/ViewedArray.h include/l0-infra/array/mixin/ObjectIndex.h include/l0-infra/array/mixin/ReplaceExt.h include/l0-infra/array/mixin/AppendExt.h include/l0-infra/array/mixin/ViewAppend.h include/l0-infra/array/mixin/ScopedReplace.h)
+        test/ut/array/UnscopedSimpleFindTest.cpp
+        include/l0-infra/array/mixin/detail/___public_mixin_delimiter___.h
+        include/l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h
+        include/l0-infra/array/mixin/ArrayEquality.h
+        include/l0-infra/array/mixin/IndicesBasedSort.h
+        include/l0-infra/array/mixin/RangedReplace.h
+        include/l0-infra/array/mixin/ViewedArray.h
+        include/l0-infra/array/mixin/ObjectIndex.h
+        include/l0-infra/array/mixin/ReplaceExt.h
+        include/l0-infra/array/mixin/AppendExt.h
+        include/l0-infra/array/mixin/ViewAppend.h
+        include/l0-infra/array/mixin/ScopedReplace.h)
 
 add_executable(object_array_test test/ut/catch.cpp ${OBJ_ARRAY_SRC})
 add_executable(object_array_it

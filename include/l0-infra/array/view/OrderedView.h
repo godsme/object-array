@@ -16,7 +16,7 @@ namespace view::detail {
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::ScopedForEach,
-            mixin::__PublicMixinDelimiter__,
+            mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,

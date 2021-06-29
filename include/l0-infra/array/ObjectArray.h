@@ -9,7 +9,7 @@
 #include <l0-infra/array/detail/ContinuousArrayMixin.h>
 #include <l0-infra/array/mixin/SortViewFactory.h>
 #include <l0-infra/array/mixin/ArrayEquality.h>
-#include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
+#include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/ObjectIndex.h>
 #include <l0-infra/array/mixin/ReplaceExt.h>
 #include <l0-infra/array/mixin/AppendExt.h>
@@ -26,7 +26,7 @@ namespace detail {
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::ScopedMinElem,
-            mixin::__PublicMixinDelimiter__,
+            mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
@@ -44,7 +44,7 @@ namespace detail {
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory,
             mixin::SortViewFactory,
-            mixin::__MutableMixinDelimiter__,
+            mixin::___mutable_mixin_delimiter___,
             mixin::SimpleMutate,
             mixin::ReplaceExt,
             mixin::AppendExt,

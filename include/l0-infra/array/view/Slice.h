@@ -15,7 +15,7 @@
 #include <l0-infra/array/mixin/RValueArraySort.h>
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
-#include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
+#include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/RangedReplace.h>
 #include <l0-infra/array/mixin/ViewedArray.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
@@ -31,7 +31,7 @@ namespace view::detail {
             mixin::ScopedFind,
             mixin::ScopedForEach,
             mixin::ViewedArray,
-            mixin::__PublicMixinDelimiter__,
+            mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
@@ -48,7 +48,7 @@ namespace view::detail {
             mixin::SimpleMinElem,
             mixin::SimpleMinElemExt,
             mixin::ScopedMinElemExt,
-            mixin::__MutableMixinDelimiter__,
+            mixin::___mutable_mixin_delimiter___,
             mixin::ViewAppend,
             mixin::AppendExt,
             mixin::RangedReplace,

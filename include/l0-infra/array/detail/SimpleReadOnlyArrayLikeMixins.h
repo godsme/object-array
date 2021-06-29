@@ -16,7 +16,7 @@
 #include <l0-infra/array/mixin/ArrayElemVisit.h>
 #include <l0-infra/array/mixin/SimpleForEach.h>
 #include <l0-infra/array/mixin/SimpleForEachExt.h>
-#include <l0-infra/array/mixin/detail/__PublicMixinDelimiter__.h>
+#include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/ScopedFind.h>
 #include <l0-infra/array/mixin/ScopedForEach.h>
 #include <l0-infra/array/mixin/ObjectIndex.h>
@@ -28,7 +28,7 @@ namespace detail {
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::ScopedForEach,
-            mixin::__PublicMixinDelimiter__,
+            mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
