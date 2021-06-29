@@ -15,14 +15,16 @@
 #include <l0-infra/array/mixin/RValueArraySort.h>
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
+#include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory,
+            mixin::RValueSortViewFactory,
+            mixin::__MutableMixinDelimiter__,
             mixin::RValueArraySort,
-            mixin::ArraySortExt,
-            mixin::RValueSortViewFactory>;
+            mixin::ArraySortExt>;
 
     template<typename ARRAY, template<typename> typename HOLDER>
     using Slice = SliceMixins::Compose<HOLDER<ARRAY>>;
