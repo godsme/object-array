@@ -674,4 +674,25 @@ SCENARIO("ObjectArray Slice Scope PartialSort") {
     REQUIRE(a[0] == 4);
     REQUIRE(a[1] == 1);
     REQUIRE(a[2] == 3);
+
+    a[0] = 5;
+    REQUIRE(a[0] == 5);
+}
+
+namespace {
+    struct TT {
+        ~TT() { a=0; }
+        int a;
+    };
+}
+
+SCENARIO("Array of const object") {
+    ObjectArray<int const, 10> array;
+
+    array.Append(10);
+    array.Append(20);
+
+    REQUIRE(array.GetNum() == 2);
+    array.Replace(0, 30);
+    REQUIRE(array[0] == 30);
 }
