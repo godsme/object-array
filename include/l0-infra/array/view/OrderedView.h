@@ -6,8 +6,15 @@
 #define OBJECT_ARRAY_ORDEREDVIEW_H
 
 #include <l0-infra/array/holder/OrderedViewDataHolder.h>
-#include <l0-infra/array/detail/SimpleReadOnlyArrayLikeMixins.h>
 #include <l0-infra/array/mixin/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/ArrayElemVisit.h>
+#include <l0-infra/array/mixin/ScopedFind.h>
+#include <l0-infra/array/mixin/ScopedForEach.h>
+#include <l0-infra/array/mixin/IterableArrayLike.h>
+#include <l0-infra/array/mixin/NonScopedSimpleFind.h>
+#include <l0-infra/array/mixin/SimpleFindExt.h>
+#include <l0-infra/array/mixin/SimpleForEach.h>
+#include <l0-infra/array/mixin/SimpleForEachExt.h>
 
 namespace view::detail {
     using OrderedViewMixins = ::mixin::Mixins<
@@ -28,11 +35,8 @@ namespace view::detail {
             mixin::IndexedViewFactory>;
 
     template<typename ARRAY, template<typename> typename HOLDER>
-    using OrderedViewBased = OrderedViewMixins::Compose<HOLDER<ARRAY>>;
-
-    template<typename ARRAY, template<typename> typename HOLDER>
-    class OrderedView : public OrderedViewBased<ARRAY, HOLDER> {
-        using Parent = OrderedViewBased<ARRAY, HOLDER> ;
+    class OrderedView : public OrderedViewMixins::Compose<HOLDER<ARRAY>> {
+        using Parent = OrderedViewMixins::Compose<HOLDER<ARRAY>>;
     public:
         OrderedView(ARRAY& array, typename ARRAY::SizeType n)
             : Parent{array, array, n} {}

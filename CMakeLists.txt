@@ -128,12 +128,10 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/base/SizeOfArray.h
         include/l0-infra/array/holder/ArrayIndicesDataHolder.h
         include/l0-infra/array/detail/ArrayIndices.h
-        include/l0-infra/array/detail/SimpleReadOnlyArrayLikeMixins.h
         include/l0-infra/array/holder/SortViewDataHolder.h
         include/l0-infra/array/view/SortView.h
         include/l0-infra/array/mixin/ArraySortExt.h
         include/l0-infra/array/mixin/SortViewFactory.h
-        include/l0-infra/array/detail/ContinuousRangedArray.h
         include/l0-infra/array/mixin/RValueSortViewFactory.h
         include/l0-infra/array/mixin/ScopedSortViewFactory.h
         include/l0-infra/array/mixin/detail/ValueRangedArray.h

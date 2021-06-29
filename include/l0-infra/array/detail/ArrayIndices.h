@@ -19,7 +19,6 @@
 #include <l0-infra/array/mixin/RangedClear.h>
 #include <l0-infra/array/mixin/ArraySort.h>
 
-
 namespace detail {
     using ArrayIndicesMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
