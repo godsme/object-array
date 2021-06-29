@@ -15,17 +15,17 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
-        using typename T::Trait;
-
-        static constexpr auto MAX_SIZE = T::MAX_SIZE;
 
     protected:
-        using Self::GetObj;
+        using Self::GetArray;
+        using Self::IndexBegin;
+        using Self::IndexEnd;
 
     public:
         template<typename ... ARGS>
         auto Replace(SizeType i, ARGS &&... args) -> ObjectType * {
-            return i < Num() ? Trait::Replace(Elems()[i], std::forward<ARGS>(args)...) : nullptr;
+            if(i < IndexBegin() || i >= IndexEnd()) return nullptr;
+            return GetArray().Replace(IndexBegin() + i, std::forward<ARGS>(args)...);
         }
     };
 }

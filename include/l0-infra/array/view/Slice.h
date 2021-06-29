@@ -16,6 +16,8 @@
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
+#include <l0-infra/array/mixin/RangedReplace.h>
+#include <l0-infra/array/mixin/ViewedArray.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
@@ -23,6 +25,8 @@ namespace view::detail {
             mixin::RValueIndexedViewFactory,
             mixin::RValueSortViewFactory,
             mixin::__MutableMixinDelimiter__,
+            mixin::ViewedArray,
+            mixin::RangedReplace,
             mixin::RValueArraySort,
             mixin::ArraySortExt>;
 
