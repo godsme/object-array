@@ -65,6 +65,12 @@ namespace ut {
             }
         }
 
+        template<typename ... ARGS>
+        auto Replace(SizeType n, ARGS&& ... args) -> ObjectType* {
+            elems[n] = int(std::forward<ARGS>(args)...);
+            return elems + n;
+        }
+
     public:
         auto IndexBegin() const -> std::size_t { return 0; }
         auto IndexEnd() const -> std::size_t { return num; }

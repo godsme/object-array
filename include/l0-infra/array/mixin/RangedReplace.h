@@ -24,8 +24,8 @@ namespace mixin {
     public:
         template<typename ... ARGS>
         auto Replace(SizeType i, ARGS &&... args) -> ObjectType * {
-            if(i < IndexBegin() || i >= IndexEnd()) return nullptr;
-            return GetArray().Replace(IndexBegin() + i, std::forward<ARGS>(args)...);
+            auto index = i + IndexBegin();
+            return i >= IndexEnd() ? nullptr : GetArray().Replace(index, std::forward<ARGS>(args)...);
         }
     };
 }

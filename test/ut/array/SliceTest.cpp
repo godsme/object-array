@@ -20,5 +20,10 @@ SCENARIO("SliceTest") {
         auto found = slice.FindIndex(7);
         REQUIRE_FALSE(found);
     }
+
+    WHEN("replace an element") {
+        auto* replaced = slice.Replace(0, 10);
+        REQUIRE(replaced != nullptr);
+    }
 }
 
