@@ -7,7 +7,7 @@
 
 namespace _concept::detail {
     template<typename T>
-    struct PredTypeTrait : T {
+    struct PredTypeTrait {
         using ObjectType = typename T::ObjectType;
         constexpr static auto pred = [](ObjectType const&) -> bool { return true; };
         using Type = decltype(pred);

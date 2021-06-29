@@ -41,11 +41,9 @@ namespace _concept {
         concept WithNumber = WithNumber_<WithNumberChecker<T>>;
     }
 
-
     template<typename T>
     concept ContinuousArrayLikeDataHolder =
-        ConstContinuousArrayLikeDataHolder<T> &&
-        detail::WithNumber<T>;
+        ConstContinuousArrayLikeDataHolder<T> && detail::WithNumber<T>;
 }
 
 #endif
