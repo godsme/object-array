@@ -8,7 +8,7 @@
 #include <l0-infra/array/detail/config.h>
 
 #if HAS_CONCEPT
-#define __cOnCePt(c) typename
+#define __cOnCePt(c) _concept::c
 #define __pRed_CoNcEpT(PRED) _concept::Pred<ObjectType, SizeType> PRED
 #define __wItH_iNdEx_pReD(PRED) _concept::WithIndexPred<PRED, ObjectType, SizeType>
 #define __wItH_iNdEx_Op(OP) _concept::WithIndexOp<OP, ObjectType, SizeType>
