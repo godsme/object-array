@@ -21,6 +21,7 @@
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/ViewAppend.h>
 #include <l0-infra/array/mixin/AppendExt.h>
+#include <l0-infra/array/mixin/ReplaceExt.h>
 
 namespace view::detail {
     using SliceMixins = mixin::Mixins<
@@ -51,6 +52,7 @@ namespace view::detail {
             mixin::ViewAppend,
             mixin::AppendExt,
             mixin::RangedReplace,
+            mixin::ReplaceExt,
             mixin::RValueArraySort,
             mixin::ArraySortExt>;
 
