@@ -22,11 +22,9 @@ namespace holder {
         constexpr static SizeType MAX_SIZE = MAX_NUM;
         constexpr static bool IS_CONST = std::is_const_v<OBJ>;
 
-    public:
+    protected:
         ArrayDataHolder() = default;
 
-        //template<std::enable_if_t<std::is_same_v<NonConstElemType, decltype(NonConstElemType(std::declval<OBJ&&>()))>, int> = 0>
-        template<typename ... ARGS>
         ArrayDataHolder(std::initializer_list<OBJ> l) {
             SizeType i = 0;
             for (auto &&elem : l) {

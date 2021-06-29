@@ -56,7 +56,7 @@ namespace holder::detail {
 
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM>
-    struct ScatteredArrayDataHolder : private ArrayDataHolder<OBJ, MAX_NUM> {
+    struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using ObjectType = typename Parent::ObjectType;
         using ElemType = typename Parent::ElemType;
