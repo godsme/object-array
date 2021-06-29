@@ -15,10 +15,10 @@ namespace holder {
     class ProxyRangedViewDataHolder {
     protected:
         dEcL_tHiS(SUB_TYPE);
-        constexpr static auto IsConstArray = std::is_const_v<std::remove_reference_t<ARRAY>>;
+        constexpr static auto CONST = std::is_const_v<std::remove_reference_t<ARRAY>> || ARRAY::CONST;
         using ArrayType = std::decay_t<ARRAY>;
     public:
-        using ObjectType = std::conditional_t<IsConstArray, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
+        using ObjectType = std::conditional_t<CONST, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
         using SizeType   = typename ArrayType::SizeType;
 
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;

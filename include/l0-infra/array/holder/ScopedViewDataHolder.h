@@ -16,11 +16,10 @@ namespace holder {
     struct ScopedViewDataHolder {
         constexpr static auto IS_CONST = std::is_const_v<ARRAY> || ARRAY::CONST;
         using ArrayType = std::decay_t<ARRAY>;
-
         using ObjectType = std::conditional_t<IS_CONST, std::add_const_t<typename ArrayType::ObjectType>, typename ArrayType::ObjectType>;
-
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
+
         constexpr static bool IS_ORDERED = ORDERED;
         using BitMap = typename ARRAY::BitMap;
 

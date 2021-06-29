@@ -14,7 +14,6 @@ namespace holder {
         using Interface = detail::RangedViewDataHolderInterface<UntilViewDataHolder>;
         using typename Parent::SizeType;
         using typename Parent::ObjectType;
-        using Parent::This;
 
     public:
         UntilViewDataHolder(SizeType end)
@@ -27,7 +26,7 @@ namespace holder {
         auto IndexBegin() const -> SizeType { return 0; }
         auto IndexEnd() const -> SizeType { return end_; }
 
-    protected:
+    private:
         SizeType end_;
     };
 
