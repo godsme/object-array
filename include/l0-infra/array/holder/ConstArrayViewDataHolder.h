@@ -24,7 +24,7 @@ namespace holder {
         constexpr static auto IS_ORDERED = ORDERED;
         using ViewTrait = detail::ViewElemTrait_T<std::decay_t<OBJ>, std::decay_t<ElemType>>;
         using Interface = detail::ContinuousArrayDataHolderInterface<ConstArrayViewDataHolder>;
-        using Trait = detail::ObjectTrait<ElemType>;
+        using Trait = detail::ObjectTrait<ElemType, ObjectType>;
 
     public:
         ConstArrayViewDataHolder(OBJ const* array, std::size_t n)

@@ -9,19 +9,19 @@
 #include <type_traits>
 
 namespace holder::detail {
+    template<typename OBJ, bool = std::is_trivially_default_constructible_v<OBJ>>
+    struct DeduceElemType {
+        using Type = OBJ;
+    };
     template<typename OBJ>
-    auto DeduceElemType() -> auto {
-        if constexpr(std::is_trivially_default_constructible_v<OBJ>) {
-            return OBJ{};
-        } else {
-            return Placement<OBJ>{};
-        }
-    }
+    struct DeduceElemType<OBJ, false> {
+        using Type = Placement<OBJ>;
+    };
 }
 
 namespace holder {
     template<typename OBJ>
-    using ElemType = decltype(detail::DeduceElemType<OBJ>());
+    using ElemType = typename detail::DeduceElemType<OBJ>::Type;
 }
 
 #endif //OBJECT_ARRAY_DEDUCEELEMTYPE_H

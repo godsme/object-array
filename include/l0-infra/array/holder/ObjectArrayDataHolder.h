@@ -18,9 +18,9 @@ namespace holder::detail {
         using SizeType = typename Parent::SizeType;
         using ElemType = typename Parent::ElemType;
         using Trait = typename Parent::Trait;
-        using Owner = ObjectArrayHolder;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
         constexpr static bool IS_ORDERED = false;
+        constexpr static bool IS_CONST = Parent::IS_CONST;
         using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
 
         protected:
@@ -76,22 +76,21 @@ namespace holder::detail {
     public:
         ObjectArrayHolder() {}
 
-        ObjectArrayHolder(std::initializer_list<OBJ> l) : num(std::min(l.size(), MAX_NUM)) {
-            SizeType i = 0;
-            for (auto &&elem : l) {
-                if (i == num) break;
-                Trait::Emplace(elems[i++], std::move(elem));
-            }
+        ObjectArrayHolder(std::initializer_list<OBJ> l)
+            : Parent{l}, num(std::min(l.size(), MAX_NUM))
+        {}
+
+        ObjectArrayHolder(ObjectArrayHolder const &rhs)
+            : Parent{rhs.elems, rhs.num}, num{rhs.num}
+        {}
+
+        ObjectArrayHolder(ObjectArrayHolder &&rhs)
+            : Parent{rhs.elems, rhs.num}, num{rhs.num}
+        {
+            rhs.DoClear();
         }
 
-        ObjectArrayHolder(ObjectArrayHolder const &rhs) : num{rhs.num} {
-            ConstructFrom(rhs.elems);
-        }
-
-        ObjectArrayHolder(ObjectArrayHolder &&rhs) : num{rhs.num} {
-            MoveFrom(std::move(rhs));
-        }
-
+        //template<std::enable_if_t<std::is_same_v<ObjectType*, decltype(Trait::Emplace(std::declval<ElemType&>(), std::declval<ObjectType const&>()))>, int> = 0>
         auto operator=(ObjectArrayHolder const &rhs) -> ObjectArrayHolder & {
             DoClear();
             num = rhs.num;
@@ -99,12 +98,31 @@ namespace holder::detail {
             return *this;
         }
 
-        auto operator=(ObjectArrayHolder &&rhs) -> ObjectArrayHolder & {
-            DoClear();
-            num = rhs.num;
-            MoveFrom(std::move(rhs));
-            return *this;
-        }
+//        template<std::enable_if_t<IS_CONST, int> = 0>
+//        auto operator=(ObjectArrayHolder const &) -> ObjectArrayHolder & = delete;
+
+//        template<std::enable_if_t<!IS_CONST, int> = 0>
+//        auto operator=(ObjectArrayHolder&& rhs) -> ObjectArrayHolder & {
+//            DoClear();
+//            num = rhs.num;
+//            ConstructFrom(rhs.elems);
+//            rhs.DoClear();
+//            return *this;
+//        }
+//
+//        template<std::enable_if_t<IS_CONST, int> = 0>
+//        auto operator=(ObjectArrayHolder&&) -> ObjectArrayHolder & = delete;
+//        template<std::enable_if_t<!IS_CONST, int> = 0>
+//        auto operator=(ObjectArrayHolder&& rhs) -> ObjectArrayHolder & {
+//            DoClear();
+//            num = rhs.num;
+//            ConstructFrom(rhs.elems);
+//            rhs.DoClear();
+//            return *this;
+//        }
+//
+//        template<std::enable_if_t<IS_CONST, int> = 0>
+//        auto operator=(ObjectArrayHolder&&) -> ObjectArrayHolder & = delete;
 
     protected:
         SizeType num{};

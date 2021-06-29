@@ -8,12 +8,12 @@
 #include <l0-infra/base/Placement.h>
 
 namespace holder::detail {
-    template<typename ELEM>
+    template<typename ELEM, typename OBJ>
     struct ObjectTrait {
         using ElemType = ELEM;
-        using ObjectType = ELEM;
+        using ObjectType = OBJ;
 
-        static auto ToObject(ElemType const& elem) -> ObjectType const& { return elem; }
+        static auto ConstToObject(ElemType const& elem) -> ObjectType const& { return elem; }
         static auto ToObject(ElemType& elem) -> ObjectType& { return elem; }
 
         template<typename ... ARGS>
@@ -37,11 +37,11 @@ namespace holder::detail {
     };
 
     template<typename OBJ>
-    struct ObjectTrait<Placement<OBJ>> {
+    struct ObjectTrait<Placement<OBJ>, OBJ> {
         using ElemType = Placement<OBJ>;
         using ObjectType = OBJ;
 
-        static auto ToObject(ElemType const& elem) -> ObjectType const& { return elem.GetRef(); }
+        static auto ConstToObject(ElemType const& elem) -> ObjectType const& { return elem.GetRef(); }
         static auto ToObject(ElemType& elem) -> ObjectType& { return elem.GetRef(); }
 
         template<typename ... ARGS>

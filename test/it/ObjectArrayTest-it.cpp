@@ -104,7 +104,7 @@ auto ObjectArray_SimpleFindTest(ARRAY&& array) {
 }
 
 suite ObjectArraySimpleFind_Suite = [] {
-    FooArray const array{{1},{2},{3},{4},{5},{6}};
+    FooArray const array{Foo{1},Foo{2},Foo{3},Foo{4},Foo{5},Foo{6}};
     ObjectArray_SimpleFindTest(array);
     ObjectArray_SimpleFindTest(FooArray{{1},{2},{3},{4},{5},{6}});
 };

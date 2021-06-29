@@ -96,7 +96,7 @@ namespace holder::detail {
 
         auto Copy(ScatteredArrayDataHolder const &rhs) -> void {
             ForAll([&, this](auto i) {
-                Trait::Emplace(elems[i], Trait::ToObject(rhs.elems[i]));
+                Trait::Emplace(elems[i], Trait::ConstToObject(rhs.elems[i]));
             });
         }
 
