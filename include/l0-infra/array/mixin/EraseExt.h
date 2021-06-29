@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/25.
 //
 
-#ifndef OBJECT_ARRAY_PREDBASEDMUTATE_H
-#define OBJECT_ARRAY_PREDBASEDMUTATE_H
+#ifndef OBJECT_ARRAY_ERASEEXT_H
+#define OBJECT_ARRAY_ERASEEXT_H
 
 #include <l0-infra/array/concept/SimpleFind.h>
 #include <l0-infra/array/concept/SimpleMutable.h>
@@ -11,7 +11,7 @@
 
 namespace mixin {
     template<__cOnCePt(SimpleFindMutable) T>
-    class PredBasedMutate : public T {
+    class EraseExt : public T {
         using Self = T;
 
     protected:
@@ -22,15 +22,15 @@ namespace mixin {
     public:
         using typename Self::ObjectType;
 
+    protected:
+        using Self::GetObjIndex;
+
     public:
         using Self::Erase;
-        using Self::Append;
-        using Self::Replace;
 
-        template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto FindOrAppend(PRED&& pred) -> ObjectType * {
-            auto* found = Self::Find(std::forward<PRED>(pred));
-            return found != nullptr ? found : Self::Append();
+        auto Remove(ObjectType const * p) -> void {
+            auto index = GetObjIndex(p);
+            if (index) Self::Erase(*index);
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
@@ -49,4 +49,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_PREDBASEDMUTATE_H
+#endif //OBJECT_ARRAY_ERASEEXT_H

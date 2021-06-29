@@ -18,6 +18,9 @@
 #include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
 #include <l0-infra/array/mixin/RangedReplace.h>
 #include <l0-infra/array/mixin/ViewedArray.h>
+#include <l0-infra/array/mixin/detail/Mixins.h>
+#include <l0-infra/array/mixin/ViewAppend.h>
+#include <l0-infra/array/mixin/AppendExt.h>
 
 namespace view::detail {
     using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
@@ -26,6 +29,8 @@ namespace view::detail {
             mixin::RValueSortViewFactory,
             mixin::__MutableMixinDelimiter__,
             mixin::ViewedArray,
+            mixin::ViewAppend,
+            mixin::AppendExt,
             mixin::RangedReplace,
             mixin::RValueArraySort,
             mixin::ArraySortExt>;

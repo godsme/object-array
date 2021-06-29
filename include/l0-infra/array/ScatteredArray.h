@@ -22,8 +22,7 @@
 #include <l0-infra/array/mixin/ScopedSimpleMinElem.h>
 #include <l0-infra/array/mixin/SimpleMinElemExt.h>
 #include <l0-infra/array/mixin/IndexedScopedViewFactory.h>
-#include <l0-infra/array/mixin/SimpleMutateExt.h>
-#include <l0-infra/array/mixin/PredBasedMutate.h>
+#include <l0-infra/array/mixin/EraseExt.h>
 #include <l0-infra/array/mixin/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/ScopedSortViewFactory.h>
 #include <l0-infra/array/mixin/ScopedSort.h>
@@ -32,6 +31,7 @@
 #include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
 #include <l0-infra/array/mixin/ObjectIndex.h>
 #include <l0-infra/array/mixin/ReplaceExt.h>
+#include <l0-infra/array/mixin/AppendExt.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
@@ -60,8 +60,8 @@ namespace detail {
             mixin::ScopedSortViewFactory,
             mixin::__MutableMixinDelimiter__,
             mixin::ReplaceExt,
-            mixin::SimpleMutateExt,
-            mixin::PredBasedMutate,
+            mixin::AppendExt,
+            mixin::EraseExt,
             mixin::ScopedCleanUp,
             mixin::ScopedSort,
             mixin::ArraySortExt>;

@@ -16,6 +16,8 @@ namespace mixin {
         using typename Self::SizeType;
 
     public:
+        using Self::Replace;
+
         template<__sImPlE_pReD_cOnCePt(PRED), typename ... ARGS>
         auto ReplaceBy(PRED&& pred, ARGS&& ... args) -> ObjectType * {
             auto index = Self::FindIndex(std::forward<PRED>(pred));

@@ -499,6 +499,20 @@ SCENARIO("init with init list") {
     REQUIRE(thing.a == 10);
     REQUIRE(array[1].a == 2);
 
+    WHEN("FindOrAppend will return obj if found") {
+        auto* found = array.FindOrAppend([](Thing  const& elem) { return elem.a == 2; });
+        REQUIRE(found != nullptr);
+        REQUIRE(found->a == 2);
+        REQUIRE(array.GetNum() == 2);
+    }
+
+    WHEN("FindOrAppend will return new obj if not found") {
+        auto* found = array.FindOrAppend([](Thing  const& elem) { return elem.a == 3; });
+        REQUIRE(found != nullptr);
+        REQUIRE(found->a == 0);
+        REQUIRE(array.GetNum() == 3);
+    }
+
     WHEN("Access By At") {
         REQUIRE(array.At(0)->a == 1);
         REQUIRE(array.At(1)->a == 2);

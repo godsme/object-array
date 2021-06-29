@@ -8,9 +8,8 @@
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/detail/ContinuousRangedArray.h>
 #include <l0-infra/array/mixin/SimpleMutate.h>
-#include <l0-infra/array/mixin/SimpleMutateExt.h>
 #include <l0-infra/array/mixin/RangedClear.h>
-#include <l0-infra/array/mixin/PredBasedMutate.h>
+#include <l0-infra/array/mixin/EraseExt.h>
 #include <l0-infra/array/mixin/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/SimpleMinElemExt.h>
 #include <l0-infra/array/mixin/ScopedMinElemExt.h>
@@ -21,6 +20,7 @@
 #include <l0-infra/array/mixin/ArraySort.h>
 #include <l0-infra/array/mixin/ArraySortExt.h>
 #include <l0-infra/array/mixin/ReplaceExt.h>
+#include <l0-infra/array/mixin/AppendExt.h>
 
 namespace detail {
     using ContinousReadOnlyMixins = ContinuousRangedArray::Concat<RangedReadOnlyMixins>;
@@ -28,8 +28,8 @@ namespace detail {
     using ContinuousArrayMixin = ContinousReadOnlyMixins::Extends<
             mixin::SimpleMutate,
             mixin::ReplaceExt,
-            mixin::SimpleMutateExt,
-            mixin::PredBasedMutate,
+            mixin::AppendExt,
+            mixin::EraseExt,
             mixin::ScopedCleanUp,
             mixin::RangedClear>;
 }
