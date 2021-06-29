@@ -12,11 +12,6 @@
 #include <l0-infra/array/mixin/SortViewFactory.h>
 
 namespace detail {
-    using ArrayViewSpecifiedMixins = ::mixin::Mixins<
-            mixin::RValueRangedViewFactory,
-            mixin::RValueScopedViewFactory,
-            mixin::RValueIndexedViewFactory,
-            mixin::RValueSortViewFactory>;
 
     using ArrayViewMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
@@ -25,6 +20,7 @@ namespace detail {
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
+            mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::__PublicMixinDelimiter__,
             mixin::IndexedRefAccessor,
@@ -33,7 +29,6 @@ namespace detail {
             mixin::IterableArrayLike,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
-            mixin::SimpleForEach,
             mixin::SimpleForEachExt,
             mixin::ScopedFindExt,
             mixin::ScopedForEachExt,
@@ -54,10 +49,8 @@ namespace detail {
             mixin::RValueArraySort,
             mixin::ArraySortExt>;
 
-    using ConstArrayViewMixins = detail::ContinousReadOnlyMixins::Concat<ArrayViewSpecifiedMixins>;
-
     template<typename T, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
-    using ConstArrayView = ConstArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ELEM, ORDERED>>;
+    using ConstArrayView = ArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ELEM, ORDERED>>;
 
     template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER, bool ORDERED, bool = std::is_const_v<T>>
     struct ArrayViewTrait {
