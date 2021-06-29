@@ -41,7 +41,7 @@ namespace detail {
             mixin::ScopedForEach,
             mixin::ScopedMinElem,
             mixin::ScopedSimpleForEach,
-            mixin::detail::__PublicMixinDelimiter__,
+            mixin::__PublicMixinDelimiter__,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::ScopedByIndexAccessor,

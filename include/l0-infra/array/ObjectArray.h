@@ -10,16 +10,9 @@
 #include <l0-infra/array/mixin/SortViewFactory.h>
 #include <l0-infra/array/mixin/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/MutableMixin.h>
+#include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
 
 namespace detail {
-    using ObjectArrayMutableMixins = mixin::Mutable<
-            mixin::SimpleMutate,
-            mixin::SimpleMutateExt,
-            mixin::PredBasedMutate,
-            mixin::ScopedCleanUp,
-            mixin::RangedClear,
-            mixin::ArraySort,
-            mixin::ArraySortExt>;
 
     using ObjectArrayMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
@@ -30,7 +23,7 @@ namespace detail {
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::ScopedMinElem,
-            mixin::detail::__PublicMixinDelimiter__,
+            mixin::__PublicMixinDelimiter__,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
@@ -48,7 +41,14 @@ namespace detail {
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory,
             mixin::SortViewFactory,
-            ObjectArrayMutableMixins::template AsMixin>;
+            mixin::__MutableMixinDelimiter__,
+            mixin::SimpleMutate,
+            mixin::SimpleMutateExt,
+            mixin::PredBasedMutate,
+            mixin::ScopedCleanUp,
+            mixin::RangedClear,
+            mixin::ArraySort,
+            mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM>
     using ObjectArray = detail::ObjectArrayMixins::Compose<holder::ObjectArrayDataHolder<T, MAX_NUM>>;

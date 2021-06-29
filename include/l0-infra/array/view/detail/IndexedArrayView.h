@@ -15,7 +15,7 @@ namespace view::detail {
     struct IndexedArrayView {
         using Mixins = mixin::Mixins<
                 mixin::RangedArrayLike,
-                mixin::detail::__PublicMixinDelimiter__,
+                mixin::__PublicMixinDelimiter__,
                 ITERATOR>;
 
         template<typename HOLDER>

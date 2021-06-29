@@ -688,11 +688,13 @@ namespace {
 
 SCENARIO("Array of const object") {
     ObjectArray<int const, 10> array{30, 10, 20};
-
+//    ObjectArray<int const, 10> array1{30, 10, 20};
+//
+//    array1 = array;
 //    array.Append(10);
 //    array.Append(20);
-
-//    REQUIRE(array.GetNum() == 2);
+//
+//    REQUIRE(array.GetNum() == 3);
 //    array.Replace(0, 30);
 //    REQUIRE(array[0] == 30);
 }

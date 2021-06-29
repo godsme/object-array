@@ -19,10 +19,20 @@ namespace mixin::detail {
         using Type = BASE;
     };
 
+    template<typename BASE, bool C, template<typename> typename H, template<typename> typename ... MIXINS>
+    struct DoCombineMixins {
+        using Type = BASE;
+    };
+
+    template<typename BASE, template<typename> typename H, template<typename> typename ... MIXINS>
+    struct DoCombineMixins<BASE, false, H, MIXINS...> {
+        using Type = typename CombineMixin<MIXINS...>::template Type<H<BASE>>;
+    };
+
     template<template<typename> typename H, template<typename> typename ... MIXINS>
     struct CombineMixin<H, MIXINS...> {
         template<typename BASE>
-        using Type = typename CombineMixin<MIXINS...>::template Type<H<BASE>>;
+        using Type = typename DoCombineMixins<BASE, std::is_final_v<H<BASE>>, H, MIXINS...>::Type;
     };
 
     template<typename OWNER, typename T>
