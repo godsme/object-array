@@ -12,6 +12,15 @@
 #include <l0-infra/array/mixin/detail/MutableMixin.h>
 
 namespace detail {
+    using ObjectArrayMutableMixins = mixin::Mutable<
+            mixin::SimpleMutate,
+            mixin::SimpleMutateExt,
+            mixin::PredBasedMutate,
+            mixin::ScopedCleanUp,
+            mixin::RangedClear,
+            mixin::ArraySort,
+            mixin::ArraySortExt>;
+
     using ObjectArrayMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
@@ -35,17 +44,11 @@ namespace detail {
             mixin::SimpleMinElem,
             mixin::SimpleMinElemExt,
             mixin::ScopedMinElemExt,
-            mixin::detail::Mutable<mixin::SimpleMutate>::template Mixin,
-            mixin::detail::Mutable<mixin::SimpleMutateExt>::template Mixin,
-            mixin::detail::Mutable<mixin::PredBasedMutate>::template Mixin,
-            mixin::detail::Mutable<mixin::ScopedCleanUp>::template Mixin,
-            mixin::detail::Mutable<mixin::RangedClear>::template Mixin,
-            mixin::detail::Mutable<mixin::ArraySort>::template Mixin,
-            mixin::detail::Mutable<mixin::ArraySortExt>::template Mixin,
             mixin::RangedViewFactory,
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory,
-            mixin::SortViewFactory>;
+            mixin::SortViewFactory,
+            ObjectArrayMutableMixins::template AsMixin>;
 
     template<typename T, std::size_t MAX_NUM>
     using ObjectArray = detail::ObjectArrayMixins::Compose<holder::ObjectArrayDataHolder<T, MAX_NUM>>;

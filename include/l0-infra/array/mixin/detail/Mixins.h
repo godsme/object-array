@@ -61,6 +61,9 @@ namespace mixin {
             using typename Mixins::Maybe;
         };
 
+        template<typename T>
+        using Mixin = typename detail::CombineMixin<MIXINS...>::template Type<T>;
+
         template<template<typename> typename ... MORE_MIXINS>
         using Extends = Mixins<MIXINS..., MORE_MIXINS...>;
 
