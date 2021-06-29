@@ -5,6 +5,7 @@
 #ifndef OBJECT_ARRAY_NONSCOPEDSIMPLEFIND_H
 #define OBJECT_ARRAY_NONSCOPEDSIMPLEFIND_H
 
+#include <l0-infra/array/concept/detail/ConceptDef.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/concept/Pred.h>
 #include <optional>
