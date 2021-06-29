@@ -8,6 +8,11 @@
 SCENARIO("ScatteredArray Test") {
     ScatteredArray<int, 10> foo {2, 6, 3};
 
+    WHEN("Replace Object") {
+        foo.ReplaceObj(foo[1], 10);
+        REQUIRE(foo[1] == 10);
+    }
+
     WHEN("find index of an existing elem") {
         auto found = foo.FindIndex([](auto&& elem) {
             return elem == 6;

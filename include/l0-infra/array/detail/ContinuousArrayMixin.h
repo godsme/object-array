@@ -20,12 +20,14 @@
 #include <l0-infra/array/mixin/IndexedViewFactory.h>
 #include <l0-infra/array/mixin/ArraySort.h>
 #include <l0-infra/array/mixin/ArraySortExt.h>
+#include <l0-infra/array/mixin/ReplaceExt.h>
 
 namespace detail {
     using ContinousReadOnlyMixins = ContinuousRangedArray::Concat<RangedReadOnlyMixins>;
 
     using ContinuousArrayMixin = ContinousReadOnlyMixins::Extends<
             mixin::SimpleMutate,
+            mixin::ReplaceExt,
             mixin::SimpleMutateExt,
             mixin::PredBasedMutate,
             mixin::ScopedCleanUp,

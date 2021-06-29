@@ -11,6 +11,7 @@
 #include <l0-infra/array/mixin/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
 #include <l0-infra/array/mixin/ObjectIndex.h>
+#include <l0-infra/array/mixin/ReplaceExt.h>
 
 namespace detail {
 
@@ -44,6 +45,7 @@ namespace detail {
             mixin::SortViewFactory,
             mixin::__MutableMixinDelimiter__,
             mixin::SimpleMutate,
+            mixin::ReplaceExt,
             mixin::SimpleMutateExt,
             mixin::PredBasedMutate,
             mixin::ScopedCleanUp,
