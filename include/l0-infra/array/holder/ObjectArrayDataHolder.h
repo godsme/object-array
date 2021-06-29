@@ -21,10 +21,10 @@ namespace holder::detail {
         constexpr static SizeType MAX_SIZE = MAX_NUM;
         constexpr static bool IS_ORDERED = false;
         constexpr static bool IS_CONST = Parent::IS_CONST;
+        using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolderBase>;
 
-
-        protected:
-            using Parent::elems;
+    protected:
+        using Parent::elems;
 
     private:
         template<typename>
@@ -73,12 +73,8 @@ namespace holder::detail {
             ConstructFrom(array);
         }
 
-    public:
+    protected:
         ObjectArrayHolderBase() {}
-
-        ObjectArrayHolderBase(std::initializer_list<OBJ> l)
-            : Parent{l}, num(std::min(l.size(), MAX_NUM))
-        {}
 
         ObjectArrayHolderBase(ObjectArrayHolderBase const &rhs)
             : Parent{rhs.elems, rhs.num}, num{rhs.num}
@@ -90,30 +86,9 @@ namespace holder::detail {
             rhs.DoClear();
         }
 
-
-
-//        template<std::enable_if_t<!IS_CONST, int> = 0>
-//        auto operator=(ObjectArrayHolder&& rhs) -> ObjectArrayHolder & {
-//            DoClear();
-//            num = rhs.num;
-//            ConstructFrom(rhs.elems);
-//            rhs.DoClear();
-//            return *this;
-//        }
-//
-//        template<std::enable_if_t<IS_CONST, int> = 0>
-//        auto operator=(ObjectArrayHolder&&) -> ObjectArrayHolder & = delete;
-//        template<std::enable_if_t<!IS_CONST, int> = 0>
-//        auto operator=(ObjectArrayHolder&& rhs) -> ObjectArrayHolder & {
-//            DoClear();
-//            num = rhs.num;
-//            ConstructFrom(rhs.elems);
-//            rhs.DoClear();
-//            return *this;
-//        }
-//
-//        template<std::enable_if_t<IS_CONST, int> = 0>
-//        auto operator=(ObjectArrayHolder&&) -> ObjectArrayHolder & = delete;
+        ObjectArrayHolderBase(std::initializer_list<OBJ> l)
+                : Parent{l}, num(std::min(l.size(), MAX_NUM))
+        {}
 
     protected:
         SizeType num{};
@@ -124,10 +99,10 @@ namespace holder::detail {
         using Parent = ObjectArrayHolderBase<OBJ, MAX_NUM>;
         using Parent::Parent;
 
+        ObjectArrayHolder(std::initializer_list<OBJ> l) : Parent{l} {}
+
         ObjectArrayHolder(ObjectArrayHolder const&) = default;
         ObjectArrayHolder(ObjectArrayHolder&&) = default;
-
-        using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
 
         auto operator=(ObjectArrayHolder const &) -> ObjectArrayHolder & = delete;
         auto operator=(ObjectArrayHolder&&) -> ObjectArrayHolder & = delete;
@@ -137,7 +112,8 @@ namespace holder::detail {
     struct ObjectArrayHolder<OBJ, MAX_NUM, false> : ObjectArrayHolderBase<OBJ, MAX_NUM> {
         using Parent = ObjectArrayHolderBase<OBJ, MAX_NUM>;
         using Parent::Parent;
-        using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolder>;
+
+        ObjectArrayHolder(std::initializer_list<OBJ> l) : Parent{l} {}
 
         ObjectArrayHolder(ObjectArrayHolder const&) = default;
         ObjectArrayHolder(ObjectArrayHolder&&) = default;
