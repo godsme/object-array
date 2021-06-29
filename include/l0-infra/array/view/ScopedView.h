@@ -20,12 +20,14 @@
 #include <l0-infra/array/mixin/ScopedSort.h>
 #include <l0-infra/array/mixin/RValueScopedSort.h>
 #include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
+#include <l0-infra/array/mixin/ViewedArray.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
+            mixin::ViewedArray,
             mixin::__PublicMixinDelimiter__,
             mixin::IndexedRefAccessor,
             mixin::ScopedByIndexAccessor,

@@ -23,12 +23,31 @@
 #include <l0-infra/array/mixin/AppendExt.h>
 
 namespace view::detail {
-    using SliceMixins = ::detail::RangedReadOnlyMixins::Extends<
+    using SliceMixins = mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::ViewedArray,
+            mixin::__PublicMixinDelimiter__,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::SimpleForEach,
+            mixin::SimpleForEachExt,
             mixin::RValueScopedViewFactory,
             mixin::RValueIndexedViewFactory,
             mixin::RValueSortViewFactory,
+            mixin::ScopedFindExt,
+            mixin::ScopedForEachExt,
+            mixin::SimpleMinElem,
+            mixin::SimpleMinElemExt,
+            mixin::ScopedMinElemExt,
             mixin::__MutableMixinDelimiter__,
-            mixin::ViewedArray,
             mixin::ViewAppend,
             mixin::AppendExt,
             mixin::RangedReplace,

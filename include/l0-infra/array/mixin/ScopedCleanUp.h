@@ -31,7 +31,6 @@ namespace mixin {
         auto CleanUpEx(BitMap excluded) -> void {
             CleanUp(~excluded);
         }
-
     };
 }
 
