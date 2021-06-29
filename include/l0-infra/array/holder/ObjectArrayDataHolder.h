@@ -12,7 +12,7 @@
 
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM>
-    struct ObjectArrayHolderBase : private ArrayDataHolder<OBJ, MAX_NUM> {
+    struct ObjectArrayHolderBase : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using ObjectType = typename Parent::ObjectType;
         using SizeType = typename Parent::SizeType;
@@ -20,7 +20,6 @@ namespace holder::detail {
         using Trait = typename Parent::Trait;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
         constexpr static bool IS_ORDERED = false;
-        constexpr static bool IS_CONST = Parent::IS_CONST;
         using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolderBase>;
 
     protected:
