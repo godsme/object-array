@@ -19,6 +19,7 @@
 #include <l0-infra/array/mixin/ScopedSortViewFactory.h>
 #include <l0-infra/array/mixin/ScopedSort.h>
 #include <l0-infra/array/mixin/RValueScopedSort.h>
+#include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
@@ -39,6 +40,7 @@ namespace view::detail {
             mixin::SimpleMinElemExt,
             mixin::IndexedScopedViewFactory,
             mixin::ScopedSortViewFactory,
+            mixin::__MutableMixinDelimiter__,
             mixin::RValueScopedSort,
             mixin::ArraySortExt>;
 
