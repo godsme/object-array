@@ -19,10 +19,12 @@
 #include <l0-infra/array/mixin/detail/__PublicMixinDelimiter__.h>
 #include <l0-infra/array/mixin/ScopedFind.h>
 #include <l0-infra/array/mixin/ScopedForEach.h>
+#include <l0-infra/array/mixin/ObjectIndex.h>
 
 namespace detail {
     using SimpleReadOnlyArrayLikeMixins = ::mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::ScopedForEach,

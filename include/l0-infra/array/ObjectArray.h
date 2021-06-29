@@ -10,6 +10,7 @@
 #include <l0-infra/array/mixin/SortViewFactory.h>
 #include <l0-infra/array/mixin/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/__MutableMixinDelimiter__.h>
+#include <l0-infra/array/mixin/ObjectIndex.h>
 
 namespace detail {
 
@@ -17,6 +18,7 @@ namespace detail {
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
             mixin::RangedArrayLike,
+            mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::SimpleForEach,

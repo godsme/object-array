@@ -19,12 +19,8 @@ namespace mixin {
 
     protected:
         using Self::GetObj;
-
-    private:
-        auto GetObjIndex(ObjectType const* obj) -> Maybe {
-            auto* base = &GetObj(0);
-            return obj < base ? std::nullopt : Maybe(obj - base);
-        }
+        using Self::IndexBegin;
+        using Self::GetObjIndex;
 
     public:
         template<typename ... ARGS>
