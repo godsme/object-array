@@ -14,8 +14,14 @@
 
 namespace _concept {
     template<typename T>
-    concept Scoped = requires(T const& o) {
-        { o.GetScope() } -> std::same_as<typename T::BitMap>;
+    struct ScopedChecker : T {
+        using T::GetScope;
+        using typename T::BitMap;
+    };
+
+    template<typename T>
+    concept Scoped = requires(ScopedChecker<T> const& o) {
+        { o.GetScope() } -> std::same_as<typename ScopedChecker<T>::BitMap>;
     };
 
     template<typename T>

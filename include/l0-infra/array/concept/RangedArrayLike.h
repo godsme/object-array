@@ -13,24 +13,45 @@
 
 namespace _concept {
     template<typename T>
+    struct SimpleRangedArrayLikeChecker : T {
+        using T::IndexBegin;
+        using T::IndexEnd;
+        using typename T::SizeType;
+    };
+
+    template<typename T>
     concept SimpleRangedArrayLike = IndexedContainer<T> &&
-    requires(T const& o) {
-        { o.IndexBegin() } -> std::same_as<typename T::SizeType>;
-        { o.IndexEnd() } -> std::same_as<typename T::SizeType>;
+    requires(SimpleRangedArrayLikeChecker<T> const& o) {
+        { o.IndexBegin() } -> std::same_as<typename SimpleRangedArrayLikeChecker<T>::SizeType>;
+        { o.IndexEnd() } -> std::same_as<typename SimpleRangedArrayLikeChecker<T>::SizeType>;
+    };
+
+    template<typename T>
+    struct ConstRangedArrayLikeChecker : T {
+        using T::ObjectBegin;
+        using T::ObjectEnd;
+        using typename T::ObjectType;
     };
 
     template<typename T>
     concept ConstRangedArrayLike = SimpleRangedArrayLike<T> &&
-    requires(T const& o) {
-        { o.ObjectBegin() } -> std::same_as<typename T::ObjectType const*>;
-        { o.ObjectEnd() } -> std::same_as<typename T::ObjectType const*>;
+    requires(ConstRangedArrayLikeChecker<T> const& o) {
+        { o.ObjectBegin() } -> std::same_as<typename ConstRangedArrayLikeChecker<T>::ObjectType const*>;
+        { o.ObjectEnd() } -> std::same_as<typename ConstRangedArrayLikeChecker<T>::ObjectType const*>;
+    };
+
+    template<typename T>
+    struct RangedArrayLikeChecker : T {
+        using T::ObjectBegin;
+        using T::ObjectEnd;
+        using typename T::ObjectType;
     };
 
     template<typename T>
     concept RangedArrayLike = ConstRangedArrayLike<T> &&
-    requires(std::decay_t<T>& o) {
-       { o.ObjectBegin() } -> std::same_as<typename T::ObjectType*>;
-       { o.ObjectEnd() } -> std::same_as<typename T::ObjectType*>;
+    requires(RangedArrayLikeChecker<std::decay_t<T>>& o) {
+       { o.ObjectBegin() } -> std::same_as<typename RangedArrayLikeChecker<std::decay_t<T>>::ObjectType*>;
+       { o.ObjectEnd() } -> std::same_as<typename RangedArrayLikeChecker<std::decay_t<T>>::ObjectType*>;
     };
 }
 #endif

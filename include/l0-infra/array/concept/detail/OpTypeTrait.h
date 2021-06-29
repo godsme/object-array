@@ -7,7 +7,7 @@
 
 namespace _concept::detail {
     template<typename T>
-    struct OpTypeTrait {
+    struct OpTypeTrait : T {
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
 

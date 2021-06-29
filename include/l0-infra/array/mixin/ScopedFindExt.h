@@ -11,7 +11,7 @@
 #include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<__cOnCePt(ConstRangedArrayLike) T>
+    template<typename T>
     class ScopedFindExt : public T {
         using Self = T;
     public:

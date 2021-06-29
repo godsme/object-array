@@ -15,9 +15,17 @@
 
 namespace _concept {
     template<typename T>
-    concept SimpleFind = requires(T const& o) {
-        { o.FindIndex(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<typename T::Maybe>;
-        { o.Find(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<typename T::ObjectType const*>;
+    struct SimpleFindChecker : T {
+        using T::FindIndex;
+        using T::Find;
+        using typename T::Maybe;
+        using typename T::ObjectType;
+    };
+
+    template<typename T>
+    concept SimpleFind = requires(SimpleFindChecker<T> const& o) {
+        { o.FindIndex(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<typename SimpleFindChecker<T>::Maybe>;
+        { o.Find(std::declval<typename detail::PredTypeTrait<T>::Type>()) } -> std::same_as<typename SimpleFindChecker<T>::ObjectType const*>;
     };
 }
 #endif

@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_OBJECTINDEX_H
 
 namespace mixin {
-    template<typename T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     class ObjectIndex : public T {
         using Self = T;
     public:

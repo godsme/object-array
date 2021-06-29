@@ -14,7 +14,13 @@
 
 namespace _concept {
     template<typename T>
-    concept ElemVisitor = requires(T const& o, typename T::SizeType n) {
+    struct ElemVisitorChecker : T {
+        using T::Visit;
+        using typename T::SizeType;
+    };
+
+    template<typename T>
+    concept ElemVisitor = requires(ElemVisitorChecker<T> const& o, typename ElemVisitorChecker<T>::SizeType n) {
         { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::ConstPredType&&>(), n) } -> std::same_as<void>;
         { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::ConstIndexPredType&&>(), n) } -> std::same_as<void>;
         { o.template Visit<true>(std::declval<typename detail::OpTypeTrait<T>::PredType&&>(), n) } -> std::same_as<void>;

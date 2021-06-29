@@ -13,12 +13,20 @@
 #include <concepts>
 
 namespace _concept {
+
+    template<typename T>
+    struct ConstArrayLikeChecker : T {
+        using T::GetRange;
+        using typename T::SizeType;
+    };
+
     template<typename T>
     concept ConstArrayLike = SimpleConstArrayLike<T> &&
-    requires(T const& o) {
-        { o.GetRange() } -> std::same_as<typename T::SizeType>;
+    requires(ConstArrayLikeChecker<T> const& o) {
+        { o.GetRange() } -> std::same_as<typename ConstArrayLikeChecker<T>::SizeType>;
     };
 }
+
 #endif
 
 #endif //OBJECT_ARRAY_ARRAYLIKE_H

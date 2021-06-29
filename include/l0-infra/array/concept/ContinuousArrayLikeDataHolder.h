@@ -14,15 +14,26 @@
 
 namespace _concept {
     template<typename T>
+    struct ConstContinuousArrayLikeDataHolderChecker : T {
+        using T::Num;
+    };
+
+    template<typename T>
     concept ConstContinuousArrayLikeDataHolder = SimpleArrayLike<T> &&
-    requires(T const& o) {
+    requires(ConstContinuousArrayLikeDataHolderChecker<T> const& o) {
         { o.Num() } -> std::same_as<typename T::SizeType>;
     };
 
     template<typename T>
+    struct ContinuousArrayLikeDataHolderChecker : T {
+        using T::Num;
+        using typename T::SizeType;
+    };
+
+    template<typename T>
     concept ContinuousArrayLikeDataHolder = ConstContinuousArrayLikeDataHolder<T> &&
-    requires(T& o) {
-        { o.Num() } -> std::same_as<typename T::SizeType&>;
+    requires(ContinuousArrayLikeDataHolderChecker<T> & o) {
+        { o.Num() } -> std::same_as<typename ContinuousArrayLikeDataHolderChecker<T>::SizeType&>;
     };
 }
 #endif

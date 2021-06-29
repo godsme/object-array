@@ -10,18 +10,34 @@
 #include <concepts>
 
 namespace _concept {
+
+    template<typename T>
+    struct ConstIndexedContainerChecker : T {
+        using T::GetObj;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+    };
+
     template<typename T>
     concept ConstIndexedContainer =
-    requires(T const& o) {
-        { o.GetObj(std::declval<typename T::SizeType>()) } -> std::same_as<typename T::ObjectType const&>;
+    requires(ConstIndexedContainerChecker<T> const& o) {
+        { o.GetObj(std::declval<typename ConstIndexedContainerChecker<T>::SizeType>()) } -> std::same_as<typename ConstIndexedContainerChecker<T>::ObjectType const&>;
+    };
+
+    template<typename T>
+    struct IndexedContainerChecker : T {
+        using T::GetObj;
+        using typename T::SizeType;
+        using typename T::ObjectType;
     };
 
     template<typename T>
     concept IndexedContainer = ConstIndexedContainer<T> &&
-    requires(std::decay_t<T>& o) {
-        { o.GetObj(std::declval<typename T::SizeType>()) } -> std::same_as<typename T::ObjectType&>;
+    requires(IndexedContainerChecker<std::decay_t<T>>& o) {
+        { o.GetObj(std::declval<typename IndexedContainerChecker<std::decay_t<T>>::SizeType>()) } -> std::same_as<typename IndexedContainerChecker<std::decay_t<T>>::ObjectType&>;
     };
 }
+
 #endif
 
 #endif //OBJECT_ARRAY_INDEXEDCONTAINER_H

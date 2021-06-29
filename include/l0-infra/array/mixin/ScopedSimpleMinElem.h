@@ -8,7 +8,7 @@
 #include <l0-infra/array/mixin/ScopedMinElem.h>
 
 namespace mixin {
-    template<__cOnCePt(ConstScopedRangedArrayLike) T>
+    template<typename T>
     class ScopedSimpleMinElem : public T {
         using Self = T;
 

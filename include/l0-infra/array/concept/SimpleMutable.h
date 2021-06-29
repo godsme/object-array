@@ -17,11 +17,20 @@
 
 namespace _concept {
     template<typename T>
-    concept SimpleMutable = requires(T& o) {
-        { o.Erase(typename T::SizeType{}) };
-        { o.Append() } -> std::same_as<typename T::ObjectType*>;
-        { o.Append(std::declval<typename T::ObjectType const&>()) } -> std::same_as<typename T::ObjectType*>;
-        { o.Append(std::declval<typename T::ObjectType&&>()) } -> std::same_as<typename T::ObjectType*>;
+    struct SimpleMutableChecker : T {
+        using T::Erase;
+        using T::Append;
+
+        using typename T::SizeType;
+        using typename T::ObjectType;
+    };
+
+    template<typename T>
+    concept SimpleMutable = requires(SimpleMutableChecker<std::decay_t<T>>& o) {
+        { o.Erase(typename SimpleMutableChecker<std::decay_t<T>>::SizeType{}) };
+        { o.Append() } -> std::same_as<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType*>;
+        { o.Append(std::declval<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType const&>()) } -> std::same_as<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType*>;
+        { o.Append(std::declval<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType&&>()) } -> std::same_as<typename SimpleMutableChecker<std::decay_t<T>>::ObjectType*>;
     };
 
     template<typename T>

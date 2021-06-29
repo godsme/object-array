@@ -18,9 +18,43 @@ namespace detail {
             mixin::RValueIndexedViewFactory,
             mixin::RValueSortViewFactory>;
 
+    using ArrayViewMixins = ::mixin::Mixins<
+            mixin::ContinuousArrayLike,
+            mixin::RangedArray,
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::__PublicMixinDelimiter__,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::SimpleForEach,
+            mixin::SimpleForEachExt,
+            mixin::ScopedFindExt,
+            mixin::ScopedForEachExt,
+            mixin::SimpleMinElem,
+            mixin::SimpleMinElemExt,
+            mixin::ScopedMinElemExt,
+            mixin::RValueRangedViewFactory,
+            mixin::RValueScopedViewFactory,
+            mixin::RValueIndexedViewFactory,
+            mixin::RValueSortViewFactory,
+            mixin::__MutableMixinDelimiter__,
+            mixin::SimpleMutate,
+            mixin::ReplaceExt,
+            mixin::AppendExt,
+            mixin::EraseExt,
+            mixin::ScopedCleanUp,
+            mixin::RangedClear,
+            mixin::RValueArraySort,
+            mixin::ArraySortExt>;
+
     using ConstArrayViewMixins = detail::ContinousReadOnlyMixins::Concat<ArrayViewSpecifiedMixins>;
-    using ArrayViewMixins = detail::ContinuousArrayMixin::Concat<ArrayViewSpecifiedMixins>
-            ::Extends<mixin::RValueArraySort, mixin::ArraySortExt>;
 
     template<typename T, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
     using ConstArrayView = ConstArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ELEM, ORDERED>>;
