@@ -388,3 +388,141 @@ CRTP
 之间是那样的关系。
 
 .. image:: images/overview.png
+
+可见性
+--------------------
+
+我们的每一种 `array/view` 都组合了多个 `mixin` ，但并不是所有的 `mixin` 所提供的接口都应该是用户可见的。
+
+所以我们就面临一个问题：如何让用户仅仅可以访问我们允许他访问的接口？
+
+一种最直接的办法是，把所有的 `mixin` 组合都首先设置为 ``protected`` 或 ``private`` ，然后在最下面的类通过 ``using`` 指令
+来暴露我们想暴露的接口。
+
+这样的方法简单直接，易于控制。但缺点也是显而易见的：
+
+首先，我们需要手工 ``using`` 每一个方法。这不仅会导致在不同的 `array/view` 上
+重复的代码，并且还经常在维护过程中会导致遗漏。
+
+更重要的是，当我们手动 ``using`` 了之后，就没办法自动禁止掉一些接口。这一点我们会在后面讲到。
+
+因而，我们希望能有一种自动措施：所有被声明为 ``public`` 的 `mixin` ，其 ``public`` 接口会自动暴露给用户；否则，将自动隐藏。
+
+为了达到这一目的，一种方法是把所有 `mixin` 全部水平继承，这样就可以精准的控制每一个 `mixin` 的可见性。
+
+但水平继承的缺点是：首先，你很难有一种不带来负担的方式，精准的指明 `mixin` 间的依赖关系；其次，每一个 `mixin` 的实现都要依赖 `CRTP` ，
+这回导致 `mixin` 的编写工作量增加；另外，虽然并不是特别重要，但由于水平铺开的所导致的类型名字，比垂直继承所导致的类型名字要显著增长，一旦
+编译错误，满屏的类型信息会导致排错时间增长。
+
+因而，我们还是希望回到垂直继承的路上。垂直继承的特点是，你一旦 `private` 或者 `protected` 继承了某一个 `mixin` ，那么所有之前的 `mixin` 都
+变得让用户不可访问。
+
+我们无力改变这一点，但我们可以通过把所有不对用户可见的 `mixin` 放在前面即可解决。
+
+那么紧接着的问题是：如何指明 **不可访问** 与 **可访问** `mixin` 的边界？
+
+当然这有很多种方案。但其中最好的方案一定是完全正交的方案：即完全不用修改任何 `mixin` 代码，仅仅靠简单的独立声明就可以做到。
+
+于是有了这样的方案：
+
+.. code-block:: c++
+
+   template<typename T>
+   struct ___public_mixin_delimiter___ : protected T {};
+
+就这么一个简单的仿 `mixin` ，放在整个 `mixin` 列表里即可。比如：
+
+.. code-block:: c++
+
+   using SliceMixins = mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::ViewedArray,
+            mixin::___public_mixin_delimiter___, // 分界线
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            // more mixins ...
+            mixin::ArraySortExt
+          >
+
+有它所画出的分界线，之上的全是对用户不可见的内部 `mixin` ，其后则是对用户可见的 `public mixin` ，而其它 `mixin` 对此一共所知。
+
+存在性
+--------------------
+
+还有另外一个更严重的问题是 **存在性** 问题：一些接口，尤其是 `non-const` 的修改相关的接口，当 `array/view` 本身的内部数据是
+不可修改时（但 `array` 本身是 `non-const` 的），那些修改对象状态相关的接口就不应该存在。比如：
+
+.. code-block:: c++
+
+   ObjectArray<int const, 10> array;
+   // array itself is non-const, but its element type is const.
+
+对于这个定义中的 `array` 本身不是 ``const`` 对象，按照 `C++` 语义，所有的 `non-const` 接口它都可以调用。
+但是，由于其内部的 `array` 是 `const` 的，事实上真的修改它们又是不允许的。这样的代码最终必然会导致编译错误。
+
+所以，最好的方法是： 一旦发现 ``ObjectArray<T, N>`` 内部的数据是不可修改的，那么所有 `non-const` 接口都应该
+自动消失。对于我们基于 `mixin` 组合的设计而言，则意味着那些相关的 `mixin` 都自动消失。
+
+但如何做到？是否像上一节所讨论的 **可访问性** 一样，存在一个非侵入的、完全正交的声明式方案？
+
+答案是 `YES` ：
+
+.. code-block:: c++
+
+    template<typename T>
+    struct ___mutable_mixin_delimiter___ final : T {
+        constexpr static bool IS_CONST = T::CONST;
+    };
+
+其中 ``T`` ，即继承线上，之前的任何一个 `mixin` 有义务来说明自己所持的数组是否是一个 `const` 的。
+
+而这个仿 `mixin` 的诀窍则在于将自己设为 ``final`` 的。其语义为：我不再允许任何继承，我就是最后一个 `mixin` 。
+
+而 `mixin composer` 一旦发现某个 `mixin` 是 ``final`` 的，则查看其给出的常量 `IS_CONST` ：
+如果为真，则放弃组合后面所有的 `mixin` ；如果为 ``false`` ，则继续组合后面的 `mixin` 。但无论是
+哪一种情况，这个仿 `mixin` 都会被丢弃（否则 ``final`` 会导致继承真的被禁止了），它的存在只是给
+`mixin composer` 一个指示而已。一旦职责完成，就不再有存在的必要性。
+
+所以，对于任何一个可读写的 `array/view` ，它的 `mixin` 列表都会存在这两个 `delimiter` 。比如：
+
+.. code-block:: c++
+
+   using SliceMixins = mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::ViewedArray,
+            mixin::___public_mixin_delimiter___,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::SimpleForEach,
+            mixin::SimpleForEachExt,
+            mixin::RValueScopedViewFactory,
+            mixin::RValueIndexedViewFactory,
+            mixin::RValueSortViewFactory,
+            mixin::ScopedFindExt,
+            mixin::ScopedForEachExt,
+            mixin::SimpleMinElem,
+            mixin::SimpleMinElemExt,
+            mixin::ScopedMinElemExt,
+            mixin::___mutable_mixin_delimiter___,
+            mixin::ViewAppend,
+            mixin::AppendExt,
+            mixin::RangedReplace,
+            mixin::ReplaceExt,
+            mixin::RValueArraySort,
+            mixin::ArraySortExt>;
+

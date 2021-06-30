@@ -26,6 +26,7 @@
 #include <l0-infra/array/mixin/ScopedMinElemExt.h>
 
 namespace view::detail {
+
     using SliceMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::ObjectIndex,
