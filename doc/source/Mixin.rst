@@ -526,3 +526,5 @@ CRTP
             mixin::RValueArraySort,
             mixin::ArraySortExt>;
 
+简洁，完美，搞定!!!
+
