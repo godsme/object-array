@@ -52,7 +52,6 @@ namespace detail {
             mixin::SimpleMinElemExt,
             mixin::ScopedMinElemExt,
             mixin::RangedViewFactory,
-            mixin::SortViewFactory,
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory,
             mixin::SortViewFactory,
