@@ -14,7 +14,6 @@
 #include <l0-infra/array/mixin/ScopedCleanUp.h>
 
 namespace detail {
-
     using ArrayViewMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
@@ -53,7 +52,9 @@ namespace detail {
 
     template<typename T, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
     using ConstArrayView = ArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ELEM, ORDERED>>;
+}
 
+namespace detail {
     template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER, bool ORDERED, bool = std::is_const_v<T>>
     struct ArrayViewTrait {
         using Type = ConstArrayView<T, MAX_NUM, WRAPPER, ORDERED>;
