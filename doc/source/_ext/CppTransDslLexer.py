@@ -17,7 +17,7 @@ class CppTransDslLexer(CppLexer):
                           'PartialSort', 'StableSort', 'Exists', 'Append', 'At', 'First', 'Last',
                           'Erase', 'GetNum', 'Any', 'All', 'None', 'Replace', 'GetOccupied', 'IsPresent',
                           'Remove', 'Clear', 'ClearFrom', 'ClearUntil', 'RemoveBy', 'CleanUp', 'CleanUpEx', 'CleanUpBy'))
-    CONST_KEYWORDS = set(('ASSERT', 'UNKNOWN_EVENT', 'FAILED',
+    CONST_KEYWORDS = set(('ASSERT', '___public_mixin_delimiter___', '___mutable_mixin_delimiter___',
                           'DEF_SIMPLE_ASYNC_ACTION'))
 
     def get_tokens_unprocessed(self, text):
