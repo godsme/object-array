@@ -24,9 +24,9 @@ namespace _concept {
         };
 
         template<typename T>
-        concept SimpleMinElem = requires(T const& o) {
-            { o.MinElemIndex(std::declval<typename detail::LessTypeTrait<T>::Type&&>()) } -> std::same_as<typename T::Maybe>;
-            { o.MinElem(std::declval<typename detail::LessTypeTrait<T>::Type&&>()) } -> std::same_as<typename T::ObjectType const*>;
+        concept SimpleMinElem = requires(T const& o, typename detail::LessTypeTrait<T> trait) {
+            { o.MinElemIndex(trait.less) } -> std::same_as<typename T::Maybe>;
+            { o.MinElem(trait.less) } -> std::same_as<typename T::ObjectType const*>;
         };
     }
 

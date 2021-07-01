@@ -9,8 +9,7 @@ namespace _concept::detail {
     template<typename T>
     struct LessTypeTrait {
         using ObjectType = typename T::ObjectType;
-        constexpr static auto pred = [](ObjectType const&, ObjectType const&) -> bool { return true; };
-        using Type = decltype(pred);
+        constexpr static auto less = [](ObjectType const&, ObjectType const&) -> bool { return true; };
     };
 }
 

@@ -27,11 +27,11 @@ namespace _concept {
         };
 
         template<typename T>
-        concept SimpleMutable = requires(T& o) {
+        concept SimpleMutable = requires(T& o, typename T::ObjectType const& obj, typename T::ObjectType&& r_obj) {
             { o.Erase(typename T::SizeType{}) };
             { o.Append() } -> std::same_as<typename T::ObjectType*>;
-            { o.Append(std::declval<typename T::ObjectType const&>()) } -> std::same_as<typename T::ObjectType*>;
-            { o.Append(std::declval<typename T::ObjectType&&>()) } -> std::same_as<typename T::ObjectType*>;
+            { o.Append(obj) } -> std::same_as<typename T::ObjectType*>;
+            { o.Append(r_obj) } -> std::same_as<typename T::ObjectType*>;
         };
     }
 

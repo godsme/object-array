@@ -22,8 +22,8 @@ namespace _concept {
         };
 
         template<typename T>
-        concept ConstIndexedContainer_ = requires(T const& o) {
-            { o.GetObj(std::declval<typename T::SizeType>()) } -> std::same_as<typename T::ObjectType const&>;
+        concept ConstIndexedContainer_ = requires(T const& o, typename T::SizeType n) {
+            { o.GetObj(n) } -> std::same_as<typename T::ObjectType const&>;
         };
     }
 

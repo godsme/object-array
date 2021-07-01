@@ -10,7 +10,6 @@ namespace _concept::detail {
     struct PredTypeTrait {
         using ObjectType = typename T::ObjectType;
         constexpr static auto pred = [](ObjectType const&) -> bool { return true; };
-        using Type = decltype(pred);
     };
 }
 
