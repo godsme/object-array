@@ -22,21 +22,21 @@ namespace _concept {
         };
 
         template<typename T>
-        concept ElemVisitor_ = requires(T const& o, typename T::SizeType n) {
-            { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::ConstPredType&&>(), n) } -> std::same_as<void>;
-            { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::ConstIndexPredType&&>(), n) } -> std::same_as<void>;
-            { o.template Visit<true>(std::declval<typename detail::OpTypeTrait<T>::PredType&&>(), n) } -> std::same_as<void>;
-            { o.template Visit<true>(std::declval<typename detail::OpTypeTrait<T>::IndexPredType&&>(), n) } -> std::same_as<void>;
+        concept ElemVisitor_ = requires(T const& o, typename T::SizeType n, typename detail::OpTypeTrait<T>&& trait) {
+            { o.template Visit<false>(trait.CONST_PRED, n) } -> std::same_as<void>;
+            { o.template Visit<false>(trait.CONST_INDEX_PRED, n) } -> std::same_as<void>;
+            { o.template Visit<true>(trait.PRED, n) } -> std::same_as<void>;
+            { o.template Visit<true>(trait.INDEX_PRED, n) } -> std::same_as<void>;
 
-            { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::BoolConstPredType&&>(), n) } -> std::same_as<bool>;
-            { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::BoolConstIndexPredType&&>(), n) } -> std::same_as<bool>;
-            { o.template Visit<true>(std::declval<typename detail::OpTypeTrait<T>::BoolPredType&&>(), n) } -> std::same_as<bool>;
-            { o.template Visit<true>(std::declval<typename detail::OpTypeTrait<T>::BoolIndexPredType&&>(), n) } -> std::same_as<bool>;
+            { o.template Visit<false>(trait.BOOL_CONST_PRED, n) } -> std::same_as<bool>;
+            { o.template Visit<false>(trait.BOOL_CONST_INDEX_PRED, n) } -> std::same_as<bool>;
+            { o.template Visit<true>(trait.BOOL_INDEX_PRED, n) } -> std::same_as<bool>;
+            { o.template Visit<true>(trait.BOOL_PRED, n) } -> std::same_as<bool>;
 
-            { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::StatusConstPredType&&>(), n) } -> std::same_as<unsigned int>;
-            { o.template Visit<false>(std::declval<typename detail::OpTypeTrait<T>::StatusConstIndexPredType&&>(), n) } -> std::same_as<unsigned int>;
-            { o.template Visit<true>(std::declval<typename detail::OpTypeTrait<T>::StatusPredType&&>(), n) } -> std::same_as<unsigned int>;
-            { o.template Visit<true>(std::declval<typename detail::OpTypeTrait<T>::StatusIndexPredType&&>(), n) } -> std::same_as<unsigned int>;
+            { o.template Visit<false>(trait.STATUS_CONST_PRED, n) } -> std::same_as<unsigned int>;
+            { o.template Visit<false>(trait.STATUS_CONST_INDEX_PRED, n) } -> std::same_as<unsigned int>;
+            { o.template Visit<true>(trait.STATUS_INDEX_PRED, n) } -> std::same_as<unsigned int>;
+            { o.template Visit<true>(trait.STATUS_PRED, n) } -> std::same_as<unsigned int>;
         };
     }
 

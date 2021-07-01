@@ -25,21 +25,6 @@ namespace _concept::detail {
         constexpr static auto STATUS_CONST_INDEX_PRED = [](ObjectType const&, SizeType) -> unsigned int { return 7; };
         constexpr static auto STATUS_PRED = [](ObjectType&) -> unsigned int { return 10; };
         constexpr static auto STATUS_INDEX_PRED = [](ObjectType&, SizeType) -> unsigned int { return 20; };
-
-        using ConstPredType = decltype(CONST_PRED);
-        using ConstIndexPredType = decltype(CONST_INDEX_PRED);
-        using PredType = decltype(PRED);
-        using IndexPredType = decltype(INDEX_PRED);
-
-        using BoolConstPredType = decltype(BOOL_CONST_PRED);
-        using BoolConstIndexPredType = decltype(BOOL_CONST_INDEX_PRED);
-        using BoolPredType = decltype(BOOL_PRED);
-        using BoolIndexPredType = decltype(BOOL_INDEX_PRED);
-
-        using StatusConstPredType = decltype(STATUS_CONST_PRED);
-        using StatusConstIndexPredType = decltype(STATUS_CONST_INDEX_PRED);
-        using StatusPredType = decltype(STATUS_PRED);
-        using StatusIndexPredType = decltype(STATUS_INDEX_PRED);
     };
 }
 
