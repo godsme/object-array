@@ -11,6 +11,7 @@ namespace mixin {
     template<typename T>
     class ReplaceExt : public T {
         using Self = T;
+
     public:
         using typename Self::ObjectType;
         using typename Self::SizeType;

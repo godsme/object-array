@@ -12,14 +12,14 @@ namespace mixin {
     class RangedReplace : public T {
         using Self = T;
 
-    public:
-        using typename T::SizeType;
-        using typename T::ObjectType;
-
     protected:
         using Self::GetArray;
         using Self::IndexBegin;
         using Self::IndexEnd;
+
+    public:
+        using typename T::SizeType;
+        using typename T::ObjectType;
 
     public:
         template<typename ... ARGS>

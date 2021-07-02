@@ -14,6 +14,7 @@ namespace holder::detail {
     template<typename HOLDER>
     class SortViewDataHolderInterface {
         dEcL_tHiS(HOLDER);
+
         auto InitIndices() -> void {
             if constexpr(HOLDER::IS_SCOPED) {
                 This()->indices.InitWithRange(This()->GetArray(), This()->GetArray().GetScope());
@@ -21,6 +22,7 @@ namespace holder::detail {
                 This()->indices.InitWithRange(This()->GetArray());
             }
         };
+
     public:
         constexpr static auto MAX_SIZE = HOLDER::MAX_SIZE;
 
@@ -28,19 +30,19 @@ namespace holder::detail {
         using ObjectType = typename HOLDER::ObjectType;
 
         template<__lEsS_cOnCePt(LESS)>
-        auto IndicesSort(LESS&& less) -> void {
+        auto IndicesSort(LESS &&less) -> void {
             InitIndices();
             This()->indices.template Sort(__sLiCe_SoRt_LaMbDa);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto IndicesStableSort(LESS&& less) & -> void {
+        auto IndicesStableSort(LESS &&less) & -> void {
             InitIndices();
             This()->indices.template StableSort(__sLiCe_SoRt_LaMbDa);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto IndicesPartialSort(LESS&& less, SizeType n) -> SizeType {
+        auto IndicesPartialSort(LESS &&less, SizeType n) -> SizeType {
             InitIndices();
             SizeType num = This()->indices.template DoPartialSort(__sLiCe_SoRt_LaMbDa, n);
             This()->indices.ClearFrom(num);
@@ -51,14 +53,17 @@ namespace holder::detail {
             return This()->GetArray().GetObj(This()->indices[n]);
         }
 
-        auto GetObj(SizeType n) const -> ObjectType const& {
+        auto GetObj(SizeType n) const -> ObjectType const & {
             return This()->GetArray().GetObj(This()->indices[n]);
         }
 
         auto IndexBegin() const -> SizeType { return 0; }
+
         auto IndexEnd() const -> SizeType { return This()->indices.GetNum(); }
     };
+}
 
+namespace holder::detail {
     template<typename T, typename = void>
     struct IsScopedArray : std::false_type{};
 
