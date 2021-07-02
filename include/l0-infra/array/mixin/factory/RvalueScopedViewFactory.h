@@ -12,10 +12,13 @@ namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     struct RValueScopedViewFactory : ScopedViewFactory<T> {
         using Self = ScopedViewFactory<T>;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::BitMap;
+
+    protected:
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
 

@@ -11,11 +11,13 @@ namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     struct RValueRangedViewFactory : RangedViewFactory<T> {
         using Self = RangedViewFactory<T>;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::OffsetType;
 
+    protected:
         using Self::IndexBegin;
         using Self::IndexEnd;
 

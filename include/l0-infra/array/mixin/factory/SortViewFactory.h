@@ -13,7 +13,7 @@ namespace mixin {
     struct SortViewFactory : T {
         using Self = T;
 
-    public:
+    protected:
         using typename T::RangedArrayLike;
 
     public:

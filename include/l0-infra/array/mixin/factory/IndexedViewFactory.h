@@ -11,8 +11,9 @@
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     class IndexedViewFactory : public T {
-    public:
+    protected:
         using typename T::RangedArrayLike;
+
     public:
         auto WithIndex() & -> view::IndexedView::RefView<RangedArrayLike> {
             return {reinterpret_cast<RangedArrayLike&>(*this)};

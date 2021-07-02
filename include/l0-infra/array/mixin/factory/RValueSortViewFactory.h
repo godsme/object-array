@@ -12,9 +12,12 @@ namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     struct RValueSortViewFactory : SortViewFactory<T> {
         using Self = SortViewFactory<T>;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
+
+    protected:
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
 

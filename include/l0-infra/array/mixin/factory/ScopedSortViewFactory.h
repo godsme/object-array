@@ -11,7 +11,7 @@
 
 namespace mixin {
     template<__cOnCePt(SimpleScopedRangedArrayLike) T>
-    struct ScopedSortViewFactory : T {
+    class ScopedSortViewFactory : public T {
         using Self = T;
 
     protected:

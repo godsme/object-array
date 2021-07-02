@@ -13,6 +13,7 @@ namespace mixin {
     template<__cOnCePt(SimpleScopedRangedArrayLike) T>
     class IndexedScopedViewFactory : public T {
         using Self = T;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;

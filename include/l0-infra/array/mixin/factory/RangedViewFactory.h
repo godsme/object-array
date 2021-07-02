@@ -10,8 +10,9 @@
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
-    struct RangedViewFactory : T {
+    class RangedViewFactory : public T {
         using Self = T;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;

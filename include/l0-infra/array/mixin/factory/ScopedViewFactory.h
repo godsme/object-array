@@ -12,6 +12,7 @@ namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     struct ScopedViewFactory : T {
         using Self = T;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;

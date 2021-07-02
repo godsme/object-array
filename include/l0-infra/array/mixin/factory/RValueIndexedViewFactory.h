@@ -14,9 +14,12 @@ namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     class RValueIndexedViewFactory : public IndexedViewFactory<T> {
         using Self = IndexedViewFactory<T>;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
+
+    protected:
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
 
