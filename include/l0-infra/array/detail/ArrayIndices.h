@@ -17,7 +17,7 @@
 #include <l0-infra/array/mixin/ranged/RangedElemsCount.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/ranged/RangedClear.h>
-#include <l0-infra/array/mixin/mutable/ArraySort.h>
+#include <l0-infra/array/mixin/mutable/sort/ArraySort.h>
 
 namespace detail {
     using ArrayIndicesMixins = ::mixin::Mixins<

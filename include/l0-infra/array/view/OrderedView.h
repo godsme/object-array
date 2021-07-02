@@ -7,7 +7,7 @@
 
 #include <l0-infra/array/holder/OrderedViewDataHolder.h>
 #include <l0-infra/array/mixin/indexed/IndexedViewFactory.h>
-#include <l0-infra/array/mixin/simple/ArrayElemVisit.h>
+#include <l0-infra/array/mixin/detail/ArrayElemVisit.h>
 #include <l0-infra/array/mixin/scoped/ScopedFind.h>
 #include <l0-infra/array/mixin/scoped/ScopedForEach.h>
 #include <l0-infra/array/mixin/simple/IterableArrayLike.h>

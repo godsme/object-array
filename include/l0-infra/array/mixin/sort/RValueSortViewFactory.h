@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RVALUESORTVIEWFACTORY_H
 #define OBJECT_ARRAY_RVALUESORTVIEWFACTORY_H
 
-#include <l0-infra/array/mixin/SortViewFactory.h>
+#include <l0-infra/array/mixin/sort/SortViewFactory.h>
 #include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 
 namespace mixin {

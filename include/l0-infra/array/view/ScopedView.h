@@ -19,9 +19,9 @@
 #include <l0-infra/array/mixin/scoped/ScopedSimpleMinElem.h>
 #include <l0-infra/array/mixin/scoped/ScopedSortViewFactory.h>
 #include <l0-infra/array/mixin/scoped/ScopedSort.h>
-#include <l0-infra/array/mixin/mutable/RValueScopedSort.h>
+#include <l0-infra/array/mixin/mutable/sort/RValueScopedSort.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/ViewedArray.h>
+#include <l0-infra/array/mixin/detail/ViewedArray.h>
 #include <l0-infra/array/mixin/mutable/ViewAppend.h>
 #include <l0-infra/array/mixin/mutable/AppendExt.h>
 #include <l0-infra/array/mixin/scoped/ScopedReplace.h>

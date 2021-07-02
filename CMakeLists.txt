@@ -79,9 +79,9 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/iterator/detail/SimpleIterator.h
         include/l0-infra/array/iterator/ScopedIterator.h
         include/l0-infra/array/mixin/scoped/IterableScopedArrayLike.h
-        include/l0-infra/array/mixin/RValueIndexedViewFactory.h
-        include/l0-infra/array/mixin/RValueRangedViewFactory.h
-        include/l0-infra/array/mixin/RvalueScopedViewFactory.h
+        include/l0-infra/array/mixin/indexed/RValueIndexedViewFactory.h
+        include/l0-infra/array/mixin/ranged/RValueRangedViewFactory.h
+        include/l0-infra/array/mixin/scoped/RvalueScopedViewFactory.h
         include/l0-infra/base/IntOpt.h
         include/l0-infra/base/detail/DeduceIntOptional.h
         include/l0-infra/array/holder/detail/ContinuousArrayDataHolderInterface.h
@@ -97,7 +97,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/detail/ArrayScope.h
         include/l0-infra/array/holder/detail/ArrayHolderTrait.h
         include/l0-infra/array/mixin/simple/SimpleForEach.h
-        include/l0-infra/array/mixin/simple/ArrayElemVisit.h
+        include/l0-infra/array/mixin/detail/ArrayElemVisit.h
         include/l0-infra/array/concept/Op.h
         include/l0-infra/array/mixin/detail/ForEachCodeBlock.h
         include/l0-infra/array/concept/ElemVisitor.h
@@ -124,15 +124,15 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/concept/detail/LessTypeTrait.h
         include/l0-infra/array/detail/config.h
         include/l0-infra/array/detail/ConceptDef.h
-        include/l0-infra/array/mixin/mutable/ArraySort.h
+        include/l0-infra/array/mixin/sort/ArraySort.h
         include/l0-infra/base/SizeOfArray.h
         include/l0-infra/array/holder/ArrayIndicesDataHolder.h
         include/l0-infra/array/detail/ArrayIndices.h
         include/l0-infra/array/holder/SortViewDataHolder.h
         include/l0-infra/array/view/SortView.h
-        include/l0-infra/array/mixin/mutable/ArraySortExt.h
-        include/l0-infra/array/mixin/SortViewFactory.h
-        include/l0-infra/array/mixin/RValueSortViewFactory.h
+        include/l0-infra/array/mixin/sort/ArraySortExt.h
+        include/l0-infra/array/mixin/sort/SortViewFactory.h
+        include/l0-infra/array/mixin/sort/RValueSortViewFactory.h
         include/l0-infra/array/mixin/scoped/ScopedSortViewFactory.h
         include/l0-infra/array/mixin/detail/ValueRangedArray.h
         include/l0-infra/array/iterator/IndicesRandomIterator.h
@@ -142,8 +142,8 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/holder/OrderedViewDataHolder.h
         include/l0-infra/array/view/OrderedView.h
         include/l0-infra/array/view/OrderedScopedView.h
-        include/l0-infra/array/mixin/RValueArraySort.h
-        include/l0-infra/array/mixin/mutable/RValueScopedSort.h
+        include/l0-infra/array/mixin/sort/RValueArraySort.h
+        include/l0-infra/array/mixin/sort/RValueScopedSort.h
         include/l0-infra/array/mixin/scoped/ScopedRangedArray.h
         include/l0-infra/array/holder/ProxyScopedViewDataHolder.h
         include/l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h
@@ -171,9 +171,9 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/detail/___public_mixin_delimiter___.h
         include/l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h
         include/l0-infra/array/mixin/simple/ArrayEquality.h
-        include/l0-infra/array/mixin/mutable/IndicesBasedSort.h
+        include/l0-infra/array/mixin/sort/IndicesBasedSort.h
         include/l0-infra/array/mixin/ranged/RangedReplace.h
-        include/l0-infra/array/mixin/ViewedArray.h
+        include/l0-infra/array/mixin/detail/ViewedArray.h
         include/l0-infra/array/mixin/indexed/ObjectIndex.h
         include/l0-infra/array/mixin/mutable/ReplaceExt.h
         include/l0-infra/array/mixin/mutable/AppendExt.h

@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_OBJECTARRAY_H
 
 #include <l0-infra/array/holder/ObjectArrayDataHolder.h>
-#include <l0-infra/array/mixin/SortViewFactory.h>
+#include <l0-infra/array/mixin/mutable/sort/SortViewFactory.h>
 #include <l0-infra/array/mixin/simple/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/indexed/ObjectIndex.h>

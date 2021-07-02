@@ -15,7 +15,7 @@
 #include <l0-infra/array/mixin/indexed/IndexedRefAccessor.h>
 #include <l0-infra/array/mixin/simple/ByIndexAccessor.h>
 #include <l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h>
-#include <l0-infra/array/mixin/simple/ArrayElemVisit.h>
+#include <l0-infra/array/mixin/detail/ArrayElemVisit.h>
 #include <l0-infra/array/mixin/scoped/ScopedSimpleForEach.h>
 #include <l0-infra/array/mixin/simple/SimpleForEachExt.h>
 #include <l0-infra/array/mixin/scoped/FullScopedElemCount.h>

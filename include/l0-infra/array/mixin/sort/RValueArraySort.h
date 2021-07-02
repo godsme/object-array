@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RVALUEARRAYSORT_H
 #define OBJECT_ARRAY_RVALUEARRAYSORT_H
 
-#include <l0-infra/array/mixin/mutable/ArraySort.h>
+#include <l0-infra/array/mixin/sort/ArraySort.h>
 #include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 
 namespace mixin {
