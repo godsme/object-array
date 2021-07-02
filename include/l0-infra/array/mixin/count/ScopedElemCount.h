@@ -11,13 +11,16 @@ namespace mixin {
     template<__cOnCePt(Scoped) T>
     class ScopedElemCount : public T {
         using Self = T;
-    public:
-        using typename T::SizeType;
-        using typename T::ObjectType;
-        using typename T::BitMap;
 
+    protected:
         using Self::GetScope;
 
+    public:
+        using typename Self::SizeType;
+        using typename Self::ObjectType;
+        using typename Self::BitMap;
+
+    public:
         auto GetNum() const -> SizeType {
             return GetScope().count();
         }

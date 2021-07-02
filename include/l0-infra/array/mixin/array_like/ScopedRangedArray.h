@@ -9,9 +9,10 @@
 
 namespace mixin {
     template<__cOnCePt(SimpleScopedRangedArrayLike) T>
-    struct ScopedRangedArray : T {
+    class ScopedRangedArray : public T {
         using Self = T;
 
+    public:
         using Self::GetScope;
         using Self::IndexBegin;
         using Self::IndexEnd;

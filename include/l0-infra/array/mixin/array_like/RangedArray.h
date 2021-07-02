@@ -12,11 +12,15 @@ namespace mixin {
     template<__cOnCePt(ConstArrayLike) T>
     class RangedArray : public IndexedContainer<T> {
         using Self = IndexedContainer<T>;
+
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
+
+    protected:
         using RangedArrayLike = RangedArray;
 
+    public:
         auto IndexBegin() const -> SizeType { return 0; }
         auto IndexEnd() const -> SizeType { return Self::GetRange(); }
     };

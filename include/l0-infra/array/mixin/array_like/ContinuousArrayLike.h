@@ -10,8 +10,9 @@
 
 namespace mixin {
     template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
-    struct ContinuousArrayLike : T {
+    class ContinuousArrayLike : public T {
         using Self = T;
+
     public:
         using typename T::SizeType;
         using typename T::ElemType;

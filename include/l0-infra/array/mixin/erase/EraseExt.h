@@ -18,12 +18,10 @@ namespace mixin {
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
+        using Self::GetObjIndex;
 
     public:
         using typename Self::ObjectType;
-
-    protected:
-        using Self::GetObjIndex;
 
     public:
         using Self::Erase;
@@ -42,7 +40,7 @@ namespace mixin {
         template<__sImPlE_pReD_cOnCePt(PRED)>
         auto CleanUpBy(PRED&& pred) -> void {
             if(IndexBegin() == IndexEnd()) return;
-            for(int i = IndexEnd() - 1; i >=IndexBegin(); --i) {
+            for(int i = IndexEnd() - 1; i >= IndexBegin(); --i) {
                 if(pred(GetObj(i))) Self::Erase(i);
             }
         }

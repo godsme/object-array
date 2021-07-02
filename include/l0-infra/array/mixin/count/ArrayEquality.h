@@ -34,4 +34,5 @@ namespace mixin {
         }
     };
 }
+
 #endif //OBJECT_ARRAY_ARRAYEQUALITY_H

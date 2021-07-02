@@ -17,6 +17,8 @@ namespace mixin {
     public:
         using typename Self::SizeType;
         using typename Self::ObjectType;
+
+    protected:
         using Self::GetObj;
 
     protected:
@@ -28,6 +30,7 @@ namespace mixin {
                 return GetObj(n);
             }
         }
+
     public:
         template<bool TO_NON_CONST, __oP_cOnCePt(OP)>
         auto Visit(OP &&op, SizeType i) const -> auto {

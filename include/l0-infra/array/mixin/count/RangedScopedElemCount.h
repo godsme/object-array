@@ -11,9 +11,11 @@ namespace mixin {
     template<__cOnCePt(Scoped) T>
     class RangedScopedElemCount : public ScopedElemCount<T> {
         using Self = T;
+
     public:
         using typename T::BitMap;
 
+    protected:
         using Self::GetScope;
         using Self::IndexBegin;
         using Self::IndexEnd;

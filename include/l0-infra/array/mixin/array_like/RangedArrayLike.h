@@ -11,16 +11,19 @@
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
-    struct RangedArrayLike : T {
+    class RangedArrayLike : public T {
         using Self = T;
 
+    public:
         using typename T::SizeType;
         using typename T::ObjectType;
 
+    public:
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
 
+    public:
         auto ObjectBegin() const -> ObjectType const* {
             return &GetObj(IndexBegin());
         }

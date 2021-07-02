@@ -15,7 +15,6 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
-        using typename T::Trait;
 
         static constexpr auto MAX_SIZE = T::MAX_SIZE;
 
@@ -23,6 +22,8 @@ namespace mixin {
         using Self::GetObj;
         using Self::Num;
         using Self::Elems;
+
+        using typename T::Trait;
 
     private:
         auto DoErase(SizeType i) -> void {

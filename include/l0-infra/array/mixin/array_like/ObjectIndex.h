@@ -9,6 +9,7 @@ namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     class ObjectIndex : public T {
         using Self = T;
+
     public:
         using typename Self::ObjectType;
         using typename Self::SizeType;
