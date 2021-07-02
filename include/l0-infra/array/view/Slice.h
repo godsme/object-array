@@ -15,12 +15,12 @@
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/mutable/RangedReplace.h>
+#include <l0-infra/array/mixin/erase/RangedReplace.h>
 #include <l0-infra/array/mixin/array_like/ViewedArray.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/mutable/ViewAppend.h>
-#include <l0-infra/array/mixin/mutable/AppendExt.h>
-#include <l0-infra/array/mixin/mutable/ReplaceExt.h>
+#include <l0-infra/array/mixin/append/ViewAppend.h>
+#include <l0-infra/array/mixin/append/AppendExt.h>
+#include <l0-infra/array/mixin/replace/ReplaceExt.h>
 #include <l0-infra/array/mixin/find/ScopedFindExt.h>
 #include <l0-infra/array/mixin/foreach/ScopedForEachExt.h>
 #include <l0-infra/array/mixin/minmax/ScopedMinElemExt.h>

@@ -9,9 +9,9 @@
 #include <l0-infra/array/holder/ArrayViewDataHolder.h>
 #include <l0-infra/array/mixin/factory/RValueRangedViewFactory.h>
 #include <l0-infra/array/mixin/factory/SortViewFactory.h>
-#include <l0-infra/array/mixin/mutable/SimpleMutate.h>
-#include <l0-infra/array/mixin/mutable/EraseExt.h>
-#include <l0-infra/array/mixin/mutable/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/erase/SimpleMutate.h>
+#include <l0-infra/array/mixin/erase/EraseExt.h>
+#include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 
 namespace detail {
     using ArrayViewMixins = ::mixin::Mixins<

@@ -16,7 +16,7 @@
 #include <l0-infra/array/mixin/accessor/ByIndexAccessor.h>
 #include <l0-infra/array/mixin/count/RangedElemsCount.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/mutable/RangedClear.h>
+#include <l0-infra/array/mixin/erase/RangedClear.h>
 #include <l0-infra/array/mixin/sort/ArraySort.h>
 
 namespace detail {

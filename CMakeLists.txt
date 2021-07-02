@@ -105,10 +105,10 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/foreach/SimpleForEachExt.h
         include/l0-infra/array/mixin/foreach/ScopedForEach.h
         include/l0-infra/array/mixin/foreach/ScopedForEachExt.h
-        include/l0-infra/array/mixin/mutable/SimpleMutate.h
-        include/l0-infra/array/mixin/mutable/RangedClear.h
-        include/l0-infra/array/mixin/mutable/ScopedCleanUp.h
-        include/l0-infra/array/mixin/mutable/EraseExt.h
+        include/l0-infra/array/mixin/erase/SimpleMutate.h
+        include/l0-infra/array/mixin/erase/RangedClear.h
+        include/l0-infra/array/mixin/erase/ScopedCleanUp.h
+        include/l0-infra/array/mixin/erase/EraseExt.h
         include/l0-infra/array/concept/SimpleMutable.h
         include/l0-infra/array/mixin/minmax/SimpleMinElem.h
         include/l0-infra/array/concept/Less.h
@@ -172,13 +172,13 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h
         include/l0-infra/array/mixin/count/ArrayEquality.h
         include/l0-infra/array/mixin/sort/IndicesBasedSort.h
-        include/l0-infra/array/mixin/mutable/RangedReplace.h
+        include/l0-infra/array/mixin/erase/RangedReplace.h
         include/l0-infra/array/mixin/array_like/ViewedArray.h
         include/l0-infra/array/mixin/array_like/ObjectIndex.h
-        include/l0-infra/array/mixin/mutable/ReplaceExt.h
-        include/l0-infra/array/mixin/mutable/AppendExt.h
-        include/l0-infra/array/mixin/mutable/ViewAppend.h
-        include/l0-infra/array/mixin/mutable/ScopedReplace.h include/l0-infra/array/holder/detail/ViewDataHolder.h)
+        include/l0-infra/array/mixin/replace/ReplaceExt.h
+        include/l0-infra/array/mixin/append/AppendExt.h
+        include/l0-infra/array/mixin/append/ViewAppend.h
+        include/l0-infra/array/mixin/replace/ScopedReplace.h include/l0-infra/array/holder/detail/ViewDataHolder.h)
 
 add_executable(object_array_test test/ut/catch.cpp ${OBJ_ARRAY_SRC})
 add_executable(object_array_it

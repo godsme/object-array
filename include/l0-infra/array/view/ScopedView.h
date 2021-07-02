@@ -22,10 +22,10 @@
 #include <l0-infra/array/mixin/sort/RValueScopedSort.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/array_like/ViewedArray.h>
-#include <l0-infra/array/mixin/mutable/ViewAppend.h>
-#include <l0-infra/array/mixin/mutable/AppendExt.h>
-#include <l0-infra/array/mixin/mutable/ScopedReplace.h>
-#include <l0-infra/array/mixin/mutable/ReplaceExt.h>
+#include <l0-infra/array/mixin/append/ViewAppend.h>
+#include <l0-infra/array/mixin/append/AppendExt.h>
+#include <l0-infra/array/mixin/replace/ScopedReplace.h>
+#include <l0-infra/array/mixin/replace/ReplaceExt.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<
