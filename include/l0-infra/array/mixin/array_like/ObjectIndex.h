@@ -5,6 +5,9 @@
 #ifndef OBJECT_ARRAY_OBJECTINDEX_H
 #define OBJECT_ARRAY_OBJECTINDEX_H
 
+#include <l0-infra/array/detail/ConceptDef.h>
+#include <l0-infra/array/concept/RangedArrayLike.h>
+
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
     class ObjectIndex : public T {

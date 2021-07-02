@@ -5,6 +5,7 @@
 #ifndef OBJECT_ARRAY_SIMPLEMUTATE_H
 #define OBJECT_ARRAY_SIMPLEMUTATE_H
 
+#include <l0-infra/array/detail/ConceptDef.h>
 #include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
 
 namespace mixin {

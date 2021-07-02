@@ -11,7 +11,7 @@
 #include <l0-infra/base/DeduceSizeType.h>
 
 namespace holder::detail {
-    template<typename OBJ, std::size_t MAX_NUM>
+    template<typename OBJ, std::size_t MAX_NUM, bool ORDERED>
     struct ObjectArrayHolderBase : ArrayDataHolder<OBJ, MAX_NUM> {
         using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
         using ObjectType = typename Parent::ObjectType;
@@ -19,7 +19,7 @@ namespace holder::detail {
         using ElemType = typename Parent::ElemType;
         using Trait = typename Parent::Trait;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
-        constexpr static bool IS_ORDERED = false;
+        constexpr static bool IS_ORDERED = ORDERED;
         using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolderBase>;
 
     protected:
@@ -93,9 +93,9 @@ namespace holder::detail {
         SizeType num{};
     };
 
-    template<typename OBJ, std::size_t MAX_NUM, bool = std::is_const_v<OBJ>>
-    struct ObjectArrayHolder : ObjectArrayHolderBase<OBJ, MAX_NUM> {
-        using Parent = ObjectArrayHolderBase<OBJ, MAX_NUM>;
+    template<typename OBJ, std::size_t MAX_NUM, bool ORDERED, bool = std::is_const_v<OBJ>>
+    struct ObjectArrayHolder : ObjectArrayHolderBase<OBJ, MAX_NUM, ORDERED> {
+        using Parent = ObjectArrayHolderBase<OBJ, MAX_NUM, ORDERED>;
         using Parent::Parent;
 
         ObjectArrayHolder(std::initializer_list<OBJ> l) : Parent{l} {}
@@ -107,9 +107,9 @@ namespace holder::detail {
         auto operator=(ObjectArrayHolder&&) -> ObjectArrayHolder & = delete;
     };
 
-    template<typename OBJ, std::size_t MAX_NUM>
-    struct ObjectArrayHolder<OBJ, MAX_NUM, false> : ObjectArrayHolderBase<OBJ, MAX_NUM> {
-        using Parent = ObjectArrayHolderBase<OBJ, MAX_NUM>;
+    template<typename OBJ, std::size_t MAX_NUM, bool ORDERED>
+    struct ObjectArrayHolder<OBJ, MAX_NUM, ORDERED, false> : ObjectArrayHolderBase<OBJ, MAX_NUM, ORDERED> {
+        using Parent = ObjectArrayHolderBase<OBJ, MAX_NUM, ORDERED>;
         using Parent::Parent;
 
         ObjectArrayHolder(std::initializer_list<OBJ> l) : Parent{l} {}
@@ -132,11 +132,14 @@ namespace holder::detail {
             return *this;
         }
     };
+
+    template<typename OBJ, std::size_t MAX_NUM>
+    using UnOrderedObjectArrayHolder = ObjectArrayHolder<OBJ, MAX_NUM, false>;
 }
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
-    using ObjectArrayDataHolder = detail::Holder<OBJ, MAX_NUM, detail::ObjectArrayHolder>;
+    using ObjectArrayDataHolder = detail::Holder<OBJ, MAX_NUM, detail::UnOrderedObjectArrayHolder>;
 }
 
 #endif //OBJECT_ARRAY_OBJECTARRAYDATAHOLDER_H

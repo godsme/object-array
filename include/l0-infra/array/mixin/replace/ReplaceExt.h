@@ -5,7 +5,9 @@
 #ifndef OBJECT_ARRAY_REPLACEEXT_H
 #define OBJECT_ARRAY_REPLACEEXT_H
 
+#include <l0-infra/array/detail/ConceptDef.h>
 #include <l0-infra/array/concept/SimpleMutable.h>
+#include <l0-infra/array/concept/Pred.h>
 
 namespace mixin {
     template<typename T>
