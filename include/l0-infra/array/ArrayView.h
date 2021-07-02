@@ -66,20 +66,16 @@ namespace detail {
     };
 }
 
-template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T, bool ORDERED = false>
-class ArrayView : public detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ELEM, ORDERED>::Type {
-    using Parent = typename detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ELEM, ORDERED>::Type;
-    using typename Parent::Holder;
-public:
+template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename ELEM = T, bool ORDERED = false, typename Parent = typename detail::ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, ELEM, ORDERED>::Type>
+struct ArrayView  : Parent {
     using Parent::Parent;
 };
 
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>
 ArrayView(T (&)[MAX_NUM], SIZE_TYPE& size) -> ArrayView<T, SIZE_TYPE, MAX_NUM, T, false>;
 
-template<typename T, std::size_t MAX_NUM, typename WRAPPER = T, bool ORDERED = false>
-struct ConstArrayView : detail::ConstArrayView<T, MAX_NUM, WRAPPER, ORDERED> {
-    using Parent = detail::ConstArrayView<T, MAX_NUM, WRAPPER, ORDERED>;
+template<typename T, std::size_t MAX_NUM, typename WRAPPER = T, bool ORDERED = false, typename Parent = detail::ConstArrayView<T, MAX_NUM, WRAPPER, ORDERED>>
+struct ConstArrayView : Parent {
     using Parent::Parent;
 };
 
