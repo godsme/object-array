@@ -3,7 +3,7 @@
 //
 
 #include <l0-infra/array/mixin/find/NonScopedSimpleFind.h>
-#include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
+#include <l0-infra/array/mixin/array_like/RangedArrayLike.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include "../Foo.h"
 #include <catch.hpp>

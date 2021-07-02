@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_FULLSCOPEDELEMCOUNT_H
 #define OBJECT_ARRAY_FULLSCOPEDELEMCOUNT_H
 
-#include <l0-infra/array/mixin/scoped/ScopedElemCount.h>
+#include <l0-infra/array/mixin/count/ScopedElemCount.h>
 
 namespace mixin {
     template<__cOnCePt(Scoped) T>

@@ -6,9 +6,9 @@
 #define OBJECT_ARRAY_INDEXEDVIEW_H
 
 #include <l0-infra/array/holder/ProxyRangedViewDataHolder.h>
-#include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
+#include <l0-infra/array/mixin/array_like/RangedArrayLike.h>
 #include <l0-infra/array/view/detail/IndexedArrayView.h>
-#include <l0-infra/array/mixin/indexed/IterableIndexedArrayLike.h>
+#include <l0-infra/array/mixin/iterable/IterableIndexedArrayLike.h>
 
 namespace view {
     using IndexedView = typename detail::IndexedArrayView<

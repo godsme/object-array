@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_RANGEDARRAY_H
 
 #include <l0-infra/array/concept/ArrayLike.h>
-#include <l0-infra/array/mixin/indexed/IndexedContainer.h>
+#include <l0-infra/array/mixin/array_like/IndexedContainer.h>
 
 namespace mixin {
     template<__cOnCePt(ConstArrayLike) T>

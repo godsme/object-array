@@ -21,7 +21,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/concept/RangedArrayLike.h
         include/l0-infra/array/mixin/find/SimpleFindExt.h
         include/l0-infra/base/InvokeConstMethod.h
-        include/l0-infra/array/mixin/ranged/RangedArrayLike.h
+        include/l0-infra/array/mixin/array_like/RangedArrayLike.h
         include/l0-infra/array/holder/ScatteredArrayDataHolder.h
         include/l0-infra/base/Placement.h
         include/l0-infra/base/detail/StorageTrait.h
@@ -35,9 +35,9 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/base/BitSet.h
         include/l0-infra/array/holder/detail/ObjectTrait.h
         include/l0-infra/array/concept/ArrayLike.h
-        include/l0-infra/array/mixin/ranged/RangedArray.h
+        include/l0-infra/array/mixin/array_like/RangedArray.h
         include/l0-infra/array/mixin/detail/Mixins.h
-        include/l0-infra/array/mixin/simple/ContinuousArrayLike.h
+        include/l0-infra/array/mixin/array_like/ContinuousArrayLike.h
         include/l0-infra/array/concept/ContinuousArrayLikeDataHolder.h
         include/l0-infra/array/concept/SimpleArrayLike.h
         include/l0-infra/array/mixin/find/ScopedSimpleFind.h
@@ -53,51 +53,51 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/view/Slice.h
         include/l0-infra/array/concept/IndexedContainer.h
         include/l0-infra/array/view/ScopedView.h
-        include/l0-infra/array/mixin/indexed/IndexedContainer.h
-        include/l0-infra/array/mixin/ranged/RangedViewFactory.h
+        include/l0-infra/array/mixin/array_like/IndexedContainer.h
+        include/l0-infra/array/mixin/factory/RangedViewFactory.h
         include/l0-infra/array/detail/ArrayOffset.h
         include/l0-infra/array/holder/ScopedViewDataHolder.h
-        include/l0-infra/array/mixin/scoped/ScopedViewFactory.h
+        include/l0-infra/array/mixin/factory/ScopedViewFactory.h
         include/l0-infra/array/view/IndexedView.h
         include/l0-infra/array/holder/ProxyRangedViewDataHolder.h
         include/l0-infra/array/holder/detail/RangedViewDataHolderInterface.h
         include/l0-infra/array/detail/CrtpHelper.h
         include/l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h
-        include/l0-infra/array/mixin/indexed/IndexedViewFactory.h
-        include/l0-infra/array/mixin/indexed/IterableIndexedArrayLike.h
+        include/l0-infra/array/mixin/factory/IndexedViewFactory.h
+        include/l0-infra/array/mixin/iterable/IterableIndexedArrayLike.h
         include/l0-infra/array/iterator/Iterator.h
         include/l0-infra/array/iterator/IndexedIterator.h
-        include/l0-infra/array/mixin/simple/IterableArrayLike.h
+        include/l0-infra/array/mixin/iterable/IterableArrayLike.h
         include/l0-infra/array/view/IndexedScopedView.h
-        include/l0-infra/array/mixin/scoped/IterableIndexedScopedArrayLike.h
+        include/l0-infra/array/mixin/iterable/IterableIndexedScopedArrayLike.h
         include/l0-infra/array/iterator/IndexedScopedIterator.h
         include/l0-infra/array/iterator/detail/IndexedIterator.h
         include/l0-infra/array/iterator/detail/ScopedIterator.h
         include/l0-infra/array/iterator/EmptyIterator.h
         include/l0-infra/array/view/detail/IndexedArrayView.h
-        include/l0-infra/array/mixin/indexed/IndexedScopedViewFactory.h
+        include/l0-infra/array/mixin/factory/IndexedScopedViewFactory.h
         include/l0-infra/array/iterator/detail/SimpleIterator.h
         include/l0-infra/array/iterator/ScopedIterator.h
-        include/l0-infra/array/mixin/scoped/IterableScopedArrayLike.h
-        include/l0-infra/array/mixin/indexed/RValueIndexedViewFactory.h
-        include/l0-infra/array/mixin/ranged/RValueRangedViewFactory.h
-        include/l0-infra/array/mixin/scoped/RvalueScopedViewFactory.h
+        include/l0-infra/array/mixin/iterable/IterableScopedArrayLike.h
+        include/l0-infra/array/mixin/factory/RValueIndexedViewFactory.h
+        include/l0-infra/array/mixin/factory/RValueRangedViewFactory.h
+        include/l0-infra/array/mixin/factory/RvalueScopedViewFactory.h
         include/l0-infra/base/IntOpt.h
         include/l0-infra/base/detail/DeduceIntOptional.h
         include/l0-infra/array/holder/detail/ContinuousArrayDataHolderInterface.h
-        include/l0-infra/array/mixin/indexed/IndexedRefAccessor.h
-        include/l0-infra/array/mixin/simple/ByIndexAccessor.h
+        include/l0-infra/array/mixin/accessor/IndexedRefAccessor.h
+        include/l0-infra/array/mixin/accessor/ByIndexAccessor.h
         include/l0-infra/array/mixin/find/ScopedFindExt.h
         include/l0-infra/array/concept/detail/PredTypeTrait.h
-        include/l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h
-        include/l0-infra/array/mixin/ranged/RangedElemsCount.h
-        include/l0-infra/array/mixin/scoped/ScopedElemCount.h
-        include/l0-infra/array/mixin/scoped/FullScopedElemCount.h
-        include/l0-infra/array/mixin/ranged/RangedScopedElemCount.h
+        include/l0-infra/array/mixin/accessor/ScopedByIndexAccessor.h
+        include/l0-infra/array/mixin/count/RangedElemsCount.h
+        include/l0-infra/array/mixin/count/ScopedElemCount.h
+        include/l0-infra/array/mixin/count/FullScopedElemCount.h
+        include/l0-infra/array/mixin/count/RangedScopedElemCount.h
         include/l0-infra/array/detail/ArrayScope.h
         include/l0-infra/array/holder/detail/ArrayHolderTrait.h
         include/l0-infra/array/mixin/foreach/SimpleForEach.h
-        include/l0-infra/array/mixin/detail/ArrayElemVisit.h
+        include/l0-infra/array/mixin/array_like/ArrayElemVisit.h
         include/l0-infra/array/concept/Op.h
         include/l0-infra/array/mixin/detail/ForEachCodeBlock.h
         include/l0-infra/array/concept/ElemVisitor.h
@@ -131,12 +131,12 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/holder/SortViewDataHolder.h
         include/l0-infra/array/view/SortView.h
         include/l0-infra/array/mixin/sort/ArraySortExt.h
-        include/l0-infra/array/mixin/sort/SortViewFactory.h
-        include/l0-infra/array/mixin/sort/RValueSortViewFactory.h
-        include/l0-infra/array/mixin/sort/ScopedSortViewFactory.h
+        include/l0-infra/array/mixin/factory/SortViewFactory.h
+        include/l0-infra/array/mixin/factory/RValueSortViewFactory.h
+        include/l0-infra/array/mixin/factory/ScopedSortViewFactory.h
         include/l0-infra/array/mixin/detail/ValueRangedArray.h
         include/l0-infra/array/iterator/IndicesRandomIterator.h
-        include/l0-infra/array/mixin/simple/IterableArrayIndices.h
+        include/l0-infra/array/mixin/iterable/IterableArrayIndices.h
         include/l0-infra/array/mixin/sort/ScopedSort.h
         include/l0-infra/array/detail/ScopedArrayIndices.h
         include/l0-infra/array/holder/OrderedViewDataHolder.h
@@ -144,7 +144,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/view/OrderedScopedView.h
         include/l0-infra/array/mixin/sort/RValueArraySort.h
         include/l0-infra/array/mixin/sort/RValueScopedSort.h
-        include/l0-infra/array/mixin/scoped/ScopedRangedArray.h
+        include/l0-infra/array/mixin/array_like/ScopedRangedArray.h
         include/l0-infra/array/holder/ProxyScopedViewDataHolder.h
         include/l0-infra/array/holder/detail/ScopedViewDataHolderInterface.h
         include/l0-infra/array/mixin/detail/ValueScopedRangedArray.h
@@ -170,11 +170,11 @@ set(OBJ_ARRAY_SRC
         test/ut/array/UnscopedSimpleFindTest.cpp
         include/l0-infra/array/mixin/detail/___public_mixin_delimiter___.h
         include/l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h
-        include/l0-infra/array/mixin/simple/ArrayEquality.h
+        include/l0-infra/array/mixin/count/ArrayEquality.h
         include/l0-infra/array/mixin/sort/IndicesBasedSort.h
         include/l0-infra/array/mixin/mutable/RangedReplace.h
-        include/l0-infra/array/mixin/detail/ViewedArray.h
-        include/l0-infra/array/mixin/indexed/ObjectIndex.h
+        include/l0-infra/array/mixin/array_like/ViewedArray.h
+        include/l0-infra/array/mixin/array_like/ObjectIndex.h
         include/l0-infra/array/mixin/mutable/ReplaceExt.h
         include/l0-infra/array/mixin/mutable/AppendExt.h
         include/l0-infra/array/mixin/mutable/ViewAppend.h

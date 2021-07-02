@@ -7,14 +7,14 @@
 
 #include <l0-infra/array/holder/ArrayIndicesDataHolder.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/simple/ContinuousArrayLike.h>
-#include <l0-infra/array/mixin/ranged/RangedArray.h>
-#include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
-#include <l0-infra/array/mixin/indexed/ObjectIndex.h>
+#include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
+#include <l0-infra/array/mixin/array_like/RangedArray.h>
+#include <l0-infra/array/mixin/array_like/RangedArrayLike.h>
+#include <l0-infra/array/mixin/array_like/ObjectIndex.h>
 #include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/indexed/IndexedRefAccessor.h>
-#include <l0-infra/array/mixin/simple/ByIndexAccessor.h>
-#include <l0-infra/array/mixin/ranged/RangedElemsCount.h>
+#include <l0-infra/array/mixin/accessor/IndexedRefAccessor.h>
+#include <l0-infra/array/mixin/accessor/ByIndexAccessor.h>
+#include <l0-infra/array/mixin/count/RangedElemsCount.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/mutable/RangedClear.h>
 #include <l0-infra/array/mixin/sort/ArraySort.h>

@@ -6,11 +6,11 @@
 #define OBJECT_ARRAY_ORDEREDVIEW_H
 
 #include <l0-infra/array/holder/OrderedViewDataHolder.h>
-#include <l0-infra/array/mixin/indexed/IndexedViewFactory.h>
-#include <l0-infra/array/mixin/detail/ArrayElemVisit.h>
+#include <l0-infra/array/mixin/factory/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/array_like/ArrayElemVisit.h>
 #include <l0-infra/array/mixin/find/ScopedFind.h>
 #include <l0-infra/array/mixin/foreach/ScopedForEach.h>
-#include <l0-infra/array/mixin/simple/IterableArrayLike.h>
+#include <l0-infra/array/mixin/iterable/IterableArrayLike.h>
 #include <l0-infra/array/mixin/find/NonScopedSimpleFind.h>
 #include <l0-infra/array/mixin/find/SimpleFindExt.h>
 #include <l0-infra/array/mixin/foreach/SimpleForEach.h>

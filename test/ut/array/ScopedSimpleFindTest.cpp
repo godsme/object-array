@@ -7,7 +7,7 @@
 #include <l0-infra/array/mixin/find/SimpleFindExt.h>
 #include "../Foo.h"
 #include <catch.hpp>
-#include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
+#include <l0-infra/array/mixin/array_like/RangedArrayLike.h>
 
 namespace {
     using Mixins = mixin::Mixins<

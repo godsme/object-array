@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_SORTVIEW_H
 
 #include <l0-infra/array/holder/SortViewDataHolder.h>
-#include <l0-infra/array/mixin/indexed/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/factory/IndexedViewFactory.h>
 #include <l0-infra/array/mixin/sort/ArraySortExt.h>
 #include <l0-infra/array/mixin/sort/IndicesBasedSort.h>
 

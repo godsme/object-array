@@ -9,11 +9,11 @@
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/find/ScopedSimpleFind.h>
 #include <l0-infra/array/mixin/find/SimpleFindExt.h>
-#include <l0-infra/array/mixin/indexed/IndexedScopedViewFactory.h>
-#include <l0-infra/array/mixin/scoped/IterableScopedArrayLike.h>
-#include <l0-infra/array/mixin/indexed/IndexedRefAccessor.h>
-#include <l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h>
-#include <l0-infra/array/mixin/ranged/RangedScopedElemCount.h>
+#include <l0-infra/array/mixin/factory/IndexedScopedViewFactory.h>
+#include <l0-infra/array/mixin/iterable/IterableScopedArrayLike.h>
+#include <l0-infra/array/mixin/accessor/IndexedRefAccessor.h>
+#include <l0-infra/array/mixin/accessor/ScopedByIndexAccessor.h>
+#include <l0-infra/array/mixin/count/RangedScopedElemCount.h>
 #include <l0-infra/array/mixin/foreach/ScopedSimpleForEach.h>
 
 namespace view::detail {

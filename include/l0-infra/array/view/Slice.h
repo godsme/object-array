@@ -5,18 +5,18 @@
 #ifndef OBJECT_ARRAY_VIEW_SLICE_H
 #define OBJECT_ARRAY_VIEW_SLICE_H
 
-#include <l0-infra/array/mixin/scoped/RvalueScopedViewFactory.h>
-#include <l0-infra/array/mixin/indexed/RValueIndexedViewFactory.h>
+#include <l0-infra/array/mixin/factory/RvalueScopedViewFactory.h>
+#include <l0-infra/array/mixin/factory/RValueIndexedViewFactory.h>
 #include <l0-infra/array/holder/RangedViewDataHolder.h>
 #include <l0-infra/array/mixin/sort/ArraySort.h>
 #include <l0-infra/array/mixin/sort/ArraySortExt.h>
-#include <l0-infra/array/mixin/sort/RValueSortViewFactory.h>
+#include <l0-infra/array/mixin/factory/RValueSortViewFactory.h>
 #include <l0-infra/array/mixin/sort/RValueArraySort.h>
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/mutable/RangedReplace.h>
-#include <l0-infra/array/mixin/detail/ViewedArray.h>
+#include <l0-infra/array/mixin/array_like/ViewedArray.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/mutable/ViewAppend.h>
 #include <l0-infra/array/mixin/mutable/AppendExt.h>

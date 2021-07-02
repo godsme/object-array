@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RVALUERANGEDVIEWFACTORY_H
 #define OBJECT_ARRAY_RVALUERANGEDVIEWFACTORY_H
 
-#include <l0-infra/array/mixin/ranged/RangedViewFactory.h>
+#include <l0-infra/array/mixin/factory/RangedViewFactory.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>

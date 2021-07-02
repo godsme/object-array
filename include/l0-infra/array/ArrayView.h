@@ -7,8 +7,8 @@
 
 #include <l0-infra/array/holder/ConstArrayViewDataHolder.h>
 #include <l0-infra/array/holder/ArrayViewDataHolder.h>
-#include <l0-infra/array/mixin/ranged/RValueRangedViewFactory.h>
-#include <l0-infra/array/mixin/sort/SortViewFactory.h>
+#include <l0-infra/array/mixin/factory/RValueRangedViewFactory.h>
+#include <l0-infra/array/mixin/factory/SortViewFactory.h>
 #include <l0-infra/array/mixin/mutable/SimpleMutate.h>
 #include <l0-infra/array/mixin/mutable/EraseExt.h>
 #include <l0-infra/array/mixin/mutable/ScopedCleanUp.h>
