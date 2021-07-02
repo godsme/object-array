@@ -24,6 +24,7 @@ namespace _concept {
     template<typename OP, typename ObjectType, typename SizeType>
     concept Op = WithIndexOp<OP, ObjectType, SizeType> || SimpleOp<OP, ObjectType>;
 }
+
 #endif
 
 #endif //OBJECT_ARRAY_OP_H

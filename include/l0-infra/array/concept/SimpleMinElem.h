@@ -13,23 +13,23 @@
 #include <optional>
 #include <concepts>
 
+namespace _concept::detail {
+    template<typename T>
+    struct SimpleMinElemChecker : T {
+        using T::MinElemIndex;
+        using T::MinElem;
+        using typename T::Maybe;
+        using typename T::ObjectType;
+    };
+
+    template<typename T>
+    concept SimpleMinElem = requires(T const& o, typename detail::LessTypeTrait<T> trait) {
+        { o.MinElemIndex(trait.less) } -> std::same_as<typename T::Maybe>;
+        { o.MinElem(trait.less) } -> std::same_as<typename T::ObjectType const*>;
+    };
+}
+
 namespace _concept {
-    namespace detail {
-        template<typename T>
-        struct SimpleMinElemChecker : T {
-            using T::MinElemIndex;
-            using T::MinElem;
-            using typename T::Maybe;
-            using typename T::ObjectType;
-        };
-
-        template<typename T>
-        concept SimpleMinElem = requires(T const& o, typename detail::LessTypeTrait<T> trait) {
-            { o.MinElemIndex(trait.less) } -> std::same_as<typename T::Maybe>;
-            { o.MinElem(trait.less) } -> std::same_as<typename T::ObjectType const*>;
-        };
-    }
-
     template<typename T>
     concept SimpleMinElem = detail::SimpleMinElem<detail::SimpleMinElemChecker<T>>;
 }

@@ -11,10 +11,10 @@ namespace _concept::detail {
         using ObjectType = typename T::ObjectType;
         using SizeType = typename T::SizeType;
 
-        constexpr static auto CONST_PRED = [](ObjectType const&) { };
-        constexpr static auto CONST_INDEX_PRED = [](ObjectType const&, SizeType) { };
-        constexpr static auto PRED = [](ObjectType&) { };
-        constexpr static auto INDEX_PRED = [](ObjectType&, SizeType) { };
+        constexpr static auto CONST_PRED = [](ObjectType const&) {};
+        constexpr static auto CONST_INDEX_PRED = [](ObjectType const&, SizeType) {};
+        constexpr static auto PRED = [](ObjectType&) {};
+        constexpr static auto INDEX_PRED = [](ObjectType&, SizeType) {};
 
         constexpr static auto BOOL_CONST_PRED = [](ObjectType const&) { return false; };
         constexpr static auto BOOL_CONST_INDEX_PRED = [](ObjectType const&, SizeType) { return false; };

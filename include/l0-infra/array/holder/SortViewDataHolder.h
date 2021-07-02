@@ -1,7 +1,6 @@
 //
 // Created by Darwin Yuan on 2021/6/26.
 //
-
 #ifndef OBJECT_ARRAY_SORTVIEWDATAHOLDER_H
 #define OBJECT_ARRAY_SORTVIEWDATAHOLDER_H
 
@@ -15,7 +14,7 @@ namespace holder::detail {
     template<typename HOLDER>
     class SortViewDataHolderInterface {
         dEcL_tHiS(HOLDER);
-        auto InitIndices() {
+        auto InitIndices() -> void {
             if constexpr(HOLDER::IS_SCOPED) {
                 This()->indices.InitWithRange(This()->GetArray(), This()->GetArray().GetScope());
             } else {
@@ -27,7 +26,6 @@ namespace holder::detail {
 
         using SizeType = typename HOLDER::SizeType;
         using ObjectType = typename HOLDER::ObjectType;
-
 
         template<__lEsS_cOnCePt(LESS)>
         auto IndicesSort(LESS&& less) -> void {

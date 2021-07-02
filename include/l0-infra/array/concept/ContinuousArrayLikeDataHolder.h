@@ -42,8 +42,7 @@ namespace _concept {
     }
 
     template<typename T>
-    concept ContinuousArrayLikeDataHolder =
-        ConstContinuousArrayLikeDataHolder<T> && detail::WithNumber<T>;
+    concept ContinuousArrayLikeDataHolder = ConstContinuousArrayLikeDataHolder<T> && detail::WithNumber<T>;
 }
 
 #endif

@@ -12,7 +12,6 @@
 #include <concepts>
 
 namespace _concept {
-
     template<typename T>
     struct ConstArrayLikeChecker : T {
         using T::GetRange;

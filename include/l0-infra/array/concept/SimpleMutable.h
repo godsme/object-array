@@ -15,26 +15,26 @@
 #include <optional>
 #include <concepts>
 
+namespace _concept::detail {
+    template<typename T>
+    struct SimpleMutableChecker : T {
+        using T::Erase;
+        using T::Append;
+
+        using typename T::SizeType;
+        using typename T::ObjectType;
+    };
+
+    template<typename T>
+    concept SimpleMutable = requires(T& o, typename T::ObjectType const& obj, typename T::ObjectType&& r_obj) {
+        { o.Erase(typename T::SizeType{}) };
+        { o.Append() } -> std::same_as<typename T::ObjectType*>;
+        { o.Append(obj) } -> std::same_as<typename T::ObjectType*>;
+        { o.Append(r_obj) } -> std::same_as<typename T::ObjectType*>;
+    };
+}
+
 namespace _concept {
-    namespace detail {
-        template<typename T>
-        struct SimpleMutableChecker : T {
-            using T::Erase;
-            using T::Append;
-
-            using typename T::SizeType;
-            using typename T::ObjectType;
-        };
-
-        template<typename T>
-        concept SimpleMutable = requires(T& o, typename T::ObjectType const& obj, typename T::ObjectType&& r_obj) {
-            { o.Erase(typename T::SizeType{}) };
-            { o.Append() } -> std::same_as<typename T::ObjectType*>;
-            { o.Append(obj) } -> std::same_as<typename T::ObjectType*>;
-            { o.Append(r_obj) } -> std::same_as<typename T::ObjectType*>;
-        };
-    }
-
     template<typename T>
     concept SimpleMutable = detail::SimpleMutable<detail::SimpleMutableChecker<std::decay_t<T>>>;
 
@@ -47,6 +47,7 @@ namespace _concept {
             _concept::SimpleMutable<T> &&
             _concept::SimpleFind<T>;
 }
+
 #endif
 
 #endif //OBJECT_ARRAY_SIMPLEMUTABLE_H

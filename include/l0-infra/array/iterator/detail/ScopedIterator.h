@@ -11,8 +11,7 @@ namespace iterator::detail {
     template<typename BASE, typename BIT_MAP>
     class ScopedIterator : public BASE {
         auto StepForward() -> void { bitmap >>= 1; BASE::StepForward(); }
-
-        auto ForwardTo1stPresent() {
+        auto ForwardTo1stPresent() -> void {
             while(!bitmap[0] && bitmap.any()) StepForward();
             if(bitmap.none()) BASE::p = nullptr;
         }
@@ -20,7 +19,9 @@ namespace iterator::detail {
     public:
         template<typename ... ARGS>
         ScopedIterator(BIT_MAP const& bitmap, ARGS&& ... args)
-                : bitmap{bitmap}, BASE{std::forward<ARGS>(args)...} { ForwardTo1stPresent(); }
+                : bitmap{bitmap}, BASE{std::forward<ARGS>(args)...} {
+            ForwardTo1stPresent();
+        }
 
         auto operator++() -> ScopedIterator& {
             StepForward();
@@ -30,6 +31,7 @@ namespace iterator::detail {
 
         auto operator!=(EmptyIterator const& rhs) const -> bool { return BASE::p != nullptr; }
 
+    public:
         ScopedIterator() = delete;
         ScopedIterator(ScopedIterator const&) = delete;
         ScopedIterator(ScopedIterator&&) = delete;

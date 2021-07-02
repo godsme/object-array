@@ -13,33 +13,33 @@
 #include <concepts>
 #include <type_traits>
 
+namespace _concept::detail {
+    template<typename T>
+    struct ElemVisitorChecker : T {
+        using T::Visit;
+        using typename T::SizeType;
+    };
+
+    template<typename T>
+    concept ElemVisitor_ = requires(T const &o, typename T::SizeType n, typename detail::OpTypeTrait<T> &&trait) {
+        { o.template Visit<false>(trait.CONST_PRED, n) } -> std::same_as<void>;
+        { o.template Visit<false>(trait.CONST_INDEX_PRED, n) } -> std::same_as<void>;
+        { o.template Visit<true>(trait.PRED, n) } -> std::same_as<void>;
+        { o.template Visit<true>(trait.INDEX_PRED, n) } -> std::same_as<void>;
+
+        { o.template Visit<false>(trait.BOOL_CONST_PRED, n) } -> std::same_as<bool>;
+        { o.template Visit<false>(trait.BOOL_CONST_INDEX_PRED, n) } -> std::same_as<bool>;
+        { o.template Visit<true>(trait.BOOL_INDEX_PRED, n) } -> std::same_as<bool>;
+        { o.template Visit<true>(trait.BOOL_PRED, n) } -> std::same_as<bool>;
+
+        { o.template Visit<false>(trait.STATUS_CONST_PRED, n) } -> std::same_as<unsigned int>;
+        { o.template Visit<false>(trait.STATUS_CONST_INDEX_PRED, n) } -> std::same_as<unsigned int>;
+        { o.template Visit<true>(trait.STATUS_INDEX_PRED, n) } -> std::same_as<unsigned int>;
+        { o.template Visit<true>(trait.STATUS_PRED, n) } -> std::same_as<unsigned int>;
+    };
+}
+
 namespace _concept {
-    namespace detail {
-        template<typename T>
-        struct ElemVisitorChecker : T {
-            using T::Visit;
-            using typename T::SizeType;
-        };
-
-        template<typename T>
-        concept ElemVisitor_ = requires(T const& o, typename T::SizeType n, typename detail::OpTypeTrait<T>&& trait) {
-            { o.template Visit<false>(trait.CONST_PRED, n) } -> std::same_as<void>;
-            { o.template Visit<false>(trait.CONST_INDEX_PRED, n) } -> std::same_as<void>;
-            { o.template Visit<true>(trait.PRED, n) } -> std::same_as<void>;
-            { o.template Visit<true>(trait.INDEX_PRED, n) } -> std::same_as<void>;
-
-            { o.template Visit<false>(trait.BOOL_CONST_PRED, n) } -> std::same_as<bool>;
-            { o.template Visit<false>(trait.BOOL_CONST_INDEX_PRED, n) } -> std::same_as<bool>;
-            { o.template Visit<true>(trait.BOOL_INDEX_PRED, n) } -> std::same_as<bool>;
-            { o.template Visit<true>(trait.BOOL_PRED, n) } -> std::same_as<bool>;
-
-            { o.template Visit<false>(trait.STATUS_CONST_PRED, n) } -> std::same_as<unsigned int>;
-            { o.template Visit<false>(trait.STATUS_CONST_INDEX_PRED, n) } -> std::same_as<unsigned int>;
-            { o.template Visit<true>(trait.STATUS_INDEX_PRED, n) } -> std::same_as<unsigned int>;
-            { o.template Visit<true>(trait.STATUS_PRED, n) } -> std::same_as<unsigned int>;
-        };
-    }
-
     template<typename T>
     concept ElemVisitor = detail::ElemVisitor_<detail::ElemVisitorChecker<T>>;
 

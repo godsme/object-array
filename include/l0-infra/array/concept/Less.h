@@ -18,6 +18,7 @@ namespace _concept {
         { less(lhs, rhs) } -> std::same_as<bool>;
     };
 }
+
 #endif
 
 #endif //OBJECT_ARRAY_LESS_H

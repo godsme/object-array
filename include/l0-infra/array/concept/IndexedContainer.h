@@ -11,42 +11,43 @@
 
 #include <concepts>
 
-namespace _concept {
-
-    namespace detail {
-        template<typename T>
-        struct ConstIndexedContainerChecker : T {
-            using T::GetObj;
-            using typename T::SizeType;
-            using typename T::ObjectType;
-        };
-
-        template<typename T>
-        concept ConstIndexedContainer_ = requires(T const& o, typename T::SizeType n) {
-            { o.GetObj(n) } -> std::same_as<typename T::ObjectType const&>;
-        };
-    }
+namespace _concept::detail {
+    template<typename T>
+    struct ConstIndexedContainerChecker : T {
+        using T::GetObj;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+    };
 
     template<typename T>
+    concept ConstIndexedContainer_ = requires(T const& o, typename T::SizeType n) {
+        { o.GetObj(n) } -> std::same_as<typename T::ObjectType const&>;
+    };
+}
+
+namespace _concept {
+    template<typename T>
     concept ConstIndexedContainer = detail::ConstIndexedContainer_<detail::ConstIndexedContainerChecker<T>>;
+}
 
-    namespace detail {
-        template<typename T>
-        struct IndexedContainerChecker : T {
-            using T::GetObj;
-            using typename T::SizeType;
-            using typename T::ObjectType;
-        };
+namespace _concept::detail {
+    template<typename T>
+    struct IndexedContainerChecker : T {
+        using T::GetObj;
+        using typename T::SizeType;
+        using typename T::ObjectType;
+    };
 
-        template<typename T>
-        concept IndexedContainer_ =  requires(T& o) {
-            { o.GetObj(std::declval<typename T::SizeType>()) } -> std::same_as<typename T::ObjectType&>;
-        };
+    template<typename T>
+    concept IndexedContainer_ = requires(T& o) {
+        { o.GetObj(std::declval<typename T::SizeType>()) } -> std::same_as<typename T::ObjectType&>;
+    };
 
-        template<typename T>
-        concept IndexedContainer = detail::IndexedContainer_<detail::IndexedContainerChecker<std::decay_t<T>>>;
-    }
+    template<typename T>
+    concept IndexedContainer = detail::IndexedContainer_<detail::IndexedContainerChecker<std::decay_t<T>>>;
+}
 
+namespace _concept {
     template<typename T>
     concept IndexedContainer = ConstIndexedContainer<T> && detail::IndexedContainer<T>;
 }
