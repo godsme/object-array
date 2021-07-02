@@ -172,7 +172,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h
         include/l0-infra/array/mixin/count/ArrayEquality.h
         include/l0-infra/array/mixin/sort/IndicesBasedSort.h
-        include/l0-infra/array/mixin/erase/RangedReplace.h
+        include/l0-infra/array/mixin/replace/RangedReplace.h
         include/l0-infra/array/mixin/array_like/ViewedArray.h
         include/l0-infra/array/mixin/array_like/ObjectIndex.h
         include/l0-infra/array/mixin/replace/ReplaceExt.h

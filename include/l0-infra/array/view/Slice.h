@@ -15,7 +15,7 @@
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/erase/RangedReplace.h>
+#include <l0-infra/array/mixin/replace/RangedReplace.h>
 #include <l0-infra/array/mixin/array_like/ViewedArray.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/append/ViewAppend.h>
