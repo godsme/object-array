@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SCOPEDSIMPLEFOREACH_H
 #define OBJECT_ARRAY_SCOPEDSIMPLEFOREACH_H
 
-#include <l0-infra/array/mixin/ScopedForEach.h>
+#include <l0-infra/array/mixin/scoped/ScopedForEach.h>
 
 namespace mixin {
     template<__cOnCePt(ScopedOpVisitable) T>

@@ -6,8 +6,8 @@
 #define OBJECT_ARRAY_INDEXEDARRAYVIEW_H
 
 #include <l0-infra/array/holder/ProxyRangedViewDataHolder.h>
-#include <l0-infra/array/mixin/RangedArrayLike.h>
-#include <l0-infra/array/mixin/IterableIndexedScopedArrayLike.h>
+#include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
+#include <l0-infra/array/mixin/scoped/IterableIndexedScopedArrayLike.h>
 #include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
 
 namespace view::detail {

@@ -6,9 +6,9 @@
 #define OBJECT_ARRAY_SORTVIEW_H
 
 #include <l0-infra/array/holder/SortViewDataHolder.h>
-#include <l0-infra/array/mixin/IndexedViewFactory.h>
-#include <l0-infra/array/mixin/ArraySortExt.h>
-#include <l0-infra/array/mixin/IndicesBasedSort.h>
+#include <l0-infra/array/mixin/indexed/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/mutable/ArraySortExt.h>
+#include <l0-infra/array/mixin/mutable/IndicesBasedSort.h>
 
 namespace view::detail {
     using SortViewMixins = ::mixin::Mixins<

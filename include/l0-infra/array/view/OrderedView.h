@@ -6,15 +6,15 @@
 #define OBJECT_ARRAY_ORDEREDVIEW_H
 
 #include <l0-infra/array/holder/OrderedViewDataHolder.h>
-#include <l0-infra/array/mixin/IndexedViewFactory.h>
-#include <l0-infra/array/mixin/ArrayElemVisit.h>
-#include <l0-infra/array/mixin/ScopedFind.h>
-#include <l0-infra/array/mixin/ScopedForEach.h>
-#include <l0-infra/array/mixin/IterableArrayLike.h>
-#include <l0-infra/array/mixin/NonScopedSimpleFind.h>
-#include <l0-infra/array/mixin/SimpleFindExt.h>
-#include <l0-infra/array/mixin/SimpleForEach.h>
-#include <l0-infra/array/mixin/SimpleForEachExt.h>
+#include <l0-infra/array/mixin/indexed/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/simple/ArrayElemVisit.h>
+#include <l0-infra/array/mixin/scoped/ScopedFind.h>
+#include <l0-infra/array/mixin/scoped/ScopedForEach.h>
+#include <l0-infra/array/mixin/simple/IterableArrayLike.h>
+#include <l0-infra/array/mixin/simple/NonScopedSimpleFind.h>
+#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
+#include <l0-infra/array/mixin/simple/SimpleForEach.h>
+#include <l0-infra/array/mixin/simple/SimpleForEachExt.h>
 
 namespace view::detail {
     using OrderedViewMixins = ::mixin::Mixins<

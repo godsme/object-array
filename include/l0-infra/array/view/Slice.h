@@ -8,22 +8,22 @@
 #include <l0-infra/array/mixin/RvalueScopedViewFactory.h>
 #include <l0-infra/array/mixin/RValueIndexedViewFactory.h>
 #include <l0-infra/array/holder/RangedViewDataHolder.h>
-#include <l0-infra/array/mixin/ArraySort.h>
-#include <l0-infra/array/mixin/ArraySortExt.h>
+#include <l0-infra/array/mixin/mutable/ArraySort.h>
+#include <l0-infra/array/mixin/mutable/ArraySortExt.h>
 #include <l0-infra/array/mixin/RValueSortViewFactory.h>
 #include <l0-infra/array/mixin/RValueArraySort.h>
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/RangedReplace.h>
+#include <l0-infra/array/mixin/ranged/RangedReplace.h>
 #include <l0-infra/array/mixin/ViewedArray.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/ViewAppend.h>
-#include <l0-infra/array/mixin/AppendExt.h>
-#include <l0-infra/array/mixin/ReplaceExt.h>
-#include <l0-infra/array/mixin/ScopedFindExt.h>
-#include <l0-infra/array/mixin/ScopedForEachExt.h>
-#include <l0-infra/array/mixin/ScopedMinElemExt.h>
+#include <l0-infra/array/mixin/mutable/ViewAppend.h>
+#include <l0-infra/array/mixin/mutable/AppendExt.h>
+#include <l0-infra/array/mixin/mutable/ReplaceExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedFindExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedForEachExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedMinElemExt.h>
 
 namespace view::detail {
 

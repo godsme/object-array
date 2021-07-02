@@ -6,32 +6,32 @@
 #define OBJECT_ARRAY_SCATTEREDARRAY_H
 
 #include <l0-infra/array/holder/ScatteredArrayDataHolder.h>
-#include <l0-infra/array/mixin/ScopedSimpleFind.h>
-#include <l0-infra/array/mixin/SimpleFindExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleFind.h>
+#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/IterableScopedArrayLike.h>
-#include <l0-infra/array/mixin/RangedArray.h>
-#include <l0-infra/array/mixin/RangedArrayLike.h>
-#include <l0-infra/array/mixin/IndexedRefAccessor.h>
-#include <l0-infra/array/mixin/ByIndexAccessor.h>
-#include <l0-infra/array/mixin/ScopedByIndexAccessor.h>
-#include <l0-infra/array/mixin/ArrayElemVisit.h>
-#include <l0-infra/array/mixin/ScopedSimpleForEach.h>
-#include <l0-infra/array/mixin/SimpleForEachExt.h>
-#include <l0-infra/array/mixin/FullScopedElemCount.h>
-#include <l0-infra/array/mixin/ScopedSimpleMinElem.h>
-#include <l0-infra/array/mixin/SimpleMinElemExt.h>
-#include <l0-infra/array/mixin/IndexedScopedViewFactory.h>
-#include <l0-infra/array/mixin/EraseExt.h>
-#include <l0-infra/array/mixin/ScopedCleanUp.h>
-#include <l0-infra/array/mixin/ScopedSortViewFactory.h>
-#include <l0-infra/array/mixin/ScopedSort.h>
-#include <l0-infra/array/mixin/ScopedRangedArray.h>
-#include <l0-infra/array/mixin/ArrayEquality.h>
+#include <l0-infra/array/mixin/scoped/IterableScopedArrayLike.h>
+#include <l0-infra/array/mixin/ranged/RangedArray.h>
+#include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
+#include <l0-infra/array/mixin/indexed/IndexedRefAccessor.h>
+#include <l0-infra/array/mixin/simple/ByIndexAccessor.h>
+#include <l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h>
+#include <l0-infra/array/mixin/simple/ArrayElemVisit.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleForEach.h>
+#include <l0-infra/array/mixin/simple/SimpleForEachExt.h>
+#include <l0-infra/array/mixin/scoped/FullScopedElemCount.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleMinElem.h>
+#include <l0-infra/array/mixin/simple/SimpleMinElemExt.h>
+#include <l0-infra/array/mixin/indexed/IndexedScopedViewFactory.h>
+#include <l0-infra/array/mixin/mutable/EraseExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/scoped/ScopedSortViewFactory.h>
+#include <l0-infra/array/mixin/scoped/ScopedSort.h>
+#include <l0-infra/array/mixin/scoped/ScopedRangedArray.h>
+#include <l0-infra/array/mixin/simple/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/ObjectIndex.h>
-#include <l0-infra/array/mixin/ReplaceExt.h>
-#include <l0-infra/array/mixin/AppendExt.h>
+#include <l0-infra/array/mixin/indexed/ObjectIndex.h>
+#include <l0-infra/array/mixin/mutable/ReplaceExt.h>
+#include <l0-infra/array/mixin/mutable/AppendExt.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<

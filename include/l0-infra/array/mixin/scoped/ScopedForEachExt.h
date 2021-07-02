@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SCOPEDFOREACHEXT_H
 #define OBJECT_ARRAY_SCOPEDFOREACHEXT_H
 
-#include <l0-infra/array/mixin/ScopedForEach.h>
+#include <l0-infra/array/mixin/scoped/ScopedForEach.h>
 #include <utility>
 
 namespace mixin {

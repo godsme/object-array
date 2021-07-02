@@ -7,23 +7,23 @@
 
 #include <l0-infra/array/holder/ObjectArrayDataHolder.h>
 #include <l0-infra/array/mixin/SortViewFactory.h>
-#include <l0-infra/array/mixin/ArrayEquality.h>
+#include <l0-infra/array/mixin/simple/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/ObjectIndex.h>
-#include <l0-infra/array/mixin/ReplaceExt.h>
-#include <l0-infra/array/mixin/AppendExt.h>
-#include <l0-infra/array/mixin/ScopedMinElem.h>
-#include <l0-infra/array/mixin/SimpleMinElem.h>
-#include <l0-infra/array/mixin/ScopedFindExt.h>
-#include <l0-infra/array/mixin/ScopedForEachExt.h>
-#include <l0-infra/array/mixin/SimpleMinElemExt.h>
-#include <l0-infra/array/mixin/ScopedMinElemExt.h>
-#include <l0-infra/array/mixin/RangedViewFactory.h>
-#include <l0-infra/array/mixin/SimpleMutate.h>
-#include <l0-infra/array/mixin/EraseExt.h>
-#include <l0-infra/array/mixin/ScopedCleanUp.h>
-#include <l0-infra/array/mixin/ContinuousArrayLike.h>
-#include <l0-infra/array/mixin/RangedArray.h>
+#include <l0-infra/array/mixin/indexed/ObjectIndex.h>
+#include <l0-infra/array/mixin/mutable/ReplaceExt.h>
+#include <l0-infra/array/mixin/mutable/AppendExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedMinElem.h>
+#include <l0-infra/array/mixin/simple/SimpleMinElem.h>
+#include <l0-infra/array/mixin/scoped/ScopedFindExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedForEachExt.h>
+#include <l0-infra/array/mixin/simple/SimpleMinElemExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedMinElemExt.h>
+#include <l0-infra/array/mixin/ranged/RangedViewFactory.h>
+#include <l0-infra/array/mixin/simple/SimpleMutate.h>
+#include <l0-infra/array/mixin/mutable/EraseExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/simple/ContinuousArrayLike.h>
+#include <l0-infra/array/mixin/ranged/RangedArray.h>
 
 namespace detail {
 

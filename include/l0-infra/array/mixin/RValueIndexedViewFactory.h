@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
 #define OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
 
-#include <l0-infra/array/mixin/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/indexed/IndexedViewFactory.h>
 #include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/view/IndexedView.h>

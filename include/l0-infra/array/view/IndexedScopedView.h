@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_INDEXEDSCOPEDVIEW_H
 
 #include <l0-infra/array/view/detail/IndexedArrayView.h>
-#include <l0-infra/array/mixin/IterableIndexedArrayLike.h>
+#include <l0-infra/array/mixin/indexed/IterableIndexedArrayLike.h>
 #include <l0-infra/array/holder/ProxyScopedViewDataHolder.h>
 
 namespace view {

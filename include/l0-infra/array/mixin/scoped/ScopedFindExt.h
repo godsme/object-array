@@ -7,7 +7,7 @@
 
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/concept/Pred.h>
-#include <l0-infra/array/mixin/ScopedFind.h>
+#include <l0-infra/array/mixin/scoped/ScopedFind.h>
 #include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {

@@ -7,25 +7,25 @@
 
 #include <l0-infra/array/holder/ScopedViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/ScopedSimpleFind.h>
-#include <l0-infra/array/mixin/SimpleFindExt.h>
-#include <l0-infra/array/mixin/IndexedScopedViewFactory.h>
-#include <l0-infra/array/mixin/IterableScopedArrayLike.h>
-#include <l0-infra/array/mixin/IndexedRefAccessor.h>
-#include <l0-infra/array/mixin/ScopedByIndexAccessor.h>
-#include <l0-infra/array/mixin/RangedScopedElemCount.h>
-#include <l0-infra/array/mixin/SimpleMinElemExt.h>
-#include <l0-infra/array/mixin/ScopedSimpleForEach.h>
-#include <l0-infra/array/mixin/ScopedSimpleMinElem.h>
-#include <l0-infra/array/mixin/ScopedSortViewFactory.h>
-#include <l0-infra/array/mixin/ScopedSort.h>
-#include <l0-infra/array/mixin/RValueScopedSort.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleFind.h>
+#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
+#include <l0-infra/array/mixin/indexed/IndexedScopedViewFactory.h>
+#include <l0-infra/array/mixin/scoped/IterableScopedArrayLike.h>
+#include <l0-infra/array/mixin/indexed/IndexedRefAccessor.h>
+#include <l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h>
+#include <l0-infra/array/mixin/ranged/RangedScopedElemCount.h>
+#include <l0-infra/array/mixin/simple/SimpleMinElemExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleForEach.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleMinElem.h>
+#include <l0-infra/array/mixin/scoped/ScopedSortViewFactory.h>
+#include <l0-infra/array/mixin/scoped/ScopedSort.h>
+#include <l0-infra/array/mixin/mutable/RValueScopedSort.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/ViewedArray.h>
-#include <l0-infra/array/mixin/ViewAppend.h>
-#include <l0-infra/array/mixin/AppendExt.h>
-#include <l0-infra/array/mixin/ScopedReplace.h>
-#include <l0-infra/array/mixin/ReplaceExt.h>
+#include <l0-infra/array/mixin/mutable/ViewAppend.h>
+#include <l0-infra/array/mixin/mutable/AppendExt.h>
+#include <l0-infra/array/mixin/scoped/ScopedReplace.h>
+#include <l0-infra/array/mixin/mutable/ReplaceExt.h>
 
 namespace view::detail {
     using ScopedMixins = mixin::Mixins<

@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RANGEDSCOPEDELEMCOUNT_H
 #define OBJECT_ARRAY_RANGEDSCOPEDELEMCOUNT_H
 
-#include <l0-infra/array/mixin/ScopedElemCount.h>
+#include <l0-infra/array/mixin/scoped/ScopedElemCount.h>
 
 namespace mixin {
     template<__cOnCePt(Scoped) T>

@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SCOPEDMINELEMEXT_H
 #define OBJECT_ARRAY_SCOPEDMINELEMEXT_H
 
-#include <l0-infra/array/mixin/ScopedMinElem.h>
+#include <l0-infra/array/mixin/scoped/ScopedMinElem.h>
 #include <l0-infra/array/mixin/detail/DefaultLessThan.h>
 #include <l0-infra/base/InvokeConstMethod.h>
 

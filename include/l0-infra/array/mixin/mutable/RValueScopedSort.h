@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RVALUESCOPEDSORT_H
 #define OBJECT_ARRAY_RVALUESCOPEDSORT_H
 
-#include <l0-infra/array/mixin/ScopedSort.h>
+#include <l0-infra/array/mixin/scoped/ScopedSort.h>
 #include <l0-infra/array/mixin/detail/ValueScopedRangedArray.h>
 
 namespace mixin {

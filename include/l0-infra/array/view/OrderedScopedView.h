@@ -7,14 +7,14 @@
 
 #include <l0-infra/array/holder/ScopedViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/ScopedSimpleFind.h>
-#include <l0-infra/array/mixin/SimpleFindExt.h>
-#include <l0-infra/array/mixin/IndexedScopedViewFactory.h>
-#include <l0-infra/array/mixin/IterableScopedArrayLike.h>
-#include <l0-infra/array/mixin/IndexedRefAccessor.h>
-#include <l0-infra/array/mixin/ScopedByIndexAccessor.h>
-#include <l0-infra/array/mixin/RangedScopedElemCount.h>
-#include <l0-infra/array/mixin/ScopedSimpleForEach.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleFind.h>
+#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
+#include <l0-infra/array/mixin/indexed/IndexedScopedViewFactory.h>
+#include <l0-infra/array/mixin/scoped/IterableScopedArrayLike.h>
+#include <l0-infra/array/mixin/indexed/IndexedRefAccessor.h>
+#include <l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h>
+#include <l0-infra/array/mixin/ranged/RangedScopedElemCount.h>
+#include <l0-infra/array/mixin/scoped/ScopedSimpleForEach.h>
 
 namespace view::detail {
     using SimpleScopedViewMixins = mixin::Mixins<

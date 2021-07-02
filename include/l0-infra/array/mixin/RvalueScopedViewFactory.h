@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RVALUESCOPEDVIEWFACTORY_H
 #define OBJECT_ARRAY_RVALUESCOPEDVIEWFACTORY_H
 
-#include <l0-infra/array/mixin/ScopedViewFactory.h>
+#include <l0-infra/array/mixin/scoped/ScopedViewFactory.h>
 #include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 
 namespace mixin {
