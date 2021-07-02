@@ -2,12 +2,12 @@
 // Created by Darwin Yuan on 2021/6/20.
 //
 
-#include <l0-infra/array/mixin/simple/NonScopedSimpleFind.h>
+#include <l0-infra/array/mixin/find/NonScopedSimpleFind.h>
 #include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include "../Foo.h"
 #include <catch.hpp>
-#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
+#include <l0-infra/array/mixin/find/SimpleFindExt.h>
 
 namespace {
     using Mixins = mixin::Mixins<mixin::RangedArrayLike, mixin::NonScopedSimpleFind, mixin::SimpleFindExt>;

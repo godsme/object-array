@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_SIMPLEMINELEMEXT_H
 
 #include <l0-infra/array/concept/SimpleMinElem.h>
-#include <l0-infra/array/mixin/simple/SimpleMinElem.h>
+#include <l0-infra/array/mixin/minmax/SimpleMinElem.h>
 #include <l0-infra/array/mixin/detail/DefaultLessThan.h>
 #include <l0-infra/base/InvokeConstMethod.h>
 

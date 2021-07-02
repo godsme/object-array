@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_SCOPEDSIMPLEMINELEM_H
 #define OBJECT_ARRAY_SCOPEDSIMPLEMINELEM_H
 
-#include <l0-infra/array/mixin/scoped/ScopedMinElem.h>
+#include <l0-infra/array/mixin/minmax/ScopedMinElem.h>
 
 namespace mixin {
     template<typename T>

@@ -7,24 +7,24 @@
 
 #include <l0-infra/array/holder/ScopedViewDataHolder.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/scoped/ScopedSimpleFind.h>
-#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
+#include <l0-infra/array/mixin/find/ScopedSimpleFind.h>
+#include <l0-infra/array/mixin/find/SimpleFindExt.h>
 #include <l0-infra/array/mixin/indexed/IndexedScopedViewFactory.h>
 #include <l0-infra/array/mixin/scoped/IterableScopedArrayLike.h>
 #include <l0-infra/array/mixin/indexed/IndexedRefAccessor.h>
 #include <l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h>
 #include <l0-infra/array/mixin/ranged/RangedScopedElemCount.h>
-#include <l0-infra/array/mixin/simple/SimpleMinElemExt.h>
-#include <l0-infra/array/mixin/scoped/ScopedSimpleForEach.h>
-#include <l0-infra/array/mixin/scoped/ScopedSimpleMinElem.h>
-#include <l0-infra/array/mixin/scoped/ScopedSortViewFactory.h>
-#include <l0-infra/array/mixin/scoped/ScopedSort.h>
-#include <l0-infra/array/mixin/mutable/sort/RValueScopedSort.h>
+#include <l0-infra/array/mixin/minmax/SimpleMinElemExt.h>
+#include <l0-infra/array/mixin/foreach/ScopedSimpleForEach.h>
+#include <l0-infra/array/mixin/minmax/ScopedSimpleMinElem.h>
+#include <l0-infra/array/mixin/sort/ScopedSortViewFactory.h>
+#include <l0-infra/array/mixin/sort/ScopedSort.h>
+#include <l0-infra/array/mixin/sort/RValueScopedSort.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/detail/ViewedArray.h>
 #include <l0-infra/array/mixin/mutable/ViewAppend.h>
 #include <l0-infra/array/mixin/mutable/AppendExt.h>
-#include <l0-infra/array/mixin/scoped/ScopedReplace.h>
+#include <l0-infra/array/mixin/mutable/ScopedReplace.h>
 #include <l0-infra/array/mixin/mutable/ReplaceExt.h>
 
 namespace view::detail {

@@ -6,8 +6,8 @@
 #define OBJECT_ARRAY_SCATTEREDARRAY_H
 
 #include <l0-infra/array/holder/ScatteredArrayDataHolder.h>
-#include <l0-infra/array/mixin/scoped/ScopedSimpleFind.h>
-#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
+#include <l0-infra/array/mixin/find/ScopedSimpleFind.h>
+#include <l0-infra/array/mixin/find/SimpleFindExt.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/scoped/IterableScopedArrayLike.h>
 #include <l0-infra/array/mixin/ranged/RangedArray.h>
@@ -16,16 +16,16 @@
 #include <l0-infra/array/mixin/simple/ByIndexAccessor.h>
 #include <l0-infra/array/mixin/scoped/ScopedByIndexAccessor.h>
 #include <l0-infra/array/mixin/detail/ArrayElemVisit.h>
-#include <l0-infra/array/mixin/scoped/ScopedSimpleForEach.h>
-#include <l0-infra/array/mixin/simple/SimpleForEachExt.h>
+#include <l0-infra/array/mixin/foreach/ScopedSimpleForEach.h>
+#include <l0-infra/array/mixin/foreach/SimpleForEachExt.h>
 #include <l0-infra/array/mixin/scoped/FullScopedElemCount.h>
-#include <l0-infra/array/mixin/scoped/ScopedSimpleMinElem.h>
-#include <l0-infra/array/mixin/simple/SimpleMinElemExt.h>
+#include <l0-infra/array/mixin/minmax/ScopedSimpleMinElem.h>
+#include <l0-infra/array/mixin/minmax/SimpleMinElemExt.h>
 #include <l0-infra/array/mixin/indexed/IndexedScopedViewFactory.h>
 #include <l0-infra/array/mixin/mutable/EraseExt.h>
-#include <l0-infra/array/mixin/scoped/ScopedCleanUp.h>
-#include <l0-infra/array/mixin/scoped/ScopedSortViewFactory.h>
-#include <l0-infra/array/mixin/scoped/ScopedSort.h>
+#include <l0-infra/array/mixin/mutable/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/sort/ScopedSortViewFactory.h>
+#include <l0-infra/array/mixin/sort/ScopedSort.h>
 #include <l0-infra/array/mixin/scoped/ScopedRangedArray.h>
 #include <l0-infra/array/mixin/simple/ArrayEquality.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>

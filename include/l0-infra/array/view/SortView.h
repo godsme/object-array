@@ -7,8 +7,8 @@
 
 #include <l0-infra/array/holder/SortViewDataHolder.h>
 #include <l0-infra/array/mixin/indexed/IndexedViewFactory.h>
-#include <l0-infra/array/mixin/mutable/sort/ArraySortExt.h>
-#include <l0-infra/array/mixin/mutable/sort/IndicesBasedSort.h>
+#include <l0-infra/array/mixin/sort/ArraySortExt.h>
+#include <l0-infra/array/mixin/sort/IndicesBasedSort.h>
 
 namespace view::detail {
     using SortViewMixins = ::mixin::Mixins<

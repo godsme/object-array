@@ -7,7 +7,7 @@
 
 #include <l0-infra/array/concept/ScopedArrayLike.h>
 #include <l0-infra/array/concept/Pred.h>
-#include <l0-infra/array/mixin/scoped/ScopedFind.h>
+#include <l0-infra/array/mixin/find/ScopedFind.h>
 #include <optional>
 #include <algorithm>
 

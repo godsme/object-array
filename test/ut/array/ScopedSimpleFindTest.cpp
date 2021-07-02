@@ -2,9 +2,9 @@
 // Created by Darwin Yuan on 2021/6/22.
 //
 
-#include <l0-infra/array/mixin/scoped/ScopedSimpleFind.h>
+#include <l0-infra/array/mixin/find/ScopedSimpleFind.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/simple/SimpleFindExt.h>
+#include <l0-infra/array/mixin/find/SimpleFindExt.h>
 #include "../Foo.h"
 #include <catch.hpp>
 #include <l0-infra/array/mixin/ranged/RangedArrayLike.h>
