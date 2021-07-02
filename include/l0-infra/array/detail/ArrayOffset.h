@@ -22,18 +22,6 @@ namespace detail {
     private:
         OFFSET_TYPE offset;
     };
-
-//    template<typename OFFSET_TYPE, typename SIZE_TYPE>
-//    struct ArrayEndOffset {
-//        ArrayEndOffset(OFFSET_TYPE offset) : offset{offset} {}
-//
-//        auto ToIndex(SIZE_TYPE size) const -> SIZE_TYPE {
-//            return offset.ToOffset(size);
-//        }
-//
-//    private:
-//        ArrayOffset<OFFSET_TYPE, SIZE_TYPE> offset;
-//    };
 }
 
 #endif //OBJECT_ARRAY_ARRAYOFFSET_H

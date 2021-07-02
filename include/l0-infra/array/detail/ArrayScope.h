@@ -84,7 +84,6 @@ namespace detail {
             return *this;
         }
     };
-
 }
 
 #endif //OBJECT_ARRAY_ARRAYSCOPE_H
