@@ -54,8 +54,8 @@ namespace mixin {
             } else {
                 for (int i = Num() - 2; i >= 0; --i) {
                     if (less(obj, GetObj(i))) {
-                        Emplace(i + 1, std::move(obj));
-                        Trait::Destroy(GetObj(i));
+                        Emplace(i + 1, std::move(GetObj(i)));
+                        Trait::Destroy(Elems()[i]);
                     } else {
                        return Emplace(i+1, std::move(obj));
                     }
@@ -90,12 +90,14 @@ namespace mixin {
             if(Num() == 1) return p;
 
             Compare less{};
-            for(int i = Num()-1; i>=0; i++) {
-                if(!less(*p, GetObj(i))) break;
-                std::swap(*p, GetObj(i));
+            for(int i = Num()-2; i>=0; --i) {
+                if(!less(GetObj(i+1), GetObj(i))) {
+                    return &GetObj(i+1);
+                }
+                std::swap(GetObj(i+1), GetObj(i));
             }
 
-            return p;
+            return &GetObj(0);
         }
 
     public:
