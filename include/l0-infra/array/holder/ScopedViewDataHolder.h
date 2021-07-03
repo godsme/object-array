@@ -45,11 +45,17 @@ namespace holder {
         BitMap scope;
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedViewDataHolder, ORDERED>;
+    template<bool ORDERED>
+    struct ScopedViewDataHolderTrait {
+        template<typename ARRAY, typename SUB_TYPE>
+        using Type = ScopedViewDataHolder<ARRAY, SUB_TYPE, ORDERED>;
+    };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedViewDataHolder, ORDERED>;
+    using RefScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ScopedViewDataHolderTrait<ORDERED>::template Type>;
+
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ScopedViewDataHolderTrait<ORDERED>::template Type>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDVIEWDATAHOLDER_H

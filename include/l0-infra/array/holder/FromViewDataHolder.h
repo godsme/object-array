@@ -31,11 +31,17 @@ namespace holder {
         SizeType begin_;
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefFromViewDataHolder = detail::RefViewDataHolder<ARRAY, FromViewDataHolder, ORDERED>;
+    template<bool ORDERED>
+    struct FromViewDataHolderTrait {
+        template<typename ARRAY, typename SUB_TYPE>
+        using Type = FromViewDataHolder<ARRAY, SUB_TYPE, ORDERED>;
+    };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueFromViewDataHolder = detail::ValueViewDataHolder<ARRAY, FromViewDataHolder, ORDERED>;
+    using RefFromViewDataHolder = detail::RefViewDataHolder<ARRAY, FromViewDataHolderTrait<ORDERED>::template Type>;
+
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueFromViewDataHolder = detail::ValueViewDataHolder<ARRAY, FromViewDataHolderTrait<ORDERED>::template Type>;
 }
 
 #endif //OBJECT_ARRAY_FROMVIEWDATAHOLDER_H

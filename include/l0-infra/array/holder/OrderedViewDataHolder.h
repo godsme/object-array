@@ -37,7 +37,7 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE, bool ORDERED>
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE>
     class OrderedViewDataHolder {
         dEcL_tHiS(SUB_TYPE);
         auto GetArray() const -> ARRAY const& { return This()->GetArray(); }
@@ -46,7 +46,7 @@ namespace holder {
         using SizeType = typename ARRAY::SizeType;
         using ObjectType = typename ARRAY::ObjectType;
         constexpr static SizeType MAX_SIZE = ARRAY::MAX_SIZE;
-        constexpr static bool IS_ORDERED = ORDERED;
+        constexpr static bool IS_ORDERED = true;
         using Interface = detail::OrderedViewDataHolderInterface<OrderedViewDataHolder>;
 
     public:
@@ -67,10 +67,10 @@ namespace holder {
     };
 
     template<typename ARRAY>
-    using RefOrdredViewHolder = detail::RefViewDataHolder<ARRAY, OrderedViewDataHolder, true>;
+    using RefOrdredViewHolder = detail::RefViewDataHolder<ARRAY, OrderedViewDataHolder>;
 
     template<typename ARRAY>
-    using ValueOrderedViewHolder = detail::ValueViewDataHolder<ARRAY, OrderedViewDataHolder, true>;
+    using ValueOrderedViewHolder = detail::ValueViewDataHolder<ARRAY, OrderedViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_ORDEREDVIEWDATAHOLDER_H

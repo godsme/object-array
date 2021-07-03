@@ -39,11 +39,17 @@ namespace holder {
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetArray().GetObj(n);}
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefProxyRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyRangedViewDataHolder, ORDERED>;
+    template<bool ORDERED>
+    struct ProxyRangedViewDataHolderTrait {
+        template<typename ARRAY, typename SUB_TYPE>
+        using Type = ProxyRangedViewDataHolder<ARRAY, SUB_TYPE, ORDERED>;
+    };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueProxyRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyRangedViewDataHolder, ORDERED>;
+    using RefProxyRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyRangedViewDataHolderTrait<ORDERED>::template Type>;
+
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueProxyRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyRangedViewDataHolderTrait<ORDERED>::template Type>;
 }
 
 #endif //OBJECT_ARRAY_PROXYRANGEDVIEWDATAHOLDER_H

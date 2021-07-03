@@ -30,11 +30,17 @@ namespace holder {
         SizeType end_;
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefUntilViewDataHolder = detail::RefViewDataHolder<ARRAY, UntilViewDataHolder, ORDERED>;
+    template<bool ORDERED>
+    struct UntilViewDataHolderTrait {
+        template<typename ARRAY, typename SUB_TYPE>
+        using Type = UntilViewDataHolder<ARRAY, SUB_TYPE, ORDERED>;
+    };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueUntilViewDataHolder = detail::ValueViewDataHolder<ARRAY, UntilViewDataHolder, ORDERED>;
+    using RefUntilViewDataHolder = detail::RefViewDataHolder<ARRAY, UntilViewDataHolderTrait<ORDERED>::template Type>;
+
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueUntilViewDataHolder = detail::ValueViewDataHolder<ARRAY, UntilViewDataHolderTrait<ORDERED>::template Type>;
 }
 
 #endif //OBJECT_ARRAY_UNTILVIEWDATAHOLDER_H

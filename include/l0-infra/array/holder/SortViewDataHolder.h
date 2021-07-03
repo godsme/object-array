@@ -72,10 +72,10 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<typename ARRAY, typename SUB_TYPE, bool ORDERED>
+    template<typename ARRAY, typename SUB_TYPE>
     struct SortViewDataHolder {
         constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
-        constexpr static bool IS_ORDERED = ORDERED;
+        constexpr static bool IS_ORDERED = true;
         constexpr static bool IS_SCOPED = detail::IsScopedArray<ARRAY>::value;
         using SizeType = typename ARRAY::SizeType;
         using ObjectType = typename ARRAY::ObjectType;
@@ -102,10 +102,10 @@ namespace holder {
     };
 
     template<typename ARRAY>
-    using RefSortViewHolder = detail::RefViewDataHolder<ARRAY, SortViewDataHolder, true>;
+    using RefSortViewHolder = detail::RefViewDataHolder<ARRAY, SortViewDataHolder>;
 
     template<typename ARRAY>
-    using ValueSortViewHolder = detail::ValueViewDataHolder<ARRAY, SortViewDataHolder, true>;
+    using ValueSortViewHolder = detail::ValueViewDataHolder<ARRAY, SortViewDataHolder>;
 }
 
 #endif //OBJECT_ARRAY_SORTVIEWDATAHOLDER_H

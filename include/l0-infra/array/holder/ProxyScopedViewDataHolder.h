@@ -27,11 +27,17 @@ namespace holder {
         auto GetScope() -> BitMap& { return This()->GetArray().GetScope(); }
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefProxyScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyScopedViewDataHolder, ORDERED>;
+    template<bool ORDERED>
+    struct ProxyScopedViewDataHolderTrait {
+        template<typename ARRAY, typename SUB_TYPE>
+        using Type = ProxyScopedViewDataHolder<ARRAY, SUB_TYPE, ORDERED>;
+    };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueProxyScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyScopedViewDataHolder, ORDERED>;
+    using RefProxyScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyScopedViewDataHolderTrait<ORDERED>::template Type>;
+
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
+    using ValueProxyScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyScopedViewDataHolderTrait<ORDERED>::template Type>;
 }
 
 #endif //OBJECT_ARRAY_PROXYSCOPEDVIEWDATAHOLDER_H

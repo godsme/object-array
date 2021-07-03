@@ -34,11 +34,17 @@ namespace holder {
         SizeType end_;
     };
 
-    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED=ARRAY::ORDERED>
-    using RefRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, RangedViewDataHolder, ORDERED>;
+    template<bool ORDERED>
+    struct RangedViewDataHolderTrait {
+        template<typename ARRAY, typename SUB_TYPE>
+        using Type = RangedViewDataHolder<ARRAY, SUB_TYPE, ORDERED>;
+    };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED=ARRAY::ORDERED>
-    using ValueRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, RangedViewDataHolder, ORDERED>;
+    using RefRangedViewDataHolder = detail::RefViewDataHolder<ARRAY, RangedViewDataHolderTrait<ORDERED>::template Type>;
+
+    template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED=ARRAY::ORDERED>
+    using ValueRangedViewDataHolder = detail::ValueViewDataHolder<ARRAY, RangedViewDataHolderTrait<ORDERED>::template Type>;
 }
 
 #endif //OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H
