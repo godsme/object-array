@@ -42,25 +42,36 @@ namespace mixin {
             return Emplace(i, std::move(obj));
         }
 
-        template<typename ARG>
-        auto Insert(ARG&& obj) -> auto* {
+        template<typename OBJ>
+        auto CopyInsert(OBJ&& obj) -> auto* {
             Compare less{};
+            for (int i = Num() - 2; i >= 0; --i) {
+                if (less(obj, GetObj(i))) continue;
+                return InsertAt(i+1, std::move(obj));
+            }
+            return InsertAt(0, std::move(obj));
+        }
+
+        template<typename ARG>
+        auto NoCopyInsert(ARG&& obj) -> auto* {
+            Compare less{};
+            for (int i = Num() - 2; i >= 0; --i) {
+                if (less(obj, GetObj(i))) {
+                    Emplace(i + 1, std::move(GetObj(i)));
+                    Trait::Destroy(Elems()[i]);
+                } else {
+                    return Emplace(i+1, std::move(obj));
+                }
+            }
+            return Emplace(0, std::move(obj));
+        }
+
+        template<typename OBJ>
+        auto Insert(OBJ&& obj) -> auto* {
             if constexpr(std::is_trivially_copyable_v<ObjectType>) {
-                for (int i = Num() - 2; i >= 0; --i) {
-                    if (less(obj, GetObj(i))) continue;
-                    return InsertAt(i+1, std::move(obj));
-                }
-                return InsertAt(0, std::move(obj));
+                return CopyInsert(std::forward<OBJ>(obj));
             } else {
-                for (int i = Num() - 2; i >= 0; --i) {
-                    if (less(obj, GetObj(i))) {
-                        Emplace(i + 1, std::move(GetObj(i)));
-                        Trait::Destroy(Elems()[i]);
-                    } else {
-                       return Emplace(i+1, std::move(obj));
-                    }
-                }
-                return Emplace(0, std::move(obj));
+                return NoCopyInsert(std::forward<OBJ>(obj));
             }
         }
 
