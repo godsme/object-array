@@ -24,6 +24,7 @@
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/array_like/RangedArray.h>
+#include <l0-infra/array/mixin/erase/SimpleErase.h>
 
 namespace detail {
     using ObjectArrayMixins = ::mixin::Mixins<
@@ -55,6 +56,7 @@ namespace detail {
         mixin::IndexedViewFactory,
         mixin::SortViewFactory,
         mixin::___mutable_mixin_delimiter___,
+        mixin::SimpleErase,
         mixin::SimpleMutate,
         mixin::ReplaceExt,
         mixin::AppendExt,

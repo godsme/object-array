@@ -12,6 +12,7 @@
 #include <l0-infra/array/mixin/erase/SimpleMutate.h>
 #include <l0-infra/array/mixin/erase/EraseExt.h>
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/erase/SimpleErase.h>
 
 namespace detail {
     using ArrayViewMixins = ::mixin::Mixins<
@@ -41,6 +42,7 @@ namespace detail {
             mixin::RValueIndexedViewFactory,
             mixin::RValueSortViewFactory,
             mixin::___mutable_mixin_delimiter___,
+            mixin::SimpleErase,
             mixin::SimpleMutate,
             mixin::ReplaceExt,
             mixin::AppendExt,

@@ -18,7 +18,6 @@
 namespace _concept::detail {
     template<typename T>
     struct SimpleMutableChecker : T {
-        using T::Erase;
         using T::Append;
 
         using typename T::SizeType;
@@ -27,7 +26,6 @@ namespace _concept::detail {
 
     template<typename T>
     concept SimpleMutable = requires(T& o, typename T::ObjectType const& obj, typename T::ObjectType&& r_obj) {
-        { o.Erase(typename T::SizeType{}) };
         { o.Append() } -> std::same_as<typename T::ObjectType*>;
         { o.Append(obj) } -> std::same_as<typename T::ObjectType*>;
         { o.Append(r_obj) } -> std::same_as<typename T::ObjectType*>;

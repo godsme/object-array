@@ -7,6 +7,7 @@
 
 #include <l0-infra/array/detail/ConceptDef.h>
 #include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
+#include <l0-infra/array/mixin/erase/SimpleDoErase.h>
 
 namespace mixin {
     template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
@@ -24,14 +25,7 @@ namespace mixin {
         using Self::Num;
         using Self::Elems;
 
-        using typename T::Trait;
-
-    private:
-        auto DoErase(SizeType i) -> void {
-            --Num();
-            if (i < Num()) Trait::Replace(Elems()[i], std::move(GetObj(Num())));
-            Trait::Destroy(Elems()[Num()]);
-        }
+        using typename Self::Trait;
 
     public:
         template<typename ... ARGS>
@@ -42,10 +36,6 @@ namespace mixin {
         template<typename ... ARGS>
         auto Replace(SizeType i, ARGS &&... args) -> ObjectType * {
             return i < Num() ? Trait::Replace(Elems()[i], std::forward<ARGS>(args)...) : nullptr;
-        }
-
-        auto Erase(SizeType i) -> void {
-            if (i < Num()) DoErase(i);
         }
     };
 }
