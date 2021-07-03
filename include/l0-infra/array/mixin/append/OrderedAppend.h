@@ -23,9 +23,9 @@ namespace mixin {
         using Self::GetObj;
         using Self::Num;
         using Self::Elems;
+        using Self::Less;
 
         using typename Self::Trait;
-        using typename Self::Compare;
 
     private:
         template<typename ARG>
@@ -44,9 +44,8 @@ namespace mixin {
 
         template<typename OBJ>
         auto CopyInsert(OBJ&& obj) -> auto* {
-            Compare less{};
             for (int i = Num() - 2; i >= 0; --i) {
-                if (less(obj, GetObj(i))) continue;
+                if (Less(obj, GetObj(i))) continue;
                 return InsertAt(i+1, std::move(obj));
             }
             return InsertAt(0, std::move(obj));
@@ -54,9 +53,8 @@ namespace mixin {
 
         template<typename ARG>
         auto NoCopyInsert(ARG&& obj) -> auto* {
-            Compare less{};
             for (int i = Num() - 2; i >= 0; --i) {
-                if (less(obj, GetObj(i))) {
+                if (Less(obj, GetObj(i))) {
                     Emplace(i + 1, std::move(GetObj(i)));
                     Trait::Destroy(Elems()[i]);
                 } else {
@@ -96,9 +94,8 @@ namespace mixin {
         }
 
         auto DoSort() -> auto* {
-            Compare less{};
             for(int i = Num()-2; i>=0; --i) {
-                if(!less(GetObj(i+1), GetObj(i))) {
+                if(!Less(GetObj(i+1), GetObj(i))) {
                     return &GetObj(i+1);
                 }
                 std::swap(GetObj(i+1), GetObj(i));
