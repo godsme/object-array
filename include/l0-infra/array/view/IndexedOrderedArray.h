@@ -57,6 +57,7 @@ namespace detail {
             mixin::IndexedOrderedAppend,
             mixin::AppendExt,
             mixin::SimpleReplace,
+            mixin::ReplaceExt,
             mixin::IndexedOrderedRangedClear,
             mixin::SimpleErase,
             mixin::EraseExt,

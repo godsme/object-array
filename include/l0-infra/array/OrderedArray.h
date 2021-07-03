@@ -62,6 +62,7 @@ namespace detail {
             mixin::AppendExt,
             mixin::EraseExt,
             mixin::SimpleReplace,
+            mixin::ReplaceExt,
             mixin::ScopedCleanUp,
             mixin::RangedClear>;
 
