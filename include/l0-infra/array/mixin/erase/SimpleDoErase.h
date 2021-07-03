@@ -33,9 +33,9 @@ namespace mixin {
 
         auto MoveElems(SizeType pos) -> void {
             if constexpr (std::is_trivially_copyable_v<ObjectType>) {
-                ::memmove(Elems() + pos, Elems() + pos + 1, sizeof(ObjectType) * (Num() - pos - 1));
+                ::memmove(Elems() + pos, Elems() + pos + 1, sizeof(ObjectType) * (Num() - pos));
             } else {
-                for(auto i=pos; i<Num()-1; i++) {
+                for(auto i=pos; i<Num(); i++) {
                     Trait::Emplace(Elems()[i], ToObject(i+1));
                 }
             }

@@ -17,6 +17,8 @@
 #include <l0-infra/array/mixin/count/RangedElemsCount.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/erase/RangedClear.h>
+#include <l0-infra/array/mixin/erase/ContiguousDoErase.h>
+#include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/append/OrderedDoAppend.h>
 
 namespace detail {
@@ -25,11 +27,13 @@ namespace detail {
             mixin::RangedArray,
             mixin::RangedArrayLike,
             mixin::ObjectIndex,
+            mixin::ContiguousDoErase,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
             mixin::___mutable_mixin_delimiter___,
+            mixin::SimpleErase,
             mixin::RangedClear,
             mixin::OrderedDoAppend>;
 

@@ -25,7 +25,7 @@
 #include <l0-infra/array/mixin/erase/IndexedOrderedDoErase.h>
 
 namespace detail {
-    using OrderedArrayMixins = ::mixin::Mixins<
+    using IndexedOrderedArrayMixins = ::mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
@@ -53,7 +53,7 @@ namespace detail {
             mixin::AppendExt>;
 
     template<typename T, std::size_t MAX_NUM, typename COMPARE>
-    using IndexedOrderedArray = detail::OrderedArrayMixins::Compose<holder::IndexedOrderedArrayHolder<T, MAX_NUM, COMPARE>>;
+    using IndexedOrderedArray = detail::IndexedOrderedArrayMixins::Compose<holder::IndexedOrderedArrayHolder<T, MAX_NUM, COMPARE>>;
 }
 
 template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>

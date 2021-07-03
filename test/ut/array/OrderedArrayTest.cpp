@@ -20,6 +20,17 @@ SCENARIO("OrderedArray") {
     REQUIRE(array[2] == 9);
     REQUIRE(array[3] == 10);
     REQUIRE(array[4] == 12);
+
+    WHEN("Erase") {
+        array.Erase(2);
+
+        REQUIRE(array.GetNum() == 4);
+
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 10);
+        REQUIRE(array[3] == 12);
+    }
 }
 
 namespace {
@@ -56,6 +67,17 @@ SCENARIO("Foo OrderedArray") {
     REQUIRE(array[2].a == 9);
     REQUIRE(array[3].a == 10);
     REQUIRE(array[4].a == 12);
+
+    WHEN("Erase") {
+        array.Erase(2);
+
+        REQUIRE(array.GetNum() == 4);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 8);
+        REQUIRE(array[2].a == 10);
+        REQUIRE(array[3].a == 12);
+    }
 }
 
 SCENARIO("Foo Object OrderedArray") {
@@ -74,4 +96,15 @@ SCENARIO("Foo Object OrderedArray") {
     REQUIRE(array[2].a == 9);
     REQUIRE(array[3].a == 10);
     REQUIRE(array[4].a == 12);
+
+    WHEN("Erase") {
+        array.Erase(2);
+
+        REQUIRE(array.GetNum() == 4);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 8);
+        REQUIRE(array[2].a == 10);
+        REQUIRE(array[3].a == 12);
+    }
 }
