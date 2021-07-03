@@ -12,14 +12,13 @@
 
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM, bool ORDERED>
-    struct ObjectArrayHolderBase : ArrayDataHolder<OBJ, MAX_NUM> {
-        using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
+    struct ObjectArrayHolderBase : ArrayDataHolder<OBJ, MAX_NUM, ORDERED> {
+        using Parent = ArrayDataHolder<OBJ, MAX_NUM, ORDERED>;
         using ObjectType = typename Parent::ObjectType;
         using SizeType = typename Parent::SizeType;
         using ElemType = typename Parent::ElemType;
         using Trait = typename Parent::Trait;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
-        constexpr static bool IS_ORDERED = ORDERED;
         using Interface = ContinuousArrayDataHolderInterface<ObjectArrayHolderBase>;
 
     protected:

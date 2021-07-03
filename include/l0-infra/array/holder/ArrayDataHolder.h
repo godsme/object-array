@@ -13,7 +13,7 @@
 #include <l0-infra/base/IntOpt.h>
 
 namespace holder {
-    template<typename OBJ, std::size_t MAX_NUM>
+    template<typename OBJ, std::size_t MAX_NUM, bool ORDERED>
     struct ArrayDataHolder {
         using ObjectType = OBJ;
         using ElemType = std::decay_t<holder::ElemType<OBJ>>;
@@ -21,6 +21,7 @@ namespace holder {
         using Trait = detail::ObjectTrait<ElemType, ObjectType>;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
         constexpr static bool IS_CONST = std::is_const_v<OBJ>;
+        constexpr static bool IS_ORDERED = ORDERED;
 
     protected:
         auto ClearContent(SizeType num) -> void {

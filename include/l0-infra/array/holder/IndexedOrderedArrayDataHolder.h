@@ -41,7 +41,7 @@ namespace holder::detail {
         }
 
     protected:
-        SizeType indices[MAX_SIZE];
+        ::detail::OrderedArrayIndices<MAX_SIZE> indices;
     };
 
     template<typename OBJ, std::size_t MAX_NUM, typename COMPARE, bool = std::is_const_v<OBJ>>

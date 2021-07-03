@@ -56,16 +56,13 @@ namespace holder::detail {
 
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM>
-    struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM> {
-        using Parent = ArrayDataHolder<OBJ, MAX_NUM>;
+    struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM, false> {
+        using Parent = ArrayDataHolder<OBJ, MAX_NUM, false>;
         using ObjectType = typename Parent::ObjectType;
         using ElemType = typename Parent::ElemType;
         using SizeType = typename Parent::SizeType;
         using BitMap = ::detail::ArrayScope<MAX_NUM>;
         using Trait = typename Parent::Trait;
-        using Owner = ScatteredArrayDataHolder;
-        constexpr static SizeType MAX_SIZE = MAX_NUM;
-        constexpr static bool IS_ORDERED = false;
         using Interface = detail::ScatteredArrayDataHolderInterface<ScatteredArrayDataHolder>;
 
     private:
