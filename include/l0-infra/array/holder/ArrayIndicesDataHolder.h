@@ -9,16 +9,14 @@
 #include <type_traits>
 
 namespace holder {
-    template<std::size_t MAX_SIZE>
-    struct ArrayIndicesDataHolder : ObjectArrayDataHolder<DeduceSizeType_t<MAX_SIZE>, MAX_SIZE> {
-        using Parent = ObjectArrayDataHolder<DeduceSizeType_t<MAX_SIZE>, MAX_SIZE>;
-        using Parent::Parent;
-
-    private:
+    template<std::size_t MAX_SIZE, typename Parent = detail::ObjectArrayHolder<DeduceSizeType_t<MAX_SIZE>, MAX_SIZE, true>>
+    class ArrayIndicesDataHolder : public Parent {
         using Parent::elems;
         using Parent::num;
 
     public:
+        using Parent::Parent;
+
         template<typename ARRAY, std::enable_if_t<(MAX_SIZE >= ARRAY::MAX_SIZE), bool> = true>
         auto InitWith(ARRAY const& array) -> void {
             for(num=0; num<array.GetNum(); num++) {
