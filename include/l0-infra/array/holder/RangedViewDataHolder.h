@@ -6,6 +6,8 @@
 #define OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H
 
 #include <l0-infra/array/holder/detail/RangedViewDataHolderBase.h>
+#include <l0-infra/array/holder/detail/RangedViewDataHolderInterface.h>
+#include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
 
 namespace holder {
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, typename SUB_TYPE, bool IS_ORDERED>

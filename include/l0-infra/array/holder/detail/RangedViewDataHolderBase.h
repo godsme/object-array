@@ -5,12 +5,10 @@
 #ifndef OBJECT_ARRAY_RANGEDVIEWDATAHOLDERBASE_H
 #define OBJECT_ARRAY_RANGEDVIEWDATAHOLDERBASE_H
 
+#include <l0-infra/array/detail/ConceptDef.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
-#include <l0-infra/array/holder/detail/DeduceElemType.h>
-#include <l0-infra/array/holder/detail/ObjectTrait.h>
-#include <l0-infra/array/holder/detail/RangedViewDataHolderInterface.h>
-#include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>
 #include <l0-infra/array/holder/detail/ViewDataHolder.h>
+#include <l0-infra/array/detail/CrtpHelper.h>
 #include <l0-infra/base/BitSet.h>
 
 namespace holder::detail {

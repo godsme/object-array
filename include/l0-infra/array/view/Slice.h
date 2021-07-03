@@ -5,28 +5,27 @@
 #ifndef OBJECT_ARRAY_VIEW_SLICE_H
 #define OBJECT_ARRAY_VIEW_SLICE_H
 
-#include <l0-infra/array/mixin/factory/RvalueScopedViewFactory.h>
-#include <l0-infra/array/mixin/factory/RValueIndexedViewFactory.h>
 #include <l0-infra/array/holder/RangedViewDataHolder.h>
-#include <l0-infra/array/mixin/sort/ArraySort.h>
-#include <l0-infra/array/mixin/sort/ArraySortExt.h>
-#include <l0-infra/array/mixin/factory/RValueSortViewFactory.h>
-#include <l0-infra/array/mixin/sort/RValueArraySort.h>
 #include <l0-infra/array/holder/FromViewDataHolder.h>
 #include <l0-infra/array/holder/UntilViewDataHolder.h>
-#include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/replace/RangedReplace.h>
-#include <l0-infra/array/mixin/array_like/ViewedArray.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/append/ViewAppend.h>
-#include <l0-infra/array/mixin/append/AppendExt.h>
-#include <l0-infra/array/mixin/replace/ReplaceExt.h>
+#include <l0-infra/array/mixin/array_like/ViewedArray.h>
 #include <l0-infra/array/mixin/find/ScopedFindExt.h>
 #include <l0-infra/array/mixin/foreach/ScopedForEachExt.h>
 #include <l0-infra/array/mixin/minmax/ScopedMinElemExt.h>
+#include <l0-infra/array/mixin/factory/RvalueScopedViewFactory.h>
+#include <l0-infra/array/mixin/factory/RValueIndexedViewFactory.h>
+#include <l0-infra/array/mixin/factory/RValueSortViewFactory.h>
+#include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
+#include <l0-infra/array/mixin/sort/ArraySort.h>
+#include <l0-infra/array/mixin/sort/ArraySortExt.h>
+#include <l0-infra/array/mixin/sort/RValueArraySort.h>
+#include <l0-infra/array/mixin/replace/RangedReplace.h>
+#include <l0-infra/array/mixin/append/ViewAppend.h>
+#include <l0-infra/array/mixin/append/AppendExt.h>
+#include <l0-infra/array/mixin/replace/ReplaceExt.h>
 
 namespace view::detail {
-
     using SliceMixins = mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::ObjectIndex,
@@ -64,18 +63,21 @@ namespace view::detail {
 }
 
 namespace view {
+    ////////////////////////////////////////////////////////////////////////
     template<typename ARRAY>
     using Slice = detail::Slice<ARRAY, holder::RefRangedViewDataHolder>;
 
     template<typename ARRAY>
     using ValueSlice = detail::Slice<ARRAY, holder::ValueRangedViewDataHolder>;
 
+    ////////////////////////////////////////////////////////////////////////
     template<typename ARRAY>
     using FromView = detail::Slice<ARRAY, holder::RefFromViewDataHolder>;
 
     template<typename ARRAY>
     using ValueFromView = detail::Slice<ARRAY, holder::ValueFromViewDataHolder>;
 
+    ////////////////////////////////////////////////////////////////////////
     template<typename ARRAY>
     using UntilView = detail::Slice<ARRAY, holder::RefUntilViewDataHolder>;
 
