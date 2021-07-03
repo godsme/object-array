@@ -95,11 +95,7 @@ namespace mixin {
             return ActualAppend<add_const_reference>(obj);
         }
 
-        template<typename ... ARGS>
-        auto DoAppend(ARGS &&... args) -> ObjectType * {
-            auto* p = Trait::Emplace(Elems()[Num()++], std::forward<ARGS>(args)...);
-            if(Num() == 1) return p;
-
+        auto DoSort() -> auto* {
             Compare less{};
             for(int i = Num()-2; i>=0; --i) {
                 if(!less(GetObj(i+1), GetObj(i))) {
@@ -109,6 +105,12 @@ namespace mixin {
             }
 
             return &GetObj(0);
+        }
+
+        template<typename ... ARGS>
+        auto DoAppend(ARGS &&... args) -> ObjectType * {
+            auto* p = Trait::Emplace(Elems()[Num()++], std::forward<ARGS>(args)...);
+            return Num() == 1 ? p : DoSort();
         }
 
     public:
