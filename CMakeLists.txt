@@ -178,7 +178,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/replace/ReplaceExt.h
         include/l0-infra/array/mixin/append/AppendExt.h
         include/l0-infra/array/mixin/append/ViewAppend.h
-        include/l0-infra/array/mixin/replace/ScopedReplace.h include/l0-infra/array/holder/detail/ViewDataHolder.h include/l0-infra/array/mixin/append/OrderedAppend.h include/l0-infra/array/OrderedArray.h test/ut/array/OrderedArrayTest.cpp include/l0-infra/array/holder/OrderedArrayDataHolder.h include/l0-infra/array/holder/IndexedOrderedArrayDataHolder.h include/l0-infra/array/mixin/append/OrderedDoAppend.h include/l0-infra/array/holder/OrderedArrayIndicesDataHolder.h include/l0-infra/array/detail/OrderedArrayIndices.h)
+        include/l0-infra/array/mixin/replace/ScopedReplace.h include/l0-infra/array/holder/detail/ViewDataHolder.h include/l0-infra/array/mixin/append/OrderedAppend.h include/l0-infra/array/OrderedArray.h test/ut/array/OrderedArrayTest.cpp include/l0-infra/array/holder/OrderedArrayDataHolder.h include/l0-infra/array/holder/IndexedOrderedArrayDataHolder.h include/l0-infra/array/mixin/append/OrderedDoAppend.h include/l0-infra/array/holder/OrderedArrayIndicesDataHolder.h include/l0-infra/array/detail/OrderedArrayIndices.h include/l0-infra/array/view/IndexedOrderedArray.h include/l0-infra/array/mixin/append/IndexedOrderedAppend.h test/ut/array/IndexedOrderedArrayTest.cpp)
 
 add_executable(object_array_test test/ut/catch.cpp ${OBJ_ARRAY_SRC})
 add_executable(object_array_it

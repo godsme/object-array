@@ -53,16 +53,9 @@ namespace holder {
             }
         }
 
-        template<typename U, std::enable_if_t<std::is_same_v<std::remove_const_t<U>, OBJ> ||
-                                              std::is_same_v<std::remove_const_t<U>, ElemType>, int> = 0>
+        template<typename U>
         ArrayDataHolder(U *array, SizeType num) {
-            if constexpr (std::is_trivially_copyable_v<ElemType>) {
-                ::memcpy(elems, array, sizeof(ElemType) * num);
-            } else {
-                for (auto i = 0; i < num; i++) {
-                    Trait::Emplace(elems[i], std::move(Trait::ToObject(array[i])));
-                }
-            }
+            ConstructFrom(array, num);
         }
 
         static auto ConstElemToObject(ElemType const& elem) -> ObjectType const& {

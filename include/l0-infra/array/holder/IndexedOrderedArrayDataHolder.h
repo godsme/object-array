@@ -6,39 +6,70 @@
 #define OBJECT_ARRAY_INDEXEDORDEREDARRAYDATAHOLDER_H
 
 #include <l0-infra/array/holder/ObjectArrayDataHolder.h>
+#include <l0-infra/array/detail/OrderedArrayIndices.h>
+#include <l0-infra/array/holder/detail/ArrayDataHolderInterface.h>
 
 namespace holder::detail {
     template<typename DATA_HOLDER, typename COMPARE>
-    struct IndexedOrderedArrayInterface : ContinuousArrayDataHolderInterface<DATA_HOLDER> {
-        using typename ContinuousArrayDataHolderInterface<DATA_HOLDER>::ObjectType;
-        constexpr static auto Compare = COMPARE{};
-        auto Less(ObjectType const& lhs, ObjectType const& rhs) const -> bool {
-            return Compare(lhs, rhs);
+    class IndexedOrderedArrayHolderInterface : public ArrayDataHolderInterface<DATA_HOLDER> {
+        using Parent = ArrayDataHolderInterface<DATA_HOLDER>;
+        dEcL_tHiS(DATA_HOLDER);
+    public:
+        using ObjectType = typename DATA_HOLDER::ObjectType;
+        using SizeType = typename DATA_HOLDER::SizeType;
+        using Compare  = COMPARE;
+        using Trait = typename DATA_HOLDER::Trait;
+
+        auto Num() const -> SizeType { return This()->indices.GetNum(); }
+        auto GetIndices() -> decltype(auto) { return (This()->indices); }
+
+        auto GetObj(SizeType n) -> ObjectType & {
+            return Parent::ElemToObject(Parent::Elems()[This()->indices[n]]);
         }
 
+        auto GetObj(SizeType n) const -> ObjectType const & {
+            return Parent::ConstElemToObject(Parent::Elems()[This()->indices[n]]);
+        }
 
+        auto IndexBegin() const -> SizeType { return 0; }
+        auto IndexEnd() const -> SizeType { return This()->indices.GetNum(); }
     };
+}
 
+namespace holder::detail {
     template<typename OBJ, std::size_t MAX_SIZE, typename COMPARE>
-    class IndexedOrderedArrayHolderBase : public ObjectArrayHolderBase<OBJ, MAX_SIZE, true> {
-        using Parent = ObjectArrayHolder<OBJ, MAX_SIZE, true>;
-        using typename Parent::SizeType;
+    class IndexedOrderedArrayHolderBase : public ArrayDataHolder<OBJ, MAX_SIZE, true> {
+        using Parent = ArrayDataHolder<OBJ, MAX_SIZE, true>;
+
+    protected:
+        auto DoClear() -> void {
+            Parent::ClearContent(indices.GetNum());
+            indices.Clear();
+        }
+
+    public:
+        using Interface = IndexedOrderedArrayHolderInterface<IndexedOrderedArrayHolderBase, COMPARE>;
+
     public:
         using Parent::Parent;
 
         IndexedOrderedArrayHolderBase() {}
         IndexedOrderedArrayHolderBase(IndexedOrderedArrayHolderBase const &rhs)
-            : Parent{rhs}
-        {
-            ::memcpy(indices, rhs.indices, sizeof(SizeType) * rhs.num);
-        }
+            : Parent{rhs.elem, rhs.indices.GetNum()}, indices{rhs.indices}
+        {}
 
         IndexedOrderedArrayHolderBase(IndexedOrderedArrayHolderBase &&rhs)
-            : Parent{std::move(rhs)}
+            : Parent{rhs.elem, rhs.indices.GetNum()}, indices{rhs.indices}
         {
-            ::memcpy(indices, rhs.indices, sizeof(SizeType) * rhs.num);
             rhs.DoClear();
         }
+
+    private:
+        template<typename, typename >
+        friend struct IndexedOrderedArrayHolderInterface;
+
+        template<typename>
+        friend struct ArrayDataHolderInterface;
 
     protected:
         ::detail::OrderedArrayIndices<MAX_SIZE> indices;
@@ -52,8 +83,8 @@ namespace holder::detail {
         IndexedOrderedArrayHolder(IndexedOrderedArrayHolder const&) = default;
         IndexedOrderedArrayHolder(IndexedOrderedArrayHolder&&) = default;
 
-        auto operator=(IndexedOrderedArrayHolder const &) -> ObjectArrayHolder & = delete;
-        auto operator=(IndexedOrderedArrayHolder&&) -> ObjectArrayHolder & = delete;
+        auto operator=(IndexedOrderedArrayHolder const &) -> IndexedOrderedArrayHolder & = delete;
+        auto operator=(IndexedOrderedArrayHolder&&) -> IndexedOrderedArrayHolder & = delete;
     };
 
     template<typename OBJ, std::size_t MAX_NUM, typename COMPARE>
@@ -66,17 +97,15 @@ namespace holder::detail {
 
         auto operator=(IndexedOrderedArrayHolder const &rhs) -> IndexedOrderedArrayHolder & {
             Parent::DoClear();
-            Parent::num = rhs.num;
-            ConstructFrom(rhs.elems);
-            ::memcpy(Parent::indices, rhs.indices, sizeof(SizeType) * rhs.num);
+            Parent::indices = rhs.indices;
+            ConstructFrom(rhs.elems, rhs.indices.GetNum());
             return *this;
         }
 
         auto operator=(IndexedOrderedArrayHolder&& rhs) -> IndexedOrderedArrayHolder & {
             Parent::DoClear();
-            Parent::num = rhs.num;
-            ConstructFrom(rhs.elems);
-            ::memcpy(Parent::indices, rhs.indices, sizeof(SizeType) * rhs.num);
+            Parent::indices = rhs.indices;
+            ConstructFrom(rhs.elems, rhs.indices.GetNum());
             rhs.DoClear();
             return *this;
         }

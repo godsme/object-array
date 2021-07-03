@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_APPENDEXT_H
 #define OBJECT_ARRAY_APPENDEXT_H
 
+#include <l0-infra/array/concept/Pred.h>
+
 namespace mixin {
     template<typename T>
     class AppendExt : public T {

@@ -9,7 +9,7 @@
 #include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
 
 namespace mixin {
-    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
+    template<__cOnCePt(ConstContinuousArrayLikeDataHolder) T>
     class ContinuousArrayLike : public T {
         using Self = T;
 

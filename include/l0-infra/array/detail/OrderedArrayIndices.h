@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_ORDEREDARRAYINDICES_H
 #define OBJECT_ARRAY_ORDEREDARRAYINDICES_H
 
-#include <l0-infra/array/holder/ArrayIndicesDataHolder.h>
+#include <l0-infra/array/holder/OrderedArrayIndicesDataHolder.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/array_like/RangedArray.h>
@@ -34,7 +34,7 @@ namespace detail {
             mixin::OrderedDoAppend>;
 
     template<std::size_t MAX_NUM>
-    using OrderedArrayIndices = ArrayIndicesMixins::Compose<holder::OrderedArrayIndicesMixins<MAX_NUM>>;
+    using OrderedArrayIndices = OrderedArrayIndicesMixins::Compose<holder::OrderedArrayIndicesDataHolder<MAX_NUM>>;
 }
 
 #endif //OBJECT_ARRAY_ORDEREDARRAYINDICES_H

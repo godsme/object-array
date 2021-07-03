@@ -21,7 +21,7 @@ namespace mixin {
         using Self::IndexBegin;
         using Self::IndexEnd;
 
-    private:
+    protected:
         using T::Elems;
         using T::Num;
 
