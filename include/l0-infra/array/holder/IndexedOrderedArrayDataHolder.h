@@ -42,11 +42,14 @@ namespace holder::detail {
         using Parent = ArrayDataHolder<OBJ, MAX_SIZE, true>;
 
     protected:
-        auto DoClear() -> void {
+        auto ClearContent() -> void {
             Parent::ClearContent(indices.GetNum());
-            indices.Clear();
         }
 
+        auto DoClear() -> void {
+            ClearContent();
+            indices.Clear();
+        }
     public:
         using Interface = IndexedOrderedArrayHolderInterface<IndexedOrderedArrayHolderBase, COMPARE>;
 

@@ -25,12 +25,13 @@ namespace mixin {
         using Self::Num;
         using typename Self::Compare;
         using typename Self::Trait;
+        using Self::ConstElemToObject;
 
     private:
         template<typename ... ARGS>
         auto DoAppend(ARGS&& ... args) -> ObjectType* {
             auto* p = Trait::Emplace(Elems()[Num()], std::forward<ARGS>(args)...);
-            GetIndices().DoAppend([less = Compare{}, elems = Elems()](auto l, auto r) { return less(elems[l], elems[r]); }, Num());
+            GetIndices().DoAppend([less = Compare{}, elems = Elems()](auto l, auto r) { return less(ConstElemToObject(elems[l]), ConstElemToObject(elems[r])); }, Num());
             return p;
         }
 

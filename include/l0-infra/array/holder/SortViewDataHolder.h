@@ -58,7 +58,6 @@ namespace holder::detail {
         }
 
         auto IndexBegin() const -> SizeType { return 0; }
-
         auto IndexEnd() const -> SizeType { return This()->indices.GetNum(); }
     };
 }
