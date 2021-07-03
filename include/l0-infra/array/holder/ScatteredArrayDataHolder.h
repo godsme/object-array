@@ -51,13 +51,17 @@ namespace holder::detail {
                 This()->occupied.reset(i);
             }
         }
+
+        auto Clear() -> void {
+            This()->DoClear();
+        }
     };
 }
 
 namespace holder::detail {
-    template<typename OBJ, std::size_t MAX_NUM>
-    struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM, false> {
-        using Parent = ArrayDataHolder<OBJ, MAX_NUM, false>;
+    template<typename OBJ, std::size_t MAX_NUM, bool ORDERED = false>
+    struct ScatteredArrayDataHolder : ArrayDataHolder<OBJ, MAX_NUM, ORDERED> {
+        using Parent = ArrayDataHolder<OBJ, MAX_NUM, ORDERED>;
         using ObjectType = typename Parent::ObjectType;
         using ElemType = typename Parent::ElemType;
         using SizeType = typename Parent::SizeType;
@@ -88,7 +92,7 @@ namespace holder::detail {
             ForAll([&, this](auto i) {
                 Trait::Emplace(elems[i], std::move(Trait::ToObject(rhs.elems[i])));
             });
-            rhs.Clear();
+            rhs.DoClear();
         }
 
         auto Copy(ScatteredArrayDataHolder const &rhs) -> void {
@@ -127,6 +131,11 @@ namespace holder::detail {
             Move(std::move(rhs));
         }
 
+        auto DoClear() -> void {
+            ClearContent();
+            occupied.reset();
+        }
+
     public:
         ScatteredArrayDataHolder() {};
 
@@ -156,11 +165,6 @@ namespace holder::detail {
         auto operator=(ScatteredArrayDataHolder &&rhs) -> ScatteredArrayDataHolder & {
             MoveFrom(std::move(rhs));
             return *this;
-        }
-
-        auto Clear() -> void {
-            ClearContent();
-            occupied.reset();
         }
 
     private:

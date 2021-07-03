@@ -32,6 +32,7 @@
 #include <l0-infra/array/mixin/array_like/ObjectIndex.h>
 #include <l0-infra/array/mixin/replace/ReplaceExt.h>
 #include <l0-infra/array/mixin/append/AppendExt.h>
+#include <l0-infra/array/mixin/erase/ScatteredClear.h>
 
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
@@ -62,6 +63,7 @@ namespace detail {
             mixin::ReplaceExt,
             mixin::AppendExt,
             mixin::EraseExt,
+            mixin::ScatteredClear,
             mixin::ScopedCleanUp,
             mixin::ScopedSort,
             mixin::ArraySortExt>;

@@ -31,6 +31,36 @@ SCENARIO("IndexedOrderedArray") {
         REQUIRE(array[2] == 10);
         REQUIRE(array[3] == 12);
     }
+
+    WHEN("Clear") {
+        array.Clear();
+        REQUIRE(array.GetNum() == 0);
+    }
+
+    WHEN("Clear range") {
+        array.Clear(1, 3);
+        REQUIRE(array.GetNum() == 3);
+
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 10);
+        REQUIRE(array[2] == 12);
+    }
+
+    WHEN("Clear from") {
+        array.ClearFrom(2);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 8);
+    }
+
+    WHEN("Clear Until") {
+        array.ClearUntil(3);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0] == 10);
+        REQUIRE(array[1] == 12);
+    }
 }
 
 namespace {
@@ -78,6 +108,36 @@ SCENARIO("Foo IndexedOrderedArray") {
         REQUIRE(array[2].a == 10);
         REQUIRE(array[3].a == 12);
     }
+
+    WHEN("Clear") {
+        array.Clear();
+        REQUIRE(array.GetNum() == 0);
+    }
+
+    WHEN("Clear range") {
+        array.Clear(1, 3);
+        REQUIRE(array.GetNum() == 3);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 10);
+        REQUIRE(array[2].a == 12);
+    }
+
+    WHEN("Clear from") {
+        array.ClearFrom(2);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 8);
+    }
+
+    WHEN("Clear Until") {
+        array.ClearUntil(3);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 10);
+        REQUIRE(array[1].a == 12);
+    }
 }
 
 SCENARIO("Foo Object IndexedOrderedArray") {
@@ -106,5 +166,35 @@ SCENARIO("Foo Object IndexedOrderedArray") {
         REQUIRE(array[1].a == 8);
         REQUIRE(array[2].a == 10);
         REQUIRE(array[3].a == 12);
+    }
+
+    WHEN("Clear") {
+        array.Clear();
+        REQUIRE(array.GetNum() == 0);
+    }
+
+    WHEN("Clear range") {
+        array.Clear(1, 3);
+        REQUIRE(array.GetNum() == 3);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 10);
+        REQUIRE(array[2].a == 12);
+    }
+
+    WHEN("Clear from") {
+        array.ClearFrom(2);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 8);
+    }
+
+    WHEN("Clear Until") {
+        array.ClearUntil(3);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 10);
+        REQUIRE(array[1].a == 12);
     }
 }

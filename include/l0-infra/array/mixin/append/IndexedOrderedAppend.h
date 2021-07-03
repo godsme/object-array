@@ -30,7 +30,7 @@ namespace mixin {
     private:
         template<typename ... ARGS>
         auto DoAppend(ARGS&& ... args) -> ObjectType* {
-            auto* p = Trait::Emplace(Elems()[Num()], std::forward<ARGS>(args)...);
+            auto* p = Self::Append(std::forward<ARGS>(args)...);
             GetIndices().DoAppend([less = Compare{}, elems = Elems()](auto l, auto r) { return less(ConstElemToObject(elems[l]), ConstElemToObject(elems[r])); }, Num());
             return p;
         }

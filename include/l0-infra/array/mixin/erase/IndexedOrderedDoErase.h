@@ -11,8 +11,8 @@
 
 namespace mixin {
     template<__cOnCePt(ConstContiguousArrayLikeDataHolder) T>
-    class IndexedOrderedDoErase : public SimpleDoErase<T> {
-        using Self = SimpleDoErase<T>;
+    class IndexedOrderedDoErase : public T {
+        using Self = T;
 
     public:
         using typename T::SizeType;
@@ -24,7 +24,7 @@ namespace mixin {
         auto DoErase(SizeType n) -> void {
             auto index = GetIndices()[n];
             GetIndices().Erase(n);
-            Self::DoErase(index);
+            Self::Erase(index);
         }
     };
 }

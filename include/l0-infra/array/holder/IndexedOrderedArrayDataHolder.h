@@ -5,13 +5,12 @@
 #ifndef OBJECT_ARRAY_INDEXEDORDEREDARRAYDATAHOLDER_H
 #define OBJECT_ARRAY_INDEXEDORDEREDARRAYDATAHOLDER_H
 
-#include <l0-infra/array/holder/ObjectArrayDataHolder.h>
+#include <l0-infra/array/holder/ScatteredArrayDataHolder.h>
 #include <l0-infra/array/detail/OrderedArrayIndices.h>
-#include <l0-infra/array/holder/detail/ArrayDataHolderInterface.h>
 
 namespace holder::detail {
     template<typename DATA_HOLDER, typename COMPARE>
-    class IndexedOrderedArrayHolderInterface : public ArrayDataHolderInterface<DATA_HOLDER> {
+    class IndexedOrderedArrayHolderInterface : public ScatteredArrayDataHolderInterface<DATA_HOLDER> {
         using Parent = ArrayDataHolderInterface<DATA_HOLDER>;
         dEcL_tHiS(DATA_HOLDER);
     public:
@@ -38,17 +37,12 @@ namespace holder::detail {
 
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_SIZE, typename COMPARE>
-    class IndexedOrderedArrayHolderBase : public ArrayDataHolder<OBJ, MAX_SIZE, true> {
-        using Parent = ArrayDataHolder<OBJ, MAX_SIZE, true>;
+    class IndexedOrderedArrayHolderBase : public ScatteredArrayDataHolder<OBJ, MAX_SIZE, true> {
+        using Parent = ScatteredArrayDataHolder<OBJ, MAX_SIZE, true>;
 
     protected:
-        auto ClearContent() -> void {
-            Parent::ClearContent(indices.GetNum());
-        }
-
         auto DoClear() -> void {
-            ClearContent();
-            indices.Clear();
+            Parent::ClearContent();
         }
     public:
         using Interface = IndexedOrderedArrayHolderInterface<IndexedOrderedArrayHolderBase, COMPARE>;
@@ -58,11 +52,11 @@ namespace holder::detail {
 
         IndexedOrderedArrayHolderBase() {}
         IndexedOrderedArrayHolderBase(IndexedOrderedArrayHolderBase const &rhs)
-            : Parent{rhs.elem, rhs.indices.GetNum()}, indices{rhs.indices}
+            : Parent{rhs}, indices{rhs.indices}
         {}
 
         IndexedOrderedArrayHolderBase(IndexedOrderedArrayHolderBase &&rhs)
-            : Parent{rhs.elem, rhs.indices.GetNum()}, indices{rhs.indices}
+            : Parent{std::move(rhs)}, indices{rhs.indices}
         {
             rhs.DoClear();
         }
@@ -99,17 +93,14 @@ namespace holder::detail {
         IndexedOrderedArrayHolder(IndexedOrderedArrayHolder&&) = default;
 
         auto operator=(IndexedOrderedArrayHolder const &rhs) -> IndexedOrderedArrayHolder & {
-            Parent::DoClear();
+            Parent::CopyFrom(rhs);
             Parent::indices = rhs.indices;
-            ConstructFrom(rhs.elems, rhs.indices.GetNum());
             return *this;
         }
 
         auto operator=(IndexedOrderedArrayHolder&& rhs) -> IndexedOrderedArrayHolder & {
-            Parent::DoClear();
             Parent::indices = rhs.indices;
-            ConstructFrom(rhs.elems, rhs.indices.GetNum());
-            rhs.DoClear();
+            Parent::MoveFrom(std::move(rhs));
             return *this;
         }
     };

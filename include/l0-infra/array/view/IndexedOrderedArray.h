@@ -23,6 +23,7 @@
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/erase/IndexedOrderedDoErase.h>
+#include <l0-infra/array/mixin/erase/IndexedOrderedRangedClear.h>
 
 namespace detail {
     using IndexedOrderedArrayMixins = ::mixin::Mixins<
@@ -48,6 +49,7 @@ namespace detail {
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory,
             mixin::___mutable_mixin_delimiter___,
+            mixin::IndexedOrderedRangedClear,
             mixin::SimpleErase,
             mixin::IndexedOrderedAppend,
             mixin::AppendExt>;
