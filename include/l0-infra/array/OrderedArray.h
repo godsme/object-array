@@ -56,7 +56,10 @@ namespace detail {
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleErase,
             mixin::OrderedAppend,
-            mixin::AppendExt>;
+            mixin::AppendExt,
+            mixin::EraseExt,
+            mixin::ScopedCleanUp,
+            mixin::RangedClear>;
 
     template<typename T, std::size_t MAX_NUM, typename COMPARE>
     using OrderedArray = detail::OrderedArrayMixins::Compose<holder::OrderedArrayHolder<T, MAX_NUM, COMPARE>>;
