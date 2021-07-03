@@ -15,6 +15,7 @@
 #include <l0-infra/array/mixin/erase/ContiguousDoErase.h>
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
+#include <l0-infra/array/mixin/replace/SimpleDoReplace.h>
 
 namespace detail {
     using ArrayViewMixins = ::mixin::Mixins<
@@ -27,6 +28,7 @@ namespace detail {
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::ContiguousDoErase,
+            mixin::SimpleDoReplace,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,

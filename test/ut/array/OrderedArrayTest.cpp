@@ -21,6 +21,56 @@ SCENARIO("OrderedArray") {
     REQUIRE(array[3] == 10);
     REQUIRE(array[4] == 12);
 
+    WHEN("Replace 0") {
+        array.Replace(0, 1);
+
+        REQUIRE(array[0] == 1);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 9);
+        REQUIRE(array[3] == 10);
+        REQUIRE(array[4] == 12);
+    }
+
+    WHEN("Replace 0") {
+        array.Replace(4, 14);
+
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 9);
+        REQUIRE(array[3] == 10);
+        REQUIRE(array[4] == 14);
+    }
+
+    WHEN("Replace") {
+        array.Replace(2, 11);
+
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 10);
+        REQUIRE(array[3] == 11);
+        REQUIRE(array[4] == 12);
+    }
+
+    WHEN("Replace 1") {
+        array.Replace(2, 13);
+
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 10);
+        REQUIRE(array[3] == 12);
+        REQUIRE(array[4] == 13);
+    }
+
+    WHEN("Replace 2") {
+        array.Replace(2, 6);
+
+        REQUIRE(array[0] == 6);
+        REQUIRE(array[1] == 7);
+        REQUIRE(array[2] == 8);
+        REQUIRE(array[3] == 10);
+        REQUIRE(array[4] == 12);
+    }
+
     WHEN("Erase") {
         array.Erase(2);
 
