@@ -30,7 +30,7 @@ namespace {
         Foo(int a) : a{a} {}
         Foo(Foo const&) = default;
         auto operator=(Foo const&) -> Foo& = default;
-        ~Foo() {  }
+        ~Foo() {}
     };
 
     static_assert(!std::is_trivially_destructible_v<IndexedOrderedArray<Foo, 10>>);
