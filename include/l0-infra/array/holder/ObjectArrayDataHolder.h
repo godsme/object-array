@@ -34,24 +34,9 @@ namespace holder::detail {
         friend
         class ArrayDataHolderInterface;
 
-    private:
-        template<typename U, std::enable_if_t<std::is_same_v<std::remove_const_t<U>, OBJ> ||
-                                              std::is_same_v<std::remove_const_t<U>, ElemType>, int> = 0>
-        auto ConstructFrom(U *array) -> void {
-            if constexpr (std::is_trivially_copyable_v<ElemType>) {
-                ::memcpy(elems, array, sizeof(ElemType) * num);
-            } else {
-                for (auto i = 0; i < num; i++) {
-                    Trait::Emplace(elems[i], std::move(Trait::ToObject(array[i])));
-                }
-            }
-        }
-
     protected:
         auto ClearContent() -> void {
-            if constexpr (!std::is_trivially_destructible_v<ElemType>) {
-                for (int i = 0; i < num; i++) Trait::Destroy(elems[i]);
-            }
+            Parent::ClearContent(num);
         }
 
         auto DoClear() -> void {
@@ -60,7 +45,7 @@ namespace holder::detail {
         }
 
         auto MoveFrom(ObjectArrayHolderBase &&rhs) {
-            ConstructFrom(rhs.elems);
+            ConstructFrom(rhs.elems, num);
             rhs.DoClear();
         }
 
@@ -120,14 +105,14 @@ namespace holder::detail {
         auto operator=(ObjectArrayHolder const &rhs) -> ObjectArrayHolder & {
             Parent::DoClear();
             Parent::num = rhs.num;
-            ConstructFrom(rhs.elems);
+            ConstructFrom(rhs.elems, rhs.num);
             return *this;
         }
 
         auto operator=(ObjectArrayHolder&& rhs) -> ObjectArrayHolder & {
             Parent::DoClear();
             Parent::num = rhs.num;
-            ConstructFrom(rhs.elems);
+            ConstructFrom(rhs.elems, rhs.num);
             rhs.DoClear();
             return *this;
         }

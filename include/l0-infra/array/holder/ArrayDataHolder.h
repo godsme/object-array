@@ -23,6 +23,25 @@ namespace holder {
         constexpr static bool IS_CONST = std::is_const_v<OBJ>;
 
     protected:
+        auto ClearContent(SizeType num) -> void {
+            if constexpr (!std::is_trivially_destructible_v<ElemType>) {
+                for (int i = 0; i < num; i++) Trait::Destroy(elems[i]);
+            }
+        }
+
+        template<typename U, std::enable_if_t<std::is_same_v<std::remove_const_t<U>, OBJ> ||
+                                              std::is_same_v<std::remove_const_t<U>, ElemType>, int> = 0>
+        auto ConstructFrom(U *array, SizeType num) -> void {
+            if constexpr (std::is_trivially_copyable_v<ElemType>) {
+                ::memcpy(elems, array, sizeof(ElemType) * num);
+            } else {
+                for (auto i = 0; i < num; i++) {
+                    Trait::Emplace(elems[i], std::move(Trait::ToObject(array[i])));
+                }
+            }
+        }
+
+    protected:
         ArrayDataHolder() = default;
 
         ArrayDataHolder(std::initializer_list<OBJ> l) {

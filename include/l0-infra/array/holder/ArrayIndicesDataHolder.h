@@ -5,11 +5,10 @@
 #ifndef OBJECT_ARRAY_ARRAYINDICESDATAHOLDER_H
 #define OBJECT_ARRAY_ARRAYINDICESDATAHOLDER_H
 
-#include <l0-infra/array/holder/ObjectArrayDataHolder.h>
-#include <type_traits>
+#include <l0-infra/array/holder/OrderedArrayIndicesDataHolder.h>
 
 namespace holder {
-    template<std::size_t MAX_SIZE, typename Parent = detail::ObjectArrayHolder<DeduceSizeType_t<MAX_SIZE>, MAX_SIZE, true>>
+    template<std::size_t MAX_SIZE, typename Parent = OrderedArrayIndicesDataHolder<MAX_SIZE>>
     class ArrayIndicesDataHolder : public Parent {
         using Parent::elems;
         using Parent::num;
