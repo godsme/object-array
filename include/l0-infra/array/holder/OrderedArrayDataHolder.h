@@ -11,7 +11,9 @@ namespace holder::detail {
     template<typename DATA_HOLDER, typename COMPARE>
     struct OrderedArrayInterface : ContinuousArrayDataHolderInterface<DATA_HOLDER> {
         using typename ContinuousArrayDataHolderInterface<DATA_HOLDER>::ObjectType;
-        using Compare = COMPARE;
+        auto GetLess() const -> auto {
+            return COMPARE{};
+        }
     };
 
     template<typename OBJ, std::size_t MAX_SIZE, typename COMPARE>

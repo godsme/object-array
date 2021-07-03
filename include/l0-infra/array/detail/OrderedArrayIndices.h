@@ -20,6 +20,7 @@
 #include <l0-infra/array/mixin/erase/ContiguousDoErase.h>
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/append/OrderedDoAppend.h>
+#include <l0-infra/array/mixin/replace/OrderedDoReplace.h>
 
 namespace detail {
     using OrderedArrayIndicesMixins = ::mixin::Mixins<
@@ -35,7 +36,8 @@ namespace detail {
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleErase,
             mixin::RangedClear,
-            mixin::OrderedDoAppend>;
+            mixin::OrderedDoAppend,
+            mixin::OrderedDoReplace>;
 
     template<std::size_t MAX_NUM>
     using OrderedArrayIndices = OrderedArrayIndicesMixins::Compose<holder::OrderedArrayIndicesDataHolder<MAX_NUM>>;

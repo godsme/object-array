@@ -21,12 +21,11 @@ namespace mixin {
 
     protected:
         using Self::Num;
-        using typename Self::Compare;
 
     public:
         template<typename ... ARGS>
         auto Append(ARGS &&... args) -> ObjectType * {
-            return Num() < MAX_SIZE ? Self::DoAppend(Compare{}, std::forward<ARGS>(args)...) : nullptr;
+            return Num() < MAX_SIZE ? Self::DoAppend(Self::GetLess(), std::forward<ARGS>(args)...) : nullptr;
         }
     };
 }

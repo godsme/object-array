@@ -16,8 +16,13 @@ namespace holder::detail {
     public:
         using ObjectType = typename DATA_HOLDER::ObjectType;
         using SizeType = typename DATA_HOLDER::SizeType;
-        using Compare  = COMPARE;
         using Trait = typename DATA_HOLDER::Trait;
+
+        auto GetLess() const -> auto {
+            return [less = COMPARE{}, elems = Parent::Elems()](auto l, auto r) {
+                return less(Parent::ConstElemToObject(elems[l]), Parent::ConstElemToObject(elems[r]));
+            };
+        }
 
         auto Num() const -> SizeType { return This()->indices.GetNum(); }
         auto GetIndices() -> decltype(auto) { return (This()->indices); }

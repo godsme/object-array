@@ -26,6 +26,8 @@
 #include <l0-infra/array/mixin/erase/IndexedOrderedRangedClear.h>
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/erase/EraseExt.h>
+#include <l0-infra/array/mixin/replace/SimpleReplace.h>
+#include <l0-infra/array/mixin/replace/IndexedOrderedDoReplace.h>
 
 namespace detail {
     using IndexedOrderedArrayMixins = ::mixin::Mixins<
@@ -36,6 +38,7 @@ namespace detail {
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::IndexedOrderedDoErase,
+            mixin::IndexedOrderedDoReplace,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -53,6 +56,7 @@ namespace detail {
             mixin::___mutable_mixin_delimiter___,
             mixin::IndexedOrderedAppend,
             mixin::AppendExt,
+            mixin::SimpleReplace,
             mixin::IndexedOrderedRangedClear,
             mixin::SimpleErase,
             mixin::EraseExt,

@@ -19,12 +19,12 @@ namespace mixin {
 
     protected:
         using Self::Elems;
-        using typename Self::Compare;
+        using Self::GetLess;
 
     public:
         template<typename ... ARGS>
         auto DoReplace(SizeType i, ARGS&& ... args) -> ObjectType* {
-            return Self::DoReplace(Compare{}, i, std::forward<ARGS>(args)...);
+            return Self::ActualReplace(GetLess(), i, std::forward<ARGS>(args)...);
         }
     };
 }

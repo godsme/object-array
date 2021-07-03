@@ -46,7 +46,7 @@ namespace mixin {
 
     public:
         template<typename LESS, typename ... ARGS>
-        auto DoReplace(LESS&& less, SizeType i, ARGS&& ... args) -> ObjectType* {
+        auto ActualReplace(LESS&& less, SizeType i, ARGS&& ... args) -> ObjectType* {
             auto* p = Self::Trait::Replace(Elems()[i], std::forward<ARGS>(args)...);
             if(i > 0 && less(GetObj(i), GetObj(i-1))) {
                 return LeftMove(std::forward<LESS>(less), i);
