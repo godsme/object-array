@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/21.
 //
 
-#ifndef OBJECT_ARRAY_CONTINUOUSARRAYLIKEDATAHOLDER_H
-#define OBJECT_ARRAY_CONTINUOUSARRAYLIKEDATAHOLDER_H
+#ifndef OBJECT_ARRAY_CONTIGUOUSARRAYLIKEDATAHOLDER_H
+#define OBJECT_ARRAY_CONTIGUOUSARRAYLIKEDATAHOLDER_H
 
 #include <l0-infra/array/detail/config.h>
 
@@ -30,7 +30,7 @@ namespace _concept::detail {
 
 namespace _concept {
     template<typename T>
-    concept ConstContinuousArrayLikeDataHolder = SimpleArrayLike<T> && detail::ConstWithNumber<T>;
+    concept ConstContiguousArrayLikeDataHolder = SimpleArrayLike<T> && detail::ConstWithNumber<T>;
 }
 
 namespace _concept::detail {
@@ -45,9 +45,9 @@ namespace _concept::detail {
 
 namespace _concept {
     template<typename T>
-    concept ContinuousArrayLikeDataHolder = ConstContinuousArrayLikeDataHolder<T> && detail::WithNumber<T>;
+    concept ContiguousArrayLikeDataHolder = ConstContiguousArrayLikeDataHolder<T> && detail::WithNumber<T>;
 }
 
 #endif
 
-#endif //OBJECT_ARRAY_CONTINUOUSARRAYLIKEDATAHOLDER_H
+#endif //OBJECT_ARRAY_CONTIGUOUSARRAYLIKEDATAHOLDER_H

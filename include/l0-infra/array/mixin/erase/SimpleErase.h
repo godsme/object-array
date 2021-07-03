@@ -6,13 +6,13 @@
 #define OBJECT_ARRAY_SIMPLEERASE_H
 
 #include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
+#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
 #include <l0-infra/array/mixin/erase/SimpleDoErase.h>
 
 namespace mixin {
-    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
-    class SimpleErase : public SimpleDoErase<T> {
-        using Self = SimpleDoErase<T>;
+    template<typename T>
+    class SimpleErase : public T {
+        using Self = T;
 
     public:
         using typename Self::SizeType;

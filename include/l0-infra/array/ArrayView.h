@@ -12,6 +12,7 @@
 #include <l0-infra/array/mixin/erase/SimpleMutate.h>
 #include <l0-infra/array/mixin/erase/EraseExt.h>
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/erase/ContiguousDoErase.h>
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 
 namespace detail {
@@ -24,6 +25,7 @@ namespace detail {
             mixin::ScopedFind,
             mixin::SimpleForEach,
             mixin::ScopedForEach,
+            mixin::ContiguousDoErase,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,

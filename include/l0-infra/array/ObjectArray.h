@@ -24,6 +24,7 @@
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/array_like/RangedArray.h>
+#include <l0-infra/array/mixin/erase/ContiguousDoErase.h>
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 
 namespace detail {
@@ -37,6 +38,7 @@ namespace detail {
         mixin::SimpleForEach,
         mixin::ScopedForEach,
         mixin::ScopedMinElem,
+        mixin::ContiguousDoErase,
         mixin::___public_mixin_delimiter___,
         mixin::IndexedRefAccessor,
         mixin::ByIndexAccessor,

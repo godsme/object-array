@@ -6,10 +6,10 @@
 #define OBJECT_ARRAY_SIMPLEDOERASE_H
 
 #include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
+#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
 
 namespace mixin {
-    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
+    template<__cOnCePt(ConstContiguousArrayLikeDataHolder) T>
     class SimpleDoErase : public T {
         using Self = T;
 
@@ -41,9 +41,8 @@ namespace mixin {
             }
         }
 
-    protected:
+    public:
         auto DoErase(SizeType i) -> void {
-            --Num();
             if constexpr(ORDERED) {
                 Trait::Destroy(Elems()[i]);
                 if(i < (Num() - 1)) MoveElems(i);

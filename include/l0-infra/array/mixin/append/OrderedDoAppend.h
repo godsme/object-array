@@ -6,10 +6,10 @@
 #define OBJECT_ARRAY_ORDEREDDOAPPEND_H
 
 #include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
+#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
 
 namespace mixin {
-    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
+    template<__cOnCePt(ContiguousArrayLikeDataHolder) T>
     class OrderedDoAppend : public T {
         using Self = T;
 

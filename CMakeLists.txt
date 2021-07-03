@@ -38,7 +38,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/array_like/RangedArray.h
         include/l0-infra/array/mixin/detail/Mixins.h
         include/l0-infra/array/mixin/array_like/ContinuousArrayLike.h
-        include/l0-infra/array/concept/ContinuousArrayLikeDataHolder.h
+        include/l0-infra/array/concept/ContiguousArrayLikeDataHolder.h
         include/l0-infra/array/concept/SimpleArrayLike.h
         include/l0-infra/array/mixin/find/ScopedSimpleFind.h
         include/l0-infra/array/concept/ScopedArrayLike.h
@@ -178,7 +178,7 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/replace/ReplaceExt.h
         include/l0-infra/array/mixin/append/AppendExt.h
         include/l0-infra/array/mixin/append/ViewAppend.h
-        include/l0-infra/array/mixin/replace/ScopedReplace.h include/l0-infra/array/holder/detail/ViewDataHolder.h include/l0-infra/array/mixin/append/OrderedAppend.h include/l0-infra/array/OrderedArray.h test/ut/array/OrderedArrayTest.cpp include/l0-infra/array/holder/OrderedArrayDataHolder.h include/l0-infra/array/holder/IndexedOrderedArrayDataHolder.h include/l0-infra/array/mixin/append/OrderedDoAppend.h include/l0-infra/array/holder/OrderedArrayIndicesDataHolder.h include/l0-infra/array/detail/OrderedArrayIndices.h include/l0-infra/array/view/IndexedOrderedArray.h include/l0-infra/array/mixin/append/IndexedOrderedAppend.h test/ut/array/IndexedOrderedArrayTest.cpp include/l0-infra/array/mixin/erase/SimpleDoErase.h include/l0-infra/array/mixin/erase/SimpleErase.h)
+        include/l0-infra/array/mixin/replace/ScopedReplace.h include/l0-infra/array/holder/detail/ViewDataHolder.h include/l0-infra/array/mixin/append/OrderedAppend.h include/l0-infra/array/OrderedArray.h test/ut/array/OrderedArrayTest.cpp include/l0-infra/array/holder/OrderedArrayDataHolder.h include/l0-infra/array/holder/IndexedOrderedArrayDataHolder.h include/l0-infra/array/mixin/append/OrderedDoAppend.h include/l0-infra/array/holder/OrderedArrayIndicesDataHolder.h include/l0-infra/array/detail/OrderedArrayIndices.h include/l0-infra/array/view/IndexedOrderedArray.h include/l0-infra/array/mixin/append/IndexedOrderedAppend.h test/ut/array/IndexedOrderedArrayTest.cpp include/l0-infra/array/mixin/erase/SimpleDoErase.h include/l0-infra/array/mixin/erase/SimpleErase.h include/l0-infra/array/mixin/erase/IndexedOrderedDoErase.h include/l0-infra/array/mixin/erase/ContiguousDoErase.h)
 
 add_executable(object_array_test test/ut/catch.cpp ${OBJ_ARRAY_SRC})
 add_executable(object_array_it

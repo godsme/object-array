@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_RANGEDREPLACE_H
 #define OBJECT_ARRAY_RANGEDREPLACE_H
 
-#include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
+#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
 
 namespace mixin {
     template<typename T>

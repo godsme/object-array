@@ -6,10 +6,10 @@
 #define OBJECT_ARRAY_CONTINUOUSARRAYLIKE_H
 
 #include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
+#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
 
 namespace mixin {
-    template<__cOnCePt(ConstContinuousArrayLikeDataHolder) T>
+    template<__cOnCePt(ConstContiguousArrayLikeDataHolder) T>
     class ContinuousArrayLike : public T {
         using Self = T;
 

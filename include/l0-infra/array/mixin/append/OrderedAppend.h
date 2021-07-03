@@ -9,7 +9,7 @@
 #include <l0-infra/array/mixin/append/OrderedDoAppend.h>
 
 namespace mixin {
-    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
+    template<__cOnCePt(ContiguousArrayLikeDataHolder) T>
     class OrderedAppend : public OrderedDoAppend<T> {
         using Self = OrderedDoAppend<T>;
 

@@ -6,11 +6,11 @@
 #define OBJECT_ARRAY_SIMPLEMUTATE_H
 
 #include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/ContinuousArrayLikeDataHolder.h>
+#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
 #include <l0-infra/array/mixin/erase/SimpleDoErase.h>
 
 namespace mixin {
-    template<__cOnCePt(ContinuousArrayLikeDataHolder) T>
+    template<__cOnCePt(ContiguousArrayLikeDataHolder) T>
     class SimpleMutate : public T {
         using Self = T;
 
