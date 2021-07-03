@@ -28,16 +28,16 @@ namespace holder {
     };
 
     template<bool ORDERED>
-    struct ProxyScopedViewDataHolderTrait {
+    struct ProxyScopedViewDataHolderAdapter {
         template<typename ARRAY, typename SUB_TYPE>
         using Type = ProxyScopedViewDataHolder<ARRAY, SUB_TYPE, ORDERED>;
     };
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using RefProxyScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyScopedViewDataHolderTrait<ORDERED>::template Type>;
+    using RefProxyScopedViewDataHolder = detail::RefViewDataHolder<ARRAY, ProxyScopedViewDataHolderAdapter<ORDERED>::template Type>;
 
     template<__cOnCePt(SimpleRangedArrayLike) ARRAY, bool ORDERED = ARRAY::ORDERED>
-    using ValueProxyScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyScopedViewDataHolderTrait<ORDERED>::template Type>;
+    using ValueProxyScopedViewDataHolder = detail::ValueViewDataHolder<ARRAY, ProxyScopedViewDataHolderAdapter<ORDERED>::template Type>;
 }
 
 #endif //OBJECT_ARRAY_PROXYSCOPEDVIEWDATAHOLDER_H
