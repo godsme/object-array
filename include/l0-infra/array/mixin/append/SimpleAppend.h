@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/24.
 //
 
-#ifndef OBJECT_ARRAY_SIMPLEMUTATE_H
-#define OBJECT_ARRAY_SIMPLEMUTATE_H
+#ifndef OBJECT_ARRAY_SIMPLEAPPEND_H
+#define OBJECT_ARRAY_SIMPLEAPPEND_H
 
 #include <l0-infra/array/detail/ConceptDef.h>
 #include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
@@ -11,7 +11,7 @@
 
 namespace mixin {
     template<__cOnCePt(ContiguousArrayLikeDataHolder) T>
-    class SimpleMutate : public T {
+    class SimpleAppend : public T {
         using Self = T;
 
     public:
@@ -32,12 +32,7 @@ namespace mixin {
         auto Append(ARGS &&... args) -> ObjectType * {
             return Num() < MAX_SIZE ? Trait::Emplace(Elems()[Num()++], std::forward<ARGS>(args)...) : nullptr;
         }
-
-        template<typename ... ARGS>
-        auto Replace(SizeType i, ARGS &&... args) -> ObjectType * {
-            return i < Num() ? Trait::Replace(Elems()[i], std::forward<ARGS>(args)...) : nullptr;
-        }
     };
 }
 
-#endif //OBJECT_ARRAY_SIMPLEMUTATE_H
+#endif //OBJECT_ARRAY_SIMPLEAPPEND_H

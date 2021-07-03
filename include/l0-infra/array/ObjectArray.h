@@ -19,13 +19,14 @@
 #include <l0-infra/array/mixin/minmax/SimpleMinElemExt.h>
 #include <l0-infra/array/mixin/minmax/ScopedMinElemExt.h>
 #include <l0-infra/array/mixin/factory/RangedViewFactory.h>
-#include <l0-infra/array/mixin/erase/SimpleMutate.h>
+#include <l0-infra/array/mixin/append/SimpleAppend.h>
 #include <l0-infra/array/mixin/erase/EraseExt.h>
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/array_like/RangedArray.h>
 #include <l0-infra/array/mixin/erase/ContiguousDoErase.h>
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
+#include <l0-infra/array/mixin/replace/SimpleReplace.h>
 
 namespace detail {
     using ObjectArrayMixins = ::mixin::Mixins<
@@ -59,7 +60,8 @@ namespace detail {
         mixin::SortViewFactory,
         mixin::___mutable_mixin_delimiter___,
         mixin::SimpleErase,
-        mixin::SimpleMutate,
+        mixin::SimpleAppend,
+        mixin::SimpleReplace,
         mixin::ReplaceExt,
         mixin::AppendExt,
         mixin::EraseExt,

@@ -20,7 +20,7 @@
 #include <l0-infra/array/mixin/find/ScopedFindExt.h>
 #include <l0-infra/array/mixin/foreach/ScopedForEachExt.h>
 #include <l0-infra/array/mixin/factory/RangedViewFactory.h>
-#include <l0-infra/array/mixin/erase/SimpleMutate.h>
+#include <l0-infra/array/mixin/append/SimpleAppend.h>
 #include <l0-infra/array/mixin/erase/EraseExt.h>
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>

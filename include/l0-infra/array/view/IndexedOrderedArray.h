@@ -24,6 +24,8 @@
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/erase/IndexedOrderedDoErase.h>
 #include <l0-infra/array/mixin/erase/IndexedOrderedRangedClear.h>
+#include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
+#include <l0-infra/array/mixin/erase/EraseExt.h>
 
 namespace detail {
     using IndexedOrderedArrayMixins = ::mixin::Mixins<
@@ -49,10 +51,12 @@ namespace detail {
             mixin::ScopedViewFactory,
             mixin::IndexedViewFactory,
             mixin::___mutable_mixin_delimiter___,
+            mixin::IndexedOrderedAppend,
+            mixin::AppendExt,
             mixin::IndexedOrderedRangedClear,
             mixin::SimpleErase,
-            mixin::IndexedOrderedAppend,
-            mixin::AppendExt>;
+            mixin::EraseExt,
+            mixin::ScopedCleanUp>;
 
     template<typename T, std::size_t MAX_NUM, typename COMPARE>
     using IndexedOrderedArray = detail::IndexedOrderedArrayMixins::Compose<holder::IndexedOrderedArrayHolder<T, MAX_NUM, COMPARE>>;
