@@ -248,3 +248,79 @@ SCENARIO("Foo Object IndexedOrderedArray") {
         REQUIRE(array[1].a == 12);
     }
 }
+
+SCENARIO("IndexedOrdered Slice Append") {
+    IndexedOrderedArray<int, 10> array = {4,3,1,2};
+    auto&& slice = array.From(1);
+
+    REQUIRE(slice.GetNum() == 3);
+
+    WHEN("Append") {
+        auto* p = slice.Append(5);
+        REQUIRE(*p == 5);
+        REQUIRE(slice.GetNum() == 4);
+        REQUIRE(slice[3] == 5);
+    }
+
+    WHEN("Replace") {
+        auto* p = slice.Replace(0, 10);
+        REQUIRE(*p == 10);
+        REQUIRE(slice.GetNum() == 3);
+        REQUIRE(slice[0] == 3);
+        REQUIRE(slice[1] == 4);
+        REQUIRE(slice[2] == 10);
+        REQUIRE(array[3] == 10);
+    }
+}
+
+SCENARIO("IndexedOrderedArray Scope Append") {
+    IndexedOrderedArray<int, 10> array = {4,3,1,2};
+    auto&& scope = array.Scope(0x0a);
+
+    REQUIRE(scope.GetNum() == 2);
+
+    WHEN("Append") {
+        auto* p = scope.Append(0);
+        REQUIRE(*p == 0);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(array[0] == 0);
+        REQUIRE(array[4] == 4);
+    }
+
+    WHEN("Replace") {
+        auto* p = scope.Replace(1, 10);
+        REQUIRE(p != nullptr);
+        REQUIRE(*p == 10);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(scope[1] == 3);
+        REQUIRE(scope[3] == 10);
+        REQUIRE(array[1] == 3);
+        REQUIRE(array[3] == 10);
+    }
+}
+
+SCENARIO("IndexedOrderedArray Slice Scope Append") {
+    IndexedOrderedArray<int, 10> array = {4,3,1,2};
+    auto&& scope = array.From(0).Scope(0x0a);
+
+    REQUIRE(scope.GetNum() == 2);
+
+    WHEN("Append") {
+        auto* p = scope.Append(0);
+        REQUIRE(*p == 0);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(array[0] == 0);
+        REQUIRE(array[4] == 4);
+    }
+
+    WHEN("Replace") {
+        auto* p = scope.Replace(1, 10);
+        REQUIRE(p != nullptr);
+        REQUIRE(*p == 10);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(scope[1] == 3);
+        REQUIRE(scope[3] == 10);
+        REQUIRE(array[1] == 3);
+        REQUIRE(array[3] == 10);
+    }
+}

@@ -14,6 +14,8 @@ namespace mixin {
 
     protected:
         using Self::GetArray;
+
+    public:
         using Self::IndexBegin;
         using Self::IndexEnd;
 

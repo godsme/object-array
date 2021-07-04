@@ -28,7 +28,7 @@ namespace mixin {
 
     private:
         template<typename ... ARGS>
-        auto DoAppend(ARGS&& ... args) -> ObjectType* {
+        auto ActualAppend(ARGS&& ... args) -> ObjectType* {
             auto* p = Self::Append(std::forward<ARGS>(args)...);
             GetIndices().DoAppend(Self::GetLess(), Num());
             return p;
@@ -36,8 +36,8 @@ namespace mixin {
 
     public:
         template<typename ... ARGS>
-        auto Append(ARGS &&... args) -> ObjectType * {
-            return Num() < MAX_SIZE ? DoAppend(std::forward<ARGS>(args)...) : nullptr;
+        auto DoAppend(ARGS &&... args) -> ObjectType * {
+            return Num() < MAX_SIZE ? ActualAppend(std::forward<ARGS>(args)...) : nullptr;
         }
     };
 }
