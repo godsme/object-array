@@ -2,15 +2,15 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_INDEXEDVIEWFACTORY_H
-#define OBJECT_ARRAY_INDEXEDVIEWFACTORY_H
+#ifndef OBJECT_ARRAY_WITHINDEXVIEWFACTORY_H
+#define OBJECT_ARRAY_WITHINDEXVIEWFACTORY_H
 
 #include <l0-infra/array/concept/RangedArrayLike.h>
-#include <l0-infra/array/view/IndexedView.h>
+#include <l0-infra/array/view/WithIndexView.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
-    class IndexedViewFactory : public T {
+    class WithIndexViewFactory : public T {
     protected:
         using typename T::RangedArrayLike;
 
@@ -27,4 +27,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_INDEXEDVIEWFACTORY_H
+#endif //OBJECT_ARRAY_WITHINDEXVIEWFACTORY_H

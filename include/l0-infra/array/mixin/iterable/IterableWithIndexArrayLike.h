@@ -16,32 +16,33 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
+        using typename T::ArrayType;
 
         using Self::IndexBegin;
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
+        using Self::IndexEnd;
+        using Self::GetArray;
 
-        using ConstIterator = iterator::WithIndexIterator<std::add_const_t<ObjectType>, SizeType>;
-        using Iterator = iterator::WithIndexIterator<ObjectType, SizeType>;
+//        using ConstIterator = iterator::WithIndexIterator<ArrayType, std::add_const_t<ObjectType>>;
+//        using Iterator = iterator::WithIndexIterator<ArrayType, ObjectType>;
 
-        using ConstEndIterator = iterator::Iterator<std::add_const_t<ObjectType>>;
-        using EndIterator = iterator::Iterator<ObjectType>;
+//        using ConstEndIterator = iterator::Iterator<std::add_const_t<ObjectType>>;
+//        using EndIterator = iterator::Iterator<ObjectType>;
 
     public:
-        auto begin() const -> ConstIterator {
-            return {ObjectBegin(), IndexBegin()};
+        auto begin() const -> auto {
+            return iterator::WithIndexIterator{GetArray(), IndexBegin()};
         }
 
-        auto end() const -> ConstEndIterator {
-            return {ObjectEnd()};
+        auto end() const -> auto {
+            return iterator::WithIndexIterator{GetArray(), IndexEnd()};
         }
 
-        auto begin() -> Iterator {
-            return {ObjectBegin(), IndexBegin()};
+        auto begin() -> auto {
+            return iterator::WithIndexIterator{GetArray(), IndexBegin()};
         }
 
-        auto end() -> EndIterator {
-            return {ObjectEnd()};
+        auto end() -> auto {
+            return iterator::WithIndexIterator{GetArray(), IndexEnd()};
         }
     };
 }

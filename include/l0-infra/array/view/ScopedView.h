@@ -16,7 +16,7 @@
 #include <l0-infra/array/mixin/minmax/ScopedMinElem.h>
 #include <l0-infra/array/mixin/find/SimpleFindExt.h>
 #include <l0-infra/array/mixin/accessor/IndexedRefAccessor.h>
-#include <l0-infra/array/mixin/factory/IndexedScopedViewFactory.h>
+#include <l0-infra/array/mixin/factory/WithIndexScopedViewFactory.h>
 #include <l0-infra/array/mixin/iterable/IterableScopedArrayLike.h>
 #include <l0-infra/array/mixin/accessor/ScopedByIndexAccessor.h>
 #include <l0-infra/array/mixin/count/RangedScopedElemCount.h>
@@ -50,14 +50,14 @@ namespace view::detail {
             mixin::ScopedByIndexAccessor,
             mixin::RangedScopedElemCount,
             mixin::IterableScopedArrayLike,
-            mixin::IndexedScopedViewFactory,
+            mixin::WithIndexScopedViewFactory,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::ScopedSimpleForEach,
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleMinElem,
             mixin::SimpleMinElemExt,
-            mixin::IndexedScopedViewFactory,
+            mixin::WithIndexScopedViewFactory,
             mixin::ScopedSortViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleAppend,
@@ -82,14 +82,14 @@ namespace view::detail {
             mixin::ScopedByIndexAccessor,
             mixin::RangedScopedElemCount,
             mixin::IterableScopedArrayLike,
-            mixin::IndexedScopedViewFactory,
+            mixin::WithIndexScopedViewFactory,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::ScopedSimpleForEach,
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleMinElem,
             mixin::SimpleMinElemExt,
-            mixin::IndexedScopedViewFactory,
+            mixin::WithIndexScopedViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleAppend,
             mixin::AppendExt,

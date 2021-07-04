@@ -14,7 +14,7 @@
 #include <l0-infra/array/mixin/foreach/ScopedForEachExt.h>
 #include <l0-infra/array/mixin/minmax/ScopedMinElemExt.h>
 #include <l0-infra/array/mixin/factory/RvalueScopedViewFactory.h>
-#include <l0-infra/array/mixin/factory/RValueIndexedViewFactory.h>
+#include <l0-infra/array/mixin/factory/RValueWithIndexViewFactory.h>
 #include <l0-infra/array/mixin/factory/RValueSortViewFactory.h>
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/sort/ArraySort.h>
@@ -49,7 +49,7 @@ namespace view::detail {
             mixin::SimpleForEach,
             mixin::SimpleForEachExt,
             mixin::RValueScopedViewFactory,
-            mixin::RValueIndexedViewFactory,
+            mixin::RValueWithIndexViewFactory,
             mixin::RValueSortViewFactory,
             mixin::ScopedFindExt,
             mixin::ScopedForEachExt,
@@ -85,7 +85,7 @@ namespace view::detail {
             mixin::SimpleFindExt,
             mixin::SimpleForEachExt,
             mixin::RValueScopedViewFactory,
-            mixin::RValueIndexedViewFactory,
+            mixin::RValueWithIndexViewFactory,
             mixin::ScopedFindExt,
             mixin::ScopedForEachExt,
             mixin::SimpleMinElem,

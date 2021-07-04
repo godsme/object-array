@@ -9,7 +9,7 @@
 #include <l0-infra/array/mixin/detail/Mixins.h>
 #include <l0-infra/array/mixin/find/ScopedSimpleFind.h>
 #include <l0-infra/array/mixin/find/SimpleFindExt.h>
-#include <l0-infra/array/mixin/factory/IndexedScopedViewFactory.h>
+#include <l0-infra/array/mixin/factory/WithIndexScopedViewFactory.h>
 #include <l0-infra/array/mixin/iterable/IterableScopedArrayLike.h>
 #include <l0-infra/array/mixin/accessor/IndexedRefAccessor.h>
 #include <l0-infra/array/mixin/accessor/ScopedByIndexAccessor.h>
@@ -26,12 +26,12 @@ namespace view::detail {
             mixin::ScopedByIndexAccessor,
             mixin::RangedScopedElemCount,
             mixin::IterableScopedArrayLike,
-            mixin::IndexedScopedViewFactory,
+            mixin::WithIndexScopedViewFactory,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::ScopedSimpleForEach,
             mixin::SimpleForEachExt,
-            mixin::IndexedScopedViewFactory>;
+            mixin::WithIndexScopedViewFactory>;
 
     template<typename ARRAY, template <typename, bool> typename HOLDER>
     using OrderedScopedView =  SimpleScopedViewMixins::Compose<HOLDER<ARRAY, true>>;

@@ -59,7 +59,7 @@ namespace detail {
             mixin::ScopedForEachExt,
             mixin::RangedViewFactory,
             mixin::ScopedViewFactory,
-            mixin::IndexedViewFactory,
+            mixin::WithIndexViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleErase,
             mixin::SimpleAppend,

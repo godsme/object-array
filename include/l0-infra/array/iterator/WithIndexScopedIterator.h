@@ -9,8 +9,8 @@
 #include <l0-infra/array/iterator/detail/WithIndexIterator.h>
 
 namespace iterator {
-    template<typename T, typename BIT_MAP, typename SIZE_TYPE>
-    using IndexedScopedIterator = detail::ScopedIterator<detail::WithIndexIterator<T, SIZE_TYPE>, BIT_MAP>;
+    template<typename ARRAY, typename BIT_MAP, typename OBJ_TYPE>
+    using IndexedScopedIterator = detail::ScopedIterator<detail::WithIndexIterator<ARRAY, OBJ_TYPE>, BIT_MAP>;
 }
 
 #endif //OBJECT_ARRAY_WITHINDEXSCOPEDITERATOR_H

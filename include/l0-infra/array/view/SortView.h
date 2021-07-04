@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_SORTVIEW_H
 
 #include <l0-infra/array/holder/SortViewDataHolder.h>
-#include <l0-infra/array/mixin/factory/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/factory/WithIndexViewFactory.h>
 #include <l0-infra/array/mixin/sort/ArraySortExt.h>
 #include <l0-infra/array/mixin/sort/IndicesBasedSort.h>
 #include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
@@ -29,7 +29,7 @@ namespace view::detail {
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::SimpleForEachExt,
-            mixin::IndexedViewFactory,
+            mixin::WithIndexViewFactory,
             mixin::IndicesBasedSort,
             mixin::ArraySortExt>;
 

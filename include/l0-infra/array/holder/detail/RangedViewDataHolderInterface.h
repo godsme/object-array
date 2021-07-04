@@ -14,11 +14,14 @@ namespace holder::detail {
     public:
         using ObjectType = typename T::ObjectType;
         using SizeType   = typename T::SizeType;
+        using ArrayType  = typename T::ArrayType;
 
         auto GetObj(SizeType n) const -> ObjectType const& { return This()->GetObj(n); }
         auto GetObj(SizeType n) -> ObjectType& { return This()->GetObj(n); }
         auto IndexBegin() const -> SizeType { return This()->IndexBegin(); }
         auto IndexEnd() const -> SizeType { return This()->IndexEnd(); }
+        auto GetArray() const -> decltype(auto) { return This()->This()->GetArray(); }
+        auto GetArray() -> decltype(auto) { return This()->This()->GetArray(); }
     };
 }
 

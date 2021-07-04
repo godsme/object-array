@@ -2,18 +2,18 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
-#define OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
+#ifndef OBJECT_ARRAY_RVALUEWITHINDEXVIEWFACTORY_H
+#define OBJECT_ARRAY_RVALUEWITHINDEXVIEWFACTORY_H
 
-#include <l0-infra/array/mixin/factory/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/factory/WithIndexViewFactory.h>
 #include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 #include <l0-infra/array/concept/RangedArrayLike.h>
-#include <l0-infra/array/view/IndexedView.h>
+#include <l0-infra/array/view/WithIndexView.h>
 
 namespace mixin {
     template<__cOnCePt(SimpleRangedArrayLike) T>
-    class RValueIndexedViewFactory : public IndexedViewFactory<T> {
-        using Self = IndexedViewFactory<T>;
+    class RValueWithIndexViewFactory : public WithIndexViewFactory<T> {
+        using Self = WithIndexViewFactory<T>;
 
     public:
         using typename T::SizeType;
@@ -39,4 +39,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_RVALUEINDEXEDVIEWFACTORY_H
+#endif //OBJECT_ARRAY_RVALUEWITHINDEXVIEWFACTORY_H

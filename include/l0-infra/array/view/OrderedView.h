@@ -19,7 +19,7 @@
 #include <l0-infra/array/mixin/find/SimpleFindExt.h>
 #include <l0-infra/array/mixin/foreach/SimpleForEach.h>
 #include <l0-infra/array/mixin/foreach/SimpleForEachExt.h>
-#include <l0-infra/array/mixin/factory/IndexedViewFactory.h>
+#include <l0-infra/array/mixin/factory/WithIndexViewFactory.h>
 
 namespace view::detail {
     using OrderedViewMixins = ::mixin::Mixins<
@@ -37,7 +37,7 @@ namespace view::detail {
             mixin::SimpleFindExt,
             mixin::SimpleForEach,
             mixin::SimpleForEachExt,
-            mixin::IndexedViewFactory>;
+            mixin::WithIndexViewFactory>;
 
     template<typename ARRAY, template<typename> typename HOLDER>
     class OrderedView : public OrderedViewMixins::Compose<HOLDER<ARRAY>> {

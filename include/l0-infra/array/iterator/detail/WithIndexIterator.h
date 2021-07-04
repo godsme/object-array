@@ -8,26 +8,27 @@
 #include <l0-infra/array/iterator/detail/SimpleIterator.h>
 
 namespace iterator::detail {
-    template<typename T, typename SIZE_TYPE>
+    template<typename ARRAY, typename OBJ_TYPE>
     class WithIndexIterator {
+        using SizeType = typename ARRAY::SizeType;
         struct Result {
-            T& value;
-            SIZE_TYPE const index;
+            OBJ_TYPE& value;
+            SizeType const index;
         };
 
     public:
-        WithIndexIterator(T* p, SIZE_TYPE from) : p{p}, i{from} {}
+        WithIndexIterator(ARRAY& array, SizeType from) : array{array}, i{from} {}
 
-        auto operator!=(WithIndexIterator const& rhs) const -> bool { return p != rhs.p; }
-        auto operator!=(SimpleIterator<T> const& rhs) const -> bool { return p != rhs.p; }
-        auto operator*() const -> Result { return {*p, i}; }
-
-    protected:
-        auto StepForward() -> void { ++p, ++i; }
+        auto operator!=(WithIndexIterator const& rhs) const -> bool { return i != rhs.i; }
+        //auto operator!=(SimpleIterator<T> const& rhs) const -> bool { return p != rhs.p; }
+        auto operator*() const -> Result { return {array.GetObj(i), i}; }
 
     protected:
-        T* p;
-        SIZE_TYPE i;
+        auto StepForward() -> void { ++i; }
+
+    protected:
+        ARRAY& array;
+        SizeType i;
     };
 }
 

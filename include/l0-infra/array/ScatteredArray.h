@@ -21,7 +21,7 @@
 #include <l0-infra/array/mixin/count/FullScopedElemCount.h>
 #include <l0-infra/array/mixin/minmax/ScopedSimpleMinElem.h>
 #include <l0-infra/array/mixin/minmax/SimpleMinElemExt.h>
-#include <l0-infra/array/mixin/factory/IndexedScopedViewFactory.h>
+#include <l0-infra/array/mixin/factory/WithIndexScopedViewFactory.h>
 #include <l0-infra/array/mixin/erase/EraseExt.h>
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/factory/ScopedSortViewFactory.h>
@@ -57,7 +57,7 @@ namespace detail {
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleMinElem,
             mixin::SimpleMinElemExt,
-            mixin::IndexedScopedViewFactory,
+            mixin::WithIndexScopedViewFactory,
             mixin::ScopedSortViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::ReplaceExt,

@@ -14,23 +14,24 @@ namespace mixin {
     struct IterableWithIndexScopedArrayLike : T {
         using Self = T;
     public:
+        using typename T::ArrayType;
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::BitMap;
 
         using Self::GetScope;
         using Self::IndexBegin;
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
+        using Self::IndexEnd;
+        using Self::GetArray;
 
-        using ConstIterator = iterator::IndexedScopedIterator<std::add_const_t<ObjectType>, BitMap, SizeType>;
-        using Iterator = iterator::IndexedScopedIterator<ObjectType, BitMap, SizeType>;
+        using ConstIterator = iterator::IndexedScopedIterator<ArrayType, BitMap, std::add_const_t<ObjectType>>;
+        using Iterator = iterator::IndexedScopedIterator<ArrayType, BitMap, ObjectType>;
 
         using EndIterator = iterator::EmptyIterator;
 
     public:
         auto begin() const -> ConstIterator {
-            return {GetScope() >> IndexBegin(), ObjectBegin(), IndexBegin()};
+            return {GetScope() >> IndexBegin(), GetArray(), IndexBegin()};
         }
 
         auto end() const -> EndIterator {
@@ -38,7 +39,7 @@ namespace mixin {
         }
 
         auto begin() -> Iterator {
-            return {GetScope() >> IndexBegin(), ObjectBegin(), IndexBegin()};
+            return {GetScope() >> IndexBegin(), GetArray(), IndexBegin()};
         }
 
         auto end() -> EndIterator {

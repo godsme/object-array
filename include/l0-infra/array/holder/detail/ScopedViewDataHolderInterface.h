@@ -15,6 +15,7 @@ namespace holder::detail {
         using ObjectType = typename T::ObjectType;
         using SizeType   = typename T::SizeType;
         using BitMap     = typename T::BitMap;
+        using ArrayType  = typename T::ArrayType;
 
         constexpr static SizeType MAX_SIZE = T::MAX_SIZE;
         constexpr static bool ORDERED = T::IS_ORDERED;
@@ -27,6 +28,8 @@ namespace holder::detail {
         auto IndexEnd() const -> SizeType { return This()->IndexEnd(); }
         auto GetScope() const -> BitMap { return This()->GetScope(); }
         auto GetScope() -> BitMap& { return This()->GetScope(); }
+        auto GetArray() const -> decltype(auto) { return This()->This()->GetArray(); }
+        auto GetArray() -> decltype(auto) { return This()->This()->GetArray(); }
     };
 }
 

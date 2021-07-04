@@ -58,12 +58,12 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/detail/ArrayOffset.h
         include/l0-infra/array/holder/ScopedViewDataHolder.h
         include/l0-infra/array/mixin/factory/ScopedViewFactory.h
-        include/l0-infra/array/view/IndexedView.h
+        include/l0-infra/array/view/WithIndexView.h
         include/l0-infra/array/holder/ProxyRangedViewDataHolder.h
         include/l0-infra/array/holder/detail/RangedViewDataHolderInterface.h
         include/l0-infra/array/detail/CrtpHelper.h
         include/l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h
-        include/l0-infra/array/mixin/factory/IndexedViewFactory.h
+        include/l0-infra/array/mixin/factory/WithIndexViewFactory.h
         include/l0-infra/array/mixin/iterable/IterableWithIndexArrayLike.h
         include/l0-infra/array/iterator/Iterator.h
         include/l0-infra/array/iterator/WithIndexIterator.h
@@ -75,11 +75,11 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/iterator/detail/ScopedIterator.h
         include/l0-infra/array/iterator/EmptyIterator.h
         include/l0-infra/array/view/detail/IndexedArrayView.h
-        include/l0-infra/array/mixin/factory/IndexedScopedViewFactory.h
+        include/l0-infra/array/mixin/factory/WithIndexScopedViewFactory.h
         include/l0-infra/array/iterator/detail/SimpleIterator.h
         include/l0-infra/array/iterator/ScopedIterator.h
         include/l0-infra/array/mixin/iterable/IterableScopedArrayLike.h
-        include/l0-infra/array/mixin/factory/RValueIndexedViewFactory.h
+        include/l0-infra/array/mixin/factory/RValueWithIndexViewFactory.h
         include/l0-infra/array/mixin/factory/RValueRangedViewFactory.h
         include/l0-infra/array/mixin/factory/RvalueScopedViewFactory.h
         include/l0-infra/base/IntOpt.h

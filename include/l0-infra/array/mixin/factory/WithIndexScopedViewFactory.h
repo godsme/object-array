@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_INDEXEDSCOPEDVIEWFACTORY_H
-#define OBJECT_ARRAY_INDEXEDSCOPEDVIEWFACTORY_H
+#ifndef OBJECT_ARRAY_WITHINDEXSCOPEDVIEWFACTORY_H
+#define OBJECT_ARRAY_WITHINDEXSCOPEDVIEWFACTORY_H
 
 #include <l0-infra/array/concept/ScopedArrayLike.h>
 #include <l0-infra/array/view/IndexedScopedView.h>
@@ -11,7 +11,7 @@
 
 namespace mixin {
     template<__cOnCePt(SimpleScopedRangedArrayLike) T>
-    class IndexedScopedViewFactory : public T {
+    class WithIndexScopedViewFactory : public T {
         using Self = T;
 
     public:
@@ -43,4 +43,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_INDEXEDSCOPEDVIEWFACTORY_H
+#endif //OBJECT_ARRAY_WITHINDEXSCOPEDVIEWFACTORY_H

@@ -13,7 +13,7 @@ namespace iterator::detail {
         auto StepForward() -> void { bitmap >>= 1; BASE::StepForward(); }
         auto ForwardTo1stPresent() -> void {
             while(!bitmap[0] && bitmap.any()) StepForward();
-            if(bitmap.none()) BASE::p = nullptr;
+            if(bitmap.none()) done = true;
         }
 
     public:
@@ -29,7 +29,7 @@ namespace iterator::detail {
             return (*this);
         }
 
-        auto operator!=(EmptyIterator const& rhs) const -> bool { return BASE::p != nullptr; }
+        auto operator!=(EmptyIterator const& rhs) const -> bool { return !done; }
 
     public:
         ScopedIterator() = delete;
@@ -40,6 +40,7 @@ namespace iterator::detail {
 
     private:
         BIT_MAP bitmap;
+        bool done{false};
     };
 }
 

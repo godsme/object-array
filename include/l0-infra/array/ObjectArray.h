@@ -62,7 +62,7 @@ namespace detail {
         mixin::ScopedMinElemExt,
         mixin::RangedViewFactory,
         mixin::ScopedViewFactory,
-        mixin::IndexedViewFactory,
+        mixin::WithIndexViewFactory,
         mixin::SortViewFactory,
         mixin::___mutable_mixin_delimiter___,
         mixin::SimpleErase,
