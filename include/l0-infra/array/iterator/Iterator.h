@@ -12,9 +12,18 @@ namespace iterator {
     struct Iterator : detail::SimpleIterator<T> {
         using Parent = detail::SimpleIterator<T>;
         using Parent::Parent;
-
         auto operator++() -> Iterator& {
             Parent::StepForward();
+            return *this;
+        }
+    };
+
+    template<typename T>
+    struct ReverseIterator : detail::SimpleIterator<T> {
+        using Parent = detail::SimpleIterator<T>;
+        using Parent::Parent;
+        auto operator++() -> ReverseIterator& {
+            --Parent::p;
             return *this;
         }
     };

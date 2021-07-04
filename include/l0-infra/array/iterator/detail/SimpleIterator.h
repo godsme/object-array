@@ -6,25 +6,18 @@
 #define OBJECT_ARRAY_SIMPLEITERATOR_H
 
 namespace iterator::detail {
-    template<typename, typename>
-    class WithIndexIterator;
-
     template<typename T>
     struct SimpleIterator {
-        SimpleIterator(T* p) : p{p} {}
+        SimpleIterator(T *p) : p{p} {}
 
-        auto operator!=(SimpleIterator const& rhs) const -> bool { return p != rhs.p; }
-        auto operator*() -> T& { return *p; }
+        auto operator!=(SimpleIterator const &rhs) const -> bool { return p != rhs.p; }
+
+        auto operator*() -> T & { return *p; }
 
     protected:
         auto StepForward() -> void { ++p; }
-
-    private:
-        template<typename, typename>
-        friend class WithIndexIterator;
-
     protected:
-        T* p;
+        T *p;
     };
 }
 

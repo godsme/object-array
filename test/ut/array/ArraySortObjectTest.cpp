@@ -2,7 +2,6 @@
 // Created by Darwin Yuan on 2021/6/26.
 //
 
-#include <l0-infra/array/view/SortView.h>
 #include <l0-infra/array/ObjectArray.h>
 #include <catch.hpp>
 
