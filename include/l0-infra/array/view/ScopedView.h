@@ -106,8 +106,8 @@ namespace view::detail {
         using Type = ScopedMixins;
     };
 
-    template<typename ARRAY, template <typename> typename HOLDER, bool ORDERED>
-    using ScopedView = typename ScopedMixinTrait<ORDERED>::Type::template Compose<HOLDER<ARRAY>>;
+    template<typename ARRAY, template <typename, bool> typename HOLDER, bool ORDERED>
+    using ScopedView = typename ScopedMixinTrait<ORDERED>::Type::template Compose<HOLDER<ARRAY, ORDERED>>;
 }
 
 namespace view {

@@ -22,6 +22,7 @@ namespace mixin {
     protected:
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
+        using T::ORDERED;
 
     private:
         using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
@@ -29,11 +30,11 @@ namespace mixin {
     public:
         using Self::WithIndex;
 
-        auto WithIndex() && -> view::IndexedView::ValueView<Array> {
+        auto WithIndex() && -> view::IndexedView::ValueView<Array, ORDERED> {
             return {reinterpret_cast<Array&&>(*this)};
         }
 
-        auto WithIndex() const && -> view::IndexedView::ValueView<Array const> {
+        auto WithIndex() const && -> view::IndexedView::ValueView<Array const, ORDERED> {
             return {reinterpret_cast<Array const&&>(*this)};
         }
     };

@@ -11,7 +11,7 @@
 #include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
 
 namespace view::detail {
-    template<template<typename> typename ITERATOR, template<typename> typename REF_HOLDER, template<typename> typename VALUE_HOLDER>
+    template<template<typename> typename ITERATOR, template<typename, bool> typename REF_HOLDER, template<typename, bool> typename VALUE_HOLDER>
     struct IndexedArrayView {
         using Mixins = mixin::Mixins<
                 mixin::RangedArrayLike,
@@ -21,11 +21,11 @@ namespace view::detail {
         template<typename HOLDER>
         using View = typename Mixins::template Compose<HOLDER>;
 
-        template<typename ARRAY>
-        using RefView = View<REF_HOLDER<ARRAY>>;
+        template<typename ARRAY, bool ORDERED>
+        using RefView = View<REF_HOLDER<ARRAY, ORDERED>>;
 
-        template<typename ARRAY>
-        using ValueView = View<VALUE_HOLDER<ARRAY>>;
+        template<typename ARRAY, bool ORDERED>
+        using ValueView = View<VALUE_HOLDER<ARRAY, ORDERED>>;
     };
 }
 

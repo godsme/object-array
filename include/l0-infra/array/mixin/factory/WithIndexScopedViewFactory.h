@@ -21,6 +21,7 @@ namespace mixin {
     protected:
         using typename T::ScopedRangedArrayLike;
         using typename T::DataHolder;
+        using T::ORDERED;
 
         using Self::GetScope;
 
@@ -28,16 +29,16 @@ namespace mixin {
         using Array = detail::ValueScopedRangedArray<DataHolder, ScopedRangedArrayLike>;
 
     public:
-        auto WithIndex() && -> view::IndexedScopedView::ValueView<Array> {
+        auto WithIndex() && -> view::IndexedScopedView::ValueView<Array, ORDERED> {
             return {reinterpret_cast<Array&&>(*this)};
         }
-        auto WithIndex() const&& -> view::IndexedScopedView::ValueView<Array const> {
+        auto WithIndex() const&& -> view::IndexedScopedView::ValueView<Array const, ORDERED> {
             return {reinterpret_cast<Array const&&>(*this)};
         }
-        auto WithIndex() & -> view::IndexedScopedView::RefView<ScopedRangedArrayLike> {
+        auto WithIndex() & -> view::IndexedScopedView::RefView<ScopedRangedArrayLike, ORDERED> {
             return {reinterpret_cast<ScopedRangedArrayLike&>(*this)};
         }
-        auto WithIndex() const& -> view::IndexedScopedView::RefView<ScopedRangedArrayLike const> {
+        auto WithIndex() const& -> view::IndexedScopedView::RefView<ScopedRangedArrayLike const, ORDERED> {
             return {reinterpret_cast<ScopedRangedArrayLike const&>(*this)};
         }
     };
