@@ -14,6 +14,7 @@ namespace mixin {
     template<__cOnCePt(OpVisitable) T>
     class ScopedForEach : public T {
         using Self = T;
+
     public:
         using typename Self::ObjectType;
         using typename Self::SizeType;

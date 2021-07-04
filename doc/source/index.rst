@@ -22,5 +22,6 @@ Object Array
    Array
    ArrayView
    ScatteredArray
+   OrderedArray
    Mixin
    Performance

@@ -41,7 +41,7 @@ namespace mixin {
             do {
                 std::swap(GetObj(i), GetObj(i+1));
                 ++i;
-            } while(i < boundary && !less(GetObj(i), GetObj(i+1)));
+            } while(i < boundary && less(GetObj(i+1), GetObj(i)));
 
             return &GetObj(i);
         }
@@ -52,7 +52,7 @@ namespace mixin {
             auto* p = Self::Trait::Replace(Elems()[i], std::forward<ARGS>(args)...);
             if(i > 0 && less(GetObj(i), GetObj(i-1))) {
                 return LeftMove(std::forward<LESS>(less), i);
-            } else if(i < (Self::Num() - 1) && !less(GetObj(i), GetObj(i+1))) {
+            } else if(i < (Self::Num() - 1) && less(GetObj(i+1), GetObj(i))) {
                 return RightMove(std::forward<LESS>(less), i);
             } else {
                 return p;
