@@ -674,6 +674,14 @@ SCENARIO("ObjectArray Slice Append") {
         REQUIRE(slice[0] == 10);
         REQUIRE(array[1] == 10);
     }
+
+    WHEN("Sort") {
+        slice.Sort();
+        REQUIRE(slice.GetNum() == 3);
+        REQUIRE(slice[0] == 1);
+        REQUIRE(slice[1] == 2);
+        REQUIRE(slice[2] == 3);
+    }
 }
 
 SCENARIO("ObjectArray Slice PartialSort") {
