@@ -34,12 +34,29 @@ SCENARIO("SortView Test") {
         REQUIRE(array[3] == 1);
     }
 
-    WHEN("should be able to sort by sort object") {
+    WHEN("ranged sort") {
         auto&& sorted = array.SortObject();
 
         int a[10];
         int n = 0;
         for(auto&& elem : sorted.Sort()) {
+            a[n++] = elem;
+        }
+
+        REQUIRE(n == 4);
+        CHECK(a[0] == 1);
+        CHECK(a[1] == 2);
+        CHECK(a[2] == 3);
+        CHECK(a[3] == 4);
+    }
+
+    WHEN("ranged sort with index") {
+        auto&& sorted = array.SortObject();
+
+        int a[10];
+        int n = 0;
+        for(auto&& [elem, i] : sorted.Sort().WithIndex()) {
+            REQUIRE(n == i);
             a[n++] = elem;
         }
 

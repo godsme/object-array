@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
-#define OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
+#ifndef OBJECT_ARRAY_ITERABLEWITHINDEXARRAYLIKE_H
+#define OBJECT_ARRAY_ITERABLEWITHINDEXARRAYLIKE_H
 
 #include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/iterator/WithIndexIterator.h>
@@ -11,7 +11,7 @@
 
 namespace mixin {
     template<__cOnCePt(RangedArrayLike) T>
-    struct IterableIndexedArrayLike : T {
+    struct IterableWithIndexArrayLike : T {
         using Self = T;
     public:
         using typename T::SizeType;
@@ -46,4 +46,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
+#endif //OBJECT_ARRAY_ITERABLEWITHINDEXARRAYLIKE_H

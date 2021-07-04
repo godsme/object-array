@@ -7,7 +7,7 @@
 
 #include <l0-infra/array/holder/ProxyRangedViewDataHolder.h>
 #include <l0-infra/array/mixin/array_like/RangedArrayLike.h>
-#include <l0-infra/array/mixin/iterable/IterableIndexedScopedArrayLike.h>
+#include <l0-infra/array/mixin/iterable/IterableWithIndexScopedArrayLike.h>
 #include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
 
 namespace view::detail {

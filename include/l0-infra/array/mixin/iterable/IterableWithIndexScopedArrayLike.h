@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_ITERABLEINDEXEDSCOPEDARRAYLIKE_H
-#define OBJECT_ARRAY_ITERABLEINDEXEDSCOPEDARRAYLIKE_H
+#ifndef OBJECT_ARRAY_ITERABLEWITHINDEXSCOPEDARRAYLIKE_H
+#define OBJECT_ARRAY_ITERABLEWITHINDEXSCOPEDARRAYLIKE_H
 
 #include <l0-infra/array/concept/ScopedArrayLike.h>
 #include <l0-infra/array/iterator/WithIndexIterator.h>
@@ -11,7 +11,7 @@
 
 namespace mixin {
     template<__cOnCePt(ScopedRangedArrayLike) T>
-    struct IterableIndexedScopedArrayLike : T {
+    struct IterableWithIndexScopedArrayLike : T {
         using Self = T;
     public:
         using typename T::SizeType;
@@ -47,4 +47,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_ITERABLEINDEXEDSCOPEDARRAYLIKE_H
+#endif //OBJECT_ARRAY_ITERABLEWITHINDEXSCOPEDARRAYLIKE_H

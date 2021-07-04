@@ -8,11 +8,11 @@
 #include <l0-infra/array/holder/ProxyRangedViewDataHolder.h>
 #include <l0-infra/array/mixin/array_like/RangedArrayLike.h>
 #include <l0-infra/array/view/detail/IndexedArrayView.h>
-#include <l0-infra/array/mixin/iterable/IterableIndexedArrayLike.h>
+#include <l0-infra/array/mixin/iterable/IterableWithIndexArrayLike.h>
 
 namespace view {
     using IndexedView = typename detail::IndexedArrayView<
-            mixin::IterableIndexedArrayLike,
+            mixin::IterableWithIndexArrayLike,
             holder::RefProxyRangedViewDataHolder,
             holder::ValueProxyRangedViewDataHolder>;
 }

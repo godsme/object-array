@@ -64,12 +64,12 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/detail/CrtpHelper.h
         include/l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h
         include/l0-infra/array/mixin/factory/IndexedViewFactory.h
-        include/l0-infra/array/mixin/iterable/IterableIndexedArrayLike.h
+        include/l0-infra/array/mixin/iterable/IterableWithIndexArrayLike.h
         include/l0-infra/array/iterator/Iterator.h
         include/l0-infra/array/iterator/WithIndexIterator.h
         include/l0-infra/array/mixin/iterable/IterableArrayLike.h
         include/l0-infra/array/view/IndexedScopedView.h
-        include/l0-infra/array/mixin/iterable/IterableIndexedScopedArrayLike.h
+        include/l0-infra/array/mixin/iterable/IterableWithIndexScopedArrayLike.h
         include/l0-infra/array/iterator/WithIndexScopedIterator.h
         include/l0-infra/array/iterator/detail/WithIndexIterator.h
         include/l0-infra/array/iterator/detail/ScopedIterator.h
