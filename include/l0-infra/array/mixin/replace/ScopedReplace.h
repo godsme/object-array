@@ -22,7 +22,7 @@ namespace mixin {
 
     public:
         template<typename ... ARGS>
-        auto Replace(SizeType i, ARGS &&... args) -> ObjectType * {
+        auto DoReplace(SizeType i, ARGS &&... args) -> ObjectType * {
             auto index = i + IndexBegin();
             return i >= IndexEnd() || !GetScope()[index] ? nullptr : GetArray().DoReplace(index, std::forward<ARGS>(args)...);
         }

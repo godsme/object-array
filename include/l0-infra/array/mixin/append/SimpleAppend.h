@@ -10,7 +10,7 @@
 #include <l0-infra/array/mixin/erase/SimpleDoErase.h>
 
 namespace mixin {
-    template<__cOnCePt(ContiguousArrayLikeDataHolder) T>
+    template<typename T>
     class SimpleAppend : public T {
         using Self = T;
 

@@ -24,15 +24,21 @@
 #include <l0-infra/array/mixin/append/ViewAppend.h>
 #include <l0-infra/array/mixin/append/AppendExt.h>
 #include <l0-infra/array/mixin/replace/ReplaceExt.h>
+#include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
+#include <l0-infra/array/mixin/append/SimpleAppend.h>
+#include <l0-infra/array/mixin/replace/SimpleReplace.h>
 
 namespace view::detail {
     using SliceMixins = mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::ViewedArray,
+            mixin::ViewAppend,
+            mixin::RangedReplace,
+            mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::ScopedForEach,
-            mixin::ViewedArray,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -51,9 +57,9 @@ namespace view::detail {
             mixin::SimpleMinElemExt,
             mixin::ScopedMinElemExt,
             mixin::___mutable_mixin_delimiter___,
-            mixin::ViewAppend,
+            mixin::SimpleAppend,
             mixin::AppendExt,
-            mixin::RangedReplace,
+            mixin::SimpleReplace,
             mixin::ReplaceExt,
             mixin::RValueArraySort,
             mixin::ArraySortExt>;
@@ -61,12 +67,15 @@ namespace view::detail {
 
     using OrderedSliceMixins = mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::ViewedArray,
+            mixin::ViewAppend,
+            mixin::RangedReplace,
+            mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::SimpleForEach,
             mixin::ScopedFind,
             mixin::ScopedForEach,
-            mixin::ViewedArray,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -83,9 +92,9 @@ namespace view::detail {
             mixin::SimpleMinElemExt,
             mixin::ScopedMinElemExt,
             mixin::___mutable_mixin_delimiter___,
-            mixin::ViewAppend,
+            mixin::SimpleAppend,
             mixin::AppendExt,
-            mixin::RangedReplace,
+            mixin::SimpleReplace,
             mixin::ReplaceExt>;
 
     template<bool ORDERED>

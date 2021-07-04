@@ -24,7 +24,7 @@ namespace mixin {
     public:
         template<typename ... ARGS>
         auto DoReplace(SizeType i, ARGS&& ... args) -> ObjectType* {
-            return Self::Trait::Replace(Elems()[i], std::forward<ARGS>(args)...);
+            return i < Self::Num() ? Self::Trait::Replace(Elems()[i], std::forward<ARGS>(args)...) : nullptr;
         }
     };
 }

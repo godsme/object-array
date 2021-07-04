@@ -714,6 +714,36 @@ SCENARIO("ObjectArray Scope Append") {
     }
 }
 
+SCENARIO("ObjectArray Slice Scope Append") {
+    ObjectArray<int, 10> array = {4,3,1,2};
+    auto&& scope = array.From(0).Scope(0x0a);
+
+    REQUIRE(scope.GetNum() == 2);
+
+    WHEN("Append") {
+        auto* p = scope.Append(5);
+        REQUIRE(*p == 5);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(array[4] == 5);
+    }
+
+    WHEN("Replace") {
+        auto* p = scope.Replace(1, 10);
+        REQUIRE(p != nullptr);
+        REQUIRE(*p == 10);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(scope[1] == 10);
+        REQUIRE(array[1] == 10);
+    }
+
+    WHEN("Sort") {
+        scope.Sort();
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(scope[1] == 2);
+        REQUIRE(scope[3] == 3);
+    }
+}
+
 SCENARIO("ObjectArray Slice PartialSort") {
     ObjectArray<int, 10> a = {4,3,1,2};
 

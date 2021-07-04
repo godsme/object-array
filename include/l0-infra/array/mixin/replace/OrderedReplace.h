@@ -24,7 +24,7 @@ namespace mixin {
     public:
         template<typename ... ARGS>
         auto DoReplace(SizeType i, ARGS&& ... args) -> ObjectType* {
-            return Self::ActualReplace(GetLess(), i, std::forward<ARGS>(args)...);
+            return i < Self::Num() ? Self::ActualReplace(GetLess(), i, std::forward<ARGS>(args)...) : nullptr;
         }
     };
 }

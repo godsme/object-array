@@ -137,6 +137,58 @@ SCENARIO("Ordered Slice Append") {
     }
 }
 
+SCENARIO("OrderedArray Scope Append") {
+    OrderedArray<int, 10> array = {4,3,1,2};
+    auto&& scope = array.Scope(0x0a);
+
+    REQUIRE(scope.GetNum() == 2);
+
+    WHEN("Append") {
+        auto* p = scope.Append(0);
+        REQUIRE(*p == 0);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(array[0] == 0);
+        REQUIRE(array[4] == 4);
+    }
+
+    WHEN("Replace") {
+        auto* p = scope.Replace(1, 10);
+        REQUIRE(p != nullptr);
+        REQUIRE(*p == 10);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(scope[1] == 3);
+        REQUIRE(scope[3] == 10);
+        REQUIRE(array[1] == 3);
+        REQUIRE(array[3] == 10);
+    }
+}
+
+SCENARIO("OrderedArray Slice Scope Append") {
+    OrderedArray<int, 10> array = {4,3,1,2};
+    auto&& scope = array.From(0).Scope(0x0a);
+
+    REQUIRE(scope.GetNum() == 2);
+
+    WHEN("Append") {
+        auto* p = scope.Append(0);
+        REQUIRE(*p == 0);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(array[0] == 0);
+        REQUIRE(array[4] == 4);
+    }
+
+    WHEN("Replace") {
+        auto* p = scope.Replace(1, 10);
+        REQUIRE(p != nullptr);
+        REQUIRE(*p == 10);
+        REQUIRE(scope.GetNum() == 2);
+        REQUIRE(scope[1] == 3);
+        REQUIRE(scope[3] == 10);
+        REQUIRE(array[1] == 3);
+        REQUIRE(array[3] == 10);
+    }
+}
+
 namespace {
     int object_count = 0;
 
