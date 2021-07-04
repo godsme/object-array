@@ -61,16 +61,52 @@ namespace view::detail {
             mixin::RValueScopedSort,
             mixin::ArraySortExt>;
 
-    template<typename ARRAY, template <typename> typename HOLDER>
-    using ScopedView = ScopedMixins::Compose<HOLDER<ARRAY>>;
+
+    using OrderedScopedMixins = mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedMinElem,
+            mixin::ViewedArray,
+            mixin::___public_mixin_delimiter___,
+            mixin::IndexedRefAccessor,
+            mixin::ScopedByIndexAccessor,
+            mixin::RangedScopedElemCount,
+            mixin::IterableScopedArrayLike,
+            mixin::IndexedScopedViewFactory,
+            mixin::ScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::ScopedSimpleForEach,
+            mixin::SimpleForEachExt,
+            mixin::ScopedSimpleMinElem,
+            mixin::SimpleMinElemExt,
+            mixin::IndexedScopedViewFactory,
+            mixin::___mutable_mixin_delimiter___,
+            mixin::ViewAppend,
+            mixin::AppendExt,
+            mixin::ScopedReplace,
+            mixin::ReplaceExt>;
+
+    template<bool ORDERED>
+    struct ScopedMixinTrait {
+        using Type = OrderedScopedMixins;
+    };
+
+    template<>
+    struct ScopedMixinTrait<false> {
+        using Type = ScopedMixins;
+    };
+
+    template<typename ARRAY, template <typename> typename HOLDER, bool ORDERED>
+    using ScopedView = typename ScopedMixinTrait<ORDERED>::Type::template Compose<HOLDER<ARRAY>>;
 }
 
 namespace view {
-    template<typename ARRAY>
-    using ScopedView = detail::ScopedView<ARRAY, holder::RefScopedViewDataHolder>;
+    template<typename ARRAY, bool ORDERED>
+    using ScopedView = detail::ScopedView<ARRAY, holder::RefScopedViewDataHolder, ORDERED>;
 
-    template<typename ARRAY>
-    using ValueScopedView = detail::ScopedView<ARRAY, holder::ValueScopedViewDataHolder>;
+    template<typename ARRAY, bool ORDERED>
+    using ValueScopedView = detail::ScopedView<ARRAY, holder::ValueScopedViewDataHolder, ORDERED>;
 }
 
 #endif //OBJECT_ARRAY_SCOPEDVIEW_H

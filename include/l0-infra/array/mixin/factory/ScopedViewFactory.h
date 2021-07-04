@@ -22,6 +22,7 @@ namespace mixin {
         using typename T::RangedArrayLike;
         using Self::IndexBegin;
         using Self::IndexEnd;
+        using Self::ORDERED;
 
     protected:
         auto MaskScope(BitMap scope) const -> BitMap {
@@ -32,11 +33,11 @@ namespace mixin {
         auto Scope(BitMap scope) && -> void {}
         auto Scope(BitMap scope) const && -> void {}
 
-        auto Scope(BitMap scope) & -> view::ScopedView<RangedArrayLike> {
+        auto Scope(BitMap scope) & -> view::ScopedView<RangedArrayLike, ORDERED> {
             return {static_cast<RangedArrayLike&>(*this), MaskScope(scope)};
         }
 
-        auto Scope(BitMap scope) const & -> view::ScopedView<RangedArrayLike const> {
+        auto Scope(BitMap scope) const & -> view::ScopedView<RangedArrayLike const, ORDERED> {
             return {static_cast<RangedArrayLike const&>(*this), MaskScope(scope)};
         }
 
