@@ -17,8 +17,8 @@ namespace mixin {
         using typename T::SizeType;
         using typename T::ObjectType;
 
-    protected:
-        using RangedArrayLike = RangedArray;
+//    protected:
+//        using RangedArrayLike = RangedArray;
 
     public:
         auto IndexBegin() const -> SizeType { return 0; }

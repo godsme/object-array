@@ -15,22 +15,9 @@ namespace mixin {
         using Self = T;
 
     public:
-        using typename T::SizeType;
-        using typename T::ObjectType;
-
-        static constexpr auto MAX_SIZE = T::MAX_SIZE;
-
-    protected:
-        using Self::GetObj;
-        using Self::Num;
-        using Self::Elems;
-
-        using typename Self::Trait;
-
-    public:
         template<typename ... ARGS>
-        auto Append(ARGS &&... args) -> ObjectType * {
-            return Num() < MAX_SIZE ? Trait::Emplace(Elems()[Num()++], std::forward<ARGS>(args)...) : nullptr;
+        auto Append(ARGS &&... args) -> typename T::ObjectType * {
+            return Self::DoAppend(std::forward<ARGS>(args)...);
         }
     };
 }

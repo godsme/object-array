@@ -28,6 +28,8 @@
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
 #include <l0-infra/array/mixin/replace/SimpleDoReplace.h>
+#include <l0-infra/array/mixin/append/SimpleDoAppend.h>
+#include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
 
 namespace detail {
     using ObjectArrayMixins = ::mixin::Mixins<
@@ -36,12 +38,14 @@ namespace detail {
         mixin::RangedArrayLike,
         mixin::ObjectIndex,
         mixin::ArrayElemVisit,
+        mixin::SimpleDoAppend,
+        mixin::SimpleDoReplace,
+        mixin::___ranged_array_tag___,
+        mixin::ContiguousDoErase,
         mixin::ScopedFind,
         mixin::SimpleForEach,
         mixin::ScopedForEach,
         mixin::ScopedMinElem,
-        mixin::ContiguousDoErase,
-        mixin::SimpleDoReplace,
         mixin::___public_mixin_delimiter___,
         mixin::IndexedRefAccessor,
         mixin::ByIndexAccessor,

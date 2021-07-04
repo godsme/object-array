@@ -16,19 +16,23 @@
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
 #include <l0-infra/array/mixin/replace/SimpleDoReplace.h>
+#include <l0-infra/array/mixin/append/SimpleDoAppend.h>
+#include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
 
 namespace detail {
     using ArrayViewMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
             mixin::RangedArrayLike,
+            mixin::SimpleDoAppend,
+            mixin::SimpleDoReplace,
+            mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::ContiguousDoErase,
-            mixin::SimpleDoReplace,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
