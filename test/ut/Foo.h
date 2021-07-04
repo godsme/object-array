@@ -66,13 +66,13 @@ namespace ut {
         }
 
         template<typename ... ARGS>
-        auto Replace(SizeType n, ARGS&& ... args) -> ObjectType* {
+        auto DoReplace(SizeType n, ARGS&& ... args) -> ObjectType* {
             elems[n] = int(std::forward<ARGS>(args)...);
             return elems + n;
         }
 
         template<typename ... ARGS>
-        auto Append(ARGS&& ... args) -> ObjectType* {
+        auto DoAppend(ARGS&& ... args) -> ObjectType* {
             if(num == MAX_SIZE) return nullptr;
             elems[num++] = int(std::forward<ARGS>(args)...);
             return elems + num - 1;
