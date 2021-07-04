@@ -112,21 +112,21 @@ SCENARIO("IndexedOrderedArray") {
         REQUIRE(array[1] == 12);
     }
 
-//    WHEN("Range for") {
-//        int a[10];
-//        int n = 0;
-//        for(auto&& elem : array) {
-//            a[n++] = elem;
-//        }
-//
-//        REQUIRE(n == 5);
-//
-//        REQUIRE(a[0] == 7);
-//        REQUIRE(a[1] == 8);
-//        REQUIRE(a[2] == 9);
-//        REQUIRE(a[3] == 10);
-//        REQUIRE(a[4] == 12);
-//    }
+    WHEN("Range for") {
+        int a[10];
+        int n = 0;
+        for(auto&& elem : array) {
+            a[n++] = elem;
+        }
+
+        REQUIRE(n == 5);
+
+        REQUIRE(a[0] == 7);
+        REQUIRE(a[1] == 8);
+        REQUIRE(a[2] == 9);
+        REQUIRE(a[3] == 10);
+        REQUIRE(a[4] == 12);
+    }
 }
 
 namespace {

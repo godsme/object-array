@@ -40,7 +40,12 @@ namespace detail {
             mixin::OrderedDoReplace>;
 
     template<std::size_t MAX_NUM>
-    using OrderedArrayIndices = OrderedArrayIndicesMixins::Compose<holder::OrderedArrayIndicesDataHolder<MAX_NUM>>;
+    struct OrderedArrayIndices : OrderedArrayIndicesMixins::Compose<holder::OrderedArrayIndicesDataHolder<MAX_NUM>> {
+        using Parent = OrderedArrayIndicesMixins::Compose<holder::OrderedArrayIndicesDataHolder<MAX_NUM>>;
+        using Parent::Parent;
+        using Parent::IndexBegin;
+        using Parent::IndexEnd;
+    };
 }
 
 #endif //OBJECT_ARRAY_ORDEREDARRAYINDICES_H

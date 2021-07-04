@@ -45,7 +45,7 @@ namespace detail {
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
-            mixin::IterableArrayLike,
+            mixin::IterableIndexBasedArray,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::SimpleForEachExt,
