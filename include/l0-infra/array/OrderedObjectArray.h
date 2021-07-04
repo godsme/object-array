@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/7/2.
 //
 
-#ifndef OBJECT_ARRAY_ORDEREDARRAY_H
-#define OBJECT_ARRAY_ORDEREDARRAY_H
+#ifndef OBJECT_ARRAY_ORDEREDOBJECTARRAY_H
+#define OBJECT_ARRAY_ORDEREDOBJECTARRAY_H
 
 #include <l0-infra/array/holder/OrderedArrayDataHolder.h>
 #include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
@@ -75,15 +75,15 @@ namespace detail {
 }
 
 template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>
-struct OrderedArray : detail::OrderedArray<T, MAX_NUM, COMPARE> {
+struct OrderedObjectArray : detail::OrderedArray<T, MAX_NUM, COMPARE> {
     using Parent = detail::OrderedArray<T, MAX_NUM, COMPARE>;
     using Parent::Parent;
 
-    OrderedArray(std::initializer_list<T> l) {
+    OrderedObjectArray(std::initializer_list<T> l) {
         for(auto i = l.begin(); i != l.end(); ++i) {
             Parent::Append(*i);
         }
     }
 };
 
-#endif //OBJECT_ARRAY_ORDEREDARRAY_H
+#endif //OBJECT_ARRAY_ORDEREDOBJECTARRAY_H

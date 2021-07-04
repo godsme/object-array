@@ -1,11 +1,11 @@
 //
 // Created by Darwin Yuan on 2021/7/2.
 //
-#include <l0-infra/array/OrderedArray.h>
+#include <l0-infra/array/OrderedObjectArray.h>
 #include <catch.hpp>
 
-SCENARIO("OrderedArray") {
-    OrderedArray<int, 10> array;
+SCENARIO("OrderedObjectArray") {
+    OrderedObjectArray<int, 10> array;
 
     array.Append(10);
     array.Append(8);
@@ -114,7 +114,7 @@ SCENARIO("OrderedArray") {
 }
 
 SCENARIO("Ordered Slice Append") {
-    OrderedArray<int, 10> array = {4,3,1,2};
+    OrderedObjectArray<int, 10> array = {4,3,1,2};
     auto&& slice = array.From(1);
 
     REQUIRE(slice.GetNum() == 3);
@@ -137,8 +137,8 @@ SCENARIO("Ordered Slice Append") {
     }
 }
 
-SCENARIO("OrderedArray Scope Append") {
-    OrderedArray<int, 10> array = {4,3,1,2};
+SCENARIO("OrderedObjectArray Scope Append") {
+    OrderedObjectArray<int, 10> array = {4,3,1,2};
     auto&& scope = array.Scope(0x0a);
 
     REQUIRE(scope.GetNum() == 2);
@@ -163,8 +163,8 @@ SCENARIO("OrderedArray Scope Append") {
     }
 }
 
-SCENARIO("OrderedArray Slice Scope Append") {
-    OrderedArray<int, 10> array = {4,3,1,2};
+SCENARIO("OrderedObjectArray Slice Scope Append") {
+    OrderedObjectArray<int, 10> array = {4,3,1,2};
     auto&& scope = array.From(0).Scope(0x0a);
 
     REQUIRE(scope.GetNum() == 2);
@@ -200,15 +200,15 @@ namespace {
         ~Foo() { a = 10; }
     };
 
-    static_assert(!std::is_trivially_destructible_v<OrderedArray<Foo, 10>>);
+    static_assert(!std::is_trivially_destructible_v<OrderedObjectArray<Foo, 10>>);
 
     auto FooLess = [](auto&& l, auto&& r) {
         return l.a < r.a;
     };
 }
 
-SCENARIO("Foo OrderedArray") {
-    OrderedArray<Foo, 10, decltype(FooLess)> array;
+SCENARIO("Foo OrderedObjectArray") {
+    OrderedObjectArray<Foo, 10, decltype(FooLess)> array;
 
     array.Append(10);
     array.Append(8);
@@ -266,8 +266,8 @@ SCENARIO("Foo OrderedArray") {
     }
 }
 
-SCENARIO("Foo Object OrderedArray") {
-    OrderedArray<Foo, 10, decltype(FooLess)> array;
+SCENARIO("Foo Object OrderedObjectArray") {
+    OrderedObjectArray<Foo, 10, decltype(FooLess)> array;
 
     array.Append(Foo{10});
     array.Append(Foo{8});
