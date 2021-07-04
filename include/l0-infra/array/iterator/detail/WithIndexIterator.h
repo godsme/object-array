@@ -20,7 +20,6 @@ namespace iterator::detail {
         WithIndexIterator(ARRAY& array, SizeType from) : array{array}, i{from} {}
 
         auto operator!=(WithIndexIterator const& rhs) const -> bool { return i != rhs.i; }
-        //auto operator!=(SimpleIterator<T> const& rhs) const -> bool { return p != rhs.p; }
         auto operator*() const -> Result { return {array.GetObj(i), i}; }
 
     protected:
