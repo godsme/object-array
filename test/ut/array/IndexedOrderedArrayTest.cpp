@@ -128,7 +128,7 @@ SCENARIO("IndexedOrderedArray") {
         REQUIRE(a[4] == 12);
     }
 
-    WHEN("Range for") {
+    WHEN("Range for with index") {
         int a[10];
         int n = 0;
         for(auto&& [elem, i] : array.WithIndex()) {
