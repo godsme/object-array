@@ -44,10 +44,10 @@ SCENARIO("SortView Test") {
         }
 
         REQUIRE(n == 4);
-        REQUIRE(a[0] == 1);
-        REQUIRE(a[1] == 2);
-        REQUIRE(a[2] == 3);
-        REQUIRE(a[3] == 4);
+        CHECK(a[0] == 1);
+        CHECK(a[1] == 2);
+        CHECK(a[2] == 3);
+        CHECK(a[3] == 4);
     }
 
     WHEN("Create a sort view on Slice") {

@@ -34,7 +34,14 @@ namespace detail {
             mixin::ArraySort>;
 
     template<std::size_t MAX_NUM>
-    using ArrayIndices = ArrayIndicesMixins::Compose<holder::ArrayIndicesDataHolder<MAX_NUM>>;
+    struct ArrayIndices : ArrayIndicesMixins::Compose<holder::ArrayIndicesDataHolder<MAX_NUM>> {
+        using Parent = ArrayIndicesMixins::Compose<holder::ArrayIndicesDataHolder<MAX_NUM>>;
+        using Parent::Parent;
+        using Parent::IndexBegin;
+        using Parent::IndexEnd;
+        using Parent::ObjectBegin;
+        using Parent::ObjectEnd;
+    };
 }
 
 #endif //OBJECT_ARRAY_ARRAYINDICES_H

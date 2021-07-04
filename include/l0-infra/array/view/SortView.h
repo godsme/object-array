@@ -9,10 +9,13 @@
 #include <l0-infra/array/mixin/factory/IndexedViewFactory.h>
 #include <l0-infra/array/mixin/sort/ArraySortExt.h>
 #include <l0-infra/array/mixin/sort/IndicesBasedSort.h>
+#include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
+#include <l0-infra/array/mixin/iterable/IterableIndexBasedArray.h>
 
 namespace view::detail {
     using SortViewMixins = ::mixin::Mixins<
             mixin::RangedArrayLike,
+            mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
@@ -22,7 +25,7 @@ namespace view::detail {
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
-            mixin::IterableArrayLike,
+            mixin::IterableIndexBasedArray,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
             mixin::SimpleForEachExt,
