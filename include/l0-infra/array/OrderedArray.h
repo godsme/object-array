@@ -42,6 +42,7 @@ namespace detail {
             mixin::ScopedForEach,
             mixin::ContiguousDoErase,
             mixin::OrderedReplace,
+            mixin::OrderedDoAppend,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -71,6 +72,9 @@ namespace detail {
 }
 
 template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>
-using OrderedArray = detail::OrderedArray<T, MAX_NUM, COMPARE>;
+struct OrderedArray : detail::OrderedArray<T, MAX_NUM, COMPARE> {
+    using Parent = detail::OrderedArray<T, MAX_NUM, COMPARE>;
+    using Parent::Parent;
+};
 
 #endif //OBJECT_ARRAY_ORDEREDARRAY_H

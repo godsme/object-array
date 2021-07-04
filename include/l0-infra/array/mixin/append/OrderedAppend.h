@@ -10,8 +10,8 @@
 
 namespace mixin {
     template<__cOnCePt(ContiguousArrayLikeDataHolder) T>
-    class OrderedAppend : public OrderedDoAppend<T> {
-        using Self = OrderedDoAppend<T>;
+    class OrderedAppend : public T {
+        using Self = T;
 
     public:
         using typename T::SizeType;

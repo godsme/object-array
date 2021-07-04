@@ -68,6 +68,9 @@ namespace detail {
 }
 
 template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>
-using IndexedOrderedArray = detail::IndexedOrderedArray<T, MAX_NUM, COMPARE>;
+struct IndexedOrderedArray : detail::IndexedOrderedArray<T, MAX_NUM, COMPARE> {
+    using Parent = detail::IndexedOrderedArray<T, MAX_NUM, COMPARE>;
+    using Parent::Parent;
+};
 
 #endif //OBJECT_ARRAY_INDEXEDORDEREDARRAY_H
