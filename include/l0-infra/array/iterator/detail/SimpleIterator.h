@@ -7,7 +7,7 @@
 
 namespace iterator::detail {
     template<typename, typename>
-    class IndexedIterator;
+    class WithIndexIterator;
 
     template<typename T>
     struct SimpleIterator {
@@ -21,7 +21,7 @@ namespace iterator::detail {
 
     private:
         template<typename, typename>
-        friend class IndexedIterator;
+        friend class WithIndexIterator;
 
     protected:
         T* p;

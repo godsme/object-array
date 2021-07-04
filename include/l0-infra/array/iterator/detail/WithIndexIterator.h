@@ -9,16 +9,16 @@
 
 namespace iterator::detail {
     template<typename T, typename SIZE_TYPE>
-    class IndexedIterator {
+    class WithIndexIterator {
         struct Result {
             T& value;
             SIZE_TYPE const index;
         };
 
     public:
-        IndexedIterator(T* p, SIZE_TYPE from) : p{p}, i{from} {}
+        WithIndexIterator(T* p, SIZE_TYPE from) : p{p}, i{from} {}
 
-        auto operator!=(IndexedIterator const& rhs) const -> bool { return p != rhs.p; }
+        auto operator!=(WithIndexIterator const& rhs) const -> bool { return p != rhs.p; }
         auto operator!=(SimpleIterator<T> const& rhs) const -> bool { return p != rhs.p; }
         auto operator*() const -> Result { return {*p, i}; }
 
