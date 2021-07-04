@@ -24,7 +24,7 @@ namespace mixin {
 
     public:
         template<typename ... ARGS>
-        auto Append(ARGS &&... args) -> ObjectType * {
+        auto DoAppend(ARGS &&... args) -> ObjectType * {
             return Num() < MAX_SIZE ? Self::DoAppend(Self::GetLess(), std::forward<ARGS>(args)...) : nullptr;
         }
     };

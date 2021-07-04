@@ -20,6 +20,8 @@ namespace mixin {
 
     protected:
         using Self::Elems;
+
+    public:
         using Self::GetObj;
 
     private:

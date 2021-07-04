@@ -29,20 +29,23 @@
 #include <l0-infra/array/mixin/erase/ContiguousDoErase.h>
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
 #include <l0-infra/array/mixin/replace/OrderedReplace.h>
+#include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
 
 namespace detail {
     using OrderedArrayMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
             mixin::RangedArrayLike,
+            mixin::OrderedDoAppend,
+            mixin::OrderedAppend,
+            mixin::OrderedReplace,
+            mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::ContiguousDoErase,
-            mixin::OrderedReplace,
-            mixin::OrderedDoAppend,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -59,7 +62,7 @@ namespace detail {
             mixin::IndexedViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleErase,
-            mixin::OrderedAppend,
+            mixin::SimpleAppend,
             mixin::AppendExt,
             mixin::EraseExt,
             mixin::SimpleReplace,
@@ -75,6 +78,12 @@ template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>
 struct OrderedArray : detail::OrderedArray<T, MAX_NUM, COMPARE> {
     using Parent = detail::OrderedArray<T, MAX_NUM, COMPARE>;
     using Parent::Parent;
+
+    OrderedArray(std::initializer_list<T> l) {
+        for(auto i = l.begin(); i != l.end(); ++i) {
+            Parent::Append(*i);
+        }
+    }
 };
 
 #endif //OBJECT_ARRAY_ORDEREDARRAY_H

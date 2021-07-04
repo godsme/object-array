@@ -71,6 +71,12 @@ template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>
 struct IndexedOrderedArray : detail::IndexedOrderedArray<T, MAX_NUM, COMPARE> {
     using Parent = detail::IndexedOrderedArray<T, MAX_NUM, COMPARE>;
     using Parent::Parent;
+
+    IndexedOrderedArray(std::initializer_list<T> l) {
+        for(auto i = l.begin(); i != l.end(); ++i) {
+            Parent::Append(*i);
+        }
+    }
 };
 
 #endif //OBJECT_ARRAY_INDEXEDORDEREDARRAY_H

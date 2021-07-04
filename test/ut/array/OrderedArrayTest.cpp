@@ -113,6 +113,30 @@ SCENARIO("OrderedArray") {
     }
 }
 
+SCENARIO("Ordered Slice Append") {
+    OrderedArray<int, 10> array = {4,3,1,2};
+    auto&& slice = array.From(1);
+
+    REQUIRE(slice.GetNum() == 3);
+
+    WHEN("Append") {
+        auto* p = slice.Append(5);
+        REQUIRE(*p == 5);
+        REQUIRE(slice.GetNum() == 4);
+        REQUIRE(slice[3] == 5);
+    }
+
+    WHEN("Replace") {
+        auto* p = slice.Replace(0, 10);
+        REQUIRE(*p == 10);
+        REQUIRE(slice.GetNum() == 3);
+        REQUIRE(slice[0] == 3);
+        REQUIRE(slice[1] == 4);
+        REQUIRE(slice[2] == 10);
+        REQUIRE(array[3] == 10);
+    }
+}
+
 namespace {
     int object_count = 0;
 
