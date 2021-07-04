@@ -71,12 +71,12 @@ namespace detail {
             mixin::RangedClear>;
 
     template<typename T, std::size_t MAX_NUM, typename COMPARE>
-    using OrderedArray = detail::OrderedArrayMixins::Compose<holder::OrderedArrayHolder<T, MAX_NUM, COMPARE>>;
+    using OrderedObjectArray = detail::OrderedArrayMixins::Compose<holder::OrderedArrayHolder<T, MAX_NUM, COMPARE>>;
 }
 
 template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>
-struct OrderedObjectArray : detail::OrderedArray<T, MAX_NUM, COMPARE> {
-    using Parent = detail::OrderedArray<T, MAX_NUM, COMPARE>;
+struct OrderedObjectArray : detail::OrderedObjectArray<T, MAX_NUM, COMPARE> {
+    using Parent = detail::OrderedObjectArray<T, MAX_NUM, COMPARE>;
     using Parent::Parent;
 
     OrderedObjectArray(std::initializer_list<T> l) {
