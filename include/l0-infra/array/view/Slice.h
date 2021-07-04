@@ -58,31 +58,71 @@ namespace view::detail {
             mixin::RValueArraySort,
             mixin::ArraySortExt>;
 
-    template<typename ARRAY, template<typename> typename HOLDER>
-    using Slice = SliceMixins::Compose<HOLDER<ARRAY>>;
+
+    using OrderedSliceMixins = mixin::Mixins<
+            mixin::RangedArrayLike,
+            mixin::ObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::ViewedArray,
+            mixin::___public_mixin_delimiter___,
+            mixin::IndexedRefAccessor,
+            mixin::ByIndexAccessor,
+            mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::SimpleForEach,
+            mixin::SimpleForEachExt,
+            mixin::RValueScopedViewFactory,
+            mixin::RValueIndexedViewFactory,
+            mixin::ScopedFindExt,
+            mixin::ScopedForEachExt,
+            mixin::SimpleMinElem,
+            mixin::SimpleMinElemExt,
+            mixin::ScopedMinElemExt,
+            mixin::___mutable_mixin_delimiter___,
+            mixin::ViewAppend,
+            mixin::AppendExt,
+            mixin::RangedReplace,
+            mixin::ReplaceExt>;
+
+    template<bool ORDERED>
+    struct SliceMixinTrait {
+        using Type = OrderedSliceMixins;
+    };
+
+    template<>
+    struct SliceMixinTrait<false> {
+        using Type = SliceMixins;
+    };
+
+    template<typename ARRAY, template<typename> typename HOLDER, bool ORDERED>
+    using Slice = typename SliceMixinTrait<ORDERED>::Type::template Compose<HOLDER<ARRAY>>;
 }
 
 namespace view {
     ////////////////////////////////////////////////////////////////////////
-    template<typename ARRAY>
-    using Slice = detail::Slice<ARRAY, holder::RefRangedViewDataHolder>;
+    template<typename ARRAY, bool ORDERED>
+    using Slice = detail::Slice<ARRAY, holder::RefRangedViewDataHolder, ORDERED>;
 
-    template<typename ARRAY>
-    using ValueSlice = detail::Slice<ARRAY, holder::ValueRangedViewDataHolder>;
-
-    ////////////////////////////////////////////////////////////////////////
-    template<typename ARRAY>
-    using FromView = detail::Slice<ARRAY, holder::RefFromViewDataHolder>;
-
-    template<typename ARRAY>
-    using ValueFromView = detail::Slice<ARRAY, holder::ValueFromViewDataHolder>;
+    template<typename ARRAY, bool ORDERED>
+    using ValueSlice = detail::Slice<ARRAY, holder::ValueRangedViewDataHolder, ORDERED>;
 
     ////////////////////////////////////////////////////////////////////////
-    template<typename ARRAY>
-    using UntilView = detail::Slice<ARRAY, holder::RefUntilViewDataHolder>;
+    template<typename ARRAY, bool ORDERED>
+    using FromView = detail::Slice<ARRAY, holder::RefFromViewDataHolder, ORDERED>;
 
-    template<typename ARRAY>
-    using ValueUntilView = detail::Slice<ARRAY, holder::ValueUntilViewDataHolder>;
+    template<typename ARRAY, bool ORDERED>
+    using ValueFromView = detail::Slice<ARRAY, holder::ValueFromViewDataHolder, ORDERED>;
+
+    ////////////////////////////////////////////////////////////////////////
+    template<typename ARRAY, bool ORDERED>
+    using UntilView = detail::Slice<ARRAY, holder::RefUntilViewDataHolder, ORDERED>;
+
+    template<typename ARRAY, bool ORDERED>
+    using ValueUntilView = detail::Slice<ARRAY, holder::ValueUntilViewDataHolder, ORDERED>;
 }
 
 #endif //OBJECT_ARRAY_VIEW_SLICE_H

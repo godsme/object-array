@@ -27,54 +27,55 @@ namespace mixin {
 
     protected:
         using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
+        using Self::ORDERED;
 
     protected:
-        auto MakeSlice(SizeType from, SizeType until) && -> view::ValueSlice<Array> {
+        auto MakeSlice(SizeType from, SizeType until) && -> view::ValueSlice<Array, ORDERED> {
             return {reinterpret_cast<Array&&>(*this), from, until};
         }
 
-        auto MakeSlice(SizeType from, SizeType until) const && -> view::ValueSlice<Array const> {
+        auto MakeSlice(SizeType from, SizeType until) const && -> view::ValueSlice<Array const, ORDERED> {
             return {reinterpret_cast<Array const &&>(*this), from, until};
         }
 
-        auto MakeFromSlice(SizeType from) && -> view::ValueFromView<Array> {
+        auto MakeFromSlice(SizeType from) && -> view::ValueFromView<Array, ORDERED> {
             return {reinterpret_cast<Array&&>(*this), from};
         }
 
-        auto MakeFromSlice(SizeType from) const && -> view::ValueFromView<Array const> {
+        auto MakeFromSlice(SizeType from) const && -> view::ValueFromView<Array const, ORDERED> {
             return {reinterpret_cast<Array const &&>(*this), from};
         }
 
-        auto MakeUntilSlice(SizeType until) && -> view::ValueUntilView<Array> {
+        auto MakeUntilSlice(SizeType until) && -> view::ValueUntilView<Array, ORDERED> {
             return {reinterpret_cast<Array&&>(*this), until};
         }
 
-        auto MakeUntilSlice(SizeType until) const && -> view::ValueUntilView<Array const> {
+        auto MakeUntilSlice(SizeType until) const && -> view::ValueUntilView<Array const, ORDERED> {
             return {reinterpret_cast<Array const &&>(*this), until};
         }
 
     private:
-        auto MakeSlice(SizeType from, SizeType until) & -> view::Slice<RangedArrayLike> {
+        auto MakeSlice(SizeType from, SizeType until) & -> view::Slice<RangedArrayLike, ORDERED> {
             return {static_cast<RangedArrayLike&>(*this), from, until};
         }
 
-        auto MakeSlice(SizeType from, SizeType until) const & -> view::Slice<RangedArrayLike const> {
+        auto MakeSlice(SizeType from, SizeType until) const & -> view::Slice<RangedArrayLike const, ORDERED> {
             return {static_cast<RangedArrayLike const&>(*this), from, until};
         }
 
-        auto MakeFromSlice(SizeType from) & -> view::FromView<RangedArrayLike> {
+        auto MakeFromSlice(SizeType from) & -> view::FromView<RangedArrayLike, ORDERED> {
             return {static_cast<RangedArrayLike&>(*this), from};
         }
 
-        auto MakeFromSlice(SizeType from) const & -> view::FromView<RangedArrayLike const> {
+        auto MakeFromSlice(SizeType from) const & -> view::FromView<RangedArrayLike const, ORDERED> {
             return {static_cast<RangedArrayLike const&>(*this), from};
         }
 
-        auto MakeUntilSlice(SizeType until) & -> view::UntilView<RangedArrayLike> {
+        auto MakeUntilSlice(SizeType until) & -> view::UntilView<RangedArrayLike, ORDERED> {
             return {static_cast<RangedArrayLike&>(*this), until};
         }
 
-        auto MakeUntilSlice(SizeType until) const & -> view::UntilView<RangedArrayLike const> {
+        auto MakeUntilSlice(SizeType until) const & -> view::UntilView<RangedArrayLike const, ORDERED> {
             return {static_cast<RangedArrayLike const&>(*this), until};
         }
 

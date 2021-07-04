@@ -8,7 +8,7 @@
 
 SCENARIO("SliceTest") {
     ut::Foo foo = {1,2,3,4,5,6,7};
-    view::Slice<ut::Foo> slice{foo, 2, 5};
+    view::Slice<ut::Foo, false> slice{foo, 2, 5};
 
     REQUIRE(slice.GetNum() == 3);
 
@@ -45,7 +45,7 @@ SCENARIO("SliceTest") {
 
 SCENARIO("FromSlice Test") {
     ut::Foo foo = {1,2,3,4,5,6,7};
-    view::FromView<ut::Foo> slice{foo, 2};
+    view::FromView<ut::Foo, false> slice{foo, 2};
 
     REQUIRE(slice.GetNum() == 5);
 

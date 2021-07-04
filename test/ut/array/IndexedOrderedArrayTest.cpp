@@ -1,7 +1,7 @@
 //
 // Created by Darwin Yuan on 2021/7/3.
 //
-#include <l0-infra/array/view/IndexedOrderedArray.h>
+#include <l0-infra/array/IndexedOrderedArray.h>
 #include <catch.hpp>
 
 SCENARIO("IndexedOrderedArray") {
