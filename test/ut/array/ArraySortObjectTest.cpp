@@ -34,6 +34,22 @@ SCENARIO("SortView Test") {
         REQUIRE(array[3] == 1);
     }
 
+    WHEN("should be able to sort by sort object") {
+        auto&& sorted = array.SortObject();
+
+        int a[10];
+        int n = 0;
+        for(auto&& elem : sorted.Sort()) {
+            a[n++] = elem;
+        }
+
+        REQUIRE(n == 4);
+        REQUIRE(a[0] == 1);
+        REQUIRE(a[1] == 2);
+        REQUIRE(a[2] == 3);
+        REQUIRE(a[3] == 4);
+    }
+
     WHEN("Create a sort view on Slice") {
         auto&& view = array.From(1).SortObject().Sort();
 

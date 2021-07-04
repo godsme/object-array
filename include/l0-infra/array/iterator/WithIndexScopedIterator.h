@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/6/23.
 //
 
-#ifndef OBJECT_ARRAY_INDEXEDSCOPEDITERATOR_H
-#define OBJECT_ARRAY_INDEXEDSCOPEDITERATOR_H
+#ifndef OBJECT_ARRAY_WITHINDEXSCOPEDITERATOR_H
+#define OBJECT_ARRAY_WITHINDEXSCOPEDITERATOR_H
 
 #include <l0-infra/array/iterator/detail/ScopedIterator.h>
 #include <l0-infra/array/iterator/detail/IndexedIterator.h>
@@ -13,4 +13,4 @@ namespace iterator {
     using IndexedScopedIterator = detail::ScopedIterator<detail::IndexedIterator<T, SIZE_TYPE>, BIT_MAP>;
 }
 
-#endif //OBJECT_ARRAY_INDEXEDSCOPEDITERATOR_H
+#endif //OBJECT_ARRAY_WITHINDEXSCOPEDITERATOR_H

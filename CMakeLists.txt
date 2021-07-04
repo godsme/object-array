@@ -66,11 +66,11 @@ set(OBJ_ARRAY_SRC
         include/l0-infra/array/mixin/factory/IndexedViewFactory.h
         include/l0-infra/array/mixin/iterable/IterableIndexedArrayLike.h
         include/l0-infra/array/iterator/Iterator.h
-        include/l0-infra/array/iterator/IndexedIterator.h
+        include/l0-infra/array/iterator/WithIndexIterator.h
         include/l0-infra/array/mixin/iterable/IterableArrayLike.h
         include/l0-infra/array/view/IndexedScopedView.h
         include/l0-infra/array/mixin/iterable/IterableIndexedScopedArrayLike.h
-        include/l0-infra/array/iterator/IndexedScopedIterator.h
+        include/l0-infra/array/iterator/WithIndexScopedIterator.h
         include/l0-infra/array/iterator/detail/IndexedIterator.h
         include/l0-infra/array/iterator/detail/ScopedIterator.h
         include/l0-infra/array/iterator/EmptyIterator.h

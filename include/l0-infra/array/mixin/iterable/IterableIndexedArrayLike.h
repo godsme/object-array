@@ -6,7 +6,7 @@
 #define OBJECT_ARRAY_ITERABLEINDEXEDARRAYLIKE_H
 
 #include <l0-infra/array/concept/RangedArrayLike.h>
-#include <l0-infra/array/iterator/IndexedIterator.h>
+#include <l0-infra/array/iterator/WithIndexIterator.h>
 #include <l0-infra/array/iterator/Iterator.h>
 
 namespace mixin {
@@ -21,8 +21,8 @@ namespace mixin {
         using Self::ObjectBegin;
         using Self::ObjectEnd;
 
-        using ConstIterator = iterator::IndexedIterator<std::add_const_t<ObjectType>, SizeType>;
-        using Iterator = iterator::IndexedIterator<ObjectType, SizeType>;
+        using ConstIterator = iterator::WithIndexIterator<std::add_const_t<ObjectType>, SizeType>;
+        using Iterator = iterator::WithIndexIterator<ObjectType, SizeType>;
 
         using ConstEndIterator = iterator::Iterator<std::add_const_t<ObjectType>>;
         using EndIterator = iterator::Iterator<ObjectType>;

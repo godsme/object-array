@@ -6,8 +6,8 @@
 #define OBJECT_ARRAY_ITERABLEINDEXEDSCOPEDARRAYLIKE_H
 
 #include <l0-infra/array/concept/ScopedArrayLike.h>
-#include <l0-infra/array/iterator/IndexedIterator.h>
-#include <l0-infra/array/iterator/IndexedScopedIterator.h>
+#include <l0-infra/array/iterator/WithIndexIterator.h>
+#include <l0-infra/array/iterator/WithIndexScopedIterator.h>
 
 namespace mixin {
     template<__cOnCePt(ScopedRangedArrayLike) T>
