@@ -20,8 +20,8 @@ namespace mixin {
         using Self::GetPointers;
 
     public:
-        auto GetObjIndex(ObjectType const *obj) -> Maybe {
-            return GetPointers().FindIndex(obj);
+        auto GetObjIndex(ObjectType const *obj) const -> Maybe {
+            return GetPointers().FindIndex(const_cast<ObjectType*>(obj));
         }
     };
 }

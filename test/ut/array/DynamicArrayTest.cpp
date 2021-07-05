@@ -6,7 +6,7 @@
 #include <l0-infra/array/DynamicArray.h>
 #include <catch.hpp>
 
-SCENARIO("DynamicArray Append & Destroy") {
+SCENARIO("DynamicArray Append") {
     ScatteredArray<int, 10> allocator;
     {
         DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
@@ -16,6 +16,36 @@ SCENARIO("DynamicArray Append & Destroy") {
         REQUIRE(allocator.GetNum() == 2);
         REQUIRE(nullptr == array.Append(30));
     }
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray Erase") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        array.Erase(1);
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(array[0] == 10);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray Remove") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        array.Remove(&array[1]);
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(array[0] == 10);
+    }
+
     REQUIRE(allocator.GetNum() == 0);
 }
 
@@ -34,6 +64,46 @@ SCENARIO("DynamicArray Iterable") {
         }
         REQUIRE(sum == 30);
         REQUIRE(n == 2);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray Iterable with index") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        auto sum = 0;
+        auto n = 0;
+        for(auto&& [item, i] : array.WithIndex()) {
+            REQUIRE(n == i);
+            n++;
+            sum += item;
+        }
+        REQUIRE(sum == 30);
+        REQUIRE(n == 2);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray Find") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        auto* found = array.Find(10);
+        REQUIRE(found != nullptr);
+        REQUIRE(*found == 10);
+
+        auto index = array.FindIndex(20);
+        REQUIRE(index.has_value());
+        REQUIRE(*index == 1);
     }
 
     REQUIRE(allocator.GetNum() == 0);

@@ -26,6 +26,10 @@ namespace holder::detail {
         auto DoAppend(ARGS&& ... args) -> ObjectType* {
             return This()->DoAppend(std::forward<ARGS>(args)...);
         }
+
+        auto DoErase(SizeType n) -> void {
+            return This()->DoErase(n);
+        }
     };
 }
 
@@ -37,6 +41,7 @@ namespace holder {
         using SizeType = typename PointerArray::SizeType;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
         constexpr static bool IS_CONST = false;
+        constexpr static bool IS_ORDERED = false;
 
         using Interface = detail::DynamicArrayDataHolderInterface<DynamicArrayDataHolder>;
 
@@ -50,6 +55,14 @@ namespace holder {
         auto DoClear() {
             ClearContent();
             pointers.Clear();
+        }
+
+        auto DoErase(SizeType n) -> void {
+            if(n < pointers.GetNum()) {
+                auto* p = pointers[n];
+                allocator.Remove(p);
+                pointers.Erase(n);
+            }
         }
 
         auto CopyFrom(DynamicArrayDataHolder const& rhs) {

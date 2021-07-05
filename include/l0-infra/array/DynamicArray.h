@@ -25,8 +25,14 @@ namespace detail {
             mixin::RangedElemCount,
             mixin::IterableIndexBasedArray,
             mixin::SimpleForEachExt,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
+            mixin::WithIndexViewFactory,
             mixin::___mutable_mixin_delimiter___,
-            mixin::SimpleAppend>;
+            mixin::SimpleAppend,
+            mixin::AppendExt,
+            mixin::SimpleErase,
+            mixin::EraseExt>;
 }
 
 template<typename ALLOCATOR, std::size_t MAX_NUM>

@@ -17,7 +17,6 @@ namespace view::detail {
     using SortViewMixins = ::mixin::Mixins<
             mixin::RangedArrayLike,
             mixin::___ranged_array_tag___,
-            //mixin::IndexedObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::SimpleForEach,

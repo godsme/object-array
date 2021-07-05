@@ -24,7 +24,7 @@ namespace mixin {
         using Self::IndexEnd;
         using Self::Num;
 
-    public:
+    private:
         auto ClearRange(SizeType from, SizeType until) -> void {
             for(auto i=from; i<until; i++) {
                 auto index = GetIndices()[i];
@@ -33,6 +33,7 @@ namespace mixin {
             GetIndices().ClearRange(from, until);
         }
 
+    public:
         auto Clear() -> void {
             ClearRange(IndexBegin(), IndexEnd());
         }
