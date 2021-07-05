@@ -13,7 +13,6 @@ namespace mixin {
         using Self = T;
 
     protected:
-        using Self::GetIndices;
         using typename Self::RangedArrayLike;
 
     public:
@@ -26,19 +25,19 @@ namespace mixin {
 
     public:
         auto begin() const -> ConstIterator {
-            return {*this, GetIndices().IndexBegin()};
+            return {*this, Self::IndexBegin()};
         }
 
         auto end() const -> ConstIterator {
-            return {*this, GetIndices().IndexEnd()};
+            return {*this, Self::IndexEnd()};
         }
 
         auto begin() -> Iterator {
-            return {*this, GetIndices().IndexBegin()};
+            return {*this, Self::IndexBegin()};
         }
 
         auto end() -> Iterator {
-            return {*this, GetIndices().IndexEnd()};
+            return {*this, Self::IndexEnd()};
         }
     };
 }

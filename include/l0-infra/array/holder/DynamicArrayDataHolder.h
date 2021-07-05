@@ -6,18 +6,26 @@
 #define OBJECT_ARRAY_DYNAMICARRAYDATAHOLDER_H
 
 #include <l0-infra/array/detail/ArrayIndices.h>
+#include <l0-infra/array/ObjectArray.h>
 
 namespace holder::detail {
     template<typename HOLDER>
     class DynamicArrayDataHolderInterface {
-        dEcL_tHiS(DATA_HOLDER);
+        dEcL_tHiS(HOLDER);
     public:
         using SizeType = typename HOLDER::SizeType;
         using ObjectType = typename HOLDER::ObjectType;
 
+        auto GetPointers() const -> decltype(auto) { return (This()->pointers); }
+        auto GetPointers() -> decltype(auto) { return (This()->pointers); }
         auto GetObj(SizeType n) -> ObjectType& { return *(This()->pointers[n]); }
         auto GetObj(SizeType n) const -> ObjectType const& { return *(This()->pointers[n]); }
         auto Num() const -> SizeType { return This()->pointers.GetNum(); }
+
+        template<typename ... ARGS>
+        auto DoAppend(ARGS&& ... args) -> ObjectType* {
+            return This()->DoAppend(std::forward<ARGS>(args)...);
+        }
     };
 }
 
@@ -28,13 +36,14 @@ namespace holder {
         using PointerArray = ObjectArray<ObjectType*, MAX_NUM>;
         using SizeType = typename PointerArray::SizeType;
         constexpr static SizeType MAX_SIZE = MAX_NUM;
+        constexpr static bool IS_CONST = false;
 
-        using Interface = DynamicArrayDataHolderInterface<DynamicArrayDataHolder>;
+        using Interface = detail::DynamicArrayDataHolderInterface<DynamicArrayDataHolder>;
 
     private:
         auto ClearContent() {
             for(auto* pointer : pointers) {
-                ALLOCATOR.Remove(pointer);
+                allocator.Remove(pointer);
             }
         }
 
@@ -51,8 +60,17 @@ namespace holder {
                     DoClear();
                     return;
                 }
-                pointers.Append(allocator.Append(*pointer));
+                pointers.Append(p);
             }
+        }
+
+        template<typename ... ARGS>
+        auto DoAppend(ARGS&& ... args) -> ObjectType* {
+            if(pointers.All()) return nullptr;
+            auto* p = allocator.Append(std::forward<ARGS>(args)...);
+            if(p == nullptr) return nullptr;
+            pointers.Append(p);
+            return p;
         }
 
     public:
@@ -68,18 +86,22 @@ namespace holder {
         }
 
         auto operator=(DynamicArrayDataHolder const& rhs) -> DynamicArrayDataHolder& {
-            if(allocator != rhs.allocator) return;
-            DoClear();
-            CopyFrom(rhs);
+            if(allocator == rhs.allocator) {
+                DoClear();
+                CopyFrom(rhs);
+            }
             return *this;
         }
 
         auto operator=(DynamicArrayDataHolder&& rhs) -> DynamicArrayDataHolder& {
-            if(allocator != rhs.allocator) return;
-            DoClear();
-            pointers = std::move(rhs.pointers);
+            if(allocator == rhs.allocator) {
+                DoClear();
+                pointers = std::move(rhs.pointers);
+            }
             return *this;
         }
+
+
 
         ~DynamicArrayDataHolder() {
             ClearContent();
@@ -87,7 +109,7 @@ namespace holder {
 
     private:
         template<typename>
-        friend detail::DynamicArrayDataHolderInterface;
+        friend class detail::DynamicArrayDataHolderInterface;
 
     private:
         ALLOCATOR& allocator;

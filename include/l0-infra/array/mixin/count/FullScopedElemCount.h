@@ -10,10 +10,11 @@
 namespace mixin {
     template<__cOnCePt(Scoped) T>
     class FullScopedElemCount : public ScopedElemCount<T> {
-        using Self = T;
+        using Self = ScopedElemCount<T>;
 
     public:
         using typename Self::BitMap;
+        using typename Self::SizeType;
 
     protected:
         using Self::GetScope;
@@ -21,6 +22,10 @@ namespace mixin {
     public:
         auto All() const -> bool {
             return GetScope().all();
+        }
+
+        auto HasEnoughSlots(SizeType num) const -> bool {
+            return num <= (Self::MAX_SIZE - Self::GetNum());
         }
 
         auto GetAvailable() const -> BitMap {
