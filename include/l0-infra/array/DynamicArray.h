@@ -11,18 +11,20 @@
 #include <l0-infra/array/mixin/array_like/RangedArray.h>
 #include <l0-infra/array/mixin/array_like/DynamicObjectIndex.h>
 
-
 namespace detail {
     using DynamicArrayMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
             mixin::RangedArray,
             mixin::___ranged_array_tag___,
             mixin::DynamicObjectIndex,
+            mixin::ArrayElemVisit,
+            mixin::SimpleForEach,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
             mixin::IterableIndexBasedArray,
+            mixin::SimpleForEachExt,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleAppend>;
 }

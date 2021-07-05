@@ -32,10 +32,30 @@ SCENARIO("DynamicArray Iterable") {
             n++;
             sum += item;
         }
-
         REQUIRE(sum == 30);
         REQUIRE(n == 2);
     }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray ForEach") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        auto sum = 0;
+        auto n = 0;
+        array.ForEach([&](auto&& item) {
+            n++;
+            sum += item;
+        });
+        REQUIRE(sum == 30);
+        REQUIRE(n == 2);
+    }
+
     REQUIRE(allocator.GetNum() == 0);
 }
 
