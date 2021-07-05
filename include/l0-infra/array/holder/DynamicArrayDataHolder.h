@@ -57,11 +57,13 @@ namespace holder {
             }
         }
 
+    protected:
         auto DoClear() {
             ClearContent();
             pointers.Clear();
         }
 
+    private:
         auto DoErase(SizeType n) -> void {
             if(n < pointers.GetNum()) {
                 auto* p = pointers[n];
@@ -127,18 +129,38 @@ namespace holder {
             return *this;
         }
 
-        ~DynamicArrayDataHolder() {
-            ClearContent();
-        }
+
 
     private:
         template<typename>
         friend class detail::DynamicArrayDataHolderInterface;
 
-    private:
+    protected:
         ALLOCATOR& allocator;
         PointerArray pointers;
     };
+
+    template<__cOnCePt(DynamicAllocator) ALLOCATOR, typename POINTER_ARRAY, bool FREE_ON_DETOR>
+    struct DynamicArrayHolder : DynamicArrayDataHolder<ALLOCATOR, POINTER_ARRAY> {
+        using Parent = DynamicArrayDataHolder<ALLOCATOR, POINTER_ARRAY>;
+        using Parent::Parent;
+
+        DynamicArrayHolder(DynamicArrayHolder const&) = default;
+        DynamicArrayHolder(DynamicArrayHolder&&) = default;
+        auto operator=(DynamicArrayHolder const&) -> DynamicArrayHolder& = default;
+        auto operator=(DynamicArrayHolder&&) -> DynamicArrayHolder& = default;
+
+        ~DynamicArrayHolder() {
+            Parent::DoClear();
+        }
+    };
+
+    template<__cOnCePt(DynamicAllocator) ALLOCATOR, typename POINTER_ARRAY>
+    struct DynamicArrayHolder<ALLOCATOR, POINTER_ARRAY, false> : DynamicArrayDataHolder<ALLOCATOR, POINTER_ARRAY> {
+        using Parent = DynamicArrayDataHolder<ALLOCATOR, POINTER_ARRAY>;
+        using Parent::Parent;
+    };
+
 }
 
 #endif //OBJECT_ARRAY_DYNAMICARRAYDATAHOLDER_H

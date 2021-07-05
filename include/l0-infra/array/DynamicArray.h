@@ -9,13 +9,12 @@
 #include <l0-infra/array/detail/DynamicArrayMixins.h>
 
 namespace detail {
-    template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM>
-    using DynamicArrayBase = detail::DynamicArray<ALLOCATOR, ObjectArray<typename ALLOCATOR::ObjectType*, MAX_NUM>>;
+    template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM, bool FREE_ON_DTOR>
+    using DynamicArrayBase = detail::DynamicArray<ALLOCATOR, ObjectArray<typename ALLOCATOR::ObjectType*, MAX_NUM>, FREE_ON_DTOR>;
 }
 
-template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM>
-struct DynamicArray : detail::DynamicArrayBase<ALLOCATOR, MAX_NUM> {
-    using Parent = detail::DynamicArrayBase<ALLOCATOR, MAX_NUM>;
+template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM, bool FREE_ON_DTOR = true, typename Parent = detail::DynamicArrayBase<ALLOCATOR, MAX_NUM, FREE_ON_DTOR>>
+struct DynamicArray : Parent {
     DynamicArray(ALLOCATOR& allocator) : Parent(allocator) {}
 };
 

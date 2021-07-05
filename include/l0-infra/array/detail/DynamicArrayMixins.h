@@ -54,8 +54,8 @@ namespace detail {
             mixin::DynamicArraySort,
             mixin::ArraySortExt>;
 
-    template<__cOnCePt(DynamicAllocator) ALLOCATOR, typename POINTER_ARRAY>
-    using DynamicArray = detail::DynamicArrayMixins::Compose<holder::DynamicArrayDataHolder<ALLOCATOR, POINTER_ARRAY>>;
+    template<__cOnCePt(DynamicAllocator) ALLOCATOR, typename POINTER_ARRAY, bool FREE_ON_DTOR = true>
+    using DynamicArray = detail::DynamicArrayMixins::Compose<holder::DynamicArrayHolder<ALLOCATOR, POINTER_ARRAY, FREE_ON_DTOR>>;
 }
 
 #endif //OBJECT_ARRAY_DYNAMICARRAYMIXINS_H

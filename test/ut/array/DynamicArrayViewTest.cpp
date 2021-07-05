@@ -23,5 +23,5 @@ SCENARIO("DynamicArrayView Append") {
         REQUIRE(allocator.GetNum() == 2);
         REQUIRE(nullptr == array.Append(30));
     }
-    REQUIRE(allocator.GetNum() == 0);
+    REQUIRE(allocator.GetNum() == 2);
 }
