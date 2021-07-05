@@ -12,7 +12,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<__cOnCePt(ConstScopedRangedArrayLike) T>
+    template<__cOnCePt(SimpleScopedRangedArrayLike) T>
     class ScopedSimpleFind : public T {
         using Self = T;
     public:

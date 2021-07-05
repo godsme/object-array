@@ -9,7 +9,7 @@
 #include <l0-infra/array/concept/Less.h>
 
 namespace mixin {
-    template<__cOnCePt(ConstRangedArrayLike) T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     class ScopedMinElem : public T {
         using Self = T;
     public:

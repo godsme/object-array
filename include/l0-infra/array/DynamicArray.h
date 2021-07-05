@@ -11,6 +11,7 @@
 #include <l0-infra/array/mixin/array_like/RangedArray.h>
 #include <l0-infra/array/mixin/array_like/DynamicObjectIndex.h>
 #include <l0-infra/array/mixin/erase/SimpleRangedClear.h>
+#include <l0-infra/array/mixin/sort/DynamicArraySort.h>
 
 namespace detail {
     using DynamicArrayMixins = ::mixin::Mixins<
@@ -21,6 +22,9 @@ namespace detail {
             mixin::ArrayElemVisit,
             mixin::SimpleForEach,
             mixin::SimpleRangedClear,
+            mixin::ScopedFind,
+            mixin::ScopedForEach,
+            mixin::ScopedMinElem,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -31,13 +35,21 @@ namespace detail {
             mixin::SimpleFindExt,
             mixin::SimpleMinElem,
             mixin::SimpleMinElemExt,
+            mixin::ArrayEquality,
+            mixin::ScopedFindExt,
+            mixin::ScopedForEachExt,
+            mixin::ScopedMinElemExt,
+            mixin::RangedViewFactory,
+            mixin::ScopedViewFactory,
             mixin::WithIndexViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleAppend,
             mixin::AppendExt,
             mixin::SimpleErase,
             mixin::EraseExt,
-            mixin::RangedClearExt>;
+            mixin::RangedClearExt,
+            mixin::DynamicArraySort,
+            mixin::ArraySortExt>;
 }
 
 template<typename ALLOCATOR, std::size_t MAX_NUM>
