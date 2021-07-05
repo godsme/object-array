@@ -5,6 +5,7 @@
 #ifndef OBJECT_ARRAY_DYNAMICARRAYDATAHOLDER_H
 #define OBJECT_ARRAY_DYNAMICARRAYDATAHOLDER_H
 
+#include <l0-infra/array/concept/DynamicAllocator.h>
 #include <l0-infra/array/detail/ArrayIndices.h>
 #include <l0-infra/array/ObjectArray.h>
 
@@ -39,7 +40,7 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<typename ALLOCATOR, std::size_t MAX_NUM>
+    template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM>
     struct DynamicArrayDataHolder {
         using ObjectType = typename ALLOCATOR::ObjectType;
         using PointerArray = ObjectArray<ObjectType*, MAX_NUM>;

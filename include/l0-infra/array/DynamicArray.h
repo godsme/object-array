@@ -55,7 +55,7 @@ namespace detail {
             mixin::ArraySortExt>;
 }
 
-template<typename ALLOCATOR, std::size_t MAX_NUM>
+template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM>
 using DynamicArray = detail::DynamicArrayMixins::Compose<holder::DynamicArrayDataHolder<ALLOCATOR, MAX_NUM>>;
 
 #endif //OBJECT_ARRAY_DYNAMICARRAY_H

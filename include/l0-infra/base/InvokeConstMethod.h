@@ -6,7 +6,6 @@
 #define OBJECT_ARRAY_INVOKECONSTMETHOD_H
 
 #include <type_traits>
-#include <concepts>
 
 namespace detail {
     template<typename T, std::enable_if_t<std::is_pointer_v<T>, int> = 0>
