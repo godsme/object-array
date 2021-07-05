@@ -32,6 +32,18 @@ SCENARIO("IndexedOrderedArray") {
         REQUIRE(array[3] == 12);
     }
 
+    WHEN("Remove") {
+        REQUIRE(array[2] == 9);
+        array.Remove(&array[2]);
+
+        REQUIRE(array.GetNum() == 4);
+
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 10);
+        REQUIRE(array[3] == 12);
+    }
+
     WHEN("Replace 0") {
         array.Replace(0, 1);
 

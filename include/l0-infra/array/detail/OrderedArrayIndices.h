@@ -21,6 +21,8 @@
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/append/OrderedDoAppend.h>
 #include <l0-infra/array/mixin/replace/OrderedDoReplace.h>
+#include <l0-infra/array/mixin/find/NonScopedSimpleFind.h>
+#include <l0-infra/array/mixin/find/SimpleFindExt.h>
 
 namespace detail {
     using OrderedArrayIndicesMixins = ::mixin::Mixins<
@@ -34,6 +36,8 @@ namespace detail {
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
+            mixin::NonScopedSimpleFind,
+            mixin::SimpleFindExt,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleErase,
             mixin::RangedClear,

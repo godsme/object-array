@@ -28,13 +28,14 @@
 #include <l0-infra/array/mixin/erase/EraseExt.h>
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
 #include <l0-infra/array/mixin/replace/IndexedOrderedDoReplace.h>
+#include <l0-infra/array/mixin/array_like/IndexedObjectIndex.h>
 
 namespace detail {
     using IndexedOrderedArrayMixins = ::mixin::Mixins<
             mixin::IndexedOrderedAppend,
             mixin::IndexedOrderedDoReplace,
             mixin::___ranged_array_tag___,
-            mixin::ObjectIndex,
+            mixin::IndexedObjectIndex,
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::SimpleForEach,
