@@ -110,22 +110,20 @@ namespace holder {
         }
 
         auto operator=(DynamicArrayDataHolder const& rhs) -> DynamicArrayDataHolder& {
+            DoClear();
             if(allocator == rhs.allocator) {
-                DoClear();
                 CopyFrom(rhs);
             }
             return *this;
         }
 
         auto operator=(DynamicArrayDataHolder&& rhs) -> DynamicArrayDataHolder& {
+            DoClear();
             if(allocator == rhs.allocator) {
-                DoClear();
                 pointers = std::move(rhs.pointers);
             }
             return *this;
         }
-
-
 
         ~DynamicArrayDataHolder() {
             ClearContent();
