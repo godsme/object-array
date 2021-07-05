@@ -17,9 +17,7 @@ namespace holder::detail {
 
         auto GetObj(SizeType n) -> ObjectType& { return *(This()->pointers[n]); }
         auto GetObj(SizeType n) const -> ObjectType const& { return *(This()->pointers[n]); }
-
-        auto IndexBegin() const -> SizeType { return 0; }
-        auto IndexEnd() const -> SizeType { return This()->pointers.GetNum(); }
+        auto Num() const -> SizeType { return This()->pointers.GetNum(); }
     };
 }
 

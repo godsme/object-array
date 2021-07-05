@@ -23,14 +23,15 @@ namespace _concept::detail {
     concept ConstWithNumber_ = requires(T const& o) {
         { o.Num() } -> std::same_as<typename T::SizeType>;
     };
-
-    template<typename T>
-    concept ConstWithNumber = ConstWithNumber_<WithNumberChecker<T>>;
 }
 
 namespace _concept {
+
     template<typename T>
-    concept ConstContiguousArrayLikeDataHolder = SimpleArrayLike<T> && detail::ConstWithNumber<T>;
+    concept ConstWithNumber = detail::ConstWithNumber_<detail::WithNumberChecker<T>>;
+
+    template<typename T>
+    concept ConstContiguousArrayLikeDataHolder = SimpleArrayLike<T> && ConstWithNumber<T>;
 }
 
 namespace _concept::detail {

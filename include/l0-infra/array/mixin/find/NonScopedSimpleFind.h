@@ -12,7 +12,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<__cOnCePt(ConstRangedArrayLike) T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     class NonScopedSimpleFind : public T {
         using Self = T;
 
@@ -20,8 +20,6 @@ namespace mixin {
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
 
     public:
         using typename T::SizeType;
@@ -44,14 +42,8 @@ namespace mixin {
 
         template<__pRed_CoNcEpT(PRED)>
         auto Find(PRED&& pred) const -> ObjectType const* {
-            if constexpr(__wItH_iNdEx_pReD(PRED)) {
-                auto index = FindIndex(std::forward<PRED>(pred));
-                return index ? &GetObj(*index) : nullptr;
-            } else {
-                if (IndexBegin() >= IndexEnd()) return nullptr;
-                auto* found = std::find_if(ObjectBegin(), ObjectEnd(), std::forward<PRED>(pred));
-                return found == ObjectEnd() ? nullptr : found;
-            }
+            auto index = FindIndex(std::forward<PRED>(pred));
+            return index ? &GetObj(*index) : nullptr;
         }
     };
 }

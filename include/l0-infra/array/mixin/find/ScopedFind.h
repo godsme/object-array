@@ -13,7 +13,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<__cOnCePt(ConstRangedArrayLike) T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     class ScopedFind : public T {
         using Self = T;
     public:
@@ -26,8 +26,6 @@ namespace mixin {
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetObj;
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
 
     public:
         template<__pRed_CoNcEpT(PRED)>

@@ -31,7 +31,6 @@
 
 namespace detail {
     using IndexedOrderedArrayMixins = ::mixin::Mixins<
-            mixin::RangedArrayLike,
             mixin::IndexedOrderedAppend,
             mixin::IndexedOrderedDoReplace,
             mixin::___ranged_array_tag___,
