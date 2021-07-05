@@ -5,57 +5,18 @@
 #ifndef OBJECT_ARRAY_DYNAMICARRAY_H
 #define OBJECT_ARRAY_DYNAMICARRAY_H
 
-#include <l0-infra/array/holder/DynamicArrayDataHolder.h>
-#include <l0-infra/array/mixin/detail/Mixins.h>
-#include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
-#include <l0-infra/array/mixin/array_like/RangedArray.h>
-#include <l0-infra/array/mixin/array_like/DynamicObjectIndex.h>
-#include <l0-infra/array/mixin/erase/SimpleRangedClear.h>
-#include <l0-infra/array/mixin/sort/DynamicArraySort.h>
+#include <l0-infra/array/ObjectArray.h>
+#include <l0-infra/array/detail/DynamicArrayMixins.h>
 
 namespace detail {
-    using DynamicArrayMixins = ::mixin::Mixins<
-            mixin::ContinuousArrayLike,
-            mixin::RangedArray,
-            mixin::___ranged_array_tag___,
-            mixin::DynamicObjectIndex,
-            mixin::ArrayElemVisit,
-            mixin::SimpleForEach,
-            mixin::SimpleRangedClear,
-            mixin::ScopedFind,
-            mixin::ScopedForEach,
-            mixin::ScopedMinElem,
-            mixin::___public_mixin_delimiter___,
-            mixin::IndexedRefAccessor,
-            mixin::ByIndexAccessor,
-            mixin::RangedElemCount,
-            mixin::IterableIndexBasedArray,
-            mixin::SimpleForEachExt,
-            mixin::NonScopedSimpleFind,
-            mixin::SimpleFindExt,
-            mixin::SimpleMinElem,
-            mixin::SimpleMinElemExt,
-            mixin::ArrayEquality,
-            mixin::ScopedFindExt,
-            mixin::ScopedForEachExt,
-            mixin::ScopedMinElemExt,
-            mixin::RangedViewFactory,
-            mixin::ScopedViewFactory,
-            mixin::WithIndexViewFactory,
-            mixin::SortViewFactory,
-            mixin::___mutable_mixin_delimiter___,
-            mixin::SimpleAppend,
-            mixin::AppendExt,
-            mixin::SimpleErase,
-            mixin::EraseExt,
-            mixin::RangedClearExt,
-            mixin::SimpleReplace,
-            mixin::ReplaceExt,
-            mixin::DynamicArraySort,
-            mixin::ArraySortExt>;
+    template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM>
+    using DynamicArrayBase = detail::DynamicArray<ALLOCATOR, ObjectArray<typename ALLOCATOR::ObjectType*, MAX_NUM>>;
 }
 
 template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM>
-using DynamicArray = detail::DynamicArrayMixins::Compose<holder::DynamicArrayDataHolder<ALLOCATOR, MAX_NUM>>;
+struct DynamicArray : detail::DynamicArrayBase<ALLOCATOR, MAX_NUM> {
+    using Parent = detail::DynamicArrayBase<ALLOCATOR, MAX_NUM>;
+    DynamicArray(ALLOCATOR& allocator) : Parent(allocator) {}
+};
 
 #endif //OBJECT_ARRAY_DYNAMICARRAY_H

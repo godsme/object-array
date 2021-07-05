@@ -7,7 +7,6 @@
 
 #include <l0-infra/array/concept/DynamicAllocator.h>
 #include <l0-infra/array/detail/ArrayIndices.h>
-#include <l0-infra/array/ObjectArray.h>
 
 namespace holder::detail {
     template<typename HOLDER>
@@ -40,12 +39,12 @@ namespace holder::detail {
 }
 
 namespace holder {
-    template<__cOnCePt(DynamicAllocator) ALLOCATOR, std::size_t MAX_NUM>
+    template<__cOnCePt(DynamicAllocator) ALLOCATOR, typename POINTER_ARRAY>
     struct DynamicArrayDataHolder {
         using ObjectType = typename ALLOCATOR::ObjectType;
-        using PointerArray = ObjectArray<ObjectType*, MAX_NUM>;
+        using PointerArray = POINTER_ARRAY;
         using SizeType = typename PointerArray::SizeType;
-        constexpr static SizeType MAX_SIZE = MAX_NUM;
+        constexpr static SizeType MAX_SIZE = PointerArray::MAX_SIZE;
         constexpr static bool IS_CONST = false;
         constexpr static bool IS_ORDERED = false;
 
@@ -99,7 +98,9 @@ namespace holder {
         }
 
     public:
-        DynamicArrayDataHolder(ALLOCATOR& allocator) : allocator{allocator} {}
+        template<typename ... ARGS>
+        DynamicArrayDataHolder(ALLOCATOR& allocator, ARGS&&...args)
+            : allocator{allocator}, pointers{std::forward<ARGS>(args)...} {}
 
         DynamicArrayDataHolder(DynamicArrayDataHolder const& rhs) : allocator{rhs.allocator} {
             CopyFrom(rhs);
@@ -136,7 +137,7 @@ namespace holder {
 
     private:
         ALLOCATOR& allocator;
-        ObjectArray<ObjectType*, MAX_NUM> pointers;
+        PointerArray pointers;
     };
 }
 

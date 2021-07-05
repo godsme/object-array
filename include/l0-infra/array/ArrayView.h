@@ -63,8 +63,11 @@ namespace detail {
             mixin::RValueArraySort,
             mixin::ArraySortExt>;
 
-    template<typename T, std::size_t MAX_NUM, typename ELEM, bool ORDERED>
-    using ConstArrayView = ArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, ELEM, ORDERED>>;
+    template<typename T, std::size_t MAX_NUM, typename WRAPPER, bool ORDERED>
+    using ConstArrayView = ArrayViewMixins::Compose<holder::ConstArrayViewDataHolder<T, MAX_NUM, WRAPPER, ORDERED>>;
+
+    template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER = T, bool ORDERED = false>
+    using NonConstArrayView = ArrayViewMixins::Compose<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, WRAPPER, ORDERED>>;
 }
 
 namespace detail {
@@ -75,7 +78,7 @@ namespace detail {
 
     template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM, typename WRAPPER, bool ORDERED>
     struct ArrayViewTrait<T, SIZE_TYPE, MAX_NUM, WRAPPER, ORDERED, false> {
-        using Type = ArrayViewMixins::Compose<holder::ArrayViewDataHolder<T, SIZE_TYPE, MAX_NUM, WRAPPER, ORDERED>>;
+        using Type = NonConstArrayView<T, SIZE_TYPE, MAX_NUM, WRAPPER, ORDERED>;
     };
 }
 
