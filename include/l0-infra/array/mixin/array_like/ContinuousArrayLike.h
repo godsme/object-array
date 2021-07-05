@@ -15,12 +15,6 @@ namespace mixin {
 
     public:
         using typename T::SizeType;
-        using typename T::ElemType;
-        using typename T::ObjectType;
-
-    protected:
-        using Self::Elems;
-        using Self::ElemToObject;
 
     public:
         auto GetRange() const -> SizeType { return Self::Num(); }

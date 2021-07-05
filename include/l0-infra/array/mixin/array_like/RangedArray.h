@@ -9,16 +9,13 @@
 #include <l0-infra/array/mixin/array_like/IndexedContainer.h>
 
 namespace mixin {
-    template<__cOnCePt(ConstArrayLike) T>
-    class RangedArray : public IndexedContainer<T> {
-        using Self = IndexedContainer<T>;
+    template<typename T>
+    class RangedArray : public T {
+        using Self = T;
 
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
-
-//    protected:
-//        using RangedArrayLike = RangedArray;
 
     public:
         auto IndexBegin() const -> SizeType { return 0; }

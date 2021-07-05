@@ -37,6 +37,7 @@
 namespace detail {
     using ScatteredArrayMixins = mixin::Mixins<
             mixin::RangedArray,
+            mixin::IndexedContainer,
             mixin::RangedArrayLike,
             mixin::ScopedRangedArray,
             mixin::ObjectIndex,

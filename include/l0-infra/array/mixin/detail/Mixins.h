@@ -79,6 +79,8 @@ namespace mixin {
             using typename Mixins::ObjectType;
             using typename Mixins::BitMap;
             using typename Mixins::Maybe;
+
+            constexpr static auto MAX_SIZE = Mixins::MAX_SIZE;
         };
 
         template<typename T>

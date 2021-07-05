@@ -22,6 +22,7 @@
 namespace detail {
     using ArrayViewMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
+            mixin::IndexedContainer,
             mixin::RangedArray,
             mixin::RangedArrayLike,
             mixin::SimpleDoAppend,

@@ -28,6 +28,10 @@ namespace mixin {
             return IndexEnd() - IndexBegin();
         }
 
+        auto HasEnoughSlots(SizeType num) const -> bool {
+            return num <= (Self::MAX_SIZE - GetNum());
+        }
+
         auto Any() const -> bool {
             return IndexBegin() < IndexEnd();
         }

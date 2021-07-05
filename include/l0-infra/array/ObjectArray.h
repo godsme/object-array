@@ -34,6 +34,7 @@
 namespace detail {
     using ObjectArrayMixins = ::mixin::Mixins<
         mixin::ContinuousArrayLike,
+        mixin::IndexedContainer,
         mixin::RangedArray,
         mixin::RangedArrayLike,
         mixin::ObjectIndex,

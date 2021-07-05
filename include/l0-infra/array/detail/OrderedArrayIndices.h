@@ -25,6 +25,7 @@
 namespace detail {
     using OrderedArrayIndicesMixins = ::mixin::Mixins<
             mixin::ContinuousArrayLike,
+            mixin::IndexedContainer,
             mixin::RangedArray,
             mixin::RangedArrayLike,
             mixin::ObjectIndex,

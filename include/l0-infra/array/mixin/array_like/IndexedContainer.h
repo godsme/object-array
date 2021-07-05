@@ -17,9 +17,6 @@ namespace mixin {
         using typename T::SizeType;
         using typename T::ObjectType;
 
-    protected:
-        using IndexContainer = IndexedContainer;
-
     public:
         auto GetObj(SizeType n) const -> ObjectType const& { return T::ConstElemToObject(Self::Elems()[n]); }
         auto GetObj(SizeType n) -> ObjectType& { return T::ElemToObject(Self::Elems()[n]); }
