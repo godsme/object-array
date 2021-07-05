@@ -129,8 +129,6 @@ namespace holder {
             return *this;
         }
 
-
-
     private:
         template<typename>
         friend class detail::DynamicArrayDataHolderInterface;
