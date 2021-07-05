@@ -176,6 +176,25 @@ SCENARIO("DynamicArray ForEach") {
     REQUIRE(allocator.GetNum() == 0);
 }
 
+SCENARIO("DynamicArray MinElem") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(20));
+        REQUIRE(nullptr != array.Append(10));
+
+        auto* min = array.MinElem();
+        REQUIRE(min != nullptr);
+        REQUIRE(*min == 10);
+
+        auto index = array.MinElemIndex();
+        REQUIRE(index.has_value());
+        REQUIRE(*index == 1);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
 SCENARIO("DynamicArray copy construct") {
     ScatteredArray<int, 10> allocator;
     using IntArray = DynamicArray<ScatteredArray<int, 10>, 2>;

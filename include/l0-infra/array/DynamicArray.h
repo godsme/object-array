@@ -29,6 +29,8 @@ namespace detail {
             mixin::SimpleForEachExt,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
+            mixin::SimpleMinElem,
+            mixin::SimpleMinElemExt,
             mixin::WithIndexViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleAppend,
