@@ -195,6 +195,74 @@ SCENARIO("DynamicArray PartialSort") {
     REQUIRE(allocator.GetNum() == 0);
 }
 
+SCENARIO("DynamicArray SortView PartialSort") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 5> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(40));
+        REQUIRE(nullptr != array.Append(30));
+        REQUIRE(nullptr != array.Append(20));
+
+        auto&& view = array.SortObject().PartialSort(2);
+
+        REQUIRE(view.GetNum() == 2);
+        REQUIRE(view[0] == 10);
+        REQUIRE(view[1] == 20);
+
+        REQUIRE(array[0] == 10);
+        REQUIRE(array[1] == 40);
+        REQUIRE(array[2] == 30);
+        REQUIRE(array[3] == 20);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray Replace") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 5> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(40));
+        REQUIRE(nullptr != array.Append(30));
+        REQUIRE(nullptr != array.Append(20));
+
+        auto* p = array.Replace(1, 50);
+        REQUIRE(p != nullptr);
+        REQUIRE(*p == 50);
+
+        REQUIRE(array[0] == 10);
+        REQUIRE(array[1] == 50);
+        REQUIRE(array[2] == 30);
+        REQUIRE(array[3] == 20);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray Replace Object") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 5> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(40));
+        REQUIRE(nullptr != array.Append(30));
+        REQUIRE(nullptr != array.Append(20));
+
+        auto* p = array.ReplaceObj(&array[1], 50);
+        REQUIRE(p != nullptr);
+        REQUIRE(*p == 50);
+
+        REQUIRE(array[0] == 10);
+        REQUIRE(array[1] == 50);
+        REQUIRE(array[2] == 30);
+        REQUIRE(array[3] == 20);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
 SCENARIO("DynamicArray ForEach") {
     ScatteredArray<int, 10> allocator;
     {

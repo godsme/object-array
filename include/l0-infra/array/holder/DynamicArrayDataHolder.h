@@ -27,6 +27,11 @@ namespace holder::detail {
             return This()->DoAppend(std::forward<ARGS>(args)...);
         }
 
+        template<typename ... ARGS>
+        auto DoReplace(SizeType n, ARGS&& ... args) -> ObjectType* {
+            return This()->DoReplace(n, std::forward<ARGS>(args)...);
+        }
+
         auto DoErase(SizeType n) -> void {
             return This()->DoErase(n);
         }
@@ -84,6 +89,12 @@ namespace holder {
             if(p == nullptr) return nullptr;
             pointers.Append(p);
             return p;
+        }
+
+        template<typename ... ARGS>
+        auto DoReplace(SizeType n, ARGS&& ... args) -> ObjectType* {
+            if(n >= pointers.GetNum()) return nullptr;
+            return allocator.ReplaceObj(pointers[n], std::forward<ARGS>(args)...);
         }
 
     public:

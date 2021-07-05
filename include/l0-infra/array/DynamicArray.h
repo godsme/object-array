@@ -42,12 +42,15 @@ namespace detail {
             mixin::RangedViewFactory,
             mixin::ScopedViewFactory,
             mixin::WithIndexViewFactory,
+            mixin::SortViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleAppend,
             mixin::AppendExt,
             mixin::SimpleErase,
             mixin::EraseExt,
             mixin::RangedClearExt,
+            mixin::SimpleReplace,
+            mixin::ReplaceExt,
             mixin::DynamicArraySort,
             mixin::ArraySortExt>;
 }
