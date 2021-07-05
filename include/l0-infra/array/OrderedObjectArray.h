@@ -30,6 +30,7 @@
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
 #include <l0-infra/array/mixin/replace/OrderedReplace.h>
 #include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
+#include <l0-infra/array/mixin/erase/RangedClearExt.h>
 
 namespace detail {
     using OrderedArrayMixins = ::mixin::Mixins<
@@ -40,6 +41,7 @@ namespace detail {
             mixin::OrderedDoAppend,
             mixin::OrderedAppend,
             mixin::OrderedReplace,
+            mixin::RangedClear,
             mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,
@@ -68,8 +70,8 @@ namespace detail {
             mixin::EraseExt,
             mixin::SimpleReplace,
             mixin::ReplaceExt,
-            mixin::ScopedCleanUp,
-            mixin::RangedClear>;
+            mixin::RangedClearExt,
+            mixin::ScopedCleanUp>;
 
     template<typename T, std::size_t MAX_NUM, typename COMPARE>
     using OrderedObjectArray = detail::OrderedArrayMixins::Compose<holder::OrderedArrayHolder<T, MAX_NUM, COMPARE>>;

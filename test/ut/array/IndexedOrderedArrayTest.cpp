@@ -21,6 +21,11 @@ SCENARIO("IndexedOrderedArray") {
     REQUIRE(array[3] == 10);
     REQUIRE(array[4] == 12);
 
+    WHEN("Clear") {
+        array.Clear();
+        REQUIRE(array.GetNum() == 0);
+    }
+
     WHEN("Erase") {
         array.Erase(2);
 

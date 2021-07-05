@@ -18,6 +18,7 @@
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/erase/RangedClear.h>
 #include <l0-infra/array/mixin/sort/ArraySort.h>
+#include <l0-infra/array/mixin/erase/RangedClearExt.h>
 
 namespace detail {
     using ArrayIndicesMixins = ::mixin::Mixins<
@@ -26,12 +27,13 @@ namespace detail {
             mixin::RangedArray,
             mixin::RangedArrayLike,
             mixin::ObjectIndex,
+            mixin::RangedClear,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
             mixin::___mutable_mixin_delimiter___,
-            mixin::RangedClear,
+            mixin::RangedClearExt,
             mixin::ArraySort>;
 
     template<std::size_t MAX_NUM>

@@ -10,6 +10,7 @@
 #include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
 #include <l0-infra/array/mixin/array_like/RangedArray.h>
 #include <l0-infra/array/mixin/array_like/DynamicObjectIndex.h>
+#include <l0-infra/array/mixin/erase/SimpleRangedClear.h>
 
 namespace detail {
     using DynamicArrayMixins = ::mixin::Mixins<
@@ -19,6 +20,7 @@ namespace detail {
             mixin::DynamicObjectIndex,
             mixin::ArrayElemVisit,
             mixin::SimpleForEach,
+            mixin::SimpleRangedClear,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -32,7 +34,8 @@ namespace detail {
             mixin::SimpleAppend,
             mixin::AppendExt,
             mixin::SimpleErase,
-            mixin::EraseExt>;
+            mixin::EraseExt,
+            mixin::RangedClearExt>;
 }
 
 template<typename ALLOCATOR, std::size_t MAX_NUM>

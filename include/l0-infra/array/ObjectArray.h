@@ -30,6 +30,7 @@
 #include <l0-infra/array/mixin/replace/SimpleDoReplace.h>
 #include <l0-infra/array/mixin/append/SimpleDoAppend.h>
 #include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
+#include <l0-infra/array/mixin/erase/RangedClearExt.h>
 
 namespace detail {
     using ObjectArrayMixins = ::mixin::Mixins<
@@ -41,6 +42,7 @@ namespace detail {
         mixin::ArrayElemVisit,
         mixin::SimpleDoAppend,
         mixin::SimpleDoReplace,
+        mixin::RangedClear,
         mixin::___ranged_array_tag___,
         mixin::ContiguousDoErase,
         mixin::ScopedFind,
@@ -73,7 +75,7 @@ namespace detail {
         mixin::AppendExt,
         mixin::EraseExt,
         mixin::ScopedCleanUp,
-        mixin::RangedClear,
+        mixin::RangedClearExt,
         mixin::ArraySort,
         mixin::ArraySortExt>;
 

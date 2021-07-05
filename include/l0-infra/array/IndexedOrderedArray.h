@@ -23,7 +23,7 @@
 #include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
 #include <l0-infra/array/mixin/erase/SimpleErase.h>
 #include <l0-infra/array/mixin/erase/IndexedOrderedDoErase.h>
-#include <l0-infra/array/mixin/erase/IndexedOrderedRangedClear.h>
+#include <l0-infra/array/mixin/erase/SimpleRangedClear.h>
 #include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
 #include <l0-infra/array/mixin/erase/EraseExt.h>
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
@@ -41,6 +41,7 @@ namespace detail {
             mixin::SimpleForEach,
             mixin::ScopedForEach,
             mixin::IndexedOrderedDoErase,
+            mixin::SimpleRangedClear,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -60,7 +61,7 @@ namespace detail {
             mixin::AppendExt,
             mixin::SimpleReplace,
             mixin::ReplaceExt,
-            mixin::IndexedOrderedRangedClear,
+            mixin::RangedClearExt,
             mixin::SimpleErase,
             mixin::EraseExt,
             mixin::ScopedCleanUp>;

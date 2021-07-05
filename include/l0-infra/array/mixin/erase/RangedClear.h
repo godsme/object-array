@@ -15,9 +15,12 @@ namespace mixin {
     protected:
         using typename T::Trait;
         using typename T::ElemType;
+
+    public:
         using typename T::SizeType;
         using typename T::OffsetType;
 
+    public:
         using Self::IndexBegin;
         using Self::IndexEnd;
 
@@ -62,7 +65,7 @@ namespace mixin {
 
     public:
         auto ClearRange(SizeType from, SizeType until) -> void {
-            if(from >= until || until > Num()) return;
+            if(from >= until) return;
             ClearContent(from, until);
             if constexpr(Self::ORDERED) {
                 CleanOrdered(from, until);
@@ -72,21 +75,6 @@ namespace mixin {
             Num() -= (until - from);
         }
 
-        auto Clear() -> void {
-            ClearRange(IndexBegin(), IndexEnd());
-        }
-
-        auto ClearFrom(OffsetType from) -> void {
-            DoClearFrom(from.ToIndex(Num()));
-        }
-
-        auto Clear(OffsetType from, OffsetType until) -> void {
-            ClearRange(from.ToIndex(Num()), until.ToIndex(Num()));
-        }
-
-        auto ClearUntil(OffsetType until) -> void {
-            ClearRange(0, until.ToIndex(Num()));
-        }
     };
 }
 

@@ -34,6 +34,53 @@ SCENARIO("DynamicArray Erase") {
     REQUIRE(allocator.GetNum() == 0);
 }
 
+SCENARIO("DynamicArray Clear") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        array.Clear();
+        REQUIRE(array.GetNum() == 0);
+        REQUIRE(allocator.GetNum() == 0);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray ClearFrom") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        array.ClearFrom(1);
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(allocator.GetNum() == 1);
+        REQUIRE(array[0] == 10);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
+SCENARIO("DynamicArray ClearUntil") {
+    ScatteredArray<int, 10> allocator;
+    {
+        DynamicArray<ScatteredArray<int, 10>, 2> array{allocator};
+        REQUIRE(nullptr != array.Append(10));
+        REQUIRE(nullptr != array.Append(20));
+
+        array.ClearUntil(1);
+        REQUIRE(array.GetNum() == 1);
+        REQUIRE(allocator.GetNum() == 1);
+        REQUIRE(array[0] == 20);
+    }
+
+    REQUIRE(allocator.GetNum() == 0);
+}
+
 SCENARIO("DynamicArray Remove") {
     ScatteredArray<int, 10> allocator;
     {
