@@ -45,14 +45,14 @@ namespace mixin::detail {
         using Type = typename DoCombineMixins<BASE, std::is_final_v<H<BASE>>, H, MIXINS...>::Type;
     };
 
-    template<typename OWNER, typename T>
+    template<typename T, typename OWNER>
     struct DataHolderInterface : T::Interface {
         using DataHolder = T;
         using Owner = OWNER;
         using SizeType = typename DataHolder::SizeType;
         constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
         constexpr static bool ORDERED = T::IS_ORDERED;
-        constexpr static bool CONST = T::IS_CONST;
+        constexpr static bool IS_CONST = T::IS_CONST;
         using BitMap = ::detail::ArrayScope<MAX_SIZE>;
         using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
 
@@ -64,10 +64,10 @@ namespace mixin {
     template<template<typename> typename ... MIXINS>
     struct Mixins {
         template<typename HOLDER>
-        struct Compose : HOLDER, detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<Compose<HOLDER>, HOLDER>> {
+        struct Compose : HOLDER, detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<HOLDER, Compose<HOLDER>>> {
         public:
             using Holder = HOLDER;
-            using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<Compose<HOLDER>, HOLDER>>;
+            using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<HOLDER, Compose<HOLDER>>>;
 
         private:
             static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(Compose)); }

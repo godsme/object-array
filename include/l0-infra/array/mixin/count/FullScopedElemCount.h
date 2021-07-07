@@ -24,8 +24,12 @@ namespace mixin {
             return GetScope().all();
         }
 
+        auto NumOfFree() const -> SizeType {
+            return Self::MAX_SIZE - Self::GetNum();
+        }
+
         auto HasEnoughSlots(SizeType num) const -> bool {
-            return num <= (Self::MAX_SIZE - Self::GetNum());
+            return num <= NumOfFree();
         }
 
         auto GetAvailable() const -> BitMap {

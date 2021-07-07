@@ -32,6 +32,8 @@ namespace detail {
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
+            mixin::IterableArrayLike,
+            mixin::WithIndexViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::RangedClearExt,
             mixin::ArraySort>;

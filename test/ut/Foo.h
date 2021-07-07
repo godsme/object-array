@@ -53,7 +53,7 @@ namespace ut {
 
         constexpr static SizeType MAX_SIZE = 10;
         constexpr static bool ORDERED = false;
-        constexpr static bool CONST = false;
+        constexpr static bool IS_CONST = false;
 
         using Interface = FooInterface<Foo>;
 

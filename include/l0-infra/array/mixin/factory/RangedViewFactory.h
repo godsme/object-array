@@ -79,42 +79,42 @@ namespace mixin {
             return {static_cast<RangedArrayLike const&>(*this), until};
         }
 
-        template<bool CONST>
+        template<bool AS_CONST>
         auto GetThis() const -> auto* {
-            if constexpr(CONST) {
+            if constexpr(AS_CONST) {
                 return this;
             } else {
                 return ::detail::RemoveConstThis(this);
             }
         }
 
-        template<bool CONST, bool R_VALUE>
+        template<bool AS_CONST, bool R_VALUE>
         auto DoMakeSlice(SizeType from, SizeType until) const -> auto {
             if constexpr(R_VALUE) {
-                return std::move(*GetThis<CONST>()).MakeSlice(from, until);
+                return std::move(*GetThis<AS_CONST>()).MakeSlice(from, until);
             } else {
-                return GetThis<CONST>()->MakeSlice(from, until);
+                return GetThis<AS_CONST>()->MakeSlice(from, until);
             }
         }
 
     protected:
-        template<bool CONST, bool R_VALUE>
+        template<bool AS_CONST, bool R_VALUE>
         auto MakeSliceByFrom(SizeType from, OffsetType until) const -> auto {
             auto until_ = until.ToIndex(IndexEnd());
             if(until_ <= from) {
-                return DoMakeSlice<CONST, R_VALUE>(from, from);
+                return DoMakeSlice<AS_CONST, R_VALUE>(from, from);
             } else {
-                return DoMakeSlice<CONST, R_VALUE>(from, until_);
+                return DoMakeSlice<AS_CONST, R_VALUE>(from, until_);
             }
         }
 
-        template<bool CONST, bool R_VALUE>
+        template<bool AS_CONST, bool R_VALUE>
         auto MakeSlice(OffsetType from, OffsetType until) const -> auto {
             auto from_  = from.ToIndex(IndexEnd());
             if(from_ == IndexEnd()) {
-                return DoMakeSlice<CONST, R_VALUE>(from_, from_);
+                return DoMakeSlice<AS_CONST, R_VALUE>(from_, from_);
             } else {
-                return MakeSliceByFrom<CONST, R_VALUE>(from_, until);
+                return MakeSliceByFrom<AS_CONST, R_VALUE>(from_, until);
             }
         }
 

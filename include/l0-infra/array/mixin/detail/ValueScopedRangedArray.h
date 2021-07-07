@@ -7,7 +7,7 @@
 
 namespace mixin::detail {
     template<typename HOLDER, typename SCOPED_ARRAY_LIKE>
-    struct ValueScopedRangedArray : private HOLDER, SCOPED_ARRAY_LIKE {
+    struct ValueScopedRangedArray : HOLDER, SCOPED_ARRAY_LIKE {
         using HOLDER::HOLDER;
         using SCOPED_ARRAY_LIKE::IndexBegin;
         using SCOPED_ARRAY_LIKE::IndexEnd;
@@ -20,6 +20,7 @@ namespace mixin::detail {
 
         constexpr static SizeType MAX_SIZE = HOLDER::MAX_SIZE;
         constexpr static bool ORDERED = HOLDER::IS_ORDERED;
+        constexpr static bool IS_CONST = HOLDER::IS_CONST;
 
         ValueScopedRangedArray(ValueScopedRangedArray&&) = default;
         ValueScopedRangedArray(ValueScopedRangedArray const&) = default;

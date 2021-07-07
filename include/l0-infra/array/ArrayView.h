@@ -33,6 +33,7 @@ namespace detail {
             mixin::ScopedFind,
             mixin::SimpleForEach,
             mixin::ScopedForEach,
+            mixin::ScopedMinElem,
             mixin::ContiguousDoErase,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,

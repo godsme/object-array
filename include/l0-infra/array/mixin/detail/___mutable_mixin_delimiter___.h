@@ -8,7 +8,7 @@
 namespace mixin {
     template<typename T>
     struct ___mutable_mixin_delimiter___ final : T {
-        constexpr static bool IS_CONST = T::CONST;
+        constexpr static bool IS_CONST = T::IS_CONST;
     };
 }
 

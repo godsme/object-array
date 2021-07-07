@@ -14,6 +14,7 @@ namespace mixin {
 
     public:
         using typename T::BitMap;
+        using typename T::SizeType;
 
     protected:
         using Self::GetScope;
@@ -23,6 +24,10 @@ namespace mixin {
     public:
         auto All() const -> bool {
             return BitMap(IndexBegin(), IndexEnd()) == GetScope();
+        }
+
+        auto NumOfFree() const -> SizeType {
+            return IndexEnd() - IndexBegin() - Self::GetNum();
         }
 
         auto GetAvailable() const -> BitMap {

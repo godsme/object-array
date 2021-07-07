@@ -34,7 +34,11 @@ namespace view::detail {
             mixin::ArraySortExt>;
 
     template<typename ARRAY, template<typename> typename HOLDER>
-    using SortView = SortViewMixins::Compose<HOLDER<ARRAY>>;
+    struct SortView : SortViewMixins::Compose<HOLDER<ARRAY>> {
+        using Parent = SortViewMixins::Compose<HOLDER<ARRAY>>;
+        using Parent::Parent;
+        using Parent::GetIndices;
+    };
 }
 
 namespace view {

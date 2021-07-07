@@ -39,6 +39,7 @@ namespace view::detail {
             mixin::ArrayElemVisit,
             mixin::ScopedFind,
             mixin::ScopedForEach,
+            mixin::ScopedMinElem,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,

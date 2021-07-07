@@ -84,8 +84,9 @@ namespace holder {
         constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
         constexpr static bool IS_ORDERED = true;
         constexpr static bool IS_SCOPED = detail::IsScopedArray<ARRAY>::value;
+        constexpr static bool IS_CONST = std::is_const_v<ARRAY> || ARRAY::IS_CONST;
         using SizeType = typename ARRAY::SizeType;
-        using ObjectType = typename ARRAY::ObjectType;
+        using ObjectType = std::conditional_t<IS_CONST, std::add_const_t<typename ARRAY::ObjectType>, typename ARRAY::ObjectType>;
 
         using Interface = detail::SortViewDataHolderInterface<SortViewDataHolder>;
 
