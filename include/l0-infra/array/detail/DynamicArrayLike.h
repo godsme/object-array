@@ -2,8 +2,8 @@
 // Created by Darwin Yuan on 2021/7/6.
 //
 
-#ifndef OBJECT_ARRAY_DYNAMICARRAYMIXINS_H
-#define OBJECT_ARRAY_DYNAMICARRAYMIXINS_H
+#ifndef OBJECT_ARRAY_DYNAMICARRAYLIKE_H
+#define OBJECT_ARRAY_DYNAMICARRAYLIKE_H
 
 #include <l0-infra/array/holder/DynamicArrayDataHolder.h>
 #include <l0-infra/array/mixin/detail/Mixins.h>
@@ -55,7 +55,7 @@ namespace detail {
             mixin::ArraySortExt>;
 
     template<__cOnCePt(DynamicAllocator) ALLOCATOR, typename POINTER_ARRAY, bool FREE_ON_DTOR = true>
-    using DynamicArray = detail::DynamicArrayMixins::Compose<holder::DynamicArrayHolder<ALLOCATOR, POINTER_ARRAY, FREE_ON_DTOR>>;
+    using DynamicArrayLike = detail::DynamicArrayMixins::Compose<holder::DynamicArrayHolder<ALLOCATOR, POINTER_ARRAY, FREE_ON_DTOR>>;
 }
 
-#endif //OBJECT_ARRAY_DYNAMICARRAYMIXINS_H
+#endif //OBJECT_ARRAY_DYNAMICARRAYLIKE_H

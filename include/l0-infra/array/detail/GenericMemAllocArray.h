@@ -5,7 +5,7 @@
 #ifndef OBJECT_ARRAY_DYNAMICMEM_H
 #define OBJECT_ARRAY_DYNAMICMEM_H
 
-#include <l0-infra/array/detail/DynamicArrayMixins.h>
+#include <l0-infra/array/detail/DynamicArrayLike.h>
 
 namespace detail {
     template<typename MEM_ALLOCATOR, typename OBJ, std::size_t MAX_NUM>
