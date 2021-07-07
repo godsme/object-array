@@ -9,7 +9,8 @@
 
 template<typename T, T EMPTY = std::is_signed_v<T> ? std::numeric_limits<T>::min() : std::numeric_limits<T>::max()>
 class IntOpt {
-    static_assert(std::is_same_v<T, uint8_t> ||
+    static_assert
+           (std::is_same_v<T, uint8_t> ||
             std::is_same_v<T, uint16_t> ||
             std::is_same_v<T, uint32_t> ||
             std::is_same_v<T, uint64_t> ||
