@@ -5,11 +5,13 @@
 #ifndef OBJECT_ARRAY_DYNAMICMEM_H
 #define OBJECT_ARRAY_DYNAMICMEM_H
 
-#include <l0-infra/array/detail/DynamicArrayLike.h>
+#include <l0-infra/base/DeduceSizeType.h>
+#include <utility>
+#include <type_traits>
 
 namespace detail {
-    template<typename MEM_ALLOCATOR, typename OBJ, std::size_t MAX_NUM>
-    struct MemAllocatorAdapter {
+    template<typename OBJ, std::size_t MAX_NUM, typename MEM_ALLOCATOR>
+    struct GenericArrayMemAllocator {
         using ObjectType = OBJ;
         using SizeType = DeduceSizeType_t<MAX_NUM>;
 
@@ -22,8 +24,9 @@ namespace detail {
                 return new (p) OBJ(std::forward<ARGS>(args)...);
             }
         }
+        
     public:
-        MemAllocatorAdapter(MEM_ALLOCATOR& allocator) : allocator{allocator} {}
+        GenericArrayMemAllocator(MEM_ALLOCATOR& allocator) : allocator{allocator} {}
 
         template<typename ... ARGS>
         auto Append(ARGS&& ... args) -> OBJ* {
@@ -60,21 +63,6 @@ namespace detail {
         auto FreeMem(void* p) -> void {
             return ::free(p);
         }
-    };
-
-    template<typename ALLOCATOR, typename POINTER_ARRAY, bool FREE_ON_DTOR = true, typename Allocator = MemAllocatorAdapter<ALLOCATOR, std::remove_pointer_t<typename POINTER_ARRAY::ObjectType>, POINTER_ARRAY::MAX_SIZE>>
-    struct GenericMemAllocArray : private Allocator, DynamicArray<Allocator, POINTER_ARRAY, FREE_ON_DTOR> {
-        using Parent = DynamicArray<Allocator, POINTER_ARRAY, FREE_ON_DTOR>;
-
-        template<typename ... ARGS>
-        GenericMemAllocArray(ALLOCATOR& memAllocator, ARGS&& ... args)
-                : Allocator{memAllocator}
-                , Parent{*static_cast<Allocator*>(this), std::forward<ARGS>(args)...} {}
-
-        using Parent::Append;
-        using Parent::Remove;
-        using Parent::ReplaceObj;
-        using Parent::HasEnoughSlots;
     };
 }
 
