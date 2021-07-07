@@ -7,12 +7,17 @@
 
 #include <optional>
 
-
-template<typename T>
+template<typename T, T EMPTY = std::is_signed_v<T> ? std::numeric_limits<T>::min() : std::numeric_limits<T>::max()>
 class IntOpt {
-    static_assert(std::is_same_v<T, uint8_t> || std::is_same_v<T, uint16_t> || std::is_same_v<T, uint32_t> || std::is_same_v<T, uint64_t>);
+    static_assert(std::is_same_v<T, uint8_t> ||
+            std::is_same_v<T, uint16_t> ||
+            std::is_same_v<T, uint32_t> ||
+            std::is_same_v<T, uint64_t> ||
+            std::is_same_v<T, int8_t>   ||
+            std::is_same_v<T, int16_t>  ||
+            std::is_same_v<T, int32_t>  ||
+            std::is_same_v<T, int64_t>);
     using IntType = T;
-    constexpr static IntType EMPTY = std::numeric_limits<T>::max();
 
 public:
     IntOpt() {}
@@ -29,7 +34,7 @@ public:
     }
 
     auto has_value() const -> bool { return value_ != EMPTY; }
-    operator bool() const { return has_value(); }
+    explicit operator bool() const { return has_value(); }
 
     auto value() const -> IntType { return value_; }
     auto operator*() const -> IntType { return value_; }

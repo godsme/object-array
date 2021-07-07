@@ -159,7 +159,7 @@ set(OBJ_ARRAY_SRC
         test/ut/array/ArrayIndicesTest.cpp
         test/ut/array/IndicesRandomIteratorTest.cpp
         test/ut/array/ArraySortObjectTest.cpp
-        test/ut/base/IntOptionalTest.cpp
+        test/ut/base/IntOptTest.cpp
         test/ut/array/ObjectArrayDataHolderTest.cpp
         test/ut/array/ScatteredArrayDataHolderTest.cpp
         test/ut/array/ObjectArrayTest.cpp

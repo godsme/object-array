@@ -31,7 +31,7 @@ namespace holder {
             }
         }
 
-        auto ConstructFrom(ElemType const*array, SizeType num) -> void {
+        auto ConstructFrom(ElemType const* array, SizeType num) -> void {
             if constexpr (std::is_trivially_copyable_v<ElemType>) {
                 ::memcpy(elems, array, sizeof(ElemType) * num);
             } else {
