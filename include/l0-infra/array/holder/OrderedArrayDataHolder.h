@@ -8,19 +8,32 @@
 #include <l0-infra/array/holder/ObjectArrayDataHolder.h>
 
 namespace holder::detail {
-    template<typename DATA_HOLDER, typename COMPARE>
-    struct OrderedArrayInterface : ContinuousArrayDataHolderInterface<DATA_HOLDER> {
+    template<typename DATA_HOLDER>
+    class OrderedArrayInterface : public ContinuousArrayDataHolderInterface<DATA_HOLDER> {
+        dEcL_tHiS(DATA_HOLDER);
+    public:
         using typename ContinuousArrayDataHolderInterface<DATA_HOLDER>::ObjectType;
-        auto GetLess() const -> auto {
-            return COMPARE{};
+        auto GetLess() const -> decltype(auto) {
+            return This()->GetLess();
         }
     };
 
     template<typename OBJ, std::size_t MAX_SIZE, typename COMPARE>
-    struct OrderedArrayDataHolder : ObjectArrayHolder<OBJ, MAX_SIZE, true> {
+    struct OrderedArrayDataHolder : private COMPARE, ObjectArrayHolder<OBJ, MAX_SIZE, true> {
         using Parent = ObjectArrayHolder<OBJ, MAX_SIZE, true>;
         using Parent::Parent;
-        using Interface = OrderedArrayInterface<OrderedArrayDataHolder, COMPARE>;
+        using Interface = OrderedArrayInterface<OrderedArrayDataHolder>;
+
+        template<typename ... ARGS>
+        OrderedArrayDataHolder(COMPARE const& compare, ARGS&& ... args) : COMPARE(compare), Parent{std::forward<ARGS>(args)...} {}
+
+    private:
+        template<typename>
+        friend struct OrderedArrayInterface;
+
+        auto GetLess() const -> COMPARE const& {
+            return *this;
+        }
     };
 
     template <typename COMPARE>

@@ -357,3 +357,124 @@ SCENARIO("Foo Object OrderedObjectArray") {
         REQUIRE(array[1].a == 12);
     }
 }
+
+SCENARIO("Foo Object OrderedArray with less compare") {
+    using COMPARE = std::function<auto (Foo const&, Foo const&) -> bool>;
+    OrderedObjectArray<Foo, 10, COMPARE> array{[](Foo const& l, Foo const& r) { return l.a < r.a; }};
+
+    array.Append(Foo{10});
+    array.Append(Foo{8});
+    array.Append(Foo{12});
+    array.Append(Foo{7});
+    array.Append(Foo{9});
+
+    REQUIRE(array.GetNum() == 5);
+
+    REQUIRE(array[0].a == 7);
+    REQUIRE(array[1].a == 8);
+    REQUIRE(array[2].a == 9);
+    REQUIRE(array[3].a == 10);
+    REQUIRE(array[4].a == 12);
+
+    WHEN("Erase") {
+        array.Erase(2);
+
+        REQUIRE(array.GetNum() == 4);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 8);
+        REQUIRE(array[2].a == 10);
+        REQUIRE(array[3].a == 12);
+    }
+
+    WHEN("Clear") {
+        array.Clear();
+        REQUIRE(array.GetNum() == 0);
+    }
+
+    WHEN("Clear range") {
+        array.Clear(1, 3);
+        REQUIRE(array.GetNum() == 3);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 10);
+        REQUIRE(array[2].a == 12);
+    }
+
+    WHEN("Clear from") {
+        array.ClearFrom(2);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 7);
+        REQUIRE(array[1].a == 8);
+    }
+
+    WHEN("Clear Until") {
+        array.ClearUntil(3);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 10);
+        REQUIRE(array[1].a == 12);
+    }
+}
+
+SCENARIO("Foo Object OrderedArray with Greater compare") {
+    using COMPARE = std::function<auto (Foo const&, Foo const&) -> bool>;
+    OrderedObjectArray<Foo, 10, COMPARE> array{[](Foo const& l, Foo const& r) { return l.a > r.a; }};
+
+    array.Append(Foo{10});
+    array.Append(Foo{8});
+    array.Append(Foo{12});
+    array.Append(Foo{7});
+    array.Append(Foo{9});
+
+    REQUIRE(array.GetNum() == 5);
+
+    REQUIRE(array[0].a == 12);
+    REQUIRE(array[1].a == 10);
+    REQUIRE(array[2].a == 9);
+    REQUIRE(array[3].a == 8);
+    REQUIRE(array[4].a == 7);
+
+    WHEN("Erase") {
+        array.Erase(2);
+
+        REQUIRE(array.GetNum() == 4);
+
+        REQUIRE(array[0].a == 12);
+        REQUIRE(array[1].a == 10);
+        REQUIRE(array[2].a == 8);
+        REQUIRE(array[3].a == 7);
+    }
+
+    WHEN("Clear") {
+        array.Clear();
+        REQUIRE(array.GetNum() == 0);
+    }
+
+    WHEN("Clear range") {
+        array.Clear(1, 3);
+        REQUIRE(array.GetNum() == 3);
+
+        REQUIRE(array[0].a == 12);
+        REQUIRE(array[1].a == 8);
+        REQUIRE(array[2].a == 7);
+    }
+
+    WHEN("Clear from") {
+        array.ClearFrom(2);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 12);
+        REQUIRE(array[1].a == 10);
+    }
+
+    WHEN("Clear Until") {
+        array.ClearUntil(3);
+        REQUIRE(array.GetNum() == 2);
+
+        REQUIRE(array[0].a == 8);
+        REQUIRE(array[1].a == 7);
+    }
+}
+
