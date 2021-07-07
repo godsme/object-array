@@ -67,7 +67,7 @@ namespace mixin {
         auto ClearRange(SizeType from, SizeType until) -> void {
             if(from >= until) return;
             ClearContent(from, until);
-            if constexpr(Self::ORDERED) {
+            if constexpr(Self::IS_ORDERED) {
                 CleanOrdered(from, until);
             } else {
                 Clean(from, until);

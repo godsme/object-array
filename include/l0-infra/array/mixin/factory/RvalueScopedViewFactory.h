@@ -21,7 +21,7 @@ namespace mixin {
     protected:
         using typename T::RangedArrayLike;
         using typename T::DataHolder;
-        using Self::ORDERED;
+        using Self::IS_ORDERED;
 
     private:
         using Array = detail::ValueRangedArray<DataHolder, RangedArrayLike>;
@@ -30,11 +30,11 @@ namespace mixin {
         using Self::Scope;
         using Self::Exclude;
 
-        auto Scope(BitMap scope) && -> view::ValueScopedView<Array, ORDERED> {
+        auto Scope(BitMap scope) && -> view::ValueScopedView<Array, IS_ORDERED> {
             return {reinterpret_cast<Array&&>(*this), Self::MaskScope(scope)};
         }
 
-        auto Scope(BitMap scope) const && -> view::ValueScopedView<Array const, ORDERED> {
+        auto Scope(BitMap scope) const && -> view::ValueScopedView<Array const, IS_ORDERED> {
             return {reinterpret_cast<Array const&&>(*this), Self::MaskScope(scope)};
         }
 

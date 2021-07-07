@@ -13,13 +13,13 @@ namespace mixin {
     class WithIndexViewFactory : public T {
     protected:
         using typename T::RangedArrayLike;
-        using T::ORDERED;
+        using T::IS_ORDERED;
 
     public:
-        auto WithIndex() & -> view::IndexedView::RefView<RangedArrayLike, ORDERED> {
+        auto WithIndex() & -> view::IndexedView::RefView<RangedArrayLike, IS_ORDERED> {
             return {reinterpret_cast<RangedArrayLike&>(*this)};
         }
-        auto WithIndex() const & -> view::IndexedView::RefView<RangedArrayLike const, ORDERED> {
+        auto WithIndex() const & -> view::IndexedView::RefView<RangedArrayLike const, IS_ORDERED> {
             return {reinterpret_cast<RangedArrayLike const&>(*this)};
         }
         // R-Value WithIndex is not allowed.

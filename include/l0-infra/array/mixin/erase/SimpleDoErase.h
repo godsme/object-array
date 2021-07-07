@@ -18,7 +18,7 @@ namespace mixin {
         using typename T::ObjectType;
 
         static constexpr auto MAX_SIZE = T::MAX_SIZE;
-        static constexpr auto ORDERED = T::ORDERED;
+        static constexpr auto IS_ORDERED = T::IS_ORDERED;
 
     protected:
         using Self::Num;
@@ -43,7 +43,7 @@ namespace mixin {
 
     public:
         auto DoErase(SizeType i) -> void {
-            if constexpr(ORDERED) {
+            if constexpr(IS_ORDERED) {
                 Trait::Destroy(Elems()[i]);
                 if(i < (Num() - 1)) MoveElems(i);
             } else {

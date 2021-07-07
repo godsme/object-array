@@ -18,7 +18,7 @@ namespace mixin::detail {
         using typename RANGED_ARRAY_LIKE::BitMap;
 
         constexpr static auto MAX_SIZE = HOLDER::MAX_SIZE;
-        constexpr static auto ORDERED = HOLDER::IS_ORDERED;
+        constexpr static auto IS_ORDERED = HOLDER::IS_ORDERED;
         constexpr static auto IS_CONST = HOLDER::IS_CONST;
 
         ValueRangedArray(ValueRangedArray&&) = default;

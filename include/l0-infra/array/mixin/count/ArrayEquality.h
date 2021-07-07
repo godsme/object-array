@@ -20,7 +20,7 @@ namespace mixin {
             if (GetNum() != rhs.GetNum()) return false;
 
             for (auto i = 0; i < GetNum(); i++) {
-                if constexpr(T::ORDERED) {
+                if constexpr(T::IS_ORDERED) {
                     if ((*this)[i] != rhs[i]) return false;
                 } else {
                     if (!rhs.Exists((*this)[i])) return false;
