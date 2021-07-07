@@ -15,13 +15,15 @@ namespace mixin {
         using Self = T;
 
     public:
+        using typename T::SizeType;
         using typename T::OffsetType;
         using typename T::ObjectType;
 
     public:
         template<typename ... ARGS>
         auto Replace(OffsetType i, ARGS &&... args) -> ObjectType * {
-            return Self::DoReplace(i.ToIndex(Self::IndexEnd() - Self::IndexBegin()), std::forward<ARGS>(args)...);
+            auto offset = i.ToOffset(Self::IndexEnd() - Self::IndexBegin());
+            return offset < 0 ? nullptr : Self::DoReplace(SizeType(offset), std::forward<ARGS>(args)...);
         }
     };
 }
