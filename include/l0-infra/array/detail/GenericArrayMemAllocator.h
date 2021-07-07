@@ -10,10 +10,9 @@
 #include <type_traits>
 
 namespace detail {
-    template<typename OBJ, std::size_t MAX_NUM, typename MEM_ALLOCATOR>
+    template<typename OBJ, typename MEM_ALLOCATOR>
     struct GenericArrayMemAllocator {
         using ObjectType = OBJ;
-        using SizeType = DeduceSizeType_t<MAX_NUM>;
 
     private:
         template<typename ... ARGS>
@@ -24,7 +23,7 @@ namespace detail {
                 return new (p) OBJ(std::forward<ARGS>(args)...);
             }
         }
-        
+
     public:
         GenericArrayMemAllocator(MEM_ALLOCATOR& allocator) : allocator{allocator} {}
 
@@ -36,18 +35,22 @@ namespace detail {
 
         auto Remove(OBJ const* p) -> void {
             if(p == nullptr) return;
-            p->~OBJ();
+            if constexpr(!std::is_trivially_destructible_v<OBJ>) {
+                p->~OBJ();
+            }
             allocator.FreeMem(reinterpret_cast<void*>(const_cast<OBJ*>(p)));
         }
 
         template<typename ... ARGS>
         auto ReplaceObj(OBJ const* p, ARGS&& ... args) -> OBJ* {
             if(p == nullptr) return p;
-            p->~OBJ();
+            if constexpr(!std::is_trivially_destructible_v<OBJ>) {
+                p->~OBJ();
+            }
             return construct(reinterpret_cast<void*>(const_cast<OBJ*>(p)), std::forward<ARGS>(args)...);
         }
 
-        auto HasEnoughSlots(SizeType num) const -> bool {
+        auto HasEnoughSlots(std::size_t num) const -> bool {
             return true;
         }
 
