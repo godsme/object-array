@@ -6,6 +6,7 @@
 #define OBJECT_ARRAY_RANGEDCLEAR_H
 
 #include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
+#include <string>
 
 namespace mixin {
     template<__cOnCePt(ContiguousArrayLikeDataHolder) T>

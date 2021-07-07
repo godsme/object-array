@@ -11,6 +11,7 @@
 #include <l0-infra/base/DeduceSizeType.h>
 #include <l0-infra/base/BitSet.h>
 #include <l0-infra/base/IntOpt.h>
+#include <cstring>
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM, bool ORDERED>
