@@ -66,8 +66,8 @@ namespace mixin {
         }
 
     public:
-        auto Slice(OffsetType, OffsetType) && -> void {}
-        auto Slice(OffsetType, OffsetType) const && -> void {}
+        auto Slice(OffsetType, OffsetType) && -> void = delete;
+        auto Slice(OffsetType, OffsetType) const && -> void = delete;
 
         auto Slice(OffsetType from, OffsetType until) & -> auto {
             return MakeSlice<false, false>(from, until);
@@ -77,8 +77,8 @@ namespace mixin {
             return MakeSlice<true, false>(from, until);
         }
 
-        auto From(OffsetType) && -> void {}
-        auto From(OffsetType) const && -> void {}
+        auto From(OffsetType) && -> void = delete;
+        auto From(OffsetType) const && -> void = delete;
 
         auto From(OffsetType from) & -> auto {
             return Self::template MakeFromSlice<IS_ORDERED>(from.ToIndex(IndexEnd()));
@@ -88,8 +88,8 @@ namespace mixin {
             return Self::template MakeFromSlice<IS_ORDERED>(from.ToIndex(IndexEnd()));
         }
 
-        auto Until(OffsetType) && -> void {}
-        auto Until(OffsetType) const && -> void {}
+        auto Until(OffsetType) && -> void = delete;
+        auto Until(OffsetType) const && -> void = delete;
 
         auto Until(OffsetType until) & -> auto {
             return Self::template MakeUntilSlice<IS_ORDERED>(until.ToIndex(IndexEnd()));

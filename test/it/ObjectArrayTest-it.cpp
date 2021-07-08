@@ -324,8 +324,6 @@ suite ObjectArraySlice_Suite = [] {
 
 suite RValue_ObjectArraySlice_Suite = [] {
     "r-value object array should not be able to range for with index"_test = [] {
-        static_assert(std::is_void_v<decltype(std::declval<FooArray&&>().WithIndex())>);
-        static_assert(std::is_void_v<decltype(std::declval<FooArray const&&>().WithIndex())>);
         static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().WithIndex())>);
         static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().WithIndex())>);
     };
@@ -341,15 +339,11 @@ suite RValue_ObjectArraySlice_Suite = [] {
     };
 
     "r-value object array should not be able to create slice"_test = [] {
-        static_assert(std::is_void_v<decltype(std::declval<FooArray&&>().Slice(1, -2))>);
-        static_assert(std::is_void_v<decltype(std::declval<FooArray const&&>().Slice(1, -2))>);
         static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().Slice(1, -2))>);
         static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().Slice(1, -2))>);
     };
 
     "r-value object array should not be able to create Scope"_test = [] {
-        static_assert(std::is_void_v<decltype(std::declval<FooArray&&>().Scope(1))>);
-        static_assert(std::is_void_v<decltype(std::declval<FooArray const&&>().Scope(1))>);
         static_assert(!std::is_void_v<decltype(std::declval<FooArray&>().Scope(1))>);
         static_assert(!std::is_void_v<decltype(std::declval<FooArray const&>().Scope(1))>);
     };

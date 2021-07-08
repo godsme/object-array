@@ -23,8 +23,8 @@ namespace mixin {
             return {reinterpret_cast<RangedArrayLike const&>(*this)};
         }
         // R-Value WithIndex is not allowed.
-        auto WithIndex() && -> void {}
-        auto WithIndex() const && -> void {}
+        auto WithIndex() && -> void = delete;
+        auto WithIndex() const && -> void = delete;
     };
 }
 

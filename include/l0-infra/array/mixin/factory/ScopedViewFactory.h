@@ -30,8 +30,8 @@ namespace mixin {
         }
 
     public:
-        auto Scope(BitMap scope) && -> void {}
-        auto Scope(BitMap scope) const && -> void {}
+        auto Scope(BitMap scope) && -> void = delete;
+        auto Scope(BitMap scope) const && -> void = delete;
 
         auto Scope(BitMap scope) & -> view::ScopedView<RangedArrayLike, IS_ORDERED> {
             return {static_cast<RangedArrayLike&>(*this), MaskScope(scope)};
@@ -41,8 +41,8 @@ namespace mixin {
             return {static_cast<RangedArrayLike const&>(*this), MaskScope(scope)};
         }
 
-        auto Exclude(BitMap excluded) && -> void {}
-        auto Exclude(BitMap excluded) const && -> void {}
+        auto Exclude(BitMap excluded) && -> void = delete;
+        auto Exclude(BitMap excluded) const && -> void = delete;
 
         auto Exclude(BitMap excluded) & -> auto {
             return Scope(~excluded);

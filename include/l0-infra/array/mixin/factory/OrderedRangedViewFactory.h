@@ -45,8 +45,8 @@ namespace mixin {
         }
 
     public:
-        auto Range(ObjectType const&) && -> void {}
-        auto Range(ObjectType const&) const && -> void {}
+        auto Range(ObjectType const&) && -> void = delete;
+        auto Range(ObjectType const&) const && -> void = delete;
 
         auto Range(ObjectType const& obj) & -> auto {
             return MakeSlice<false, false>(obj);

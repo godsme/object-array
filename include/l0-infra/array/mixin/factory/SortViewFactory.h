@@ -17,8 +17,8 @@ namespace mixin {
         using typename T::RangedArrayLike;
 
     public:
-        auto SortObject() && -> void {}
-        auto SortObject() const && -> void {}
+        auto SortObject() && -> void = delete;
+        auto SortObject() const && -> void = delete;
 
         auto SortObject() & -> view::SortView<RangedArrayLike> {
             return {static_cast<RangedArrayLike&>(*this)};
