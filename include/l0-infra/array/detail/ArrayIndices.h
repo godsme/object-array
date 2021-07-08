@@ -19,6 +19,8 @@
 #include <l0-infra/array/mixin/erase/RangedClear.h>
 #include <l0-infra/array/mixin/sort/ArraySort.h>
 #include <l0-infra/array/mixin/erase/RangedClearExt.h>
+#include <l0-infra/array/mixin/sort/ArrayLikeRangeSort.h>
+#include <l0-infra/array/mixin/sort/ArrayBasicRangeSort.h>
 
 namespace detail {
     using ArrayIndicesMixins = ::mixin::Mixins<
@@ -26,6 +28,8 @@ namespace detail {
             mixin::IndexedContainer,
             mixin::RangedArray,
             mixin::RangedArrayLike,
+            mixin::ArrayBasicRangeSort,
+            mixin::ArrayLikeRangeSort,
             mixin::ObjectIndex,
             mixin::RangedClear,
             mixin::___public_mixin_delimiter___,

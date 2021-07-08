@@ -19,6 +19,10 @@ namespace mixin {
         using typename Self::ObjectType;
         using typename Self::SizeType;
 
+    protected:
+        using Self::IndexBegin;
+        using Self::IndexEnd;
+
     public:
         using Self::DoPartialSort;
         using Self::Sort;

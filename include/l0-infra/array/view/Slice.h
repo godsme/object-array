@@ -27,6 +27,8 @@
 #include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
 #include <l0-infra/array/mixin/append/SimpleAppend.h>
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
+#include <l0-infra/array/mixin/sort/ViewBasicRangeSort.h>
+#include <l0-infra/array/mixin/sort/ArrayLikeRangeSort.h>
 
 namespace view::detail {
     using SliceMixins = mixin::Mixins<
@@ -34,6 +36,8 @@ namespace view::detail {
             mixin::ViewedArray,
             mixin::ViewAppend,
             mixin::RangedReplace,
+            mixin::ViewBasicRangeSort,
+            mixin::ArrayLikeRangeSort,
             mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,

@@ -27,6 +27,8 @@ namespace detail {
             mixin::RangedArrayLike,
             mixin::SimpleDoAppend,
             mixin::SimpleDoReplace,
+            mixin::ArrayBasicRangeSort,
+            mixin::ArrayLikeRangeSort,
             mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,

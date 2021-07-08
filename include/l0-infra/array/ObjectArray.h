@@ -31,6 +31,8 @@
 #include <l0-infra/array/mixin/append/SimpleDoAppend.h>
 #include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
 #include <l0-infra/array/mixin/erase/RangedClearExt.h>
+#include <l0-infra/array/mixin/sort/ArrayLikeRangeSort.h>
+#include <l0-infra/array/mixin/sort/ArrayBasicRangeSort.h>
 
 namespace detail {
     using ObjectArrayMixins = ::mixin::Mixins<
@@ -40,6 +42,8 @@ namespace detail {
         mixin::RangedArrayLike,
         mixin::SimpleDoAppend,
         mixin::SimpleDoReplace,
+        mixin::ArrayBasicRangeSort,
+        mixin::ArrayLikeRangeSort,
         mixin::___ranged_array_tag___,
         mixin::ArrayElemVisit,
         mixin::ObjectIndex,

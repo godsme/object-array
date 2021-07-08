@@ -20,30 +20,19 @@ namespace mixin {
         using typename Self::SizeType;
 
     protected:
-        using typename Self::Owner;
-        using typename T::RangedArrayLike;
-
         using Self::IndexBegin;
         using Self::IndexEnd;
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
+        using typename Self::Owner;
 
     public:
-        template<__lEsS_cOnCePt(LESS)>
-        auto DoPartialSort(LESS&& less, SizeType n) & -> SizeType {
-            if(n == 0) return 0;
-            if(n < (IndexEnd() - IndexBegin())) {
-                std::partial_sort(ObjectBegin(), ObjectBegin() + n, ObjectEnd(), std::forward<LESS>(less));
-                return n;
-            } else {
-                Sort(std::forward<LESS>(less));
-                return IndexEnd() - IndexBegin();
-            }
-        }
+        using Self::DoRangePartialSort;
+        using Self::RangeSort;
+        using Self::RangePartialSort;
+        using Self::RangeStableSort;
 
         template<__lEsS_cOnCePt(LESS)>
         auto Sort(LESS&& less) && -> void {
-            std::sort(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));
+            RangeSort(IndexBegin(), IndexEnd(), std::forward<LESS>(less));
         }
 
         template<__lEsS_cOnCePt(LESS)>
@@ -54,7 +43,7 @@ namespace mixin {
 
         template<__lEsS_cOnCePt(LESS)>
         auto StableSort(LESS&& less) && -> void {
-            std::stable_sort(ObjectBegin(), ObjectEnd(), std::forward<LESS>(less));
+            RangeStableSort(IndexBegin(), IndexBegin(), std::forward<LESS>(less));
         }
 
         template<__lEsS_cOnCePt(LESS)>
@@ -64,8 +53,13 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) & -> view::OrderedView<RangedArrayLike> {
-            return {reinterpret_cast<RangedArrayLike&>(*this), DoPartialSort(std::forward<LESS>(less), n)};
+        auto DoPartialSort(LESS&& less, SizeType n) & -> SizeType {
+            return DoRangePartialSort(IndexBegin(), IndexEnd(), std::forward<LESS>(less), n);
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto PartialSort(LESS&& less, SizeType n) & -> auto {
+            return RangePartialSort(IndexBegin(), IndexEnd(), std::forward<LESS>(less), n);
         }
 
         template<__lEsS_cOnCePt(LESS)>

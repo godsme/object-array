@@ -43,6 +43,8 @@ namespace detail {
             mixin::OrderedAppend,
             mixin::OrderedReplace,
             mixin::RangedClear,
+            mixin::ArrayBasicRangeSort,
+            mixin::ArrayLikeRangeSort,
             mixin::___ranged_array_tag___,
             mixin::ObjectIndex,
             mixin::ArrayElemVisit,

@@ -202,7 +202,7 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
     "should be able to rang-for"_test = [&] {
         auto n=0;
         auto sum = 0;
-        for(auto&& item : array.Slice(1, -2)) {
+        for(auto&& item : array.Slice(1, -1)) {
             ++n;
             sum += item.a;
         }
@@ -226,7 +226,7 @@ auto ObjectArray_SliceTest(ARRAY&& array) {
     "should be able to rang-for (Until)"_test = [&] {
         auto n=0;
         auto sum = 0;
-        for(auto&& item : array.Until(-2)) {
+        for(auto&& item : array.Until(-1)) {
             ++n;
             sum += item.a;
         }
@@ -363,9 +363,9 @@ auto ObjectArray_SliceOpTest(SLICE&& slice) {
     };
 
     "should be able to access by At"_test = [&] {
-        auto* p = slice.At(3);
+        auto* p = slice.At(2);
         expect(p != nullptr);
-        expect(*p == 5);
+        expect(*p == 4);
     };
 
     "should return nullptr if index out of range"_test = [&] {
@@ -424,9 +424,9 @@ auto ObjectArray_SliceOpTest(SLICE&& slice) {
     };
 
     "should be able to find an elem in range"_test = [&] {
-        auto* found = slice.Find(5);
+        auto* found = slice.Find(4);
         expect(found != nullptr);
-        expect(*found == 5);
+        expect(*found == 4);
     };
 
     "should be able to find an elem in range with scope"_test = [&] {
@@ -471,10 +471,10 @@ auto ObjectArray_SliceOpTest(SLICE&& slice) {
 
 suite ObjectArraySliceView_Suite = [] {
     FooArray const array{{1}, {2}, {3}, {4}, {5}, {6}};
-    ObjectArray_SliceOpTest(array.Slice(1, -2));
+    ObjectArray_SliceOpTest(array.Slice(1, -1));
 
     FooArray array2{{1}, {2}, {3}, {4}, {5}, {6}};
-    ObjectArray_SliceOpTest(array2.Slice(1, -2));
+    ObjectArray_SliceOpTest(array2.Slice(1, -1));
 };
 
 suite ObjectArrayFromSliceView_Suite = [] {
@@ -595,7 +595,7 @@ suite ObjectArrayFromSliceView_Suite = [] {
 
 suite ObjectArrayUntilSliceView_Suite = [] {
     FooArray const array{{1}, {2}, {3}, {4}, {5}, {6}};
-    auto&& slice = array.Until(-2);
+    auto&& slice = array.Until(-1);
 
     "should be able to access by operator[]"_test = [&] {
         expect(slice[0] ==  1);
@@ -807,7 +807,7 @@ suite ObjectArraySliceScopedView_Suite= [] {
     auto&& scope = array.Slice(2,-2).Scope(0xFF);
 
     "should be able to get num of elems in scope"_test = [&] {
-        expect(3 == scope.GetNum());
+        expect(2 == scope.GetNum());
     };
 
     "should be able to know if there is any elems"_test = [&] {
