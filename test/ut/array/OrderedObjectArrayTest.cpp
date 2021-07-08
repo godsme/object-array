@@ -358,7 +358,7 @@ SCENARIO("Foo Object OrderedObjectArray") {
     }
 }
 
-SCENARIO("Foo Object OrderedArray with less compare") {
+SCENARIO("Foo Object IndexOrderedArray with less compare") {
     using COMPARE = std::function<auto (Foo const&, Foo const&) -> bool>;
     OrderedObjectArray<Foo, 10, COMPARE> array{[](Foo const& l, Foo const& r) { return l.a < r.a; }};
 
@@ -418,7 +418,7 @@ SCENARIO("Foo Object OrderedArray with less compare") {
     }
 }
 
-SCENARIO("Foo Object OrderedArray with Greater compare") {
+SCENARIO("Foo Object IndexOrderedArray with Greater compare") {
     using COMPARE = std::function<auto (Foo const&, Foo const&) -> bool>;
     OrderedObjectArray<Foo, 10, COMPARE> array{[](Foo const& l, Foo const& r) { return l.a > r.a; }};
 

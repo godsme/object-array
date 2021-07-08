@@ -9,7 +9,7 @@
 #include <l0-infra/array/detail/OrderedArrayIndices.h>
 
 namespace holder::detail {
-    template<typename DATA_HOLDER, typename COMPARE>
+    template<typename DATA_HOLDER>
     class IndexedOrderedArrayHolderInterface : public ScatteredArrayDataHolderInterface<DATA_HOLDER> {
         using Parent = ArrayDataHolderInterface<DATA_HOLDER>;
         dEcL_tHiS(DATA_HOLDER);
@@ -18,10 +18,8 @@ namespace holder::detail {
         using SizeType = typename DATA_HOLDER::SizeType;
         using Trait = typename DATA_HOLDER::Trait;
 
-        auto GetLess() const -> auto {
-            return [less = COMPARE{}, elems = Parent::Elems()](auto l, auto r) {
-                return less(Parent::ConstElemToObject(elems[l]), Parent::ConstElemToObject(elems[r]));
-            };
+        auto GetLess() const -> decltype(auto) {
+            return (This()->less);
         }
 
         auto Num() const -> SizeType { return This()->indices.GetNum(); }
@@ -44,30 +42,37 @@ namespace holder::detail {
     template<typename OBJ, std::size_t MAX_SIZE, typename COMPARE>
     class IndexedOrderedArrayHolderBase : public ScatteredArrayDataHolder<OBJ, MAX_SIZE, true> {
         using Parent = ScatteredArrayDataHolder<OBJ, MAX_SIZE, true>;
+    public:
+        using typename Parent::ElemType;
+        using typename Parent::SizeType;
 
     protected:
         auto DoClear() -> void {
             Parent::ClearContent();
         }
     public:
-        using Interface = IndexedOrderedArrayHolderInterface<IndexedOrderedArrayHolderBase, COMPARE>;
+        using Interface = IndexedOrderedArrayHolderInterface<IndexedOrderedArrayHolderBase>;
 
     public:
-        using Parent::Parent;
+        IndexedOrderedArrayHolderBase() : less{Parent::elems} {}
 
-        IndexedOrderedArrayHolderBase() {}
+        template<typename ... ARGS>
+        IndexedOrderedArrayHolderBase(COMPARE const& less, ARGS&& ... args)
+            : Parent(std::forward<ARGS>(args)...)
+            , less(Parent::elems, less) {}
+
         IndexedOrderedArrayHolderBase(IndexedOrderedArrayHolderBase const &rhs)
-            : Parent{rhs}, indices{rhs.indices}
+            : Parent{rhs}, indices{rhs.indices}, less(rhs.less)
         {}
 
         IndexedOrderedArrayHolderBase(IndexedOrderedArrayHolderBase &&rhs)
-            : Parent{std::move(rhs)}, indices{rhs.indices}
+            : Parent{std::move(rhs)}, indices{rhs.indices}, less(rhs.less)
         {
             rhs.DoClear();
         }
 
     private:
-        template<typename, typename >
+        template<typename>
         friend struct IndexedOrderedArrayHolderInterface;
 
         template<typename>
@@ -75,6 +80,19 @@ namespace holder::detail {
 
     protected:
         ::detail::OrderedArrayIndices<MAX_SIZE> indices;
+
+        struct Less : private COMPARE {
+            Less(ElemType const* elems, COMPARE const& compare) : COMPARE{compare}, elems{elems} {}
+            Less(ElemType const* elems) : elems{elems} {}
+
+            auto operator()(SizeType l, SizeType r) const -> bool {
+                return COMPARE::operator()(Parent::ConstElemToObject(elems[l]), Parent::ConstElemToObject(elems[r]));
+            }
+
+            ElemType const* elems;
+        };
+
+        Less less;
     };
 
     template<typename OBJ, std::size_t MAX_NUM, typename COMPARE, bool = std::is_const_v<OBJ>>

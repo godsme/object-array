@@ -76,12 +76,13 @@ namespace holder::detail {
         template<typename>
         friend class detail::ScatteredArrayDataHolderInterface;
 
-    private:
+    protected:
         using Parent::elems;
 
         using Parent::ElemToObject;
         using Parent::ConstElemToObject;
 
+    private:
         template<typename OP>
         auto ForAll(OP &&op) -> void {
             auto bits = occupied;
