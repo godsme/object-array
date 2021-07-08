@@ -23,6 +23,8 @@
 #include <l0-infra/array/mixin/replace/OrderedDoReplace.h>
 #include <l0-infra/array/mixin/find/NonScopedSimpleFind.h>
 #include <l0-infra/array/mixin/find/SimpleFindExt.h>
+#include <l0-infra/array/mixin/sort/ArrayLikeRangeSort.h>
+#include <l0-infra/array/mixin/sort/ArrayBasicRangeSort.h>
 
 namespace detail {
     using OrderedArrayIndicesMixins = ::mixin::Mixins<
@@ -32,6 +34,8 @@ namespace detail {
             mixin::RangedArrayLike,
             mixin::ObjectIndex,
             mixin::ContiguousDoErase,
+            mixin::ArrayBasicRangeSort,
+            mixin::ArrayLikeRangeSort,
             mixin::___public_mixin_delimiter___,
             mixin::IndexedRefAccessor,
             mixin::ByIndexAccessor,
@@ -50,6 +54,10 @@ namespace detail {
         using Parent::Parent;
         using Parent::IndexBegin;
         using Parent::IndexEnd;
+        using Parent::RangeSort;
+        using Parent::RangeStableSort;
+        using Parent::RangePartialSort;
+        using Parent::DoRangePartialSort;
     };
 }
 

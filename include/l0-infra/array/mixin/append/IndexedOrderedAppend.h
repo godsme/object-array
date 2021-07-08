@@ -30,7 +30,7 @@ namespace mixin {
         template<typename ... ARGS>
         auto ActualAppend(ARGS&& ... args) -> ObjectType* {
             auto* p = Self::Append(std::forward<ARGS>(args)...);
-            GetIndices().DoAppend(Self::GetLess(), Num());
+            GetIndices().DoAppend(Self::GetIndicesLess(), Num());
             return p;
         }
 

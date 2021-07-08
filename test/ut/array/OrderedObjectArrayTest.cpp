@@ -420,7 +420,7 @@ SCENARIO("Foo Object IndexOrderedArray with less compare") {
     }
 }
 
-SCENARIO("Foo Object IndexOrderedArray with Greater compare") {
+SCENARIO("Foo Object OrderedObjectArray with Greater compare") {
     using COMPARE = std::function<auto (Foo const&, Foo const&) -> bool>;
     OrderedObjectArray<Foo, 10, COMPARE> array{[](Foo const& l, Foo const& r) { return l.a > r.a; }};
 
@@ -481,7 +481,7 @@ SCENARIO("Foo Object IndexOrderedArray with Greater compare") {
 }
 
 
-SCENARIO("Foo Object IndexOrderedArray Range View") {
+SCENARIO("Foo Object OrderedObjectArray Range View") {
     using COMPARE = std::function<auto (Foo const&, Foo const&) -> bool>;
     OrderedObjectArray<Foo, 10, COMPARE> array{[](Foo const& l, Foo const& r) { return l.a > r.a; }};
 

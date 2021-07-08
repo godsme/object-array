@@ -11,7 +11,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<__cOnCePt(RangedArrayLike) T>
+    template<typename T>
     struct ArrayLikeRangeSort : T {
         using Self = T;
 
@@ -21,7 +21,6 @@ namespace mixin {
 
     protected:
         using typename Self::Owner;
-        using typename T::RangedArrayLike;
 
     public:
         using Self::RangeSort;
@@ -41,8 +40,8 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto RangePartialSort(SizeType from, SizeType until, LESS&& less, SizeType n) & -> view::OrderedView<RangedArrayLike> {
-            return {reinterpret_cast<RangedArrayLike&>(*this), DoRangePartialSort(from, until, std::forward<LESS>(less), n)};
+        auto RangePartialSort(SizeType from, SizeType until, LESS&& less, SizeType n) & -> view::OrderedView<ArrayLikeRangeSort> {
+            return {*this, DoRangePartialSort(from, until, std::forward<LESS>(less), n)};
         }
 
         template<__lEsS_cOnCePt(LESS)>

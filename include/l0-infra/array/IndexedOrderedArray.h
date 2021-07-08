@@ -29,11 +29,13 @@
 #include <l0-infra/array/mixin/replace/SimpleReplace.h>
 #include <l0-infra/array/mixin/replace/IndexedOrderedDoReplace.h>
 #include <l0-infra/array/mixin/array_like/IndexedObjectIndex.h>
+#include <l0-infra/array/mixin/factory/OrderedRangedViewFactory.h>
 
 namespace detail {
     using IndexedOrderedArrayMixins = ::mixin::Mixins<
             mixin::IndexedOrderedAppend,
             mixin::IndexedOrderedDoReplace,
+            mixin::ArrayLikeRangeSort,
             mixin::___ranged_array_tag___,
             mixin::IndexedObjectIndex,
             mixin::ArrayElemVisit,
@@ -56,6 +58,7 @@ namespace detail {
             mixin::RangedViewFactory,
             mixin::ScopedViewFactory,
             mixin::WithIndexViewFactory,
+            mixin::OrderedRangedViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleAppend,
             mixin::AppendExt,

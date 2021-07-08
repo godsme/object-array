@@ -5,20 +5,37 @@
 #ifndef OBJECT_ARRAY_INDEXEDORDEREDARRAYDATAHOLDER_H
 #define OBJECT_ARRAY_INDEXEDORDEREDARRAYDATAHOLDER_H
 
+#include <l0-infra/array/concept/Less.h>
 #include <l0-infra/array/holder/ScatteredArrayDataHolder.h>
 #include <l0-infra/array/detail/OrderedArrayIndices.h>
 
 namespace holder::detail {
-    template<typename DATA_HOLDER>
+    template<typename DATA_HOLDER, typename COMPARE>
     class IndexedOrderedArrayHolderInterface : public ScatteredArrayDataHolderInterface<DATA_HOLDER> {
         using Parent = ArrayDataHolderInterface<DATA_HOLDER>;
         dEcL_tHiS(DATA_HOLDER);
+
+
     public:
         using ObjectType = typename DATA_HOLDER::ObjectType;
         using SizeType = typename DATA_HOLDER::SizeType;
         using Trait = typename DATA_HOLDER::Trait;
 
-        auto GetLess() const -> decltype(auto) {
+    private:
+        auto __GetObj(SizeType n) -> ObjectType & {
+            return Parent::ElemToObject(Parent::Elems()[n]);
+        }
+
+        auto __GetObj(SizeType n) const -> ObjectType const & {
+            return Parent::ConstElemToObject(Parent::Elems()[n]);
+        }
+
+    public:
+        auto GetIndicesLess() const -> decltype(auto) {
+            return (This()->less);
+        }
+
+        auto GetLess() const -> COMPARE const& {
             return (This()->less);
         }
 
@@ -26,15 +43,38 @@ namespace holder::detail {
         auto GetIndices() -> decltype(auto) { return (This()->indices); }
 
         auto GetObj(SizeType n) -> ObjectType & {
-            return Parent::ElemToObject(Parent::Elems()[This()->indices[n]]);
+            return __GetObj(This()->indices[n]);
         }
 
         auto GetObj(SizeType n) const -> ObjectType const & {
-            return Parent::ConstElemToObject(Parent::Elems()[This()->indices[n]]);
+            return __GetObj(This()->indices[n]);
         }
 
         auto IndexBegin() const -> SizeType { return 0; }
         auto IndexEnd() const -> SizeType { return This()->indices.GetNum(); }
+
+
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto DoRangePartialSort(SizeType from, SizeType until, LESS&& less, SizeType n) & -> SizeType {
+            return This()->indices.DoRangePartialSort(from, until, [&](auto l, auto r) {
+                return less(__GetObj(l), __GetObj(r));
+            }, n);
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto RangeSort(SizeType from, SizeType until, LESS&& less) && -> void {
+            This()->indices.RangeSort(from, until, [&](auto l, auto r) {
+                return less(__GetObj(l), __GetObj(r));
+            });
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
+        auto RangeStableSort(SizeType from, SizeType until, LESS&& less) && -> void {
+            This()->indices.RangeStableSort(from, until, [&](auto l, auto r) {
+                return less(__GetObj(l), __GetObj(r));
+            });
+        }
     };
 }
 
@@ -51,7 +91,7 @@ namespace holder::detail {
             Parent::ClearContent();
         }
     public:
-        using Interface = IndexedOrderedArrayHolderInterface<IndexedOrderedArrayHolderBase>;
+        using Interface = IndexedOrderedArrayHolderInterface<IndexedOrderedArrayHolderBase, COMPARE>;
 
     public:
         IndexedOrderedArrayHolderBase() : less{Parent::elems} {}
@@ -72,7 +112,7 @@ namespace holder::detail {
         }
 
     private:
-        template<typename>
+        template<typename, typename >
         friend struct IndexedOrderedArrayHolderInterface;
 
         template<typename>
@@ -81,7 +121,7 @@ namespace holder::detail {
     protected:
         ::detail::OrderedArrayIndices<MAX_SIZE> indices;
 
-        struct Less : private COMPARE {
+        struct Less : COMPARE {
             Less(ElemType const* elems, COMPARE const& compare) : COMPARE{compare}, elems{elems} {}
             Less(ElemType const* elems) : elems{elems} {}
 

@@ -27,7 +27,7 @@ namespace mixin {
         auto DoReplace(SizeType i, ARGS&& ... args) -> ObjectType* {
             auto index = GetIndices()[i];
             auto* p = Self::Replace(index, std::forward<ARGS>(args)...);
-            GetIndices().ActualReplace(Self::GetLess(), i, index);
+            GetIndices().ActualReplace(Self::GetIndicesLess(), i, index);
             return p;
         }
     };
