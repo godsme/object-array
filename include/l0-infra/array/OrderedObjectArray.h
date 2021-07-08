@@ -31,6 +31,7 @@
 #include <l0-infra/array/mixin/replace/OrderedReplace.h>
 #include <l0-infra/array/mixin/detail/___ranged_array_tag___.h>
 #include <l0-infra/array/mixin/erase/RangedClearExt.h>
+#include <l0-infra/array/mixin/factory/OrderedRangedViewFactory.h>
 
 namespace detail {
     using OrderedArrayMixins = ::mixin::Mixins<
@@ -63,6 +64,7 @@ namespace detail {
             mixin::RangedViewFactory,
             mixin::ScopedViewFactory,
             mixin::WithIndexViewFactory,
+            mixin::OrderedRangedViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::SimpleErase,
             mixin::SimpleAppend,

@@ -227,7 +227,9 @@ namespace {
 
     struct Foo {
         int a;
-        explicit Foo(int a) : a{a} {}
+        int b;
+        explicit Foo(int a) : a{a}, b{a} {}
+        explicit Foo(int a, int b) : a{a}, b{b} {}
         Foo(Foo const&) = default;
         auto operator=(Foo const&) -> Foo& = default;
         ~Foo() { a = 10; }
@@ -475,6 +477,64 @@ SCENARIO("Foo Object IndexOrderedArray with Greater compare") {
 
         REQUIRE(array[0].a == 8);
         REQUIRE(array[1].a == 7);
+    }
+}
+
+
+SCENARIO("Foo Object IndexOrderedArray Range View") {
+    using COMPARE = std::function<auto (Foo const&, Foo const&) -> bool>;
+    OrderedObjectArray<Foo, 10, COMPARE> array{[](Foo const& l, Foo const& r) { return l.a > r.a; }};
+
+    array.Append(Foo{10});
+    array.Append(Foo{8, 3});
+    array.Append(Foo{12});
+    array.Append(Foo{8, 1});
+    array.Append(Foo{7});
+    array.Append(Foo{8, 5});
+    array.Append(Foo{9});
+
+    REQUIRE(array.GetNum() == 7);
+
+    REQUIRE(array[0].a == 12);
+    REQUIRE(array[1].a == 10);
+    REQUIRE(array[2].a == 9);
+    REQUIRE(array[3].a == 8);
+    REQUIRE(array[4].a == 8);
+    REQUIRE(array[5].a == 8);
+    REQUIRE(array[6].a == 7);
+
+    auto&& view = array.Range(Foo{8});
+    REQUIRE(view.GetNum() == 3);
+    REQUIRE(view[0].a == 8);
+    REQUIRE(view[1].a == 8);
+    REQUIRE(view[2].a == 8);
+
+    WHEN("Sort") {
+        view.Sort([](auto&& l, auto r) {
+            return l.b < r.b;
+        });
+
+        REQUIRE(view.GetNum() == 3);
+        REQUIRE(view[0].b == 1);
+        REQUIRE(view[1].b == 3);
+        REQUIRE(view[2].b == 5);
+        REQUIRE(view[0].a == 8);
+        REQUIRE(view[1].a == 8);
+        REQUIRE(view[2].a == 8);
+    }
+
+    WHEN("SortObject") {
+        auto&& sorted = view.SortObject().Sort([](auto&& l, auto r) {
+            return l.b < r.b;
+        });
+
+        REQUIRE(sorted.GetNum() == 3);
+        REQUIRE(sorted[0].b == 1);
+        REQUIRE(sorted[1].b == 3);
+        REQUIRE(sorted[2].b == 5);
+        REQUIRE(sorted[0].a == 8);
+        REQUIRE(sorted[1].a == 8);
+        REQUIRE(sorted[2].a == 8);
     }
 }
 
