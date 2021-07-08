@@ -5,6 +5,7 @@
 #ifndef OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H
 #define OBJECT_ARRAY_RANGEDVIEWDATAHOLDER_H
 
+#include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/holder/detail/RangedViewDataHolderBase.h>
 #include <l0-infra/array/holder/detail/RangedViewDataHolderInterface.h>
 #include <l0-infra/array/holder/detail/ArrayLikeViewDataHolder.h>

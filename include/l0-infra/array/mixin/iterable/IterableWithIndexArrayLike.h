@@ -10,7 +10,7 @@
 #include <l0-infra/array/iterator/Iterator.h>
 
 namespace mixin {
-    template<__cOnCePt(RangedArrayLike) T>
+    template<typename T>
     struct IterableWithIndexArrayLike : T {
         using Self = T;
     public:
@@ -21,12 +21,6 @@ namespace mixin {
         using Self::IndexBegin;
         using Self::IndexEnd;
         using Self::GetArray;
-
-//        using ConstIterator = iterator::WithIndexIterator<ArrayType, std::add_const_t<ObjectType>>;
-//        using Iterator = iterator::WithIndexIterator<ArrayType, ObjectType>;
-
-//        using ConstEndIterator = iterator::Iterator<std::add_const_t<ObjectType>>;
-//        using EndIterator = iterator::Iterator<ObjectType>;
 
     public:
         auto begin() const -> auto {

@@ -32,11 +32,11 @@ namespace _concept {
     template<typename T>
     concept ConstScopedArrayLike = Scoped<T> && ConstArrayLike<T>;
 
-    template<typename T>
-    concept ConstScopedRangedArrayLike = Scoped<T> && ConstRangedArrayLike<T>;
-
-    template<typename T>
-    concept ScopedRangedArrayLike = Scoped<T> && RangedArrayLike<T>;
+//    template<typename T>
+//    concept ConstScopedRangedArrayLike = Scoped<T> && ConstRangedArrayLike<T>;
+//
+//    template<typename T>
+//    concept ScopedRangedArrayLike = Scoped<T> && RangedArrayLike<T>;
 
     template<typename T>
     concept SimpleScopedRangedArrayLike = Scoped<T> && SimpleRangedArrayLike<T>;

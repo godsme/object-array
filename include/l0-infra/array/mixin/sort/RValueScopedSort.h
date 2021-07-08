@@ -9,7 +9,7 @@
 #include <l0-infra/array/mixin/detail/ValueScopedRangedArray.h>
 
 namespace mixin {
-    template<__cOnCePt(ScopedRangedArrayLike) T>
+    template<typename T>
     struct RValueScopedSort : ScopedSort<T> {
         using Self = ScopedSort<T>;
 

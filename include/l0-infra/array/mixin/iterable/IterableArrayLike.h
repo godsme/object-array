@@ -9,13 +9,13 @@
 #include <l0-infra/array/iterator/Iterator.h>
 
 namespace mixin {
-    template<__cOnCePt(RangedArrayLike) T>
+    template<__cOnCePt(SimpleRangedArrayLike) T>
     class IterableArrayLike : public T {
         using Self = T;
 
     protected:
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
+        using Self::IndexBegin;
+        using Self::IndexEnd;
 
     public:
         using typename T::SizeType;
@@ -27,19 +27,19 @@ namespace mixin {
 
     public:
         auto begin() const -> ConstIterator {
-            return {ObjectBegin()};
+            return {&Self::GetObj(IndexBegin())};
         }
 
         auto end() const -> ConstIterator {
-            return {ObjectEnd()};
+            return {&Self::GetObj(IndexEnd())};
         }
 
         auto begin() -> Iterator {
-            return {ObjectBegin()};
+            return {&Self::GetObj(IndexBegin())};
         }
 
         auto end() -> Iterator {
-            return {ObjectEnd()};
+            return {&Self::GetObj(IndexEnd())};
         }
     };
 }

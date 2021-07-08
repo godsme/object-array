@@ -13,7 +13,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<__cOnCePt(ScopedRangedArrayLike) T>
+    template<typename T>
     class ScopedSort : public T {
         using Self = T;
 

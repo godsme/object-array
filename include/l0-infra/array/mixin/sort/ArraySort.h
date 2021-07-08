@@ -11,7 +11,7 @@
 #include <algorithm>
 
 namespace mixin {
-    template<__cOnCePt(RangedArrayLike) T>
+    template<typename T>
     struct ArraySort : T {
         using Self = T;
 

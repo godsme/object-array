@@ -9,7 +9,7 @@
 #include <l0-infra/array/mixin/detail/ValueRangedArray.h>
 
 namespace mixin {
-    template<__cOnCePt(RangedArrayLike) T>
+    template<typename T>
     struct RValueArraySort : ArraySort<T> {
         using Self = ArraySort<T>;
 
