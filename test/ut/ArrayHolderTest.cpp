@@ -38,10 +38,10 @@ namespace {
 
 SCENARIO("Const Array could be initialized by init_list") {
     Array<ConstIntArray> array{1,2,3,4};
-    REQUIRE(*array.elems[0] == 1);
-    REQUIRE(*array.elems[1] == 2);
-    REQUIRE(*array.elems[2] == 3);
-    REQUIRE(*array.elems[3] == 4);
+    REQUIRE(array.elems[0] == 1);
+    REQUIRE(array.elems[1] == 2);
+    REQUIRE(array.elems[2] == 3);
+    REQUIRE(array.elems[3] == 4);
 }
 
 SCENARIO("Placement of trivial type should not be 0-initialized") {
@@ -57,7 +57,7 @@ SCENARIO("Default Array Initialization of trivial type should not be 0-initializ
     ::memset(&array, 0xFF, sizeof(array));
     array.Emplace();
 
-    REQUIRE(*array->elems[0] != 0);
+    REQUIRE(array->elems[0] != 0);
 }
 
 namespace {

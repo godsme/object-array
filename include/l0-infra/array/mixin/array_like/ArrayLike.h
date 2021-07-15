@@ -17,23 +17,26 @@ namespace mixin {
         using typename T::ObjectType;
         using typename T::SizeType;
 
+    protected:
+        using Trait = typename DataHolder::Trait;
 
+    public:
         template<typename ... ARGS>
         auto Emplace(SizeType n, ARGS&& ... args) -> ObjectType* {
-            return T::Elems()[n].Emplace(std::forward<ARGS>(args)...);
+            return Trait::Emplace(T::Elems()[n], std::forward<ARGS>(args)...);
         }
 
         template<typename ... ARGS>
         auto Unsafe_Replace(SizeType n, ARGS&& ... args) -> ObjectType* {
-            return T::Elems()[n].Replace(std::forward<ARGS>(args)...);
+            return Trait::Replace(T::Elems()[n], std::forward<ARGS>(args)...);
         }
 
         auto Destroy(SizeType n) -> void {
-            return T::Elems()[n].Destroy();
+            return Trait::Destroy(T::Elems()[n]);
         }
 
         auto ReplaceObject(SizeType to, SizeType from) -> ObjectType* {
-            return T::Elems()[to].Replace(std::move(DataHolder::ElemToObject(T::Elems()[from])));
+            return Trait::Replace(T::Elems()[to], std::move(DataHolder::ElemToObject(T::Elems()[from])));
         }
     };
 }

@@ -20,6 +20,7 @@ namespace holder::detail {
         using typename Parent::ElemType;
         using typename Parent::SizeType;
         using BitMap = ::detail::ArrayScope<MAX_NUM>;
+        using typename Parent::Trait;
 
         using ConstScatteredArrayHolder = ScatteredArrayDataHolder<std::add_const_t<OBJ>, MAX_NUM>;
         using NonConstScatteredArrayHolder = ScatteredArrayDataHolder<std::remove_const_t<OBJ>, MAX_NUM>;
@@ -36,21 +37,21 @@ namespace holder::detail {
 
         auto Move(ScatteredArrayDataHolder &&rhs) {
             ForAll([&, this](auto i) {
-                elems[i].Emplace(std::move(*rhs.elems[i]));
+                Trait::Emplace(elems[i], std::move(Trait::ToObject(rhs.elems[i])));
             });
             rhs.DoClear();
         }
 
         auto Copy(ScatteredArrayDataHolder const &rhs) -> void {
-            ForAll([&, this](auto i) {
-                elems[i].Emplace(*rhs.elems[i]);
+            ForAll([&, this](SizeType i) {
+                Trait::Emplace(elems[i], Trait::ConstToObject(rhs.elems[i]));
             });
         }
 
         template<typename ... ARGS>
         auto DoEmplace(SizeType i, ARGS &&... args) -> auto * {
             occupied.set(i);
-            return elems[i].Emplace(std::forward<ARGS>(args)...);
+            return Trait::Emplace(elems[i], std::forward<ARGS>(args)...);
         }
 
     protected:

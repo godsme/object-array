@@ -28,9 +28,9 @@ SCENARIO("should be able to construct with init-list") {
     REQUIRE(holder.occupied[1]);
     REQUIRE(holder.occupied[2]);
 
-    REQUIRE(*holder.elems[0] == 1);
-    REQUIRE(*holder.elems[1] == 2);
-    REQUIRE(*holder.elems[2] == 3);
+    REQUIRE(holder.elems[0] == 1);
+    REQUIRE(holder.elems[1] == 2);
+    REQUIRE(holder.elems[2] == 3);
 
     static_assert(!std::is_copy_assignable_v<ConstIntHolder>);
     static_assert(!std::is_move_assignable_v<ConstIntHolder>);
