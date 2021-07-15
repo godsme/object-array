@@ -24,7 +24,6 @@
 #include <l0-infra/array/mixin/sort/SortExt.h>
 #include <l0-infra/array/mixin/iterable/IterableWithIndexArrayLike.h>
 #include <l0-infra/array/mixin/factory/WithIndexViewFactory_R.h>
-#include <l0-infra/array/mixin/sort/SortExt_R.h>
 #include <l0-infra/array/mixin/access/SortViewByIndexRefAccessor.h>
 #include <l0-infra/array/mixin/iterable/IterableSortView.h>
 #include <l0-infra/array/mixin/access/ArrayByIndexAccessor.h>
@@ -33,6 +32,7 @@
 #include <l0-infra/array/mixin/less/ViewObjectLess.h>
 #include <l0-infra/array/mixin/eq/ViewObjectEquality.h>
 #include <l0-infra/array/mixin/eq/ObjectCompareExt.h>
+#include <l0-infra/array/mixin/sort/NoDiscardSortExt_R.h>
 
 namespace sort_view {
     template<template<typename> typename INDICES_INIT>
@@ -71,7 +71,7 @@ namespace sort_view {
             mixin::___mutable_mixin_delimiter___,
             mixin::SortViewSort,
             mixin::SortExt,
-            mixin::SortExt_R>;
+            mixin::NoDiscardSortExt_R>;
 
     template<typename HOLDER, template<typename> typename INDICES_INIT>
     class Array : public Public::Compose<HOLDER, Private<INDICES_INIT>, Array<HOLDER, INDICES_INIT>> {

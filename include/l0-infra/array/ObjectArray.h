@@ -158,6 +158,9 @@ namespace object_array {
     struct Array : Public::Compose<HOLDER, Private, Array<HOLDER>> {
         using Parent = Public::Compose<HOLDER, Private, Array<HOLDER>>;
         using Parent::Parent;
+
+        // DO NOT REMOVE IT or CHANGE IT TO ``=default``!!!
+        // It's for avoiding unnecessary 0-initialization.
         Array() {}
 
     private:

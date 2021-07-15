@@ -5,6 +5,14 @@
 #include <l0-infra/array/ScatteredArray.h>
 #include <catch.hpp>
 
+SCENARIO("Default ScatteredArray Initialization of trivial type should not be 0-initialized") {
+    Placement<ScatteredArray<int, 10>> array;
+    ::memset(&array, 0xFF, sizeof(array));
+    array.Emplace();
+
+    REQUIRE((*array)[0] != 0);
+}
+
 SCENARIO("ScatteredArray Test") {
     ScatteredArray<int, 10> foo {2, 6, 3};
 

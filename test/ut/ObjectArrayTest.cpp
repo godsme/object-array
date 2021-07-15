@@ -5,6 +5,14 @@
 #include <l0-infra/array/ObjectArray.h>
 #include <catch.hpp>
 
+SCENARIO("Default ObjectArray Initialization of trivial type should not be 0-initialized") {
+    Placement<ObjectArray<int, 10>> array;
+    ::memset(&array, 0xFF, sizeof(array));
+    array.Emplace();
+
+    REQUIRE((*array)[0] != 0);
+}
+
 SCENARIO("ObjectArray") {
     ObjectArray<int, 10> array;
 

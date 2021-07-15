@@ -33,6 +33,7 @@
 #include <l0-infra/array/mixin/replace/ViewReplace.h>
 #include <l0-infra/array/mixin/replace/ReplaceExt.h>
 #include <l0-infra/array/mixin/eq/ObjectCompareExt.h>
+#include <l0-infra/array/mixin/sort/SortExt_R.h>
 
 namespace scope_view {
     using Private = ::mixin::Private<
