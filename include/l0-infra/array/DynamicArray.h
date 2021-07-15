@@ -26,6 +26,7 @@
 #include <l0-infra/array/mixin/min/UnsafePointersRangeMinElem.h>
 #include <l0-infra/array/mixin/min/UnsafePointerRangeScopeMinElem.h>
 #include <l0-infra/array/mixin/rotate/PointersRangeRotate.h>
+#include <l0-infra/array/mixin/less/PointerLess.h>
 
 namespace dynamic_array {
     using Private = ::mixin::Private<
@@ -37,6 +38,7 @@ namespace dynamic_array {
             mixin::PointerArrayObjectAccessor,
             mixin::ArraySliceMaker,
             mixin::ArrayOffsetToIndex,
+            mixin::PointerLess,
 
             mixin::ArrayElemVisit,
             mixin::SimpleRangeForEach,

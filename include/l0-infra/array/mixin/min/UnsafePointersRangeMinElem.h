@@ -14,12 +14,6 @@ namespace mixin {
         using typename T::ObjectType;
         using typename T::Maybe;
 
-    protected:
-        template<__lEsS_cOnCePt(LESS)>
-        auto GetPointerLess(LESS&& less) -> auto {
-            return [&](auto* l, auto* r) -> bool { return less(*l, *r); };
-        }
-
     public:
         template<__lEsS_cOnCePt(LESS)>
         auto Unsafe_RangeMinElemIndex(SizeType from, SizeType until, LESS &&less) const -> Maybe {

@@ -22,14 +22,14 @@ namespace mixin {
         using T::StableDescSort;
         using T::PartialDescSort;
 
-        auto Sort() && -> auto { return std::move(*this).Sort(std::less<ObjectType>{}); }
-        auto DescSort() && -> auto { return std::move(*this).Sort(std::greater<ObjectType>{});}
+        auto Sort() && -> auto { return std::move(*this).Sort(T::GetLess()); }
+        auto DescSort() && -> auto { return std::move(*this).Sort(T::GetGreater());}
 
-        auto StableSort() && -> auto { return std::move(*this).StableSort(std::less<ObjectType>{});}
-        auto StableDescSort() && -> auto { return std::move(*this).StableSort(std::greater<ObjectType>{});}
+        auto StableSort() && -> auto { return std::move(*this).StableSort(T::GetLess());}
+        auto StableDescSort() && -> auto { return std::move(*this).StableSort(T::GetGreater());}
 
-        auto PartialSort(SizeType n) && -> auto { return T::PartialSort(std::less<ObjectType>{}, n); }
-        auto PartialDescSort(SizeType n) && -> auto { return std::move(*this).PartialSort(std::greater<ObjectType>{}, n); }
+        auto PartialSort(SizeType n) && -> auto { return T::PartialSort(T::GetLess(), n); }
+        auto PartialDescSort(SizeType n) && -> auto { return std::move(*this).PartialSort(T::GetGreater(), n); }
     };
 }
 

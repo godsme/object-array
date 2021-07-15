@@ -19,7 +19,7 @@ namespace mixin {
 
     protected:
         template<__pRed_CoNcEpT(PRED)>
-        auto GetPointerPred(PRED&& pred) -> auto {
+        auto GetPointerPred(PRED&& pred) const -> auto {
             if constexpr(__wItH_iNdEx_pReD(PRED)) {
                 return [&pred](auto* p, auto i) -> bool {
                     return pred(*p, i);
@@ -34,18 +34,18 @@ namespace mixin {
     public:
         template<__pRed_CoNcEpT(PRED)>
         auto Unsafe_RangeFindIndex(SizeType from, SizeType until, PRED&& pred) const -> Maybe {
-            return Self::GetPointer().Unsafe_RangeFindIndex(from, until, Self::GetPointerPred(std::forward<PRED>(pred)));
+            return Self::GetPointers().Unsafe_RangeFindIndex(from, until, Self::GetPointerPred(std::forward<PRED>(pred)));
         }
 
         template<__pRed_CoNcEpT(PRED)>
         auto Unsafe_RangeFind(SizeType from, SizeType until, PRED&& pred) const -> ObjectType const* {
-            auto* p = Self::GetPointer().Unsafe_RangeFind(from, until, Self::GetPointerPred(std::forward<PRED>(pred)));
+            auto* p = Self::GetPointers().Unsafe_RangeFind(from, until, Self::GetPointerPred(std::forward<PRED>(pred)));
             return p == nullptr ? nullptr : *p;
         }
 
         template<__pRed_CoNcEpT(PRED)>
         auto Unsafe_RangeFindRange(SizeType from, SizeType until, PRED&& pred) const -> auto {
-            return Self::GetPointer().Unsafe_RangeFindRange(from, until, Self::GetPointerPred(std::forward<PRED>(pred)));
+            return Self::GetPointers().Unsafe_RangeFindRange(from, until, Self::GetPointerPred(std::forward<PRED>(pred)));
         }
     };
 }

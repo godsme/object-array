@@ -78,14 +78,14 @@ namespace mixin {
     template<template<typename> typename ... MIXINS>
     class Public {
         template<typename HOLDER, typename PRIVATE, typename OWNER>
-        using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::___public_mixin_delimiter___<typename PRIVATE::template Type<HOLDER, OWNER>>>;
+        using AllMixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::___public_mixin_delimiter___<typename PRIVATE::template Type<HOLDER, OWNER>>>;
 
     public:
         template<typename HOLDER, typename PRIVATE, typename OWNER>
-        struct Compose : HOLDER, Mixins<HOLDER, PRIVATE, OWNER> {
+        struct Compose : HOLDER, AllMixins<HOLDER, PRIVATE, OWNER> {
         public:
             using Holder = HOLDER;
-            using Mixins = Mixins<HOLDER, PRIVATE, OWNER>;
+            using Mixins = AllMixins<HOLDER, PRIVATE, OWNER>;
 
         private:
             static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(Compose)); }

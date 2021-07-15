@@ -87,19 +87,19 @@ namespace mixin {
         }
 
         auto MinElems(SizeType n) & -> ThisType& {
-            return MinElems(std::less<ObjectType>{}, n);
+            return MinElems(T::GetLess(), n);
         }
 
         auto MaxElems(SizeType n) & -> ThisType& {
-            return MinElems(std::greater<ObjectType>{}, n);
+            return MinElems(T::GetGreater(), n);
         }
 
         [[nodiscard]] auto MinElems(SizeType n) && -> ThisType {
-            return MinElems(std::less<ObjectType>{}, n);
+            return MinElems(T::GetLess(), n);
         }
 
         [[nodiscard]] auto MaxElems(SizeType n) && -> ThisType {
-            return MinElems(std::greater<ObjectType>{}, n);
+            return MinElems(T::GetGreater(), n);
         }
     };
 }
