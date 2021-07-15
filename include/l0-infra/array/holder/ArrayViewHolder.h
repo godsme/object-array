@@ -28,7 +28,7 @@ namespace holder {
                 : elems((ElemType (&)[MAX_SIZE])ViewTrait::ObjToElem(*array))
                 , num(n)
         {
-            //if(num > MAX_SIZE) num = MAX_SIZE;
+            if(num > MAX_SIZE) num = MAX_SIZE;
         }
 
         ArrayViewHolder(ArrayViewHolder const& rhs)

@@ -10,6 +10,7 @@
 #include <l0-infra/array/mixin/array_like/ConstArrayLike.h>
 #include <l0-infra/array/mixin/array_like/ArrayLike.h>
 #include <algorithm>
+#include <cstring>
 
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM, bool ORDERED>

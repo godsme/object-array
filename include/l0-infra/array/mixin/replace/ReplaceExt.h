@@ -30,7 +30,7 @@ namespace mixin {
 
         template<typename ... ARGS>
         auto ReplaceObj(ObjectType const* p, ARGS &&... args) -> ObjectType * {
-            auto index = T::GetObjIndex(p);
+            auto index = T::ObjectToIndex(p);
             return index ? T::Replace(*index, std::forward<ARGS>(args)...) : nullptr;
         }
     };

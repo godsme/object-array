@@ -32,11 +32,11 @@ namespace mixin::detail {
         }
 
         [[nodiscard]] auto MinElems(SizeType n) const && -> ConstThisSortView {
-            return std::move(*this).MinElems(std::less<ObjectType>{}, n);
+            return std::move(*this).MinElems(T::GetLess(), n);
         }
 
         [[nodiscard]] auto MaxElems(SizeType n) const && -> ConstThisSortView {
-            return std::move(*this).MinElems(std::greater<ObjectType>{}, n);
+            return std::move(*this).MinElems(T::GetGreater(), n);
         }
 
         template<__lEsS_cOnCePt(LESS)>
@@ -45,11 +45,11 @@ namespace mixin::detail {
         }
 
         [[nodiscard]] auto MinElems(SizeType n) && -> ThisSortView {
-            return std::move(*this).MinElems(std::less<ObjectType>{}, n);
+            return std::move(*this).MinElems(T::GetLess(), n);
         }
 
         [[nodiscard]] auto MaxElems(SizeType n) && -> ThisSortView {
-            return std::move(*this).MinElems(std::greater<ObjectType>{}, n);
+            return std::move(*this).MinElems(T::GetGreater(), n);
         }
     };
 }

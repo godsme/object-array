@@ -42,6 +42,7 @@
 #include <l0-infra/array/mixin/erase/ClearExt.h>
 #include <l0-infra/array/mixin/foreach/UnsafeRangeForEach.h>
 #include <l0-infra/array/mixin/access/RangeExporter.h>
+#include <l0-infra/array/mixin/iterable/IterableArrayLike.h>
 
 namespace array_indices {
     using Private = ::mixin::Private<
@@ -69,6 +70,7 @@ namespace array_indices {
             mixin::ByIndexRefAccessor,
             mixin::ByIndexAccessor,
             mixin::RangedElemCount,
+            mixin::IterableArrayLike,
             mixin::UnsafeRangeFind,
             mixin::NonScopedSimpleFind,
             mixin::SimpleFindExt,
