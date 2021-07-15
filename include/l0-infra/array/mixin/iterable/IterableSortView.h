@@ -26,7 +26,7 @@ namespace mixin {
         }
 
         auto end() const -> ConstIterator {
-            return {T::ToThisType(), &T::GetIndices()[T::IndexEnd()]};
+            return {T::ToThisType(), &T::GetIndices()[T::GetIndices().GetNum()]};
         }
 
         auto begin() -> Iterator {
@@ -34,7 +34,7 @@ namespace mixin {
         }
 
         auto end() -> Iterator {
-            return {T::ToThisType(), &T::GetIndices()[T::IndexEnd()]};
+            return {T::ToThisType(), &T::GetIndices()[T::GetIndices().GetNum()]};
         }
     };
 }

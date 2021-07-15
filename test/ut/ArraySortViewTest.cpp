@@ -144,4 +144,18 @@ SCENARIO("SortView Test") {
         REQUIRE(array[2] == 4);
         REQUIRE(array[3] == 1);
     }
+
+    WHEN("Scope view range for") {
+        auto&& view = array.Scope(0x0a).MinElems(2);
+
+        auto n = 0;
+        auto sum = 0;
+        for(auto&& item : view) {
+            n++;
+            sum += item;
+        }
+
+        REQUIRE(n == 2);
+        REQUIRE(sum == 3);
+    }
 }
