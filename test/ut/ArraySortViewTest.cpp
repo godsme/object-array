@@ -122,4 +122,26 @@ SCENARIO("SortView Test") {
         REQUIRE(array[2] == 4);
         REQUIRE(array[3] == 2);
     }
+
+    WHEN("Scope view should be able to sort directly") {
+        auto&& view = array.Scope(0x0a).SortView().DescSort();
+        REQUIRE(view[0] == 2);
+        REQUIRE(view[1] == 1);
+
+        REQUIRE(array[0] == 3);
+        REQUIRE(array[1] == 2);
+        REQUIRE(array[2] == 4);
+        REQUIRE(array[3] == 1);
+    }
+
+    WHEN("Scope view should be able to sort directly") {
+        auto&& view = array.Scope(0x0a).MinElems(2);
+        REQUIRE(view[0] == 1);
+        REQUIRE(view[1] == 2);
+
+        REQUIRE(array[0] == 3);
+        REQUIRE(array[1] == 2);
+        REQUIRE(array[2] == 4);
+        REQUIRE(array[3] == 1);
+    }
 }

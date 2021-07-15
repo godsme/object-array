@@ -29,6 +29,7 @@
 #include <l0-infra/array/mixin/less/ObjectLess.h>
 #include <l0-infra/array/mixin/eq/ObjectEquality.h>
 #include <l0-infra/array/mixin/erase/ClearExporter.h>
+#include <l0-infra/array/mixin/count/FullScopeElemCount.h>
 
 namespace holder::detail {
     template<typename, std::size_t>
@@ -62,6 +63,7 @@ namespace scattered_array {
             mixin::RangeExporter,
             mixin::ByIndexRefAccessor,
             mixin::ScopedElemCount,
+            mixin::FullScopedElemCount,
             mixin::ByIndexAccessor,
             mixin::ScatteredArrayFind,
             mixin::SimpleFindExt,

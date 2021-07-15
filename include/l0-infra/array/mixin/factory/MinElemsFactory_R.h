@@ -15,8 +15,8 @@ namespace mixin::detail {
         using typename T::ThisType;
 
     private:
-        using ConstSortView = SortView::ValueView<ThisType const>;
-        using SortView = SortView::ValueView<ThisType>;
+        using ConstThisSortView = SortView::ValueView<ThisType const>;
+        using ThisSortView = SortView::ValueView<ThisType>;
 
     public:
         using typename T::ObjectType;
@@ -27,28 +27,28 @@ namespace mixin::detail {
         using T::MaxElems;
 
         template<__lEsS_cOnCePt(LESS)>
-        [[nodiscard]] auto MinElems(LESS&& less, SizeType n) const && -> ConstSortView {
-            return ConstSortView{std::move(T::ToThisType())}.MinElems(std::forward<LESS>(less), n);
+        [[nodiscard]] auto MinElems(LESS&& less, SizeType n) const && -> ConstThisSortView {
+            return ConstThisSortView{std::move(T::ToThisType())}.MinElems(std::forward<LESS>(less), n);
         }
 
-        [[nodiscard]] auto MinElems(SizeType n) const && -> ConstSortView {
+        [[nodiscard]] auto MinElems(SizeType n) const && -> ConstThisSortView {
             return std::move(*this).MinElems(std::less<ObjectType>{}, n);
         }
 
-        [[nodiscard]] auto MaxElems(SizeType n) const && -> ConstSortView {
+        [[nodiscard]] auto MaxElems(SizeType n) const && -> ConstThisSortView {
             return std::move(*this).MinElems(std::greater<ObjectType>{}, n);
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        [[nodiscard]] auto MinElems(LESS&& less, SizeType n) && -> SortView {
-            return SortView{std::move(T::ToThisType())}.MinElems(std::forward<LESS>(less), n);
+        [[nodiscard]] auto MinElems(LESS&& less, SizeType n) && -> ThisSortView {
+            return ThisSortView{T::ToThisType()}.MinElems(std::forward<LESS>(less), n);
         }
 
-        [[nodiscard]] auto MinElems(SizeType n) && -> SortView {
+        [[nodiscard]] auto MinElems(SizeType n) && -> ThisSortView {
             return std::move(*this).MinElems(std::less<ObjectType>{}, n);
         }
 
-        [[nodiscard]] auto MaxElems(SizeType n) && -> SortView {
+        [[nodiscard]] auto MaxElems(SizeType n) && -> ThisSortView {
             return std::move(*this).MinElems(std::greater<ObjectType>{}, n);
         }
     };

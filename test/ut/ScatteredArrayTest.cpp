@@ -90,6 +90,8 @@ SCENARIO("ScatteredArray SortObject Test") {
     REQUIRE(foo[0] == 2);
     REQUIRE(foo[1] == 6);
     REQUIRE(foo[2] == 3);
+
+    REQUIRE(!foo.All());
 }
 
 namespace {
