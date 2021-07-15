@@ -47,6 +47,14 @@ IndexedOrderedArray
 因而，``IndexedOrderedArray`` 要比 ``OrderedObjectArray`` 耗费更多的空间（索引所需的空间，以及空间占用位图），
 但在维持有序方面，性能更高。
 
+.. attention::
+
+   事实上，``ObjectArray`` 也有它的索引版本 : ``IndexedArray`` 。它们都是将 ``ScatteredArray`` 当作一个
+   数组空间分配器，并通过索引数组来保持 `Contiguous` 属性。
+
+   这样的做法，可以让需要频繁修改，比如进行 ``Append`` , ``Erase`` , ``Sort`` , ``Rotate`` 等操作，但同时对象
+   的 ``move`` 成本又比较大的数组，具备性能优势。
+
 自动选择
 ------------------
 
