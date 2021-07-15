@@ -1,47 +1,40 @@
 //
-// Created by Darwin Yuan on 2021/6/23.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_ITERABLEARRAYLIKE_H
-#define OBJECT_ARRAY_ITERABLEARRAYLIKE_H
+#ifndef OBJECT_ARRAY_2_480C8FE86F4D471DADE80F708A386E46
+#define OBJECT_ARRAY_2_480C8FE86F4D471DADE80F708A386E46
 
-#include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/iterator/Iterator.h>
+#include <type_traits>
 
 namespace mixin {
-    template<__cOnCePt(SimpleRangedArrayLike) T>
-    class IterableArrayLike : public T {
-        using Self = T;
-
-    protected:
-        using Self::IndexBegin;
-        using Self::IndexEnd;
-
-    public:
+    template<typename T>
+    struct IterableArrayLike : T {
         using typename T::SizeType;
         using typename T::ObjectType;
 
     private:
         using ConstIterator = iterator::Iterator<std::add_const_t<ObjectType>>;
-        using Iterator = iterator::Iterator<ObjectType>;
+        using Iterator      = iterator::Iterator<ObjectType>;
 
     public:
         auto begin() const -> ConstIterator {
-            return {&Self::GetObj(IndexBegin())};
+            return {&T::GetObject(T::IndexBegin())};
         }
 
         auto end() const -> ConstIterator {
-            return {&Self::GetObj(IndexEnd())};
+            return {&T::GetObject(T::IndexEnd())};
         }
 
         auto begin() -> Iterator {
-            return {&Self::GetObj(IndexBegin())};
+            return {&T::GetObject(T::IndexBegin())};
         }
 
         auto end() -> Iterator {
-            return {&Self::GetObj(IndexEnd())};
+            return {&T::GetObject(T::IndexEnd())};
         }
     };
 }
 
-#endif //OBJECT_ARRAY_ITERABLEARRAYLIKE_H
+#endif //OBJECT_ARRAY_2_480C8FE86F4D471DADE80F708A386E46

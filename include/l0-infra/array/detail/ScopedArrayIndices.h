@@ -1,23 +1,28 @@
 //
-// Created by Darwin Yuan on 2021/6/27.
+// Created by Darwin Yuan on 2021/7/12.
 //
 
-#ifndef OBJECT_ARRAY_SCOPEDARRAYINDICES_H
-#define OBJECT_ARRAY_SCOPEDARRAYINDICES_H
+#ifndef OBJECT_ARRAY_2_C65FF96A7CA3465D97FA2B18B68E39C9
+#define OBJECT_ARRAY_2_C65FF96A7CA3465D97FA2B18B68E39C9
 
 #include <l0-infra/array/detail/ArrayIndices.h>
 #include <l0-infra/array/iterator/IndicesRandomIterator.h>
-#include <l0-infra/array/concept/ScopedArrayLike.h>
 
 namespace detail {
-    template<__cOnCePt(SimpleScopedRangedArrayLike) ARRAY>
+    template<typename ARRAY>
     struct ScopedArrayIndices {
         constexpr static auto MAX_SIZE = ARRAY::MAX_SIZE;
         using SizeType = typename ARRAY::SizeType;
         using ObjectType = typename ARRAY::ObjectType;
 
-        ScopedArrayIndices(ARRAY& array) : array{array} {
-            indices.InitWithRange(array, array.GetScope());
+        ScopedArrayIndices(ARRAY& array)
+            : array{array}
+            , indices{array, array.GetScope()} {
+        }
+
+        ScopedArrayIndices(ARRAY& array, SizeType from, SizeType until, typename ARRAY::BitMap scope)
+                : array{array}
+                , indices{from, until, scope} {
         }
 
         auto begin() -> iterator::IndicesRandomIterator<ARRAY> {
@@ -33,9 +38,9 @@ namespace detail {
         }
 
     private:
-        ::detail::ArrayIndices<MAX_SIZE> indices;
+        ::array_indices::Array<MAX_SIZE> indices;
         ARRAY& array;
     };
 }
 
-#endif //OBJECT_ARRAY_SCOPEDARRAYINDICES_H
+#endif //OBJECT_ARRAY_2_C65FF96A7CA3465D97FA2B18B68E39C9

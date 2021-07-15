@@ -1,38 +1,24 @@
 //
-// Created by Darwin Yuan on 2021/6/24.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_SIMPLEFOREACH_H
-#define OBJECT_ARRAY_SIMPLEFOREACH_H
+#ifndef OBJECT_ARRAY_2_1DF52766AC564284900237D80EE66C79
+#define OBJECT_ARRAY_2_1DF52766AC564284900237D80EE66C79
 
-#include <l0-infra/array/mixin/detail/ForEachCodeBlock.h>
-#include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/concept/Op.h>
-#include <l0-infra/array/concept/ElemVisitor.h>
 
 namespace mixin {
-    template<__cOnCePt(OpVisitable) T>
-    class SimpleForEach : public T {
-        using Self = T;
-
-    public:
-        using typename Self::SizeType;
-        using typename Self::ObjectType;
-
-    public:
-        using Self::Visit;
-        using Self::IndexBegin;
-        using Self::IndexEnd;
+    template<typename T>
+    struct SimpleForEach : T {
+        using typename T::SizeType;
+        using typename T::ObjectType;
 
     public:
         template<bool TO_NON_CONST, __oP_cOnCePt(OP)>
         auto DoForEach(OP &&op) const -> auto {
-            for (auto i = IndexBegin(); i < IndexEnd(); i++) {
-                __vIsIt_CoDe_BlOcK__
-            }
-            __fOrEaCh_SuCcEsS_rEtUrN__
+            return T::template RangeForEach<TO_NON_CONST>(0, T::Num(), std::forward<OP>(op));
         }
     };
 }
 
-#endif //OBJECT_ARRAY_SIMPLEFOREACH_H
+#endif //OBJECT_ARRAY_2_1DF52766AC564284900237D80EE66C79

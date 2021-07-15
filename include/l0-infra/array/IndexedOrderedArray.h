@@ -1,88 +1,46 @@
 //
-// Created by Darwin Yuan on 2021/7/3.
+// Created by Darwin Yuan on 2021/7/12.
 //
 
-#ifndef OBJECT_ARRAY_INDEXEDORDEREDARRAY_H
-#define OBJECT_ARRAY_INDEXEDORDEREDARRAY_H
+#ifndef OBJECT_ARRAY_2_D64C4CE0528646E29E6ACAE2E6D1B7A3
+#define OBJECT_ARRAY_2_D64C4CE0528646E29E6ACAE2E6D1B7A3
 
-#include <l0-infra/array/holder/IndexedOrderedArrayDataHolder.h>
-#include <l0-infra/array/mixin/array_like/ContinuousArrayLike.h>
-#include <l0-infra/array/mixin/array_like/RangedArray.h>
-#include <l0-infra/array/mixin/array_like/ObjectIndex.h>
-#include <l0-infra/array/mixin/count/ArrayEquality.h>
-#include <l0-infra/array/mixin/append/AppendExt.h>
-#include <l0-infra/array/mixin/append/IndexedOrderedAppend.h>
-#include <l0-infra/array/mixin/minmax/ScopedMinElem.h>
-#include <l0-infra/array/mixin/minmax/SimpleMinElem.h>
-#include <l0-infra/array/mixin/minmax/SimpleMinElemExt.h>
-#include <l0-infra/array/mixin/minmax/ScopedMinElemExt.h>
-#include <l0-infra/array/mixin/find/ScopedFindExt.h>
-#include <l0-infra/array/mixin/foreach/ScopedForEachExt.h>
-#include <l0-infra/array/mixin/factory/RangedViewFactory.h>
-#include <l0-infra/array/mixin/detail/___public_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/detail/___mutable_mixin_delimiter___.h>
-#include <l0-infra/array/mixin/erase/SimpleErase.h>
-#include <l0-infra/array/mixin/erase/IndexedOrderedDoErase.h>
-#include <l0-infra/array/mixin/erase/SimpleRangedClear.h>
-#include <l0-infra/array/mixin/erase/ScopedCleanUp.h>
-#include <l0-infra/array/mixin/erase/EraseExt.h>
-#include <l0-infra/array/mixin/replace/SimpleReplace.h>
-#include <l0-infra/array/mixin/replace/IndexedOrderedDoReplace.h>
-#include <l0-infra/array/mixin/array_like/IndexedObjectIndex.h>
-#include <l0-infra/array/mixin/factory/OrderedRangedViewFactory.h>
+#include <l0-infra/array/detail/IndexedArray.h>
+#include <l0-infra/array/holder/IndexedOrderedArrayHolder.h>
+#include <l0-infra/array/ScatteredArray.h>
 
-namespace detail {
-    using IndexedOrderedArrayMixins = ::mixin::Mixins<
-            mixin::IndexedOrderedAppend,
-            mixin::IndexedOrderedDoReplace,
-            mixin::ArrayLikeRangeSort,
-            mixin::___ranged_array_tag___,
-            mixin::IndexedObjectIndex,
-            mixin::ArrayElemVisit,
-            mixin::ScopedFind,
-            mixin::SimpleForEach,
-            mixin::ScopedForEach,
-            mixin::IndexedOrderedDoErase,
-            mixin::SimpleRangedClear,
-            mixin::___public_mixin_delimiter___,
-            mixin::IndexedRefAccessor,
-            mixin::ByIndexAccessor,
-            mixin::RangedElemCount,
-            mixin::IterableIndexBasedArray,
-            mixin::NonScopedSimpleFind,
-            mixin::SimpleFindExt,
-            mixin::SimpleForEachExt,
-            mixin::ArrayEquality,
-            mixin::ScopedFindExt,
-            mixin::ScopedForEachExt,
-            mixin::RangedViewFactory,
-            mixin::ScopedViewFactory,
-            mixin::WithIndexViewFactory,
-            mixin::OrderedRangedViewFactory,
-            mixin::___mutable_mixin_delimiter___,
-            mixin::SimpleAppend,
-            mixin::AppendExt,
-            mixin::SimpleReplace,
-            mixin::ReplaceExt,
-            mixin::RangedClearExt,
-            mixin::SimpleErase,
-            mixin::EraseExt,
-            mixin::ScopedCleanUp>;
+namespace indexed_ordered_array {
+    template<typename ARRAY, typename LESS>
+    class Array : public indexed_array::Public::Compose<holder::IndexedOrderedArrayHolder<ARRAY, LESS>, indexed_array::Private, Array<ARRAY, LESS>> {
+        using Parent = indexed_array::Public::Compose<holder::IndexedOrderedArrayHolder<ARRAY, LESS>, indexed_array::Private, Array<ARRAY, LESS>>;
 
-    template<typename T, std::size_t MAX_NUM, typename COMPARE>
-    using IndexedOrderedArray = detail::IndexedOrderedArrayMixins::Compose<holder::IndexedOrderedArrayHolder<T, MAX_NUM, COMPARE>>;
+    public:
+        using typename Parent::ObjectType;
+
+    public:
+        using Parent::Parent;
+        Array() {}
+        Array(LESS const& less) : Parent{less} {}
+        Array(LESS const& less, std::initializer_list<ObjectType> l) : Parent{less} {
+            auto n = 0;
+            for(auto i = l.begin(); i < l.end(); ++i) {
+                if(n++ == Parent::MAX_SIZE) break;
+                Parent::Append(*i);
+            }
+        }
+
+        Array(std::initializer_list<ObjectType> l) : Array{LESS{}, l} {}
+
+    private:
+        template<typename>
+        friend class mixin::ViewObjectLess;
+
+        template<typename>
+        friend class mixin::ViewObjectEquality;
+    };
 }
 
-template<typename T, std::size_t MAX_NUM, typename COMPARE = std::less<T>>
-struct IndexedOrderedArray : detail::IndexedOrderedArray<T, MAX_NUM, COMPARE> {
-    using Parent = detail::IndexedOrderedArray<T, MAX_NUM, COMPARE>;
-    using Parent::Parent;
+template<typename OBJ, std::size_t MAX_NUM, typename LESS = std::less<OBJ>>
+using IndexedOrderedArray = indexed_ordered_array::Array<ScatteredArray<OBJ, MAX_NUM>, LESS>;
 
-    IndexedOrderedArray(std::initializer_list<T> l) {
-        for(auto i = l.begin(); i != l.end(); ++i) {
-            Parent::Append(*i);
-        }
-    }
-};
-
-#endif //OBJECT_ARRAY_INDEXEDORDEREDARRAY_H
+#endif //OBJECT_ARRAY_2_D64C4CE0528646E29E6ACAE2E6D1B7A3

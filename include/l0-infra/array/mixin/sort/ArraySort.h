@@ -1,72 +1,34 @@
 //
-// Created by Darwin Yuan on 2021/6/25.
+// Created by Darwin Yuan on 2021/7/11.
 //
 
-#ifndef OBJECT_ARRAY_ARRAYSORT_H
-#define OBJECT_ARRAY_ARRAYSORT_H
+#ifndef OBJECT_ARRAY_2_D8DD85B683CB43ADAF2966D7DDBF1C41
+#define OBJECT_ARRAY_2_D8DD85B683CB43ADAF2966D7DDBF1C41
 
 #include <l0-infra/array/concept/Less.h>
-#include <l0-infra/array/view/OrderedView.h>
-#include <type_traits>
-#include <algorithm>
 
 namespace mixin {
     template<typename T>
     struct ArraySort : T {
-        using Self = T;
-
-    public:
-        using typename Self::ObjectType;
-        using typename Self::SizeType;
+        using typename T::ObjectType;
+        using typename T::SizeType;
 
     protected:
-        using Self::IndexBegin;
-        using Self::IndexEnd;
-        using typename Self::Owner;
-
-    public:
-        using Self::DoRangePartialSort;
-        using Self::RangeSort;
-        using Self::RangePartialSort;
-        using Self::RangeStableSort;
-
         template<__lEsS_cOnCePt(LESS)>
-        auto Sort(LESS&& less) && -> void {
-            RangeSort(IndexBegin(), IndexEnd(), std::forward<LESS>(less));
+        auto DoSort(LESS&& less) -> void {
+            T::Unsafe_RangeSort(0, T::Num(), std::forward<LESS>(less));
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto Sort(LESS&& less) & -> decltype(auto) {
-            std::move(*this).Sort(std::forward<LESS>(less));
-            return reinterpret_cast<Owner&>(*this);
+        auto DoStableSort(LESS&& less) -> void {
+            T::Unsafe_RangeStableSort(0, T::Num(), std::forward<LESS>(less));
         }
 
         template<__lEsS_cOnCePt(LESS)>
-        auto StableSort(LESS&& less) && -> void {
-            RangeStableSort(IndexBegin(), IndexBegin(), std::forward<LESS>(less));
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto StableSort(LESS&& less) & -> decltype(auto) {
-            std::move(*this).StableSort(std::forward<LESS>(less));
-            return reinterpret_cast<Owner&>(*this);
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto DoPartialSort(LESS&& less, SizeType n) & -> SizeType {
-            return DoRangePartialSort(IndexBegin(), IndexEnd(), std::forward<LESS>(less), n);
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) & -> auto {
-            return RangePartialSort(IndexBegin(), IndexEnd(), std::forward<LESS>(less), n);
-        }
-
-        template<__lEsS_cOnCePt(LESS)>
-        auto PartialSort(LESS&& less, SizeType n) && -> void {
-            DoPartialSort(std::forward<LESS>(less), n);
+        auto DoPartialSort(LESS&& less, SizeType n) -> SizeType {
+            return T::Unsafe_RangePartialSort(0, T::Num(), std::forward<LESS>(less), n);
         }
     };
 }
 
-#endif //OBJECT_ARRAY_ARRAYSORT_H
+#endif //OBJECT_ARRAY_2_D8DD85B683CB43ADAF2966D7DDBF1C41

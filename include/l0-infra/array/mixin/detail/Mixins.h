@@ -1,15 +1,16 @@
 //
-// Created by Darwin Yuan on 2021/6/21.
+// Created by Darwin Yuan on 2021/7/9.
 //
 
-#ifndef OBJECT_ARRAY_MIXINS_H
-#define OBJECT_ARRAY_MIXINS_H
+#ifndef OBJECT_ARRAY_2_MIXINS_H
+#define OBJECT_ARRAY_2_MIXINS_H
 
 #include <l0-infra/base/DeduceOffsetType.h>
 #include <l0-infra/base/BitSet.h>
 #include <l0-infra/base/detail/DeduceIntOptional.h>
 #include <l0-infra/array/detail/ArrayOffset.h>
 #include <l0-infra/array/detail/ArrayScope.h>
+#include <l0-infra/array/detail/CRTP.h>
 #include <type_traits>
 
 namespace mixin::detail {
@@ -45,29 +46,46 @@ namespace mixin::detail {
         using Type = typename DoCombineMixins<BASE, std::is_final_v<H<BASE>>, H, MIXINS...>::Type;
     };
 
-    template<typename T, typename OWNER>
-    struct DataHolderInterface : T::Interface {
+    template<typename T, typename THIS_TYPE>
+    struct DataHolderInfo {
+        dEcL_tHiS(T);
+        using ThisType = THIS_TYPE;
         using DataHolder = T;
-        using Owner = OWNER;
+        using ObjectType = typename DataHolder::ObjectType;
         using SizeType = typename DataHolder::SizeType;
         constexpr static SizeType MAX_SIZE = DataHolder::MAX_SIZE;
         constexpr static bool IS_ORDERED = T::IS_ORDERED;
         constexpr static bool IS_CONST = T::IS_CONST;
         using BitMap = ::detail::ArrayScope<MAX_SIZE>;
-        using Maybe = ::detail::DeduceIntOptional_t<MAX_SIZE>;
-
+        using Maybe = ::detail::DeduceIntOpt_t<MAX_SIZE>;
         using OffsetType = ::detail::ArrayOffset<DeduceOffsetType_t<MAX_SIZE>, SizeType>;
+
+        auto ToThisType() -> ThisType& { return reinterpret_cast<ThisType&>(*this); }
+        auto ToThisType() const -> ThisType const& { return reinterpret_cast<ThisType const&>(*this); }
     };
+
+    template<typename PRIVATE>
+    struct ___public_mixin_delimiter___ : protected PRIVATE {};
 }
 
 namespace mixin {
     template<template<typename> typename ... MIXINS>
-    struct Mixins {
-        template<typename HOLDER>
-        struct Compose : HOLDER, detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<HOLDER, Compose<HOLDER>>> {
+    struct Private {
+        template<typename HOLDER, typename OWNER>
+        using Type = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInfo<HOLDER, OWNER>>;
+    };
+
+    template<template<typename> typename ... MIXINS>
+    class Public {
+        template<typename HOLDER, typename PRIVATE, typename OWNER>
+        using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::___public_mixin_delimiter___<typename PRIVATE::template Type<HOLDER, OWNER>>>;
+
+    public:
+        template<typename HOLDER, typename PRIVATE, typename OWNER>
+        struct Compose : HOLDER, Mixins<HOLDER, PRIVATE, OWNER> {
         public:
             using Holder = HOLDER;
-            using Mixins = typename detail::CombineMixin<MIXINS...>::template Type<detail::DataHolderInterface<HOLDER, Compose<HOLDER>>>;
+            using Mixins = Mixins<HOLDER, PRIVATE, OWNER>;
 
         private:
             static auto __sEcReAtE_vAliD_cHeCkEr() { static_assert(sizeof(HOLDER) == sizeof(Compose)); }
@@ -81,20 +99,10 @@ namespace mixin {
             using typename Mixins::Maybe;
 
             constexpr static auto MAX_SIZE = Mixins::MAX_SIZE;
+            constexpr static auto IS_CONST = Mixins::IS_CONST;
+            constexpr static auto IS_ORDERED = Mixins::IS_ORDERED;
         };
-
-        template<typename T>
-        using Mixin = typename detail::CombineMixin<MIXINS...>::template Type<T>;
-
-        template<template<typename> typename ... MORE_MIXINS>
-        using Extends = Mixins<MIXINS..., MORE_MIXINS...>;
-
-        template<typename LHS>
-        using Prepend = typename LHS::template Extends<MIXINS...>;
-
-        template<typename RHS>
-        using Concat = typename RHS::template Prepend<Mixins<MIXINS...>>;
     };
 }
 
-#endif //OBJECT_ARRAY_MIXINS_H
+#endif //OBJECT_ARRAY_2_MIXINS_H

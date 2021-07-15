@@ -1,25 +1,22 @@
 //
-// Created by Darwin Yuan on 2021/6/20.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_SIMPLEFINDEXT_H
-#define OBJECT_ARRAY_SIMPLEFINDEXT_H
+#ifndef OBJECT_ARRAY_2_96C636C448354B638950FC9C2B2D64E7
+#define OBJECT_ARRAY_2_96C636C448354B638950FC9C2B2D64E7
 
-#include <l0-infra/array/concept/SimpleFind.h>
 #include <l0-infra/array/concept/Pred.h>
 #include <l0-infra/base/InvokeConstMethod.h>
 
 namespace mixin {
-    template<__cOnCePt(SimpleFind) T>
-    class SimpleFindExt : public T {
-        using Self = T;
-    public:
+    template<typename T>
+    struct SimpleFindExt : T {
         using typename T::ObjectType;
         using typename T::SizeType;
         using typename T::Maybe;
 
-        using Self::Find;
-        using Self::FindIndex;
+        using T::FindIndex;
+        using T::Find;
 
         template<__pRed_CoNcEpT(PRED)>
         auto Find(PRED &&pred) -> ObjectType* {
@@ -32,7 +29,7 @@ namespace mixin {
         }
 
         auto Find(ObjectType const& obj) const -> ObjectType const* {
-            return Self::template Find([&](auto&& elem) { return elem == obj;});
+            return Find(T::GetEqPred(obj));
         }
 
         auto Find(ObjectType const& obj) -> ObjectType* {
@@ -40,7 +37,7 @@ namespace mixin {
         }
 
         auto FindIndex(ObjectType const& obj) const -> Maybe {
-            return Self::template FindIndex([&](auto&& elem) { return elem == obj;});
+            return T::FindIndex(T::GetEqPred(obj));
         }
 
         auto FindIndex(ObjectType const& obj) -> Maybe {
@@ -53,9 +50,9 @@ namespace mixin {
         }
 
         auto Exists(ObjectType const &obj) const -> bool {
-            return Exists([&](auto&& elem) { return obj == elem; });
+            return Exists(T::GetEqPred(obj));
         }
     };
 }
 
-#endif //OBJECT_ARRAY_SIMPLEFINDEXT_H
+#endif //OBJECT_ARRAY_2_96C636C448354B638950FC9C2B2D64E7

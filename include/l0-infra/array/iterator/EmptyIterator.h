@@ -1,14 +1,12 @@
 //
-// Created by Darwin Yuan on 2021/6/23.
+// Created by Darwin Yuan on 2021/7/12.
 //
 
-#ifndef OBJECT_ARRAY_EMPTYITERATOR_H
-#define OBJECT_ARRAY_EMPTYITERATOR_H
-
-#include <l0-infra/array/iterator/Iterator.h>
+#ifndef OBJECT_ARRAY_2_5A9EDE87842E41249457017F08892900
+#define OBJECT_ARRAY_2_5A9EDE87842E41249457017F08892900
 
 namespace iterator {
     struct EmptyIterator {};
 }
 
-#endif //OBJECT_ARRAY_EMPTYITERATOR_H
+#endif //OBJECT_ARRAY_2_5A9EDE87842E41249457017F08892900

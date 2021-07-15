@@ -1,27 +1,25 @@
 //
-// Created by Darwin Yuan on 2021/6/29.
+// Created by Darwin Yuan on 2021/7/11.
 //
 
-#ifndef OBJECT_ARRAY_APPENDEXT_H
-#define OBJECT_ARRAY_APPENDEXT_H
+#ifndef OBJECT_ARRAY_2_46DC069C4A394651B62260CC019122FC
+#define OBJECT_ARRAY_2_46DC069C4A394651B62260CC019122FC
 
 #include <l0-infra/array/concept/Pred.h>
 
 namespace mixin {
     template<typename T>
-    class AppendExt : public T {
-        using Self = T;
+    struct AppendExt : T {
+        using typename T::ObjectType;
 
     public:
-        using typename Self::ObjectType;
-
-    public:
-        using Self::Append;
+        using T::Append;
+        using T::Append_I;
 
         template<__sImPlE_pReD_cOnCePt(PRED), typename ... ARGS>
         auto FindOrAppend(PRED &&pred, ARGS&& ... args) -> ObjectType * {
-            auto *found = Self::Find(std::forward<PRED>(pred));
-            return found != nullptr ? found : Self::Append(std::forward<ARGS>(args)...);
+            auto *found = T::Find(std::forward<PRED>(pred));
+            return found != nullptr ? found : T::Append(std::forward<ARGS>(args)...);
         }
 
         auto FindOrAppend(ObjectType const& obj) -> ObjectType * {
@@ -30,4 +28,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_APPENDEXT_H
+#endif //OBJECT_ARRAY_2_46DC069C4A394651B62260CC019122FC

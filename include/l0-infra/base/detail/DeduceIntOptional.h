@@ -9,7 +9,7 @@
 
 namespace detail {
     template<std::size_t MAX_SIZE>
-    auto DeduceBitsType() -> auto {
+    auto DeduceIntOptSizeType() -> auto {
         static_assert(MAX_SIZE < (std::numeric_limits<std::size_t>::max()));
         if constexpr(MAX_SIZE < (std::numeric_limits<uint8_t>::max())) {
             return uint8_t{};
@@ -23,7 +23,10 @@ namespace detail {
     }
 
     template<std::size_t MAX_SIZE>
-    using DeduceIntOptional_t = IntOpt<decltype(DeduceBitsType<MAX_SIZE>())>;
+    using DeduceIntOptSizeType_t = decltype(DeduceIntOptSizeType<MAX_SIZE>());
+
+    template<std::size_t MAX_SIZE>
+    using DeduceIntOpt_t = IntOpt<DeduceIntOptSizeType_t<MAX_SIZE>>;
 }
 
 #endif //OBJECT_ARRAY_DEDUCEINTOPTIONAL_H

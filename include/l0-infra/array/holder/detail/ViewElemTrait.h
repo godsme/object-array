@@ -1,9 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/6/22.
+// Created by Darwin Yuan on 2021/7/13.
 //
 
-#ifndef OBJECT_ARRAY_VIEWELEMTRAIT_H
-#define OBJECT_ARRAY_VIEWELEMTRAIT_H
+#ifndef OBJECT_ARRAY_2_B75C48D2C4E14687A0F423B992F8FD1B
+#define OBJECT_ARRAY_2_B75C48D2C4E14687A0F423B992F8FD1B
 
 #include <type_traits>
 
@@ -64,4 +64,4 @@ namespace holder::detail {
     using ViewElemTrait_T = typename ViewElemTrait<OBJ, ELEM>::Type;
 }
 
-#endif //OBJECT_ARRAY_VIEWELEMTRAIT_H
+#endif //OBJECT_ARRAY_2_B75C48D2C4E14687A0F423B992F8FD1B

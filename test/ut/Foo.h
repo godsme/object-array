@@ -1,9 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/6/22.
+// Created by Darwin Yuan on 2021/7/14.
 //
 
-#ifndef OBJECT_ARRAY_FOO_H
-#define OBJECT_ARRAY_FOO_H
+#ifndef OBJECT_ARRAY_2_4ADE1F3272E74BD1ACE16F8066CB79DE
+#define OBJECT_ARRAY_2_4ADE1F3272E74BD1ACE16F8066CB79DE
 
 #include <l0-infra/base/BitSet.h>
 #include <l0-infra/base/IntOpt.h>
@@ -52,7 +52,7 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-        constexpr static bool ORDERED = false;
+        constexpr static bool IS_ORDERED = false;
         constexpr static bool IS_CONST = false;
 
         using Interface = FooInterface<Foo>;
@@ -66,16 +66,20 @@ namespace ut {
         }
 
         template<typename ... ARGS>
-        auto DoReplace(SizeType n, ARGS&& ... args) -> ObjectType* {
+        auto Replace(SizeType n, ARGS&& ... args) -> ObjectType* {
             elems[n] = int(std::forward<ARGS>(args)...);
             return elems + n;
         }
 
         template<typename ... ARGS>
-        auto DoAppend(ARGS&& ... args) -> ObjectType* {
+        auto Append(ARGS&& ... args) -> ObjectType* {
             if(num == MAX_SIZE) return nullptr;
             elems[num++] = int(std::forward<ARGS>(args)...);
             return elems + num - 1;
+        }
+
+        auto GetEq() const -> auto {
+            return std::equal_to<int>{};
         }
 
     public:
@@ -95,8 +99,8 @@ namespace ut {
         using ObjectType = int;
 
         constexpr static SizeType MAX_SIZE = 10;
-        constexpr static bool ORDERED = false;
-        constexpr static bool CONST = false;
+        constexpr static bool IS_ORDERED = false;
+        constexpr static bool IS_CONST = false;
         using Interface = ScopedFooInterface<ScopedFoo>;
 
     public:
@@ -119,4 +123,4 @@ namespace ut {
     };
 }
 
-#endif //OBJECT_ARRAY_FOO_H
+#endif //OBJECT_ARRAY_2_4ADE1F3272E74BD1ACE16F8066CB79DE

@@ -12,22 +12,6 @@
 template<typename T>
 struct Placement {
     Placement() = default;
-
-    template<typename ARG, typename ... ARGS>
-    Placement(ARG&& arg, ARGS&& ... args) {
-        if constexpr (std::is_aggregate_v<T>) {
-            new (&storage) T{ std::forward<ARG>(arg), std::forward<ARGS>(args)... };
-        } else {
-            new (&storage) T( std::forward<ARG>(arg), std::forward<ARGS>(args)... );
-        }
-    }
-
-    Placement(Placement&&) = default;
-    Placement(Placement const&) = default;
-
-    auto operator=(Placement const&) -> Placement& = default;
-    auto operator=(Placement&&) -> Placement& = default;
-
     ~Placement() = default;
 
     template<typename ... ARGS>

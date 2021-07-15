@@ -1,13 +1,11 @@
 //
-// Created by Darwin Yuan on 2021/6/23.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_ITERABLEWITHINDEXARRAYLIKE_H
-#define OBJECT_ARRAY_ITERABLEWITHINDEXARRAYLIKE_H
+#ifndef OBJECT_ARRAY_2_3D4835B55341430888211C9DC9022354
+#define OBJECT_ARRAY_2_3D4835B55341430888211C9DC9022354
 
-#include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/iterator/WithIndexIterator.h>
-#include <l0-infra/array/iterator/Iterator.h>
 
 namespace mixin {
     template<typename T>
@@ -16,29 +14,24 @@ namespace mixin {
     public:
         using typename T::SizeType;
         using typename T::ObjectType;
-        using typename T::ArrayType;
-
-        using Self::IndexBegin;
-        using Self::IndexEnd;
-        using Self::GetArray;
 
     public:
         auto begin() const -> auto {
-            return iterator::WithIndexIterator{GetArray(), IndexBegin()};
+            return iterator::WithIndexIterator{T::GetArray(), T::IndexBegin()};
         }
 
         auto end() const -> auto {
-            return iterator::WithIndexIterator{GetArray(), IndexEnd()};
+            return iterator::WithIndexIterator{T::GetArray(), T::IndexEnd()};
         }
 
         auto begin() -> auto {
-            return iterator::WithIndexIterator{GetArray(), IndexBegin()};
+            return iterator::WithIndexIterator{T::GetArray(), T::IndexBegin()};
         }
 
         auto end() -> auto {
-            return iterator::WithIndexIterator{GetArray(), IndexEnd()};
+            return iterator::WithIndexIterator{T::GetArray(), T::IndexEnd()};
         }
     };
 }
 
-#endif //OBJECT_ARRAY_ITERABLEWITHINDEXARRAYLIKE_H
+#endif //OBJECT_ARRAY_2_3D4835B55341430888211C9DC9022354

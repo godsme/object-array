@@ -1,9 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/6/27.
+// Created by Darwin Yuan on 2021/7/12.
 //
 
-#ifndef OBJECT_ARRAY_INDICESRANDOMITERATOR_H
-#define OBJECT_ARRAY_INDICESRANDOMITERATOR_H
+#ifndef OBJECT_ARRAY_2_906E3003F8C0430E9059A29A73E37BC2
+#define OBJECT_ARRAY_2_906E3003F8C0430E9059A29A73E37BC2
 
 #include <cstddef>
 #include <iterator>
@@ -74,11 +74,11 @@ namespace iterator {
         }
 
         auto operator*() -> ObjectType& {
-            return array.GetObj(*p);
+            return array.GetObject(*p);
         }
 
         auto operator[](SizeType n) -> ObjectType& {
-            return array.GetObj(*(p + n));
+            return array.GetObject(*(p + n));
         }
 
         auto operator==(IndicesRandomIterator const& rhs) const -> bool {
@@ -106,4 +106,4 @@ namespace iterator {
     };
 }
 
-#endif //OBJECT_ARRAY_INDICESRANDOMITERATOR_H
+#endif //OBJECT_ARRAY_2_906E3003F8C0430E9059A29A73E37BC2

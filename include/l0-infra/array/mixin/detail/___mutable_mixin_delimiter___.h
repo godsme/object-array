@@ -1,9 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/6/29.
+// Created by Darwin Yuan on 2021/7/9.
 //
 
-#ifndef OBJECT_ARRAY____MUTABLE_MIXIN_DELIMITER____H
-#define OBJECT_ARRAY____MUTABLE_MIXIN_DELIMITER____H
+#ifndef OBJECT_ARRAY_2____MUTABLE_MIXIN_DELIMITER____H
+#define OBJECT_ARRAY_2____MUTABLE_MIXIN_DELIMITER____H
 
 namespace mixin {
     template<typename T>
@@ -12,4 +12,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY____MUTABLE_MIXIN_DELIMITER____H
+#endif //OBJECT_ARRAY_2____MUTABLE_MIXIN_DELIMITER____H

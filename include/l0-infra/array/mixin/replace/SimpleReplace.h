@@ -1,31 +1,28 @@
 //
-// Created by Darwin Yuan on 2021/7/3.
+// Created by Darwin Yuan on 2021/7/13.
 //
 
-#ifndef OBJECT_ARRAY_SIMPLEREPLACE_H
-#define OBJECT_ARRAY_SIMPLEREPLACE_H
-
-#include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
-#include <l0-infra/array/mixin/erase/SimpleDoErase.h>
+#ifndef OBJECT_ARRAY_2_34092CFC21414C5A84BD400DBA016887
+#define OBJECT_ARRAY_2_34092CFC21414C5A84BD400DBA016887
 
 namespace mixin {
     template<typename T>
-    class SimpleReplace : public T {
-        using Self = T;
-
-    public:
-        using typename T::SizeType;
-        using typename T::OffsetType;
+    struct SimpleReplace : T {
         using typename T::ObjectType;
+        using typename T::SizeType;
+        using typename T::Maybe;
 
     public:
         template<typename ... ARGS>
-        auto Replace(OffsetType i, ARGS &&... args) -> ObjectType * {
-            auto offset = i.ToOffset(Self::IndexEnd() - Self::IndexBegin());
-            return offset < 0 ? nullptr : Self::DoReplace(SizeType(offset), std::forward<ARGS>(args)...);
+        auto Replace(SizeType n, ARGS &&... args) -> ObjectType * {
+            return (n < T::IndexEnd()) ? T::Unsafe_Replace(n, std::forward<ARGS>(args)...) : nullptr;
+        }
+
+        template<typename ... ARGS>
+        auto Replace_I(SizeType n, ARGS &&... args) -> Maybe {
+            return Replace(n, std::forward<ARGS>(args)...) == nullptr ? std::nullopt : Maybe(n);
         }
     };
 }
 
-#endif //OBJECT_ARRAY_SIMPLEREPLACE_H
+#endif //OBJECT_ARRAY_2_34092CFC21414C5A84BD400DBA016887

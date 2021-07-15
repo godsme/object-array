@@ -1,45 +1,42 @@
 //
-// Created by Darwin Yuan on 2021/7/4.
+// Created by Darwin Yuan on 2021/7/12.
 //
 
-#ifndef OBJECT_ARRAY_ITERABLEINDEXBASEDARRAY_H
-#define OBJECT_ARRAY_ITERABLEINDEXBASEDARRAY_H
+#ifndef OBJECT_ARRAY_2_D8A03C0EDDF049359E9810874658B1B4
+#define OBJECT_ARRAY_2_D8A03C0EDDF049359E9810874658B1B4
 
 #include <l0-infra/array/iterator/IndexBasedIterator.h>
 
 namespace mixin {
     template<typename T>
-    class IterableIndexBasedArray : public T {
-        using Self = T;
-
-    protected:
-        using typename Self::RangedArrayLike;
-
-    public:
+    struct IterableIndexBasedArray : T {
         using typename T::SizeType;
         using typename T::ObjectType;
 
+    protected:
+        using typename T::ThisType;
+
     private:
-        using ConstIterator = iterator::IndexBasedIterator<RangedArrayLike, std::add_const_t<ObjectType>>;
-        using Iterator = iterator::IndexBasedIterator<RangedArrayLike, ObjectType>;
+        using ConstIterator = iterator::IndicesBasedIndexIterator<ThisType const, std::add_const_t<ObjectType>, SizeType>;
+        using Iterator = iterator::IndicesBasedIndexIterator<ThisType, ObjectType, SizeType>;
 
     public:
         auto begin() const -> ConstIterator {
-            return {*this, Self::IndexBegin()};
+            return {T::ToThisType(), T::IndexBegin()};
         }
 
         auto end() const -> ConstIterator {
-            return {*this, Self::IndexEnd()};
+            return {T::ToThisType(), T::IndexEnd()};
         }
 
         auto begin() -> Iterator {
-            return {*this, Self::IndexBegin()};
+            return {T::ToThisType(), T::IndexBegin()};
         }
 
         auto end() -> Iterator {
-            return {*this, Self::IndexEnd()};
+            return {T::ToThisType(), T::IndexEnd()};
         }
     };
 }
 
-#endif //OBJECT_ARRAY_ITERABLEINDEXBASEDARRAY_H
+#endif //OBJECT_ARRAY_2_D8A03C0EDDF049359E9810874658B1B4

@@ -1,31 +1,33 @@
 //
-// Created by Darwin Yuan on 2021/6/23.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_WITHINDEXVIEWFACTORY_H
-#define OBJECT_ARRAY_WITHINDEXVIEWFACTORY_H
+#ifndef OBJECT_ARRAY_2_9FAADE91699547F4B58CF7144AE05449
+#define OBJECT_ARRAY_2_9FAADE91699547F4B58CF7144AE05449
 
-#include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/view/WithIndexView.h>
 
-namespace mixin {
-    template<__cOnCePt(SimpleRangedArrayLike) T>
-    class WithIndexViewFactory : public T {
-    protected:
-        using typename T::RangedArrayLike;
-        using T::IS_ORDERED;
+namespace mixin::detail {
+    template<typename T, typename VIEW>
+    struct WithIndexViewFactory : T {
+        using typename T::ThisType;
 
-    public:
-        auto WithIndex() & -> view::IndexedView::RefView<RangedArrayLike, IS_ORDERED> {
-            return {reinterpret_cast<RangedArrayLike&>(*this)};
+        auto WithIndex() & -> typename VIEW::template RefView<ThisType> {
+            return {T::ToThisType()};
         }
-        auto WithIndex() const & -> view::IndexedView::RefView<RangedArrayLike const, IS_ORDERED> {
-            return {reinterpret_cast<RangedArrayLike const&>(*this)};
+
+        auto WithIndex() const & -> typename VIEW::template RefView<ThisType const> {
+            return {T::ToThisType()};
         }
-        // R-Value WithIndex is not allowed.
-        auto WithIndex() && -> void = delete;
-        auto WithIndex() const && -> void = delete;
+
+        auto WithIndex() && = delete;
+        auto WithIndex() const && = delete;
     };
 }
 
-#endif //OBJECT_ARRAY_WITHINDEXVIEWFACTORY_H
+namespace mixin {
+    template<typename T>
+    using WithIndexViewFactory = detail::WithIndexViewFactory<T, WithIndexView>;
+}
+
+#endif //OBJECT_ARRAY_2_9FAADE91699547F4B58CF7144AE05449

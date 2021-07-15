@@ -1,27 +1,15 @@
 //
-// Created by Darwin Yuan on 2021/6/20.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_NONSCOPEDSIMPLEFIND_H
-#define OBJECT_ARRAY_NONSCOPEDSIMPLEFIND_H
+#ifndef OBJECT_ARRAY_2_7BF07355492E4ADBA28E66112EF24D29
+#define OBJECT_ARRAY_2_7BF07355492E4ADBA28E66112EF24D29
 
-#include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/RangedArrayLike.h>
 #include <l0-infra/array/concept/Pred.h>
-#include <optional>
-#include <algorithm>
 
 namespace mixin {
-    template<__cOnCePt(SimpleRangedArrayLike) T>
-    class NonScopedSimpleFind : public T {
-        using Self = T;
-
-    protected:
-        using Self::IndexBegin;
-        using Self::IndexEnd;
-        using Self::GetObj;
-
-    public:
+    template<typename T>
+    struct NonScopedSimpleFind : T {
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::Maybe;
@@ -29,23 +17,19 @@ namespace mixin {
     public:
         template<__pRed_CoNcEpT(PRED)>
         auto FindIndex(PRED&& pred) const -> Maybe {
-            if (IndexBegin() >= IndexEnd()) return std::nullopt;
-            for (auto i = IndexBegin(); i < IndexEnd(); i++) {
-                if constexpr(__wItH_iNdEx_pReD(PRED)) {
-                    if (pred(GetObj(i), i)) return i;
-                } else {
-                    if (pred(GetObj(i))) return i;
-                }
-            }
-            return std::nullopt;
+            return T::Unsafe_RangeFindIndex(0, T::Num(), std::forward<PRED>(pred));
         }
 
         template<__pRed_CoNcEpT(PRED)>
         auto Find(PRED&& pred) const -> ObjectType const* {
-            auto index = FindIndex(std::forward<PRED>(pred));
-            return index ? &GetObj(*index) : nullptr;
+            return T::Unsafe_RangeFind(0, T::Num(), std::forward<PRED>(pred));
+        }
+
+        template<__pRed_CoNcEpT(PRED)>
+        auto FindRange(PRED&& pred) const -> std::pair<SizeType, SizeType> {
+            return T::Unsafe_RangeFindRange(0, T::Num(), std::forward<PRED>(pred));
         }
     };
 }
 
-#endif //OBJECT_ARRAY_NONSCOPEDSIMPLEFIND_H
+#endif //OBJECT_ARRAY_2_7BF07355492E4ADBA28E66112EF24D29

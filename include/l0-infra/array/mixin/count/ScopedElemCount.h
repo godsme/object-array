@@ -1,46 +1,38 @@
 //
-// Created by Darwin Yuan on 2021/6/24.
+// Created by Darwin Yuan on 2021/7/11.
 //
 
-#ifndef OBJECT_ARRAY_SCOPEDELEMCOUNT_H
-#define OBJECT_ARRAY_SCOPEDELEMCOUNT_H
-
-#include <l0-infra/array/concept/ScopedArrayLike.h>
+#ifndef OBJECT_ARRAY_2_80EB7347DB124C6895D3506F3B8640EF
+#define OBJECT_ARRAY_2_80EB7347DB124C6895D3506F3B8640EF
 
 namespace mixin {
-    template<__cOnCePt(Scoped) T>
-    class ScopedElemCount : public T {
-        using Self = T;
-
-    protected:
-        using Self::GetScope;
-
-    public:
-        using typename Self::SizeType;
-        using typename Self::ObjectType;
-        using typename Self::BitMap;
+    template<typename T>
+    struct ScopedElemCount : T {
+        using typename T::SizeType;
+        using typename T::ObjectType;
+        using typename T::BitMap;
 
     public:
         auto GetNum() const -> SizeType {
-            return GetScope().count();
+            return T::GetScope().count();
         }
 
         auto Any() const -> bool {
-            return GetScope().any();
+            return T::GetScope().any();
         }
 
         auto None() const -> bool {
-            return GetScope().none();
+            return T::GetScope().none();
         }
 
         auto GetOccupied() const -> BitMap {
-            return GetScope();
+            return T::GetScope();
         }
 
         auto IsPresent(SizeType n) const -> bool {
-            return GetScope().test(n);
+            return T::GetScope().test(n);
         }
     };
 }
 
-#endif //OBJECT_ARRAY_SCOPEDELEMCOUNT_H
+#endif //OBJECT_ARRAY_2_80EB7347DB124C6895D3506F3B8640EF

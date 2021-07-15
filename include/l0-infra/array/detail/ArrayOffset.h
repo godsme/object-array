@@ -1,9 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/6/22.
+// Created by Darwin Yuan on 2021/7/9.
 //
 
-#ifndef OBJECT_ARRAY_ARRAYOFFSET_H
-#define OBJECT_ARRAY_ARRAYOFFSET_H
+#ifndef OBJECT_ARRAY_2_ARRAYOFFSET_H
+#define OBJECT_ARRAY_2_ARRAYOFFSET_H
 
 #include <algorithm>
 
@@ -31,4 +31,4 @@ namespace detail {
     };
 }
 
-#endif //OBJECT_ARRAY_ARRAYOFFSET_H
+#endif //OBJECT_ARRAY_2_ARRAYOFFSET_H

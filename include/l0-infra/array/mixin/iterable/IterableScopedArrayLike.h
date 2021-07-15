@@ -1,38 +1,35 @@
 //
-// Created by Darwin Yuan on 2021/6/23.
+// Created by Darwin Yuan on 2021/7/12.
 //
 
-#ifndef OBJECT_ARRAY_ITERABLESCOPEDARRAYLIKE_H
-#define OBJECT_ARRAY_ITERABLESCOPEDARRAYLIKE_H
+#ifndef OBJECT_ARRAY_2_5DCB71950B9B4CFEB251CC5EED16FBE3
+#define OBJECT_ARRAY_2_5DCB71950B9B4CFEB251CC5EED16FBE3
 
-#include <l0-infra/array/concept/ScopedArrayLike.h>
-#include <l0-infra/array/iterator/ScopedIterator.h>
+#include <l0-infra/array/iterator/ScopeIterator.h>
 
 namespace mixin {
     template<typename T>
-    class IterableScopedArrayLike : public T {
-        using Self = T;
-
-    public:
+    struct IterableScopedArrayLike : T {
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::BitMap;
 
+        using T::IndexBegin;
+
+        using T::GetScope;
+
     protected:
-        using Self::IndexBegin;
-        using Self::ObjectBegin;
-        using Self::ObjectEnd;
-        using Self::GetScope;
+        using typename T::ThisType;
 
     private:
-        using ConstIterator = iterator::ScopedIterator<std::add_const_t<ObjectType>, BitMap>;
-        using Iterator = iterator::ScopedIterator<ObjectType, BitMap>;
+        using ConstIterator = iterator::ScopeIterator<ThisType const, std::add_const_t<ObjectType>, SizeType, BitMap>;
+        using Iterator = iterator::ScopeIterator<ThisType, ObjectType, SizeType, BitMap>;
 
         using EndIterator = iterator::EmptyIterator;
 
     public:
         auto begin() const -> ConstIterator {
-            return {GetScope() >> IndexBegin(), ObjectBegin()};
+            return {GetScope() >> IndexBegin(), T::ToThisType(), IndexBegin()};
         }
 
         auto end() const -> EndIterator {
@@ -40,7 +37,7 @@ namespace mixin {
         }
 
         auto begin() -> Iterator {
-            return {GetScope() >> IndexBegin(), ObjectBegin()};
+            return {GetScope() >> IndexBegin(), T::ToThisType(), IndexBegin()};
         }
 
         auto end() -> EndIterator {
@@ -49,4 +46,4 @@ namespace mixin {
     };
 }
 
-#endif //OBJECT_ARRAY_ITERABLESCOPEDARRAYLIKE_H
+#endif //OBJECT_ARRAY_2_5DCB71950B9B4CFEB251CC5EED16FBE3

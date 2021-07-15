@@ -1,32 +1,15 @@
 //
-// Created by Darwin Yuan on 2021/6/20.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_PRED_H
-#define OBJECT_ARRAY_PRED_H
+#ifndef OBJECT_ARRAY_2_PRED_021878CC399F46C39EE95D4CEEC0427F
+#define OBJECT_ARRAY_2_PRED_021878CC399F46C39EE95D4CEEC0427F
 
-#include <l0-infra/array/detail/config.h>
-
-#if HAS_CONCEPT
-
-#include <concepts>
 #include <type_traits>
 
-namespace _concept {
-    template<typename PRED, typename ELEM>
-    concept SimplePred = requires(PRED&& pred, ELEM const& elem) {
-        { pred(elem) } -> std::same_as<bool>;
-    };
+#define __sImPlE_pReD(PRED) std::is_invocable_r_v<bool, PRED, ObjectType const&>
+#define __wItH_iNdEx_pReD(PRED) std::is_invocable_r_v<bool, PRED, ObjectType const&, SizeType>
+#define __pRed_CoNcEpT(PRED) typename PRED, std::enable_if_t<__sImPlE_pReD(PRED) || __wItH_iNdEx_pReD(PRED), int> = 0
+#define __sImPlE_pReD_cOnCePt(PRED) typename PRED, std::enable_if_t<__sImPlE_pReD(PRED), int> = 0
 
-    template<typename PRED, typename ELEM, typename SizeType>
-    concept WithIndexPred = requires(PRED&& pred, ELEM const& elem, SizeType n) {
-        { pred(elem, n) } -> std::same_as<bool>;
-    };
-
-    template<typename PRED, typename ELEM, typename SizeType>
-    concept Pred = WithIndexPred<PRED, ELEM, SizeType> || SimplePred<PRED, ELEM>;
-}
-
-#endif
-
-#endif //OBJECT_ARRAY_PRED_H
+#endif //OBJECT_ARRAY_2_PRED_021878CC399F46C39EE95D4CEEC0427F

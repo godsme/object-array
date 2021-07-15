@@ -1,24 +1,39 @@
 //
-// Created by Darwin Yuan on 2021/6/24.
+// Created by Darwin Yuan on 2021/7/9.
 //
 
-#ifndef OBJECT_ARRAY_ARRAYSCOPE_H
-#define OBJECT_ARRAY_ARRAYSCOPE_H
+#ifndef OBJECT_ARRAY_2_ARRAYSCOPE_H
+#define OBJECT_ARRAY_2_ARRAYSCOPE_H
 
-#include <l0-infra/base/DeduceSizeType.h>
+#include <l0-infra/base/detail/DeduceIntOptional.h>
 #include <l0-infra/base/BitSet.h>
 
 namespace detail {
     template<std::size_t MAX_SIZE>
     class ArrayScope : public BitSet<MAX_SIZE> {
         using Parent = BitSet<MAX_SIZE>;
-        using SizeType = DeduceSizeType_t<MAX_SIZE>;
+        using SizeType = DeduceIntOptSizeType_t<MAX_SIZE>;
+
     public:
         using Parent::Parent;
         ArrayScope(SizeType begin, SizeType end) {
             Parent::set();
             auto n = MAX_SIZE - end;
             (*this) = ((*this) << (n + begin)) >> n;
+        }
+
+        struct EnableTag{};
+        constexpr static auto ENABLE = EnableTag{};
+        ArrayScope(SizeType until, EnableTag) {
+            if(until >= MAX_SIZE) {
+                Parent::set();
+            } else {
+                if constexpr(MAX_SIZE <= sizeof(std::size_t)) {
+                    Parent::operator=(Parent::EnabledN(until));
+                } else {
+                    for(auto i=0; i<until; i++) Parent::set(i);
+                }
+            }
         }
 
         ArrayScope(Parent const& rhs) : Parent{rhs} {}
@@ -86,4 +101,4 @@ namespace detail {
     };
 }
 
-#endif //OBJECT_ARRAY_ARRAYSCOPE_H
+#endif //OBJECT_ARRAY_2_ARRAYSCOPE_H

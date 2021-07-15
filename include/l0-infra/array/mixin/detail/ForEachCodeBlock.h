@@ -1,9 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/6/24.
+// Created by Darwin Yuan on 2021/7/10.
 //
 
-#ifndef OBJECT_ARRAY_FOREACHCODEBLOCK_H
-#define OBJECT_ARRAY_FOREACHCODEBLOCK_H
+#ifndef OBJECT_ARRAY_2_FOREACHCODEBLOCK_39CC47302A864A0598103351D7EA5512
+#define OBJECT_ARRAY_2_FOREACHCODEBLOCK_39CC47302A864A0598103351D7EA5512
 
 #include <type_traits>
 
@@ -14,11 +14,11 @@ std::decay_t<decltype(this->template Visit<TO_NON_CONST>(std::declval<OP&&>(), s
 ////////////////////////////////////////////////////////////////////////////////////////
 #define __vIsIt_CoDe_BlOcK__ \
 if constexpr(std::is_same_v<bool, __vIsIt_ReSuLt_TyPe>) { \
-    if(auto r = Self::template Visit<TO_NON_CONST>(std::forward<OP>(op), i); !r) return r; \
+    if(auto r = T::template Visit<TO_NON_CONST>(std::forward<OP>(op), i); !r) return r; \
 } else if constexpr(std::is_convertible_v<std::size_t, __vIsIt_ReSuLt_TyPe>) { \
-    if(auto r = Self::template Visit<TO_NON_CONST>(std::forward<OP>(op), i); r != 0) return r; \
+    if(auto r = T::template Visit<TO_NON_CONST>(std::forward<OP>(op), i); r != 0) return r; \
 } else  { \
-    Self::template Visit<TO_NON_CONST>(std::forward<OP>(op), i); \
+    T::template Visit<TO_NON_CONST>(std::forward<OP>(op), i); \
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -29,4 +29,4 @@ if constexpr(std::is_same_v<bool, __vIsIt_ReSuLt_TyPe>) { \
     return __vIsIt_ReSuLt_TyPe{}; \
 } else {}
 
-#endif //OBJECT_ARRAY_FOREACHCODEBLOCK_H
+#endif //OBJECT_ARRAY_2_FOREACHCODEBLOCK_39CC47302A864A0598103351D7EA5512

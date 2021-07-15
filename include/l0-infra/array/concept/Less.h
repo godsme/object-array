@@ -1,24 +1,12 @@
 //
-// Created by Darwin Yuan on 2021/6/25.
+// Created by Darwin Yuan on 2021/7/9.
 //
 
-#ifndef OBJECT_ARRAY_LESS_H
-#define OBJECT_ARRAY_LESS_H
+#ifndef OBJECT_ARRAY_2_LESS_H
+#define OBJECT_ARRAY_2_LESS_H
 
-#include <l0-infra/array/detail/config.h>
-#include <l0-infra/array/detail/ConceptDef.h>
-
-#if HAS_CONCEPT
-#include <concepts>
 #include <type_traits>
 
-namespace _concept {
-    template<typename LESS, typename ObjectType>
-    concept Less = requires(LESS&& less, ObjectType const& lhs, ObjectType const& rhs) {
-        { less(lhs, rhs) } -> std::same_as<bool>;
-    };
-}
+#define __lEsS_cOnCePt(LESS) typename LESS, std::enable_if_t<std::is_invocable_r_v<bool, LESS, ObjectType const&, ObjectType const&>, int> = 0
 
-#endif
-
-#endif //OBJECT_ARRAY_LESS_H
+#endif //OBJECT_ARRAY_2_LESS_H

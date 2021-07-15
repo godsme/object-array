@@ -1,13 +1,9 @@
 //
-// Created by Darwin Yuan on 2021/7/3.
+// Created by Darwin Yuan on 2021/7/9.
 //
 
-#ifndef OBJECT_ARRAY_SIMPLEERASE_H
-#define OBJECT_ARRAY_SIMPLEERASE_H
-
-#include <l0-infra/array/detail/ConceptDef.h>
-#include <l0-infra/array/concept/ContiguousArrayLikeDataHolder.h>
-#include <l0-infra/array/mixin/erase/SimpleDoErase.h>
+#ifndef OBJECT_ARRAY_2_SIMPLEERASE_H
+#define OBJECT_ARRAY_2_SIMPLEERASE_H
 
 namespace mixin {
     template<typename T>
@@ -17,14 +13,22 @@ namespace mixin {
     public:
         using typename Self::SizeType;
 
-    protected:
         using Self::Num;
+        using Self::Destroy;
+        using Self::MoveObject;
+
+    private:
+        auto DoErase(SizeType n) -> void {
+            --Num();
+            if (n < Num()) MoveObject(n, Num());
+            Destroy(Num());
+        }
 
     public:
-        auto Erase(SizeType i) -> void {
-            if (i < Num()) Self::DoErase(i);
+        auto Erase(SizeType n) -> void {
+            if(n < Num()) DoErase(n);
         }
     };
 }
 
-#endif //OBJECT_ARRAY_SIMPLEERASE_H
+#endif //OBJECT_ARRAY_2_SIMPLEERASE_H
