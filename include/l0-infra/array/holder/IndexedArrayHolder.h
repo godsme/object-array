@@ -139,11 +139,14 @@ namespace holder::const_trait {
             return *this;
         }
     };
+
+    template<typename OBJ, std::size_t MAX_NUM>
+    using IndexedArray = IndexedArrayHolder<OBJ, MAX_NUM>;
 }
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
-    using IndexedArrayHolder = holder::detail::Holder<OBJ, MAX_NUM, const_trait::IndexedArrayHolder>;
+    using IndexedArrayHolder = holder::detail::Holder<OBJ, MAX_NUM, const_trait::IndexedArray>;
 }
 
 #endif //OBJECT_ARRAY_2_0BFB8077B100489AA942CE66C9D8CC76

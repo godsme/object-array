@@ -170,11 +170,14 @@ namespace holder::detail {
             return *this;
         }
     };
+
+    template<typename OBJ, std::size_t MAX_NUM>
+    using ScatteredArrayHolderAdapter = ScatteredArrayHolder<OBJ, MAX_NUM>;
 }
 
 namespace holder {
     template<typename OBJ, std::size_t MAX_NUM>
-    using ScatteredArrayHolder = holder::detail::Holder<OBJ, MAX_NUM, holder::detail::ScatteredArrayHolder>;
+    using ScatteredArrayHolder = holder::detail::Holder<OBJ, MAX_NUM, holder::detail::ScatteredArrayHolderAdapter>;
 }
 
 #endif //OBJECT_ARRAY_2_SCATTEREDARRAYHOLDER_H
