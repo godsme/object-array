@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(object_array_2)
+project(object_array)
 
 set(CMAKE_CXX_STANDARD 17)
 

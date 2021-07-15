@@ -640,7 +640,7 @@ CleanUp
 
    ObjectArray<int, 10> array{3, 1, 4, 2};
 
-   auto&& view = array.SortObject().Sort();
+   auto&& view = array.SortView().Sort();
 
    ASSERT(view[0] == 1);
    ASSERT(view[1] == 2);
@@ -653,11 +653,11 @@ CleanUp
    ASSERT(array[2] == 4);
    ASSERT(array[3] == 2);
 
-当然， 通过 `SortObject` 也可以进行 ``StableSort`` 和 ``PartialSort`` ：
+当然， 通过 `SortView` 也可以进行 ``StableSort`` 和 ``PartialSort`` ：
 
 .. code-block:: c++
 
-   auto&& view = array.SortObject();
+   auto&& view = array.SortView();
 
    view.PartialSort(3);
 
@@ -671,26 +671,78 @@ CleanUp
 
 .. code-block:: c++
 
-   auto&& view = array.SortObject().PartialSort(3);
+   auto&& view = array.SortView().PartialSort(3);
 
 
 .. note::
 
-   `SortObject` 本身是对数组的索引进行排序，而不是对对象直接排序，以降低数组元素移动所带来的成本。
+   `SortView` 本身是对数组的索引进行排序，而不是对对象直接排序，以降低数组元素移动所带来的成本。
 
 
-而 `SortObject` 也可以在 `Slice` (或/和） `Scope` 范围内创建：
+而 `SortView` 也可以在 `Slice` (或/和） `Scope` 范围内创建：
 
 .. code-block:: c++
 
    ObjectArray<int, 10> array{3,2,4,1};
 
-   auto&& view = array.From(1).Scope(0x0c).SortObject().Sort();
+   auto&& view = array.From(1).Scope(0x0c).SortView().Sort();
 
    // indices are slice ones.
    ASSERT(view[0] == 2);
    ASSERT(view[1] == 1);
    ASSERT(view[2] == 4);
+
+Rotate
+-----------------------
+
+如果你想对数组内某个范围的元素进行 **旋转** (rotate) 操作，可以直接调用数组的 ``RotateLeft`` 或 ``RotateRight`` 操作：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,2,4,1};
+
+   array.RotateLeft(); // 2, 4, 1, 3
+   array.RotateRight(); // 1, 3, 2, 4
+
+事实上，这两个函数都有一个参数: ``n`` ，即旋转的次数（默认值为 ``1``） 。因而你可以：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,2,4,1,5};
+
+   array.RotateLeft(2);  // 4, 1, 5, 3, 2
+   array.RotateRight(2); // 1, 5, 3, 2, 4
+
+通过 ``RangeRotateLeft(from, until, n)`` 与 ````RangeRotateRight(from, until, n)`` ，你可以在指定旋转的范围：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,2,4,1,5};
+
+   array.RangeRotateLeft(1, -1, 2);  // 3, 1, 2, 4, 5
+   array.RangeRotateRight(1, -1, 2); // 3, 4, 1, 2, 5
+
+像 ``Slice`` 一样，你可以只指定范围边界的一侧：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,2,4,1,5};
+
+   array.RotateLeftFrom(1, 2);   // 3, 1, 5, 2, 4
+   array.RotateLeftUntil(-1, 2); // 4, 1, 3, 2, 5
+
+
+自然，你也可以通过 ``Slice`` 来进行 ``Rotate`` :
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,2,4,1,5};
+
+   array.Slice(1, -1).RotateLeft(2);  // 3, 1, 2, 4, 5
+   array.Slice(1, -1).RotateRight(2); // 3, 4, 1, 2, 5
+
+   array.From(1).RotateLeft(2);   // 3, 1, 5, 2, 4
+   array.Until(-1).RotateLeft(2); // 4, 1, 3, 2, 5
 
 对象数组
 ------------------------
