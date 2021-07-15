@@ -15,12 +15,11 @@ namespace mixin {
 
         using Self::Num;
         using Self::Destroy;
-        using Self::MoveObject;
 
     private:
         auto DoErase(SizeType n) -> void {
             --Num();
-            if (n < Num()) MoveObject(n, Num());
+            if (n < Num()) T::ReplaceObject(n, Num());
             Destroy(Num());
         }
 

@@ -49,8 +49,6 @@ namespace mixin {
             return SortUntil(until, ~exclude, std::forward<LESS>(less));
         }
 
-        /////////////
-
         template<__lEsS_cOnCePt(LESS)>
         auto RangeStableSort(OffsetType from, OffsetType until, BitMap scope, LESS& less) & -> ThisType & {
             T::Unsafe_RangeScopeStableSort(T::OffsetToIndex(from), T::OffsetToIndex(until), T::MaskScope(scope), std::forward<LESS>(less));

@@ -25,7 +25,7 @@ namespace mixin {
                 ::memmove(Elems() + pos, Elems() + pos + 1, sizeof(ObjectType) * (Num() - pos));
             } else {
                 for(auto i=pos; i<Num(); i++) {
-                    T::MoveObject(i, 1 + i);
+                    T::ReplaceObject(i, 1 + i);
                 }
                 T::Destroy(Num());
             }

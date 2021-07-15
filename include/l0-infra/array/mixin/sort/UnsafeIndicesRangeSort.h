@@ -10,26 +10,23 @@
 namespace mixin {
     template<typename T>
     struct UnsafeIndicesRangeSort : T {
-        using Self = T;
-
-    public:
-        using typename Self::ObjectType;
-        using typename Self::SizeType;
+        using typename T::ObjectType;
+        using typename T::SizeType;
 
     public:
         template<__lEsS_cOnCePt(LESS)>
         auto Unsafe_RangePartialSort(SizeType from, SizeType until, LESS&& less, SizeType n) -> SizeType {
-            return Self::GetIndices().Unsafe_RangePartialSort(from, until, Self::GetIndicesLess(std::forward<LESS>(less)), n);
+            return T::GetIndices().Unsafe_RangePartialSort(from, until, T::GetIndicesLess(std::forward<LESS>(less)), n);
         }
 
         template<__lEsS_cOnCePt(LESS)>
         auto Unsafe_RangeSort(SizeType from, SizeType until, LESS&& less) -> void {
-            Self::GetIndices().Unsafe_RangeSort(from, until, Self::GetIndicesLess(std::forward<LESS>(less)));
+            T::GetIndices().Unsafe_RangeSort(from, until, T::GetIndicesLess(std::forward<LESS>(less)));
         }
 
         template<__lEsS_cOnCePt(LESS)>
         auto Unsafe_RangeStableSort(SizeType from, SizeType until, LESS&& less) -> void {
-            Self::GetIndices().Unsafe_RangeStableSort(from, until, Self::GetIndicesLess(std::forward<LESS>(less)));
+            T::GetIndices().Unsafe_RangeStableSort(from, until, T::GetIndicesLess(std::forward<LESS>(less)));
         }
     };
 }

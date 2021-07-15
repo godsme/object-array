@@ -20,8 +20,7 @@ namespace mixin {
         auto LeftMove(LESS&& less, SizeType i) -> auto* {
             do {
                 std::swap(T::GetObject(i), T::GetObject(i-1));
-                --i;
-            } while(i > 0 && less(T::GetObject(i), T::GetObject(i-1)));
+            } while(--i > 0 && less(T::GetObject(i), T::GetObject(i-1)));
 
             return &T::GetObject(i);
         }
@@ -31,8 +30,7 @@ namespace mixin {
             auto boundary = T::Num() - 1;
             do {
                 std::swap(T::GetObject(i), T::GetObject(i+1));
-                ++i;
-            } while(i < boundary && less(T::GetObject(i+1), T::GetObject(i)));
+            } while(++i < boundary && less(T::GetObject(i+1), T::GetObject(i)));
 
             return &T::GetObject(i);
         }

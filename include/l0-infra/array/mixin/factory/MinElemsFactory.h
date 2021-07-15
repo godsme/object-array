@@ -9,14 +9,14 @@
 #include <l0-infra/array/view/SortView.h>
 
 namespace mixin::detail {
-    template<typename T, template<typename> typename REF_SORT_VIEW>
+    template<typename T, template<typename> typename REF_VIEW>
     class MinElemsFactory : public T {
     protected:
         using typename T::ThisType;
 
     private:
-        using ThisConstSortView = REF_SORT_VIEW<ThisType const>;
-        using ThisSortView = REF_SORT_VIEW<ThisType>;
+        using ThisConstSortView = REF_VIEW<ThisType const>;
+        using ThisSortView = REF_VIEW<ThisType>;
 
     public:
         using typename T::ObjectType;

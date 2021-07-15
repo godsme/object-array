@@ -8,10 +8,8 @@
 namespace mixin {
     template<typename T>
     struct IndicesRangeInit : T {
-        using Self = T;
-
         auto InitIndices() -> void {
-            Self::GetIndices().Init(Self::GetArray());
+            T::GetIndices().Init(T::GetArray());
         }
     };
 }

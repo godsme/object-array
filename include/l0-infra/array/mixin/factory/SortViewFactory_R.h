@@ -8,14 +8,14 @@
 #include <l0-infra/array/view/SortView.h>
 
 namespace mixin::detail {
-    template<typename T, template<typename> typename VALUE_SORT_VIEW>
+    template<typename T, template<typename> typename VALUE_VIEW>
     struct SortViewFactory_R : T {
     protected:
         using typename T::ThisType;
 
     private:
-        using ConstSortView = VALUE_SORT_VIEW<ThisType const>;
-        using ValueSortView   = VALUE_SORT_VIEW<ThisType>;
+        using ConstSortView = VALUE_VIEW<ThisType const>;
+        using ValueSortView   = VALUE_VIEW<ThisType>;
 
     public:
         using T::SortView;

@@ -32,8 +32,8 @@ namespace mixin {
             return T::Elems()[n].Destroy();
         }
 
-        auto MoveObject(SizeType to, SizeType from) -> ObjectType* {
-            return Emplace(to, std::move(DataHolder::ElemToObject(T::Elems()[from])));
+        auto ReplaceObject(SizeType to, SizeType from) -> ObjectType* {
+            return T::Elems()[to].Replace(std::move(DataHolder::ElemToObject(T::Elems()[from])));
         }
     };
 }

@@ -33,7 +33,7 @@ namespace mixin {
                 ::memmove(base + from, base + until, sizeof(typename T::ElemType) * total);
             } else {
                 for (auto i = 0; i < total; i++) {
-                    T::MoveObject(from + i, until + i);
+                    T::ReplaceObject(from + i, until + i);
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace mixin {
             } else {
                 auto moveFrom = num - total;
                 for(auto i=0; i<total; i++) {
-                    Self::MoveObject(from + i, moveFrom + i);
+                    Self::ReplaceObject(from + i, moveFrom + i);
                 }
             }
         }

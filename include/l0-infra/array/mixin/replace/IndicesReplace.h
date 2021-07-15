@@ -17,16 +17,16 @@ namespace mixin {
         auto Replace(SizeType i, ARGS&& ... args) -> ObjectType* {
             auto* index = T::GetIndices().At(i);
             if(index == nullptr) { return nullptr; }
-            auto newIndex = T::GetArray().Replace_I(*index, std::forward<ARGS>(args)...);
+            Maybe newIndex = T::GetArray().Replace_I(*index, std::forward<ARGS>(args)...);
             T::GetIndices().Replace(i, *newIndex);
-            return newIndex ? &T::GetArray().GetObject(*newIndex) : nullptr;
+            return newIndex.has_value() ? &T::GetArray().GetObject(*newIndex) : nullptr;
         }
 
         template<typename ... ARGS>
         auto Replace_I(SizeType i, ARGS&& ... args) -> Maybe {
             auto* index = T::GetIndices().At(i);
             if(index == nullptr) { return std::nullopt; }
-            auto newIndex = T::GetArray().Replace_I(*index, std::forward<ARGS>(args)...);
+            Maybe newIndex = T::GetArray().Replace_I(*index, std::forward<ARGS>(args)...);
             if(newIndex) T::GetIndices().Replace(i, *newIndex);
             return newIndex;
         }
