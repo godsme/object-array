@@ -28,7 +28,7 @@ namespace mixin {
         auto StableSort() && -> auto { return std::move(*this).StableSort(T::GetLess());}
         auto StableDescSort() && -> auto { return std::move(*this).StableSort(T::GetGreater());}
 
-        auto PartialSort(SizeType n) && -> auto { return T::PartialSort(T::GetLess(), n); }
+        auto PartialSort(SizeType n) && -> auto { return std::move(*this).PartialSort(T::GetLess(), n); }
         auto PartialDescSort(SizeType n) && -> auto { return std::move(*this).PartialSort(T::GetGreater(), n); }
     };
 }

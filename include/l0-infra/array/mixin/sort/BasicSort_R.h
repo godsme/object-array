@@ -34,7 +34,7 @@ namespace mixin {
 
         template<__lEsS_cOnCePt(LESS)>
         auto PartialSort(LESS&& less, SizeType n) && -> auto {
-            return T::MakeSlice(DoPartialSort(std::forward<LESS>(less), n));
+            return T::MakeSlice(T::DoPartialSort(std::forward<LESS>(less), n));
         }
     };
 }

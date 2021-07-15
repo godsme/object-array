@@ -82,6 +82,11 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
+        [[nodiscard]] auto PartialSort(LESS&& less, SizeType n) && -> ThisType {
+            return MinElems(std::forward<LESS>(less), n);
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
         [[nodiscard]] auto MinElems(LESS&& less, SizeType n) && -> ThisType {
             return MinElems(std::forward<LESS>(less), n);
         }
