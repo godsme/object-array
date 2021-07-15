@@ -7,6 +7,7 @@
 
 #include <l0-infra/base/detail/DeduceIntOptional.h>
 #include <l0-infra/array/mixin/append/ProxyAppend.h>
+#include <l0-infra/array/mixin/replace/ProxyReplace.h>
 #include <l0-infra/array/mixin/erase/ProxyErase.h>
 #include <l0-infra/array/mixin/erase/DynamicRangedClear.h>
 #include <l0-infra/array/mixin/array_like/PointerArrayLike.h>
@@ -85,6 +86,13 @@ namespace holder::detail {
             return allocator.ReplaceObj(pointers[n], std::forward<ARGS>(args)...);
         }
 
+        template<typename ... ARGS>
+        auto DoReplace_I(SizeType n, ARGS &&... args) -> Maybe {
+            if (n >= pointers.GetNum()) return std::nullopt;
+            allocator.ReplaceObj(pointers[n], std::forward<ARGS>(args)...);
+            return n;
+        }
+
     public:
         template<typename ... ARGS>
         DynamicArrayHolder(ALLOCATOR &allocator, ARGS &&...args)
@@ -117,6 +125,9 @@ namespace holder::detail {
     private:
         template<typename>
         friend class mixin::ProxyAppend;
+
+        template<typename>
+        friend class mixin::ProxyReplace;
 
         template<typename>
         friend class mixin::ProxyErase;

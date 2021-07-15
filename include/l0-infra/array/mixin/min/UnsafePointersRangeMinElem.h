@@ -17,12 +17,12 @@ namespace mixin {
     public:
         template<__lEsS_cOnCePt(LESS)>
         auto Unsafe_RangeMinElemIndex(SizeType from, SizeType until, LESS &&less) const -> Maybe {
-            return T::GetPointers().Unsafe_RangeMinElemIndex(from, until, GetPointerLess(std::forward<LESS>(less)));
+            return T::GetPointers().Unsafe_RangeMinElemIndex(from, until, T::GetPointerLess(std::forward<LESS>(less)));
         }
 
         template<__lEsS_cOnCePt(LESS)>
         auto Unsafe_RangeMinElem(SizeType from, SizeType until, LESS &&less) const -> ObjectType const* {
-            auto* p = T::GetPointers().Unsafe_RangeMinElem(from, until, GetPointerLess(std::forward<LESS>(less)));
+            auto* p = T::GetPointers().Unsafe_RangeMinElem(from, until, T::GetPointerLess(std::forward<LESS>(less)));
             return p == nullptr ? nullptr : *p;
         }
     };
