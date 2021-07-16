@@ -42,6 +42,10 @@ namespace mixin {
         auto MoveObject(SizeType to, SizeType from) -> ObjectType* {
             return Emplace(to, std::move(T::Elems()[from]));
         }
+
+        auto ReplaceObject(SizeType to, SizeType from) -> ObjectType* {
+            return Unsafe_Replace(to, std::move(T::Elems()[from]));
+        }
     };
 }
 

@@ -17,7 +17,6 @@ namespace mixin {
         using typename T::Maybe;
         using typename T::ObjectType;
 
-
         template<typename ... ARGS>
         auto Append(ARGS &&... args) -> ObjectType * {
             if (!This()->occupied.all()) {

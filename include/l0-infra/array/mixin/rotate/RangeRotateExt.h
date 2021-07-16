@@ -33,10 +33,10 @@ namespace mixin {
             }  else {
                 if(n >= until_) return;
                 to = until_ - n;
-                if(to <= from) return;
+                if(to <= from_) return;
             }
 
-            T::Unsafe_RangeRotate(from, to, until);
+            T::Unsafe_RangeRotate(from_, to, until_);
         }
 
     public:
