@@ -5,7 +5,7 @@
 #include <l0-infra/array/IndexedOrderedArray.h>
 #include <catch.hpp>
 
-SCENARIO("IndexedOrderedArra full append") {
+SCENARIO("IndexedOrderedArray full append") {
     IndexedOrderedArray<int, 8> array;
 
     array.Append(10);

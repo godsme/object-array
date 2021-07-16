@@ -7,10 +7,7 @@
 
 namespace mixin {
     template<typename T>
-    class OrderedAppend : public T {
-        using Self = T;
-
-    public:
+    struct OrderedAppend : T {
         using typename T::SizeType;
         using typename T::ObjectType;
         using typename T::Maybe;
@@ -30,13 +27,13 @@ namespace mixin {
             if(num > 0) {
                 ::memmove(Elems() + i + 1, Elems() + i, sizeof(ObjectType) * num);
             }
-            return Self::Emplace(i, std::move(obj));
+            return T::Emplace(i, std::move(obj));
         }
 
         template<typename LESS, typename OBJ>
         auto CopyInsert(LESS&& less, OBJ&& obj) -> auto* {
             for (int i = Num() - 2; i >= 0; --i) {
-                if (less(obj, Self::GetObject(i))) continue;
+                if (less(obj, T::GetObject(i))) continue;
                 return InsertAt(i+1, std::move(obj));
             }
             return InsertAt(0, std::move(obj));
@@ -45,14 +42,14 @@ namespace mixin {
         template<typename LESS, typename ARG>
         auto NoCopyInsert(LESS&& less, ARG&& obj) -> auto* {
             for (int i = Num() - 2; i >= 0; --i) {
-                if (less(obj, Self::GetObject(i))) {
-                    Emplace(i + 1, std::move(Self::GetObject(i)));
-                    Self::Destroy(i);
+                if (less(obj, T::GetObject(i))) {
+                    T::Emplace(i+1, std::move(T::GetObject(i)));
+                    T::Destroy(i);
                 } else {
-                    return Emplace(i+1, std::move(obj));
+                    return Emplace(i+1, std::forward<ARG>(obj));
                 }
             }
-            return Emplace(0, std::move(obj));
+            return Emplace(0, std::forward<ARG>(obj));
         }
 
         template<typename LESS, typename OBJ>
@@ -67,7 +64,7 @@ namespace mixin {
         template<template<typename> typename TYPE_REF, typename LESS>
         auto ActualAppend(LESS&& less, typename TYPE_REF<ObjectType>::type obj) -> ObjectType * {
             if(++Num() == 1) {
-                return Emplace(0, std::move(obj));
+                return T::Emplace(0, std::move(obj));
             } else {
                 return Insert(std::forward<LESS>(less), std::move(obj));
             }
@@ -79,13 +76,13 @@ namespace mixin {
         template<typename LESS>
         auto DoSort(LESS&& less) -> auto* {
             for(int i = Num()-2; i>=0; --i) {
-                if(!less(Self::GetObject(i+1), Self::GetObject(i))) {
-                    return &Self::GetObject(i+1);
+                if(!less(T::GetObject(i+1), T::GetObject(i))) {
+                    return &T::GetObject(i+1);
                 }
-                std::swap(Self::GetObject(i+1), Self::GetObject(i));
+                std::swap(T::GetObject(i+1), T::GetObject(i));
             }
 
-            return &Self::GetObject(0);
+            return &T::GetObject(0);
         }
 
     private:
@@ -101,7 +98,7 @@ namespace mixin {
 
         template<typename LESS, typename ... ARGS>
         auto DoAppend(LESS&& less, ARGS &&... args) -> ObjectType * {
-            auto* p = Self::Emplace(Num()++, std::forward<ARGS>(args)...);
+            auto* p = T::Emplace(Num()++, std::forward<ARGS>(args)...);
             return Num() == 1 ? p : DoSort(std::forward<LESS>(less));
         }
 
