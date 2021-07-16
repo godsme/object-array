@@ -5,6 +5,40 @@
 #include <l0-infra/array/IndexedOrderedArray.h>
 #include <catch.hpp>
 
+SCENARIO("IndexedOrderedArra full append") {
+    IndexedOrderedArray<int, 8> array;
+
+    array.Append(10);
+    REQUIRE(array.GetNum() == 1);
+    array.Append(8);
+    REQUIRE(array.GetNum() == 2);
+    array.Append(12);
+    REQUIRE(array.GetNum() == 3);
+    array.Append(7);
+    REQUIRE(array.GetNum() == 4);
+    array.Append(9);
+    REQUIRE(array.GetNum() == 5);
+    array.Append(6);
+    REQUIRE(array.GetNum() == 6);
+    array.Append(5);
+    REQUIRE(array.GetNum() == 7);
+    array.Append(4);
+    REQUIRE(array.GetNum() == 8);
+    REQUIRE(nullptr != array.Append(3));
+    REQUIRE(array.GetNum() == 8);
+
+    REQUIRE(nullptr != array.Append(4));
+    REQUIRE(array.GetNum() == 8);
+    REQUIRE(nullptr == array.Append(12));
+    REQUIRE(array.GetNum() == 8);
+
+    REQUIRE(nullptr == array.Append(10));
+    REQUIRE(array.GetNum() == 8);
+
+    REQUIRE(nullptr == array.Append(9));
+    REQUIRE(nullptr != array.Append(8));
+}
+
 SCENARIO("IndexedOrderedArray") {
     IndexedOrderedArray<int, 10> array;
 

@@ -18,15 +18,15 @@ namespace mixin {
         static constexpr auto MAX_SIZE = T::MAX_SIZE;
 
     protected:
-        using Self::Num;
-        using Self::Elems;
-        using Self::Emplace;
-        using Self::This;
+        using T::Num;
+        using T::Elems;
+        using T::Emplace;
+        using T::This;
 
     private:
         template<typename ARG>
         auto InsertAt(SizeType i, ARG&& obj) -> auto* {
-            auto num = Num() - i;
+            SizeType num = T::Num() - i - 1;
             if(num > 0) {
                 ::memmove(Elems() + i + 1, Elems() + i, sizeof(ObjectType) * num);
             }
@@ -108,12 +108,16 @@ namespace mixin {
     public:
         template<typename ... ARGS>
         auto Append(ARGS &&... args) -> ObjectType * {
-            return DoAppend(T::GetLess(), std::forward<ARGS>(args)...);
+            if(T::All()) {
+                return T::ReplaceLastIf(std::forward<ARGS>(args)...);
+            } else {
+                return DoAppend(T::GetLess(), std::forward<ARGS>(args)...);
+            }
         }
 
         template<typename ... ARGS>
         auto Append_I(ARGS &&... args) -> Maybe {
-            return Self::ObjectToIndex(Append(std::forward<ARGS>(args)...));
+            return T::ObjectToIndex(Append(std::forward<ARGS>(args)...));
         }
     };
 }

@@ -57,6 +57,7 @@
 #include <l0-infra/array/mixin/count/ArrayOffsetToIndex.h>
 #include <l0-infra/array/mixin/sort/ArrayRangeSort.h>
 #include <l0-infra/array/mixin/min/ArrayRangeMinElem.h>
+#include <l0-infra/array/mixin/replace/OrderedReplaceLastIf.h>
 
 namespace indexed_array {
     using Private = ::mixin::Private<
@@ -115,12 +116,13 @@ namespace indexed_array {
 
             mixin::ArrayEquality,
             mixin::___mutable_mixin_delimiter___,
+            mixin::IndicesReplace,
+            mixin::OrderedReplaceLastIf,
+            mixin::ReplaceExt,
             mixin::IndicesAppend,
             mixin::AppendExt,
             mixin::IndicesErase,
             mixin::EraseExt,
-            mixin::IndicesReplace,
-            mixin::ReplaceExt,
             mixin::IndicesRangedClear,
             mixin::ClearExt,
             mixin::ScopeCleanUp,

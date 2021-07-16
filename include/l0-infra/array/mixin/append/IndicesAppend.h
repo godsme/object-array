@@ -17,12 +17,23 @@ namespace mixin {
     protected:
         using Self::This;
 
-    public:
+    private:
         template<typename ... ARGS>
-        auto Append_I(ARGS&& ... args) -> Maybe {
+        auto DoAppend_I(ARGS&& ... args) -> Maybe {
             auto index = Self::GetArray().Append_I(std::forward<ARGS>(args)...);
             if(index) Self::GetIndices().Append(*index);
             return index;
+        }
+
+    public:
+        template<typename ... ARGS>
+        auto Append_I(ARGS&& ... args) -> Maybe {
+            if constexpr(T::IS_ORDERED) {
+                if(T::All()) {
+                    return T::ReplaceLastIf_I(std::forward<ARGS>(args)...);
+                }
+            }
+            return DoAppend_I(std::forward<ARGS>(args)...);
         }
 
         template<typename ... ARGS>

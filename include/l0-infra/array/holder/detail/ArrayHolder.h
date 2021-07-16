@@ -15,6 +15,7 @@
 namespace holder::detail {
     template<typename OBJ, std::size_t MAX_NUM, bool ORDERED = false>
     struct ArrayHolder {
+        static_assert(MAX_NUM > 0);
         static_assert(!std::is_reference_v<OBJ>);
 
         using ObjectType = OBJ;

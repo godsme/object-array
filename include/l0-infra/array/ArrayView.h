@@ -222,5 +222,4 @@ struct ConstArrayView : Parent {
 template<typename T, typename SIZE_TYPE, SIZE_TYPE MAX_NUM>
 ConstArrayView(T const (&)[MAX_NUM], SIZE_TYPE) -> ConstArrayView<T, MAX_NUM, T>;
 
-
 #endif //OBJECT_ARRAY_2_EF20B2BF9E0249DA8F02F690E18C3BCE
