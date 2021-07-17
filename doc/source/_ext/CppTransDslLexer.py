@@ -16,7 +16,8 @@ class CppTransDslLexer(CppLexer):
                           'Sort', 'DescSort', 'SortEx', 'DescSortEx', 'SortObject', 'PartialDescSort', 'StableDescSort',
                           'PartialSort', 'StableSort', 'Exists', 'Append', 'At', 'First', 'Last',
                           'Erase', 'GetNum', 'Any', 'All', 'None', 'Replace', 'GetOccupied', 'IsPresent',
-                          'Remove', 'Clear', 'ClearFrom', 'ClearUntil', 'RemoveBy', 'CleanUp', 'CleanUpEx', 'CleanUpBy'))
+                          'Remove', 'Clear', 'ClearFrom', 'ClearUntil', 'RemoveIf', 'CleanUp', 'CleanUpEx', 'ClearIf',
+                          'Enumerate', 'ClearFromIf', 'ClearUntilIf'))
     CONST_KEYWORDS = set(('ASSERT', '___public_mixin_delimiter___', '___mutable_mixin_delimiter___',
                           'DEF_SIMPLE_ASYNC_ACTION'))
 
