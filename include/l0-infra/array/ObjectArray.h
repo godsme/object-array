@@ -79,6 +79,8 @@
 #include <l0-infra/array/mixin/erase/UnsafeArrayRangeClearIf.h>
 #include <l0-infra/array/mixin/erase/ArrayRangeClearIf.h>
 #include <l0-infra/array/mixin/factory/ArrayEnumViewFactory.h>
+#include <l0-infra/array/mixin/foreach/UnsafeRangePredForEach.h>
+#include <l0-infra/array/mixin/foreach/ArrayPredForEach.h>
 
 namespace object_array {
     using Private = ::mixin::Private<
@@ -116,6 +118,8 @@ namespace object_array {
             mixin::ScopeFindExt,
             mixin::ArrayEquality,
 
+            mixin::UnsafeRangePredForEach,
+            mixin::ArrayPredForEach,
             mixin::UnsafeRangeScopeForEach,
             mixin::ArrayScopedForEach,
             mixin::UnsafeRangeForEach,

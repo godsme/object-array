@@ -77,6 +77,13 @@ namespace mixin {
         }
 
         template<__lEsS_cOnCePt(LESS)>
+        auto MaxElems(LESS&& less, SizeType n) & -> ThisType& {
+            return MinElems([&](auto&& l, auto&& r) {
+                return less(r, l);
+            }, n);
+        }
+
+        template<__lEsS_cOnCePt(LESS)>
         auto PartialSort(LESS&& less, SizeType n) & -> ThisType& {
             return MinElems(std::forward<LESS>(less), n);
         }
@@ -96,7 +103,7 @@ namespace mixin {
         }
 
         auto MaxElems(SizeType n) & -> ThisType& {
-            return MinElems(T::GetGreater(), n);
+            return MaxElems(T::GetLess(), n);
         }
 
         [[nodiscard]] auto MinElems(SizeType n) && -> ThisType {
@@ -104,7 +111,7 @@ namespace mixin {
         }
 
         [[nodiscard]] auto MaxElems(SizeType n) && -> ThisType {
-            return MinElems(T::GetGreater(), n);
+            return MaxElems(T::GetLess(), n);
         }
     };
 }

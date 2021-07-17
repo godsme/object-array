@@ -120,6 +120,47 @@ SCENARIO("l-Value SortView MinElems 1") {
     }
 }
 
+SCENARIO("l-Value SortView range for") {
+    using ArrayType = ObjectArray<int, 10>;
+    ArrayType array {9, 3, 6, 2, 8};
+    REQUIRE(array.GetNum() == 5);
+
+    SortView::ValueView<ArrayType> view{array};
+    REQUIRE(view.GetNum() == 0);
+
+    {
+        auto&& sorted = view.MinElems(std::less<int>{}, 10);
+        int indices[10]{};
+        int n = 0;
+        for(auto&& [elem, i] : sorted.WithIndex()) {
+            indices[n++] = i;
+        }
+
+        REQUIRE(n == 5);
+        REQUIRE(indices[0] == 3);
+        REQUIRE(indices[1] == 1);
+        REQUIRE(indices[2] == 2);
+        REQUIRE(indices[3] == 4);
+        REQUIRE(indices[4] == 0);
+    }
+
+    {
+        auto&& sorted = view.MinElems(std::less<int>{}, 10);
+        int indices[10]{};
+        int n = 0;
+        for(auto&& [elem, i] : sorted.Enumerate()) {
+            indices[n++] = i;
+        }
+
+        REQUIRE(n == 5);
+        REQUIRE(indices[0] == 0);
+        REQUIRE(indices[1] == 1);
+        REQUIRE(indices[2] == 2);
+        REQUIRE(indices[3] == 3);
+        REQUIRE(indices[4] == 4);
+    }
+}
+
 SCENARIO("l-Value SortView MinElems 0") {
     using ArrayType = ObjectArray<int, 10>;
     ArrayType array {9, 3, 6, 2, 8};
