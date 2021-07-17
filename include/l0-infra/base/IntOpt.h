@@ -37,6 +37,10 @@ public:
     auto has_value() const -> bool { return value_ != EMPTY; }
     explicit operator bool() const { return has_value(); }
 
+    operator std::optional<T>() const {
+        return has_value() ? std::optional{value_} : std::nullopt;
+    }
+
     auto value() const -> IntType { return value_; }
     auto operator*() const -> IntType { return value_; }
 
