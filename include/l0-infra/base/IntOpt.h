@@ -44,13 +44,8 @@ public:
     auto value() const -> IntType { return value_; }
     auto operator*() const -> IntType { return value_; }
 
-    auto value_or(IntType v) const -> IntType {
-        return has_value() ? value_ : v;
-    }
-
-    auto emplace(IntType value) -> void {
-        value_ = value;
-    }
+    auto value_or(IntType v) const -> IntType { return has_value() ? value_ : v; }
+    auto emplace(IntType value) -> void { value_ = value; }
 
     auto operator==(IntOpt const& rhs) const -> bool { return value_ == rhs.value_; }
     auto operator!=(IntOpt const& rhs) const -> bool { return !operator==(rhs); }
