@@ -116,6 +116,63 @@ SCENARIO("ObjectArray iterator") {
     REQUIRE(sum == 2 + 4 + 3 + 1 + 8 + 7 + 6);
 }
 
+SCENARIO("ObjectArray range cleanup") {
+    ObjectArray<int, 10> array;
+    array.Append(2);
+    array.Append(3);
+    array.Append(4);
+    array.Append(1);
+    array.Append(8);
+    array.Append(7);
+
+    WHEN("range cleanup if") {
+        auto&& result = array.RangeCleanUpIf(1, -1, [](auto&& elem) {
+            return elem > 1;
+        });
+
+        REQUIRE(result.GetNum() == 3);
+        REQUIRE(result[0] == 2);
+        REQUIRE(result[1] == 1);
+        REQUIRE(result[2] == 7);
+
+        REQUIRE(array.GetNum() == 3);
+        REQUIRE(array[0] == 2);
+        REQUIRE(array[1] == 1);
+        REQUIRE(array[2] == 7);
+    }
+
+    WHEN("cleanup from if") {
+        auto&& result = array.CleanUpFromIf(1, [](auto&& elem) {
+            return elem > 1;
+        });
+
+        REQUIRE(result.GetNum() == 2);
+        REQUIRE(result[0] == 2);
+        REQUIRE(result[1] == 1);
+
+        REQUIRE(array.GetNum() == 2);
+        REQUIRE(array[0] == 2);
+        REQUIRE(array[1] == 1);
+    }
+
+    WHEN("cleanup until if") {
+        auto &&result = array.CleanUpUntilIf(-2, [](auto &&elem) {
+            return elem > 1;
+        });
+
+        REQUIRE(result.GetNum() == 3);
+        REQUIRE(result[0] == 1);
+        REQUIRE(result[1] == 8);
+        REQUIRE(result[2] == 7);
+
+        REQUIRE(array.GetNum() == 3);
+        REQUIRE(array[0] == 1);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 7);
+    }
+
+}
+
 SCENARIO("ObjectArray rotate") {
     ObjectArray<int, 10> array;
     array.Append(2);
