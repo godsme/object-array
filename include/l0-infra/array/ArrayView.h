@@ -80,9 +80,9 @@
 #include <l0-infra/array/mixin/sort/ArrayRangeSort.h>
 #include <l0-infra/array/mixin/sort/ArrayRangeSort_R.h>
 #include <l0-infra/array/mixin/min/ArrayRangeMinElem.h>
-#include <l0-infra/array/mixin/erase/UnsafeArrayRangeCleanUpIf.h>
-#include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf.h>
-#include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf_R.h>
+#include <l0-infra/array/mixin/erase/UnsafeArrayRangeClearIf.h>
+#include <l0-infra/array/mixin/erase/ArrayRangeClearIf.h>
+#include <l0-infra/array/mixin/erase/ArrayRangeClearIf_R.h>
 #include <l0-infra/array/mixin/erase/ClearExt_R.h>
 
 namespace array_view {
@@ -158,9 +158,9 @@ namespace array_view {
             mixin::SimpleErase,
             mixin::EraseExt,
 
-            mixin::UnsafeArrayRangeCleanUpIf,
-            mixin::ArrayRangeCleanUpIf,
-            mixin::ArrayRangeCleanUpIf_R,
+            mixin::UnsafeArrayRangeClearIf,
+            mixin::ArrayRangeClearIf,
+            mixin::ArrayRangeClearIf_R,
 
             mixin::RangedClear,
             mixin::ClearExt,

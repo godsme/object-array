@@ -99,8 +99,8 @@ namespace dynamic_array {
             mixin::DynamicRangedClear,
             mixin::ClearExt,
             mixin::ScopeCleanUp,
-            mixin::UnsafeArrayRangeCleanUpIf,
-            mixin::ArrayRangeCleanUpIf,
+            mixin::UnsafeArrayRangeClearIf,
+            mixin::ArrayRangeClearIf,
 
             mixin::UnsafePointersRangeSort,
             mixin::UnsafePointersRangeScopeSort,

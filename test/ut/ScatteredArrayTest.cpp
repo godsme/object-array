@@ -391,8 +391,8 @@ SCENARIO("ScatteredObjectArray") {
         }
     }
 
-    WHEN("CleanUpBy") {
-        array.CleanUpIf([](auto&& elem) {
+    WHEN("ClearIf") {
+        array.ClearIf([](auto&& elem) {
             return elem.a <= 2;
         });
 

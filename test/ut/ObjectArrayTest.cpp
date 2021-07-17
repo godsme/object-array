@@ -125,8 +125,8 @@ SCENARIO("ObjectArray range cleanup") {
     array.Append(8);
     array.Append(7);
 
-    WHEN("range cleanup if") {
-        auto&& result = array.RangeCleanUpIf(1, -1, [](auto&& elem) {
+    WHEN("range clear if") {
+        auto&& result = array.RangeClearIf(1, -1, [](auto&& elem) {
             return elem > 1;
         });
 
@@ -141,8 +141,8 @@ SCENARIO("ObjectArray range cleanup") {
         REQUIRE(array[2] == 7);
     }
 
-    WHEN("cleanup from if") {
-        auto&& result = array.CleanUpFromIf(1, [](auto&& elem) {
+    WHEN("clear from if") {
+        auto&& result = array.ClearFromIf(1, [](auto&& elem) {
             return elem > 1;
         });
 
@@ -156,7 +156,7 @@ SCENARIO("ObjectArray range cleanup") {
     }
 
     WHEN("cleanup until if") {
-        auto &&result = array.CleanUpUntilIf(-2, [](auto &&elem) {
+        auto &&result = array.ClearUntilIf(-2, [](auto &&elem) {
             return elem > 1;
         });
 
@@ -171,9 +171,15 @@ SCENARIO("ObjectArray range cleanup") {
         REQUIRE(array[2] == 7);
     }
 
+//    WHEN("l-value slice cleanup if should be deleted") {
+//        auto&& slice = array.Slice(1, -1);
+//        slice.CleanUpIf([](auto&& elem) {
+//            return elem > 1;
+//        });
+//    }
 
     WHEN("range cleanup if") {
-        array.Slice(1, -1).CleanUpIf([](auto&& elem) {
+        array.Slice(1, -1).ClearIf([](auto&& elem) {
             return elem > 1;
         });
 
@@ -184,7 +190,7 @@ SCENARIO("ObjectArray range cleanup") {
     }
 
     WHEN("cleanup from if") {
-        array.From(1).CleanUpIf([](auto&& elem) {
+        array.From(1).ClearIf([](auto&& elem) {
             return elem > 1;
         });
 
@@ -194,7 +200,7 @@ SCENARIO("ObjectArray range cleanup") {
     }
 
     WHEN("cleanup until if") {
-        array.Until(-2).CleanUpIf([](auto &&elem) {
+        array.Until(-2).ClearIf([](auto &&elem) {
             return elem > 1;
         });
 
@@ -875,7 +881,7 @@ SCENARIO("init with init list") {
         REQUIRE(array.All());
 
         WHEN("CleanUpBy") {
-            array.CleanUpIf([](auto&& elem) {
+            array.ClearIf([](auto&& elem) {
                 return elem.a <= 3;
             });
 

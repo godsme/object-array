@@ -730,8 +730,8 @@ SCENARIO("IndexArray init with init list") {
         REQUIRE(array.GetNum() == 5);
         REQUIRE(array.All());
 
-        WHEN("CleanUpBy") {
-            array.CleanUpIf([](auto&& elem) {
+        WHEN("ClearIf") {
+            array.ClearIf([](auto&& elem) {
                 return elem.a <= 3;
             });
 

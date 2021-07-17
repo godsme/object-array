@@ -30,8 +30,8 @@
 #include <l0-infra/array/mixin/eq/ObjectEquality.h>
 #include <l0-infra/array/mixin/erase/ClearExporter.h>
 #include <l0-infra/array/mixin/count/FullScopeElemCount.h>
-#include <l0-infra/array/mixin/erase/UnsafeArrayRangeCleanUpIf.h>
-#include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf.h>
+#include <l0-infra/array/mixin/erase/UnsafeArrayRangeClearIf.h>
+#include <l0-infra/array/mixin/erase/ArrayRangeClearIf.h>
 
 namespace holder::detail {
     template<typename, std::size_t>
@@ -81,8 +81,8 @@ namespace scattered_array {
             mixin::ReplaceExt,
             mixin::EraseExt,
             mixin::ClearExporter,
-            mixin::UnsafeArrayRangeCleanUpIf,
-            mixin::ArrayRangeCleanUpIf,
+            mixin::UnsafeArrayRangeClearIf,
+            mixin::ArrayRangeClearIf,
             mixin::BasicSort,
             mixin::SortExt>;
 
