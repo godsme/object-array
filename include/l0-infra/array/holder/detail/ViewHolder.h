@@ -16,7 +16,7 @@ namespace holder::detail {
         dEcL_tHiS(ARRAY_HOLDER);
     public:
         constexpr static auto IS_CONST = std::is_const_v<ARRAY> || ARRAY::IS_CONST;
-        using ArrayType = std::decay_t<ARRAY>;
+        using ArrayType = ARRAY;
         using ObjectType = ::detail::CondConst_t<IS_CONST, typename ArrayType::ObjectType>;
         using SizeType = typename ArrayType::SizeType;
         constexpr static SizeType MAX_SIZE = ArrayType::MAX_SIZE;
