@@ -25,6 +25,8 @@ namespace mixin {
             return T::ToThisType();
         }
 
+        // Clear a temporary array is meaningless, most likely a bug,
+        // so it should better be forbidden.
         auto Clear() && = delete;
 
         auto Clear(OffsetType from, OffsetType until) & -> ThisType& {
