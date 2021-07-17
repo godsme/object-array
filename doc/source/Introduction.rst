@@ -273,28 +273,6 @@ Replace
       // ...
    }
 
-
-不过需要注意的是：当你进行 `range-for` 时，如果需要索引，你得到的是数组的索引，而不是在
-切片内的索引：
-
-.. code-block:: c++
-
-   for(auto&& [item, i] : array.Slice(3, -2).WithIndex()) {
-      // the 1st `i` is 3, 2nd `i` is 4, and so on...
-   }
-
-.. note::
-
-   之所以做出这样的设计决定，是因为在现实项目中所见的应用场景，真正关注的都是在数组整体范围内的索引，而
-   并非在 `slice` 范围内的索引。
-
-   未来如果有现实需求，可以增加接口。现阶段，为了避免误用，暂不提供额外接口。
-
-   除了在 `range-for` 时之外，如果用户在调用 ``ForEach`` 等接口时，如果传入的函数需要索引，得到的索引
-   也和 `range-for` 一样，是数组的索引。
-
-   不过，用户调其它接口时，比如 ``operator[]`` 、 ``At`` 、 ``Replace`` 时，使用的索引则是在 `slice` 范围内的索引。
-
 在指定切片边界时，用户有可能给出超出数组事实边界的索引，比如：
 
 .. code-block:: c++
@@ -665,12 +643,12 @@ CleanUp
 
 
 
-排序对象
+SortView
 -------------------
 
 对于数组而言，排序操作会导致对象在数组中的位置进行移动，如果对象比较大，这是一个昂贵的操作。
 
-如果我们只是在某次需要时，对数组进行排序，但并不想改变数组本身的元素顺序，则可以通过排序对象进行排序。
+如果我们只是在某次需要时，对数组进行排序，但并不想改变数组本身的元素顺序，则可以通过 ``SortView`` 进行排序。
 
 .. code-block:: c++
 
@@ -779,6 +757,70 @@ Rotate
 
    array.From(1).RotateLeft(2);   // 3, 1, 5, 2, 4
    array.Until(-1).RotateLeft(2); // 4, 1, 3, 2, 5
+
+
+索引与序号
+---------------------
+
+当你通过 `range-for` 对各种 `Array/View` 进行遍历时，除了数组元素之外，你或许还需要 "索引" 值。
+
+但对于索引的需要至少有两种：首先是它们在数组中的索引；其次，是遍历集合的序号。
+
+比如，当你对一个 ``Slice`` 进行 `range-for` 操作。由于切片只是数组元素的一个子集，因而遍历过程中，每个元素在数组中的索引，与遍历序号是不一致的。但这两种需求都存在。
+
+如果你需要的是一个元素在数组中的索引值，可以使用 ``WithIndex`` ；而如果你需要的是遍历序号，则使用 ``Enumerate`` 。 比如：
+
+.. code-block:: c++
+
+   auto&& slice = array.From(2);
+
+   for(auto&& [elem, i] : slice.WithIndex()) {
+      // i start from 2
+   }
+
+   for(auto&& [elem, i] : slice.Enumerate()) {
+      // i start from 0
+   }
+
+而对于不连续的 ``ScopeView`` ，比如：
+
+.. code-block:: c++
+
+   auto&& scope = array.Scope(0x2a); // 1, 3, 5
+
+   for(auto&& [elem, i] : scope.WithIndex()) {
+      // i is 1, 3, 5 in turn.
+   }
+
+   for(auto&& [elem, i] : scope.Enumerate()) {
+      // i is 0, 1, 2 in turn.
+   }
+
+而你如果通过 ``SortView`` 对一个数组进行排序，当你遍历 ``SortView`` 是， ``WithIndex`` 得到的依然是数组索引：
+
+.. code-block:: c++
+
+   ObjectArray<int, 10> array{3,1,4,2};
+
+   auto&& sorted = array.SortView().Sort();
+
+   for(auto&& [elem, i] : sorted.WithIndex()) {
+      // i is 1, 3, 0, 2 in turn
+   }
+
+   for(auto&& [elem, i] : sorted.Enumerate()) {
+      // i is 0, 1, 2, 3 in turn
+   }
+
+.. important::
+
+   无论你对任何数组，或者 `view` 进行遍历时，``WithIndex`` 总是得到在数组内的索引；``Enumerate`` 总是得到序号。
+
+   除了在 `range-for` 时之外，如果用户在调用 ``ForEach`` 等接口时，如果传入的函数需要索引，得到的索引
+   也和 `range-for` 一样，是数组的索引。
+
+   不过，用户调其它接口时，比如 ``operator[]`` 、 ``At`` 、 ``Replace`` 时，使用的索引则是在 `slice` 范围内的索引。
+
 
 对象数组
 ------------------------
