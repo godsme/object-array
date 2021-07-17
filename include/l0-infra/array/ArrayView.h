@@ -83,6 +83,7 @@
 #include <l0-infra/array/mixin/erase/UnsafeArrayRangeCleanUpIf.h>
 #include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf.h>
 #include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf_R.h>
+#include <l0-infra/array/mixin/erase/ClearExt_R.h>
 
 namespace array_view {
     using Private = ::mixin::Private<
@@ -163,6 +164,7 @@ namespace array_view {
 
             mixin::RangedClear,
             mixin::ClearExt,
+            mixin::ClearExt_R,
             mixin::ScopeCleanUp,
 
             mixin::ContiguousRangeSort,

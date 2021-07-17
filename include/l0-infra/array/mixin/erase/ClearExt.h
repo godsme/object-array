@@ -7,32 +7,46 @@
 
 namespace mixin {
     template<typename T>
-    class ClearExt : public T {
-        using Self = T;
-
-    public:
+    struct ClearExt : T {
         using typename T::OffsetType;
         using typename T::SizeType;
 
+    protected:
+        using typename T::ThisType;
+
     private:
         auto OffsetToIndex(OffsetType offset) const -> SizeType {
-            return offset.ToIndex(Self::Num());
+            return offset.ToIndex(T::IndexEnd());
         }
 
     public:
-        using Self::Clear;
-
-        auto ClearFrom(OffsetType from) -> void {
-            T::DoClearFrom(OffsetToIndex(from));
+        auto Clear() & -> ThisType& {
+            T::Clear();
+            return T::ToThisType();
         }
 
-        auto Clear(OffsetType from, OffsetType until) -> void {
+        auto Clear() && = delete;
+
+        auto Clear(OffsetType from, OffsetType until) & -> ThisType& {
             T::Unsafe_Clear(OffsetToIndex(from), OffsetToIndex(until));
+            return T::ToThisType();
         }
 
-        auto ClearUntil(OffsetType until) -> void {
-            T::Unsafe_Clear(0, OffsetToIndex(until));
+        auto Clear(OffsetType from, OffsetType until) && = delete;
+
+        auto ClearFrom(OffsetType from) & -> ThisType& {
+            T::DoClearFrom(OffsetToIndex(from));
+            return T::ToThisType();
         }
+
+        auto ClearFrom(OffsetType from) && = delete;
+
+        auto ClearUntil(OffsetType until) & -> ThisType& {
+            T::Unsafe_Clear(0, OffsetToIndex(until));
+            return T::ToThisType();
+        }
+
+        auto ClearUntil(OffsetType until) && = delete;
     };
 }
 
