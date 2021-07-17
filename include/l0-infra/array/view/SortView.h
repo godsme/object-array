@@ -33,6 +33,7 @@
 #include <l0-infra/array/mixin/eq/ViewObjectEquality.h>
 #include <l0-infra/array/mixin/eq/ObjectCompareExt.h>
 #include <l0-infra/array/mixin/sort/NoDiscardSortExt_R.h>
+#include <l0-infra/array/mixin/factory/ViewEnumViewFactory.h>
 
 namespace sort_view {
     template<template<typename> typename INDICES_INIT>
@@ -61,6 +62,7 @@ namespace sort_view {
             mixin::ArrayByIndexAccessor,
             mixin::IterableSortView,
             mixin::SortViewWithIndexViewFactory_R,
+            mixin::EnumViewFactory,
             mixin::ArrayElemCount,
             mixin::ElemCountExt,
             mixin::NonScopedSimpleFind,

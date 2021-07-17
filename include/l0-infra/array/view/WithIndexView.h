@@ -11,6 +11,7 @@
 #include <l0-infra/array/mixin/access/ViewedRange.h>
 #include <l0-infra/array/mixin/iterable/IterableWithIndexArrayLike.h>
 #include <l0-infra/array/mixin/iterable/IterableWithIndexSortView.h>
+#include <l0-infra/array/mixin/enumerate/IterableEnumArrayLike.h>
 
 namespace with_index_view {
     using Private = ::mixin::Private<
@@ -39,5 +40,6 @@ namespace with_index_view {
 
 using WithIndexView = with_index_view::WithIndexView<mixin::IterableWithIndexArrayLike>;
 using SortViewWithIndexView = with_index_view::WithIndexView<mixin::IterableWithIndexSortView>;
+using EnumerateView = with_index_view::WithIndexView<mixin::IterableEnumArrayLike>;
 
 #endif //OBJECT_ARRAY_2_417C5173E11142FD8EC7D6448CE0EAE7

@@ -53,6 +53,7 @@
 #include <l0-infra/array/mixin/rotate/Rotate_R.h>
 #include <l0-infra/array/mixin/erase/RangeViewClearIf.h>
 #include <l0-infra/array/mixin/erase/RangeViewClear.h>
+#include <l0-infra/array/mixin/factory/ViewEnumViewFactory.h>
 
 namespace slice {
     using Private = ::mixin::Private<
@@ -93,6 +94,7 @@ namespace slice {
             mixin::ScopedMinElemExt,
 
             mixin::WithIndexViewFactory_R,
+            mixin::EnumViewFactory,
             mixin::ScopeViewFactory,
             mixin::ScopeViewFactory_R,
             mixin::MinElemsFactory,

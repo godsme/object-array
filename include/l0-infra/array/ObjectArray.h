@@ -78,6 +78,7 @@
 #include <l0-infra/array/mixin/min/ArrayRangeMinElem.h>
 #include <l0-infra/array/mixin/erase/UnsafeArrayRangeClearIf.h>
 #include <l0-infra/array/mixin/erase/ArrayRangeClearIf.h>
+#include <l0-infra/array/mixin/factory/ArrayEnumViewFactory.h>
 
 namespace object_array {
     using Private = ::mixin::Private<
@@ -131,6 +132,7 @@ namespace object_array {
             mixin::ScopedMinElemExt,
 
             mixin::WithIndexViewFactory,
+            mixin::ArrayEnumViewFactory,
             mixin::SliceViewFactory,
             mixin::ScopeViewFactory,
             mixin::MinElemsFactory,

@@ -84,6 +84,8 @@
 #include <l0-infra/array/mixin/erase/ArrayRangeClearIf.h>
 #include <l0-infra/array/mixin/erase/ArrayRangeClearIf_R.h>
 #include <l0-infra/array/mixin/erase/ClearExt_R.h>
+#include <l0-infra/array/mixin/factory/ArrayEnumViewFactory.h>
+#include <l0-infra/array/mixin/factory/ArrayEnumViewFactory_R.h>
 
 namespace array_view {
     using Private = ::mixin::Private<
@@ -135,6 +137,8 @@ namespace array_view {
             mixin::UnsafeArrayScopeMinElem,
             mixin::ScopedMinElemExt,
             mixin::WithIndexViewFactory_R,
+            mixin::ArrayEnumViewFactory,
+            mixin::ArrayEnumViewFactory_R,
 
             mixin::SliceViewFactory,
             mixin::SliceViewFactory_R,

@@ -83,6 +83,7 @@ namespace dynamic_array {
             mixin::ScopedMinElemExt,
 
             mixin::WithIndexViewFactory,
+            mixin::ArrayEnumViewFactory,
             mixin::SliceViewFactory,
             mixin::ScopeViewFactory,
             mixin::MinElemsFactory,

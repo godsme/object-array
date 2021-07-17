@@ -11,8 +11,9 @@ namespace iterator::detail {
     template<typename BASE, typename BIT_MAP>
     class ScopeIterator : public BASE {
         auto StepForward() -> void { bitmap >>= 1; BASE::StepForward(); }
+        auto SkipForward() -> void { bitmap >>= 1; BASE::SkipForward(); }
         auto ForwardTo1stPresent() -> void {
-            while(!bitmap[0] && bitmap.any()) StepForward();
+            while(!bitmap[0] && bitmap.any()) SkipForward();
         }
 
     public:

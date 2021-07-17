@@ -341,14 +341,32 @@ SCENARIO("ObjectArray range rotate") {
     }
 }
 
+SCENARIO("ObjectArray Enumerate") {
+    ObjectArray<int, 10> array{2,3,4,1,8,7};
+
+    WHEN("Enumerate") {
+        auto n = 0;
+        for(auto&& [elem, i] : array.Enumerate()) {
+            REQUIRE(i == n);
+            REQUIRE(elem == array[n]);
+            ++n;
+        }
+    }
+
+    WHEN("Enumerate in Slice") {
+        auto n = 0;
+        for(auto&& [elem, i] : array.Slice(1, -1).Enumerate()) {
+            REQUIRE(i == n);
+            REQUIRE(elem == array[n+1]);
+            ++n;
+        }
+
+        REQUIRE(n == array.GetNum() - 2);
+    }
+}
+
 SCENARIO("ObjectArray Slice rotate") {
-    ObjectArray<int, 10> array;
-    array.Append(2);
-    array.Append(3);
-    array.Append(4);
-    array.Append(1);
-    array.Append(8);
-    array.Append(7);
+    ObjectArray<int, 10> array{2,3,4,1,8,7};
 
     WHEN("Unsafe range rotate left") {
         array.Slice(1, -1).RotateLeft(1);
