@@ -76,6 +76,8 @@
 #include <l0-infra/array/mixin/sort/ArrayRangeSort.h>
 #include <l0-infra/array/mixin/count/ArrayScopeMask.h>
 #include <l0-infra/array/mixin/min/ArrayRangeMinElem.h>
+#include <l0-infra/array/mixin/erase/UnsafeArrayRangeCleanUpIf.h>
+#include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf.h>
 
 namespace object_array {
     using Private = ::mixin::Private<
@@ -143,6 +145,8 @@ namespace object_array {
             mixin::RangedClear,
             mixin::ClearExt,
             mixin::ScopeCleanUp,
+            mixin::UnsafeArrayRangeCleanUpIf,
+            mixin::ArrayRangeCleanUpIf,
             mixin::ContiguousRangeSort,
             mixin::UnsafeRangeScopeSort,
             mixin::UnsafeScopeSort,

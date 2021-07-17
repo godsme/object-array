@@ -720,7 +720,7 @@ SCENARIO("init with init list") {
     }
 
     WHEN("RemoveBy") {
-        array.RemoveBy([](auto&& elem) {
+        array.RemoveIf([](auto&& elem) {
             return elem.a == 1;
         });
 
@@ -736,7 +736,7 @@ SCENARIO("init with init list") {
         REQUIRE(array.All());
 
         WHEN("CleanUpBy") {
-            array.CleanUpBy([](auto&& elem) {
+            array.CleanUpIf([](auto&& elem) {
                 return elem.a <= 3;
             });
 

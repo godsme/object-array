@@ -366,8 +366,8 @@ SCENARIO("ScatteredObjectArray") {
         }
     }
 
-    WHEN("RemoveBy") {
-        array.RemoveBy([](auto&& elem) {
+    WHEN("RemoveIf") {
+        array.RemoveIf([](auto&& elem) {
             return elem.a == 2;
         });
 
@@ -392,7 +392,7 @@ SCENARIO("ScatteredObjectArray") {
     }
 
     WHEN("CleanUpBy") {
-        array.CleanUpBy([](auto&& elem) {
+        array.CleanUpIf([](auto&& elem) {
             return elem.a <= 2;
         });
 
