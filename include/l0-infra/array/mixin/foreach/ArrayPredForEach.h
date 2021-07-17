@@ -21,7 +21,7 @@ namespace mixin {
         }
 
         template<typename PRED, __oP_cOnCePt(OP), __wItH_pReD(PRED)>
-        auto PredForEach(SizeType from, SizeType until, PRED&& pred, OP &&op) -> auto {
+        auto PredForEach(PRED&& pred, OP &&op) -> auto {
             return T::Unsafe_RangePredForEach(T::IndexBegin(), T::IndexEnd(), std::forward<PRED>(pred), std::forward<OP>(op));
         }
     };
