@@ -126,7 +126,7 @@ SCENARIO("ObjectArray range cleanup") {
     array.Append(7);
 
     WHEN("range clear if") {
-        auto&& result = array.RangeClearIf(1, -1, [](auto&& elem) {
+        auto&& result = array.ClearIf(1, -1, [](auto&& elem) {
             return elem > 1;
         });
 

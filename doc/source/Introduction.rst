@@ -355,7 +355,7 @@ Replace
 
 .. attention::
 
-   当创建并使用一个 `slice` 期间，一定要保证 `slice` 所引用的数组内元素是不可被删除的。
+   当创建并使用一个 **左值** `slice` 期间，一定要保证 `slice` 所引用的数组内元素是不可被删除的。
    否则，将可能会导致不确定的行为。
 
    比如，我们在一个元素个数为 ``3`` 的数组上创建了一个 `slice` : ``array.Until(3)`` 。这时 `slice`
@@ -409,6 +409,43 @@ Clear
 
    array.ClearFrom(2); // [2, n)
    array.ClearUntil(-2); // [0, n-2)
+
+除了无条件进行 ``Clear`` 之外，你还可以通过 ``ClearIf`` 以指定谓词的方式进行清理，即在一个范围内，所有满足谓词条件的，都会被清理。
+
+.. code-block:: c++
+
+   array.ClearIf([](auto&& elem) { return elem > 2; });
+
+   // range [1, -1)
+   array.ClearIf(1, -1, [](auto&& elem) { return elem > 2; });
+
+   // range [1, n)
+   array.ClearFromIf(1, [](auto&& elem) { return elem > 2; });
+
+   // range [0, n-1)
+   array.ClearUntilIf(-1, [](auto&& elem) { return elem > 2; });
+
+对于需要在一个范围内进行清理的操作，你也可以通过一个 **右值** ``Slice`` 进行：
+
+.. code-block:: c++
+
+   array.Slice(1,-1).Clear();
+   array.From(1).ClearIf([](auto&& elem) { return elem > 2; });
+
+但一个 **左值** ``Slice`` 不允许进行这种操作：
+
+.. code-block:: c++
+
+   auto&& slice = array.Slice(1,-1);
+
+   slice.Clear(); // not allowed, compiling fail.
+   slice.ClearIf([](auto&& elem) { return elem > 2; }); // not allowed, compiling fail.
+
+.. attention::
+
+   这是因为，**左值** slice 的生命周期很久，你可以多次调用其不同接口，因而必须维持一个 ``Slice`` 的语义完整性。
+
+   但一个右值 ``Slice`` 在你调用 ``Clear`` 相关接口之后，就没有途径再次访问同一 ``slice`` ，因而不需要维持其语义完整性。
 
 
 ScopeView

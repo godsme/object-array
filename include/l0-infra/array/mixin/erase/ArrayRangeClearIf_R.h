@@ -19,7 +19,6 @@ namespace mixin {
 
     public:
         using T::ClearIf;
-        using T::RangeClearIf;
         using T::ClearFromIf;
         using T::ClearUntilIf;
 
@@ -29,8 +28,8 @@ namespace mixin {
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto RangeClearIf(OffsetType from, OffsetType until, PRED&& pred) && -> ThisType {
-            return T::RangeClearIf(from, until, std::forward<PRED>(pred));
+        auto ClearIf(OffsetType from, OffsetType until, PRED&& pred) && -> ThisType {
+            return T::ClearIf(from, until, std::forward<PRED>(pred));
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>

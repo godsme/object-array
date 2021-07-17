@@ -8,7 +8,7 @@
 namespace mixin {
     template<typename T>
     struct RangeViewClear : T {
-        // on r-value slice could do Clear, because we don't have to maintain
+        // r-value slice could do Clear, because we don't have to maintain
         // the integrity of Slice.
         auto Clear() && -> void {
             T::GetArray().Clear(T::IndexBegin(), T::IndexEnd());

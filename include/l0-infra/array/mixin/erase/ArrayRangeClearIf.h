@@ -28,13 +28,13 @@ namespace mixin {
         auto ClearIf(PRED&& pred) && = delete;
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto RangeClearIf(OffsetType from, OffsetType until, PRED&& pred) & -> ThisType& {
+        auto ClearIf(OffsetType from, OffsetType until, PRED&& pred) & -> ThisType& {
             T::Unsafe_RangeClearIf(from.ToIndex(T::IndexEnd()), until.ToIndex(T::IndexEnd()), std::forward<PRED>(pred));
             return T::ToThisType();
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto RangeClearIf(OffsetType from, OffsetType until, PRED&& pred) && = delete;
+        auto ClearIf(OffsetType from, OffsetType until, PRED&& pred) && = delete;
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
         auto ClearFromIf(OffsetType from, PRED&& pred) & -> ThisType& {
