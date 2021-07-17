@@ -15,6 +15,9 @@ namespace mixin {
         using typename T::SizeType;
 
     public:
+        // on r-value slice could do CleanUpIf, because we don't have to maintain
+        // the integrity of Slice.
+
         template<__sImPlE_pReD_cOnCePt(PRED)>
         auto CleanUpIf(PRED&& pred) && -> void {
             T::GetArray().Unsafe_RangeCleanUpIf(T::IndexBegin(), T::IndexEnd(), std::forward<PRED>(pred));

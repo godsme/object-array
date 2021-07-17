@@ -52,6 +52,7 @@
 #include <l0-infra/array/mixin/rotate/Rotate.h>
 #include <l0-infra/array/mixin/rotate/Rotate_R.h>
 #include <l0-infra/array/mixin/erase/RangeViewCleanUpIf.h>
+#include <l0-infra/array/mixin/erase/RangeViewClear.h>
 
 namespace slice {
     using Private = ::mixin::Private<
@@ -103,6 +104,7 @@ namespace slice {
             mixin::AppendExt,
             mixin::ViewReplace,
             mixin::ReplaceExt,
+            mixin::RangeViewClear,
             mixin::RangeViewCleanUpIf,
             mixin::SliceUnsafeScopeSort,
             mixin::BasicSort,
