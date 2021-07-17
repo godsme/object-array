@@ -32,6 +32,7 @@
 #include <l0-infra/array/mixin/count/FullScopeElemCount.h>
 #include <l0-infra/array/mixin/erase/UnsafeArrayRangeClearIf.h>
 #include <l0-infra/array/mixin/erase/ArrayRangeClearIf.h>
+#include <l0-infra/array/mixin/factory/ScopeEnumViewFactory.h>
 
 namespace holder::detail {
     template<typename, std::size_t>
@@ -76,6 +77,7 @@ namespace scattered_array {
             mixin::ScopeSortViewFactory,
             mixin::IterableScopedArrayLike,
             mixin::WithIndexScopeArrayLikeFactory,
+            mixin::ScopeEnumViewFactory,
             mixin::___mutable_mixin_delimiter___,
             mixin::AppendExt,
             mixin::ReplaceExt,

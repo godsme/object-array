@@ -17,8 +17,8 @@ namespace mixin {
         auto WithIndex() && = delete;
         auto WithIndex() const&& = delete;
 
-        auto WithIndex() & -> RefWithIndexScopeView<ThisType> { return {T::ToThisType()}; }
-        auto WithIndex() const& -> RefWithIndexScopeView<ThisType const> { return {T::ToThisType()}; }
+        auto WithIndex() & -> WithIndexScopeView::RefView<ThisType> { return {T::ToThisType()}; }
+        auto WithIndex() const& -> WithIndexScopeView::RefView<ThisType const> { return {T::ToThisType()}; }
     };
 }
 

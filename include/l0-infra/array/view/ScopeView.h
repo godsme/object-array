@@ -34,6 +34,8 @@
 #include <l0-infra/array/mixin/replace/ReplaceExt.h>
 #include <l0-infra/array/mixin/eq/ObjectCompareExt.h>
 #include <l0-infra/array/mixin/sort/SortExt_R.h>
+#include <l0-infra/array/mixin/factory/ScopeEnumViewFactory.h>
+#include <l0-infra/array/mixin/factory/ScopeEnumViewFactory_R.h>
 
 namespace scope_view {
     using Private = ::mixin::Private<
@@ -57,6 +59,8 @@ namespace scope_view {
             mixin::IterableScopedArrayLike,
             mixin::WithIndexScopeArrayLikeFactory,
             mixin::WithIndexScopeArrayLikeFactory_R,
+            mixin::ScopeEnumViewFactory,
+            mixin::ScopeEnumViewFactory_R,
             mixin::SimpleForEachExt,
             mixin::ScopedSimpleFind,
             mixin::SimpleFindExt,

@@ -727,6 +727,38 @@ SCENARIO("ObjectArray Foreach") {
     }
 
     {
+        ObjectArray<int, 10> a = {1,2,3,4,5,6,7};
+
+        int n = 0;
+        int objs[10]{};
+        for(auto&& [elem, i] : a.Scope(0x05).Enumerate()) {
+            REQUIRE(i == n);
+            objs[n] = elem;
+            n++;
+        }
+
+        REQUIRE(n == 2);
+        REQUIRE(objs[0] == 1);
+        REQUIRE(objs[1] == 3);
+    }
+
+    {
+        ObjectArray<int, 10> a = {1,2,3,4,5,6,7};
+
+        int n = 0;
+        int objs[10]{};
+        for(auto&& [elem, i] : a.Slice(1,-1).Scope(0x0b).Enumerate()) {
+            REQUIRE(i == n);
+            objs[n] = elem;
+            n++;
+        }
+
+        REQUIRE(n == 2);
+        REQUIRE(objs[0] == 2);
+        REQUIRE(objs[1] == 4);
+    }
+
+    {
         ObjectArray<int, 10> a = {1,2,3};
         ObjectArray<int, 10>::BitMap scope{0x02};
 

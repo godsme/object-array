@@ -13,6 +13,29 @@ SCENARIO("Default ScatteredArray Initialization of trivial type should not be 0-
     REQUIRE((*array)[0] != 0);
 }
 
+SCENARIO("ScatteredArray Scattered Test") {
+    ScatteredArray<int, 10> array{2, 6, 3, 7, 4, 5};
+    array.Erase(2);
+    array.Erase(4);
+
+    REQUIRE(array.GetNum() == 4);
+    REQUIRE_FALSE(array.IsPresent(2));
+    REQUIRE_FALSE(array.IsPresent(4));
+
+    auto n = 0;
+    int objs[10] = {};
+    for(auto&& [elem, i] : array.Enumerate()) {
+        REQUIRE(i == n);
+        objs[n++] = elem;
+    }
+
+    REQUIRE(n == 4);
+    REQUIRE(objs[0] == 2);
+    REQUIRE(objs[1] == 6);
+    REQUIRE(objs[2] == 7);
+    REQUIRE(objs[3] == 5);
+}
+
 SCENARIO("ScatteredArray Test") {
     ScatteredArray<int, 10> foo {2, 6, 3};
 

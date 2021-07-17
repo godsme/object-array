@@ -83,6 +83,29 @@ SCENARIO("SortView Test") {
         CHECK(indices[3] == 2);
     }
 
+    WHEN("ranged sort with enumeration") {
+        auto&& sorted = array.SortView();
+
+        uint8_t indices[10];
+        int a[10];
+        int n = 0;
+        for(auto&& [elem, i] : sorted.Sort().Enumerate()) {
+            indices[n] = i;
+            a[n++] = elem;
+        }
+
+        REQUIRE(n == 4);
+        CHECK(a[0] == 1);
+        CHECK(a[1] == 2);
+        CHECK(a[2] == 3);
+        CHECK(a[3] == 4);
+
+        CHECK(indices[0] == 0);
+        CHECK(indices[1] == 1);
+        CHECK(indices[2] == 2);
+        CHECK(indices[3] == 3);
+    }
+
     WHEN("Create a sort view on Slice") {
         auto&& view = array.From(1).SortView().Sort();
 

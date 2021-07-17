@@ -16,10 +16,10 @@ namespace mixin {
     public:
         using T::WithIndex;
 
-        auto WithIndex() && -> ValueWithIndexScopeView<ThisType> {
+        auto WithIndex() && -> WithIndexScopeView::ValueView<ThisType> {
             return {T::ToThisType()};
         }
-        auto WithIndex() const&& -> ValueWithIndexScopeView<ThisType const> {
+        auto WithIndex() const&& -> WithIndexScopeView::ValueView<ThisType const> {
             return {T::ToThisType()};
         }
     };
