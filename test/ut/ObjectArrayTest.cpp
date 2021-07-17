@@ -196,6 +196,56 @@ SCENARIO("ObjectArray rotate") {
     }
 }
 
+SCENARIO("ObjectArray range rotate") {
+    ObjectArray<int, 10> array;
+    array.Append(2);
+    array.Append(3);
+    array.Append(4);
+    array.Append(1);
+    array.Append(8);
+    array.Append(7);
+
+    WHEN("Unsafe range rotate left") {
+        array.RangeRotateLeft(1, array.GetNum() - 1, 1);
+        REQUIRE(array[0] == 2);
+        REQUIRE(array[1] == 4);
+        REQUIRE(array[2] == 1);
+        REQUIRE(array[3] == 8);
+        REQUIRE(array[4] == 3);
+        REQUIRE(array[5] == 7);
+    }
+
+    WHEN("Unsafe range rotate right") {
+        array.RangeRotateRight(1, array.GetNum() - 1, 1);
+        REQUIRE(array[0] == 2);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 3);
+        REQUIRE(array[3] == 4);
+        REQUIRE(array[4] == 1);
+        REQUIRE(array[5] == 7);
+    }
+
+    WHEN("rotate left") {
+        array.RotateLeftFrom(0, 2);
+        REQUIRE(array[0] == 4);
+        REQUIRE(array[1] == 1);
+        REQUIRE(array[2] == 8);
+        REQUIRE(array[3] == 7);
+        REQUIRE(array[4] == 2);
+        REQUIRE(array[5] == 3);
+    }
+
+    WHEN("rotate right") {
+        array.RotateRightUntil(array.GetNum(), 7);
+        REQUIRE(array[0] == 7);
+        REQUIRE(array[1] == 2);
+        REQUIRE(array[2] == 3);
+        REQUIRE(array[3] == 4);
+        REQUIRE(array[4] == 1);
+        REQUIRE(array[5] == 8);
+    }
+}
+
 SCENARIO("ObjectArray Slice rotate") {
     ObjectArray<int, 10> array;
     array.Append(2);
@@ -266,7 +316,7 @@ SCENARIO("ObjectArray Slice rotate") {
     }
 
     WHEN("Unsafe rotate right") {
-        array.Until(array.GetNum()).Unsafe_RotateRight();
+        array.Until(array.GetNum()).RotateRight();
         REQUIRE(array[0] == 7);
         REQUIRE(array[1] == 2);
         REQUIRE(array[2] == 3);
