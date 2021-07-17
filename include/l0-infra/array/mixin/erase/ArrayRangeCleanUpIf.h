@@ -14,34 +14,41 @@ namespace mixin {
         using typename T::ObjectType;
         using typename T::SizeType;
 
+    protected:
+        using typename T::ThisType;
+
     public:
         template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto CleanUpIf(PRED&& pred) & -> void {
-            T::Unsafe_CleanUpIf(0, T::Num(), std::forward<PRED>(pred));
+        auto CleanUpIf(PRED&& pred) & -> ThisType& {
+            T::Unsafe_RangeCleanUpIf(0, T::IndexEnd(), std::forward<PRED>(pred));
+            return T::ToThisType();
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
         auto CleanUpIf(PRED&& pred) && = delete;
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto RangeCleanUpIf(OffsetType from, OffsetType until, PRED&& pred) & -> void {
-            T::Unsafe_CleanUpIf(from.ToIndex(T::Num()), until.ToIndex(T::Num()), std::forward<PRED>(pred));
+        auto RangeCleanUpIf(OffsetType from, OffsetType until, PRED&& pred) & -> ThisType& {
+            T::Unsafe_RangeCleanUpIf(from.ToIndex(T::IndexEnd()), until.ToIndex(T::IndexEnd()), std::forward<PRED>(pred));
+            return T::ToThisType();
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
         auto RangeCleanUpIf(OffsetType from, OffsetType until, PRED&& pred) && = delete;
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto CleanUpFromIf(OffsetType from, PRED&& pred) & -> void {
-            T::Unsafe_CleanUpIf(from.ToIndex(T::Num()), T::Num(), std::forward<PRED>(pred));
+        auto CleanUpFromIf(OffsetType from, PRED&& pred) & -> ThisType& {
+            T::Unsafe_RangeCleanUpIf(from.ToIndex(T::IndexEnd()), T::IndexEnd(), std::forward<PRED>(pred));
+            return T::ToThisType();
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
         auto CleanUpFromIf(OffsetType from, PRED&& pred) && = delete;
 
         template<__sImPlE_pReD_cOnCePt(PRED)>
-        auto CleanUpUntilIf(OffsetType until, PRED&& pred) & -> void {
-            T::Unsafe_CleanUpIf(0, until.ToIndex(T::Num()), std::forward<PRED>(pred));
+        auto CleanUpUntilIf(OffsetType until, PRED&& pred) & -> ThisType& {
+            T::Unsafe_RangeCleanUpIf(0, until.ToIndex(T::IndexEnd()), std::forward<PRED>(pred));
+            return T::ToThisType();
         }
 
         template<__sImPlE_pReD_cOnCePt(PRED)>

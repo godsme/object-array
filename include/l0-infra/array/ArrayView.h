@@ -80,6 +80,9 @@
 #include <l0-infra/array/mixin/sort/ArrayRangeSort.h>
 #include <l0-infra/array/mixin/sort/ArrayRangeSort_R.h>
 #include <l0-infra/array/mixin/min/ArrayRangeMinElem.h>
+#include <l0-infra/array/mixin/erase/UnsafeArrayRangeCleanUpIf.h>
+#include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf.h>
+#include <l0-infra/array/mixin/erase/ArrayRangeCleanUpIf_R.h>
 
 namespace array_view {
     using Private = ::mixin::Private<
@@ -153,6 +156,10 @@ namespace array_view {
 
             mixin::SimpleErase,
             mixin::EraseExt,
+
+            mixin::UnsafeArrayRangeCleanUpIf,
+            mixin::ArrayRangeCleanUpIf,
+            mixin::ArrayRangeCleanUpIf_R,
 
             mixin::RangedClear,
             mixin::ClearExt,
