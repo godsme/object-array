@@ -171,6 +171,38 @@ SCENARIO("ObjectArray range cleanup") {
         REQUIRE(array[2] == 7);
     }
 
+
+    WHEN("range cleanup if") {
+        array.Slice(1, -1).CleanUpIf([](auto&& elem) {
+            return elem > 1;
+        });
+
+        REQUIRE(array.GetNum() == 3);
+        REQUIRE(array[0] == 2);
+        REQUIRE(array[1] == 1);
+        REQUIRE(array[2] == 7);
+    }
+
+    WHEN("cleanup from if") {
+        array.From(1).CleanUpIf([](auto&& elem) {
+            return elem > 1;
+        });
+
+        REQUIRE(array.GetNum() == 2);
+        REQUIRE(array[0] == 2);
+        REQUIRE(array[1] == 1);
+    }
+
+    WHEN("cleanup until if") {
+        array.Until(-2).CleanUpIf([](auto &&elem) {
+            return elem > 1;
+        });
+
+        REQUIRE(array.GetNum() == 3);
+        REQUIRE(array[0] == 1);
+        REQUIRE(array[1] == 8);
+        REQUIRE(array[2] == 7);
+    }
 }
 
 SCENARIO("ObjectArray rotate") {
