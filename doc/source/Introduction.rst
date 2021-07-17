@@ -51,7 +51,7 @@
 
 既然可以向数组中添加元素，当然也可以删除和清理。
 
-首先你可以通过 ``Erase`` 和 ``Remove`` , ``RemoveBy`` 来删除一个元素：
+首先你可以通过 ``Erase`` 和 ``Remove`` , ``RemoveIf`` 来删除一个元素：
 
 ``Erase`` 的参数是索引：
 
@@ -65,25 +65,25 @@
 
    array.Remove(&array[2]);
 
-``RemoveBy`` 的参数则是一个 **谓词** :
+``RemoveIf`` 的参数则是一个 **谓词** :
 
 .. code-block:: c++
 
-   array.RemoveBy([value](auto&& item) { return item == value; });
+   array.RemoveIf([value](auto&& item) { return item == value; });
 
 这三个接口都是只删除数组中的一个元素。而对于 **无序** 且 **连续存储** 的数组，
 由于删除而导致的空位，将由最后一个元素填补（如果被删除的不是最后一个的话）：
 将最后一个元素，通过 ``std::move`` ，而不是 ``copy`` 到空缺位置。
 （因而数组内对象的 **move 构造** 的实现很重要）。
 
-另外，值得注意的是: ``RemoveBy`` 提供的是 **谓词** ，因而，数组内 **谓词** 成立的元素有可能不止一个。
-但 ``RemoveBy`` 只会删除依先后顺序找到的第一个。
+另外，值得注意的是: ``RemoveIf`` 提供的是 **谓词** ，因而，数组内 **谓词** 成立的元素有可能不止一个。
+但 ``RemoveIf`` 只会删除依先后顺序找到的第一个。
 
-如果想删除所有满足谓词的元素，则需要使用 ``CleanUpBy`` :
+如果想删除所有满足谓词的元素，则需要使用 ``ClearIf`` :
 
 .. code-block:: c++
 
-   array.CleanUpBy([](auto&& item) { return item == 3; });
+   array.ClearIf([](auto&& item) { return item == 3; });
 
 Replace
 -----------------------------
@@ -107,6 +107,13 @@ Replace
 
    array.Replace(2, std::move(foo));
 
+``Replace`` 的返回值为替换后的对象指针。需要注意的是，对于无序数组而言，替换前与替换后，元素在数组中的位置并不会发生变化。但对于
+有序数组，其位置可能会因为保持有序而变化，从而导致返回的指针与替换前访问同一位置得到的对象指针不同。
+
+另外，如果你希望 ``Replace`` 操作返回索引值，而不是对象指针，可以调用 ``Replace_I`` 。
+
+类似地，``Append`` 与 ``Append_I`` 分别返回的是 **对象指针** 与 **数组索引**。 如果 ``Append`` 失败，返回 ``nullptr`` ；如果 ``Append_I`` 失败，
+返回 ``std::nullopt`` 。
 
 遍历
 ----------------------------------
