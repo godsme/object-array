@@ -1172,7 +1172,7 @@ namespace {
     };
 }
 
-SCENARIO("dynamic object array") {
+SCENARIO("dynamic object array clear if") {
     ObjectArray<DynamicFoo, 10> array;
 
     array.Append(10, 20);
@@ -1181,11 +1181,25 @@ SCENARIO("dynamic object array") {
     array.Append(50, 40);
     array.Append(20, 40);
 
-
     array.Erase(1);
 
     array.ClearIf([](DynamicFoo const& elem) { return elem.obj->a > 30; });
 
+    REQUIRE(array.GetNum() == 2);
+    REQUIRE(array[0].obj->a == 10);
+    REQUIRE(array[1].obj->a == 20);
+}
 
+SCENARIO("dynamic object array slice clear if") {
+    ObjectArray<DynamicFoo, 10> array;
 
+    array.Append(10, 20);
+    array.Append(30, 40);
+    array.Append(40, 50);
+    array.Append(50, 40);
+    array.Append(20, 40);
+
+    array.Slice(1, -1).ClearIf([](DynamicFoo const& elem) { return elem.obj->a > 40; });
+
+    REQUIRE(array.GetNum() == 4);
 }

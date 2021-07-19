@@ -19,6 +19,10 @@ namespace mixin {
         auto MakeSlice(SizeType num) & -> RefScopeView<ThisType> {
             return {T::ToThisType(), T::GetScope().GetLowestBits(num)};
         }
+
+        auto MakeSlice(SizeType num) && -> ValueScopeView<ThisType> {
+            return {T::ToThisType(), T::GetScope().GetLowestBits(num)};
+        }
     };
 }
 
