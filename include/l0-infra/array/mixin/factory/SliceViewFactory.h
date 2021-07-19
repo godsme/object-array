@@ -48,7 +48,15 @@ namespace mixin {
             return {T::ToThisType(), from};
         }
 
+        auto MakeFromSlice(SizeType from) && -> ValueFromSliceView<ThisType> {
+            return {T::ToThisType(), from};
+        }
+
         auto MakeFromSlice(SizeType from) const & -> RefFromSliceView<ThisType const> {
+            return {T::ToThisType(), from};
+        }
+
+        auto MakeFromSlice(SizeType from) const && -> ValueFromSliceView<ThisType const> {
             return {T::ToThisType(), from};
         }
 
@@ -56,7 +64,11 @@ namespace mixin {
             return {T::ToThisType(), until};
         }
 
-        auto MakeUntilSlice(SizeType until) const & -> RefUntilSliceView<ThisType const> {
+        auto MakeUntilSlice(SizeType until) && -> ValueUntilSliceView<ThisType> {
+            return {T::ToThisType(), until};
+        }
+
+        auto MakeUntilSlice(SizeType until) const && -> ValueUntilSliceView<ThisType const> {
             return {T::ToThisType(), until};
         }
 

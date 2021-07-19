@@ -149,7 +149,7 @@ SCENARIO("ArrayView iterator with Slice") {
     REQUIRE(sum == 4 + 3 + 1 + 8 + 7);
 }
 
-SCENARIO("ArrayView Slice index iterator") {
+SCENARIO("ArrayView From Slice index iterator") {
     Dummy dummy{.a = {2, 4, 3, 1, 8, 7}, .num = 6};
 
     auto n = 0;
@@ -162,6 +162,21 @@ SCENARIO("ArrayView Slice index iterator") {
 
     REQUIRE(n == 5);
     REQUIRE(sum == 4 + 3 + 1 + 8 + 7);
+}
+
+SCENARIO("ArrayView Until Slice index iterator") {
+    Dummy dummy{.a = {2, 4, 3, 1, 8, 7}, .num = 6};
+
+    auto n = 0;
+    auto sum = 0;
+    for (auto&&[elem, i] : ArrayView{dummy.a, dummy.num}.Until(-1).WithIndex()) {
+        REQUIRE(n == i);
+        n++;
+        sum += elem;
+    }
+
+    REQUIRE(n == 5);
+    REQUIRE(sum == 2+ 4 + 3 + 1 + 8);
 }
 
 SCENARIO("ArrayView full Slice index iterator") {

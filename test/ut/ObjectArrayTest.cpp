@@ -1159,3 +1159,33 @@ SCENARIO("Array of const object") {
     static_assert(!std::is_copy_assignable_v<ObjectArray<int const, 10>>);
     static_assert(!std::is_move_assignable_v<ObjectArray<int const, 10>>);
 }
+
+namespace {
+    struct Obj {
+        int a;
+        int b;
+    };
+
+    struct DynamicFoo {
+        DynamicFoo(int a, int b) : obj{new Obj{a, b}} {}
+        std::unique_ptr<Obj> obj;
+    };
+}
+
+SCENARIO("dynamic object array") {
+    ObjectArray<DynamicFoo, 10> array;
+
+    array.Append(10, 20);
+    array.Append(30, 40);
+    array.Append(40, 50);
+    array.Append(50, 40);
+    array.Append(20, 40);
+
+
+    array.Erase(1);
+
+    array.ClearIf([](DynamicFoo const& elem) { return elem.obj->a > 30; });
+
+
+
+}
