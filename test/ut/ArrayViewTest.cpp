@@ -312,7 +312,8 @@ SCENARIO("ArrayView Slice [1,-1] ForEach") {
 
     auto n = 0;
     auto sum = 0;
-    ArrayView{dummy.a, dummy.num}.From(1).ForEach([&n, &sum](auto &&elem) {
+    auto&& view = ArrayView{dummy.a, dummy.num}.From(1);
+    view.ForEach([&n, &sum](auto &&elem) {
         n++;
         sum += elem;
     });
@@ -326,7 +327,8 @@ SCENARIO("ArrayView Slice [1,-2] ForEach") {
 
     auto n = 0;
     auto sum = 0;
-    ArrayView{dummy.a, dummy.num}.Slice(1, -1).ForEach([&n, &sum](auto &&elem) {
+    auto&& view = ArrayView{dummy.a, dummy.num}.Slice(1, -1);
+    view.ForEach([&n, &sum](auto &&elem) {
         n++;
         sum += elem;
     });

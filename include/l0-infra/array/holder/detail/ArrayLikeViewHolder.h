@@ -5,6 +5,8 @@
 #ifndef OBJECT_ARRAY_2_ARRAYLIKEVIEWHOLDER_H
 #define OBJECT_ARRAY_2_ARRAYLIKEVIEWHOLDER_H
 
+#include <utility>
+
 namespace holder::detail {
     template<typename ARRAY, template <typename, typename> typename SUPER>
     struct RefViewDataHolder : SUPER<ARRAY, RefViewDataHolder<ARRAY, SUPER>> {
