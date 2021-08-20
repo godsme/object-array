@@ -17,6 +17,7 @@ namespace mixin {
         auto Num() -> SizeType& {
             return This()->num;
         }
+
         auto Num() const -> SizeType {
             return This()->num;
         }

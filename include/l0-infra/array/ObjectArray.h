@@ -153,6 +153,7 @@ namespace object_array {
             mixin::ScopeCleanUp,
             mixin::UnsafeArrayRangeClearIf,
             mixin::ArrayRangeClearIf,
+
             mixin::ContiguousRangeSort,
             mixin::UnsafeRangeScopeSort,
             mixin::UnsafeScopeSort,

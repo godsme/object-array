@@ -4,6 +4,7 @@
 
 #include <l0-infra/array/holder/detail/ArrayHolder.h>
 #include <catch.hpp>
+#include <cstring>
 
 namespace {
     using OrderedIntArray = holder::detail::ArrayHolder<int, 0xFF, true>;

@@ -21,8 +21,8 @@ namespace detail {
         }
 
         ScopedArrayIndices(ARRAY& array, SizeType from, SizeType until, typename ARRAY::BitMap scope)
-                : array{array}
-                , indices{from, until, scope} {
+            : array{array}
+            , indices{from, until, scope} {
         }
 
         auto begin() -> iterator::IndicesRandomIterator<ARRAY> {
