@@ -22,6 +22,8 @@ private:
 
     constexpr static IntType MASK = GetMask(N);
 
+    constexpr auto DoReset() -> void { integral = 0; }
+
 public:
     constexpr static auto EnabledN(IntType n) -> IntBitSet {
         return IntBitSet(GetMask(n));
@@ -46,7 +48,7 @@ public:
     }
 
     constexpr auto test(std::size_t pos) const -> bool {
-        return (integral & (1ULL << pos)) > 0;
+        return (pos < N) && ((integral & (1ULL << pos)) > 0);
     }
 
     constexpr auto operator[](std::size_t pos) const -> bool {
@@ -76,7 +78,9 @@ public:
     }
 
     auto set(std::size_t pos) -> IntBitSet& {
-        integral |= (((IntType)1 << pos) & MASK);
+        if (pos < N) {
+            integral |= (((IntType)1 << pos) & MASK);
+        }
         return *this;
     }
 
@@ -91,12 +95,14 @@ public:
     }
 
     auto reset(std::size_t pos) noexcept -> IntBitSet& {
-        integral &= (~((IntType)1 << pos) & MASK);
+        if (pos < N) {
+            integral &= (~((IntType)1 << pos) & MASK);
+        }
         return *this;
     }
 
     auto reset() -> IntBitSet& {
-        integral = 0;
+        DoReset();
         return *this;
     }
 
@@ -121,21 +127,30 @@ public:
     }
 
     constexpr auto operator<<(std::size_t pos) const -> IntBitSet {
-        return IntBitSet(integral << pos);
+        return IntBitSet<N>(*this) <<= pos;
     }
 
-    auto operator<<=(std::size_t pos) -> IntBitSet& {
-        integral <<= pos;
-        integral &= MASK;
+    constexpr auto operator<<=(std::size_t pos) -> IntBitSet& {
+        if (pos < N) {
+            integral <<= pos;
+            integral &= MASK;
+        } else {
+            DoReset();
+        }
+
         return *this;
     }
 
     constexpr auto operator>>(std::size_t pos) const -> IntBitSet {
-        return IntBitSet(integral >> pos);
+        return IntBitSet<N>(*this) >>= pos;
     }
 
-    auto operator>>=(std::size_t pos) -> IntBitSet& {
-        integral >>= pos;
+    constexpr auto operator>>=(std::size_t pos) -> IntBitSet& {
+        if (pos < N) {
+            integral >>= pos;
+        } else {
+            DoReset();
+        }
         return *this;
     }
 
