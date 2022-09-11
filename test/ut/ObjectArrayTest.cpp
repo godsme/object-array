@@ -5,6 +5,17 @@
 #include <l0-infra/array/ObjectArray.h>
 #include <catch.hpp>
 
+SCENARIO("Object Array Slice Scope SortView") {
+    ObjectArray<int, 10> array{3,2,4,1};
+
+    auto&& view = array.From(1).Scope(0x0c).SortView().Sort();
+
+// indices are slice ones.
+    REQUIRE(view[0] == 1);
+    REQUIRE(view[1] == 4);
+    REQUIRE(view.GetNum() == 2);
+}
+
 SCENARIO("Default ObjectArray Initialization of trivial type should not be 0-initialized") {
     Placement<ObjectArray<int, 10>> array;
     ::memset(&array, 0xFF, sizeof(array));

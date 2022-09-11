@@ -709,9 +709,9 @@ SortView
    auto&& view = array.From(1).Scope(0x0c).SortView().Sort();
 
    // indices are slice ones.
-   ASSERT(view[0] == 2);
-   ASSERT(view[1] == 1);
-   ASSERT(view[2] == 4);
+   ASSERT(view[0] == 1);
+   ASSERT(view[1] == 4);
+   ASSERT(view.GetNum() == 2);
 
 Rotate
 -----------------------

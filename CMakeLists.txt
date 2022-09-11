@@ -13,8 +13,13 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     #-frelaxed-template-template-args
 endif()
 
-set(OBJ_ARRAY_SRC include/l0-infra/array/holder/detail/ArrayHolder.h
-        test/ut/ArrayHolderTest.cpp include/l0-infra/array/holder/detail/ContiguousArrayHolder.h include/l0-infra/array/detail/CRTP.h include/l0-infra/array/holder/detail/ObjectArrayHolder.h include/l0-infra/array/holder/ObjectArrayHolder.h
+set(OBJ_ARRAY_SRC
+        include/l0-infra/array/holder/detail/ArrayHolder.h
+        test/ut/ArrayHolderTest.cpp
+        include/l0-infra/array/holder/detail/ContiguousArrayHolder.h
+        include/l0-infra/array/detail/CRTP.h
+        include/l0-infra/array/holder/detail/ObjectArrayHolder.h
+        include/l0-infra/array/holder/ObjectArrayHolder.h
         include/l0-infra/array/holder/detail/Holder.h
         test/ut/ObjectArrayHolderTest.cpp
         include/l0-infra/array/mixin/array_like/ConstArrayLike.h
@@ -104,12 +109,147 @@ set(OBJ_ARRAY_SRC include/l0-infra/array/holder/detail/ArrayHolder.h
         include/l0-infra/array/mixin/iterable/IterableWithIndexArrayLike.h
         include/l0-infra/array/mixin/factory/WithIndexViewFactory.h
         include/l0-infra/array/iterator/WithIndexIterator.h
-        include/l0-infra/array/iterator/detail/WithIndexIterator.h include/l0-infra/array/mixin/access/ArrayObjectAccessor.h include/l0-infra/array/mixin/foreach/SliceSimpleForEach.h include/l0-infra/array/mixin/foreach/SliceScopedForEach.h include/l0-infra/array/mixin/foreach/UnsafeRangeForEach.h include/l0-infra/array/mixin/min/SliceMinElem.h include/l0-infra/array/mixin/find/SliceScopeFind.h include/l0-infra/array/mixin/sort/SliceSort.h include/l0-infra/array/mixin/factory/SliceMaker.h include/l0-infra/array/mixin/sort/ArraySort.h include/l0-infra/array/mixin/sort/SortExt.h include/l0-infra/array/mixin/factory/ArraySliceMaker.h include/l0-infra/array/mixin/factory/SliceViewFactory.h include/l0-infra/array/mixin/factory/InternalSliceViewFactory.h include/l0-infra/array/holder/FromSliceHolder.h include/l0-infra/array/holder/UntilSliceHolder.h include/l0-infra/array/mixin/erase/EraseExt.h include/l0-infra/array/mixin/erase/ScopeCleanUp.h include/l0-infra/array/view/ScopeView.h include/l0-infra/array/mixin/foreach/ScopeSimpleForEach.h include/l0-infra/array/mixin/array_like/ScopedArrayLike.h include/l0-infra/array/holder/ScopeViewHolder.h test/ut/ScopeViewTest.cpp include/l0-infra/array/mixin/count/ScopedElemCount.h include/l0-infra/array/mixin/foreach/UnsafeScopeForEach.h include/l0-infra/array/mixin/array_like/ViewedArrayRange.h include/l0-infra/array/mixin/find/ScopedSimpleFind.h include/l0-infra/array/mixin/min/UnsafeArrayScopeMinElem.h include/l0-infra/array/mixin/min/UnsafeSliceScopeMinElem.h test/ut/ObjectArrayTest.cpp include/l0-infra/array/mixin/replace/ReplaceExt.h include/l0-infra/array/mixin/factory/WithIndexViewFactory_R.h include/l0-infra/array/mixin/append/AppendExt.h include/l0-infra/array/mixin/foreach/UnsafeSliceScopedForEach.h include/l0-infra/array/mixin/find/ScopeFindExt.h include/l0-infra/array/mixin/factory/ScopeViewFactory.h include/l0-infra/array/iterator/detail/ScopeIterator.h include/l0-infra/array/iterator/EmptyIterator.h include/l0-infra/array/iterator/ScopeIterator.h include/l0-infra/array/mixin/iterable/IterableScopedArrayLike.h include/l0-infra/array/view/WithIndexScopeView.h include/l0-infra/array/mixin/iterable/IterableWithIndexScopeArrayLike.h include/l0-infra/array/iterator/WithIndexScopeIterator.h include/l0-infra/array/mixin/array_like/ViewedScope.h include/l0-infra/array/mixin/factory/WithIndexScopeArrayLikeFactory_R.h include/l0-infra/array/mixin/factory/ScopeViewFactory_R.h include/l0-infra/array/mixin/factory/MinElemsFactory_R.h include/l0-infra/array/mixin/factory/SortViewFactory_R.h include/l0-infra/array/IndexedOrderedArray.h include/l0-infra/array/mixin/sort/IndicesRangeScopeInit.h test/ut/ArraySortViewTest.cpp include/l0-infra/array/iterator/IndexBasedIterator.h include/l0-infra/array/mixin/iterable/IterableIndexBasedArray.h include/l0-infra/array/mixin/access/ViewedRange.h include/l0-infra/array/mixin/sort/SortExt_R.h include/l0-infra/array/mixin/min/ScopeViewMinElem.h include/l0-infra/array/iterator/detail/IndexIterator.h include/l0-infra/array/iterator/detail/PointerIterator.h include/l0-infra/array/iterator/SortViewWithIndexIterator.h include/l0-infra/array/mixin/iterable/IterableWithIndexSortView.h include/l0-infra/array/detail/ScopedArrayIndices.h include/l0-infra/array/iterator/IndicesRandomIterator.h include/l0-infra/array/mixin/sort/UnsafeRangeScopeSort.h include/l0-infra/array/mixin/sort/UnSafeScopeSort.h include/l0-infra/array/mixin/sort/SliceUnsafeScopeSort.h include/l0-infra/array/mixin/sort/ScopeViewSort.h include/l0-infra/array/mixin/factory/ScopeSliceMaker.h include/l0-infra/array/mixin/access/IndexedObjectAccessor.h include/l0-infra/array/mixin/foreach/SortViewIndicesOp.h include/l0-infra/array/mixin/find/SortViewIndicesPred.h include/l0-infra/array/mixin/access/SortViewByIndexRefAccessor.h include/l0-infra/array/mixin/iterable/IterableSortView.h include/l0-infra/array/mixin/access/ArrayByIndexAccessor.h include/l0-infra/array/mixin/count/ArrayElemCount.h include/l0-infra/array/mixin/count/ElemCountExt.h include/l0-infra/array/mixin/find/UnsafeSliceScopedFind.h test/ut/ScatteredArrayTest.cpp include/l0-infra/array/mixin/find/ScatteredArrayFind.h include/l0-infra/array/mixin/sort/ScatteredArraySort.h include/l0-infra/array/mixin/factory/ScatteredArraySliceMaker.h include/l0-infra/array/mixin/sort/BasicSort.h include/l0-infra/array/mixin/sort/BasicSort_R.h include/l0-infra/array/mixin/eq/ScopedArrayLikeEquality.h include/l0-infra/array/mixin/foreach/ScatteredArrayForEach.h include/l0-infra/array/mixin/factory/WithIndexScopeArrayLikeFactory.h include/l0-infra/array/mixin/min/ScatteredArrayMinElem.h include/l0-infra/array/mixin/replace/OrderedReplace.h include/l0-infra/array/mixin/erase/OrderedErase.h include/l0-infra/array/mixin/less/OrderedArrayLike.h include/l0-infra/array/mixin/erase/IndicesErase.h include/l0-infra/array/mixin/replace/IndicesReplace.h include/l0-infra/array/mixin/sort/UnsafeIndicesRangeScopeSort.h include/l0-infra/array/mixin/erase/IndicesRangeClear.h test/ut/IndexedOrderedArrayTest.cpp include/l0-infra/array/mixin/index/IndicesArrayObjectIndex.h include/l0-infra/array/mixin/replace/SimpleReplace.h include/l0-infra/array/mixin/factory/RangeFactory.h include/l0-infra/array/mixin/replace/ViewReplace.h test/ut/IndicesRandomIteratorTest.cpp include/l0-infra/array/ArrayView.h include/l0-infra/array/holder/ArrayViewHolder.h include/l0-infra/array/holder/detail/ViewElemTrait.h test/ut/ArrayViewTest.cpp include/l0-infra/array/mixin/factory/SliceViewFactory_R.h include/l0-infra/array/mixin/array_like/ValueArrayLike.h include/l0-infra/array/holder/ConstArrayViewHolder.h include/l0-infra/array/holder/DynamicArrayHolder.h include/l0-infra/array/DynamicArray.h test/ut/DynamicArrayTest.cpp include/l0-infra/array/mixin/array_like/PointerArrayLike.h include/l0-infra/array/mixin/access/PointerArrayObjectAccessor.h include/l0-infra/array/mixin/index/DynamicObjectIndex.h include/l0-infra/array/mixin/min/UnsafePointersRangeMinElem.h include/l0-infra/array/mixin/append/ProxyAppend.h include/l0-infra/array/mixin/erase/ProxyErase.h include/l0-infra/array/mixin/erase/DynamicRangedClear.h include/l0-infra/array/mixin/sort/UnsafePointersRangeSort.h include/l0-infra/array/mixin/sort/UnsafePointersRangeScopeSort.h include/l0-infra/array/OrderedArray.h test/ut/OrderedArrayTest.cpp include/l0-infra/array/mixin/find/UnsafePointerRangeFind.h include/l0-infra/array/mixin/foreach/UnsafePointerRangeScopeForEach.h include/l0-infra/array/mixin/min/UnsafePointerRangeScopeMinElem.h include/l0-infra/base/detail/BinaryOpDetect.h include/l0-infra/array/mixin/eq/ObjectEquality.h include/l0-infra/array/mixin/eq/OrderedObjectEquality.h include/l0-infra/array/mixin/less/ObjectLess.h include/l0-infra/array/mixin/less/ViewObjectLess.h include/l0-infra/array/mixin/eq/ViewObjectEquality.h include/l0-infra/array/mixin/eq/ObjectCompareExt.h include/l0-infra/array/mixin/rotate/ArrayRangeRotate.h include/l0-infra/array/mixin/rotate/Rotate.h include/l0-infra/array/mixin/rotate/Rotate_R.h include/l0-infra/array/mixin/rotate/IndicesRangeRotate.h include/l0-infra/array/mixin/rotate/PointersRangeRotate.h include/l0-infra/array/mixin/rotate/RangeRotateExt.h include/l0-infra/array/mixin/rotate/RangeRotateExt_R.h include/l0-infra/array/mixin/rotate/ViewUnsafeRotate.h include/l0-infra/array/holder/IndexedArrayHolder.h include/l0-infra/array/IndexedArray.h test/ut/IndexedArrayTest.cpp include/l0-infra/array/iterator/detail/ViewIterator.h include/l0-infra/array/mixin/erase/ClearExporter.h test/ut/Foo.h include/l0-infra/array/mixin/sort/ArrayRangeSort.h include/l0-infra/array/mixin/count/ArrayOffsetToIndex.h include/l0-infra/array/mixin/count/ArrayScopeMask.h include/l0-infra/array/mixin/sort/ArrayRangeSort_R.h include/l0-infra/array/mixin/min/ArrayRangeMinElem.h include/l0-infra/array/mixin/count/FullScopeElemCount.h include/l0-infra/array/mixin/less/PointerLess.h include/l0-infra/array/mixin/replace/ProxyReplace.h include/l0-infra/array/mixin/find/PointerPred.h include/l0-infra/array/mixin/sort/NoDiscardSortExt_R.h include/l0-infra/array/holder/detail/DeduceElemType.h include/l0-infra/array/holder/detail/ObjectTrait.h include/l0-infra/array/mixin/replace/OrderedReplaceLastIf.h include/l0-infra/array/mixin/erase/UnsafeArrayRangeClearIf.h include/l0-infra/array/mixin/erase/ArrayRangeClearIf.h include/l0-infra/array/mixin/erase/ArrayRangeClearIf_R.h include/l0-infra/array/mixin/erase/RangeViewClearIf.h include/l0-infra/array/mixin/erase/ClearExt_R.h include/l0-infra/array/mixin/erase/RangeViewClear.h include/l0-infra/array/iterator/EnumIterator.h include/l0-infra/array/mixin/iterable/IterableEnumArrayLike.h include/l0-infra/array/mixin/factory/ArrayEnumViewFactory.h include/l0-infra/array/mixin/factory/ArrayEnumViewFactory_R.h include/l0-infra/array/mixin/factory/ViewEnumViewFactory.h include/l0-infra/array/mixin/factory/ScopeEnumViewFactory.h include/l0-infra/array/iterator/ScopeEnumIterator.h include/l0-infra/array/mixin/iterable/IterableScopeEnumArrayLike.h include/l0-infra/array/mixin/factory/ScopeEnumViewFactory_R.h include/l0-infra/array/holder/FilterHolder.h include/l0-infra/array/view/FilterView.h include/l0-infra/array/mixin/foreach/UnsafeRangePredForEach.h include/l0-infra/array/mixin/foreach/ArrayPredForEach.h)
+        include/l0-infra/array/iterator/detail/WithIndexIterator.h
+        include/l0-infra/array/mixin/access/ArrayObjectAccessor.h
+        include/l0-infra/array/mixin/foreach/SliceSimpleForEach.h
+        include/l0-infra/array/mixin/foreach/SliceScopedForEach.h
+        include/l0-infra/array/mixin/foreach/UnsafeRangeForEach.h
+        include/l0-infra/array/mixin/min/SliceMinElem.h
+        include/l0-infra/array/mixin/find/SliceScopeFind.h
+        include/l0-infra/array/mixin/sort/SliceSort.h
+        include/l0-infra/array/mixin/factory/SliceMaker.h
+        include/l0-infra/array/mixin/sort/ArraySort.h
+        include/l0-infra/array/mixin/sort/SortExt.h
+        include/l0-infra/array/mixin/factory/ArraySliceMaker.h
+        include/l0-infra/array/mixin/factory/SliceViewFactory.h
+        include/l0-infra/array/mixin/factory/InternalSliceViewFactory.h
+        include/l0-infra/array/holder/FromSliceHolder.h
+        include/l0-infra/array/holder/UntilSliceHolder.h
+        include/l0-infra/array/mixin/erase/EraseExt.h
+        include/l0-infra/array/mixin/erase/ScopeCleanUp.h
+        include/l0-infra/array/view/ScopeView.h
+        include/l0-infra/array/mixin/foreach/ScopeSimpleForEach.h
+        include/l0-infra/array/mixin/array_like/ScopedArrayLike.h
+        include/l0-infra/array/holder/ScopeViewHolder.h
+        include/l0-infra/array/mixin/count/ScopedElemCount.h
+        include/l0-infra/array/mixin/foreach/UnsafeScopeForEach.h
+        include/l0-infra/array/mixin/array_like/ViewedArrayRange.h
+        include/l0-infra/array/mixin/find/ScopedSimpleFind.h
+        include/l0-infra/array/mixin/min/UnsafeArrayScopeMinElem.h
+        include/l0-infra/array/mixin/min/UnsafeSliceScopeMinElem.h
+        include/l0-infra/array/mixin/replace/ReplaceExt.h
+        include/l0-infra/array/mixin/factory/WithIndexViewFactory_R.h
+        include/l0-infra/array/mixin/append/AppendExt.h
+        include/l0-infra/array/mixin/foreach/UnsafeSliceScopedForEach.h
+        include/l0-infra/array/mixin/find/ScopeFindExt.h
+        include/l0-infra/array/mixin/factory/ScopeViewFactory.h
+        include/l0-infra/array/iterator/detail/ScopeIterator.h
+        include/l0-infra/array/iterator/EmptyIterator.h
+        include/l0-infra/array/iterator/ScopeIterator.h
+        include/l0-infra/array/mixin/iterable/IterableScopedArrayLike.h
+        include/l0-infra/array/view/WithIndexScopeView.h
+        include/l0-infra/array/mixin/iterable/IterableWithIndexScopeArrayLike.h
+        include/l0-infra/array/iterator/WithIndexScopeIterator.h
+        include/l0-infra/array/mixin/array_like/ViewedScope.h
+        include/l0-infra/array/mixin/factory/WithIndexScopeArrayLikeFactory_R.h
+        include/l0-infra/array/mixin/factory/ScopeViewFactory_R.h
+        include/l0-infra/array/mixin/factory/MinElemsFactory_R.h
+        include/l0-infra/array/mixin/factory/SortViewFactory_R.h
+        include/l0-infra/array/IndexedOrderedArray.h
+        include/l0-infra/array/mixin/sort/IndicesRangeScopeInit.h
+        include/l0-infra/array/iterator/IndexBasedIterator.h
+        include/l0-infra/array/mixin/iterable/IterableIndexBasedArray.h
+        include/l0-infra/array/mixin/access/ViewedRange.h
+        include/l0-infra/array/mixin/sort/SortExt_R.h
+        include/l0-infra/array/mixin/min/ScopeViewMinElem.h
+        include/l0-infra/array/iterator/detail/IndexIterator.h
+        include/l0-infra/array/iterator/detail/PointerIterator.h
+        include/l0-infra/array/iterator/SortViewWithIndexIterator.h
+        include/l0-infra/array/mixin/iterable/IterableWithIndexSortView.h
+        include/l0-infra/array/detail/ScopedArrayIndices.h
+        include/l0-infra/array/iterator/IndicesRandomIterator.h
+        include/l0-infra/array/mixin/sort/UnsafeRangeScopeSort.h
+        include/l0-infra/array/mixin/sort/UnSafeScopeSort.h
+        include/l0-infra/array/mixin/sort/SliceUnsafeScopeSort.h
+        include/l0-infra/array/mixin/sort/ScopeViewSort.h
+        include/l0-infra/array/mixin/factory/ScopeSliceMaker.h
+        include/l0-infra/array/mixin/access/IndexedObjectAccessor.h
+        include/l0-infra/array/mixin/foreach/SortViewIndicesOp.h
+        include/l0-infra/array/mixin/find/SortViewIndicesPred.h
+        include/l0-infra/array/mixin/access/SortViewByIndexRefAccessor.h
+        include/l0-infra/array/mixin/iterable/IterableSortView.h
+        include/l0-infra/array/mixin/access/ArrayByIndexAccessor.h
+        include/l0-infra/array/mixin/count/ArrayElemCount.h
+        include/l0-infra/array/mixin/count/ElemCountExt.h
+        include/l0-infra/array/mixin/find/UnsafeSliceScopedFind.h
+        include/l0-infra/array/mixin/find/ScatteredArrayFind.h
+        include/l0-infra/array/mixin/sort/ScatteredArraySort.h
+        include/l0-infra/array/mixin/factory/ScatteredArraySliceMaker.h
+        include/l0-infra/array/mixin/sort/BasicSort.h
+        include/l0-infra/array/mixin/sort/BasicSort_R.h
+        include/l0-infra/array/mixin/eq/ScopedArrayLikeEquality.h
+        include/l0-infra/array/mixin/foreach/ScatteredArrayForEach.h
+        include/l0-infra/array/mixin/factory/WithIndexScopeArrayLikeFactory.h
+        include/l0-infra/array/mixin/min/ScatteredArrayMinElem.h
+        include/l0-infra/array/mixin/replace/OrderedReplace.h
+        include/l0-infra/array/mixin/erase/OrderedErase.h
+        include/l0-infra/array/mixin/less/OrderedArrayLike.h
+        include/l0-infra/array/mixin/erase/IndicesErase.h
+        include/l0-infra/array/mixin/replace/IndicesReplace.h
+        include/l0-infra/array/mixin/sort/UnsafeIndicesRangeScopeSort.h
+        include/l0-infra/array/mixin/erase/IndicesRangeClear.h
+        include/l0-infra/array/mixin/index/IndicesArrayObjectIndex.h
+        include/l0-infra/array/mixin/replace/SimpleReplace.h
+        include/l0-infra/array/mixin/factory/RangeFactory.h
+        include/l0-infra/array/mixin/replace/ViewReplace.h
+        include/l0-infra/array/ArrayView.h
+        include/l0-infra/array/holder/ArrayViewHolder.h
+        include/l0-infra/array/holder/detail/ViewElemTrait.h
+        include/l0-infra/array/mixin/factory/SliceViewFactory_R.h
+        include/l0-infra/array/mixin/array_like/ValueArrayLike.h
+        include/l0-infra/array/holder/ConstArrayViewHolder.h
+        include/l0-infra/array/holder/DynamicArrayHolder.h
+        include/l0-infra/array/DynamicArray.h
+        include/l0-infra/array/mixin/array_like/PointerArrayLike.h
+        include/l0-infra/array/mixin/access/PointerArrayObjectAccessor.h
+        include/l0-infra/array/mixin/index/DynamicObjectIndex.h
+        include/l0-infra/array/mixin/min/UnsafePointersRangeMinElem.h
+        include/l0-infra/array/mixin/append/ProxyAppend.h
+        include/l0-infra/array/mixin/erase/ProxyErase.h
+        include/l0-infra/array/mixin/erase/DynamicRangedClear.h
+        include/l0-infra/array/mixin/sort/UnsafePointersRangeSort.h
+        include/l0-infra/array/mixin/sort/UnsafePointersRangeScopeSort.h
+        include/l0-infra/array/OrderedArray.h
+        include/l0-infra/array/mixin/find/UnsafePointerRangeFind.h
+        include/l0-infra/array/mixin/foreach/UnsafePointerRangeScopeForEach.h
+        include/l0-infra/array/mixin/min/UnsafePointerRangeScopeMinElem.h
+        include/l0-infra/base/detail/BinaryOpDetect.h
+        include/l0-infra/array/mixin/eq/ObjectEquality.h
+        include/l0-infra/array/mixin/eq/OrderedObjectEquality.h
+        include/l0-infra/array/mixin/less/ObjectLess.h
+        include/l0-infra/array/mixin/less/ViewObjectLess.h
+        include/l0-infra/array/mixin/eq/ViewObjectEquality.h
+        include/l0-infra/array/mixin/eq/ObjectCompareExt.h
+        include/l0-infra/array/mixin/rotate/ArrayRangeRotate.h
+        include/l0-infra/array/mixin/rotate/Rotate.h
+        include/l0-infra/array/mixin/rotate/Rotate_R.h
+        include/l0-infra/array/mixin/rotate/IndicesRangeRotate.h
+        include/l0-infra/array/mixin/rotate/PointersRangeRotate.h
+        include/l0-infra/array/mixin/rotate/RangeRotateExt.h include/l0-infra/array/mixin/rotate/RangeRotateExt_R.h include/l0-infra/array/mixin/rotate/ViewUnsafeRotate.h include/l0-infra/array/holder/IndexedArrayHolder.h include/l0-infra/array/IndexedArray.h test/ut/IndexedArrayTest.cpp include/l0-infra/array/iterator/detail/ViewIterator.h include/l0-infra/array/mixin/erase/ClearExporter.h test/ut/Foo.h include/l0-infra/array/mixin/sort/ArrayRangeSort.h include/l0-infra/array/mixin/count/ArrayOffsetToIndex.h include/l0-infra/array/mixin/count/ArrayScopeMask.h include/l0-infra/array/mixin/sort/ArrayRangeSort_R.h include/l0-infra/array/mixin/min/ArrayRangeMinElem.h include/l0-infra/array/mixin/count/FullScopeElemCount.h include/l0-infra/array/mixin/less/PointerLess.h include/l0-infra/array/mixin/replace/ProxyReplace.h include/l0-infra/array/mixin/find/PointerPred.h include/l0-infra/array/mixin/sort/NoDiscardSortExt_R.h include/l0-infra/array/holder/detail/DeduceElemType.h include/l0-infra/array/holder/detail/ObjectTrait.h include/l0-infra/array/mixin/replace/OrderedReplaceLastIf.h include/l0-infra/array/mixin/erase/UnsafeArrayRangeClearIf.h include/l0-infra/array/mixin/erase/ArrayRangeClearIf.h include/l0-infra/array/mixin/erase/ArrayRangeClearIf_R.h include/l0-infra/array/mixin/erase/RangeViewClearIf.h include/l0-infra/array/mixin/erase/ClearExt_R.h include/l0-infra/array/mixin/erase/RangeViewClear.h include/l0-infra/array/iterator/EnumIterator.h include/l0-infra/array/mixin/iterable/IterableEnumArrayLike.h include/l0-infra/array/mixin/factory/ArrayEnumViewFactory.h include/l0-infra/array/mixin/factory/ArrayEnumViewFactory_R.h include/l0-infra/array/mixin/factory/ViewEnumViewFactory.h include/l0-infra/array/mixin/factory/ScopeEnumViewFactory.h include/l0-infra/array/iterator/ScopeEnumIterator.h include/l0-infra/array/mixin/iterable/IterableScopeEnumArrayLike.h include/l0-infra/array/mixin/factory/ScopeEnumViewFactory_R.h include/l0-infra/array/holder/FilterHolder.h include/l0-infra/array/view/FilterView.h include/l0-infra/array/mixin/foreach/UnsafeRangePredForEach.h include/l0-infra/array/mixin/foreach/ArrayPredForEach.h)
 
 add_executable(object_array_test
         third-party/catch.hpp
         test/ut/catch.cpp
+        test/ut/OrderedArrayTest.cpp
+        test/ut/DynamicArrayTest.cpp
+        test/ut/ArrayViewTest.cpp
         test/ut/SortViewTest.cpp
+        test/ut/ScopeViewTest.cpp
+        test/ut/ObjectArrayTest.cpp
+        test/ut/ArraySortViewTest.cpp
+        test/ut/IndicesRandomIteratorTest.cpp
+        test/ut/ScatteredArrayTest.cpp
+        test/ut/IndexedOrderedArrayTest.cpp
         test/ut/ScatteredArrayHolderTest.cpp
         test/ut/ObjectArraySliceTest.cpp
         test/ut/OrderedObjectArrayTest.cpp
