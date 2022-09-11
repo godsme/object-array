@@ -16,6 +16,19 @@ SCENARIO("Object Array Slice Scope SortView") {
     REQUIRE(view.GetNum() == 2);
 }
 
+SCENARIO("Object Array partial sort") {
+    ObjectArray<int, 10> array{3, 1, 4, 2};
+
+    auto&& view = array.SortView();
+
+    view.PartialSort(3);
+
+    REQUIRE(view.GetNum() == 3);
+    REQUIRE(view[0] == 1);
+    REQUIRE(view[1] == 2);
+    REQUIRE(view[2] == 3);
+}
+
 SCENARIO("Default ObjectArray Initialization of trivial type should not be 0-initialized") {
     Placement<ObjectArray<int, 10>> array;
     ::memset(&array, 0xFF, sizeof(array));

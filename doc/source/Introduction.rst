@@ -682,10 +682,10 @@ SortView
 
    view.PartialSort(3);
 
+   ASSERT(view.GetNum() == 3);
    ASSERT(view[0] == 1);
-   ASSERT(view[1] == 3);
-   ASSERT(view[2] == 4);
-   ASSERT(view[3] == 2);
+   ASSERT(view[1] == 2);
+   ASSERT(view[2] == 3);
 
 
 当然，你也可以连写：
