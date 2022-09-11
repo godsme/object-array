@@ -8,7 +8,7 @@
 #include <l0-infra/base/detail/DeduceBitSetIntType.h>
 #include <limits>
 
-template<std::size_t N>
+template <std::size_t N>
 struct IntBitSet {
 private:
     constexpr static auto MAX_BITS = sizeof(std::size_t) * 8;
